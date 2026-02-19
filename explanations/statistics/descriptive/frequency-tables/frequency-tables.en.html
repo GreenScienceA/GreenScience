@@ -1,0 +1,355 @@
+<h2>📊 Frequency Tables: Turning Chaos into Clarity</h2>
+
+<p>Imagine you've just collected the exam scores of 200 students, the daily rainfall measurements of an entire year, or the heights of 500 wheat plants across experimental plots in Algeria's Sétif region. You stare at the raw data — a dizzying wall of numbers — and a single thought crosses your mind: <strong>what does any of this mean?</strong></p>
+
+<p>This is the fundamental challenge of statistics: raw data, in its unorganized form, tells you almost nothing. It is noise without signal, a forest without a map. The frequency distribution table is the statistician's most powerful first tool for transforming this chaos into meaning. It is the bridge between the raw, messy world of data collection and the structured, insightful world of data analysis (Moore et al., 2021; Gravetter & Wallnau, 2017).</p>
+
+<blockquote>💡 <strong>The fundamental insight:</strong> A frequency table does not change the data — it reorganizes it. By counting how often each value or range of values appears, we reveal the <em>shape</em>, <em>center</em>, and <em>spread</em> of the data. As the legendary statistician John Tukey wrote in his pioneering work on exploratory data analysis: the first step is always to <strong>look at the data</strong> (Tukey, 1977). The frequency table is how we take that first, crucial look.</blockquote>
+
+<hr>
+
+<h2>📋 What Is a Frequency Table?</h2>
+
+<p>A <strong>frequency distribution table</strong> (or simply <em>frequency table</em>) is an organized tabulation that shows how many times each value — or each range of values — occurs in a dataset. It takes the raw, scattered observations and compresses them into a compact summary that reveals patterns invisible in the original data (Wackerly et al., 2014).</p>
+
+<p>At its core, a frequency table answers the simplest and most important question in all of descriptive statistics: <strong>how often does each outcome occur?</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Component</th><th>Symbol</th><th>Definition</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Class / Category</strong></td><td>xᵢ or [Lᵢ, Lᵢ₊₁[</td><td>A distinct value or interval grouping observations</td><td>[150, 160[ cm</td></tr>
+    <tr><td><strong>Absolute Frequency</strong></td><td>nᵢ (or fᵢ)</td><td>The count of observations falling in each class</td><td>23 students</td></tr>
+    <tr><td><strong>Relative Frequency</strong></td><td>fᵢ = nᵢ / N</td><td>The proportion of total observations in each class</td><td>23/100 = 0.23</td></tr>
+    <tr><td><strong>Percentage Frequency</strong></td><td>fᵢ × 100</td><td>Relative frequency expressed as a percentage</td><td>23%</td></tr>
+    <tr><td><strong>Cumulative Frequency</strong></td><td>Nᵢ (or Fᵢ)</td><td>Running total of frequencies up to and including class i</td><td>45 students</td></tr>
+    <tr><td><strong>Cumulative Relative Freq.</strong></td><td>Fᵢ = Nᵢ / N</td><td>Proportion of observations at or below class i</td><td>45/100 = 0.45</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔑 <strong>Key identity:</strong> The sum of all absolute frequencies must equal the total number of observations: <strong>Σnᵢ = N</strong>. The sum of all relative frequencies must equal 1: <strong>Σfᵢ = 1</strong>. If they don't, you've made an error somewhere. This is your built-in quality check.</blockquote>
+
+<hr>
+
+<h2>📌 Two Types of Frequency Tables</h2>
+
+<p>The type of frequency table you construct depends on the nature of your variable and the range of values in your data. There are two fundamental forms, each suited to different situations (Freedman et al., 2007).</p>
+
+<h3>1️⃣ Ungrouped (Simple) Frequency Tables</h3>
+
+<p>An <strong>ungrouped frequency table</strong> lists every distinct value individually and counts how often each one appears. This approach works best when the variable has a <em>small number of distinct values</em> — typically fewer than 15–20 unique values. It is ideal for discrete variables with limited range and for all qualitative (categorical) variables.</p>
+
+<p><strong>Example — Number of children per family (survey of 30 families):</strong></p>
+
+<p>Raw data: 2, 3, 1, 4, 2, 2, 3, 1, 0, 2, 3, 5, 1, 2, 3, 2, 4, 1, 2, 3, 0, 1, 2, 3, 4, 2, 1, 3, 2, 1</p>
+
+<table>
+  <thead>
+    <tr><th>Children (xᵢ)</th><th>Tally</th><th>Frequency (nᵢ)</th><th>Relative Freq. (fᵢ)</th><th>Percentage (%)</th><th>Cumulative Freq. (Nᵢ)</th><th>Cum. Rel. Freq. (Fᵢ)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>||</td><td>2</td><td>0.067</td><td>6.7%</td><td>2</td><td>0.067</td></tr>
+    <tr><td>1</td><td>|||| ||</td><td>7</td><td>0.233</td><td>23.3%</td><td>9</td><td>0.300</td></tr>
+    <tr><td>2</td><td>|||| |||| |</td><td>10</td><td>0.333</td><td>33.3%</td><td>19</td><td>0.633</td></tr>
+    <tr><td>3</td><td>|||| ||</td><td>7</td><td>0.233</td><td>23.3%</td><td>26</td><td>0.867</td></tr>
+    <tr><td>4</td><td>|||</td><td>3</td><td>0.100</td><td>10.0%</td><td>29</td><td>0.967</td></tr>
+    <tr><td>5</td><td>|</td><td>1</td><td>0.033</td><td>3.3%</td><td>30</td><td>1.000</td></tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td><strong>30</strong></td><td><strong>1.000</strong></td><td><strong>100%</strong></td><td>—</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔍 <strong>What the table reveals instantly:</strong> The most common family size is 2 children (mode = 2, frequency = 10). One-third of families have exactly 2 children. Nearly 87% of families have 3 or fewer children. Only one family has 5 children — a clear outlier. None of these patterns are visible in the raw data string above.</blockquote>
+
+<h3>2️⃣ Grouped Frequency Tables (Class Intervals)</h3>
+
+<p>When a variable takes on many distinct values — as continuous variables typically do — listing every value individually would produce a table with dozens or hundreds of rows, defeating the entire purpose of summarization. In such cases, we group values into <strong>class intervals</strong> (also called <em>bins</em> or <em>classes</em>) and count how many observations fall into each interval (Triola, 2018).</p>
+
+<p>This is where frequency tables become both an art and a science. The choice of how many classes to use, and how wide to make them, profoundly affects what patterns you see — or miss — in the data.</p>
+
+<hr>
+
+<h2>🧮 How to Build a Grouped Frequency Table: Step by Step</h2>
+
+<p>Constructing a grouped frequency table follows a systematic process. Each step involves a decision, and each decision shapes the final result. Let us walk through this with a concrete example (Wackerly et al., 2014; Moore et al., 2021).</p>
+
+<p><strong>Scenario:</strong> A soil scientist measures the pH of 40 soil samples collected from agricultural fields across the Sétif region of Algeria. The raw measurements are:</p>
+
+<p>6.2, 7.1, 5.8, 6.9, 7.5, 6.4, 5.5, 7.8, 6.1, 6.7, 7.3, 5.9, 6.5, 7.0, 6.8, 5.6, 7.2, 6.3, 7.6, 6.0, 5.7, 7.4, 6.6, 7.1, 5.4, 6.8, 7.7, 6.2, 6.9, 5.8, 7.3, 6.5, 6.1, 7.0, 5.9, 6.4, 7.5, 6.7, 5.6, 7.2</p>
+
+<h3>Step 1: Find the Range</h3>
+
+<p>The <strong>range</strong> is the difference between the maximum and minimum values in the dataset:</p>
+
+<p><strong>Range = X_max − X_min = 7.8 − 5.4 = 2.4</strong></p>
+
+<h3>Step 2: Determine the Number of Classes (k)</h3>
+
+<p>This is the most critical decision. Too few classes over-simplify the data, hiding real patterns. Too many classes under-simplify, showing noise rather than signal. Several rules of thumb exist:</p>
+
+<table>
+  <thead>
+    <tr><th>Method</th><th>Formula</th><th>Best For</th><th>Result (n = 40)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Sturges' Rule</strong> (1926)</td><td>k = 1 + 3.322 × log₁₀(n)</td><td>Small to moderate samples; approximately normal data</td><td>k = 1 + 3.322 × log₁₀(40) = 1 + 3.322 × 1.602 ≈ <strong>6.3 → 7</strong></td></tr>
+    <tr><td><strong>Square Root Rule</strong></td><td>k = √n</td><td>Quick estimation</td><td>k = √40 ≈ <strong>6.3 → 7</strong></td></tr>
+    <tr><td><strong>Rice's Rule</strong></td><td>k = 2 × n^(1/3)</td><td>Moderate to large samples</td><td>k = 2 × 40^(1/3) ≈ <strong>6.8 → 7</strong></td></tr>
+    <tr><td><strong>Freedman-Diaconis Rule</strong></td><td>h = 2 × IQR × n^(−1/3)</td><td>Robust to outliers and skewness</td><td>Depends on IQR calculation</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📚 <strong>Historical note:</strong> Herbert A. Sturges published his famous rule in a brief 1926 paper in the <em>Journal of the American Statistical Association</em>. His formula derives from approximating a normal distribution using a binomial distribution — an elegant mathematical connection. Despite its simplicity, it remains one of the most widely used guidelines nearly a century later (Sturges, 1926). However, Scott (1979) showed that Sturges' rule tends to produce overly smooth histograms for large samples, leading to the development of alternatives like the Freedman-Diaconis rule (Freedman & Diaconis, 1981).</blockquote>
+
+<p>For our soil pH data, all three common rules converge on approximately <strong>k = 7 classes</strong>.</p>
+
+<h3>Step 3: Calculate the Class Width (h)</h3>
+
+<p>The class width is determined by dividing the range by the number of classes and rounding up to a convenient number:</p>
+
+<p><strong>h = Range / k = 2.4 / 7 ≈ 0.34 → round up to 0.4</strong></p>
+
+<p>We choose h = 0.4 because it is a "clean" number that makes the intervals easy to read and interpret. This is a judgment call — the class width should be a number that makes practical sense for the variable being measured.</p>
+
+<h3>Step 4: Set the Class Boundaries</h3>
+
+<p>Starting from a value at or just below the minimum (5.4), we create intervals of width 0.4. We use the convention <strong>[lower, upper[</strong> meaning the lower limit is included but the upper limit is excluded (ensuring no observation falls in two classes simultaneously):</p>
+
+<h3>Step 5: Count, Compute, and Assemble</h3>
+
+<table>
+  <thead>
+    <tr><th>Class Interval [Lᵢ, Lᵢ₊₁[</th><th>Class Center (cᵢ)</th><th>Freq. (nᵢ)</th><th>Rel. Freq. (fᵢ)</th><th>Percentage</th><th>Cum. Freq. (Nᵢ)</th><th>Cum. Rel. Freq. (Fᵢ)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>[5.4, 5.8[</td><td>5.6</td><td>4</td><td>0.100</td><td>10.0%</td><td>4</td><td>0.100</td></tr>
+    <tr><td>[5.8, 6.2[</td><td>6.0</td><td>6</td><td>0.150</td><td>15.0%</td><td>10</td><td>0.250</td></tr>
+    <tr><td>[6.2, 6.6[</td><td>6.4</td><td>6</td><td>0.150</td><td>15.0%</td><td>16</td><td>0.400</td></tr>
+    <tr><td>[6.6, 7.0[</td><td>6.8</td><td>7</td><td>0.175</td><td>17.5%</td><td>23</td><td>0.575</td></tr>
+    <tr><td>[7.0, 7.4[</td><td>7.2</td><td>8</td><td>0.200</td><td>20.0%</td><td>31</td><td>0.775</td></tr>
+    <tr><td>[7.4, 7.8[</td><td>7.6</td><td>5</td><td>0.125</td><td>12.5%</td><td>36</td><td>0.900</td></tr>
+    <tr><td>[7.8, 8.2[</td><td>8.0</td><td>4</td><td>0.100</td><td>10.0%</td><td>40</td><td>1.000</td></tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td><strong>40</strong></td><td><strong>1.000</strong></td><td><strong>100%</strong></td><td>—</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🧪 <strong>What does the table reveal?</strong> The soil pH values cluster most heavily in the slightly acidic to neutral range (6.6–7.4), with the modal class being [7.0, 7.4[. About 58% of samples have pH below 7.0 (cumulative frequency at the end of the [6.6, 7.0[ class = 23/40). The distribution is roughly symmetric, with slight positive skew. This tells the soil scientist that most fields in the region are near-neutral — excellent information for crop selection and fertilizer planning.</blockquote>
+
+<hr>
+
+<h2>🔬 Anatomy of Each Frequency Type: Why They All Matter</h2>
+
+<p>A complete frequency table contains several types of frequencies, each serving a distinct analytical purpose. Understanding what each one tells you is crucial for extracting maximum insight from your data (Agresti & Franklin, 2018).</p>
+
+<h3>📊 Absolute Frequency (nᵢ) — The Raw Count</h3>
+
+<p>The absolute frequency is simply the number of observations that fall into each class. It is the most basic and intuitive measure — the direct count of "how many." Absolute frequencies are essential for understanding the actual magnitude of each group, but they can be misleading when comparing datasets of different sizes. A class with nᵢ = 50 in a dataset of N = 100 is very different from nᵢ = 50 in a dataset of N = 10,000.</p>
+
+<h3>📏 Relative Frequency (fᵢ) — The Proportion</h3>
+
+<p>The relative frequency transforms the raw count into a proportion of the total: <strong>fᵢ = nᵢ / N</strong>. This standardization makes it possible to compare distributions across datasets of different sizes — a crucial advantage in scientific research. If 20% of soil samples in Sétif are acidic and 35% in Jijel are acidic, we can make meaningful comparisons regardless of whether 40 or 400 samples were collected in each region.</p>
+
+<blockquote>📈 <strong>Connection to probability:</strong> Relative frequencies are the empirical (observed) estimates of probability. If you randomly selected one soil sample, the relative frequency of each class approximates the probability of obtaining a pH value in that range. As sample size increases, relative frequencies converge to the true probabilities — this is the essence of the <strong>Law of Large Numbers</strong> (Wackerly et al., 2014).</blockquote>
+
+<h3>📈 Cumulative Frequency (Nᵢ) — The Running Total</h3>
+
+<p>The cumulative frequency is the sum of all frequencies from the first class up to and including class i: <strong>Nᵢ = n₁ + n₂ + ... + nᵢ</strong>. It tells you how many observations fall <em>at or below</em> a given value. This is enormously useful for answering questions like "How many students scored 70 or below?" or "What percentage of soil samples are acidic (pH < 7.0)?"</p>
+
+<p>There are two types of cumulative frequency:</p>
+
+<table>
+  <thead>
+    <tr><th>Type</th><th>Direction</th><th>Formula</th><th>Question It Answers</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Ascending (≤)</strong></td><td>Bottom to top</td><td>Nᵢ = Σ nⱼ for j = 1 to i</td><td>"How many observations are at or below this value?"</td></tr>
+    <tr><td><strong>Descending (≥)</strong></td><td>Top to bottom</td><td>N'ᵢ = Σ nⱼ for j = i to k</td><td>"How many observations are at or above this value?"</td></tr>
+  </tbody>
+</table>
+
+<h3>📊 Cumulative Relative Frequency (Fᵢ) — Percentiles and Beyond</h3>
+
+<p>The cumulative relative frequency, <strong>Fᵢ = Nᵢ / N</strong>, directly gives you the percentile rank. If Fᵢ = 0.75 for a given class, then 75% of the data falls at or below that class boundary. This is the mathematical foundation for computing <strong>quartiles</strong>, <strong>percentiles</strong>, and the <strong>median</strong> from grouped data — topics we will explore in future lessons.</p>
+
+<hr>
+
+<h2>📐 The Class Center (Midpoint): A Hidden Workhorse</h2>
+
+<p>The <strong>class center</strong> (or <em>midpoint</em>, <em>class mark</em>) is the value located exactly in the middle of each class interval:</p>
+
+<p><strong>cᵢ = (Lower limit + Upper limit) / 2</strong></p>
+
+<p>While it may seem like a minor technical detail, the class center plays a vital role. When we compute the <strong>mean</strong>, <strong>variance</strong>, and <strong>standard deviation</strong> from grouped data, we assume each observation in a class takes the value of the class center. This introduces a small approximation error — called <em>grouping error</em> — but it enables computation when only the grouped table (not the raw data) is available (Spiegel et al., 2013). This was particularly important historically, when datasets were tabulated by hand, and remains essential when data is published only in grouped form.</p>
+
+<hr>
+
+<h2>⚖️ Rules and Principles for Well-Constructed Classes</h2>
+
+<p>A poorly designed frequency table can distort the data as badly as no table at all. The following principles, established by generations of statisticians, ensure that your grouped table faithfully represents the underlying data (Moore et al., 2021; Freedman et al., 2007):</p>
+
+<table>
+  <thead>
+    <tr><th>Principle</th><th>Description</th><th>Why It Matters</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Exhaustiveness</strong></td><td>Every observation must fall into exactly one class</td><td>No data point should be left unclassified</td></tr>
+    <tr><td><strong>Mutual Exclusivity</strong></td><td>Classes must not overlap</td><td>Prevents double-counting; use [lower, upper[ convention</td></tr>
+    <tr><td><strong>Equal Width</strong></td><td>All classes should have the same width (when possible)</td><td>Unequal widths distort visual comparisons and require density corrections</td></tr>
+    <tr><td><strong>5–20 Classes</strong></td><td>Use between 5 and 20 classes for most datasets</td><td>Fewer = over-simplification; more = under-summarization</td></tr>
+    <tr><td><strong>Clean Boundaries</strong></td><td>Choose boundaries that are easy to read (multiples of 5, 10, etc.)</td><td>Improves interpretability and reduces errors</td></tr>
+    <tr><td><strong>No Empty Classes</strong></td><td>Avoid classes with zero frequency (if possible)</td><td>Empty classes suggest the interval structure is inappropriate</td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚠️ <strong>The Goldilocks problem:</strong> Too few classes (say, 3 classes for 500 observations) compresses distinct patterns into blurred averages — you might merge acidic and neutral soils into one category, losing the crucial distinction. Too many classes (say, 50 classes for 50 observations) shows every minor fluctuation as if it were a real pattern when it's just random noise. The goal is to find the number that's "just right" — enough resolution to see real patterns, enough smoothing to suppress noise. This is one of the central themes of data analysis (Tukey, 1977; Scott, 1979).</blockquote>
+
+<hr>
+
+<h2>🔄 From Data to Table to Graph: The Analytical Pipeline</h2>
+
+<p>The frequency table is not an end in itself — it is the foundation upon which all graphical representations are built. Each type of frequency has its corresponding graph (Triola, 2018):</p>
+
+<table>
+  <thead>
+    <tr><th>Frequency Type</th><th>Graph</th><th>What It Shows</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Absolute / Relative (ungrouped, qualitative)</td><td><strong>Bar chart</strong></td><td>Bars separated by gaps; order can be rearranged</td></tr>
+    <tr><td>Absolute / Relative (grouped, quantitative)</td><td><strong>Histogram</strong></td><td>Bars touching (no gaps); X-axis is a continuous scale</td></tr>
+    <tr><td>Relative / Percentage</td><td><strong>Pie chart</strong></td><td>Proportional composition of the whole</td></tr>
+    <tr><td>Absolute (midpoints connected)</td><td><strong>Frequency polygon</strong></td><td>Shape of the distribution; allows comparison of distributions</td></tr>
+    <tr><td>Cumulative frequency</td><td><strong>Ogive (cumulative curve)</strong></td><td>Reading percentiles, median, quartiles graphically</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>Practical insight:</strong> The histogram is born directly from the grouped frequency table — each bar represents one class, and the bar's height equals the frequency (or relative frequency). The ogive is born from the cumulative frequency column — each point represents the upper boundary of a class plotted against the cumulative count. Understanding this connection between tables and graphs is essential: <strong>the table is the data, the graph is the story</strong>.</blockquote>
+
+<hr>
+
+<h2>🌍 Real-World Applications: Why Frequency Tables Are Everywhere</h2>
+
+<p>Frequency tables are not confined to statistics textbooks. They are the analytical backbone of virtually every quantitative discipline (Agresti & Franklin, 2018):</p>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Application Example</th><th>What the Table Reveals</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>🌾 Agriculture</strong></td><td>Grain yield (t/ha) of 200 experimental plots</td><td>Which yield ranges are most common; identification of exceptional plots</td></tr>
+    <tr><td><strong>🏥 Medicine</strong></td><td>Blood pressure readings of 500 patients</td><td>Distribution of hypertension risk; percentage above clinical thresholds</td></tr>
+    <tr><td><strong>🌿 Ecology</strong></td><td>Species counts across 100 sampling quadrats</td><td>Biodiversity patterns; rare vs. common species</td></tr>
+    <tr><td><strong>💰 Economics</strong></td><td>Monthly income distribution of 10,000 households</td><td>Income inequality; percentage below poverty line</td></tr>
+    <tr><td><strong>🏭 Quality Control</strong></td><td>Product weights from an assembly line</td><td>Whether products meet specifications; defect rates</td></tr>
+    <tr><td><strong>🧬 Genetics</strong></td><td>Gene expression levels across tissue samples</td><td>Which genes are up/down-regulated; expression patterns</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧪 Complete Worked Example: From Raw Data to Full Analysis</h2>
+
+<p>A plant pathologist measures the lesion diameter (in mm) of 50 infected wheat leaves in an experiment studying <em>Septoria tritici</em> blotch. The raw data are:</p>
+
+<p>12, 18, 23, 15, 31, 27, 19, 22, 14, 26, 33, 17, 21, 28, 16, 24, 30, 20, 13, 25, 35, 19, 22, 29, 17, 11, 23, 26, 32, 18, 21, 27, 15, 24, 34, 20, 14, 28, 16, 22, 30, 19, 25, 13, 23, 31, 17, 21, 26, 29</p>
+
+<p><strong>Step 1: Range</strong> = 35 − 11 = 24 mm</p>
+
+<p><strong>Step 2: Number of classes</strong> (Sturges' rule) = 1 + 3.322 × log₁₀(50) = 1 + 3.322 × 1.699 ≈ 6.6 → <strong>k = 7</strong></p>
+
+<p><strong>Step 3: Class width</strong> = 24 / 7 ≈ 3.43 → round up to <strong>h = 4 mm</strong></p>
+
+<p><strong>Step 4: Starting point</strong> = 10 (a clean number just below the minimum of 11)</p>
+
+<table>
+  <thead>
+    <tr><th>Class [mm]</th><th>Center</th><th>nᵢ</th><th>fᵢ</th><th>%</th><th>Nᵢ ↑</th><th>Fᵢ ↑</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>[10, 14[</td><td>12</td><td>4</td><td>0.080</td><td>8.0%</td><td>4</td><td>0.080</td></tr>
+    <tr><td>[14, 18[</td><td>16</td><td>9</td><td>0.180</td><td>18.0%</td><td>13</td><td>0.260</td></tr>
+    <tr><td>[18, 22[</td><td>20</td><td>10</td><td>0.200</td><td>20.0%</td><td>23</td><td>0.460</td></tr>
+    <tr><td>[22, 26[</td><td>24</td><td>10</td><td>0.200</td><td>20.0%</td><td>33</td><td>0.660</td></tr>
+    <tr><td>[26, 30[</td><td>28</td><td>9</td><td>0.180</td><td>18.0%</td><td>42</td><td>0.840</td></tr>
+    <tr><td>[30, 34[</td><td>32</td><td>5</td><td>0.100</td><td>10.0%</td><td>47</td><td>0.940</td></tr>
+    <tr><td>[34, 38[</td><td>36</td><td>3</td><td>0.060</td><td>6.0%</td><td>50</td><td>1.000</td></tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td><strong>50</strong></td><td><strong>1.000</strong></td><td><strong>100%</strong></td><td>—</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔬 <strong>Interpretation:</strong> The distribution of lesion diameters is roughly symmetric, centered around 18–26 mm (the two modal classes, each with 10 observations). About 46% of lesions are smaller than 22 mm. Only 16% of lesions exceed 30 mm — these severely infected leaves may require special attention. The approximately normal shape suggests the pathogen affects leaves uniformly, with natural biological variation causing the spread. This information directly informs the pathologist's disease severity assessment and treatment recommendations.</blockquote>
+
+<hr>
+
+<h2>⚠️ Common Mistakes and How to Avoid Them</h2>
+
+<table>
+  <thead>
+    <tr><th>❌ Mistake</th><th>Why It's Wrong</th><th>✅ Correct Approach</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Overlapping classes: [10–20], [20–30]</td><td>An observation of 20 falls in two classes — double-counting</td><td>Use exclusive upper bounds: [10, 20[, [20, 30[</td></tr>
+    <tr><td>Unequal class widths without justification</td><td>Visually exaggerates narrower classes in histograms</td><td>Use equal widths; if unequal widths are necessary, use frequency density (nᵢ/h)</td></tr>
+    <tr><td>Too few classes (k = 2 or 3)</td><td>Compresses all variation into meaningless blobs</td><td>Use Sturges' or similar rule as a starting guide</td></tr>
+    <tr><td>Forgetting to verify Σnᵢ = N</td><td>Indicates a counting error — some observations were missed or double-counted</td><td>Always check that frequencies sum to total N</td></tr>
+    <tr><td>Using grouped tables for categorical data</td><td>Nominal/ordinal data should not be grouped into numeric intervals</td><td>Use ungrouped tables for categorical variables</td></tr>
+    <tr><td>Reporting frequencies without relative frequencies</td><td>Makes comparison across different sample sizes impossible</td><td>Always include both nᵢ and fᵢ (or %) in your table</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧠 Key Formulas Summary</h2>
+
+<table>
+  <thead>
+    <tr><th>Formula</th><th>Expression</th><th>Purpose</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Range</td><td>R = X_max − X_min</td><td>Total spread of data</td></tr>
+    <tr><td>Sturges' Rule</td><td>k = 1 + 3.322 × log₁₀(n)</td><td>Number of classes</td></tr>
+    <tr><td>Class Width</td><td>h = R / k (rounded up)</td><td>Width of each interval</td></tr>
+    <tr><td>Class Center</td><td>cᵢ = (Lᵢ + Lᵢ₊₁) / 2</td><td>Representative value of each class</td></tr>
+    <tr><td>Relative Frequency</td><td>fᵢ = nᵢ / N</td><td>Proportion in each class</td></tr>
+    <tr><td>Cumulative Frequency</td><td>Nᵢ = Σ nⱼ (j = 1 to i)</td><td>Running total up to class i</td></tr>
+    <tr><td>Cumulative Relative Freq.</td><td>Fᵢ = Nᵢ / N</td><td>Percentile rank</td></tr>
+    <tr><td>Frequency Density</td><td>dᵢ = nᵢ / hᵢ</td><td>Needed when class widths are unequal</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>💡 Final Thought: The Frequency Table as a Way of Seeing</h2>
+
+<p>The frequency table is often dismissed as a "basic" tool — something to learn in the first week and then move past. This is a mistake. Every advanced statistical technique — from the chi-squared test to regression analysis — ultimately rests on the foundation of understanding how values distribute across categories and intervals. Florence Nightingale, one of history's great applied statisticians, used frequency distributions to demonstrate that more soldiers died from preventable diseases than from battle wounds, revolutionizing military medicine and public health (Braveman, 1998; Cohen, 1984).</p>
+
+<p>The frequency table is not just a tool for organizing data. It is a <strong>way of seeing</strong> — a disciplined method for discovering what the data is trying to tell you. Master this tool, and you have mastered the foundation upon which all of statistics is built.</p>
+
+<hr>
+
+<h2>📚 References</h2>
+
+<p>Agresti, A., & Franklin, C. (2018). <em>Statistics: The art and science of learning from data</em> (4th ed.). Pearson.</p>
+
+<p>Braveman, P. (1998). Florence Nightingale and evidence-based medicine. <em>American Journal of Public Health</em>, <em>88</em>(6), 968. https://doi.org/10.2105/AJPH.88.6.968</p>
+
+<p>Cohen, I. B. (1984). Florence Nightingale. <em>Scientific American</em>, <em>250</em>(3), 128–137.</p>
+
+<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton.</p>
+
+<p>Freedman, D., & Diaconis, P. (1981). On the histogram as a density estimator: L₂ theory. <em>Zeitschrift für Wahrscheinlichkeitstheorie und verwandte Gebiete</em>, <em>57</em>(4), 453–476. https://doi.org/10.1007/BF01025868</p>
+
+<p>Gravetter, F. J., & Wallnau, L. B. (2017). <em>Statistics for the behavioral sciences</em> (10th ed.). Cengage Learning.</p>
+
+<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+
+<p>Scott, D. W. (1979). On optimal and data-based histograms. <em>Biometrika</em>, <em>66</em>(3), 605–610. https://doi.org/10.1093/biomet/66.3.605</p>
+
+<p>Spiegel, M. R., Schiller, J. J., & Srinivasan, R. A. (2013). <em>Schaum's outline of probability and statistics</em> (4th ed.). McGraw-Hill.</p>
+
+<p>Sturges, H. A. (1926). The choice of a class interval. <em>Journal of the American Statistical Association</em>, <em>21</em>(153), 65–66. https://doi.org/10.1080/01621459.1926.10502161</p>
+
+<p>Triola, M. F. (2018). <em>Elementary statistics</em> (13th ed.). Pearson.</p>
+
+<p>Tukey, J. W. (1977). <em>Exploratory data analysis</em>. Addison-Wesley.</p>
+
+<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>

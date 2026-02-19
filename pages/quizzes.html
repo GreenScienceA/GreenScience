@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizzes — Green Science</title>
+  <link rel="icon" type="image/svg+xml" href="../SS.svg">
+  <meta name="theme-color" content="#0a0f0a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta property="og:title" content="All Quizzes — Green Science">
+  <meta property="og:description" content="Browse and download all quizzes available on Green Science.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="../SS.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <noscript><div style="text-align:center;padding:80px 20px;font-family:sans-serif;color:#ccc;background:#0a0f0a;min-height:100vh"><h1 style="color:#2ECC71">Green Science</h1><p>JavaScript is required to use this site.</p></div></noscript>
+  <div class="bg-layer"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+  <div class="grain"></div>
+
+  <nav class="nav-bar" role="navigation" aria-label="Main navigation"><div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <img src="../SS.svg" width="30" height="30" alt="logo">
+      <span data-i18n="siteName">Green Science</span>
+    </a>
+    <div class="nav-right">
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+      <button class="search-btn" onclick="openSearch()" title="Search (Ctrl+K)" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      <div class="lang-btns">
+        <button class="lang-btn active" onclick="setLang('en')" aria-label="English">EN</button>
+        <button class="lang-btn" onclick="setLang('fr')" aria-label="Français">FR</button>
+        <button class="lang-btn" onclick="setLang('ar')" aria-label="العربية">عربي</button>
+      </div>
+    </div>
+  </div></nav>
+
+  <main class="wrap" id="main" role="main"></main>
+
+<script src="../js/config.js"></script>
+<script src="../js/i18n.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/modules/soil.js"></script>
+<script src="../js/modules/plant.js"></script>
+<script src="../js/modules/climate.js"></script>
+<script src="../js/modules/stat.js"></script>
+<script src="../js/modules/ai.js"></script>
+<script src="../js/modules/datasci.js"></script>
+<script src="../js/modules/writing.js"></script>
+<script src="../js/modules/tools.js"></script>
+<script src="../js/modules/ecology.js"></script>
+<script src="../js/modules/chemistry.js"></script>
+
+<script src="../js/news.js"></script>
+<script src="../js/engine.js"></script>
+<script src="../js/features.js"></script>
+<script>
+
+var allQuizzes = [];
+var quizModFilter = 'all';
+var quizSearch = '';
+
+function onLangChange() { var s = window.scrollY; render(); requestAnimationFrame(function(){ window.scrollTo(0, s); }); }
+
+function getFilteredQuizzes() {
+  return allQuizzes.filter(function(entry) {
+    if (quizModFilter !== 'all' && entry.modId !== quizModFilter) return false;
+    if (quizSearch) {
+      var q = quizSearch.toLowerCase();
+      var title = (localText(entry.quiz.title) || '').toLowerCase();
+      var topic = (localText(entry.topicTitle) || '').toLowerCase();
+      var mod = (localText(entry.modTitle) || '').toLowerCase();
+      if (title.indexOf(q) === -1 && topic.indexOf(q) === -1 && mod.indexOf(q) === -1) return false;
+    }
+    return true;
+  }).sort(function(a, b) {
+    return (localText(a.quiz.title) || '').localeCompare(localText(b.quiz.title) || '', currentLang);
+  });
+}
+
+function getQuizModuleCounts() {
+  var counts = {};
+  allQuizzes.forEach(function(entry) {
+    counts[entry.modId] = (counts[entry.modId] || 0) + 1;
+  });
+  return counts;
+}
+
+function groupByModule(filtered) {
+  var groups = {};
+  var order = [];
+  filtered.forEach(function(entry) {
+    if (!groups[entry.modId]) {
+      groups[entry.modId] = { modTitle: entry.modTitle, modIcon: entry.modIcon, modGrad: entry.modGrad, modId: entry.modId, items: [] };
+      order.push(entry.modId);
+    }
+    groups[entry.modId].items.push(entry);
+  });
+  // Sort groups alphabetically by module title
+  order.sort(function(a, b) {
+    return localText(groups[a].modTitle).localeCompare(localText(groups[b].modTitle), currentLang);
+  });
+  return { groups: groups, order: order };
+}
+
+function render() {
+  allQuizzes = getAllQuizzes();
+  document.title = tr('quizzesAllTitle') + ' — Green Science';
+  var el = document.getElementById('main');
+  var h = '';
+
+  h += '<div class="breadcrumb">' +
+    '<a href="' + ROOT + 'index.html">' + tr('backHome') + '</a>' +
+    '<span class="sep">›</span>' +
+    '<span class="current">' + tr('quizzesAllTitle') + '</span></div>';
+
+  h += '<div class="page-hero">' +
+    '<div class="page-icon" style="background:linear-gradient(135deg,#E67E22,#F39C12)">📝</div>' +
+    '<div><h1 class="page-title">' + tr('quizzesAllTitle') + '</h1>' +
+    '<p class="page-desc">' + allQuizzes.length + ' ' + tr('quizSection').toLowerCase() + '</p></div></div>';
+
+  // Search bar
+  h += '<div class="books-toolbar">';
+  h += '<input class="books-search" type="text" placeholder="' + tr('quizzesSearchPh') + '" value="' + quizSearch.replace(/"/g, '&quot;') + '" oninput="onQuizSearchInput(this.value)" />';
+  h += '</div>';
+
+  // Module filter pills
+  var counts = getQuizModuleCounts();
+  h += '<div class="books-filters">';
+  h += '<button class="books-filter-btn' + (quizModFilter === 'all' ? ' active' : '') + '" onclick="setQuizFilter(\'all\')">📋 ' + tr('catFilterAll') + ' <span class="books-filter-count">(' + allQuizzes.length + ')</span></button>';
+  modules.forEach(function(mod) {
+    var c = counts[mod.id] || 0;
+    if (c === 0) return;
+    h += '<button class="books-filter-btn' + (quizModFilter === mod.id ? ' active' : '') + '" onclick="setQuizFilter(\'' + mod.id + '\')">' +
+      mod.icon + ' ' + localText(mod.title) + ' <span class="books-filter-count">(' + c + ')</span></button>';
+  });
+  h += '</div>';
+
+  h += '<div id="quizResults"></div>';
+
+  h += '<footer><div id="contactSlot"></div><div style="margin-top:16px">&copy; Ouali Abdelouahad - والي عبد الواحد  &mdash; <a href="https://www.youtube.com/@greenscience-9226">' + tr('footerLink') + '</a></div></footer>';
+
+  el.innerHTML = h;
+  renderContactLinks();
+  renderResults();
+}
+
+function renderResults() {
+  var container = document.getElementById('quizResults');
+  if (!container) return;
+  var filtered = getFilteredQuizzes();
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:56px;height:56px;margin-bottom:12px;opacity:0.3"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg><p>' + tr('quizzesNoResults') + '</p></div>';
+    return;
+  }
+
+  var data = groupByModule(filtered);
+  var h = '<div class="quiz-toolbar-row">';
+  h += '<span class="quiz-page-count">' + filtered.length + ' ' + tr('quizSection').toLowerCase() + '</span>';
+  h += '<div class="quiz-toggle-btns">';
+  h += '<button class="quiz-toggle-btn" onclick="toggleAllQuizGroups(true)">' + tr('expandAll') + '</button>';
+  h += '<button class="quiz-toggle-btn" onclick="toggleAllQuizGroups(false)">' + tr('collapseAll') + '</button>';
+  h += '</div></div>';
+
+  data.order.forEach(function(modId) {
+    var group = data.groups[modId];
+    var isOpen = quizGroupState[modId] !== false; // default open
+    h += '<div class="quiz-module-group">';
+    h += '<div class="quiz-module-header quiz-collapsible" onclick="toggleQuizGroup(\'' + modId + '\')" role="button" tabindex="0">';
+    h += '<div class="quiz-module-icon" style="background:' + group.modGrad + '">' + group.modIcon + '</div>';
+    h += '<div class="quiz-module-info">';
+    h += '<div class="quiz-module-name">' + localText(group.modTitle) + '</div>';
+    h += '<div class="quiz-module-count">' + group.items.length + ' ' + tr('quizSection').toLowerCase() + '</div>';
+    h += '</div>';
+    h += '<svg class="quiz-chevron' + (isOpen ? ' open' : '') + '" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+    h += '</div>';
+
+    h += '<div class="quiz-items-grid' + (isOpen ? '' : ' collapsed') + '" id="quizGroup_' + modId + '">';
+    group.items.forEach(function(entry) {
+      var q = entry.quiz;
+      h += '<div class="quiz-item-card">';
+      h += '<div class="quiz-item-top"><div class="quiz-item-icon">' + (q.icon || '📝') + '</div><div class="quiz-item-info"><div class="quiz-item-title">' + localText(q.title) + '</div><div class="quiz-item-path">' + localText(entry.subTitle) + ' › ' + localText(entry.topicTitle) + '</div></div></div>';
+      h += '<div class="quiz-item-meta">';
+      if (q.questions) h += '<span class="quiz-meta-tag">📋 ' + q.questions + ' ' + tr('quizQuestions') + '</span>';
+      if (q.chapters) h += '<span class="quiz-meta-tag">📖 ' + q.chapters + ' ' + tr('quizChapters') + '</span>';
+      h += renderLangBadges(q);
+      h += '</div>';
+      if (q.file) h += '<a href="' + q.file + '" target="_blank" rel="noopener" class="quiz-item-dl">' + dlSvg + ' ' + tr('download') + '</a>';
+      h += '</div>';
+    });
+    h += '</div></div>';
+  });
+
+  container.innerHTML = h;
+}
+
+var quizGroupState = {};
+function toggleQuizGroup(modId) {
+  var grid = document.getElementById('quizGroup_' + modId);
+  if (!grid) return;
+  var isOpen = !grid.classList.contains('collapsed');
+  grid.classList.toggle('collapsed', isOpen);
+  quizGroupState[modId] = !isOpen;
+  // Update chevron
+  var header = grid.previousElementSibling;
+  if (header) {
+    var chev = header.querySelector('.quiz-chevron');
+    if (chev) chev.classList.toggle('open', !isOpen);
+  }
+}
+function toggleAllQuizGroups(open) {
+  document.querySelectorAll('.quiz-items-grid').forEach(function(g) {
+    g.classList.toggle('collapsed', !open);
+    var modId = g.id.replace('quizGroup_', '');
+    quizGroupState[modId] = open;
+    var header = g.previousElementSibling;
+    if (header) { var c = header.querySelector('.quiz-chevron'); if (c) c.classList.toggle('open', open); }
+  });
+}
+
+function setQuizFilter(id) {
+  quizModFilter = id;
+  render();
+  var input = document.querySelector('.books-search');
+  if (input) input.value = quizSearch;
+}
+
+var _debouncedQuizSearch = debounce(function() { renderResults(); }, 180);
+function onQuizSearchInput(val) { quizSearch = val; _debouncedQuizSearch(); }
+
+setLang(initLang());
+</script>
+</body>
+</html>

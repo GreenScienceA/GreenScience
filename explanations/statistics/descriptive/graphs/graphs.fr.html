@@ -1,0 +1,386 @@
+<h2>📈 Représentation Graphique : Quand les Nombres Apprennent à Parler</h2>
+
+<p>Imaginez que vous venez de compiler un jeu de données de 500 hauteurs de plantes issues d'un essai agronomique dans la région de Sétif en Algérie. Vous fixez le tableur — ligne après ligne de chiffres — et les données vous renvoient un regard muet et impénétrable. Maintenant, imaginez transformer ces mêmes nombres en un seul histogramme. Soudain, vous <em>voyez</em> la distribution : le pic, la dispersion, les valeurs aberrantes, l'histoire. En un seul coup d'œil, les données parlent.</p>
+
+<p>Tel est le pouvoir extraordinaire de la représentation graphique : la capacité de convertir l'information numérique abstraite en motifs visuels que le cerveau humain peut traiter presque instantanément. Alors qu'un tableau de fréquences compresse les données en un résumé structuré, un graphique rend ce résumé <strong>visible</strong> — exploitant le fait qu'environ 30 % de notre cortex cérébral est dédié au traitement visuel, contre seulement 8 % pour le toucher et 3 % pour l'audition (Ware, 2012).</p>
+
+<blockquote>💡 <strong>L'idée fondamentale :</strong> Un bon graphique ne se contente pas d'<em>afficher</em> les données — il <strong>révèle</strong> ce que les données ont à dire. Comme l'a écrit le légendaire statisticien John Tukey : « La plus grande valeur d'une image est lorsqu'elle nous force à remarquer ce que nous ne nous attendions jamais à voir » (Tukey, 1977, p. vi). Chaque graphique est un argument visuel — et comme tout argument, il peut être brillant, trompeur ou totalement incompréhensible selon la façon dont il est construit.</blockquote>
+
+<hr>
+
+<h2>🏛️ Brève Histoire : L'Invention des Graphiques Statistiques</h2>
+
+<p>Les graphiques statistiques sont si omniprésents aujourd'hui qu'il est facile d'oublier à quel point ils ont été inventés <strong>récemment</strong>. Pendant la majeure partie de l'histoire humaine, les données numériques étaient communiquées exclusivement par des tableaux et du texte. La révolution a commencé avec un seul individu.</p>
+
+<p><strong>William Playfair</strong> (1759–1823), ingénieur et économiste politique écossais, a inventé à lui seul presque tous les types de graphiques majeurs utilisés aujourd'hui. Dans son <em>Commercial and Political Atlas</em> (1786), il a introduit le <strong>graphique linéaire</strong> (43 séries temporelles) et le <strong>diagramme en barres</strong>. Dans son <em>Statistical Breviary</em> (1801), il a publié le premier <strong>diagramme circulaire (camembert)</strong>. Avant Playfair, l'affichage visuel de l'information quantitative était pratiquement inexistant (Friendly, 2008 ; Spence, 2005).</p>
+
+<p>Un demi-siècle plus tard, <strong>Florence Nightingale</strong> (1858) a démontré le pouvoir persuasif des graphiques en utilisant son célèbre <strong>diagramme en aire polaire</strong> (souvent appelé « coxcomb ») pour montrer que bien plus de soldats britanniques mouraient de maladies évitables que de blessures de guerre pendant la guerre de Crimée. Sa visualisation a conduit à une réforme sanitaire et sauvé d'innombrables vies (Magnello, 2012).</p>
+
+<p>Au XXᵉ siècle, <strong>John Tukey</strong> (1977) a révolutionné le domaine avec son concept d'<em>Analyse Exploratoire des Données</em> (EDA), introduisant des outils comme le <strong>diagramme tige-et-feuilles</strong> et la <strong>boîte à moustaches</strong>. Et <strong>Edward Tufte</strong> (1983) a établi les principes théoriques de l'excellence graphique dans son ouvrage de référence <em>The Visual Display of Quantitative Information</em>.</p>
+
+<hr>
+
+<h2>🧭 Vue d'Ensemble : Choisir le Bon Graphique</h2>
+
+<p>Tous les graphiques ne se valent pas. Le type de graphique dépend de deux facteurs critiques : la <strong>nature de votre variable</strong> (qualitative ou quantitative) et la <strong>question à laquelle vous cherchez à répondre</strong> (Moore et al., 2021).</p>
+
+<table>
+  <thead>
+    <tr><th>Type de Données</th><th>Objectif</th><th>Graphique Recommandé</th><th>À Éviter</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Qualitatives (Catégorielles)</strong></td><td>Comparer des catégories</td><td>Diagramme en barres, Camembert</td><td>Histogramme</td></tr>
+    <tr><td><strong>Quantitatives Discrètes</strong></td><td>Distribution de fréquences</td><td>Barres, Tige-et-feuilles</td><td>Camembert (généralement)</td></tr>
+    <tr><td><strong>Quantitatives Continues</strong></td><td>Forme de la distribution</td><td>Histogramme, Polygone des fréquences</td><td>Barres avec espaces</td></tr>
+    <tr><td><strong>Quantitatives Continues</strong></td><td>Distribution cumulée</td><td>Ogive (courbe cumulative)</td><td>Camembert</td></tr>
+    <tr><td><strong>Quantitatives (toutes)</strong></td><td>Résumé à 5 nombres</td><td>Boîte à moustaches</td><td>Camembert</td></tr>
+    <tr><td><strong>Séries temporelles</strong></td><td>Évolution dans le temps</td><td>Graphique linéaire</td><td>Camembert, Histogramme</td></tr>
+    <tr><td><strong>Deux variables quantitatives</strong></td><td>Relation entre variables</td><td>Nuage de points</td><td>Barres</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>Règle d'or :</strong> Demandez-vous toujours : <em>« Quelle histoire est-ce que j'essaie de raconter ? »</em> Le graphique doit servir l'histoire, et non l'inverse.</blockquote>
+
+<hr>
+
+<h2>📊 1. Diagrammes en Barres — Les Piliers des Données Catégorielles</h2>
+
+<h3>Définition</h3>
+
+<p>Un <strong>diagramme en barres</strong> utilise des rectangles de largeur égale pour représenter la fréquence de chaque catégorie. La hauteur de chaque barre est proportionnelle à la valeur représentée. Les barres sont <strong>séparées par des espaces</strong> — c'est l'indice visuel crucial qui distingue les diagrammes en barres des histogrammes et signale que les catégories sont discrètes et indépendantes (Agresti & Franklin, 2018).</p>
+
+<h3>Quand les Utiliser</h3>
+
+<p>Les diagrammes en barres conviennent aux <strong>variables qualitatives</strong> — groupes sanguins, variétés de cultures, textures du sol — et aux <strong>variables quantitatives discrètes</strong> avec un petit nombre de valeurs.</p>
+
+<h3>Exemple Pratique</h3>
+
+<p><strong>Scénario :</strong> Un agronome enquête sur 120 exploitations de l'est algérien pour classifier la texture principale du sol :</p>
+
+<table>
+  <thead>
+    <tr><th>Texture du Sol</th><th>Fréquence (nᵢ)</th><th>Fréq. Relative (%)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Sableux</td><td>18</td><td>15,0 %</td></tr>
+    <tr><td>Sablo-limoneux</td><td>32</td><td>26,7 %</td></tr>
+    <tr><td>Limoneux</td><td>38</td><td>31,7 %</td></tr>
+    <tr><td>Argilo-limoneux</td><td>22</td><td>18,3 %</td></tr>
+    <tr><td>Argileux</td><td>10</td><td>8,3 %</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>120</strong></td><td><strong>100 %</strong></td></tr>
+  </tbody>
+</table>
+
+<p><strong>Règles de construction :</strong></p>
+<p>① Axe horizontal (catégories) et axe vertical (fréquence ou %). ② Barres de <strong>même largeur</strong>. ③ <strong>Espaces égaux</strong> entre les barres. ④ Hauteur = fréquence de la catégorie. ⑤ Étiqueter les deux axes et ajouter un titre.</p>
+
+<blockquote>🔑 <strong>Variantes clés :</strong> Les <strong>diagrammes en barres groupées</strong> permettent de comparer des sous-groupes. Les <strong>diagrammes en barres empilées</strong> montrent la composition. Les <strong>diagrammes de Pareto</strong> trient les barres par ordre décroissant avec une courbe cumulative — un outil de contrôle qualité fondé sur le principe 80/20 de Vilfredo Pareto (Juran, 1951).</blockquote>
+
+<hr>
+
+<h2>🥧 2. Diagrammes Circulaires (Camemberts) — Les Parts d'un Tout</h2>
+
+<h3>Définition</h3>
+
+<p>Un <strong>diagramme circulaire</strong> est un cercle divisé en secteurs dont l'<strong>angle</strong> est proportionnel à la fréquence relative de chaque catégorie. Un cercle complet = 360°, donc une catégorie de fréquence relative fᵢ occupe un angle de <strong>fᵢ × 360°</strong> (Freedman et al., 2007).</p>
+
+<h3>Quand les Utiliser (et Quand NE PAS les Utiliser)</h3>
+
+<p>Les camemberts conviennent pour montrer des <strong>relations partie-tout</strong> avec un petit nombre de catégories (idéalement 2 à 6). Cependant, ils sont <strong>très critiqués</strong> par les statisticiens. Tufte (1983) a soutenu que les humains comparent mal les angles et les aires. Cleveland et McGill (1984) ont démontré expérimentalement que les gens estiment les quantités plus précisément à partir de positions sur une échelle commune (diagrammes en barres) qu'à partir d'angles (camemberts).</p>
+
+<h3>Exemple Pratique</h3>
+
+<p>Avec les données de texture du sol ci-dessus :</p>
+
+<table>
+  <thead>
+    <tr><th>Texture</th><th>Fréq.</th><th>Fréq. Relative</th><th>Angle (°)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Sableux</td><td>18</td><td>0,150</td><td>54,0°</td></tr>
+    <tr><td>Sablo-limoneux</td><td>32</td><td>0,267</td><td>96,0°</td></tr>
+    <tr><td>Limoneux</td><td>38</td><td>0,317</td><td>114,0°</td></tr>
+    <tr><td>Argilo-limoneux</td><td>22</td><td>0,183</td><td>66,0°</td></tr>
+    <tr><td>Argileux</td><td>10</td><td>0,083</td><td>30,0°</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>120</strong></td><td><strong>1,000</strong></td><td><strong>360,0°</strong></td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚠️ <strong>Le débat du camembert :</strong> Tufte (1983) a écrit que les camemberts devraient être remplacés par des tableaux ou des barres dans presque tous les cas. Utilisez-les avec discernement et n'utilisez <strong>jamais</strong> de camemberts 3D : ils déforment les angles et rendent la comparaison impossible.</blockquote>
+
+<hr>
+
+<h2>📶 3. Histogrammes — Le Cœur des Données Quantitatives</h2>
+
+<h3>Définition</h3>
+
+<p>L'<strong>histogramme</strong> est l'outil graphique le plus important en statistique descriptive. Il affiche la distribution de fréquences d'une <strong>variable quantitative continue</strong> à l'aide de barres rectangulaires adjacentes, chaque barre couvrant un intervalle de classe. Les barres <strong>se touchent</strong> — il n'y a pas d'espaces — car les données sont continues et les intervalles contigus (Wackerly et al., 2014).</p>
+
+<h3>Histogramme vs. Diagramme en Barres : La Différence Cruciale</h3>
+
+<table>
+  <thead>
+    <tr><th>Caractéristique</th><th>Diagramme en Barres</th><th>Histogramme</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Type de données</strong></td><td>Catégorielles / Discrètes</td><td>Quantitatives continues</td></tr>
+    <tr><td><strong>Barres</strong></td><td>Séparées par des espaces</td><td>Adjacentes (pas d'espaces)</td></tr>
+    <tr><td><strong>Axe X</strong></td><td>Catégories</td><td>Échelle numérique</td></tr>
+    <tr><td><strong>Largeur des barres</strong></td><td>Arbitraire (esthétique)</td><td>Significative (= largeur de classe)</td></tr>
+    <tr><td><strong>Ordre des barres</strong></td><td>Modifiable</td><td>Fixé par l'ordre numérique</td></tr>
+    <tr><td><strong>Aire</strong></td><td>Hauteur = fréquence</td><td>Aire ∝ fréquence (si largeurs inégales)</td></tr>
+  </tbody>
+</table>
+
+<h3>Exemple Pratique</h3>
+
+<p><strong>Scénario :</strong> Un biologiste mesure la longueur corporelle (en cm) de 50 coléoptères collectés dans un champ de blé :</p>
+
+<table>
+  <thead>
+    <tr><th>Classe [cm)</th><th>Centre (xᵢ)</th><th>Fréquence (nᵢ)</th><th>Fréq. Rel.</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>[1,0 ; 1,5[</td><td>1,25</td><td>4</td><td>0,08</td></tr>
+    <tr><td>[1,5 ; 2,0[</td><td>1,75</td><td>9</td><td>0,18</td></tr>
+    <tr><td>[2,0 ; 2,5[</td><td>2,25</td><td>16</td><td>0,32</td></tr>
+    <tr><td>[2,5 ; 3,0[</td><td>2,75</td><td>12</td><td>0,24</td></tr>
+    <tr><td>[3,0 ; 3,5[</td><td>3,25</td><td>6</td><td>0,12</td></tr>
+    <tr><td>[3,5 ; 4,0[</td><td>3,75</td><td>3</td><td>0,06</td></tr>
+    <tr><td><strong>Total</strong></td><td></td><td><strong>50</strong></td><td><strong>1,00</strong></td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔍 <strong>Lecture de l'histogramme :</strong> La distribution est <strong>unimodale</strong>, le pic est à [2,0 ; 2,5[ cm (la <strong>classe modale</strong>), la distribution est légèrement <strong>asymétrique à droite</strong>, et la plupart des coléoptères mesurent entre 1,5 et 3,0 cm.</blockquote>
+
+<h3>⚠️ Cas Spécial : Classes de Largeurs Inégales</h3>
+
+<p>Quand les largeurs de classes ne sont pas égales, il faut utiliser la <strong>densité de fréquence</strong> sur l'axe Y :</p>
+
+<p><strong>Densité de fréquence = nᵢ / largeur de classe</strong></p>
+
+<p>Cela garantit que l'<strong>aire</strong> (et non la hauteur) de chaque barre est proportionnelle à la fréquence (Freedman et al., 2007).</p>
+
+<hr>
+
+<h2>📉 4. Polygones de Fréquences — Relier les Points</h2>
+
+<h3>Définition</h3>
+
+<p>Un <strong>polygone de fréquences</strong> est construit en traçant un point au centre de chaque classe à une hauteur égale à la fréquence, puis en reliant ces points par des segments de droite. Le polygone est « fermé » en l'étendant aux centres de classes hypothétiques vides aux deux extrémités (Moore et al., 2021).</p>
+
+<h3>Avantages par Rapport à l'Histogramme</h3>
+
+<p>① Permet de <strong>comparer plusieurs distributions sur le même graphique</strong>. ② Met en valeur la <strong>forme</strong> et le <strong>flux</strong> de la distribution.</p>
+
+<blockquote>💡 <strong>Propriété clé :</strong> L'aire totale sous le polygone de fréquences est exactement égale à l'aire totale de l'histogramme correspondant — une belle identité géométrique (Wackerly et al., 2014).</blockquote>
+
+<hr>
+
+<h2>📈 5. Courbe des Fréquences Cumulées (Ogive) — Le Total Cumulé</h2>
+
+<h3>Définition</h3>
+
+<p>Une <strong>ogive</strong> est un graphique de la <strong>fréquence cumulée</strong> tracé en fonction de la <strong>borne supérieure</strong> de chaque classe. La courbe monte toujours de zéro à N. Le terme « ogive » vient de l'architecture, désignant une forme d'arc en ogive (Gravetter & Wallnau, 2017).</p>
+
+<h3>Ce qu'elle Révèle</h3>
+
+<p>L'ogive répond aux <strong>questions cumulatives</strong> : « Quelle proportion de coléoptères mesure moins de 2,5 cm ? », « Quelle longueur n'est dépassée que par 25 % des individus ? ». La <strong>médiane</strong> se lit là où la courbe croise la ligne des 50 %, et les <strong>quartiles</strong> aux lignes des 25 % et 75 %.</p>
+
+<h3>Construction à partir des Données</h3>
+
+<table>
+  <thead>
+    <tr><th>Borne Supérieure</th><th>Fréq. Cumulée (Nᵢ)</th><th>Fréq. Rel. Cumulée</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1,0</td><td>0</td><td>0,00</td></tr>
+    <tr><td>1,5</td><td>4</td><td>0,08</td></tr>
+    <tr><td>2,0</td><td>13</td><td>0,26</td></tr>
+    <tr><td>2,5</td><td>29</td><td>0,58</td></tr>
+    <tr><td>3,0</td><td>41</td><td>0,82</td></tr>
+    <tr><td>3,5</td><td>47</td><td>0,94</td></tr>
+    <tr><td>4,0</td><td>50</td><td>1,00</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔍 <strong>Lecture de l'ogive :</strong> La médiane ≈ 2,3 cm. Q₁ ≈ 1,85 cm et Q₃ ≈ 2,85 cm. La section abrupte entre 2,0 et 2,5 cm confirme la concentration des observations.</blockquote>
+
+<hr>
+
+<h2>🌿 6. Diagrammes Tige-et-Feuilles — Le Meilleur des Deux Mondes</h2>
+
+<h3>Définition</h3>
+
+<p>Inventé par <strong>John Tukey</strong> (1977), le <strong>diagramme tige-et-feuilles</strong> affiche la forme de la distribution (comme un histogramme) tout en <strong>conservant chaque valeur individuelle</strong>. Chaque nombre est divisé en « tige » (chiffre(s) de tête) et « feuille » (dernier chiffre) (Tukey, 1977).</p>
+
+<h3>Exemple Pratique</h3>
+
+<p><strong>Scénario :</strong> Notes d'examen (/100) de 25 étudiants en biostatistique :</p>
+
+<p>45, 52, 55, 58, 61, 63, 65, 66, 67, 68, 70, 72, 73, 74, 75, 76, 78, 80, 82, 83, 85, 88, 90, 93, 95</p>
+
+<table>
+  <thead>
+    <tr><th>Tige</th><th>Feuilles</th><th>Effectif</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>4</td><td>5</td><td>1</td></tr>
+    <tr><td>5</td><td>2 5 8</td><td>3</td></tr>
+    <tr><td>6</td><td>1 3 5 6 7 8</td><td>6</td></tr>
+    <tr><td>7</td><td>0 2 3 4 5 6 8</td><td>7</td></tr>
+    <tr><td>8</td><td>0 2 3 5 8</td><td>5</td></tr>
+    <tr><td>9</td><td>0 3 5</td><td>3</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔑 <strong>Ce que vous voyez instantanément :</strong> Distribution en forme de <strong>cloche</strong>, légèrement asymétrique à gauche. Le mode est dans les 70 (7 étudiants). Note minimale 45, maximale 95, médiane = 73. Vous pouvez lire <strong>chaque note</strong> — ce qu'aucun histogramme ne permet.</blockquote>
+
+<hr>
+
+<h2>📦 7. Boîtes à Moustaches — Le Résumé en Cinq Nombres</h2>
+
+<h3>Définition</h3>
+
+<p>La <strong>boîte à moustaches</strong> (box plot), inventée par <strong>Tukey</strong> (1977), affiche simultanément cinq statistiques — le <strong>minimum</strong>, <strong>Q₁</strong>, la <strong>médiane</strong>, <strong>Q₃</strong> et le <strong>maximum</strong> — plus les <strong>valeurs aberrantes</strong> (McGill et al., 1978).</p>
+
+<h3>Anatomie d'une Boîte à Moustaches</h3>
+
+<table>
+  <thead>
+    <tr><th>Composant</th><th>Représente</th><th>Ce qu'il Indique</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Boîte</strong></td><td>Intervalle interquartile (IQR = Q₃ − Q₁)</td><td>Où se trouvent les 50 % centraux</td></tr>
+    <tr><td><strong>Trait dans la boîte</strong></td><td>Médiane (Q₂)</td><td>Le centre des données</td></tr>
+    <tr><td><strong>Moustache inférieure</strong></td><td>Plus petite valeur ≥ Q₁ − 1,5×IQR</td><td>Étendue inférieure « normale »</td></tr>
+    <tr><td><strong>Moustache supérieure</strong></td><td>Plus grande valeur ≤ Q₃ + 1,5×IQR</td><td>Étendue supérieure « normale »</td></tr>
+    <tr><td><strong>Points individuels (●)</strong></td><td>Valeurs aberrantes au-delà des barrières</td><td>Observations inhabituelles à investiguer</td></tr>
+  </tbody>
+</table>
+
+<h3>Exemple Pratique</h3>
+
+<p>Avec les 25 notes : Min = 45, Q₁ = 63, Médiane = 73, Q₃ = 83, Max = 95</p>
+
+<p>IQR = 20. Barrière inférieure = 33 → moustache jusqu'à Min = 45. Barrière supérieure = 113 → moustache jusqu'à Max = 95. Aucune valeur aberrante.</p>
+
+<blockquote>🔍 <strong>Lecture :</strong> Le trait médian est plus proche de Q₃ que de Q₁ → légère <strong>asymétrie à gauche</strong>. La moustache inférieure (18 unités) est plus longue que la supérieure (12 unités), confirmant l'asymétrie.</blockquote>
+
+<h3>Boîtes Côte à Côte</h3>
+
+<p>La puissance des boîtes à moustaches émerge dans la comparaison de groupes — rendements de blé sous cinq traitements de fertilisation, par exemple. C'est pourquoi elles sont la visualisation par défaut en biologie expérimentale (Krzywinski & Altman, 2014).</p>
+
+<hr>
+
+<h2>📉 8. Graphiques Linéaires — L'Évolution dans le Temps</h2>
+
+<p>Un <strong>graphique linéaire</strong> relie des points par des segments, typiquement avec le temps en abscisse. Inventé par Playfair (1786), c'est le choix naturel pour les <strong>tendances</strong> et les <strong>cycles temporels</strong>. La pente de la ligne encode le <em>taux de changement</em> (Tufte, 1983).</p>
+
+<hr>
+
+<h2>🔵 9. Nuages de Points — Explorer les Relations</h2>
+
+<p>Un <strong>nuage de points</strong> (scatter plot) montre la relation entre deux variables quantitatives. Le « nuage » révèle la direction, la forme et l'intensité de l'association (Cleveland, 1985). Attention : un nuage de points montre l'<em>association</em>, pas la <em>causalité</em> (Freedman et al., 2007).</p>
+
+<hr>
+
+<h2>🎨 Principes de Tufte pour l'Excellence Graphique</h2>
+
+<table>
+  <thead>
+    <tr><th>Principe</th><th>Signification</th><th>Implication Pratique</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Maximiser le ratio encre-données</strong></td><td>L'encre doit représenter les données</td><td>Supprimer quadrillages et bordures inutiles</td></tr>
+    <tr><td><strong>Éviter le chartjunk</strong></td><td>Éliminer le fouillis visuel</td><td>Pas d'effets 3D ni de couleurs excessives</td></tr>
+    <tr><td><strong>Intégrité graphique</strong></td><td>Le visuel doit être proportionnel aux données</td><td>Ne pas tronquer les axes ni déformer les échelles</td></tr>
+    <tr><td><strong>Montrer la variation des données</strong></td><td>Le design ne doit pas dominer les données</td><td>Laisser les données parler d'elles-mêmes</td></tr>
+    <tr><td><strong>Étiquetage clair</strong></td><td>Axes, unités et sources étiquetés</td><td>Le graphique doit être auto-explicatif</td></tr>
+    <tr><td><strong>Petits multiples</strong></td><td>Petits graphiques répétés pour comparer</td><td>Graphiques à échelle identique pour chaque groupe</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>Facteur de Mensonge de Tufte :</strong> Rapport entre l'effet visuel du graphique et l'effet réel dans les données. Un facteur de 1,0 signifie l'honnêteté. Au-delà de 1,05 ou en dessous de 0,95, il y a déformation (Tufte, 1983).</blockquote>
+
+<hr>
+
+<h2>⚠️ Erreurs Courantes en Représentation Graphique</h2>
+
+<table>
+  <thead>
+    <tr><th>Erreur</th><th>Pourquoi c'est Faux</th><th>Comment Corriger</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Histogramme pour données catégorielles</td><td>Implique une continuité inexistante</td><td>Utiliser un diagramme en barres</td></tr>
+    <tr><td>Barres pour données continues</td><td>Implique des catégories discrètes</td><td>Utiliser un histogramme</td></tr>
+    <tr><td>Tronquer l'axe Y</td><td>Exagère les différences</td><td>Commencer à zéro ou indiquer la coupure</td></tr>
+    <tr><td>Effets 3D</td><td>Déforme les aires et angles</td><td>Toujours utiliser le 2D</td></tr>
+    <tr><td>Trop de parts dans le camembert</td><td>Illisible</td><td>Grouper ou utiliser des barres</td></tr>
+    <tr><td>Pas d'étiquettes/titre</td><td>Graphique non interprétable</td><td>Toujours étiqueter et titrer</td></tr>
+    <tr><td>Lignes reliant des catégories</td><td>Implique une interpolation</td><td>Utiliser des barres</td></tr>
+    <tr><td>Ignorer les valeurs aberrantes</td><td>Rate des anomalies importantes</td><td>Investiguer : erreur ou découverte</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧪 Un Jeu de Données, Plusieurs Regards : Synthèse</h2>
+
+<table>
+  <thead>
+    <tr><th>Graphique</th><th>Ce qu'il Révèle</th><th>Ce qu'il Masque</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Histogramme</strong></td><td>Forme, classe modale, asymétrie</td><td>Valeurs individuelles, quartiles exacts</td></tr>
+    <tr><td><strong>Polygone des fréquences</strong></td><td>Forme, comparaison facile de groupes</td><td>Moins intuitif pour une seule distribution</td></tr>
+    <tr><td><strong>Ogive</strong></td><td>Proportions cumulées, médiane, quartiles</td><td>Forme de la distribution moins évidente</td></tr>
+    <tr><td><strong>Tige-et-feuilles</strong></td><td>Forme + chaque valeur individuelle</td><td>Impraticable pour n > 100</td></tr>
+    <tr><td><strong>Boîte à moustaches</strong></td><td>Résumé à 5 nombres, valeurs aberrantes</td><td>Modalité, détails de forme</td></tr>
+    <tr><td><strong>Nuage de points</strong></td><td>Relation entre deux variables</td><td>Distributions individuelles</td></tr>
+  </tbody>
+</table>
+
+<blockquote>💡 <strong>L'approche du statisticien expert :</strong> Ne vous fiez jamais à un seul graphique. Comme Tukey (1977) l'enseignait, l'analyse exploratoire signifie regarder les données sous tous les angles possibles. Chaque graphique révèle quelque chose de différent. Ensemble, ils racontent l'histoire complète.</blockquote>
+
+<hr>
+
+<h2>📚 Références</h2>
+
+<p>Agresti, A., & Franklin, C. (2018). <em>Statistics: The Art and Science of Learning from Data</em> (4th ed.). Pearson.</p>
+
+<p>Cleveland, W. S. (1985). <em>The Elements of Graphing Data</em>. Wadsworth.</p>
+
+<p>Cleveland, W. S., & McGill, R. (1984). Graphical perception: Theory, experimentation, and application to the development of graphical methods. <em>Journal of the American Statistical Association</em>, 79(387), 531–554.</p>
+
+<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton.</p>
+
+<p>Friendly, M. (2008). A brief history of data visualization. In C. Chen, W. Härdle, & A. Unwin (Eds.), <em>Handbook of Data Visualization</em> (pp. 15–56). Springer.</p>
+
+<p>Gravetter, F. J., & Wallnau, L. B. (2017). <em>Statistics for the Behavioral Sciences</em> (10th ed.). Cengage Learning.</p>
+
+<p>Krzywinski, M., & Altman, N. (2014). Visualizing samples with box plots. <em>Nature Methods</em>, 11(2), 119–120.</p>
+
+<p>Magnello, M. E. (2012). Victorian statistical graphics and the iconography of Florence Nightingale's polar area graph. <em>BSHM Bulletin</em>, 27(1), 13–29.</p>
+
+<p>McGill, R., Tukey, J. W., & Larsen, W. A. (1978). Variations of box plots. <em>The American Statistician</em>, 32(1), 12–16.</p>
+
+<p>Moore, D. S., Notz, W. I., & Fligner, M. A. (2021). <em>The Basic Practice of Statistics</em> (9th ed.). W. H. Freeman.</p>
+
+<p>Nightingale, F. (1858). <em>Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army</em>. Harrison & Sons.</p>
+
+<p>Playfair, W. (1786). <em>The Commercial and Political Atlas</em>. J. Wallis.</p>
+
+<p>Playfair, W. (1801). <em>The Statistical Breviary</em>. T. Bensley.</p>
+
+<p>Spence, I. (2005). No humble pie: The origins and usage of a statistical chart. <em>Journal of Educational and Behavioral Statistics</em>, 30(4), 353–368.</p>
+
+<p>Tufte, E. R. (1983). <em>The Visual Display of Quantitative Information</em>. Graphics Press.</p>
+
+<p>Tukey, J. W. (1977). <em>Exploratory Data Analysis</em>. Addison-Wesley.</p>
+
+<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical Statistics with Applications</em> (7th ed.). Cengage Learning.</p>
+
+<p>Ware, C. (2012). <em>Information Visualization: Perception for Design</em> (3rd ed.). Morgan Kaufmann.</p>
+
+<p>Wickham, H., & Stryjewski, L. (2011). 40 years of boxplots. <em>The American Statistician</em>, Technical report.</p>

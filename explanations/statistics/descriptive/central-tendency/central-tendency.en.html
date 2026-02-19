@@ -1,0 +1,376 @@
+<h2>🎯 Central Tendency: Finding the Heart of Your Data</h2>
+
+<p>Imagine you are an agricultural researcher in the Algerian steppe, measuring wheat yields across 50 experimental plots. You have 50 different numbers — some high, some low, some in between. A colleague asks: <em>"So, what was the yield?"</em> You cannot recite all 50 values. You need <strong>one number</strong> that captures the essence of the entire dataset. That number is a <strong>measure of central tendency</strong>.</p>
+
+<p>Measures of central tendency are among the most fundamental concepts in all of statistics. They answer the deceptively simple question: <em>"What is a typical value in this dataset?"</em> Yet behind this simplicity lies remarkable depth — different measures give different answers, and choosing the wrong one can lead to profoundly misleading conclusions. As Weisberg (1992) noted, the choice of a central tendency measure is not merely a mathematical convenience but a <strong>substantive scientific decision</strong> that reflects how we conceptualize "typical" in a given context.</p>
+
+<blockquote>💡 <strong>The Big Three:</strong> The three classical measures of central tendency are the <strong>arithmetic mean</strong> (the balance point), the <strong>median</strong> (the middle value), and the <strong>mode</strong> (the most frequent value). Each captures a fundamentally different aspect of "center" — and in a perfectly symmetrical distribution, all three converge to the same point. When they diverge, the story gets interesting.</blockquote>
+
+<hr>
+
+<h2>📊 Why Central Tendency Matters</h2>
+
+<p>Central tendency measures serve four essential functions in data analysis (Agresti & Finlay, 2018):</p>
+
+<table>
+  <thead>
+    <tr><th>Function</th><th>Description</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📝 <strong>Summarization</strong></td><td>Condense many values into a single representative number</td><td>"The average crop yield was 3.2 tonnes/ha"</td></tr>
+    <tr><td>⚖️ <strong>Comparison</strong></td><td>Compare groups, time periods, or treatments</td><td>"Treated plots yielded 15% more than controls"</td></tr>
+    <tr><td>🔮 <strong>Prediction</strong></td><td>Estimate the most likely value for a new observation</td><td>"Based on historical data, we expect ~3 tonnes/ha"</td></tr>
+    <tr><td>🧱 <strong>Foundation</strong></td><td>Serve as building blocks for advanced methods (ANOVA, regression, hypothesis testing)</td><td>Every t-test begins by comparing two means</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>➕ The Arithmetic Mean (x̄ or μ)</h2>
+
+<h3>Definition and Calculation</h3>
+
+<p>The <strong>arithmetic mean</strong> is the sum of all observed values divided by the number of observations. It is the most widely used measure of central tendency in statistics and the natural sciences (Moore et al., 2021). The population mean is denoted <strong>μ</strong> (mu), while the sample mean is denoted <strong>x̄</strong> (x-bar):</p>
+
+<table>
+  <thead>
+    <tr><th>Context</th><th>Formula</th><th>Notation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Population mean</strong></td><td>μ = (Σxᵢ) / N</td><td>N = population size</td></tr>
+    <tr><td><strong>Sample mean</strong></td><td>x̄ = (Σxᵢ) / n</td><td>n = sample size</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Worked example:</strong> Five plots yield 2.8, 3.1, 3.5, 2.9, and 3.2 tonnes/ha. The mean is:</p>
+<p style="text-align:center;"><strong>x̄ = (2.8 + 3.1 + 3.5 + 2.9 + 3.2) / 5 = 15.5 / 5 = 3.10 tonnes/ha</strong></p>
+
+<h3>Key Mathematical Properties</h3>
+
+<p>The arithmetic mean possesses several remarkable mathematical properties that make it the cornerstone of parametric statistics (Wackerly et al., 2014):</p>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Property</th><th>Mathematical Statement</th><th>Why It Matters</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>🔄 <strong>Zero-sum deviations</strong></td><td>Σ(xᵢ − x̄) = 0</td><td>The mean is the exact balance point — positive and negative deviations cancel out perfectly</td></tr>
+    <tr><td>2</td><td>📐 <strong>Least squares</strong></td><td>Σ(xᵢ − x̄)² is minimized</td><td>No other value produces a smaller sum of squared deviations — this is why the mean is optimal for variance, ANOVA, and regression</td></tr>
+    <tr><td>3</td><td>🔗 <strong>Algebraic tractability</strong></td><td>Σxᵢ = n · x̄</td><td>Knowing the mean and n lets you recover the total; means can be combined across subgroups</td></tr>
+    <tr><td>4</td><td>📈 <strong>Sampling stability</strong></td><td>Var(x̄) = σ²/n</td><td>The sampling distribution of the mean has less variance than individual observations — the foundation of inferential statistics</td></tr>
+    <tr><td>5</td><td>⚡ <strong>Linear transformation</strong></td><td>If y = a + bx, then ȳ = a + bx̄</td><td>Converting units (e.g., Celsius to Fahrenheit) transforms the mean in the same way</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🧪 <strong>Property #2 is revolutionary.</strong> The fact that the mean minimizes the sum of squared deviations is the mathematical foundation of the entire least-squares framework — from calculating variance and standard deviation to running ANOVA and linear regression. When you understand this single property, you understand why the mean sits at the center of modern statistics (Freedman et al., 2007).</blockquote>
+
+<h3>Mean for Grouped Data (Frequency Tables)</h3>
+
+<p>When data is organized in a frequency table — as is common in large biological surveys or census data — we calculate the mean using midpoints of class intervals:</p>
+
+<table>
+  <thead>
+    <tr><th>Class Interval</th><th>Midpoint (mᵢ)</th><th>Frequency (fᵢ)</th><th>fᵢ × mᵢ</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>10 – 20</td><td>15</td><td>4</td><td>60</td></tr>
+    <tr><td>20 – 30</td><td>25</td><td>8</td><td>200</td></tr>
+    <tr><td>30 – 40</td><td>35</td><td>12</td><td>420</td></tr>
+    <tr><td>40 – 50</td><td>45</td><td>6</td><td>270</td></tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td><strong>n = 30</strong></td><td><strong>Σfᵢmᵢ = 950</strong></td></tr>
+  </tbody>
+</table>
+
+<p style="text-align:center;"><strong>x̄ = Σ(fᵢ × mᵢ) / Σfᵢ = 950 / 30 = 31.67</strong></p>
+
+<h3>The Weighted Mean</h3>
+
+<p>When different observations carry different levels of importance, we use the <strong>weighted mean</strong>. This is essential in fields like portfolio analysis, GPA calculation, and experimental design where treatments have unequal sample sizes (Triola, 2018):</p>
+
+<p style="text-align:center;"><strong>x̄<sub>w</sub> = Σ(wᵢ × xᵢ) / Σwᵢ</strong></p>
+
+<p><strong>Example — GPA Calculation:</strong> A student earns an A (4.0) in a 4-credit course, B (3.0) in a 3-credit course, and C (2.0) in a 1-credit course:</p>
+<p style="text-align:center;">x̄<sub>w</sub> = (4×4.0 + 3×3.0 + 1×2.0) / (4+3+1) = 27/8 = <strong>3.375</strong></p>
+<p>The unweighted mean would be (4.0+3.0+2.0)/3 = 3.0 — the weighted mean correctly gives more influence to the 4-credit course.</p>
+
+<h3>⚠️ The Achilles' Heel: Sensitivity to Outliers</h3>
+
+<p>The mean's greatest strength — using every data point — is also its greatest weakness. Because every value contributes to the sum, a single extreme outlier can dramatically distort the result. Consider household incomes in a small village (Agresti & Finlay, 2018):</p>
+
+<table>
+  <thead>
+    <tr><th>Household</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Income ($)</strong></td><td>12k</td><td>14k</td><td>15k</td><td>15k</td><td>16k</td><td>17k</td><td>18k</td><td>19k</td><td>20k</td><td>250k</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Mean = $39,600</strong> — yet 9 out of 10 households earn less than $20,000! The single wealthy household pulls the mean far above the typical income. The <strong>median ($16,500)</strong> better represents this community. This is precisely why governments report <em>median</em> household income rather than mean income.</p>
+
+<hr>
+
+<h2>📏 The Median (Md or x̃)</h2>
+
+<h3>Definition and Calculation</h3>
+
+<p>The <strong>median</strong> is the value that divides an ordered dataset into two equal halves — exactly 50% of observations fall below it and 50% fall above it. It is the 50th percentile (Devore & Berk, 2012).</p>
+
+<table>
+  <thead>
+    <tr><th>Situation</th><th>Rule</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Odd n</strong></td><td>The middle value: position = (n+1)/2</td><td>Data: 3, 5, <strong>7</strong>, 9, 11 → Median = 7</td></tr>
+    <tr><td><strong>Even n</strong></td><td>Average of two middle values: positions n/2 and (n/2)+1</td><td>Data: 3, 5, <strong>7, 9</strong>, 11, 13 → Median = (7+9)/2 = 8</td></tr>
+  </tbody>
+</table>
+
+<h3>Median for Grouped Data</h3>
+
+<p>For data organized in frequency tables, the median is found by interpolation within the <strong>median class</strong> — the class whose cumulative frequency first reaches or exceeds n/2:</p>
+
+<p style="text-align:center;"><strong>Md = L + [(n/2 − CF) / f] × h</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Symbol</th><th>Meaning</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>L</td><td>Lower boundary of the median class</td></tr>
+    <tr><td>n</td><td>Total number of observations</td></tr>
+    <tr><td>CF</td><td>Cumulative frequency <em>before</em> the median class</td></tr>
+    <tr><td>f</td><td>Frequency of the median class</td></tr>
+    <tr><td>h</td><td>Width of the median class interval</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Example:</strong> Using the frequency table from above (n=30), n/2 = 15. The cumulative frequencies are 4, 12, 24, 30. The median class is 30–40 (CF first exceeds 15 at this class).</p>
+<p style="text-align:center;">Md = 30 + [(15 − 12) / 12] × 10 = 30 + 2.5 = <strong>32.5</strong></p>
+
+<h3>Key Properties of the Median</h3>
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Explanation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🛡️ <strong>Robustness</strong></td><td>Resistant to outliers — changing an extreme value does not affect the median unless the rank order changes</td></tr>
+    <tr><td>📐 <strong>Minimizes absolute deviations</strong></td><td>Σ|xᵢ − Md| is minimized — no other value produces a smaller sum of absolute deviations</td></tr>
+    <tr><td>📊 <strong>Works with ordinal data</strong></td><td>Can be computed for any ordered data, even when arithmetic operations are meaningless</td></tr>
+    <tr><td>🔢 <strong>Unique</strong></td><td>Always yields exactly one value (unlike the mode, which may have zero, one, or multiple values)</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📐 <strong>The median's optimization property:</strong> Just as the mean minimizes the sum of <em>squared</em> deviations, the median minimizes the sum of <em>absolute</em> deviations. This means that if you needed to find the single value that is, on average, the closest to every data point in terms of absolute distance, the answer is always the median. This property makes the median the optimal center for situations where outliers should not be amplified by squaring (Huber & Ronchetti, 2009).</blockquote>
+
+<hr>
+
+<h2>📈 The Mode (Mo)</h2>
+
+<h3>Definition</h3>
+
+<p>The <strong>mode</strong> is the value that occurs most frequently in a dataset. It is the simplest measure of central tendency and the <strong>only measure applicable to nominal (categorical) data</strong> — you cannot compute a mean or median of "blood types" or "plant species," but you can identify which category is most common (Agresti & Finlay, 2018).</p>
+
+<h3>Types of Modal Distributions</h3>
+
+<table>
+  <thead>
+    <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔵 <strong>Unimodal</strong></td><td>One mode — one clear peak</td><td>Exam scores: 65, 70, 72, 72, 72, 75, 80 → Mode = 72</td></tr>
+    <tr><td>🔴🔵 <strong>Bimodal</strong></td><td>Two modes — two distinct peaks</td><td>Heights of mixed adult sample: peaks at ~163 cm and ~177 cm (reflecting female and male subgroups)</td></tr>
+    <tr><td>🌈 <strong>Multimodal</strong></td><td>Three or more modes</td><td>Customer purchase times: peaks at 8 AM, 12 PM, and 6 PM</td></tr>
+    <tr><td>⚪ <strong>No mode</strong></td><td>All values appear with equal frequency</td><td>Data: 2, 4, 6, 8, 10 — no value repeats</td></tr>
+  </tbody>
+</table>
+
+<h3>Mode for Grouped Data</h3>
+
+<p>For frequency distributions, the mode is estimated within the <strong>modal class</strong> (the class with the highest frequency) using the following interpolation formula:</p>
+
+<p style="text-align:center;"><strong>Mo = L + [Δ₁ / (Δ₁ + Δ₂)] × h</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Symbol</th><th>Meaning</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>L</td><td>Lower boundary of the modal class</td></tr>
+    <tr><td>Δ₁</td><td>f<sub>modal</sub> − f<sub>preceding</sub> (excess frequency over the class before)</td></tr>
+    <tr><td>Δ₂</td><td>f<sub>modal</sub> − f<sub>following</sub> (excess frequency over the class after)</td></tr>
+    <tr><td>h</td><td>Width of the class interval</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Example:</strong> From our table, the modal class is 30–40 (f=12). Δ₁ = 12−8 = 4, Δ₂ = 12−6 = 6.</p>
+<p style="text-align:center;">Mo = 30 + [4/(4+6)] × 10 = 30 + 4 = <strong>34.0</strong></p>
+
+<h3>Properties of the Mode</h3>
+
+<table>
+  <thead>
+    <tr><th>✅ Strengths</th><th>❌ Limitations</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Only measure for nominal data</td><td>May not exist or may not be unique</td></tr>
+    <tr><td>Easy to determine by inspection</td><td>Not based on all observations</td></tr>
+    <tr><td>Not affected by extreme values</td><td>Unstable in small samples</td></tr>
+    <tr><td>Represents the most "popular" value</td><td>Cannot be used in further algebraic calculations</td></tr>
+    <tr><td>Identifies peaks in distribution shape</td><td>For continuous data, depends on binning choices</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🔬 Beyond the Big Three: Other Measures of Central Tendency</h2>
+
+<h3>📐 The Geometric Mean (GM)</h3>
+
+<p>The <strong>geometric mean</strong> is the nth root of the product of n values. It is the appropriate average for data that are <em>multiplicative</em> rather than additive — such as growth rates, ratios, fold-changes, and compound interest (Bland & Altman, 1996):</p>
+
+<p style="text-align:center;"><strong>GM = (x₁ × x₂ × ... × xₙ)<sup>1/n</sup></strong></p>
+
+<p>Equivalently, it can be computed by taking the arithmetic mean of the log-transformed values and then back-transforming: GM = exp[Σ ln(xᵢ) / n].</p>
+
+<p><strong>Example — Investment Returns:</strong> An investment grows by +10%, −5%, and +20% over three years. The growth factors are 1.10, 0.95, and 1.20.</p>
+<p style="text-align:center;">GM = (1.10 × 0.95 × 1.20)<sup>1/3</sup> = (1.254)<sup>1/3</sup> = <strong>1.0783</strong> → average annual growth ≈ 7.83%</p>
+<p>The arithmetic mean of the growth factors (1.0833) would <em>overestimate</em> the actual compound growth rate. The geometric mean always gives the correct compound average.</p>
+
+<h3>⚖️ The Harmonic Mean (HM)</h3>
+
+<p>The <strong>harmonic mean</strong> is the reciprocal of the arithmetic mean of the reciprocals. It is the correct average for <em>rates</em> — such as speed, price-to-earnings ratios, or any quantity expressed as a ratio with a fixed numerator (Bland & Altman, 1996):</p>
+
+<p style="text-align:center;"><strong>HM = n / Σ(1/xᵢ)</strong></p>
+
+<p><strong>Example — Average Speed:</strong> You drive 60 km at 30 km/h and return 60 km at 60 km/h. What is your average speed?</p>
+<p style="text-align:center;">HM = 2 / (1/30 + 1/60) = 2 / (3/60) = <strong>40 km/h</strong></p>
+<p>The arithmetic mean (45 km/h) is wrong — it ignores that you spent <em>more time</em> driving slowly. Total distance = 120 km, total time = 2h + 1h = 3h, true average = 120/3 = 40 km/h ✓</p>
+
+<h3>✂️ The Trimmed Mean</h3>
+
+<p>The <strong>trimmed mean</strong> removes a fixed percentage of observations from each tail before computing the arithmetic mean. A common choice is the 5% or 10% trimmed mean. This is a <strong>robust estimator</strong> — it retains the strengths of the mean while reducing sensitivity to outliers (Wilcox, 2017):</p>
+
+<p style="text-align:center;"><strong>x̄<sub>trim</sub> = mean of the middle (100−2α)% of ordered values</strong></p>
+
+<p>For example, a 10% trimmed mean of 20 values removes the 2 smallest and 2 largest, then averages the remaining 16. The trimmed mean has been used in Olympic judging (removing the highest and lowest scores) and is increasingly recommended in modern biostatistics for small, potentially contaminated datasets.</p>
+
+<h3>📊 The Inequality of Means</h3>
+
+<p>For any set of positive, unequal values, the three generalized means always follow a strict mathematical ordering (Hardy et al., 1952):</p>
+
+<p style="text-align:center;font-size:1.15em;"><strong>Harmonic Mean ≤ Geometric Mean ≤ Arithmetic Mean</strong></p>
+
+<p>Equality holds if and only if all values in the dataset are identical. The greater the variability in the data, the wider the gap between these means. This inequality — known as the <strong>AM–GM–HM inequality</strong> — is one of the most elegant results in mathematics, with applications from information theory to thermodynamics.</p>
+
+<hr>
+
+<h2>🔄 The Mean–Median–Mode Relationship and Skewness</h2>
+
+<p>The relative positions of the mean, median, and mode reveal the <strong>shape</strong> of a distribution — specifically, its skewness. This relationship is one of the most powerful diagnostic tools in exploratory data analysis (Freedman et al., 2007):</p>
+
+<table>
+  <thead>
+    <tr><th>Distribution Shape</th><th>Relationship</th><th>Visual Description</th><th>Real-World Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔔 <strong>Symmetric</strong></td><td>Mean = Median = Mode</td><td>Perfect bell curve; identical halves</td><td>Heights of adult males in a population</td></tr>
+    <tr><td>➡️ <strong>Right-skewed (positive)</strong></td><td>Mode < Median < Mean</td><td>Long tail stretching to the right; mean pulled toward high values</td><td>Household incomes, bacterial colony counts, rainfall amounts</td></tr>
+    <tr><td>⬅️ <strong>Left-skewed (negative)</strong></td><td>Mean < Median < Mode</td><td>Long tail stretching to the left; mean pulled toward low values</td><td>Age at retirement, exam scores on an easy test</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📊 <strong>Karl Pearson's empirical rule:</strong> For moderately skewed unimodal distributions, the approximate relationship is: <strong>Mean − Mode ≈ 3 × (Mean − Median)</strong>. This elegant approximation, first proposed by Karl Pearson around 1895, allows you to estimate any one of the three measures if you know the other two. While it is an approximation rather than an exact law, it holds remarkably well for many real-world distributions encountered in biological and social sciences (Doane, 2004).</blockquote>
+
+<hr>
+
+<h2>🧭 Choosing the Right Measure: A Decision Framework</h2>
+
+<p>Selecting the appropriate measure of central tendency is not a matter of personal preference — it depends on the <strong>level of measurement</strong>, the <strong>shape of the distribution</strong>, and the <strong>purpose of the analysis</strong> (Moore et al., 2021):</p>
+
+<table>
+  <thead>
+    <tr><th>Criterion</th><th>Use Mean</th><th>Use Median</th><th>Use Mode</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Scale of measurement</strong></td><td>Interval / Ratio</td><td>Ordinal / Interval / Ratio</td><td>Any scale (including Nominal)</td></tr>
+    <tr><td><strong>Distribution shape</strong></td><td>Symmetric or nearly so</td><td>Skewed; outliers present</td><td>Any; especially bimodal/multimodal</td></tr>
+    <tr><td><strong>Further analysis needed?</strong></td><td>Yes — most inferential tests require the mean</td><td>Non-parametric tests use ranks</td><td>Rarely used in further calculations</td></tr>
+    <tr><td><strong>Outlier sensitivity</strong></td><td>Highly sensitive</td><td>Resistant</td><td>Not affected</td></tr>
+    <tr><td><strong>Uniqueness</strong></td><td>Always unique</td><td>Always unique</td><td>May not exist or may be multiple</td></tr>
+    <tr><td><strong>Best for...</strong></td><td>Symmetric quantitative data; parametric statistics</td><td>Skewed data; economic indicators; survival analysis</td><td>Categorical data; identifying peaks</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>The practical rule:</strong> When in doubt with quantitative data, report <em>both</em> the mean and the median. If they are close together, the mean is a good summary. If they are far apart, the distribution is skewed and the median better represents the "typical" observation. Reporting both tells a richer story than either alone — as recommended by the American Statistical Association (Wasserstein & Lazar, 2016).</blockquote>
+
+<hr>
+
+<h2>🌍 Real-World Applications Across Disciplines</h2>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Application</th><th>Preferred Measure</th><th>Why</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🌾 <strong>Agriculture</strong></td><td>Crop yield analysis</td><td>Mean</td><td>Data usually approximately normal; enables ANOVA comparisons between treatments</td></tr>
+    <tr><td>💰 <strong>Economics</strong></td><td>Household income reporting</td><td>Median</td><td>Income distributions are strongly right-skewed; mean inflated by billionaires</td></tr>
+    <tr><td>🏥 <strong>Medicine</strong></td><td>Survival time after diagnosis</td><td>Median</td><td>Survival data is typically right-skewed; median survival is the clinical standard</td></tr>
+    <tr><td>📈 <strong>Finance</strong></td><td>Investment return over time</td><td>Geometric mean</td><td>Returns compound multiplicatively, not additively</td></tr>
+    <tr><td>🚗 <strong>Engineering</strong></td><td>Average speed over a journey</td><td>Harmonic mean</td><td>Speed is a rate; arithmetic mean gives incorrect average</td></tr>
+    <tr><td>🔬 <strong>Microbiology</strong></td><td>Bacterial colony counts</td><td>Geometric mean</td><td>Counts are often log-normally distributed</td></tr>
+    <tr><td>🏫 <strong>Education</strong></td><td>GPA calculation</td><td>Weighted mean</td><td>Courses carry different credit weights</td></tr>
+    <tr><td>👗 <strong>Fashion/Retail</strong></td><td>Most popular shoe size</td><td>Mode</td><td>Need to stock the most frequently purchased size</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>⚡ Summary Comparison Table</h2>
+
+<table>
+  <thead>
+    <tr><th>Feature</th><th>Mean (x̄)</th><th>Median (Md)</th><th>Mode (Mo)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Definition</strong></td><td>Sum / count</td><td>Middle value</td><td>Most frequent value</td></tr>
+    <tr><td><strong>Uses all data?</strong></td><td>✅ Yes</td><td>❌ No (only position)</td><td>❌ No (only frequency)</td></tr>
+    <tr><td><strong>Affected by outliers?</strong></td><td>✅ Yes (strongly)</td><td>❌ No</td><td>❌ No</td></tr>
+    <tr><td><strong>Nominal data?</strong></td><td>❌ No</td><td>❌ No</td><td>✅ Yes</td></tr>
+    <tr><td><strong>Always unique?</strong></td><td>✅ Yes</td><td>✅ Yes</td><td>❌ No</td></tr>
+    <tr><td><strong>Used in inferential stats?</strong></td><td>✅ Extensively</td><td>⚠️ Some tests</td><td>❌ Rarely</td></tr>
+    <tr><td><strong>Optimization property</strong></td><td>Minimizes Σ(xᵢ − c)²</td><td>Minimizes Σ|xᵢ − c|</td><td>Maximizes P(X = c)</td></tr>
+    <tr><td><strong>Skewed distributions</strong></td><td>Pulled toward tail</td><td>Resistant to tail</td><td>Located at peak</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>📚 References</h2>
+
+<p>Agresti, A., & Finlay, B. (2018). <em>Statistical methods for the social sciences</em> (5th ed.). Pearson.</p>
+
+<p>Bland, J. M., & Altman, D. G. (1996). Statistics notes: The use of transformation when comparing two means. <em>BMJ</em>, 312(7039), 1153. https://doi.org/10.1136/bmj.312.7039.1153</p>
+
+<p>Devore, J. L., & Berk, K. N. (2012). <em>Modern mathematical statistics with applications</em> (2nd ed.). Springer.</p>
+
+<p>Doane, D. P. (2004). Using simulation to teach distributions. <em>Journal of Statistics Education</em>, 12(1). https://doi.org/10.1080/10691898.2004.11910731</p>
+
+<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton & Company.</p>
+
+<p>Hardy, G. H., Littlewood, J. E., & Pólya, G. (1952). <em>Inequalities</em> (2nd ed.). Cambridge University Press.</p>
+
+<p>Huber, P. J., & Ronchetti, E. M. (2009). <em>Robust statistics</em> (2nd ed.). Wiley.</p>
+
+<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+
+<p>Triola, M. F. (2018). <em>Elementary statistics</em> (13th ed.). Pearson.</p>
+
+<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>
+
+<p>Wasserstein, R. L., & Lazar, N. A. (2016). The ASA statement on p-values: Context, process, and purpose. <em>The American Statistician</em>, 70(2), 129–133. https://doi.org/10.1080/00031305.2016.1154108</p>
+
+<p>Weisberg, H. F. (1992). <em>Central tendency and variability</em>. Sage Publications.</p>
+
+<p>Wilcox, R. R. (2017). <em>Introduction to robust estimation and hypothesis testing</em> (4th ed.). Academic Press.</p>

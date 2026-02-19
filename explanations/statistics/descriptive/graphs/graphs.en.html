@@ -1,0 +1,409 @@
+<h2>📈 Graphical Representation: When Numbers Learn to Speak</h2>
+
+<p>Imagine you've just compiled a dataset of 500 plant heights from an agricultural field trial across Algeria's Sétif region. You stare at the spreadsheet — row after row of numbers — and the data stares back, silent and inscrutable. Now imagine transforming those same numbers into a single histogram. Suddenly, you <em>see</em> the distribution: the peak, the spread, the outliers, the story. In one glance, the data speaks.</p>
+
+<p>This is the extraordinary power of graphical representation: the ability to convert abstract numerical information into visual patterns that the human brain can process almost instantaneously. While a frequency table compresses data into a structured summary, a graph takes that summary and makes it <strong>visible</strong> — exploiting the fact that roughly 30% of our cerebral cortex is devoted to visual processing, compared to just 8% for touch and 3% for hearing (Ware, 2012).</p>
+
+<blockquote>💡 <strong>The foundational insight:</strong> A good graph does not merely <em>display</em> data — it <strong>reveals</strong> what the data has to say. As the legendary statistician John Tukey wrote: "The greatest value of a picture is when it forces us to notice what we never expected to see" (Tukey, 1977, p. vi). Every graph is a visual argument — and like any argument, it can be brilliant, misleading, or utterly incomprehensible depending on how it is constructed.</blockquote>
+
+<hr>
+
+<h2>🏛️ A Brief History: The Invention of Statistical Graphics</h2>
+
+<p>Statistical graphics are so ubiquitous today that it is easy to forget how <strong>recently</strong> they were invented. For most of human history, numerical data was communicated exclusively through tables and text. The revolution began with a single individual.</p>
+
+<p><strong>William Playfair</strong> (1759–1823), a Scottish engineer and political economist, single-handedly invented nearly every major chart type we use today. In his <em>Commercial and Political Atlas</em> (1786), he introduced the <strong>line graph</strong> (43 time-series charts) and the <strong>bar chart</strong> (one example, showing Scotland's trade). In his <em>Statistical Breviary</em> (1801), he published the first <strong>pie chart</strong> and <strong>circle graph</strong>. Before Playfair, the visual display of quantitative information was virtually nonexistent (Friendly, 2008; Spence, 2005).</p>
+
+<p>Half a century later, <strong>Florence Nightingale</strong> (1858) demonstrated the persuasive power of graphs when she used her famous <strong>polar-area diagram</strong> (often called the "coxcomb") to show that far more British soldiers died from preventable diseases than from battlefield wounds during the Crimean War. Her visualization drove sanitary reform and saved countless lives — proving that a well-crafted graph can change the world (Magnello, 2012).</p>
+
+<p>In the 20th century, <strong>John Tukey</strong> (1977) revolutionized the field with his concept of <em>Exploratory Data Analysis</em> (EDA), introducing tools like the <strong>stem-and-leaf plot</strong> and the <strong>box-and-whisker plot</strong> that remain staples of modern statistics. And <strong>Edward Tufte</strong> (1983) established the theoretical principles of graphical excellence in his landmark work <em>The Visual Display of Quantitative Information</em> — a book that has influenced every serious data visualization since.</p>
+
+<hr>
+
+<h2>🧭 The Big Picture: Choosing the Right Graph</h2>
+
+<p>Not all graphs are created equal. The type of graph you choose depends on two critical factors: the <strong>nature of your variable</strong> (qualitative or quantitative) and the <strong>question you are trying to answer</strong>. Choosing the wrong graph is like using a hammer to drive a screw — you may get a result, but it won't be pretty (Moore et al., 2021).</p>
+
+<table>
+  <thead>
+    <tr><th>Data Type</th><th>Purpose</th><th>Recommended Graph</th><th>Avoid</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Qualitative (Categorical)</strong></td><td>Compare categories</td><td>Bar chart, Pie chart</td><td>Histogram</td></tr>
+    <tr><td><strong>Quantitative Discrete</strong></td><td>Show frequency distribution</td><td>Bar chart, Stem-and-leaf</td><td>Pie chart (usually)</td></tr>
+    <tr><td><strong>Quantitative Continuous</strong></td><td>Show distribution shape</td><td>Histogram, Frequency polygon</td><td>Bar chart with gaps</td></tr>
+    <tr><td><strong>Quantitative Continuous</strong></td><td>Show cumulative distribution</td><td>Ogive (cumulative curve)</td><td>Pie chart</td></tr>
+    <tr><td><strong>Quantitative (any)</strong></td><td>Summarize with 5-number statistics</td><td>Box-and-whisker plot</td><td>Pie chart</td></tr>
+    <tr><td><strong>Time-series</strong></td><td>Show change over time</td><td>Line graph</td><td>Pie chart, Histogram</td></tr>
+    <tr><td><strong>Two quantitative variables</strong></td><td>Show relationship</td><td>Scatter plot</td><td>Bar chart</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>Golden rule:</strong> Always ask yourself: <em>"What story am I trying to tell?"</em> The graph should serve the story, not the other way around. If you find yourself forcing data into a chart type, you're probably using the wrong one.</blockquote>
+
+<hr>
+
+<h2>📊 1. Bar Charts — The Workhorses of Categorical Data</h2>
+
+<h3>What They Are</h3>
+
+<p>A <strong>bar chart</strong> (or bar graph) uses rectangular bars of equal width to represent the frequency (or relative frequency) of each category. The height (or length) of each bar is proportional to the value it represents. The bars are <strong>separated by gaps</strong> — this is the critical visual cue that distinguishes bar charts from histograms and signals that the categories are discrete and independent (Agresti & Franklin, 2018).</p>
+
+<h3>When to Use Them</h3>
+
+<p>Bar charts are ideal for <strong>qualitative (categorical) variables</strong> — blood types, crop varieties, soil textures, disease categories — and for <strong>discrete quantitative variables</strong> with a small number of values. They answer the question: <em>How do different categories compare?</em></p>
+
+<h3>Worked Example</h3>
+
+<p><strong>Scenario:</strong> An agronomist surveys 120 farms in eastern Algeria to classify their primary soil texture. The results:</p>
+
+<table>
+  <thead>
+    <tr><th>Soil Texture</th><th>Frequency (nᵢ)</th><th>Relative Freq. (%)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Sandy</td><td>18</td><td>15.0%</td></tr>
+    <tr><td>Sandy Loam</td><td>32</td><td>26.7%</td></tr>
+    <tr><td>Loam</td><td>38</td><td>31.7%</td></tr>
+    <tr><td>Clay Loam</td><td>22</td><td>18.3%</td></tr>
+    <tr><td>Clay</td><td>10</td><td>8.3%</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>120</strong></td><td><strong>100%</strong></td></tr>
+  </tbody>
+</table>
+
+<p><strong>Construction rules:</strong></p>
+<p>① Draw horizontal axis (categories) and vertical axis (frequency or %). ② Each bar has the <strong>same width</strong>. ③ Leave <strong>equal gaps</strong> between bars. ④ Bar height = frequency of that category. ⑤ Label both axes and add a title.</p>
+
+<blockquote>🔑 <strong>Key variants:</strong> <strong>Grouped bar charts</strong> place bars side-by-side to compare subgroups within categories (e.g., soil texture by region). <strong>Stacked bar charts</strong> stack bars to show the composition of each category. <strong>Pareto charts</strong> sort bars in descending order with a cumulative line — a quality-control favorite named after the economist Vilfredo Pareto and his 80/20 principle (Juran, 1951).</blockquote>
+
+<hr>
+
+<h2>🥧 2. Pie Charts — Parts of a Whole</h2>
+
+<h3>What They Are</h3>
+
+<p>A <strong>pie chart</strong> is a circular diagram divided into slices (sectors), where the <strong>angle</strong> (and thus the area) of each slice is proportional to the relative frequency of that category. Since a full circle represents 360°, a category with relative frequency fᵢ occupies an angle of <strong>fᵢ × 360°</strong> (Freedman et al., 2007).</p>
+
+<h3>When to Use Them (and When NOT to)</h3>
+
+<p>Pie charts are effective for showing <strong>part-to-whole relationships</strong> when you have a small number of categories (ideally 2–6). They answer: <em>What proportion of the whole does each category represent?</em></p>
+
+<p>However, pie charts are <strong>widely criticized</strong> by statisticians. Edward Tufte (1983) argued that humans are poor at comparing angles and areas, making pie charts inferior to bar charts for most comparison tasks. Cleveland and McGill (1984) demonstrated experimentally that people estimate quantities more accurately from position along a common scale (bar charts) than from angle or area (pie charts).</p>
+
+<h3>Worked Example</h3>
+
+<p>Using the soil texture data above:</p>
+
+<table>
+  <thead>
+    <tr><th>Soil Texture</th><th>Freq.</th><th>Relative Freq.</th><th>Angle (°)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Sandy</td><td>18</td><td>0.150</td><td>54.0°</td></tr>
+    <tr><td>Sandy Loam</td><td>32</td><td>0.267</td><td>96.0°</td></tr>
+    <tr><td>Loam</td><td>38</td><td>0.317</td><td>114.0°</td></tr>
+    <tr><td>Clay Loam</td><td>22</td><td>0.183</td><td>66.0°</td></tr>
+    <tr><td>Clay</td><td>10</td><td>0.083</td><td>30.0°</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>120</strong></td><td><strong>1.000</strong></td><td><strong>360.0°</strong></td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚠️ <strong>The pie chart debate:</strong> Tufte (1983) wrote that pie charts should be replaced by tables or bar charts in nearly all cases. Cleveland (1985) concurred. However, pie charts remain popular for executive dashboards and media reporting because they communicate the intuitive idea of "shares of a whole" effectively — even if precision suffers. Use them wisely, and <strong>never</strong> use 3D pie charts: they distort angles and make accurate comparison impossible.</blockquote>
+
+<hr>
+
+<h2>📶 3. Histograms — The Heart of Quantitative Data</h2>
+
+<h3>What They Are</h3>
+
+<p>A <strong>histogram</strong> is the most important graphical tool in descriptive statistics. It displays the frequency distribution of a <strong>continuous quantitative variable</strong> using adjacent rectangular bars, where each bar covers a class interval (bin) and its height represents the frequency (or relative frequency or frequency density) of observations in that interval. Crucially, the bars <strong>touch each other</strong> — there are no gaps — because the data is continuous and the class intervals are contiguous (Wackerly et al., 2014).</p>
+
+<h3>Histogram vs. Bar Chart: The Critical Difference</h3>
+
+<table>
+  <thead>
+    <tr><th>Feature</th><th>Bar Chart</th><th>Histogram</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Data type</strong></td><td>Categorical / Discrete</td><td>Continuous quantitative</td></tr>
+    <tr><td><strong>Bars</strong></td><td>Separated by gaps</td><td>Adjacent (no gaps)</td></tr>
+    <tr><td><strong>X-axis</strong></td><td>Categories (nominal/ordinal)</td><td>Numerical scale (interval/ratio)</td></tr>
+    <tr><td><strong>Bar width</strong></td><td>Arbitrary (aesthetic)</td><td>Meaningful (= class width)</td></tr>
+    <tr><td><strong>Bar order</strong></td><td>Can be rearranged</td><td>Fixed by numerical order</td></tr>
+    <tr><td><strong>Area</strong></td><td>Height = frequency</td><td>Area ∝ frequency (when widths vary)</td></tr>
+  </tbody>
+</table>
+
+<h3>Worked Example</h3>
+
+<p><strong>Scenario:</strong> A biologist measures the body length (in cm) of 50 beetles collected from a wheat field. The grouped frequency table:</p>
+
+<table>
+  <thead>
+    <tr><th>Class Interval [cm)</th><th>Midpoint (xᵢ)</th><th>Frequency (nᵢ)</th><th>Rel. Freq.</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>[1.0, 1.5[</td><td>1.25</td><td>4</td><td>0.08</td></tr>
+    <tr><td>[1.5, 2.0[</td><td>1.75</td><td>9</td><td>0.18</td></tr>
+    <tr><td>[2.0, 2.5[</td><td>2.25</td><td>16</td><td>0.32</td></tr>
+    <tr><td>[2.5, 3.0[</td><td>2.75</td><td>12</td><td>0.24</td></tr>
+    <tr><td>[3.0, 3.5[</td><td>3.25</td><td>6</td><td>0.12</td></tr>
+    <tr><td>[3.5, 4.0[</td><td>3.75</td><td>3</td><td>0.06</td></tr>
+    <tr><td><strong>Total</strong></td><td></td><td><strong>50</strong></td><td><strong>1.00</strong></td></tr>
+  </tbody>
+</table>
+
+<p><strong>Construction rules:</strong></p>
+<p>① X-axis: numerical scale with class boundaries. ② Y-axis: frequency (or relative frequency or frequency density). ③ Draw bars with <strong>no gaps</strong> between them. ④ Each bar spans one class interval. ⑤ Height = frequency of that class. ⑥ For equal-width classes, area is proportional to frequency.</p>
+
+<blockquote>🔍 <strong>Reading the histogram:</strong> From this histogram you can instantly see: the distribution is <strong>unimodal</strong> (one peak), the peak is at [2.0, 2.5[ cm (the <strong>modal class</strong>), the distribution is slightly <strong>right-skewed</strong> (tail extends further to the right), and most beetles are between 1.5 and 3.0 cm. None of these patterns are as immediately visible in the table alone.</blockquote>
+
+<h3>⚠️ Special Case: Unequal Class Widths</h3>
+
+<p>When class widths are not equal, using frequency as the bar height produces a misleading histogram. In this case, you must use <strong>frequency density</strong> on the y-axis:</p>
+
+<p><strong>Frequency density = nᵢ / class width</strong></p>
+
+<p>This ensures that the <strong>area</strong> (not the height) of each bar is proportional to the frequency, maintaining the fundamental principle of the histogram (Freedman et al., 2007).</p>
+
+<hr>
+
+<h2>📉 4. Frequency Polygons — Connecting the Dots</h2>
+
+<h3>What They Are</h3>
+
+<p>A <strong>frequency polygon</strong> is constructed by plotting a point at the midpoint (class mark) of each class interval at a height equal to the frequency, then connecting these points with straight line segments. The polygon is "closed" by extending it to the midpoints of hypothetical empty classes at each end (Moore et al., 2021).</p>
+
+<h3>Why Use a Frequency Polygon Instead of a Histogram?</h3>
+
+<p>Frequency polygons have two key advantages: ① They allow <strong>multiple distributions to be compared on the same graph</strong> — overlapping histograms become unreadable, but overlapping polygons remain clear. ② They emphasize the <strong>shape</strong> and <strong>flow</strong> of the distribution rather than individual bar values.</p>
+
+<h3>Construction from the Beetle Data</h3>
+
+<p>① Add a class [0.5, 1.0[ with frequency 0 before the first class. ② Add a class [4.0, 4.5[ with frequency 0 after the last class. ③ Plot points: (0.75, 0), (1.25, 4), (1.75, 9), (2.25, 16), (2.75, 12), (3.25, 6), (3.75, 3), (4.25, 0). ④ Connect the points with straight lines.</p>
+
+<blockquote>💡 <strong>Key property:</strong> The total area under the frequency polygon is exactly equal to the total area of the corresponding histogram. This is because each triangle "gained" above a bar is offset by a triangle "lost" below it — a beautiful geometric identity (Wackerly et al., 2014).</blockquote>
+
+<hr>
+
+<h2>📈 5. Cumulative Frequency Curve (Ogive) — The Running Total</h2>
+
+<h3>What It Is</h3>
+
+<p>An <strong>ogive</strong> (pronounced oh-JIVE) is a graph of the <strong>cumulative frequency</strong> (or cumulative relative frequency) plotted against the <strong>upper boundary</strong> of each class interval. The resulting curve always rises from zero to N, creating a monotonically increasing curve. The term "ogive" comes from architecture, referring to a pointed arch shape (Gravetter & Wallnau, 2017).</p>
+
+<h3>What It Reveals</h3>
+
+<p>The ogive is uniquely powerful for answering <strong>cumulative questions</strong>:</p>
+<p>• "What proportion of beetles are shorter than 2.5 cm?" — Read horizontally from x = 2.5 to the curve, then vertically to the y-axis.<br>
+• "What length is exceeded by only 25% of beetles?" — This is Q₃: read from y = 75% to the curve, then down to the x-axis.<br>
+• <strong>Median</strong>: where the curve crosses the 50% line.<br>
+• <strong>Quartiles</strong>: where it crosses the 25% and 75% lines.</p>
+
+<h3>Construction from the Beetle Data</h3>
+
+<table>
+  <thead>
+    <tr><th>Upper Boundary</th><th>Cumulative Freq. (Nᵢ)</th><th>Cumulative Rel. Freq.</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1.0</td><td>0</td><td>0.00</td></tr>
+    <tr><td>1.5</td><td>4</td><td>0.08</td></tr>
+    <tr><td>2.0</td><td>13</td><td>0.26</td></tr>
+    <tr><td>2.5</td><td>29</td><td>0.58</td></tr>
+    <tr><td>3.0</td><td>41</td><td>0.82</td></tr>
+    <tr><td>3.5</td><td>47</td><td>0.94</td></tr>
+    <tr><td>4.0</td><td>50</td><td>1.00</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔍 <strong>Reading the ogive:</strong> The median ≈ 2.3 cm (where the curve crosses 25 on the y-axis). Q₁ ≈ 1.85 cm and Q₃ ≈ 2.85 cm. The steep section between 2.0 and 2.5 cm confirms that this is where most observations concentrate.</blockquote>
+
+<hr>
+
+<h2>🌿 6. Stem-and-Leaf Plots — The Best of Both Worlds</h2>
+
+<h3>What They Are</h3>
+
+<p>Invented by <strong>John Tukey</strong> (1977), the <strong>stem-and-leaf plot</strong> is a semi-graphical device that displays the distribution shape (like a histogram) while <strong>preserving every individual data value</strong>. Each number is split into a "stem" (the leading digit(s)) and a "leaf" (the trailing digit). The stems are listed vertically, and the leaves extend horizontally — forming a sideways histogram where no data is lost (Tukey, 1977).</p>
+
+<h3>Worked Example</h3>
+
+<p><strong>Scenario:</strong> Exam scores (out of 100) for 25 students in a biostatistics course:</p>
+
+<p>45, 52, 55, 58, 61, 63, 65, 66, 67, 68, 70, 72, 73, 74, 75, 76, 78, 80, 82, 83, 85, 88, 90, 93, 95</p>
+
+<table>
+  <thead>
+    <tr><th>Stem</th><th>Leaves</th><th>Frequency</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>4</td><td>5</td><td>1</td></tr>
+    <tr><td>5</td><td>2 5 8</td><td>3</td></tr>
+    <tr><td>6</td><td>1 3 5 6 7 8</td><td>6</td></tr>
+    <tr><td>7</td><td>0 2 3 4 5 6 8</td><td>7</td></tr>
+    <tr><td>8</td><td>0 2 3 5 8</td><td>5</td></tr>
+    <tr><td>9</td><td>0 3 5</td><td>3</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔑 <strong>What you see instantly:</strong> The distribution is roughly <strong>bell-shaped</strong>, slightly left-skewed. The mode is in the 70s (7 students). The lowest score is 45, the highest 95. The median is the 13th value = 73. You can read <strong>every single score</strong> from this display — something no histogram can do. This is why Tukey called stem-and-leaf displays a tool for "detective work" on data.</blockquote>
+
+<h3>Back-to-Back Stem-and-Leaf Plots</h3>
+
+<p>A powerful extension: two datasets can be compared using a <strong>back-to-back</strong> stem-and-leaf plot, where one dataset's leaves extend to the left and the other's to the right — perfect for comparing two groups such as male vs. female scores or treated vs. control plants (Gravetter & Wallnau, 2017).</p>
+
+<hr>
+
+<h2>📦 7. Box-and-Whisker Plots — The Five-Number Summary Made Visual</h2>
+
+<h3>What They Are</h3>
+
+<p>The <strong>box plot</strong> (or box-and-whisker plot), also invented by <strong>John Tukey</strong> (1977), is one of the most information-dense graphical tools in statistics. It displays five key statistics simultaneously — the <strong>minimum</strong>, <strong>first quartile (Q₁)</strong>, <strong>median (Q₂)</strong>, <strong>third quartile (Q₃)</strong>, and <strong>maximum</strong> — plus any <strong>outliers</strong>. In a single compact figure, you can read the center, spread, skewness, and unusual observations of an entire distribution (McGill et al., 1978).</p>
+
+<h3>Anatomy of a Box Plot</h3>
+
+<table>
+  <thead>
+    <tr><th>Component</th><th>Represents</th><th>What It Tells You</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Box</strong></td><td>Interquartile range (IQR = Q₃ − Q₁)</td><td>Where the middle 50% of data lies</td></tr>
+    <tr><td><strong>Line inside box</strong></td><td>Median (Q₂)</td><td>The center of the data</td></tr>
+    <tr><td><strong>Lower whisker</strong></td><td>Smallest value ≥ Q₁ − 1.5×IQR</td><td>Lower range of "normal" data</td></tr>
+    <tr><td><strong>Upper whisker</strong></td><td>Largest value ≤ Q₃ + 1.5×IQR</td><td>Upper range of "normal" data</td></tr>
+    <tr><td><strong>Individual points (●)</strong></td><td>Outliers beyond the fences</td><td>Unusual observations requiring investigation</td></tr>
+  </tbody>
+</table>
+
+<h3>Worked Example</h3>
+
+<p>Using the 25 exam scores: Min = 45, Q₁ = 63, Median = 73, Q₃ = 83, Max = 95</p>
+
+<p>IQR = 83 − 63 = 20. Lower fence = 63 − 1.5(20) = 33 → lower whisker to Min = 45. Upper fence = 83 + 1.5(20) = 113 → upper whisker to Max = 95. No outliers.</p>
+
+<blockquote>🔍 <strong>Reading the box plot:</strong> The median line is closer to Q₃ than Q₁, suggesting a slight <strong>left skew</strong>. The lower whisker (45 to 63 = 18 units) is longer than the upper whisker (83 to 95 = 12 units), confirming the left skew. The IQR = 20 tells us the middle 50% spans 20 points.</blockquote>
+
+<h3>Side-by-Side Box Plots</h3>
+
+<p>The true power of box plots emerges when comparing groups. Placing them side by side allows immediate visual comparison of location, spread, skewness, and outliers — for instance, comparing wheat yields across five different fertilizer treatments. This is why box plots are the default visualization in experimental biology and agricultural research (Krzywinski & Altman, 2014).</p>
+
+<hr>
+
+<h2>📉 8. Line Graphs — Change Over Time</h2>
+
+<p>A <strong>line graph</strong> displays data points connected by straight line segments, typically with time on the x-axis. First invented by Playfair (1786), line graphs are the natural choice for <strong>trends</strong>, <strong>cycles</strong>, and <strong>temporal patterns</strong>. They are appropriate only when the x-axis represents an ordered quantitative variable — most commonly time (Tufte, 1983).</p>
+
+<blockquote>💡 <strong>Design principle:</strong> The line in a line graph is itself data — it encodes the <em>rate of change</em> between consecutive points. A steep line means rapid change; a flat line means stability. Multiple lines on the same axes enable powerful trend comparisons.</blockquote>
+
+<hr>
+
+<h2>🔵 9. Scatter Plots — Exploring Relationships</h2>
+
+<p>A <strong>scatter plot</strong> displays the relationship between two quantitative variables by plotting each observation as a point in two-dimensional space. The "cloud" of points reveals the direction, form, and strength of the association (Cleveland, 1985). Look for: <strong>direction</strong> (positive, negative, or none), <strong>form</strong> (linear or curvilinear), <strong>strength</strong> (tight or dispersed), and <strong>outliers</strong>.</p>
+
+<blockquote>🔑 <strong>Critical reminder:</strong> Scatter plots show <em>association</em>, not <em>causation</em>. A strong visual pattern does not prove that one variable causes changes in the other. Correlation is not causation — a principle every statistics student must internalize (Freedman et al., 2007).</blockquote>
+
+<hr>
+
+<h2>🎨 Tufte's Principles of Graphical Excellence</h2>
+
+<p>Edward Tufte (1983) established principles that remain the gold standard for statistical graphics:</p>
+
+<table>
+  <thead>
+    <tr><th>Principle</th><th>What It Means</th><th>Practical Implication</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Maximize data-ink ratio</strong></td><td>Most ink should represent actual data</td><td>Remove unnecessary gridlines, borders, decorations</td></tr>
+    <tr><td><strong>Avoid chartjunk</strong></td><td>Eliminate visual clutter</td><td>No 3D effects, excessive colors, or decorative elements</td></tr>
+    <tr><td><strong>Graphical integrity</strong></td><td>Visuals must be proportional to data</td><td>Don't truncate axes or distort scales</td></tr>
+    <tr><td><strong>Show data variation</strong></td><td>Design should not overshadow data</td><td>Let the data speak for itself</td></tr>
+    <tr><td><strong>Clear labeling</strong></td><td>Every axis, unit, and source labeled</td><td>A graph should be self-explanatory</td></tr>
+    <tr><td><strong>Use small multiples</strong></td><td>Repeated small graphs enable comparison</td><td>Identical-scale graphs for different groups</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>Tufte's Lie Factor:</strong> Defined as the ratio of the visual effect in the graph to the actual effect in the data. A Lie Factor of 1.0 means honesty. Values above 1.05 or below 0.95 indicate deception — intentional or not (Tufte, 1983).</blockquote>
+
+<hr>
+
+<h2>⚠️ Common Mistakes in Graphical Representation</h2>
+
+<table>
+  <thead>
+    <tr><th>Mistake</th><th>Why It's Wrong</th><th>How to Fix It</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Histogram for categorical data</td><td>Implies nonexistent continuity</td><td>Use a bar chart (with gaps)</td></tr>
+    <tr><td>Bar chart for continuous data</td><td>Implies discrete categories</td><td>Use a histogram (no gaps)</td></tr>
+    <tr><td>Truncating the y-axis</td><td>Exaggerates differences</td><td>Start y-axis at zero or indicate the break</td></tr>
+    <tr><td>Using 3D effects</td><td>Distorts areas and angles</td><td>Always use 2D graphics</td></tr>
+    <tr><td>Too many pie slices</td><td>Becomes unreadable</td><td>Group small categories or use bar chart</td></tr>
+    <tr><td>Missing labels/titles</td><td>Graph is uninterpretable</td><td>Always label axes, add units and title</td></tr>
+    <tr><td>Lines connecting categories</td><td>Implies interpolation</td><td>Use bars; reserve lines for ordered data</td></tr>
+    <tr><td>Ignoring outliers</td><td>Misses important anomalies</td><td>Investigate: they may be errors or discoveries</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧪 One Dataset, Many Views: A Synthesis</h2>
+
+<table>
+  <thead>
+    <tr><th>Graph</th><th>What It Reveals</th><th>What It Hides</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Histogram</strong></td><td>Distribution shape, modal class, skewness</td><td>Individual values, exact quartiles</td></tr>
+    <tr><td><strong>Frequency polygon</strong></td><td>Shape, easy group comparison</td><td>Less intuitive for single distributions</td></tr>
+    <tr><td><strong>Ogive</strong></td><td>Cumulative proportions, median, quartiles</td><td>Distribution shape less obvious</td></tr>
+    <tr><td><strong>Stem-and-leaf</strong></td><td>Shape + every individual value</td><td>Impractical for n > 100</td></tr>
+    <tr><td><strong>Box plot</strong></td><td>Five-number summary, outliers, skewness</td><td>Modality, shape details</td></tr>
+    <tr><td><strong>Scatter plot</strong></td><td>Relationship between two variables</td><td>Individual variable distributions</td></tr>
+  </tbody>
+</table>
+
+<blockquote>💡 <strong>The master analyst's approach:</strong> Never rely on a single graph. As Tukey (1977) taught, exploratory data analysis means looking at data from every possible angle. Each graph reveals something different. Together, they tell the complete story.</blockquote>
+
+<hr>
+
+<h2>📚 References</h2>
+
+<p>Agresti, A., & Franklin, C. (2018). <em>Statistics: The Art and Science of Learning from Data</em> (4th ed.). Pearson.</p>
+
+<p>Cleveland, W. S. (1985). <em>The Elements of Graphing Data</em>. Wadsworth.</p>
+
+<p>Cleveland, W. S., & McGill, R. (1984). Graphical perception: Theory, experimentation, and application to the development of graphical methods. <em>Journal of the American Statistical Association</em>, 79(387), 531–554.</p>
+
+<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton.</p>
+
+<p>Friendly, M. (2008). A brief history of data visualization. In C. Chen, W. Härdle, & A. Unwin (Eds.), <em>Handbook of Data Visualization</em> (pp. 15–56). Springer.</p>
+
+<p>Gravetter, F. J., & Wallnau, L. B. (2017). <em>Statistics for the Behavioral Sciences</em> (10th ed.). Cengage Learning.</p>
+
+<p>Krzywinski, M., & Altman, N. (2014). Visualizing samples with box plots. <em>Nature Methods</em>, 11(2), 119–120.</p>
+
+<p>Magnello, M. E. (2012). Victorian statistical graphics and the iconography of Florence Nightingale's polar area graph. <em>BSHM Bulletin</em>, 27(1), 13–29.</p>
+
+<p>McGill, R., Tukey, J. W., & Larsen, W. A. (1978). Variations of box plots. <em>The American Statistician</em>, 32(1), 12–16.</p>
+
+<p>Moore, D. S., Notz, W. I., & Fligner, M. A. (2021). <em>The Basic Practice of Statistics</em> (9th ed.). W. H. Freeman.</p>
+
+<p>Nightingale, F. (1858). <em>Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army</em>. Harrison & Sons.</p>
+
+<p>Playfair, W. (1786). <em>The Commercial and Political Atlas</em>. J. Wallis.</p>
+
+<p>Playfair, W. (1801). <em>The Statistical Breviary</em>. T. Bensley.</p>
+
+<p>Spence, I. (2005). No humble pie: The origins and usage of a statistical chart. <em>Journal of Educational and Behavioral Statistics</em>, 30(4), 353–368.</p>
+
+<p>Tufte, E. R. (1983). <em>The Visual Display of Quantitative Information</em>. Graphics Press.</p>
+
+<p>Tukey, J. W. (1977). <em>Exploratory Data Analysis</em>. Addison-Wesley.</p>
+
+<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical Statistics with Applications</em> (7th ed.). Cengage Learning.</p>
+
+<p>Ware, C. (2012). <em>Information Visualization: Perception for Design</em> (3rd ed.). Morgan Kaufmann.</p>
+
+<p>Wickham, H., & Stryjewski, L. (2011). 40 years of boxplots. <em>The American Statistician</em>, Technical report.</p>

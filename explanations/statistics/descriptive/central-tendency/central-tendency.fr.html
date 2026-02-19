@@ -1,0 +1,370 @@
+<h2>🎯 Tendance Centrale : Trouver le Cœur de Vos Données</h2>
+
+<p>Imaginez que vous êtes un chercheur agronome dans la steppe algérienne, mesurant les rendements de blé sur 50 parcelles expérimentales. Vous avez 50 chiffres différents — certains élevés, d'autres bas, d'autres intermédiaires. Un collègue vous demande : <em>« Alors, quel était le rendement ? »</em> Vous ne pouvez pas réciter les 50 valeurs. Vous avez besoin d'<strong>un seul nombre</strong> qui capture l'essence de l'ensemble des données. Ce nombre est une <strong>mesure de tendance centrale</strong>.</p>
+
+<p>Les mesures de tendance centrale comptent parmi les concepts les plus fondamentaux de toute la statistique. Elles répondent à la question apparemment simple : <em>« Quelle est la valeur typique dans ce jeu de données ? »</em> Pourtant, derrière cette simplicité se cache une profondeur remarquable — différentes mesures donnent des réponses différentes, et choisir la mauvaise peut mener à des conclusions profondément trompeuses. Comme l'a souligné Weisberg (1992), le choix d'une mesure de tendance centrale n'est pas une simple commodité mathématique mais une <strong>décision scientifique substantielle</strong> qui reflète notre conception du « typique » dans un contexte donné.</p>
+
+<blockquote>💡 <strong>Les Trois Grands :</strong> Les trois mesures classiques de tendance centrale sont la <strong>moyenne arithmétique</strong> (le point d'équilibre), la <strong>médiane</strong> (la valeur du milieu) et le <strong>mode</strong> (la valeur la plus fréquente). Chacune capture un aspect fondamentalement différent du « centre » — et dans une distribution parfaitement symétrique, les trois convergent vers le même point. Quand elles divergent, l'histoire devient passionnante.</blockquote>
+
+<hr>
+
+<h2>📊 Pourquoi la Tendance Centrale Est-elle Importante ?</h2>
+
+<p>Les mesures de tendance centrale remplissent quatre fonctions essentielles dans l'analyse des données (Agresti & Finlay, 2018) :</p>
+
+<table>
+  <thead>
+    <tr><th>Fonction</th><th>Description</th><th>Exemple</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📝 <strong>Résumé</strong></td><td>Condenser de nombreuses valeurs en un seul nombre représentatif</td><td>« Le rendement moyen était de 3,2 tonnes/ha »</td></tr>
+    <tr><td>⚖️ <strong>Comparaison</strong></td><td>Comparer des groupes, des périodes ou des traitements</td><td>« Les parcelles traitées ont produit 15 % de plus que les témoins »</td></tr>
+    <tr><td>🔮 <strong>Prédiction</strong></td><td>Estimer la valeur la plus probable pour une nouvelle observation</td><td>« D'après les données historiques, on s'attend à ~3 tonnes/ha »</td></tr>
+    <tr><td>🧱 <strong>Fondation</strong></td><td>Servir de blocs de construction pour les méthodes avancées (ANOVA, régression, tests d'hypothèses)</td><td>Chaque test t commence par comparer deux moyennes</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>➕ La Moyenne Arithmétique (x̄ ou μ)</h2>
+
+<h3>Définition et Calcul</h3>
+
+<p>La <strong>moyenne arithmétique</strong> est la somme de toutes les valeurs observées divisée par le nombre d'observations. C'est la mesure de tendance centrale la plus utilisée en statistique et en sciences naturelles (Moore et al., 2021). La moyenne de la population est notée <strong>μ</strong> (mu), tandis que la moyenne de l'échantillon est notée <strong>x̄</strong> (x-barre) :</p>
+
+<table>
+  <thead>
+    <tr><th>Contexte</th><th>Formule</th><th>Notation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Moyenne de population</strong></td><td>μ = (Σxᵢ) / N</td><td>N = taille de la population</td></tr>
+    <tr><td><strong>Moyenne d'échantillon</strong></td><td>x̄ = (Σxᵢ) / n</td><td>n = taille de l'échantillon</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Exemple résolu :</strong> Cinq parcelles donnent 2,8 ; 3,1 ; 3,5 ; 2,9 et 3,2 tonnes/ha. La moyenne est :</p>
+<p style="text-align:center;"><strong>x̄ = (2,8 + 3,1 + 3,5 + 2,9 + 3,2) / 5 = 15,5 / 5 = 3,10 tonnes/ha</strong></p>
+
+<h3>Propriétés Mathématiques Fondamentales</h3>
+
+<p>La moyenne arithmétique possède plusieurs propriétés mathématiques remarquables qui en font la pierre angulaire des statistiques paramétriques (Wackerly et al., 2014) :</p>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Propriété</th><th>Expression Mathématique</th><th>Pourquoi C'est Important</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>🔄 <strong>Somme nulle des écarts</strong></td><td>Σ(xᵢ − x̄) = 0</td><td>La moyenne est le point d'équilibre exact — les écarts positifs et négatifs s'annulent parfaitement</td></tr>
+    <tr><td>2</td><td>📐 <strong>Moindres carrés</strong></td><td>Σ(xᵢ − x̄)² est minimisé</td><td>Aucune autre valeur ne produit une plus petite somme des carrés des écarts — c'est pourquoi la moyenne est optimale pour la variance, l'ANOVA et la régression</td></tr>
+    <tr><td>3</td><td>🔗 <strong>Manipulabilité algébrique</strong></td><td>Σxᵢ = n · x̄</td><td>Connaître la moyenne et n permet de retrouver le total ; les moyennes peuvent être combinées entre sous-groupes</td></tr>
+    <tr><td>4</td><td>📈 <strong>Stabilité d'échantillonnage</strong></td><td>Var(x̄) = σ²/n</td><td>La distribution d'échantillonnage de la moyenne a une variance plus faible que les observations individuelles — le fondement de la statistique inférentielle</td></tr>
+    <tr><td>5</td><td>⚡ <strong>Transformation linéaire</strong></td><td>Si y = a + bx, alors ȳ = a + bx̄</td><td>La conversion d'unités (ex. Celsius en Fahrenheit) transforme la moyenne de la même manière</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🧪 <strong>La propriété #2 est révolutionnaire.</strong> Le fait que la moyenne minimise la somme des carrés des écarts est le fondement mathématique de tout le cadre des moindres carrés — du calcul de la variance et de l'écart-type à l'exécution de l'ANOVA et de la régression linéaire. Quand vous comprenez cette seule propriété, vous comprenez pourquoi la moyenne est au centre de la statistique moderne (Freedman et al., 2007).</blockquote>
+
+<h3>Moyenne pour Données Groupées (Tableaux de Fréquences)</h3>
+
+<p>Lorsque les données sont organisées dans un tableau de fréquences — comme c'est courant dans les grandes enquêtes biologiques — on calcule la moyenne en utilisant les centres de classes :</p>
+
+<table>
+  <thead>
+    <tr><th>Intervalle de Classe</th><th>Centre (mᵢ)</th><th>Fréquence (fᵢ)</th><th>fᵢ × mᵢ</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>10 – 20</td><td>15</td><td>4</td><td>60</td></tr>
+    <tr><td>20 – 30</td><td>25</td><td>8</td><td>200</td></tr>
+    <tr><td>30 – 40</td><td>35</td><td>12</td><td>420</td></tr>
+    <tr><td>40 – 50</td><td>45</td><td>6</td><td>270</td></tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td><strong>n = 30</strong></td><td><strong>Σfᵢmᵢ = 950</strong></td></tr>
+  </tbody>
+</table>
+
+<p style="text-align:center;"><strong>x̄ = Σ(fᵢ × mᵢ) / Σfᵢ = 950 / 30 = 31,67</strong></p>
+
+<h3>La Moyenne Pondérée</h3>
+
+<p>Lorsque différentes observations ont des niveaux d'importance différents, on utilise la <strong>moyenne pondérée</strong>. Ceci est essentiel dans des domaines comme l'analyse de portefeuille, le calcul de la MPC (moyenne pondérée des coefficients), et la conception expérimentale avec des tailles d'échantillon inégales (Triola, 2018) :</p>
+
+<p style="text-align:center;"><strong>x̄<sub>p</sub> = Σ(wᵢ × xᵢ) / Σwᵢ</strong></p>
+
+<p><strong>Exemple — Calcul de la MPC :</strong> Un étudiant obtient 16/20 (coeff. 4), 12/20 (coeff. 3) et 10/20 (coeff. 1) :</p>
+<p style="text-align:center;">x̄<sub>p</sub> = (4×16 + 3×12 + 1×10) / (4+3+1) = 110/8 = <strong>13,75</strong></p>
+<p>La moyenne simple serait (16+12+10)/3 = 12,67 — la moyenne pondérée donne correctement plus d'influence à la matière à fort coefficient.</p>
+
+<h3>⚠️ Le Talon d'Achille : Sensibilité aux Valeurs Aberrantes</h3>
+
+<p>La plus grande force de la moyenne — utiliser chaque point de données — est aussi sa plus grande faiblesse. Puisque chaque valeur contribue à la somme, une seule valeur aberrante peut considérablement fausser le résultat. Considérez les revenus des ménages dans un petit village (Agresti & Finlay, 2018) :</p>
+
+<table>
+  <thead>
+    <tr><th>Ménage</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Revenu (DA)</strong></td><td>25k</td><td>28k</td><td>30k</td><td>30k</td><td>32k</td><td>35k</td><td>36k</td><td>38k</td><td>40k</td><td>500k</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Moyenne = 79 400 DA</strong> — pourtant 9 ménages sur 10 gagnent moins de 40 000 DA ! Le seul ménage riche tire la moyenne très au-dessus du revenu typique. La <strong>médiane (33 500 DA)</strong> représente mieux cette communauté. C'est exactement pourquoi les gouvernements publient le revenu <em>médian</em> des ménages plutôt que le revenu moyen.</p>
+
+<hr>
+
+<h2>📏 La Médiane (Md ou x̃)</h2>
+
+<h3>Définition et Calcul</h3>
+
+<p>La <strong>médiane</strong> est la valeur qui divise un ensemble de données ordonnées en deux moitiés égales — exactement 50 % des observations sont en dessous et 50 % au-dessus. C'est le 50ème percentile (Devore & Berk, 2012).</p>
+
+<table>
+  <thead>
+    <tr><th>Situation</th><th>Règle</th><th>Exemple</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>n impair</strong></td><td>La valeur du milieu : position = (n+1)/2</td><td>Données : 3, 5, <strong>7</strong>, 9, 11 → Médiane = 7</td></tr>
+    <tr><td><strong>n pair</strong></td><td>Moyenne des deux valeurs centrales : positions n/2 et (n/2)+1</td><td>Données : 3, 5, <strong>7, 9</strong>, 11, 13 → Médiane = (7+9)/2 = 8</td></tr>
+  </tbody>
+</table>
+
+<h3>Médiane pour Données Groupées</h3>
+
+<p>Pour les données en tableaux de fréquences, la médiane se trouve par interpolation dans la <strong>classe médiane</strong> — la classe dont la fréquence cumulée atteint ou dépasse n/2 pour la première fois :</p>
+
+<p style="text-align:center;"><strong>Md = L + [(n/2 − FC) / f] × h</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Symbole</th><th>Signification</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>L</td><td>Borne inférieure de la classe médiane</td></tr>
+    <tr><td>n</td><td>Nombre total d'observations</td></tr>
+    <tr><td>FC</td><td>Fréquence cumulée <em>avant</em> la classe médiane</td></tr>
+    <tr><td>f</td><td>Fréquence de la classe médiane</td></tr>
+    <tr><td>h</td><td>Amplitude de l'intervalle de la classe médiane</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Exemple :</strong> Avec le tableau de fréquences ci-dessus (n=30), n/2 = 15. Les fréquences cumulées sont 4, 12, 24, 30. La classe médiane est 30–40 (FC dépasse 15 à cette classe).</p>
+<p style="text-align:center;">Md = 30 + [(15 − 12) / 12] × 10 = 30 + 2,5 = <strong>32,5</strong></p>
+
+<h3>Propriétés Clés de la Médiane</h3>
+
+<table>
+  <thead>
+    <tr><th>Propriété</th><th>Explication</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🛡️ <strong>Robustesse</strong></td><td>Résistante aux valeurs aberrantes — changer une valeur extrême n'affecte pas la médiane sauf si l'ordre des rangs change</td></tr>
+    <tr><td>📐 <strong>Minimise les écarts absolus</strong></td><td>Σ|xᵢ − Md| est minimisé — aucune autre valeur ne produit une plus petite somme des écarts absolus</td></tr>
+    <tr><td>📊 <strong>Fonctionne avec des données ordinales</strong></td><td>Peut être calculée pour toute donnée ordonnée, même quand les opérations arithmétiques n'ont pas de sens</td></tr>
+    <tr><td>🔢 <strong>Unicité</strong></td><td>Donne toujours exactement une valeur (contrairement au mode qui peut avoir zéro, une ou plusieurs valeurs)</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📐 <strong>La propriété d'optimisation de la médiane :</strong> Tout comme la moyenne minimise la somme des écarts <em>au carré</em>, la médiane minimise la somme des écarts <em>absolus</em>. Cela signifie que si vous deviez trouver la valeur unique qui est, en moyenne, la plus proche de chaque point de données en termes de distance absolue, la réponse est toujours la médiane. Cette propriété rend la médiane optimale pour les situations où les valeurs aberrantes ne doivent pas être amplifiées par la mise au carré (Huber & Ronchetti, 2009).</blockquote>
+
+<hr>
+
+<h2>📈 Le Mode (Mo)</h2>
+
+<h3>Définition</h3>
+
+<p>Le <strong>mode</strong> est la valeur qui apparaît le plus fréquemment dans un jeu de données. C'est la mesure de tendance centrale la plus simple et la <strong>seule mesure applicable aux données nominales (catégorielles)</strong> — on ne peut pas calculer une moyenne ou une médiane de « groupes sanguins » ou « espèces végétales », mais on peut identifier quelle catégorie est la plus courante (Agresti & Finlay, 2018).</p>
+
+<h3>Types de Distributions Modales</h3>
+
+<table>
+  <thead>
+    <tr><th>Type</th><th>Description</th><th>Exemple</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔵 <strong>Unimodale</strong></td><td>Un seul mode — un pic net</td><td>Notes d'examen : 65, 70, 72, 72, 72, 75, 80 → Mode = 72</td></tr>
+    <tr><td>🔴🔵 <strong>Bimodale</strong></td><td>Deux modes — deux pics distincts</td><td>Tailles d'un échantillon mixte d'adultes : pics à ~163 cm et ~177 cm (sous-groupes féminin et masculin)</td></tr>
+    <tr><td>🌈 <strong>Multimodale</strong></td><td>Trois modes ou plus</td><td>Heures d'achat des clients : pics à 8h, 12h et 18h</td></tr>
+    <tr><td>⚪ <strong>Amodale</strong></td><td>Toutes les valeurs apparaissent avec la même fréquence</td><td>Données : 2, 4, 6, 8, 10 — aucune valeur ne se répète</td></tr>
+  </tbody>
+</table>
+
+<h3>Mode pour Données Groupées</h3>
+
+<p>Pour les distributions de fréquences, le mode est estimé dans la <strong>classe modale</strong> (la classe avec la fréquence la plus élevée) par la formule d'interpolation :</p>
+
+<p style="text-align:center;"><strong>Mo = L + [Δ₁ / (Δ₁ + Δ₂)] × h</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Symbole</th><th>Signification</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>L</td><td>Borne inférieure de la classe modale</td></tr>
+    <tr><td>Δ₁</td><td>f<sub>modale</sub> − f<sub>précédente</sub> (excès de fréquence par rapport à la classe précédente)</td></tr>
+    <tr><td>Δ₂</td><td>f<sub>modale</sub> − f<sub>suivante</sub> (excès de fréquence par rapport à la classe suivante)</td></tr>
+    <tr><td>h</td><td>Amplitude de l'intervalle de classe</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Exemple :</strong> Dans notre tableau, la classe modale est 30–40 (f=12). Δ₁ = 12−8 = 4, Δ₂ = 12−6 = 6.</p>
+<p style="text-align:center;">Mo = 30 + [4/(4+6)] × 10 = 30 + 4 = <strong>34,0</strong></p>
+
+<h3>Propriétés du Mode</h3>
+
+<table>
+  <thead>
+    <tr><th>✅ Forces</th><th>❌ Limites</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Seule mesure pour données nominales</td><td>Peut ne pas exister ou ne pas être unique</td></tr>
+    <tr><td>Facile à déterminer par inspection</td><td>Non basé sur toutes les observations</td></tr>
+    <tr><td>Non affecté par les valeurs extrêmes</td><td>Instable dans les petits échantillons</td></tr>
+    <tr><td>Représente la valeur la plus « populaire »</td><td>Ne peut pas être utilisé dans des calculs algébriques ultérieurs</td></tr>
+    <tr><td>Identifie les pics dans la forme de la distribution</td><td>Pour les données continues, dépend du choix des classes</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🔬 Au-delà des Trois Grands : Autres Mesures de Tendance Centrale</h2>
+
+<h3>📐 La Moyenne Géométrique (MG)</h3>
+
+<p>La <strong>moyenne géométrique</strong> est la racine nième du produit de n valeurs. C'est la moyenne appropriée pour les données <em>multiplicatives</em> — taux de croissance, ratios, changements relatifs et intérêts composés (Bland & Altman, 1996) :</p>
+
+<p style="text-align:center;"><strong>MG = (x₁ × x₂ × ... × xₙ)<sup>1/n</sup></strong></p>
+
+<p>De manière équivalente : MG = exp[Σ ln(xᵢ) / n].</p>
+
+<p><strong>Exemple — Rendements d'investissement :</strong> Un investissement croît de +10 %, −5 % et +20 % sur trois ans. Les facteurs de croissance sont 1,10 ; 0,95 et 1,20.</p>
+<p style="text-align:center;">MG = (1,10 × 0,95 × 1,20)<sup>1/3</sup> = (1,254)<sup>1/3</sup> = <strong>1,0783</strong> → croissance annuelle moyenne ≈ 7,83 %</p>
+<p>La moyenne arithmétique des facteurs (1,0833) <em>surestimerait</em> le taux de croissance composé réel.</p>
+
+<h3>⚖️ La Moyenne Harmonique (MH)</h3>
+
+<p>La <strong>moyenne harmonique</strong> est l'inverse de la moyenne arithmétique des inverses. C'est la moyenne correcte pour les <em>taux</em> — vitesses, ratios cours/bénéfices, ou toute quantité exprimée comme un rapport à numérateur fixe (Bland & Altman, 1996) :</p>
+
+<p style="text-align:center;"><strong>MH = n / Σ(1/xᵢ)</strong></p>
+
+<p><strong>Exemple — Vitesse moyenne :</strong> Vous parcourez 60 km à 30 km/h et revenez 60 km à 60 km/h. Quelle est votre vitesse moyenne ?</p>
+<p style="text-align:center;">MH = 2 / (1/30 + 1/60) = 2 / (3/60) = <strong>40 km/h</strong></p>
+<p>La moyenne arithmétique (45 km/h) est fausse — elle ignore que vous avez passé <em>plus de temps</em> à rouler lentement. Distance totale = 120 km, temps total = 2h + 1h = 3h, vitesse réelle = 120/3 = 40 km/h ✓</p>
+
+<h3>✂️ La Moyenne Tronquée (Trimmed Mean)</h3>
+
+<p>La <strong>moyenne tronquée</strong> supprime un pourcentage fixe d'observations de chaque extrémité avant de calculer la moyenne arithmétique. C'est un <strong>estimateur robuste</strong> qui conserve les forces de la moyenne tout en réduisant la sensibilité aux valeurs aberrantes (Wilcox, 2017).</p>
+
+<h3>📊 L'Inégalité des Moyennes</h3>
+
+<p>Pour tout ensemble de valeurs positives et inégales (Hardy et al., 1952) :</p>
+
+<p style="text-align:center;font-size:1.15em;"><strong>Moyenne Harmonique ≤ Moyenne Géométrique ≤ Moyenne Arithmétique</strong></p>
+
+<p>L'égalité n'est atteinte que si toutes les valeurs sont identiques. Cette inégalité — connue sous le nom d'<strong>inégalité AM–GM–HM</strong> — est l'un des résultats les plus élégants des mathématiques.</p>
+
+<hr>
+
+<h2>🔄 Relation Moyenne–Médiane–Mode et Asymétrie</h2>
+
+<p>Les positions relatives de la moyenne, de la médiane et du mode révèlent la <strong>forme</strong> d'une distribution — en particulier son asymétrie (Freedman et al., 2007) :</p>
+
+<table>
+  <thead>
+    <tr><th>Forme de la Distribution</th><th>Relation</th><th>Description Visuelle</th><th>Exemple Concret</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔔 <strong>Symétrique</strong></td><td>Moyenne = Médiane = Mode</td><td>Courbe en cloche parfaite ; moitiés identiques</td><td>Tailles des hommes adultes dans une population</td></tr>
+    <tr><td>➡️ <strong>Asymétrie droite (positive)</strong></td><td>Mode < Médiane < Moyenne</td><td>Longue queue vers la droite ; la moyenne est tirée vers les grandes valeurs</td><td>Revenus des ménages, comptages de colonies bactériennes</td></tr>
+    <tr><td>⬅️ <strong>Asymétrie gauche (négative)</strong></td><td>Moyenne < Médiane < Mode</td><td>Longue queue vers la gauche ; la moyenne est tirée vers les petites valeurs</td><td>Âge à la retraite, notes d'un examen facile</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📊 <strong>Règle empirique de Karl Pearson :</strong> Pour les distributions unimodales modérément asymétriques : <strong>Moyenne − Mode ≈ 3 × (Moyenne − Médiane)</strong>. Cette approximation élégante, proposée vers 1895, permet d'estimer l'une des trois mesures si l'on connaît les deux autres (Doane, 2004).</blockquote>
+
+<hr>
+
+<h2>🧭 Choisir la Bonne Mesure : Cadre de Décision</h2>
+
+<table>
+  <thead>
+    <tr><th>Critère</th><th>Utiliser la Moyenne</th><th>Utiliser la Médiane</th><th>Utiliser le Mode</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Échelle de mesure</strong></td><td>Intervalle / Ratio</td><td>Ordinale / Intervalle / Ratio</td><td>Toute échelle (y compris Nominale)</td></tr>
+    <tr><td><strong>Forme de la distribution</strong></td><td>Symétrique ou presque</td><td>Asymétrique ; valeurs aberrantes</td><td>Toute ; surtout bimodale/multimodale</td></tr>
+    <tr><td><strong>Analyses ultérieures ?</strong></td><td>Oui — la plupart des tests inférentiels exigent la moyenne</td><td>Tests non paramétriques utilisent les rangs</td><td>Rarement utilisé dans d'autres calculs</td></tr>
+    <tr><td><strong>Sensibilité aux extrêmes</strong></td><td>Très sensible</td><td>Résistante</td><td>Non affecté</td></tr>
+    <tr><td><strong>Unicité</strong></td><td>Toujours unique</td><td>Toujours unique</td><td>Peut ne pas exister ou être multiple</td></tr>
+    <tr><td><strong>Idéal pour...</strong></td><td>Données quantitatives symétriques ; statistiques paramétriques</td><td>Données asymétriques ; indicateurs économiques ; analyse de survie</td><td>Données catégorielles ; identification des pics</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>La règle pratique :</strong> En cas de doute avec des données quantitatives, rapportez <em>à la fois</em> la moyenne et la médiane. Si elles sont proches, la moyenne est un bon résumé. Si elles sont éloignées, la distribution est asymétrique et la médiane représente mieux l'observation « typique » (Wasserstein & Lazar, 2016).</blockquote>
+
+<hr>
+
+<h2>🌍 Applications Concrètes Selon les Disciplines</h2>
+
+<table>
+  <thead>
+    <tr><th>Domaine</th><th>Application</th><th>Mesure Préférée</th><th>Pourquoi</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🌾 <strong>Agriculture</strong></td><td>Analyse des rendements</td><td>Moyenne</td><td>Données souvent approximativement normales ; permet les comparaisons ANOVA</td></tr>
+    <tr><td>💰 <strong>Économie</strong></td><td>Revenu des ménages</td><td>Médiane</td><td>Distributions fortement asymétriques à droite</td></tr>
+    <tr><td>🏥 <strong>Médecine</strong></td><td>Temps de survie après diagnostic</td><td>Médiane</td><td>Données de survie typiquement asymétriques à droite</td></tr>
+    <tr><td>📈 <strong>Finance</strong></td><td>Rendement d'investissement</td><td>Moyenne géométrique</td><td>Les rendements se composent de manière multiplicative</td></tr>
+    <tr><td>🚗 <strong>Ingénierie</strong></td><td>Vitesse moyenne d'un trajet</td><td>Moyenne harmonique</td><td>La vitesse est un taux ; la moyenne arithmétique donne un résultat incorrect</td></tr>
+    <tr><td>🔬 <strong>Microbiologie</strong></td><td>Comptages de colonies bactériennes</td><td>Moyenne géométrique</td><td>Comptages souvent log-normalement distribués</td></tr>
+    <tr><td>🏫 <strong>Éducation</strong></td><td>Calcul de la MPC</td><td>Moyenne pondérée</td><td>Les matières ont des coefficients différents</td></tr>
+    <tr><td>👗 <strong>Commerce</strong></td><td>Pointure la plus populaire</td><td>Mode</td><td>Besoin de stocker la taille la plus achetée</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>⚡ Tableau Comparatif Récapitulatif</h2>
+
+<table>
+  <thead>
+    <tr><th>Caractéristique</th><th>Moyenne (x̄)</th><th>Médiane (Md)</th><th>Mode (Mo)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Définition</strong></td><td>Somme / effectif</td><td>Valeur centrale</td><td>Valeur la plus fréquente</td></tr>
+    <tr><td><strong>Utilise toutes les données ?</strong></td><td>✅ Oui</td><td>❌ Non (position seulement)</td><td>❌ Non (fréquence seulement)</td></tr>
+    <tr><td><strong>Affectée par les extrêmes ?</strong></td><td>✅ Oui (fortement)</td><td>❌ Non</td><td>❌ Non</td></tr>
+    <tr><td><strong>Données nominales ?</strong></td><td>❌ Non</td><td>❌ Non</td><td>✅ Oui</td></tr>
+    <tr><td><strong>Toujours unique ?</strong></td><td>✅ Oui</td><td>✅ Oui</td><td>❌ Non</td></tr>
+    <tr><td><strong>Statistique inférentielle ?</strong></td><td>✅ Largement</td><td>⚠️ Certains tests</td><td>❌ Rarement</td></tr>
+    <tr><td><strong>Propriété d'optimisation</strong></td><td>Minimise Σ(xᵢ − c)²</td><td>Minimise Σ|xᵢ − c|</td><td>Maximise P(X = c)</td></tr>
+    <tr><td><strong>Distributions asymétriques</strong></td><td>Tirée vers la queue</td><td>Résistante à la queue</td><td>Située au pic</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>📚 Références</h2>
+
+<p>Agresti, A., & Finlay, B. (2018). <em>Statistical methods for the social sciences</em> (5th ed.). Pearson.</p>
+
+<p>Bland, J. M., & Altman, D. G. (1996). Statistics notes: The use of transformation when comparing two means. <em>BMJ</em>, 312(7039), 1153. https://doi.org/10.1136/bmj.312.7039.1153</p>
+
+<p>Devore, J. L., & Berk, K. N. (2012). <em>Modern mathematical statistics with applications</em> (2nd ed.). Springer.</p>
+
+<p>Doane, D. P. (2004). Using simulation to teach distributions. <em>Journal of Statistics Education</em>, 12(1). https://doi.org/10.1080/10691898.2004.11910731</p>
+
+<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton & Company.</p>
+
+<p>Hardy, G. H., Littlewood, J. E., & Pólya, G. (1952). <em>Inequalities</em> (2nd ed.). Cambridge University Press.</p>
+
+<p>Huber, P. J., & Ronchetti, E. M. (2009). <em>Robust statistics</em> (2nd ed.). Wiley.</p>
+
+<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+
+<p>Triola, M. F. (2018). <em>Elementary statistics</em> (13th ed.). Pearson.</p>
+
+<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>
+
+<p>Wasserstein, R. L., & Lazar, N. A. (2016). The ASA statement on p-values: Context, process, and purpose. <em>The American Statistician</em>, 70(2), 129–133. https://doi.org/10.1080/00031305.2016.1154108</p>
+
+<p>Weisberg, H. F. (1992). <em>Central tendency and variability</em>. Sage Publications.</p>
+
+<p>Wilcox, R. R. (2017). <em>Introduction to robust estimation and hypothesis testing</em> (4th ed.). Academic Press.</p>
