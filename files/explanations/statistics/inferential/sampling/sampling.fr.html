@@ -1,0 +1,348 @@
+<h2>🎯 Échantillonnage : L'Art et la Science de Choisir Qui Étudier</h2>
+
+<p>Imaginez que vous êtes un chercheur agronome en Algérie et que vous souhaitez connaître le rendement moyen du blé dans toute la wilaya de Sétif — des milliers d'exploitations réparties sur des microclimats, types de sols et pratiques agricoles très variés. Il est impossible de mesurer <em>chaque</em> parcelle. Alors que faites-vous ? Vous <strong>échantillonnez</strong> : vous sélectionnez un sous-ensemble soigneusement choisi de parcelles, vous les mesurez, et vous utilisez ces mesures pour tirer des conclusions sur l'ensemble de la province. Cet acte apparemment simple — choisir <em>qui</em> ou <em>quoi</em> étudier — est l'une des décisions les plus déterminantes de toute la statistique.</p>
+
+<p>L'échantillonnage est le pont entre une <strong>population</strong> (l'ensemble complet des éléments que vous souhaitez étudier) et l'<strong>échantillon</strong> (le sous-ensemble que vous observez réellement). Si l'échantillonnage est bien fait, quelques centaines d'observations peuvent renseigner sur des millions. S'il est mal fait, même des millions d'observations vous induiront en erreur. Comme l'a souligné Cochran (1977), la qualité de toute inférence statistique dépend avant tout de la qualité de l'échantillon dont elle est tirée.</p>
+
+<blockquote>💡 <strong>Le Principe Fondamental :</strong> Un échantillon bien conçu de 1 000 personnes peut prédire avec précision le comportement de 300 millions — mais un échantillon mal conçu de 2 millions peut être spectaculairement erroné. En 1936, le sondage du <em>Literary Digest</em> a interrogé plus de 2,4 millions d'Américains et a prédit l'élection présidentielle <em>de manière incorrecte</em>, tandis que l'échantillon scientifique de seulement 50 000 personnes de George Gallup a donné le bon résultat (Squire, 1988). <strong>La méthode l'emporte toujours sur la taille.</strong></blockquote>
+
+<hr>
+
+<h2>📚 Concepts Fondamentaux</h2>
+
+<h3>Population vs. Échantillon</h3>
+
+<p>La distinction entre population et échantillon est le fondement même de la statistique inférentielle (Moore et al., 2021). Chaque procédure inférentielle — des intervalles de confiance aux tests d'hypothèses — existe parce que nous travaillons avec des échantillons plutôt qu'avec des populations complètes.</p>
+
+<table>
+  <thead>
+    <tr><th>Concept</th><th>Symbole</th><th>Définition</th><th>Exemple</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🌍 <strong>Population</strong></td><td>N</td><td>L'ensemble <em>complet</em> de tous les éléments d'intérêt</td><td>Les 50 000 oliviers d'une région</td></tr>
+    <tr><td>🔍 <strong>Échantillon</strong></td><td>n</td><td>Un <em>sous-ensemble</em> de la population effectivement observé</td><td>200 oliviers mesurés pour leur teneur en huile</td></tr>
+    <tr><td>📊 <strong>Paramètre</strong></td><td>μ, σ, p</td><td>Une caractéristique numérique de la <em>population</em> (généralement inconnue)</td><td>Teneur moyenne réelle en huile : μ = ?</td></tr>
+    <tr><td>📈 <strong>Statistique</strong></td><td>x̄, s, p̂</td><td>Une caractéristique numérique de l'<em>échantillon</em> (calculée à partir des données)</td><td>Teneur moyenne échantillonnale : x̄ = 18,3 %</td></tr>
+    <tr><td>📋 <strong>Base de sondage</strong></td><td>—</td><td>Une liste ou carte de tous les éléments accessibles pour le tirage</td><td>Registre de toutes les oliveraies enregistrées</td></tr>
+    <tr><td>🧩 <strong>Unité d'échantillonnage</strong></td><td>—</td><td>L'élément individuel sélectionné pour la mesure</td><td>Un seul olivier</td></tr>
+    <tr><td>⚙️ <strong>Recensement</strong></td><td>—</td><td>Collecte de données auprès de <em>chaque</em> membre de la population</td><td>Mesurer les 50 000 arbres (irréalisable !)</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🧪 <strong>Pourquoi ne pas simplement faire un recensement ?</strong> Trois raisons impérieuses : (1) <strong>Coût</strong> — un recensement de millions d'éléments est prohibitif ; (2) <strong>Temps</strong> — le temps de tout mesurer, les conditions ont déjà changé ; (3) <strong>Tests destructifs</strong> — on ne peut pas tester la résistance de chaque poutre d'acier ni le taux de germination de chaque graine sans détruire la population elle-même (Lohr, 2022). L'échantillonnage n'est pas un compromis — c'est une <em>nécessité</em>.</blockquote>
+
+<hr>
+
+<h2>🎲 Méthodes d'Échantillonnage Probabilistes</h2>
+
+<p>L'échantillonnage probabiliste est le standard d'excellence de la recherche scientifique. Sa caractéristique définissante : chaque élément de la population a une <strong>probabilité connue et non nulle</strong> d'être sélectionné. Cette propriété mathématique permet de quantifier l'erreur d'échantillonnage, de construire des intervalles de confiance et de faire des inférences valides sur la population (Kish, 1965). Il existe quatre méthodes probabilistes principales :</p>
+
+<h3>1. Échantillonnage Aléatoire Simple (EAS)</h3>
+
+<p>L'<strong>échantillonnage aléatoire simple</strong> est la méthode la plus fondamentale : chaque échantillon possible de taille <em>n</em> a une probabilité égale d'être sélectionné dans une population de taille <em>N</em>. C'est la « référence » par rapport à laquelle tous les autres plans sont comparés (Cochran, 1977).</p>
+
+<table>
+  <thead>
+    <tr><th>Caractéristique</th><th>Détails</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Mécanisme de sélection</strong></td><td>Générateur de nombres aléatoires ou tirage au sort ; chaque élément a la probabilité n/N d'être inclus</td></tr>
+    <tr><td><strong>Nécessite</strong></td><td>Une base de sondage complète (liste de tous les N éléments)</td></tr>
+    <tr><td><strong>Avantages</strong></td><td>Élimine le biais de sélection ; calculs simples ; fondement de la théorie statistique</td></tr>
+    <tr><td><strong>Inconvénients</strong></td><td>Nécessite une liste complète ; peut manquer les sous-groupes rares ; coûteux si géographiquement dispersé</td></tr>
+    <tr><td><strong>Idéal pour</strong></td><td>Populations homogènes ; situations où une base de sondage complète existe</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Exemple :</strong> Un pédologue veut estimer la teneur moyenne en matière organique de 500 parcelles agricoles d'une commune. Il attribue un numéro à chaque parcelle (1–500), utilise un générateur de nombres aléatoires pour en sélectionner 50, et mesure chacune d'elles. Chaque parcelle avait la même chance de 50/500 = 10 % d'être incluse.</p>
+
+<h3>2. Échantillonnage Systématique</h3>
+
+<p>L'<strong>échantillonnage systématique</strong> sélectionne chaque <em>k</em>-ième élément d'une liste ordonnée après un point de départ aléatoire, où <em>k = N/n</em> (le pas d'échantillonnage). Il est opérationnellement plus simple que l'EAS et produit souvent des échantillons tout aussi représentatifs (Thompson, 2012).</p>
+
+<table>
+  <thead>
+    <tr><th>Caractéristique</th><th>Détails</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Mécanisme de sélection</strong></td><td>Choisir un départ aléatoire <em>r</em> entre 1 et <em>k</em>, puis sélectionner les éléments r, r+k, r+2k, …</td></tr>
+    <tr><td><strong>Nécessite</strong></td><td>Une liste ordonnée ou un arrangement physique des éléments</td></tr>
+    <tr><td><strong>Avantages</strong></td><td>Simple à mettre en œuvre ; répartit l'échantillon uniformément ; plus rapide que l'EAS sur le terrain</td></tr>
+    <tr><td><strong>Inconvénients</strong></td><td>⚠️ Dangereux si la liste présente un <em>motif périodique</em> correspondant à l'intervalle <em>k</em> (biais caché)</td></tr>
+    <tr><td><strong>Idéal pour</strong></td><td>Lignes de production, files de patients, rangées agricoles, populations linéaires</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Exemple :</strong> Un agronome étudiant les dégâts d'insectes dans un verger de 1 000 arbres veut n = 100 arbres. L'intervalle est k = 1000/100 = 10. Il choisit aléatoirement l'arbre de départ n°7, puis inspecte les arbres 7, 17, 27, 37, … jusqu'à 997.</p>
+
+<blockquote>⚠️ <strong>Le Piège de la Périodicité :</strong> Si des maisons d'une rue alternent entre parcelles d'angle et parcelles intérieures avec un k correspondant à ce motif, l'échantillonnage systématique pourrait ne sélectionner <em>que</em> les parcelles d'angle — créant un biais sévère. Vérifiez toujours qu'aucun motif cyclique ne coïncide avec votre pas d'échantillonnage (Cochran, 1977).</blockquote>
+
+<h3>3. Échantillonnage Stratifié</h3>
+
+<p>L'<strong>échantillonnage stratifié</strong> divise la population en sous-groupes non chevauchants et exhaustifs appelés <strong>strates</strong>, puis tire un échantillon aléatoire séparé de chaque strate. C'est l'un des plans les plus puissants et les plus utilisés dans les enquêtes et l'expérimentation agricole (Lohr, 2022).</p>
+
+<table>
+  <thead>
+    <tr><th>Caractéristique</th><th>Détails</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Mécanisme de sélection</strong></td><td>Diviser la population en L strates ; EAS ou systématique dans chaque strate</td></tr>
+    <tr><td><strong>Types d'allocation</strong></td><td><strong>Proportionnelle :</strong> nₕ ∝ Nₕ (taille de strate) — <strong>Optimale (Neyman) :</strong> nₕ ∝ Nₕ·σₕ (taille × variabilité)</td></tr>
+    <tr><td><strong>Avantages</strong></td><td>Garantit la représentation de tous les sous-groupes ; réduit la variance ; permet l'analyse par sous-groupe</td></tr>
+    <tr><td><strong>Inconvénients</strong></td><td>Nécessite une connaissance préalable de la variable de stratification ; administration plus complexe</td></tr>
+    <tr><td><strong>Idéal pour</strong></td><td>Populations hétérogènes avec sous-groupes connus ; comparaisons de groupes ; représentation des minorités</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Exemple :</strong> Pour estimer le rendement moyen d'une région avec trois types de sols (argileux, limoneux, sableux), un chercheur stratifie par type de sol et échantillonne proportionnellement. Si 50 % des exploitations sont sur argile, 30 % sur limon et 20 % sur sable, un échantillon de n = 200 inclura 100 mesures sur argile, 60 sur limon et 40 sur sable.</p>
+
+<blockquote>📐 <strong>Pourquoi la Stratification Bat l'EAS :</strong> Mathématiquement, la variance de la moyenne stratifiée est toujours ≤ celle de la moyenne de l'EAS avec allocation proportionnelle. Le gain est maximal lorsque les strates sont homogènes en interne mais diffèrent substantiellement entre elles — le principe classique : <em>« maximiser la variance inter-strates, minimiser la variance intra-strate »</em> (Cochran, 1977).</blockquote>
+
+<h3>4. Échantillonnage en Grappes (par Clusters)</h3>
+
+<p>L'<strong>échantillonnage en grappes</strong> divise la population en groupes (grappes) — souvent géographiques — puis sélectionne aléatoirement des <em>grappes entières</em> et étudie tous les éléments (ou un sous-échantillon aléatoire) au sein de celles-ci. C'est la méthode de choix lorsqu'aucune base de sondage d'individus n'existe, mais qu'une liste de grappes est disponible (Kish, 1965).</p>
+
+<table>
+  <thead>
+    <tr><th>Caractéristique</th><th>Détails</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Mécanisme de sélection</strong></td><td>Sélectionner aléatoirement <em>m</em> grappes parmi <em>M</em> ; étudier toutes les unités dans les grappes choisies (un degré) ou sous-échantillonner (deux degrés)</td></tr>
+    <tr><td><strong>Avantages</strong></td><td>Pas besoin de liste individuelle ; réduit drastiquement les coûts de déplacement ; pratique pour les grandes populations dispersées</td></tr>
+    <tr><td><strong>Inconvénients</strong></td><td>Erreur d'échantillonnage plus élevée que l'EAS pour le même <em>n</em> (effet de plan > 1) ; les grappes peuvent être homogènes en interne</td></tr>
+    <tr><td><strong>Idéal pour</strong></td><td>Enquêtes ménages, études scolaires, régions agricoles, enquêtes sanitaires dans les pays en développement</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Exemple :</strong> L'OMS doit estimer la couverture vaccinale d'un pays comptant 10 000 villages sans liste individuelle d'enfants. On sélectionne aléatoirement 30 villages (grappes), puis on enquête sur chaque enfant dans chaque village sélectionné — un échantillon en grappes <strong>à un degré</strong> classique.</p>
+
+<blockquote>🔄 <strong>Stratifié vs. Grappes — L'Image Miroir :</strong> La stratification sélectionne <em>certains éléments de chaque groupe</em> ; le sondage en grappes sélectionne <em>tous les éléments de certains groupes</em>. Ce sont des stratégies opposées : la stratification fonctionne mieux quand les groupes sont homogènes en interne, tandis que le sondage en grappes fonctionne mieux quand chaque grappe reflète la diversité de la population (Lohr, 2022).</blockquote>
+
+<h3>Comparaison des Méthodes Probabilistes</h3>
+
+<table>
+  <thead>
+    <tr><th>Méthode</th><th>Base requise ?</th><th>Précision vs EAS</th><th>Coût</th><th>Complexité</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🎯 Aléatoire simple</td><td>Liste complète</td><td>Référence</td><td>Peut être élevé</td><td>Faible</td></tr>
+    <tr><td>📏 Systématique</td><td>Liste ordonnée</td><td>≈ EAS (souvent mieux)</td><td>Faible</td><td>Très faible</td></tr>
+    <tr><td>📊 Stratifié</td><td>Liste + info strates</td><td>Meilleure (souvent nettement)</td><td>Modéré</td><td>Modérée</td></tr>
+    <tr><td>🏘️ En grappes</td><td>Liste de grappes seule</td><td>Inférieure (effet de plan)</td><td>Faible</td><td>Modérée–Élevée</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>📋 Méthodes d'Échantillonnage Non Probabilistes</h2>
+
+<p>Dans l'échantillonnage non probabiliste, la probabilité de sélection de tout élément est <strong>inconnue</strong>. On ne peut donc ni quantifier formellement l'erreur d'échantillonnage ni construire des intervalles de confiance valides. Cependant, ces méthodes sont indispensables quand l'échantillonnage probabiliste est irréalisable, impossible ou inutile — en particulier dans la recherche exploratoire, qualitative et les études pilotes (Etikan et al., 2016).</p>
+
+<table>
+  <thead>
+    <tr><th>Méthode</th><th>Comment ça marche</th><th>Idéal pour</th><th>Limite</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🛒 <strong>De convenance</strong></td><td>Sélectionner les éléments les plus accessibles et disponibles</td><td>Études pilotes, tests préliminaires, recherche étudiante</td><td>Risque élevé d'échantillon non représentatif ; généralisabilité la plus faible</td></tr>
+    <tr><td>🎯 <strong>À choix raisonné</strong></td><td>Le chercheur sélectionne délibérément des éléments selon son expertise</td><td>Recherche qualitative, panels d'experts, études de cas</td><td>Subjectif ; dépend des connaissances du chercheur</td></tr>
+    <tr><td>📊 <strong>Par quotas</strong></td><td>Fixer des quotas correspondant aux proportions connues de la population, puis remplir chaque quota de manière non aléatoire</td><td>Études de marché, sondages d'opinion sans accès aléatoire</td><td>La sélection non aléatoire au sein des quotas peut introduire un biais caché</td></tr>
+    <tr><td>❄️ <strong>Boule de neige</strong></td><td>Les participants recrutent de nouveaux participants dans leurs réseaux</td><td>Populations difficiles d'accès (maladies rares, comportements illégaux, groupes marginalisés)</td><td>Homophilie de réseau — les participants recrutent des personnes similaires</td></tr>
+    <tr><td>🔄 <strong>Consécutif</strong></td><td>Chaque élément répondant aux critères est sélectionné jusqu'à la taille cible</td><td>Études cliniques, recrutement de patients sur une période</td><td>Peut ne pas représenter la population si les tendances changent dans le temps</td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚖️ <strong>Quand le non probabiliste est-il acceptable ?</strong> Les échantillons non probabilistes sont légitimes quand : (a) l'objectif est l'exploration ou la construction de théorie plutôt que la généralisation ; (b) la population est cachée ou difficile à dénombrer ; (c) les ressources ne permettent pas un échantillonnage probabiliste ; ou (d) vous faites un test pilote. L'essentiel est d'être <em>transparent</em> sur la méthode et ses limites (Taherdoost, 2016).</blockquote>
+
+<hr>
+
+<h2>⚠️ Le Biais d'Échantillonnage : La Menace Silencieuse</h2>
+
+<p>Le biais d'échantillonnage survient lorsque la méthode de sélection favorise systématiquement certains membres de la population au détriment d'autres, produisant un échantillon non représentatif de la population cible (Groves et al., 2009). Contrairement à l'<em>erreur</em> d'échantillonnage (qui diminue avec la taille), le <em>biais</em> d'échantillonnage persiste quelle que soit la taille de l'échantillon — c'est une distorsion systématique, non aléatoire.</p>
+
+<h3>Principaux Types de Biais d'Échantillonnage</h3>
+
+<table>
+  <thead>
+    <tr><th>Type de biais</th><th>Ce qui se passe</th><th>Exemple classique</th><th>Prévention</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📉 <strong>Sous-couverture</strong></td><td>Certains segments de la population sont exclus de la base de sondage</td><td>Sondage <em>Literary Digest</em> 1936 : annuaires téléphoniques excluaient les électeurs pauvres, prédisant Landon contre Roosevelt (Squire, 1988)</td><td>Utiliser des bases multiples et à jour ; vérifier la complétude</td></tr>
+    <tr><td>🚫 <strong>Non-réponse</strong></td><td>Les individus sélectionnés refusent ou ne répondent pas ; les non-répondants diffèrent systématiquement des répondants</td><td>Enquêtes postales : taux de réponse souvent < 30 % ; les opinions extrêmes sont surreprésentées</td><td>Relances ; incitations ; rappels ; comparer la démographie des répondants à la population</td></tr>
+    <tr><td>🙋 <strong>Auto-sélection</strong></td><td>Les participants se choisissent eux-mêmes</td><td>Sondages en ligne, émissions radio à appels — surreprésentation des opinions extrêmes</td><td>Utiliser la sélection aléatoire plutôt que la participation volontaire</td></tr>
+    <tr><td>🏆 <strong>Survivance</strong></td><td>Seuls les éléments « survivants » sont observés ; les échecs sont invisibles</td><td>Études de performance des fonds : les fonds en échec sont supprimés, gonflant les rendements moyens (Malkiel, 1995)</td><td>Suivre tous les éléments dès le départ ; inclure ceux qui abandonnent</td></tr>
+    <tr><td>🏥 <strong>Utilisateur sain</strong></td><td>Les volontaires sont en meilleure santé ou plus actifs que la population générale</td><td>Études sur l'exercice recrutent des personnes actives ; les essais médicaux excluent les plus malades</td><td>Critères d'inclusion plus larges ; recrutement communautaire</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔑 <strong>La Règle Cardinale :</strong> <em>Augmenter la taille de l'échantillon réduit l'erreur d'échantillonnage mais NE réduit PAS le biais.</em> Le <em>Literary Digest</em> a sondé 2,4 millions de personnes et s'est trompé de manière catastrophique parce que le biais était intégré dans la méthode. Pendant ce temps, l'échantillon <em>aléatoire</em> de 50 000 personnes de Gallup a prédit correctement le résultat (Groves et al., 2009). La qualité de la méthode l'emporte toujours sur la quantité d'observations.</blockquote>
+
+<hr>
+
+<h2>🔬 Erreur d'Échantillonnage et Distribution d'Échantillonnage</h2>
+
+<p>Même avec un échantillon probabiliste parfait, la statistique échantillonnale (ex. x̄) ne sera presque jamais <em>exactement</em> égale au paramètre de la population (μ). La différence est appelée l'<strong>erreur d'échantillonnage</strong>. Ce n'est pas une « erreur » au sens de faute — c'est la variabilité inhérente et inévitable qui résulte de l'étude d'un sous-ensemble (Moore et al., 2021).</p>
+
+<p>Le comportement d'une statistique à travers tous les échantillons possibles est décrit par sa <strong>distribution d'échantillonnage</strong>. Pour la moyenne échantillonnale :</p>
+
+<table>
+  <thead>
+    <tr><th>Propriété</th><th>Formule</th><th>Interprétation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Espérance de la distribution</strong></td><td>E(x̄) = μ</td><td>La moyenne échantillonnale est un estimateur <em>sans biais</em> de la moyenne de la population</td></tr>
+    <tr><td><strong>Erreur-type (SE)</strong></td><td>SE = σ / √n</td><td>L'écart-type de x̄ sur les échantillons répétés ; mesure la précision</td></tr>
+    <tr><td><strong>Implication clé</strong></td><td>SE ↓ quand n ↑</td><td>Échantillons plus grands → estimations plus précises (loi du √n à rendements décroissants)</td></tr>
+  </tbody>
+</table>
+
+<p>Le <strong>Théorème Central Limite</strong> garantit que pour un <em>n</em> suffisamment grand, la distribution d'échantillonnage de x̄ est approximativement normale, quelle que soit la forme de la population d'origine — c'est pourquoi l'inférence basée sur la loi normale fonctionne si largement (Agresti & Franklin, 2018).</p>
+
+<blockquote>📈 <strong>La Règle du √n en Pratique :</strong> Pour diviser l'erreur-type par deux, il faut <em>quadrupler</em> la taille de l'échantillon. Passer de n = 100 à n = 400 divise le SE par deux. Passer de 400 à 1 600 le divise encore par deux. Ce schéma de rendements décroissants explique pourquoi les très grands échantillons n'apportent qu'une amélioration marginale — et pourquoi un plan d'échantillonnage intelligent est plus rentable que l'augmentation brute de la taille.</blockquote>
+
+<hr>
+
+<h2>📐 Détermination de la Taille d'Échantillon</h2>
+
+<p>L'une des questions pratiques les plus importantes en recherche est : <em>« Combien d'observations me faut-il ? »</em> Trop peu → précision insuffisante ; trop → ressources gaspillées. La détermination de la taille d'échantillon équilibre ces exigences concurrentes (Cochran, 1977).</p>
+
+<h3>Formule de Cochran — Estimation d'une Proportion</h3>
+
+<p>La formule la plus utilisée pour estimer la taille d'échantillon nécessaire à la mesure d'une proportion est celle de Cochran (1977) :</p>
+
+<table>
+  <thead>
+    <tr><th>Composant</th><th>Symbole</th><th>Description</th><th>Valeur typique</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Valeur z</td><td>z</td><td>Valeur critique pour le niveau de confiance souhaité</td><td>1,96 pour 95 % NC</td></tr>
+    <tr><td>Proportion estimée</td><td>p</td><td>Prévalence attendue de l'attribut</td><td>0,5 (variabilité maximale, le plus conservateur)</td></tr>
+    <tr><td>Marge d'erreur</td><td>e</td><td>Précision acceptable (demi-largeur de l'IC)</td><td>0,05 (±5 %)</td></tr>
+  </tbody>
+</table>
+
+<p style="text-align:center;"><strong>n₀ = z² · p · (1 − p) / e²</strong></p>
+
+<p><strong>Exemple résolu :</strong> Avec 95 % de confiance (z = 1,96), variabilité maximale (p = 0,5), et ±5 % de marge d'erreur :</p>
+<p style="text-align:center;"><strong>n₀ = (1,96)² × 0,5 × 0,5 / (0,05)² = 3,8416 × 0,25 / 0,0025 = 384,16 ≈ 385</strong></p>
+
+<h3>Correction pour Population Finie (CPF)</h3>
+
+<p>Quand la population est petite (environ n₀ > 5 % de N), la formule ci-dessus surestime la taille nécessaire. La correction est :</p>
+
+<p style="text-align:center;"><strong>n = n₀ / (1 + (n₀ − 1) / N)</strong></p>
+
+<p><strong>Exemple :</strong> Pour N = 600 étudiants : n = 385 / (1 + 384/600) = 385 / 1,64 ≈ 235. Il ne faut que 235 étudiants au lieu de 385.</p>
+
+<h3>Taille d'Échantillon pour Estimer une Moyenne</h3>
+
+<p>Quand la cible est une moyenne de population plutôt qu'une proportion :</p>
+
+<p style="text-align:center;"><strong>n = (z · σ / e)²</strong></p>
+
+<p>où σ est l'écart-type de la population (estimé par une étude pilote ou la littérature) et e est la marge d'erreur souhaitée dans les mêmes unités que la variable.</p>
+
+<h3>Référence Rapide : Tailles d'Échantillons Requises</h3>
+
+<table>
+  <thead>
+    <tr><th>Niveau de confiance</th><th>Marge d'erreur</th><th>p = 0,5</th><th>p = 0,3</th><th>p = 0,1</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>90 %</td><td>±5 %</td><td>271</td><td>228</td><td>98</td></tr>
+    <tr><td>95 %</td><td>±5 %</td><td>385</td><td>323</td><td>139</td></tr>
+    <tr><td>95 %</td><td>±3 %</td><td>1 068</td><td>897</td><td>385</td></tr>
+    <tr><td>99 %</td><td>±5 %</td><td>666</td><td>559</td><td>240</td></tr>
+    <tr><td>99 %</td><td>±1 %</td><td>16 641</td><td>13 978</td><td>5 990</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>Aperçu Pratique :</strong> Remarquez que passer de ±5 % à ±1 % de précision multiplie l'échantillon requis par plus de 40. C'est la loi du √n en action — les gains de précision sont coûteux. En pratique, la plupart des chercheurs acceptent ±5 % d'erreur à 95 % de confiance, ce qui nécessite environ <strong>385 observations</strong> pour les grandes populations — l'un des chiffres les plus cités dans toute la recherche par sondage (Cochran, 1977).</blockquote>
+
+<hr>
+
+<h2>🛠️ Plans d'Échantillonnage Multi-Degrés et Complexes</h2>
+
+<p>Les enquêtes réelles utilisent rarement une seule méthode. Elles combinent plutôt les techniques en <strong>plans multi-degrés</strong> qui équilibrent coût, précision et faisabilité (Kish, 1965).</p>
+
+<table>
+  <thead>
+    <tr><th>Plan</th><th>Description</th><th>Exemple</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📊 <strong>Grappes à deux degrés</strong></td><td>Degré 1 : sélection aléatoire de grappes ; Degré 2 : échantillonnage aléatoire <em>au sein</em> des grappes choisies</td><td>Sélectionner 30 écoles, puis 25 élèves par école</td></tr>
+    <tr><td>🔗 <strong>Stratifié en grappes</strong></td><td>Stratifier la population, puis appliquer l'échantillonnage en grappes dans chaque strate</td><td>Stratifier par urbain/rural, puis échantillonner des villages dans chacun</td></tr>
+    <tr><td>📐 <strong>PPS (Proportionnel à la taille)</strong></td><td>Les grappes sont sélectionnées avec une probabilité proportionnelle à leur taille</td><td>Le Programme Élargi de Vaccination de l'OMS utilise le PPS dans l'échantillonnage 30×7</td></tr>
+    <tr><td>🔄 <strong>Double (Biphasique)</strong></td><td>Phase 1 : mesure peu coûteuse sur un grand échantillon ; Phase 2 : mesure coûteuse sur un sous-échantillon</td><td>Trier 10 000 échantillons de sol par couleur, puis analyser en labo 500 sélectionnés</td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚙️ <strong>Effet de Plan (DEFF) :</strong> Les plans complexes produisent une précision différente de l'EAS. L'<em>effet de plan</em> est le ratio DEFF = Var(complexe) / Var(EAS). Pour le sondage en grappes, le DEFF est typiquement 1,5–3,0, signifiant qu'il faut 1,5–3× plus d'observations pour la même précision que l'EAS. Pour l'échantillonnage stratifié, DEFF < 1, ce qui signifie qu'il faut <em>moins</em> d'observations — un des grands avantages de la stratification (Kish, 1965).</blockquote>
+
+<hr>
+
+<h2>🌾 Échantillonnage en Recherche Agricole et Biologique</h2>
+
+<p>L'échantillonnage présente des défis particuliers en sciences de la vie, où les populations sont souvent spatialement structurées, temporellement variables et impossibles à dénombrer (Scheiner & Gurevitch, 2001).</p>
+
+<table>
+  <thead>
+    <tr><th>Application</th><th>Population</th><th>Plan recommandé</th><th>Pourquoi</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🌾 Estimation du rendement</td><td>Toutes les parcelles d'une région</td><td>Stratifié par type de sol ou irrigation</td><td>Forte variabilité inter-strates du rendement</td></tr>
+    <tr><td>🐛 Surveillance des ravageurs</td><td>Insectes dans un champ</td><td>Grille systématique avec départ aléatoire</td><td>Couverture spatiale efficace ; détecte l'agrégation</td></tr>
+    <tr><td>🧫 Microbiologie du sol</td><td>Micro-organismes par gramme</td><td>Stratifié par profondeur et usage du sol</td><td>Les communautés microbiennes varient drastiquement avec la profondeur</td></tr>
+    <tr><td>🌲 Inventaire forestier</td><td>Arbres d'une forêt nationale</td><td>Deux degrés : sélectionner des placettes, puis mesurer les arbres</td><td>Pas de recensement complet ; les placettes réduisent les coûts</td></tr>
+    <tr><td>🐄 Santé animale</td><td>Troupeaux d'une wilaya</td><td>Échantillonnage en grappes de troupeaux</td><td>La base de sondage existe pour les troupeaux, pas pour les individus</td></tr>
+    <tr><td>💧 Qualité de l'eau</td><td>Rivières et puits</td><td>Stratifié amont/aval</td><td>La qualité varie systématiquement le long du gradient</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>✅ Bonnes Pratiques : Un Cadre de Décision</h2>
+
+<p>Le choix de la bonne méthode d'échantillonnage dépend de vos objectifs de recherche, de vos ressources et des caractéristiques de la population. Voici un guide de décision pratique synthétisé à partir des ouvrages méthodologiques de référence (Cochran, 1977 ; Lohr, 2022 ; Thompson, 2012) :</p>
+
+<table>
+  <thead>
+    <tr><th>Étape</th><th>Question à se poser</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1️⃣</td><td>Avez-vous besoin de généraliser à une population ?</td><td><strong>Oui</strong> → Échantillonnage probabiliste requis. <strong>Non</strong> → Le non probabiliste peut suffire</td></tr>
+    <tr><td>2️⃣</td><td>Disposez-vous d'une base de sondage complète ?</td><td><strong>Oui</strong> → EAS ou Systématique. <strong>Non</strong> → Grappes ou Multi-degrés</td></tr>
+    <tr><td>3️⃣</td><td>La population est-elle hétérogène avec des sous-groupes connus ?</td><td><strong>Oui</strong> → Échantillonnage stratifié. <strong>Non</strong> → EAS ou Systématique</td></tr>
+    <tr><td>4️⃣</td><td>La population est-elle géographiquement dispersée ?</td><td><strong>Oui</strong> → Grappes pour réduire les coûts de déplacement</td></tr>
+    <tr><td>5️⃣</td><td>La population est-elle difficile d'accès ou cachée ?</td><td><strong>Oui</strong> → Boule de neige ou choix raisonné (reconnaître les limites)</td></tr>
+    <tr><td>6️⃣</td><td>Quelle précision vous faut-il ?</td><td>Utiliser la formule de Cochran (ou l'analyse de puissance) pour déterminer <em>n</em></td></tr>
+    <tr><td>7️⃣</td><td>Quel est votre budget ?</td><td>Équilibrer précision et coût ; considérer l'allocation optimale dans les plans stratifiés</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>📖 Références</h2>
+
+<p>Agresti, A., & Franklin, C. (2018). <em>Statistics: The art and science of learning from data</em> (4th ed.). Pearson.</p>
+
+<p>Cochran, W. G. (1977). <em>Sampling techniques</em> (3rd ed.). John Wiley & Sons.</p>
+
+<p>Etikan, I., Musa, S. A., & Alkassim, R. S. (2016). Comparison of convenience sampling and purposive sampling. <em>American Journal of Theoretical and Applied Statistics</em>, <em>5</em>(1), 1–4. https://doi.org/10.11648/j.ajtas.20160501.11</p>
+
+<p>Groves, R. M., Fowler, F. J., Couper, M. P., Lepkowski, J. M., Singer, E., & Tourangeau, R. (2009). <em>Survey methodology</em> (2nd ed.). John Wiley & Sons.</p>
+
+<p>Kish, L. (1965). <em>Survey sampling</em>. John Wiley & Sons.</p>
+
+<p>Lohr, S. L. (2022). <em>Sampling: Design and analysis</em> (3rd ed.). CRC Press.</p>
+
+<p>Malkiel, B. G. (1995). Returns from investing in equity mutual funds 1971 to 1991. <em>The Journal of Finance</em>, <em>50</em>(2), 549–572. https://doi.org/10.1111/j.1540-6261.1995.tb04795.x</p>
+
+<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+
+<p>Scheiner, S. M., & Gurevitch, J. (Eds.). (2001). <em>Design and analysis of ecological experiments</em> (2nd ed.). Oxford University Press.</p>
+
+<p>Squire, P. (1988). Why the 1936 Literary Digest poll failed. <em>Public Opinion Quarterly</em>, <em>52</em>(1), 125–133. https://doi.org/10.1086/269085</p>
+
+<p>Taherdoost, H. (2016). Sampling methods in research methodology: How to choose a sampling technique for research. <em>International Journal of Academic Research in Management</em>, <em>5</em>(2), 18–27. https://doi.org/10.2139/ssrn.3205035</p>
+
+<p>Thompson, S. K. (2012). <em>Sampling</em> (3rd ed.). John Wiley & Sons.</p>

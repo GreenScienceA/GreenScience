@@ -1,0 +1,398 @@
+<h2>📋 Non-Parametric Tests: When Your Data Refuse to Follow the Rules</h2>
+
+<p>Imagine you are an agricultural researcher in Batna, Algeria, surveying 15 smallholder farmers about their satisfaction with a new drip irrigation system. Each farmer rates satisfaction on a scale of 1 (very dissatisfied) to 5 (very satisfied). You want to know: does satisfaction differ between farmers who received training and those who did not? You instinctively reach for a t-test — but then pause. Your data are ordinal ranks, not continuous measurements. With only 7 farmers in one group and 8 in the other, you cannot credibly assume normality. The variances look wildly different. Every parametric assumption you learned is violated. What do you do?</p>
+
+<p>You use a <strong>non-parametric test</strong> — a class of statistical methods that make minimal assumptions about the underlying population distribution. These tests do not require your data to be normally distributed, do not demand equal variances, and can handle ordinal, ranked, or severely skewed data with grace and rigor. They are not a compromise or a "Plan B"; they are a distinct and powerful statistical philosophy with deep mathematical foundations, proven efficiency, and a rich history stretching back to the 1900s.</p>
+
+<blockquote>💡 <strong>The Big Idea:</strong> Parametric tests are like tailored suits — they fit beautifully when the body (data) matches the pattern (assumptions). Non-parametric tests are like elastic clothing — they adapt to almost any shape. You sacrifice a small amount of precision when the suit would have fit perfectly, but you gain the ability to work reliably with data of almost any distributional shape.</blockquote>
+
+<hr>
+
+<h2>📜 Historical Origins: From Pearson's χ² to the Rank Revolution</h2>
+
+<p>The history of non-parametric statistics is a story of brilliant minds who questioned whether the normal distribution deserved its monopoly over statistical inference.</p>
+
+<p>The earliest non-parametric test predates the term itself. In 1900, <strong>Karl Pearson</strong> published a landmark paper in the <em>Philosophical Magazine</em> introducing the <strong>chi-squared (χ²) goodness-of-fit test</strong> — a method that evaluates whether observed frequencies match expected frequencies without assuming any particular continuous distribution (Pearson, 1900). The eminent statistician Bradley Efron later called this paper "an auspicious beginning to a wonderful century for the field of statistics" (Rao, 2002). Pearson's χ² test remains, over 125 years later, one of the most widely used statistical tests in science.</p>
+
+<p>In 1904, the British psychologist <strong>Charles Spearman</strong> proposed the <strong>rank correlation coefficient</strong> (ρ, or "Spearman's rho"), which measures the association between two variables using their ranks rather than their raw values (Spearman, 1904). This was a conceptual breakthrough: by converting observations to ranks, Spearman freed correlation analysis from the assumption of linearity and normality that constrained Pearson's product-moment correlation.</p>
+
+<p>The modern non-parametric revolution truly ignited in 1945, when <strong>Frank Wilcoxon</strong>, a physical chemist at the American Cyanamid Company, published a remarkably concise four-page paper in the <em>Biometrics Bulletin</em>. In those four pages, he proposed both the <strong>signed-rank test</strong> (for paired samples) and the <strong>rank-sum test</strong> (for independent samples) — two tests that would become cornerstones of non-parametric statistics (Wilcoxon, 1945). Wilcoxon's motivation was practical: he was tired of computing endless t-tests for laboratory measurements and wanted simpler alternatives based on ranks (Noether, 1992).</p>
+
+<p>In 1947, <strong>Henry Mann</strong> and his student <strong>Donald Ransom Whitney</strong> extended Wilcoxon's rank-sum test to unequal sample sizes and provided a comprehensive theoretical analysis, creating what is now called the <strong>Mann-Whitney U test</strong> (Mann &amp; Whitney, 1947). Then in 1952, <strong>William Kruskal</strong> and <strong>W. Allen Wallis</strong> generalized the two-sample rank test to multiple groups, producing the <strong>Kruskal-Wallis H test</strong> — the non-parametric alternative to one-way ANOVA (Kruskal &amp; Wallis, 1952). Meanwhile, the Nobel Prize–winning economist <strong>Milton Friedman</strong> had already proposed a rank-based test for repeated measures designs in 1937, now called the <strong>Friedman test</strong> (Friedman, 1937).</p>
+
+<blockquote>🧠 <strong>The Efficiency Surprise:</strong> Many researchers assume non-parametric tests are inherently weaker than parametric ones. But Hodges and Lehmann (1956) proved a stunning result: the asymptotic relative efficiency (ARE) of the Wilcoxon rank-sum test compared to the t-test <em>never falls below 0.864</em>, even when the data are perfectly normal — meaning the Wilcoxon test requires at most 16% more observations to achieve the same power. For non-normal distributions, the Wilcoxon test can be <em>infinitely</em> more efficient than the t-test. This result shattered the myth that non-parametric = weak.</blockquote>
+
+<hr>
+
+<h2>🔬 The Core Principle: Ranks Instead of Raw Values</h2>
+
+<p>The fundamental insight behind most non-parametric tests is deceptively simple: <strong>replace each observation with its rank</strong> in the combined sample, then perform calculations on these ranks rather than on the original data. This simple transformation has profound consequences:</p>
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Raw Values</th><th>Ranks</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Sensitivity to outliers</td><td>Extreme values dominate calculations</td><td>The largest value gets rank <em>n</em>, regardless of how extreme it is</td></tr>
+    <tr><td>Distribution assumption</td><td>Requires specific distribution (usually normal)</td><td>Distribution-free under H₀</td></tr>
+    <tr><td>Measurement scale</td><td>Requires interval/ratio scale</td><td>Works with ordinal data</td></tr>
+    <tr><td>Information used</td><td>Uses exact magnitudes of differences</td><td>Uses only relative ordering</td></tr>
+    <tr><td>Robustness</td><td>Vulnerable to non-normality, heteroscedasticity</td><td>Highly robust to distributional violations</td></tr>
+  </tbody>
+</table>
+
+<p>Consider a soil heavy-metal dataset: 12, 15, 18, 22, and 450 mg/kg. The mean (103.4) is dominated by the outlier 450. But the ranks (1, 2, 3, 4, 5) treat all values equally, diffusing the outlier's influence. The median (18), not the mean, captures the typical value — and rank-based tests naturally align with this median-centric perspective.</p>
+
+<hr>
+
+<h2>📊 The Non-Parametric Test Family: A Complete Guide</h2>
+
+<p>Non-parametric tests form a coherent family, with each test serving as a distribution-free counterpart to a familiar parametric test. The table below maps the complete landscape:</p>
+
+<table>
+  <thead>
+    <tr><th>Research Question</th><th>Parametric Test</th><th>Non-Parametric Alternative</th><th>Data Requirements</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>One sample vs. hypothesized median</td><td>One-sample t-test</td><td>🔹 <strong>Wilcoxon signed-rank test</strong></td><td>Ordinal+, symmetric distribution of differences</td></tr>
+    <tr><td>Two independent groups</td><td>Independent t-test</td><td>🔹 <strong>Mann-Whitney U test</strong></td><td>Ordinal+, independent observations</td></tr>
+    <tr><td>Two paired/matched groups</td><td>Paired t-test</td><td>🔹 <strong>Wilcoxon signed-rank test</strong></td><td>Ordinal+, paired observations</td></tr>
+    <tr><td>Three+ independent groups</td><td>One-way ANOVA</td><td>🔹 <strong>Kruskal-Wallis H test</strong></td><td>Ordinal+, independent observations</td></tr>
+    <tr><td>Three+ repeated measures</td><td>Repeated measures ANOVA</td><td>🔹 <strong>Friedman test</strong></td><td>Ordinal+, blocked/repeated design</td></tr>
+    <tr><td>Association between two variables</td><td>Pearson correlation (r)</td><td>🔹 <strong>Spearman rank correlation (ρ)</strong></td><td>Ordinal+, monotonic relationship</td></tr>
+    <tr><td>Categorical frequency distributions</td><td>—</td><td>🔹 <strong>Chi-squared (χ²) test</strong></td><td>Nominal/categorical, expected counts ≥ 5</td></tr>
+    <tr><td>2×2 table, small samples</td><td>—</td><td>🔹 <strong>Fisher's exact test</strong></td><td>Nominal/categorical, any sample size</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🔹 Test 1: The Mann-Whitney U Test (Two Independent Samples)</h2>
+
+<h3>When to Use It</h3>
+<p>Use the Mann-Whitney U test when comparing two independent groups and you cannot assume normality — for example, comparing soil organic matter content between conventional and organic farms when the data are skewed.</p>
+
+<h3>The Procedure</h3>
+<p>Suppose we measure cadmium concentration (mg/kg) in soil from two regions:</p>
+<p><strong>Region A (n₁ = 5):</strong> 0.8, 1.2, 2.5, 3.1, 4.7<br>
+<strong>Region B (n₂ = 5):</strong> 1.9, 3.8, 5.2, 6.1, 8.3</p>
+
+<p><strong>Step 1:</strong> Combine all observations and assign ranks from 1 (smallest) to N = n₁ + n₂ = 10:</p>
+
+<table>
+  <thead>
+    <tr><th>Value</th><th>0.8</th><th>1.2</th><th>1.9</th><th>2.5</th><th>3.1</th><th>3.8</th><th>4.7</th><th>5.2</th><th>6.1</th><th>8.3</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Rank</strong></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+    <tr><td><strong>Group</strong></td><td>A</td><td>A</td><td>B</td><td>A</td><td>A</td><td>B</td><td>A</td><td>B</td><td>B</td><td>B</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Step 2:</strong> Sum the ranks for each group:</p>
+<p>R₁ (Region A) = 1 + 2 + 4 + 5 + 7 = <strong>19</strong><br>
+R₂ (Region B) = 3 + 6 + 8 + 9 + 10 = <strong>36</strong></p>
+
+<p><strong>Step 3:</strong> Compute the U statistics:</p>
+<p style="text-align:center; font-size:1.1em;"><strong>U₁ = n₁n₂ + n₁(n₁+1)/2 − R₁ = 5×5 + 5×6/2 − 19 = 25 + 15 − 19 = 21</strong></p>
+<p style="text-align:center; font-size:1.1em;"><strong>U₂ = n₁n₂ − U₁ = 25 − 21 = 4</strong></p>
+<p>The test statistic is U = min(U₁, U₂) = <strong>4</strong>.</p>
+
+<p><strong>Step 4:</strong> Compare to critical values or compute a p-value. For n₁ = n₂ = 5 at α = 0.05 (two-tailed), the critical value is 2. Since U = 4 > 2, we fail to reject H₀ — there is insufficient evidence that cadmium concentrations differ between the two regions at the 5% significance level.</p>
+
+<h3>The Formula (General)</h3>
+<p style="text-align:center; font-size:1.1em;"><strong>U = n₁n₂ + n₁(n₁+1)/2 − R₁</strong></p>
+
+<p>For large samples (both n₁ and n₂ > 20), U is approximately normally distributed with:</p>
+<p style="text-align:center;">μ<sub>U</sub> = n₁n₂/2 &nbsp;&nbsp;&nbsp; σ<sub>U</sub> = √(n₁n₂(n₁+n₂+1)/12)</p>
+<p style="text-align:center;">Z = (U − μ<sub>U</sub>) / σ<sub>U</sub></p>
+
+<h3>Interpretation</h3>
+<p>U can be interpreted as the number of times a value from Group 1 precedes a value from Group 2 when all values are arranged in ascending order. If U is very small (or very large), the groups are well-separated in rank, suggesting different distributions (Mann &amp; Whitney, 1947).</p>
+
+<hr>
+
+<h2>🔹 Test 2: The Wilcoxon Signed-Rank Test (Paired Samples)</h2>
+
+<h3>When to Use It</h3>
+<p>Use when comparing two related measurements — before/after treatment, matched pairs, or repeated measures on the same subjects — when you cannot assume the differences are normally distributed.</p>
+
+<h3>The Procedure</h3>
+<p>Suppose we measure soil pH at 8 sites before and after applying lime amendment:</p>
+
+<table>
+  <thead>
+    <tr><th>Site</th><th>Before</th><th>After</th><th>Difference (d)</th><th>|d|</th><th>Rank of |d|</th><th>Signed Rank</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>5.2</td><td>5.8</td><td>+0.6</td><td>0.6</td><td>5</td><td>+5</td></tr>
+    <tr><td>2</td><td>4.8</td><td>5.5</td><td>+0.7</td><td>0.7</td><td>6</td><td>+6</td></tr>
+    <tr><td>3</td><td>5.5</td><td>5.4</td><td>−0.1</td><td>0.1</td><td>1</td><td>−1</td></tr>
+    <tr><td>4</td><td>4.9</td><td>5.3</td><td>+0.4</td><td>0.4</td><td>3.5</td><td>+3.5</td></tr>
+    <tr><td>5</td><td>5.1</td><td>5.5</td><td>+0.4</td><td>0.4</td><td>3.5</td><td>+3.5</td></tr>
+    <tr><td>6</td><td>4.7</td><td>5.0</td><td>+0.3</td><td>0.3</td><td>2</td><td>+2</td></tr>
+    <tr><td>7</td><td>5.3</td><td>6.1</td><td>+0.8</td><td>0.8</td><td>7</td><td>+7</td></tr>
+    <tr><td>8</td><td>5.0</td><td>5.9</td><td>+0.9</td><td>0.9</td><td>8</td><td>+8</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Step 1:</strong> Compute differences, discard zeros. <strong>Step 2:</strong> Rank the absolute differences (assigning average ranks for ties). <strong>Step 3:</strong> Attach the sign of the original difference to each rank.</p>
+
+<p><strong>Step 4:</strong> Compute the test statistics:</p>
+<p>W⁺ (sum of positive signed ranks) = 5 + 6 + 3.5 + 3.5 + 2 + 7 + 8 = <strong>35</strong><br>
+W⁻ (sum of negative signed ranks) = 1<br>
+T = min(W⁺, W⁻) = <strong>1</strong></p>
+
+<p>For n = 8 at α = 0.05 (two-tailed), the critical value is T<sub>crit</sub> = 4. Since T = 1 < 4, we <strong>reject H₀</strong> — there is significant evidence that lime amendment changed soil pH.</p>
+
+<h3>Key Assumptions</h3>
+<p>The Wilcoxon signed-rank test assumes that the distribution of differences is <em>symmetric</em> around the median. It does <em>not</em> require normality, but the symmetry assumption is important — if the differences are heavily skewed, the simpler sign test (which only considers the direction, not magnitude, of differences) may be more appropriate (Wilcoxon, 1945).</p>
+
+<hr>
+
+<h2>🔹 Test 3: The Kruskal-Wallis H Test (Three+ Independent Groups)</h2>
+
+<h3>When to Use It</h3>
+<p>Use when comparing three or more independent groups — the non-parametric alternative to one-way ANOVA. Ideal for comparing crop yields across different soil treatments when normality or equal-variance assumptions fail.</p>
+
+<h3>The Formula</h3>
+<p style="text-align:center; font-size:1.1em;"><strong>H = (N−1) × [Σ nᵢ(R̄ᵢ − R̄)² ] / [Σ Σ (Rᵢⱼ − R̄)²]</strong></p>
+
+<p>Or, equivalently (the computational formula):</p>
+<p style="text-align:center; font-size:1.1em;"><strong>H = [12 / N(N+1)] × Σ (Rᵢ²/nᵢ) − 3(N+1)</strong></p>
+
+<p>where N is the total sample size, k is the number of groups, nᵢ is the size of group i, Rᵢ is the sum of ranks in group i, and R̄ is the overall mean rank (Kruskal &amp; Wallis, 1952).</p>
+
+<h3>Worked Example</h3>
+<p>Three fertilizer treatments are applied to wheat plots, and yield (t/ha) is measured:</p>
+<p><strong>Treatment A (n=4):</strong> 2.1, 2.5, 2.3, 2.8<br>
+<strong>Treatment B (n=4):</strong> 3.2, 3.5, 2.9, 3.1<br>
+<strong>Treatment C (n=4):</strong> 3.8, 4.2, 3.6, 4.0</p>
+
+<p>After ranking all 12 values: R<sub>A</sub> = 1+3+2+4 = 10, R<sub>B</sub> = 7+9+5+6 = 27, R<sub>C</sub> = 10+12+8+11 = 41.</p>
+
+<p>H = [12/(12×13)] × [10²/4 + 27²/4 + 41²/4] − 3(13) = [12/156] × [25 + 182.25 + 420.25] − 39 = 0.0769 × 627.5 − 39 = 48.27 − 39 = <strong>9.27</strong></p>
+
+<p>Under H₀, H follows approximately a χ²(k−1) = χ²(2) distribution. The critical value at α = 0.05 is 5.99. Since H = 9.27 > 5.99, we <strong>reject H₀</strong> — at least one fertilizer treatment produces significantly different yields.</p>
+
+<blockquote>⚠️ <strong>Important:</strong> Like ANOVA, the Kruskal-Wallis test is an <em>omnibus test</em> — it tells you that at least one group differs but not <em>which</em> groups differ. Post-hoc pairwise comparisons (e.g., Dunn's test with Bonferroni correction) are needed to identify specific differences (Conover, 1999).</blockquote>
+
+<hr>
+
+<h2>🔹 Test 4: The Friedman Test (Repeated Measures with Three+ Conditions)</h2>
+
+<h3>When to Use It</h3>
+<p>Use when you have repeated measures or matched data across three or more conditions — the non-parametric alternative to repeated measures ANOVA. For example, rating the quality of three different soil amendments on the same set of experimental plots.</p>
+
+<h3>The Procedure</h3>
+<p>The Friedman test ranks observations <em>within each block</em> (subject), then tests whether the rank sums across treatments differ more than expected by chance (Friedman, 1937).</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>χ²<sub>F</sub> = [12 / bk(k+1)] × Σ Rⱼ² − 3b(k+1)</strong></p>
+
+<p>where b = number of blocks (subjects), k = number of treatments, and Rⱼ = sum of ranks for treatment j.</p>
+
+<p>Under H₀, the statistic approximates a chi-squared distribution with (k−1) degrees of freedom.</p>
+
+<hr>
+
+<h2>🔹 Test 5: Pearson's Chi-Squared (χ²) Test (Categorical Data)</h2>
+
+<h3>Three Faces of χ²</h3>
+<p>Pearson's chi-squared test actually serves three distinct purposes (Pearson, 1900):</p>
+
+<p><strong>① Goodness of Fit:</strong> Does an observed frequency distribution match a hypothesized theoretical distribution?<br>
+<strong>② Test of Independence:</strong> Are two categorical variables associated in a contingency table?<br>
+<strong>③ Test of Homogeneity:</strong> Do two or more groups have the same distribution of a categorical variable?</p>
+
+<h3>The Formula</h3>
+<p style="text-align:center; font-size:1.15em;"><strong>χ² = Σ (Oᵢ − Eᵢ)² / Eᵢ</strong></p>
+
+<p>where Oᵢ = observed frequency and Eᵢ = expected frequency under H₀.</p>
+
+<h3>Worked Example: Test of Independence</h3>
+<p>A survey of 200 Algerian farmers examines whether adoption of drip irrigation is related to farm size:</p>
+
+<table>
+  <thead>
+    <tr><th></th><th>Small Farm</th><th>Medium Farm</th><th>Large Farm</th><th>Total</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Adopted</strong></td><td>15</td><td>30</td><td>35</td><td>80</td></tr>
+    <tr><td><strong>Not adopted</strong></td><td>45</td><td>40</td><td>35</td><td>120</td></tr>
+    <tr><td><strong>Total</strong></td><td>60</td><td>70</td><td>70</td><td>200</td></tr>
+  </tbody>
+</table>
+
+<p>Expected values: E = (Row total × Column total) / Grand total. For example, E(Small, Adopted) = (80 × 60)/200 = 24.</p>
+
+<p>χ² = (15−24)²/24 + (30−28)²/28 + (35−28)²/28 + (45−36)²/36 + (40−42)²/42 + (35−42)²/42</p>
+<p>= 3.375 + 0.143 + 1.750 + 2.250 + 0.095 + 1.167 = <strong>8.78</strong></p>
+
+<p>With df = (r−1)(c−1) = (2−1)(3−1) = 2 and α = 0.05, the critical value is 5.99. Since χ² = 8.78 > 5.99, we <strong>reject H₀</strong> — there is a significant association between farm size and drip irrigation adoption.</p>
+
+<h3>Validity Conditions</h3>
+<p>The χ² test requires that <em>expected</em> cell frequencies are sufficiently large — the classic rule is Eᵢ ≥ 5 for all cells (Cochran, 1954). For 2×2 tables with small expected counts, use <strong>Fisher's exact test</strong> instead. When the table has only 2 rows and 2 columns, applying <strong>Yates's continuity correction</strong> (subtracting 0.5 from each |Oᵢ − Eᵢ|) can improve the approximation.</p>
+
+<hr>
+
+<h2>🔹 Test 6: Spearman's Rank Correlation (ρ)</h2>
+
+<h3>When to Use It</h3>
+<p>Use Spearman's rank correlation when assessing the monotonic association between two variables — especially when data are ordinal, contain outliers, or violate the assumptions of Pearson's r (Spearman, 1904).</p>
+
+<h3>The Formula</h3>
+<p style="text-align:center; font-size:1.15em;"><strong>ρ = 1 − [6Σdᵢ²] / [n(n²−1)]</strong></p>
+
+<p>where dᵢ = difference between ranks of corresponding observations, and n = number of paired observations.</p>
+
+<p>This formula is exact when there are no tied ranks. When ties exist, the Pearson product-moment formula should be applied to the ranked data directly (Lehmann &amp; D'Abrera, 1998).</p>
+
+<h3>Interpretation</h3>
+<p>ρ ranges from −1 (perfect negative monotonic relationship) through 0 (no monotonic relationship) to +1 (perfect positive monotonic relationship). Unlike Pearson's r, Spearman's ρ detects any monotonic relationship, not just linear ones. A researcher finding that elevation and species diversity have ρ = 0.82 can conclude there is a strong positive monotonic association, even if the relationship is curvilinear.</p>
+
+<hr>
+
+<h2>⚖️ Asymptotic Relative Efficiency: How Much Power Do You Lose?</h2>
+
+<p>The most common objection to non-parametric tests is: "You lose statistical power." This claim deserves careful examination, because the reality is far more nuanced than the myth.</p>
+
+<p>The concept of <strong>asymptotic relative efficiency (ARE)</strong> formalizes the comparison: it measures the ratio of sample sizes needed by two tests to achieve equivalent power as sample size approaches infinity. An ARE of 0.955 means the non-parametric test needs about 4.7% more observations to match the parametric test's power.</p>
+
+<table>
+  <thead>
+    <tr><th>Non-Parametric Test</th><th>Compared To</th><th>ARE (Normal Data)</th><th>ARE (Logistic)</th><th>ARE (Double Exponential)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mann-Whitney / Wilcoxon rank-sum</td><td>t-test</td><td>3/π ≈ <strong>0.955</strong></td><td>π²/9 ≈ <strong>1.098</strong></td><td><strong>1.500</strong></td></tr>
+    <tr><td>Sign test</td><td>t-test</td><td>2/π ≈ <strong>0.637</strong></td><td>π²/12 ≈ <strong>0.822</strong></td><td><strong>2.000</strong></td></tr>
+    <tr><td>Kruskal-Wallis</td><td>F-test (ANOVA)</td><td>3/π ≈ <strong>0.955</strong></td><td>π²/9 ≈ <strong>1.098</strong></td><td><strong>1.500</strong></td></tr>
+  </tbody>
+</table>
+
+<p><em>Source: Hodges &amp; Lehmann (1956); the same efficiency bounds apply to the Kruskal-Wallis vs. F-test comparison.</em></p>
+
+<p>Three critical insights emerge from this table:</p>
+
+<p><strong>① The worst case is not bad:</strong> Even when data are perfectly normal (the best-case scenario for parametric tests), the Wilcoxon/Mann-Whitney test retains 95.5% of the t-test's efficiency. You would need 105 observations instead of 100 — a trivial cost in most research settings.</p>
+
+<p><strong>② For non-normal data, non-parametric tests can be <em>more</em> powerful:</strong> For logistic distributions, the Wilcoxon test is 10% <em>more</em> efficient than the t-test. For heavy-tailed distributions (double exponential/Laplace), it is 50% more efficient. For extremely heavy-tailed or contaminated distributions, the advantage becomes arbitrarily large.</p>
+
+<p><strong>③ The minimum ARE guarantee is 0.864:</strong> Hodges and Lehmann (1956) proved that the ARE of the Wilcoxon test relative to the t-test can <em>never</em> fall below 0.864, regardless of the underlying distribution. This is a remarkable guarantee: in the absolute worst case, you need at most 16% more data.</p>
+
+<blockquote>📐 <strong>Practical Rule:</strong> If you are unsure whether your data are normal, the Wilcoxon/Mann-Whitney test is almost always a safe and efficient choice. You sacrifice very little power when normality holds, and you gain substantial power when it does not.</blockquote>
+
+<hr>
+
+<h2>🎯 When to Choose Non-Parametric Tests: A Decision Framework</h2>
+
+<p>Choosing between parametric and non-parametric tests requires evaluating multiple factors. Here is a systematic decision framework:</p>
+
+<p><strong>✅ Use Non-Parametric Tests When:</strong></p>
+<p>① Your data are <strong>ordinal</strong> (rankings, Likert scales, satisfaction scores)<br>
+② The sample is <strong>small</strong> (n < 20–30) and you cannot verify normality<br>
+③ Normality tests (Shapiro-Wilk) <strong>reject normality</strong> significantly<br>
+④ Your data contain <strong>extreme outliers</strong> that resist legitimate removal<br>
+⑤ The data are <strong>heavily skewed</strong> and transformation is inappropriate or insufficient<br>
+⑥ <strong>Variances are very unequal</strong> across groups (heteroscedasticity)<br>
+⑦ You are working with <strong>categorical/frequency data</strong> (→ χ² test)</p>
+
+<p><strong>✅ Use Parametric Tests When:</strong></p>
+<p>① Data are at least interval-scale and <strong>approximately normal</strong><br>
+② Sample sizes are <strong>large enough</strong> (Central Limit Theorem provides robustness, typically n ≥ 30)<br>
+③ Variances are <strong>reasonably equal</strong> across groups<br>
+④ You need a <strong>more complex design</strong> that lacks non-parametric equivalents (e.g., factorial ANOVA, mixed models)<br>
+⑤ You want to estimate <strong>effect sizes and confidence intervals</strong> more directly</p>
+
+<blockquote>🔎 <strong>Common Misconception:</strong> "Non-parametric tests have no assumptions." This is false. Non-parametric tests still assume independence of observations (unless specifically designed for paired data), and many require that the distribution of differences be symmetric (Wilcoxon signed-rank) or that groups have similarly shaped distributions differing only in location (Mann-Whitney). They simply make <em>fewer and weaker</em> distributional assumptions than parametric tests.</blockquote>
+
+<hr>
+
+<h2>⚙️ Effect Sizes for Non-Parametric Tests</h2>
+
+<p>Reporting only p-values — whether from parametric or non-parametric tests — is insufficient. Effect sizes quantify the <em>magnitude</em> of the observed difference, complementing the binary significant/non-significant verdict.</p>
+
+<table>
+  <thead>
+    <tr><th>Test</th><th>Effect Size Measure</th><th>Formula / Interpretation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mann-Whitney U</td><td><strong>r = Z/√N</strong></td><td>Small: 0.1, Medium: 0.3, Large: 0.5 (Cohen's benchmarks)</td></tr>
+    <tr><td>Mann-Whitney U</td><td><strong>Common language effect size (CLES)</strong></td><td>P(X > Y) — probability a random observation from Group 1 exceeds one from Group 2</td></tr>
+    <tr><td>Wilcoxon signed-rank</td><td><strong>r = Z/√N</strong></td><td>Same scale as Mann-Whitney</td></tr>
+    <tr><td>Kruskal-Wallis</td><td><strong>η²<sub>H</sub> = (H − k + 1)/(N − k)</strong></td><td>Analogous to η² in ANOVA: proportion of variance in ranks explained by group membership</td></tr>
+    <tr><td>Chi-squared (χ²)</td><td><strong>Cramér's V = √(χ²/(N×min(r−1, c−1)))</strong></td><td>0 to 1; small: 0.1, medium: 0.3, large: 0.5 (for df* = 1)</td></tr>
+    <tr><td>Spearman's ρ</td><td><strong>ρ itself</strong></td><td>−1 to +1; small: 0.1, medium: 0.3, large: 0.5</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>✅ Best Practices and APA Reporting Guidelines</h2>
+
+<p>Following APA (7th edition) guidelines and methodological best practices (APA, 2020; Conover, 1999; Hollander et al., 2014):</p>
+
+<p><strong>1. Report the exact test statistic, sample sizes, and p-value.</strong><br>
+Example: "A Mann-Whitney U test indicated that cadmium concentrations were significantly higher in Region B (Mdn = 5.2 mg/kg) than Region A (Mdn = 2.5 mg/kg), U = 4, n₁ = n₂ = 5, p = .032, r = .68."</p>
+
+<p><strong>2. Report medians rather than means</strong> as the measure of central tendency, since non-parametric tests operate on ranks, which align with the median.</p>
+
+<p><strong>3. Always include an effect size measure</strong> (r, η²<sub>H</sub>, Cramér's V, or ρ) alongside the test statistic.</p>
+
+<p><strong>4. Justify your choice.</strong> Briefly explain <em>why</em> a non-parametric test was chosen (e.g., "Due to significant departure from normality [Shapiro-Wilk W = 0.82, p = .003] and unequal variances [Levene's F = 7.2, p = .012], the Mann-Whitney U test was used").</p>
+
+<p><strong>5. Use exact tests for small samples.</strong> When sample sizes are very small (n < 20), use exact p-values rather than normal approximations.</p>
+
+<p><strong>6. Apply corrections for ties.</strong> When tied values exist, use the corrected formulas that adjust the test statistic's variance (built into most statistical software).</p>
+
+<p><strong>7. For post-hoc comparisons</strong> following a significant Kruskal-Wallis or Friedman test, use Dunn's test with Bonferroni (or Holm) correction for multiple comparisons.</p>
+
+<p><strong>8. For χ² tests, report expected frequencies</strong> to demonstrate the test's validity conditions are met (all Eᵢ ≥ 5).</p>
+
+<hr>
+
+<h2>🧩 Advanced Topics and Modern Perspectives</h2>
+
+<h3>The Bootstrap Alternative</h3>
+<p>Modern computing has enabled <strong>bootstrap methods</strong> (Efron, 1979) — resampling-based approaches that can replace or supplement both parametric and classical non-parametric tests. Bootstrap permutation tests are fully distribution-free and can handle complex designs where no classical non-parametric test exists. However, classical rank-based tests remain preferred for standard designs due to their exact distribution-free properties, tabulated critical values, and well-understood efficiency guarantees (Lehmann &amp; D'Abrera, 1998).</p>
+
+<h3>Exact Permutation Tests</h3>
+<p>The Mann-Whitney, Kruskal-Wallis, and other rank tests are actually special cases of a broader class of <strong>permutation tests</strong>. Under H₀ (no group differences), the assignment of observations to groups is exchangeable, meaning all possible permutations of group labels are equally likely. The rank-based test statistics are chosen because they have known, tabulated null distributions that do not depend on the underlying data distribution — the celebrated <strong>distribution-free</strong> property.</p>
+
+<h3>Limitations and Beyond</h3>
+<p>Non-parametric tests have genuine limitations. They are less flexible for complex designs — there is no rank-based equivalent to a factorial ANOVA interaction test, a mixed-effects model, or an ANCOVA. For such designs, researchers may need to use robust parametric methods (e.g., trimmed means, M-estimators), generalized linear models, or bootstrap-based approaches. The development of rank-based methods for multivariate and high-dimensional settings remains an active area of research (Oja, 2010).</p>
+
+<hr>
+
+<h2>📚 References</h2>
+
+<p>American Psychological Association. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.). American Psychological Association.</p>
+
+<p>Cochran, W. G. (1954). Some methods for strengthening the common χ² tests. <em>Biometrics</em>, <em>10</em>(4), 417–451.</p>
+
+<p>Conover, W. J. (1999). <em>Practical nonparametric statistics</em> (3rd ed.). John Wiley &amp; Sons.</p>
+
+<p>Efron, B. (1979). Bootstrap methods: Another look at the jackknife. <em>The Annals of Statistics</em>, <em>7</em>(1), 1–26.</p>
+
+<p>Friedman, M. (1937). The use of ranks to avoid the assumption of normality implicit in the analysis of variance. <em>Journal of the American Statistical Association</em>, <em>32</em>(200), 675–701.</p>
+
+<p>Hodges, J. L., Jr., &amp; Lehmann, E. L. (1956). The efficiency of some nonparametric competitors of the <em>t</em>-test. <em>Annals of Mathematical Statistics</em>, <em>27</em>(2), 324–335.</p>
+
+<p>Hollander, M., Wolfe, D. A., &amp; Chicken, E. (2014). <em>Nonparametric statistical methods</em> (3rd ed.). John Wiley &amp; Sons.</p>
+
+<p>Kruskal, W. H., &amp; Wallis, W. A. (1952). Use of ranks in one-criterion variance analysis. <em>Journal of the American Statistical Association</em>, <em>47</em>(260), 583–621.</p>
+
+<p>Lehmann, E. L., &amp; D'Abrera, H. J. M. (1998). <em>Nonparametrics: Statistical methods based on ranks</em> (Rev. ed.). Prentice-Hall.</p>
+
+<p>Mann, H. B., &amp; Whitney, D. R. (1947). On a test of whether one of two random variables is stochastically larger than the other. <em>Annals of Mathematical Statistics</em>, <em>18</em>(1), 50–60.</p>
+
+<p>Noether, G. E. (1992). Introduction to Wilcoxon (1945) Individual comparisons by ranking methods. In S. Kotz &amp; N. L. Johnson (Eds.), <em>Breakthroughs in statistics</em> (pp. 196–202). Springer.</p>
+
+<p>Oja, H. (2010). <em>Multivariate nonparametric methods with R: An approach based on spatial signs and ranks</em>. Springer.</p>
+
+<p>Pearson, K. (1900). On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling. <em>Philosophical Magazine, Series 5</em>, <em>50</em>(302), 157–175.</p>
+
+<p>Rao, C. R. (2002). Karl Pearson chi-square test: The dawn of statistical inference. In C. Huber-Carol, N. Balakrishnan, M. S. Nikulin, &amp; M. Mesbah (Eds.), <em>Goodness-of-fit tests and model validity</em> (pp. 9–24). Birkhäuser.</p>
+
+<p>Spearman, C. (1904). The proof and measurement of association between two things. <em>The American Journal of Psychology</em>, <em>15</em>(1), 72–101.</p>
+
+<p>Wilcoxon, F. (1945). Individual comparisons by ranking methods. <em>Biometrics Bulletin</em>, <em>1</em>(6), 80–83.</p>

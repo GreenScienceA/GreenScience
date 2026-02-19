@@ -1,0 +1,389 @@
+<h2>📊 Parametric Tests: The Workhorse of Statistical Inference</h2>
+
+<p>Imagine it is 1904 in Dublin, Ireland. A young Oxford-educated chemist named <strong>William Sealy Gosset</strong> stares at a table of numbers — the soft resin content measured from a handful of hop samples destined for the Guinness brewery. He needs to know: does this batch of hops meet quality standards? The problem? He has only 5 measurements, and the statistical methods of his era — built for astronomy and census data with hundreds of observations — are hopelessly unreliable for such tiny samples. Gosset's struggle with this practical question would lead him to invent the most widely used statistical test in all of science: the <strong>Student's t-test</strong>.</p>
+
+<p>Parametric tests are the backbone of inferential statistics. They earn the name "parametric" because they make <em>assumptions about the parameters</em> of the population distribution from which data are drawn — typically that the data follow a normal distribution with unknown mean μ and variance σ² (Lehmann &amp; Romano, 2005). When these assumptions are reasonably met, parametric tests are the most <strong>powerful</strong> tools available — meaning they have the highest probability of detecting a true effect when one exists (Sheskin, 2011).</p>
+
+<blockquote>💡 <strong>The Big Idea:</strong> Parametric tests use sample statistics (means, variances) to make inferences about population parameters under explicit distributional assumptions. They trade assumptions for power — by assuming something about the shape of the data's distribution, they extract more information from each observation than assumption-free (nonparametric) alternatives.</blockquote>
+
+<hr>
+
+<h2>🍺 A Brief History: From Beer to Biostatistics</h2>
+
+<h3>Gosset and the Birth of the t-Test (1908)</h3>
+
+<p>William Sealy Gosset (1876–1937) was hired by the Guinness brewery in 1899, one of the first Oxford graduates recruited as Guinness moved from traditional craft brewing to scientific quality control. Gosset's job required him to determine whether batches of barley, hops, and malt met specifications — but his experiments yielded only 3 to 5 measurements per batch. The existing statistical theory, built on the Central Limit Theorem, required large samples to be trustworthy (Student, 1908).</p>
+
+<p>In 1906, Guinness granted Gosset a sabbatical at Karl Pearson's Biometric Laboratory at University College London, where he worked on the small-sample problem. His breakthrough insight was that when you estimate both the mean <em>and</em> the standard deviation from a small sample, the resulting ratio does not follow the normal distribution — it follows a new, heavier-tailed distribution that depends on the sample size (Student, 1908). Because Guinness forbade employees from publishing under their real names (to protect trade secrets), Gosset published his landmark paper under the pseudonym <strong>"Student"</strong> in <em>Biometrika</em>. The distribution he discovered is still called the "Student's t-distribution."</p>
+
+<p>The mathematical community initially ignored Gosset's paper. It was not until <strong>Ronald A. Fisher</strong> provided a rigorous proof of the t-distribution in 1925 and popularized the t-test in his enormously influential <em>Statistical Methods for Research Workers</em> that the method became the standard tool for comparing means (Fisher, 1925). Fisher also introduced the concept of <strong>degrees of freedom</strong> — the key parameter that shapes the t-distribution.</p>
+
+<blockquote>🧠 <strong>Fisher on Gosset:</strong> After Gosset's death in 1937, Fisher wrote that Gosset had introduced "a fundamentally new approach to the classical problem of the theory of errors, the consequences of which are still only gradually coming to be appreciated." That appreciation continues more than a century later — the t-test remains the single most frequently used statistical method across all scientific disciplines.</blockquote>
+
+<hr>
+
+<h2>🔧 Prerequisites: The Four Assumptions of Parametric Tests</h2>
+
+<p>Every parametric test rests on a set of assumptions. When these assumptions hold, the test delivers optimal performance — correct Type I error rates and maximum statistical power. When they are violated, results may be misleading. Understanding assumptions is therefore <em>essential</em> for responsible use of parametric methods.</p>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Assumption</th><th>What It Means</th><th>How to Check</th><th>Consequence of Violation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>🔢 <strong>Scale of Measurement</strong></td><td>Data must be interval or ratio scale (not ordinal or nominal)</td><td>Examine the nature of the variable</td><td>Means and variances become meaningless</td></tr>
+    <tr><td>2</td><td>🎲 <strong>Independence</strong></td><td>Observations are independent of each other (no clustering, no repeated measures unless accounted for)</td><td>Study design review; Durbin-Watson test for autocorrelation</td><td><strong>Severe</strong> — inflated Type I error; no simple fix</td></tr>
+    <tr><td>3</td><td>📐 <strong>Normality</strong></td><td>The sampling distribution of the mean is approximately normal (population is normal, or n is large enough for CLT)</td><td>Shapiro-Wilk test, Q-Q plot, histogram, skewness/kurtosis</td><td><strong>Mild</strong> for moderate n (≥ 25–30); t-test is robust (Glass et al., 1972)</td></tr>
+    <tr><td>4</td><td>⚖️ <strong>Homogeneity of Variance</strong></td><td>Groups being compared have equal population variances (homoscedasticity)</td><td>Levene's test, Brown-Forsythe test, F-max ratio</td><td><strong>Moderate to severe</strong> when sample sizes are unequal; use Welch's correction</td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚠️ <strong>Robustness — Good News:</strong> Decades of simulation research have shown that the t-test and F-test are remarkably <strong>robust</strong> to violations of normality, especially with moderate sample sizes (n ≥ 25–30 per group) and equal group sizes (Glass, Peckham, &amp; Sanders, 1972; Boneau, 1960). The Central Limit Theorem guarantees that sample means approach normality regardless of the population shape. However, the tests are <strong>not</strong> robust to violations of the independence assumption or to heterogeneity of variance when combined with unequal sample sizes.</blockquote>
+
+<hr>
+
+<h2>📏 The z-Test: When σ Is Known</h2>
+
+<p>The z-test is the simplest parametric test and the theoretical starting point for understanding all others. It applies when you want to test whether a sample mean differs from a known population mean, <em>and you know the population standard deviation σ</em>.</p>
+
+<h3>Hypotheses and Test Statistic</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>z = (x̄ − μ₀) / (σ / √n)</strong></p>
+
+<p>Under H₀, this statistic follows the standard normal distribution N(0, 1).</p>
+
+<table>
+  <thead>
+    <tr><th>Component</th><th>Meaning</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>x̄</td><td>Sample mean</td></tr>
+    <tr><td>μ₀</td><td>Hypothesized population mean (under H₀)</td></tr>
+    <tr><td>σ</td><td>Known population standard deviation</td></tr>
+    <tr><td>n</td><td>Sample size</td></tr>
+  </tbody>
+</table>
+
+<p><strong>When to use:</strong> The z-test is primarily used in two situations: (1) when the population σ is truly known (rare in practice — perhaps from long-established manufacturing processes or standardized tests with published norms), and (2) for large-sample tests of proportions (where the standard error can be computed from the hypothesized proportion).</p>
+
+<h3>Worked Example: Standardized Test Scores</h3>
+
+<p>A national exam has a known mean μ₀ = 500 and σ = 100. A random sample of n = 64 students from a new teaching program scores x̄ = 520. Is this significantly different at α = 0.05?</p>
+
+<p>z = (520 − 500) / (100/√64) = 20 / 12.5 = <strong>1.60</strong>. The critical value for a two-tailed test at α = 0.05 is z* = ±1.96. Since |1.60| &lt; 1.96, we <strong>fail to reject H₀</strong>. The sample mean is not significantly different from 500 at the 5% level.</p>
+
+<hr>
+
+<h2>📐 Student's t-Test: The Workhorse of Science</h2>
+
+<p>In practice, we almost never know σ. When we replace it with the sample standard deviation s, the standardized statistic no longer follows the normal distribution — it follows the <strong>Student's t-distribution</strong> with (n − 1) degrees of freedom. This distribution has heavier tails than the normal, reflecting the additional uncertainty from estimating σ. As n increases, the t-distribution converges to the normal — for n ≥ 30, the two are virtually indistinguishable (Student, 1908; Fisher, 1925).</p>
+
+<p>There are three major variants of the t-test, each designed for a different research scenario:</p>
+
+<h3>1. One-Sample t-Test</h3>
+
+<p><strong>Purpose:</strong> Test whether the population mean μ equals a specified value μ₀.</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>t = (x̄ − μ₀) / (s / √n)</strong> &nbsp; with df = n − 1</p>
+
+<p><strong>Example:</strong> A soil scientist collects n = 20 soil samples from a field in Sétif. The mean pH is x̄ = 7.8 with s = 0.6. Does the field differ from neutral pH (μ₀ = 7.0)?</p>
+
+<p>t = (7.8 − 7.0) / (0.6/√20) = 0.8 / 0.134 = <strong>5.96</strong>. With df = 19, the critical value at α = 0.05 (two-tailed) is t* ≈ 2.093. Since 5.96 &gt;&gt; 2.093, we <strong>reject H₀</strong>. The soil is significantly more alkaline than neutral. Effect size: Cohen's d = 0.8 / 0.6 = <strong>1.33</strong> (very large).</p>
+
+<h3>2. Independent Two-Sample t-Test</h3>
+
+<p><strong>Purpose:</strong> Test whether two <em>independent</em> groups have different population means.</p>
+
+<p><strong>Equal variances assumed (Student's original):</strong></p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>t = (x̄₁ − x̄₂) / (s<sub>p</sub> · √(1/n₁ + 1/n₂))</strong></p>
+
+<p>where s<sub>p</sub> = √[((n₁−1)s₁² + (n₂−1)s₂²) / (n₁ + n₂ − 2)] is the <strong>pooled standard deviation</strong>.</p>
+
+<p><strong>Unequal variances (Welch's t-test):</strong></p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>t = (x̄₁ − x̄₂) / √(s₁²/n₁ + s₂²/n₂)</strong></p>
+
+<p>with degrees of freedom approximated by the <strong>Welch-Satterthwaite equation</strong>:</p>
+
+<p style="text-align:center;"><strong>df = (s₁²/n₁ + s₂²/n₂)² / [(s₁²/n₁)²/(n₁−1) + (s₂²/n₂)²/(n₂−1)]</strong></p>
+
+<blockquote>🎯 <strong>Modern Best Practice:</strong> Delacre, Lakens, and Leys (2017) demonstrated convincingly that Welch's t-test should be used <em>by default</em> instead of Student's t-test. Welch's version controls Type I error rates well even when variances are unequal, and it loses very little power compared to Student's test when variances are actually equal. The traditional strategy of first testing for equality of variances (e.g., Levene's test) and then choosing which t-test to use has been shown to perform poorly and is no longer recommended.</blockquote>
+
+<p><strong>Example:</strong> An agronomist compares wheat yield (t/ha) between two irrigation methods. Group 1 (drip): n₁ = 15, x̄₁ = 4.5, s₁ = 0.7. Group 2 (flood): n₂ = 18, x̄₂ = 3.9, s₂ = 0.9.</p>
+
+<p>Using Welch's t-test: t = (4.5 − 3.9) / √(0.49/15 + 0.81/18) = 0.6 / √(0.0327 + 0.045) = 0.6 / 0.278 = <strong>2.16</strong>. Welch df ≈ 31.4. At α = 0.05: t* ≈ 2.040. Since 2.16 &gt; 2.040, we <strong>reject H₀</strong>. Drip irrigation produces significantly higher yields. Cohen's d = 0.6 / √((0.49+0.81)/2) = 0.6 / 0.806 = <strong>0.74</strong> (medium-to-large effect).</p>
+
+<h3>3. Paired-Samples t-Test (Dependent t-Test)</h3>
+
+<p><strong>Purpose:</strong> Compare two related measurements on the <em>same</em> subjects (before/after, matched pairs, repeated measures).</p>
+
+<p>The key insight is to compute the <strong>difference score</strong> d<sub>i</sub> = x<sub>1i</sub> − x<sub>2i</sub> for each pair, then apply a one-sample t-test to the differences:</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>t = d̄ / (s<sub>d</sub> / √n)</strong> &nbsp; with df = n − 1</p>
+
+<p>where d̄ is the mean of differences and s<sub>d</sub> is the standard deviation of differences.</p>
+
+<p><strong>Why it's more powerful:</strong> By analyzing differences, the paired test <em>eliminates between-subject variability</em>. Each subject serves as their own control, so the error term is typically much smaller than in an independent test — resulting in a more powerful analysis (Cohen, 1988).</p>
+
+<p><strong>Example:</strong> A researcher measures blood pressure in n = 12 patients before and after a new treatment.</p>
+
+<table>
+  <thead>
+    <tr><th>Patient</th><th>Before</th><th>After</th><th>Difference (d)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>142</td><td>130</td><td>12</td></tr>
+    <tr><td>2</td><td>155</td><td>148</td><td>7</td></tr>
+    <tr><td>3</td><td>160</td><td>145</td><td>15</td></tr>
+    <tr><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+    <tr><td colspan="3"><strong>Summary:</strong> d̄ = 9.5, s<sub>d</sub> = 4.2</td><td></td></tr>
+  </tbody>
+</table>
+
+<p>t = 9.5 / (4.2/√12) = 9.5 / 1.212 = <strong>7.84</strong>. With df = 11, t* = 2.201 (α = 0.05). Highly significant — the treatment substantially reduces blood pressure.</p>
+
+<hr>
+
+<h2>📋 The Complete t-Test Decision Guide</h2>
+
+<table>
+  <thead>
+    <tr><th>Scenario</th><th>Test</th><th>H₀</th><th>Formula Core</th><th>df</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>One sample vs. known value</td><td>One-sample t</td><td>μ = μ₀</td><td>(x̄ − μ₀) / (s/√n)</td><td>n − 1</td></tr>
+    <tr><td>Two independent groups, equal var.</td><td>Student's t</td><td>μ₁ = μ₂</td><td>(x̄₁ − x̄₂) / (s<sub>p</sub>√(1/n₁+1/n₂))</td><td>n₁ + n₂ − 2</td></tr>
+    <tr><td>Two independent groups, unequal var.</td><td>Welch's t ✅</td><td>μ₁ = μ₂</td><td>(x̄₁ − x̄₂) / √(s₁²/n₁+s₂²/n₂)</td><td>Welch-Satterthwaite</td></tr>
+    <tr><td>Same subjects, two conditions</td><td>Paired t</td><td>μ<sub>d</sub> = 0</td><td>d̄ / (s<sub>d</sub>/√n)</td><td>n − 1</td></tr>
+    <tr><td>Large sample, σ known</td><td>z-test</td><td>μ = μ₀</td><td>(x̄ − μ₀) / (σ/√n)</td><td>∞ (normal)</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>📏 Effect Size: Beyond Statistical Significance</h2>
+
+<p>A statistically significant t-test tells you the effect is likely real — but not whether it's <em>large enough to matter</em>. This is why modern reporting guidelines require <strong>effect size measures</strong> alongside p-values (APA, 2010; Cumming, 2014).</p>
+
+<h3>Cohen's d — The Gold Standard for Mean Differences</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>d = (x̄₁ − x̄₂) / s<sub>pooled</sub></strong></p>
+
+<table>
+  <thead>
+    <tr><th>Cohen's d</th><th>Interpretation</th><th>Real-World Analogy</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0.2</td><td>Small effect</td><td>Height difference between 15- and 16-year-old girls</td></tr>
+    <tr><td>0.5</td><td>Medium effect</td><td>Height difference between 14- and 18-year-old girls</td></tr>
+    <tr><td>0.8</td><td>Large effect</td><td>Height difference between 13- and 18-year-old girls</td></tr>
+  </tbody>
+</table>
+
+<p>Cohen (1988) proposed these benchmarks as rough guidelines, but emphasized that "the terms 'small,' 'medium,' and 'large' are relative… to each other and to the context of a particular research domain." In clinical research, even a "small" effect can be meaningful if the outcome is important (e.g., survival). In educational research, a "medium" effect might represent substantial improvement.</p>
+
+<h3>Other Effect Size Measures</h3>
+
+<table>
+  <thead>
+    <tr><th>Measure</th><th>Formula / Use</th><th>Range</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Hedges' g</strong></td><td>Like d but with bias correction for small samples</td><td>Same as d</td></tr>
+    <tr><td><strong>Glass's Δ</strong></td><td>Uses control group SD only: (x̄₁ − x̄₂) / s<sub>control</sub></td><td>Same as d</td></tr>
+    <tr><td><strong>r (point-biserial)</strong></td><td>r = √(t² / (t² + df))</td><td>0 to 1</td></tr>
+    <tr><td><strong>η² (eta-squared)</strong></td><td>η² = t² / (t² + df); proportion of variance explained</td><td>0 to 1</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📐 <strong>The "New Statistics" Rule:</strong> Always report: (1) the test statistic and degrees of freedom, (2) the exact p-value, (3) an appropriate effect size with its confidence interval, and (4) descriptive statistics (means, SDs, sample sizes). Example: "Drip irrigation yielded significantly higher wheat production than flood irrigation, t(31.4) = 2.16, p = .038, d = 0.74, 95% CI [0.04, 1.44]." This single sentence tells the complete statistical story (Cumming, 2014).</blockquote>
+
+<hr>
+
+<h2>⚖️ z-Test for Proportions</h2>
+
+<p>When comparing proportions (e.g., success rates, prevalence), we use a z-test based on the normal approximation to the binomial distribution.</p>
+
+<h3>One-Sample z-Test for a Proportion</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>z = (p̂ − p₀) / √(p₀(1−p₀)/n)</strong></p>
+
+<h3>Two-Sample z-Test for Comparing Proportions</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>z = (p̂₁ − p̂₂) / √(p̄(1−p̄)(1/n₁ + 1/n₂))</strong></p>
+
+<p>where p̄ = (x₁ + x₂)/(n₁ + n₂) is the pooled proportion under H₀.</p>
+
+<p><strong>Example:</strong> A public health study compares vaccination rates in two regions. Region A: 420/500 = 84% vaccinated. Region B: 360/500 = 72%.</p>
+
+<p>p̄ = (420+360)/(500+500) = 0.78. z = (0.84 − 0.72) / √(0.78 × 0.22 × (1/500 + 1/500)) = 0.12 / √(0.000686) = 0.12 / 0.0262 = <strong>4.58</strong>. Since |4.58| &gt;&gt; 1.96, the difference is highly significant — Region A has a substantially higher vaccination rate.</p>
+
+<hr>
+
+<h2>🔍 Checking Assumptions: A Practical Guide</h2>
+
+<h3>Testing Normality</h3>
+
+<table>
+  <thead>
+    <tr><th>Method</th><th>How It Works</th><th>Best For</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📊 <strong>Shapiro-Wilk test</strong></td><td>Most powerful omnibus normality test</td><td>Small to moderate samples (n &lt; 2000)</td></tr>
+    <tr><td>📈 <strong>Q-Q plot</strong></td><td>Visual: points should follow diagonal line</td><td>Any sample size; shows nature of deviation</td></tr>
+    <tr><td>📐 <strong>Skewness &amp; Kurtosis</strong></td><td>Values near 0 suggest normality; |skew| &lt; 2 and |kurtosis| &lt; 7 acceptable</td><td>Quick numerical check</td></tr>
+    <tr><td>📊 <strong>Histogram</strong></td><td>Visual inspection of distribution shape</td><td>Moderate to large samples</td></tr>
+  </tbody>
+</table>
+
+<h3>Testing Homogeneity of Variance</h3>
+
+<table>
+  <thead>
+    <tr><th>Test</th><th>How It Works</th><th>Robustness to Non-Normality</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>⚖️ <strong>Levene's test</strong></td><td>ANOVA on absolute deviations from group means</td><td>Moderate</td></tr>
+    <tr><td>⚖️ <strong>Brown-Forsythe test</strong></td><td>Like Levene's but uses group medians</td><td>Good — recommended for skewed data</td></tr>
+    <tr><td>⚖️ <strong>Bartlett's test</strong></td><td>Likelihood ratio test</td><td>Poor — very sensitive to non-normality</td></tr>
+    <tr><td>📏 <strong>F-max ratio</strong></td><td>Largest variance / Smallest variance; concern if &gt; 3–4</td><td>Quick rule of thumb</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>Practical Decision Framework:</strong>
+<br>1. Check independence (by design, not by testing).
+<br>2. Check normality visually (Q-Q plot) and formally (Shapiro-Wilk).
+<br>3. If normality fails badly and n is small → consider nonparametric alternatives or bootstrap.
+<br>4. For two-group comparisons → use Welch's t-test by default (Delacre et al., 2017).
+<br>5. Always report effect sizes and confidence intervals alongside p-values.</blockquote>
+
+<hr>
+
+<h2>🔄 When Assumptions Fail: Alternatives and Remedies</h2>
+
+<table>
+  <thead>
+    <tr><th>Problem</th><th>Remedy</th><th>Alternative Test</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Non-normality (mild)</td><td>t-test is robust; proceed with caution for n ≥ 25–30</td><td>—</td></tr>
+    <tr><td>Non-normality (severe, small n)</td><td>Data transformation (log, sqrt, rank) or bootstrap</td><td>Mann-Whitney U (independent) / Wilcoxon signed-rank (paired)</td></tr>
+    <tr><td>Unequal variances</td><td>Use Welch's t-test (default recommendation)</td><td>—</td></tr>
+    <tr><td>Outliers</td><td>Trimmed means (Yuen's test), winsorization, robust methods</td><td>Wilcox's robust methods (Wilcox, 2017)</td></tr>
+    <tr><td>Non-independence</td><td>Redesign; use mixed models or repeated-measures approaches</td><td>No simple nonparametric fix</td></tr>
+    <tr><td>Ordinal data</td><td>Use nonparametric tests designed for ranks</td><td>Mann-Whitney / Wilcoxon</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🌍 Comprehensive Worked Example: Agricultural Field Trial</h2>
+
+<p>A researcher in the Algerian Hauts Plateaux compares the effect of two fertilizer treatments on durum wheat yield (quintals/hectare). Treatment A (organic compost): n₁ = 20 plots; Treatment B (chemical NPK): n₂ = 20 plots.</p>
+
+<table>
+  <thead>
+    <tr><th>Statistic</th><th>Treatment A (Organic)</th><th>Treatment B (NPK)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mean (x̄)</td><td>28.5 q/ha</td><td>32.1 q/ha</td></tr>
+    <tr><td>Std Dev (s)</td><td>4.2</td><td>5.1</td></tr>
+    <tr><td>n</td><td>20</td><td>20</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Step 1 — State hypotheses:</strong> H₀: μ_A = μ_B (no difference); H₁: μ_A ≠ μ_B (two-tailed)</p>
+
+<p><strong>Step 2 — Check assumptions:</strong> Shapiro-Wilk: both groups p &gt; 0.10 (normality OK). Q-Q plots: approximately linear. Levene's test: F = 1.02, p = 0.32 (homogeneity OK, but we'll use Welch's anyway).</p>
+
+<p><strong>Step 3 — Compute Welch's t:</strong><br>
+t = (28.5 − 32.1) / √(4.2²/20 + 5.1²/20) = −3.6 / √(0.882 + 1.3005) = −3.6 / √2.1825 = −3.6 / 1.477 = <strong>−2.44</strong></p>
+
+<p>Welch df = (0.882 + 1.3005)² / [(0.882)²/19 + (1.3005)²/19] = 4.763 / (0.0410 + 0.0890) = 4.763 / 0.130 ≈ <strong>36.6</strong></p>
+
+<p><strong>Step 4 — Decision:</strong> For df ≈ 37, t* (two-tailed, α = 0.05) ≈ 2.026. |−2.44| &gt; 2.026 → <strong>Reject H₀</strong>.</p>
+
+<p><strong>Step 5 — Effect size:</strong> Cohen's d = 3.6 / √((4.2² + 5.1²)/2) = 3.6 / 4.672 = <strong>0.77</strong> (medium-to-large).</p>
+
+<p><strong>Step 6 — Report:</strong> "NPK fertilizer produced significantly higher durum wheat yields than organic compost (M = 32.1 vs. 28.5 q/ha), t(36.6) = −2.44, p = .020, d = 0.77, 95% CI for the mean difference [−6.58, −0.62]."</p>
+
+<hr>
+
+<h2>🆚 Parametric vs. Nonparametric: When to Choose Which?</h2>
+
+<table>
+  <thead>
+    <tr><th>Criterion</th><th>Parametric Tests</th><th>Nonparametric Tests</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Assumptions</strong></td><td>Requires normality and (usually) equal variances</td><td>Distribution-free (no shape assumptions)</td></tr>
+    <tr><td><strong>Data level</strong></td><td>Interval / ratio</td><td>Ordinal or above</td></tr>
+    <tr><td><strong>Power (when assumptions met)</strong></td><td>Higher — extracts more info per observation</td><td>Lower — wastes some information by ranking</td></tr>
+    <tr><td><strong>Power (when assumptions violated)</strong></td><td>Can be lower than nonparametric</td><td>Can be higher for heavy-tailed or skewed data</td></tr>
+    <tr><td><strong>Sample size</strong></td><td>Works well for moderate to large n</td><td>Better for very small n with non-normal data</td></tr>
+    <tr><td><strong>Asymptotic Relative Efficiency</strong></td><td>Benchmark (100%)</td><td>≥ 95.5% for many alternatives (e.g., Wilcoxon)</td></tr>
+    <tr><td><strong>Corresponding tests</strong></td><td>One-sample t, Independent t, Paired t, ANOVA</td><td>Sign test, Mann-Whitney, Wilcoxon, Kruskal-Wallis</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📊 <strong>The Asymptotic Relative Efficiency (ARE):</strong> The Wilcoxon rank-sum test has an ARE of at least 0.864 relative to the t-test for <em>any</em> continuous distribution, and exactly 3/π ≈ 0.955 for normal data (Lehmann, 2006). This means that even under normality — the best-case scenario for the t-test — the Wilcoxon test needs only about 5% more observations to achieve the same power. For heavy-tailed distributions, the Wilcoxon can be <em>substantially more powerful</em> than the t-test.</blockquote>
+
+<hr>
+
+<h2>✅ Best Practices and Reporting Guidelines</h2>
+
+<table>
+  <thead>
+    <tr><th>Practice</th><th>Recommendation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔧 <strong>Default to Welch's t-test</strong></td><td>Use Welch's version for independent samples; it's robust regardless of variance equality (Delacre et al., 2017)</td></tr>
+    <tr><td>📐 <strong>Always check assumptions</strong></td><td>Use Q-Q plots and Shapiro-Wilk; report results</td></tr>
+    <tr><td>📏 <strong>Report effect sizes</strong></td><td>Cohen's d or Hedges' g with 95% CI (APA, 2010)</td></tr>
+    <tr><td>🔢 <strong>Report exact p-values</strong></td><td>Write p = .038, not p &lt; .05; report to 3 decimal places</td></tr>
+    <tr><td>📊 <strong>Include descriptives</strong></td><td>Means, SDs, sample sizes for all groups</td></tr>
+    <tr><td>🔗 <strong>Include confidence intervals</strong></td><td>95% CI for the mean difference completes the picture</td></tr>
+    <tr><td>⚠️ <strong>State one-tailed vs. two-tailed</strong></td><td>Justify one-tailed tests <em>a priori</em>; default to two-tailed</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧩 Summary: The Power and Responsibility of Parametric Tests</h2>
+
+<p>Parametric tests — the z-test, Student's t-test, and Welch's t-test — are the foundational tools of statistical comparison. Born from Gosset's practical need to evaluate beer ingredients with small samples, they have grown into the most widely applied methods across medicine, psychology, agriculture, engineering, and virtually every empirical science. Their power comes from leveraging distributional assumptions to extract maximum information from data — but with that power comes the responsibility to verify those assumptions and to report results completely, with effect sizes and confidence intervals alongside significance tests.</p>
+
+<p>The arc from Gosset's Dublin brewery to modern meta-analyses spanning millions of observations is a testament to the enduring brilliance of a simple idea: that even a few carefully collected measurements can tell us something meaningful about the world, as long as we account honestly for the uncertainty inherent in small samples.</p>
+
+<hr>
+
+<h2>📚 References</h2>
+
+<p>American Psychological Association. (2010). <em>Publication manual of the American Psychological Association</em> (6th ed.). Author.</p>
+
+<p>Boneau, C. A. (1960). The effects of violations of assumptions underlying the t test. <em>Psychological Bulletin</em>, <em>57</em>(1), 49–64. https://doi.org/10.1037/h0041412</p>
+
+<p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
+
+<p>Cumming, G. (2014). The new statistics: Why and how. <em>Psychological Science</em>, <em>25</em>(1), 7–29. https://doi.org/10.1177/0956797613504966</p>
+
+<p>Delacre, M., Lakens, D., &amp; Leys, C. (2017). Why psychologists should by default use Welch's t-test instead of Student's t-test. <em>International Review of Social Psychology</em>, <em>30</em>(1), 92–101. https://doi.org/10.5334/irsp.82</p>
+
+<p>Fisher, R. A. (1925). <em>Statistical methods for research workers</em>. Oliver and Boyd.</p>
+
+<p>Glass, G. V., Peckham, P. D., &amp; Sanders, J. R. (1972). Consequences of failure to meet assumptions underlying the fixed effects analyses of variance and covariance. <em>Review of Educational Research</em>, <em>42</em>(3), 237–288. https://doi.org/10.3102/00346543042003237</p>
+
+<p>Lehmann, E. L. (2006). <em>Nonparametrics: Statistical methods based on ranks</em> (Rev. ed.). Springer.</p>
+
+<p>Lehmann, E. L., &amp; Romano, J. P. (2005). <em>Testing statistical hypotheses</em> (3rd ed.). Springer.</p>
+
+<p>Levene, H. (1960). Robust tests for equality of variances. In I. Olkin (Ed.), <em>Contributions to probability and statistics</em> (pp. 278–292). Stanford University Press.</p>
+
+<p>Sheskin, D. J. (2011). <em>Handbook of parametric and nonparametric statistical procedures</em> (5th ed.). Chapman &amp; Hall/CRC.</p>
+
+<p>Student. (1908). The probable error of a mean. <em>Biometrika</em>, <em>6</em>(1), 1–25. https://doi.org/10.1093/biomet/6.1.1</p>
+
+<p>Welch, B. L. (1947). The generalization of "Student's" problem when several different population variances are involved. <em>Biometrika</em>, <em>34</em>(1–2), 28–35. https://doi.org/10.1093/biomet/34.1-2.28</p>
+
+<p>Wilcox, R. R. (2017). <em>Introduction to robust estimation and hypothesis testing</em> (4th ed.). Academic Press.</p>

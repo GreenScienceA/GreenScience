@@ -1,0 +1,414 @@
+<h2>⚖️ Hypothesis Testing: The Engine of Scientific Discovery</h2>
+
+<p>Imagine you are an agronomist in Algeria testing a new fertilizer on wheat fields. You apply it to 30 randomly selected plots and compare their yields to 30 control plots. The treated plots average 4.2 tonnes/ha versus 3.8 tonnes/ha for the controls. Is this 0.4 tonne difference <em>real</em> — a genuine effect of the fertilizer — or could it have arisen purely by chance, just from natural variation between fields? This is the fundamental question that <strong>hypothesis testing</strong> was invented to answer.</p>
+
+<p>Hypothesis testing is the formal statistical framework for making decisions under uncertainty. It transforms vague scientific questions ("Does this treatment work?") into precise mathematical problems with quantifiable error rates. Developed in the early 20th century by three intellectual giants — <strong>Ronald A. Fisher</strong>, <strong>Jerzy Neyman</strong>, and <strong>Egon Pearson</strong> — it remains the most widely used inferential tool in science, medicine, engineering, and social research (Lehmann &amp; Romano, 2005).</p>
+
+<blockquote>💡 <strong>Why Hypothesis Testing Matters:</strong> Without a formal framework, humans are notoriously bad at judging whether patterns are real or coincidental. Hypothesis testing provides a disciplined, reproducible method for separating genuine effects from random noise — protecting us from our own cognitive biases and allowing science to accumulate reliable knowledge.</blockquote>
+
+<hr>
+
+<h2>📜 A Brief History: Three Philosophies, One Procedure</h2>
+
+<p>What most textbooks teach as a single unified procedure is actually an uneasy fusion of two distinct — and historically rival — approaches (Lehmann, 1993). Understanding this intellectual history helps you use hypothesis testing more wisely.</p>
+
+<h3>🎣 Fisher's Significance Testing (1925)</h3>
+
+<p>Ronald A. Fisher, working at the Rothamsted Experimental Station on agricultural experiments, developed <strong>significance testing</strong> as a method for quantifying evidence against a hypothesis. His key innovation was the <strong>p-value</strong> — a continuous measure of how surprising the data would be if the null hypothesis were true (Fisher, 1925). Fisher viewed the p-value as a tool for <em>inductive reasoning</em>: a small p-value is evidence against H₀, with smaller values indicating stronger evidence. Crucially, Fisher never intended the p-value to be compared against a fixed threshold for mechanical decision-making. He famously considered 0.05 as merely a convenient reference point, writing that results around this level merit further investigation rather than definitive conclusions.</p>
+
+<h3>⚙️ Neyman-Pearson Decision Theory (1928–1933)</h3>
+
+<p>Jerzy Neyman and Egon Pearson took a fundamentally different approach. They framed testing as a <strong>decision problem</strong> between two hypotheses with explicit control over long-run error rates. Their innovations included: the formal <em>alternative hypothesis</em> (H₁), <em>Type I and Type II errors</em>, the concept of <em>statistical power</em>, and the <strong>Neyman-Pearson Lemma</strong> — which identifies the most powerful test for simple hypotheses (Neyman &amp; Pearson, 1933). In their framework, you fix error rates <em>before</em> collecting data and then make a binary accept/reject decision.</p>
+
+<h3>🔀 The Modern Hybrid: NHST</h3>
+
+<p>What researchers practice today is <strong>Null Hypothesis Significance Testing (NHST)</strong> — an amalgam that blends Fisher's p-values with Neyman-Pearson's decision framework (Gigerenzer, 2004). You state H₀ and H₁ (Neyman-Pearson), compute a p-value (Fisher), compare it to a pre-set α (Neyman-Pearson), and sometimes interpret the p-value's magnitude as evidence strength (Fisher). This hybrid, while practical, can create confusion when users don't recognize where one philosophy ends and the other begins.</p>
+
+<table>
+  <thead>
+    <tr><th>Feature</th><th>Fisher (1925)</th><th>Neyman-Pearson (1933)</th><th>NHST (Modern Hybrid)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Hypotheses</strong></td><td>H₀ only</td><td>H₀ and H₁ explicitly</td><td>H₀ and H₁</td></tr>
+    <tr><td><strong>Key Metric</strong></td><td>p-value (continuous)</td><td>α and β (pre-fixed)</td><td>p-value compared to α</td></tr>
+    <tr><td><strong>Goal</strong></td><td>Measure evidence against H₀</td><td>Minimize decision errors long-run</td><td>Blends both</td></tr>
+    <tr><td><strong>Decision</strong></td><td>No binary decision; evidence is graded</td><td>Reject or fail to reject</td><td>Reject if p &lt; α</td></tr>
+    <tr><td><strong>Power</strong></td><td>Not formally considered</td><td>Central concept (1 − β)</td><td>Often neglected in practice</td></tr>
+    <tr><td><strong>Philosophy</strong></td><td>Inductive inference</td><td>Inductive behaviour (long-run control)</td><td>Inconsistent mix</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🔬 The Anatomy of a Hypothesis Test</h2>
+
+<p>Despite philosophical differences, modern hypothesis testing follows a structured 7-step procedure. Let us walk through each step using our wheat fertilizer example.</p>
+
+<h3>Step 1: State the Research Question</h3>
+
+<p>Translate your scientific question into a testable statistical form. Our question: "Does the new fertilizer increase wheat yield?" This must be formulated in terms of population parameters, not sample statistics.</p>
+
+<h3>Step 2: Formulate Hypotheses</h3>
+
+<p>Every test involves a pair of mutually exclusive and exhaustive hypotheses about a population parameter θ:</p>
+
+<table>
+  <thead>
+    <tr><th>Hypothesis</th><th>Symbol</th><th>Meaning</th><th>Fertilizer Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔴 <strong>Null Hypothesis</strong></td><td>H₀</td><td>The "no effect" or "no difference" statement; the status quo</td><td>H₀: μ₁ − μ₂ = 0 (fertilizer has no effect)</td></tr>
+    <tr><td>🟢 <strong>Alternative Hypothesis</strong></td><td>H₁ or Hₐ</td><td>The claim the researcher wants to support; contradicts H₀</td><td>H₁: μ₁ − μ₂ &gt; 0 (fertilizer increases yield)</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🧠 <strong>Key Insight:</strong> We never "prove" H₁ directly. Instead, we assess whether the data provide sufficient evidence to <em>reject</em> H₀. This is the logic of <strong>proof by contradiction</strong> — assume H₀ is true, show the data are highly implausible under that assumption, and then conclude H₀ is likely false. As the philosopher Karl Popper argued, science advances through <em>falsification</em>, not verification.</blockquote>
+
+<h3>One-Tailed vs. Two-Tailed Tests</h3>
+
+<table>
+  <thead>
+    <tr><th>Type</th><th>H₁ Form</th><th>When to Use</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>➡️ <strong>Right-tailed</strong></td><td>H₁: θ &gt; θ₀</td><td>You predict a specific direction of effect</td><td>Fertilizer <em>increases</em> yield</td></tr>
+    <tr><td>⬅️ <strong>Left-tailed</strong></td><td>H₁: θ &lt; θ₀</td><td>You predict a decrease</td><td>Drug <em>lowers</em> blood pressure</td></tr>
+    <tr><td>↔️ <strong>Two-tailed</strong></td><td>H₁: θ ≠ θ₀</td><td>You only predict a difference, not its direction</td><td>New teaching method <em>differs</em> from old</td></tr>
+  </tbody>
+</table>
+
+<p>Two-tailed tests are more conservative (harder to reject H₀) because they split α across both tails. Use one-tailed tests only when you have strong <em>a priori</em> theoretical justification for the direction — never because you peeked at the data first (Lombardi &amp; Hurlbert, 2009).</p>
+
+<h3>Step 3: Choose the Significance Level (α)</h3>
+
+<p>The significance level α is the <strong>maximum probability of a Type I error</strong> (rejecting H₀ when it is actually true) that you are willing to tolerate. It must be set <em>before</em> data collection.</p>
+
+<table>
+  <thead>
+    <tr><th>α Level</th><th>Interpretation</th><th>Typical Use</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>0.10</strong></td><td>10% risk of false alarm; more liberal</td><td>Exploratory research, pilot studies</td></tr>
+    <tr><td><strong>0.05</strong></td><td>5% risk of false alarm; conventional default</td><td>Most scientific disciplines</td></tr>
+    <tr><td><strong>0.01</strong></td><td>1% risk of false alarm; more stringent</td><td>Medical trials, high-stakes decisions</td></tr>
+    <tr><td><strong>0.001</strong></td><td>0.1% risk; very stringent</td><td>Genomics (often even stricter), particle physics</td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚠️ <strong>The 0.05 Convention:</strong> The near-universal use of α = 0.05 traces back to Fisher's 1925 recommendation. While convenient, it is ultimately arbitrary. Benjamin et al. (2018) proposed redefining statistical significance as p &lt; 0.005 for new discoveries, arguing that the 0.05 threshold yields too many false positives. The right α depends on your context: the consequences of errors, sample size, and the prior plausibility of the effect.</blockquote>
+
+<h3>Step 4: Select the Appropriate Test Statistic</h3>
+
+<p>The test statistic transforms your data into a single number that measures how far the sample result deviates from what H₀ predicts. Its choice depends on your data type, sample size, and assumptions:</p>
+
+<table>
+  <thead>
+    <tr><th>Situation</th><th>Test Statistic</th><th>Distribution Under H₀</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mean, σ known, large n</td><td>z = (x̄ − μ₀) / (σ/√n)</td><td>Standard Normal N(0,1)</td></tr>
+    <tr><td>Mean, σ unknown</td><td>t = (x̄ − μ₀) / (s/√n)</td><td>Student's t with df = n−1</td></tr>
+    <tr><td>Two independent means</td><td>t = (x̄₁ − x̄₂) / SE</td><td>Student's t with pooled df</td></tr>
+    <tr><td>Proportion</td><td>z = (p̂ − p₀) / √[p₀(1−p₀)/n]</td><td>Standard Normal (large n)</td></tr>
+    <tr><td>Variance</td><td>χ² = (n−1)s² / σ₀²</td><td>Chi-squared with df = n−1</td></tr>
+    <tr><td>Categorical data</td><td>χ² = Σ (O−E)² / E</td><td>Chi-squared</td></tr>
+    <tr><td>Multiple group means</td><td>F = MS_between / MS_within</td><td>F-distribution</td></tr>
+  </tbody>
+</table>
+
+<p>For our fertilizer example with unknown population variance and independent samples, we use a <strong>two-sample t-test</strong>.</p>
+
+<h3>Step 5: Determine the Critical Region or Compute the p-Value</h3>
+
+<p>There are two equivalent approaches to making the decision:</p>
+
+<p><strong>Approach A — Critical Value Method:</strong> Find the boundary value(s) that separate the rejection region from the non-rejection region. If your test statistic falls in the rejection region, reject H₀. For our one-tailed test at α = 0.05 with df = 58, the critical value is t<sub>crit</sub> ≈ 1.672.</p>
+
+<p><strong>Approach B — p-Value Method:</strong> Calculate the probability of obtaining a test statistic as extreme as (or more extreme than) the observed value, assuming H₀ is true. If p ≤ α, reject H₀. The p-value approach is more informative because it shows the exact strength of evidence, not just a binary decision (Wasserstein &amp; Lazar, 2016).</p>
+
+<h3>Step 6: Collect Data and Calculate</h3>
+
+<p>Suppose our data yield t<sub>obs</sub> = 2.31 with p = 0.012. Since p = 0.012 &lt; α = 0.05 (and equivalently, 2.31 &gt; 1.672), we reject H₀.</p>
+
+<h3>Step 7: State the Conclusion</h3>
+
+<p>Always translate back to the real-world context: "There is statistically significant evidence at the 5% level that the new fertilizer increases wheat yield (t(58) = 2.31, p = 0.012, d = 0.60)." Notice we report the test statistic, degrees of freedom, p-value, <em>and</em> an effect size — a practice strongly recommended by the American Psychological Association (Wilkinson &amp; Task Force, 1999).</p>
+
+<hr>
+
+<h2>🚨 Type I and Type II Errors: The Two Ways to Be Wrong</h2>
+
+<p>Every hypothesis test is a decision under uncertainty, and every decision carries the risk of error. Understanding these errors is essential for designing good studies and interpreting results wisely.</p>
+
+<table>
+  <thead>
+    <tr><th></th><th>H₀ is Actually TRUE</th><th>H₀ is Actually FALSE</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Reject H₀</strong></td><td>🔴 <strong>Type I Error</strong> (False Positive) — Probability = α</td><td>✅ <strong>Correct Decision</strong> (True Positive) — Probability = 1 − β = Power</td></tr>
+    <tr><td><strong>Fail to reject H₀</strong></td><td>✅ <strong>Correct Decision</strong> (True Negative) — Probability = 1 − α</td><td>🟡 <strong>Type II Error</strong> (False Negative) — Probability = β</td></tr>
+  </tbody>
+</table>
+
+<h3>🔴 Type I Error (α) — The False Alarm</h3>
+
+<p>You conclude the fertilizer works when it actually doesn't. This is like a fire alarm going off when there is no fire. In medical research, this could mean approving an ineffective drug; in criminal justice, it is convicting an innocent person. We control α directly by choosing our significance level.</p>
+
+<h3>🟡 Type II Error (β) — The Missed Discovery</h3>
+
+<p>You fail to detect that the fertilizer truly works. This is like a smoke detector failing to sound during an actual fire. In medicine, it means failing to identify an effective treatment. Type II errors are often neglected because β is harder to control — it depends on the true effect size, sample size, and variability.</p>
+
+<blockquote>🏛️ <strong>The Courtroom Analogy:</strong> In criminal law, the null hypothesis is "the defendant is innocent." A Type I error is <em>convicting an innocent person</em> (false positive) — the justice system is designed to make this rare ("beyond reasonable doubt"). A Type II error is <em>acquitting a guilty person</em> (false negative) — unfortunate, but considered less catastrophic than the alternative. Similarly, in science, we conventionally set α small (0.05) to guard against false claims, accepting that we will sometimes miss real effects.</blockquote>
+
+<h3>The α–β Trade-Off</h3>
+
+<p>For a fixed sample size, decreasing α (making it harder to reject H₀) inevitably <em>increases</em> β (making it easier to miss real effects). The only way to reduce <em>both</em> errors simultaneously is to <strong>increase the sample size</strong> — more data gives more precision, which sharpens the test's ability to distinguish signal from noise (Cohen, 1988).</p>
+
+<hr>
+
+<h2>💪 Statistical Power: The Ability to Detect What's Real</h2>
+
+<p><strong>Statistical power</strong> is the probability that a test will correctly reject H₀ when H₁ is actually true. It equals 1 − β and is one of the most important — yet most neglected — concepts in hypothesis testing.</p>
+
+<table>
+  <thead>
+    <tr><th>Factor</th><th>Effect on Power</th><th>Why</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📈 <strong>Larger effect size</strong></td><td>↑ Power increases</td><td>Bigger effects are easier to detect</td></tr>
+    <tr><td>📊 <strong>Larger sample size (n)</strong></td><td>↑ Power increases</td><td>More data reduces sampling variability</td></tr>
+    <tr><td>🎯 <strong>Higher α</strong></td><td>↑ Power increases</td><td>Lower bar for rejection makes detection easier (but increases Type I error)</td></tr>
+    <tr><td>📉 <strong>Lower variability (σ)</strong></td><td>↑ Power increases</td><td>Less noise makes the signal clearer</td></tr>
+    <tr><td>➡️ <strong>One-tailed vs. two-tailed</strong></td><td>↑ One-tailed has more power</td><td>Concentrates α in one direction</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>The 80% Convention:</strong> Cohen (1988) recommended that studies should be designed to achieve at least 80% power (β ≤ 0.20), meaning you have an 80% chance of detecting a true effect. Yet empirical surveys consistently show that the median power in published research is far lower — around 50% or less in many fields — meaning half of all real effects go undetected (Button et al., 2013). This "power failure" is a major contributor to the replication crisis.</blockquote>
+
+<h3>A Priori Power Analysis</h3>
+
+<p>Power analysis should be performed <em>before</em> data collection to determine the minimum sample size needed. The four elements of power analysis are interconnected — knowing any three determines the fourth:</p>
+
+<table>
+  <thead>
+    <tr><th>Element</th><th>Symbol</th><th>Typical Value</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Significance level</td><td>α</td><td>0.05</td></tr>
+    <tr><td>Desired power</td><td>1 − β</td><td>0.80 or 0.90</td></tr>
+    <tr><td>Expected effect size</td><td>d, r, f, etc.</td><td>From pilot data or literature</td></tr>
+    <tr><td>→ Required sample size</td><td>n</td><td>Calculated</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>📏 The p-Value: What It Is and What It Is NOT</h2>
+
+<p>The <strong>p-value</strong> is perhaps the most used, most misunderstood, and most controversial statistic in all of science. In 2016, the American Statistical Association (ASA) took the unprecedented step of issuing a formal statement on its proper use (Wasserstein &amp; Lazar, 2016) — the first time in its 177-year history that the ASA had spoken on a specific statistical practice.</p>
+
+<h3>✅ What the p-Value IS</h3>
+
+<p>The p-value is the probability, <strong>assuming H₀ is true</strong>, of obtaining a test statistic as extreme as or more extreme than the one actually observed. Formally:</p>
+
+<p style="text-align: center; font-size: 1.1em;"><strong>p = P(T ≥ t<sub>obs</sub> | H₀ is true)</strong></p>
+
+<p>A small p-value means the observed data would be unlikely under H₀, which constitutes evidence against H₀. A p-value of 0.03, for instance, tells you: "If the fertilizer truly had zero effect, there would be only a 3% chance of seeing a difference this large or larger just by random sampling."</p>
+
+<h3>❌ What the p-Value is NOT</h3>
+
+<table>
+  <thead>
+    <tr><th>Common Misconception</th><th>Reality</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>"p = 0.03 means there's a 3% chance H₀ is true"</td><td>❌ The p-value is P(data | H₀), <strong>NOT</strong> P(H₀ | data). It says nothing about the probability that H₀ is true or false.</td></tr>
+    <tr><td>"p = 0.03 means there's a 97% chance the effect is real"</td><td>❌ This is the same error in reverse. You cannot derive P(H₁ | data) from the p-value alone without Bayesian methods.</td></tr>
+    <tr><td>"A smaller p-value means a bigger effect"</td><td>❌ The p-value conflates effect size and sample size. A tiny, trivial effect can yield p &lt; 0.001 with a large enough sample.</td></tr>
+    <tr><td>"p &gt; 0.05 means there is no effect"</td><td>❌ <strong>Absence of evidence is not evidence of absence.</strong> A non-significant result may simply reflect insufficient power (Altman &amp; Bland, 1995).</td></tr>
+    <tr><td>"p = 0.049 is fundamentally different from p = 0.051"</td><td>❌ The difference between "significant" and "not significant" is not itself statistically significant (Gelman &amp; Stern, 2006).</td></tr>
+    <tr><td>"Replication will give a similar p-value"</td><td>❌ p-values vary enormously across replications, even when H₁ is true. A study with p = 0.04 could easily yield p = 0.30 on replication.</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📢 <strong>ASA's Six Principles (Wasserstein &amp; Lazar, 2016):</strong><br>
+1. P-values can indicate incompatibility between data and a specified model.<br>
+2. P-values do not measure the probability that the hypothesis is true or that data were produced by chance alone.<br>
+3. Scientific conclusions should not be based only on whether a p-value passes a specific threshold.<br>
+4. Proper inference requires full reporting and transparency.<br>
+5. A p-value does not measure the size of an effect or the importance of a result.<br>
+6. By itself, a p-value does not provide a good measure of evidence.</blockquote>
+
+<hr>
+
+<h2>📐 Effect Size: The Magnitude That Matters</h2>
+
+<p>If the p-value answers "Is there an effect?", the <strong>effect size</strong> answers the far more important question: "<strong>How large is the effect?</strong>" A result can be statistically significant but practically meaningless (a tiny effect detected with a huge sample), or non-significant but practically important (a meaningful effect missed due to small sample size).</p>
+
+<h3>Common Effect Size Measures</h3>
+
+<table>
+  <thead>
+    <tr><th>Measure</th><th>Formula</th><th>Use</th><th>Cohen's Benchmarks</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Cohen's d</strong></td><td>d = (x̄₁ − x̄₂) / s<sub>pooled</sub></td><td>Difference between two means</td><td>Small: 0.2, Medium: 0.5, Large: 0.8</td></tr>
+    <tr><td><strong>Pearson's r</strong></td><td>Correlation coefficient</td><td>Strength of association</td><td>Small: 0.1, Medium: 0.3, Large: 0.5</td></tr>
+    <tr><td><strong>η² (Eta squared)</strong></td><td>SS<sub>effect</sub> / SS<sub>total</sub></td><td>Proportion of variance explained (ANOVA)</td><td>Small: 0.01, Medium: 0.06, Large: 0.14</td></tr>
+    <tr><td><strong>Cohen's f²</strong></td><td>R² / (1 − R²)</td><td>Regression effect size</td><td>Small: 0.02, Medium: 0.15, Large: 0.35</td></tr>
+    <tr><td><strong>Odds Ratio (OR)</strong></td><td>ad / bc</td><td>Categorical outcomes</td><td>Small: 1.5, Medium: 2.5, Large: 4.3</td></tr>
+  </tbody>
+</table>
+
+<p>Cohen (1988) himself cautioned that these benchmarks were intended for general guidance, not rigid rules — the practical importance of any effect depends on context. In our fertilizer example, d = 0.60 represents a medium-to-large effect, suggesting the yield improvement is not just statistically detectable but agronomically meaningful.</p>
+
+<blockquote>💬 <strong>Jacob Cohen's Wisdom:</strong> "The primary product of a research inquiry is one or more measures of effect size, not p-values." (Cohen, 1990). Always report effect sizes alongside p-values — a practice now mandated by many leading journals and recommended by the APA Publication Manual.</blockquote>
+
+<hr>
+
+<h2>🔄 The Complete Hypothesis Testing Workflow</h2>
+
+<p>Here is a consolidated decision flowchart for performing a hypothesis test:</p>
+
+<table>
+  <thead>
+    <tr><th>Step</th><th>Action</th><th>Key Question</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1️⃣</td><td>Define research question</td><td>What effect or relationship am I testing?</td></tr>
+    <tr><td>2️⃣</td><td>Formulate H₀ and H₁</td><td>What is the null (no effect) vs. alternative?</td></tr>
+    <tr><td>3️⃣</td><td>Set α (e.g., 0.05)</td><td>What Type I error risk am I willing to accept?</td></tr>
+    <tr><td>4️⃣</td><td>Conduct power analysis</td><td>How many subjects/observations do I need?</td></tr>
+    <tr><td>5️⃣</td><td>Collect data</td><td>Is my sampling design valid and unbiased?</td></tr>
+    <tr><td>6️⃣</td><td>Check assumptions</td><td>Normality? Equal variances? Independence?</td></tr>
+    <tr><td>7️⃣</td><td>Calculate test statistic &amp; p-value</td><td>How extreme are my data under H₀?</td></tr>
+    <tr><td>8️⃣</td><td>Make decision</td><td>Is p ≤ α? Reject or fail to reject H₀</td></tr>
+    <tr><td>9️⃣</td><td>Report effect size &amp; CI</td><td>How large and how precise is the effect?</td></tr>
+    <tr><td>🔟</td><td>Interpret in context</td><td>What does this mean for my field or question?</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>⚠️ Common Pitfalls and Best Practices</h2>
+
+<h3>Pitfalls to Avoid</h3>
+
+<table>
+  <thead>
+    <tr><th>Pitfall</th><th>Description</th><th>Consequence</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🎣 <strong>p-Hacking</strong></td><td>Running multiple tests, selecting favourable results, dropping inconvenient data points, or trying different model specifications until p &lt; 0.05</td><td>Inflated false positive rate far above nominal α; unreplicable findings</td></tr>
+    <tr><td>🗂️ <strong>HARKing</strong></td><td>Hypothesizing After the Results are Known — presenting exploratory findings as confirmatory</td><td>Confirmation bias masquerading as rigorous science</td></tr>
+    <tr><td>📂 <strong>Publication Bias</strong></td><td>Journals preferentially publish significant results (the "file drawer problem")</td><td>Published literature overestimates effect sizes and significance rates</td></tr>
+    <tr><td>📊 <strong>Ignoring Effect Size</strong></td><td>Reporting only "significant" or "non-significant" without quantifying the magnitude</td><td>Trivial effects are overvalued; important non-significant effects are discarded</td></tr>
+    <tr><td>🔋 <strong>Low Power</strong></td><td>Running underpowered studies (small samples for the expected effect)</td><td>High Type II error rate; significant results that do emerge are likely inflated</td></tr>
+    <tr><td>🔁 <strong>Multiple Comparisons</strong></td><td>Performing many tests without correcting α (Bonferroni, FDR, etc.)</td><td>Family-wise error rate explodes (e.g., 20 tests at α = 0.05 → 64% chance of at least one false positive)</td></tr>
+  </tbody>
+</table>
+
+<h3>Best Practices</h3>
+
+<table>
+  <thead>
+    <tr><th>Practice</th><th>Why It Matters</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📝 <strong>Pre-register your hypotheses and analysis plan</strong></td><td>Prevents p-hacking and HARKing; makes confirmatory vs. exploratory analysis transparent</td></tr>
+    <tr><td>📏 <strong>Always report effect sizes and confidence intervals</strong></td><td>Provides practical significance beyond the p-value binary</td></tr>
+    <tr><td>🔋 <strong>Conduct a priori power analysis</strong></td><td>Ensures adequate sample size to detect meaningful effects</td></tr>
+    <tr><td>🔢 <strong>Correct for multiple comparisons</strong></td><td>Controls family-wise error when testing multiple hypotheses (Bonferroni, Holm, Benjamini-Hochberg)</td></tr>
+    <tr><td>📊 <strong>Report exact p-values</strong></td><td>Say "p = 0.032" not just "p &lt; 0.05" — gives readers more information</td></tr>
+    <tr><td>🔄 <strong>Replicate findings</strong></td><td>Single studies are never definitive; replication builds scientific confidence</td></tr>
+    <tr><td>📈 <strong>Consider Bayesian alternatives</strong></td><td>Bayesian methods can quantify evidence for H₀, not just against it, and incorporate prior knowledge</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🌍 Real-World Application: A Worked Example</h2>
+
+<p>Let's work through a complete example relevant to agricultural science in Algeria.</p>
+
+<p><strong>Research Question:</strong> Does a new drip irrigation system reduce water consumption in tomato cultivation compared to traditional flood irrigation?</p>
+
+<p><strong>Data:</strong> 25 plots with drip irrigation (mean consumption = 4,200 m³/ha, s = 380) vs. 25 plots with flood irrigation (mean = 5,100 m³/ha, s = 420).</p>
+
+<table>
+  <thead>
+    <tr><th>Step</th><th>Application</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>H₀</strong></td><td>μ<sub>drip</sub> − μ<sub>flood</sub> = 0 (no difference in water use)</td></tr>
+    <tr><td><strong>H₁</strong></td><td>μ<sub>drip</sub> − μ<sub>flood</sub> &lt; 0 (drip uses less water) — left-tailed</td></tr>
+    <tr><td><strong>α</strong></td><td>0.05</td></tr>
+    <tr><td><strong>Test</strong></td><td>Two-sample t-test (independent samples, σ unknown)</td></tr>
+    <tr><td><strong>SE</strong></td><td>√(380²/25 + 420²/25) = √(5776 + 7056) = √12832 ≈ 113.3</td></tr>
+    <tr><td><strong>t<sub>obs</sub></strong></td><td>(4200 − 5100) / 113.3 = −900 / 113.3 ≈ −7.94</td></tr>
+    <tr><td><strong>df</strong></td><td>≈ 47 (Welch's approximation)</td></tr>
+    <tr><td><strong>p-value</strong></td><td>p ≈ 0.0000000001 (extremely small)</td></tr>
+    <tr><td><strong>Effect size</strong></td><td>d = 900 / √((380² + 420²)/2) = 900 / 400.6 ≈ 2.25 (very large)</td></tr>
+    <tr><td><strong>Decision</strong></td><td>Reject H₀ — overwhelming evidence that drip irrigation reduces water use</td></tr>
+    <tr><td><strong>Interpretation</strong></td><td>Drip irrigation reduced water consumption by approximately 900 m³/ha (a 17.6% reduction), with a very large effect size (d = 2.25). This represents both a statistically significant and practically important water saving for Algerian agriculture.</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧭 Beyond NHST: The Modern Landscape</h2>
+
+<p>The past two decades have seen growing calls to move beyond traditional NHST or to supplement it with additional tools (Cumming, 2014):</p>
+
+<table>
+  <thead>
+    <tr><th>Approach</th><th>Key Idea</th><th>Advantage Over NHST</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔵 <strong>Confidence Intervals</strong></td><td>Estimate the range of plausible parameter values</td><td>Shows precision and direction of effect, not just significance</td></tr>
+    <tr><td>🟣 <strong>Bayesian Hypothesis Testing</strong></td><td>Bayes factors quantify evidence for H₀ <em>and</em> H₁ using prior information</td><td>Can support H₀ (not just fail to reject it); incorporates prior knowledge</td></tr>
+    <tr><td>🟢 <strong>Equivalence Testing</strong></td><td>TOST (Two One-Sided Tests) procedure tests whether effects fall within a negligible range</td><td>Can affirmatively conclude "no meaningful effect" rather than just "insufficient evidence"</td></tr>
+    <tr><td>🟡 <strong>Meta-Analysis</strong></td><td>Combines results across multiple studies to estimate overall effect</td><td>More precise estimates; reduces publication bias; assesses heterogeneity</td></tr>
+    <tr><td>🔴 <strong>Pre-Registration</strong></td><td>Register hypotheses, methods, and analysis plan before data collection</td><td>Eliminates p-hacking and HARKing; separates confirmatory from exploratory research</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔮 <strong>The Future of Inference:</strong> The trend in modern statistics is not to abandon hypothesis testing but to <em>enrich</em> it — combining p-values with effect sizes, confidence intervals, and Bayesian measures to build a more complete picture of evidence. As the ASA Task Force (2021) concluded, p-values and significance tests, properly applied, remain important tools that should not be abandoned.</blockquote>
+
+<hr>
+
+<h2>📚 References</h2>
+
+<p>Altman, D. G., &amp; Bland, J. M. (1995). Absence of evidence is not evidence of absence. <em>BMJ</em>, 311(7003), 485. https://doi.org/10.1136/bmj.311.7003.485</p>
+
+<p>Benjamin, D. J., Berger, J. O., Johannesson, M., Nosek, B. A., Wagenmakers, E.-J., Berk, R., ... &amp; Johnson, V. E. (2018). Redefine statistical significance. <em>Nature Human Behaviour</em>, 2(1), 6–10. https://doi.org/10.1038/s41562-017-0189-z</p>
+
+<p>Button, K. S., Ioannidis, J. P. A., Mokrysz, C., Nosek, B. A., Flint, J., Robinson, E. S. J., &amp; Munafò, M. R. (2013). Power failure: Why small sample size undermines the reliability of neuroscience. <em>Nature Reviews Neuroscience</em>, 14(5), 365–376. https://doi.org/10.1038/nrn3475</p>
+
+<p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
+
+<p>Cohen, J. (1990). Things I have learned (so far). <em>American Psychologist</em>, 45(12), 1304–1312. https://doi.org/10.1037/0003-066X.45.12.1304</p>
+
+<p>Cohen, J. (1992). A power primer. <em>Psychological Bulletin</em>, 112(1), 155–159. https://doi.org/10.1037/0033-2909.112.1.155</p>
+
+<p>Cumming, G. (2014). The new statistics: Why and how. <em>Psychological Science</em>, 25(1), 7–29. https://doi.org/10.1177/0956797613504966</p>
+
+<p>Fisher, R. A. (1925). <em>Statistical methods for research workers</em>. Oliver and Boyd.</p>
+
+<p>Gelman, A., &amp; Stern, H. (2006). The difference between "significant" and "not significant" is not itself statistically significant. <em>The American Statistician</em>, 60(4), 328–331. https://doi.org/10.1198/000313006X152649</p>
+
+<p>Gigerenzer, G. (2004). Mindless statistics. <em>The Journal of Socio-Economics</em>, 33(5), 587–606. https://doi.org/10.1016/j.socec.2004.09.033</p>
+
+<p>Lehmann, E. L. (1993). The Fisher, Neyman-Pearson theories of testing hypotheses: One theory or two? <em>Journal of the American Statistical Association</em>, 88(424), 1242–1249. https://doi.org/10.1080/01621459.1993.10476404</p>
+
+<p>Lehmann, E. L., &amp; Romano, J. P. (2005). <em>Testing statistical hypotheses</em> (3rd ed.). Springer.</p>
+
+<p>Lombardi, C. M., &amp; Hurlbert, S. H. (2009). Misprescription and misuse of one‐tailed tests. <em>Austral Ecology</em>, 34(4), 447–468. https://doi.org/10.1111/j.1442-9993.2009.01946.x</p>
+
+<p>Moore, D. S., McCabe, G. P., &amp; Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W.H. Freeman.</p>
+
+<p>Neyman, J., &amp; Pearson, E. S. (1933). On the problem of the most efficient tests of statistical hypotheses. <em>Philosophical Transactions of the Royal Society A</em>, 231(694–706), 289–337. https://doi.org/10.1098/rsta.1933.0009</p>
+
+<p>Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA's statement on p-values: Context, process, and purpose. <em>The American Statistician</em>, 70(2), 129–133. https://doi.org/10.1080/00031305.2016.1154108</p>
+
+<p>Wilkinson, L., &amp; the Task Force on Statistical Inference. (1999). Statistical methods in psychology journals: Guidelines and explanations. <em>American Psychologist</em>, 54(8), 594–604. https://doi.org/10.1037/0003-066X.54.8.594</p>

@@ -1,0 +1,224 @@
+<h2>📊 Tests Paramétriques : Le Pilier de l'Inférence Statistique</h2>
+
+<p>Imaginez-vous en 1904 à Dublin, en Irlande. Un jeune chimiste diplômé d'Oxford nommé <strong>William Sealy Gosset</strong> fixe un tableau de chiffres — la teneur en résines molles mesurée sur une poignée d'échantillons de houblon destinés à la brasserie Guinness. Il doit savoir : ce lot de houblon satisfait-il aux normes de qualité ? Le problème ? Il n'a que 5 mesures, et les méthodes statistiques de son époque — conçues pour l'astronomie et les données de recensement avec des centaines d'observations — sont désespérément peu fiables pour de si petits échantillons. La lutte de Gosset avec cette question pratique allait le conduire à inventer le test statistique le plus utilisé de toute la science : le <strong>test t de Student</strong>.</p>
+
+<p>Les tests paramétriques sont l'épine dorsale de la statistique inférentielle. Ils méritent le qualificatif de « paramétriques » car ils font des <em>hypothèses sur les paramètres</em> de la distribution de la population — typiquement que les données suivent une loi normale de moyenne μ et de variance σ² inconnues (Lehmann &amp; Romano, 2005). Quand ces hypothèses sont raisonnablement satisfaites, les tests paramétriques sont les outils les plus <strong>puissants</strong> disponibles (Sheskin, 2011).</p>
+
+<blockquote>💡 <strong>L'Idée Fondamentale :</strong> Les tests paramétriques utilisent les statistiques de l'échantillon (moyennes, variances) pour faire des inférences sur les paramètres de la population sous des hypothèses distributionnelles explicites. Ils échangent des hypothèses contre de la puissance — en supposant quelque chose sur la forme de la distribution des données, ils extraient plus d'information de chaque observation que les alternatives non paramétriques.</blockquote>
+
+<hr>
+
+<h2>🍺 Brève Histoire : De la Bière à la Biostatistique</h2>
+
+<h3>Gosset et la Naissance du Test t (1908)</h3>
+
+<p>William Sealy Gosset (1876–1937) fut embauché par la brasserie Guinness en 1899. Son travail exigeait de déterminer si des lots d'orge, de houblon et de malt satisfaisaient aux spécifications — mais ses expériences ne produisaient que 3 à 5 mesures par lot. La théorie statistique existante nécessitait de grands échantillons (Student, 1908).</p>
+
+<p>En 1906, Guinness accorda à Gosset un congé sabbatique au laboratoire biométrique de Karl Pearson à l'University College London. Sa découverte majeure fut que lorsqu'on estime à la fois la moyenne <em>et</em> l'écart-type à partir d'un petit échantillon, le ratio résultant ne suit pas la loi normale — il suit une nouvelle distribution à queues plus lourdes qui dépend de la taille de l'échantillon (Student, 1908). Comme Guinness interdisait à ses employés de publier sous leur vrai nom, Gosset publia son article fondateur sous le pseudonyme <strong>« Student »</strong> dans <em>Biometrika</em>.</p>
+
+<p>La communauté mathématique ignora d'abord l'article de Gosset. Ce n'est qu'après que <strong>Ronald A. Fisher</strong> fournit une démonstration rigoureuse de la distribution t en 1925 et popularisa le test t dans son ouvrage influent <em>Statistical Methods for Research Workers</em> que la méthode devint standard (Fisher, 1925).</p>
+
+<blockquote>🧠 <strong>Fisher sur Gosset :</strong> Après la mort de Gosset en 1937, Fisher écrivit qu'il avait introduit « une approche fondamentalement nouvelle du problème classique de la théorie des erreurs. » Cette appréciation continue plus d'un siècle plus tard — le test t reste la méthode statistique la plus fréquemment utilisée dans toutes les disciplines scientifiques.</blockquote>
+
+<hr>
+
+<h2>🔧 Prérequis : Les Quatre Hypothèses des Tests Paramétriques</h2>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Hypothèse</th><th>Signification</th><th>Comment Vérifier</th><th>Conséquence de la Violation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>🔢 <strong>Échelle de Mesure</strong></td><td>Données d'intervalle ou de ratio</td><td>Examiner la nature de la variable</td><td>Moyennes et variances deviennent sans signification</td></tr>
+    <tr><td>2</td><td>🎲 <strong>Indépendance</strong></td><td>Les observations sont indépendantes les unes des autres</td><td>Revue du plan expérimental ; test de Durbin-Watson</td><td><strong>Sévère</strong> — inflation de l'erreur de Type I</td></tr>
+    <tr><td>3</td><td>📐 <strong>Normalité</strong></td><td>La distribution d'échantillonnage de la moyenne est approximativement normale</td><td>Test de Shapiro-Wilk, diagramme Q-Q, histogramme</td><td><strong>Légère</strong> pour n ≥ 25–30 ; le test t est robuste (Glass et al., 1972)</td></tr>
+    <tr><td>4</td><td>⚖️ <strong>Homogénéité des Variances</strong></td><td>Les groupes comparés ont des variances égales (homoscédasticité)</td><td>Test de Levene, test de Brown-Forsythe</td><td><strong>Modérée à sévère</strong> quand les tailles sont inégales ; utiliser la correction de Welch</td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚠️ <strong>Robustesse — Bonne Nouvelle :</strong> Des décennies de recherche par simulation ont montré que le test t est remarquablement <strong>robuste</strong> aux violations de la normalité, surtout avec des tailles d'échantillon modérées (n ≥ 25–30) et des groupes de taille égale (Glass, Peckham, &amp; Sanders, 1972 ; Boneau, 1960). Le théorème central limite garantit que les moyennes d'échantillon s'approchent de la normalité quelle que soit la forme de la population.</blockquote>
+
+<hr>
+
+<h2>📏 Le Test z : Quand σ Est Connu</h2>
+
+<p style="text-align:center; font-size:1.1em;"><strong>z = (x̄ − μ₀) / (σ / √n)</strong></p>
+
+<p>Sous H₀, cette statistique suit la loi normale centrée réduite N(0, 1).</p>
+
+<p><strong>Utilisation :</strong> Le test z est principalement utilisé quand le σ de la population est vraiment connu (rare) et pour les tests de proportions avec grands échantillons.</p>
+
+<h3>Exemple : Scores à un Examen Standardisé</h3>
+
+<p>Un examen national a μ₀ = 500 et σ = 100. Un échantillon de n = 64 étudiants d'un nouveau programme obtient x̄ = 520. z = (520 − 500) / (100/√64) = 20 / 12.5 = <strong>1.60</strong>. La valeur critique bilatérale à α = 0.05 est z* = ±1.96. Puisque |1.60| &lt; 1.96, on <strong>ne rejette pas H₀</strong>.</p>
+
+<hr>
+
+<h2>📐 Test t de Student : Le Cheval de Bataille de la Science</h2>
+
+<p>En pratique, on ne connaît presque jamais σ. Quand on le remplace par s, la statistique standardisée suit la <strong>distribution t de Student</strong> à (n − 1) degrés de liberté — plus lourde aux queues que la loi normale. Pour n ≥ 30, les deux sont virtuellement indiscernables (Student, 1908 ; Fisher, 1925).</p>
+
+<h3>1. Test t pour un Échantillon</h3>
+
+<p><strong>But :</strong> Tester si μ est égal à une valeur spécifiée μ₀.</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>t = (x̄ − μ₀) / (s / √n)</strong> &nbsp; avec dl = n − 1</p>
+
+<p><strong>Exemple :</strong> Un pédologue prélève n = 20 échantillons à Sétif. pH moyen : x̄ = 7.8, s = 0.6. Le sol diffère-t-il du pH neutre (μ₀ = 7.0) ? t = 0.8 / 0.134 = <strong>5.96</strong>. Avec dl = 19, t* = 2.093. On <strong>rejette H₀</strong>. d de Cohen = 1.33 (très grand).</p>
+
+<h3>2. Test t pour Deux Échantillons Indépendants</h3>
+
+<p><strong>Variances égales (Student original) :</strong></p>
+<p style="text-align:center; font-size:1.1em;"><strong>t = (x̄₁ − x̄₂) / (s<sub>p</sub> · √(1/n₁ + 1/n₂))</strong></p>
+
+<p><strong>Variances inégales (test t de Welch) :</strong></p>
+<p style="text-align:center; font-size:1.1em;"><strong>t = (x̄₁ − x̄₂) / √(s₁²/n₁ + s₂²/n₂)</strong></p>
+
+<blockquote>🎯 <strong>Bonne Pratique Moderne :</strong> Delacre, Lakens et Leys (2017) ont démontré de manière convaincante que le test t de Welch devrait être utilisé <em>par défaut</em> au lieu du test t de Student. La version de Welch contrôle bien les erreurs de Type I même quand les variances sont inégales, et elle perd très peu de puissance quand les variances sont effectivement égales.</blockquote>
+
+<p><strong>Exemple :</strong> Un agronome compare le rendement de blé (t/ha) entre deux méthodes d'irrigation. Groupe 1 (goutte-à-goutte) : n₁ = 15, x̄₁ = 4.5, s₁ = 0.7. Groupe 2 (submersion) : n₂ = 18, x̄₂ = 3.9, s₂ = 0.9. Test de Welch : t = 0.6 / 0.278 = <strong>2.16</strong>, dl ≈ 31.4. On <strong>rejette H₀</strong>. d = 0.74 (moyen à grand).</p>
+
+<h3>3. Test t pour Échantillons Appariés</h3>
+
+<p><strong>But :</strong> Comparer deux mesures sur les <em>mêmes</em> sujets.</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>t = d̄ / (s<sub>d</sub> / √n)</strong> &nbsp; avec dl = n − 1</p>
+
+<p><strong>Pourquoi il est plus puissant :</strong> En analysant les différences, le test apparié <em>élimine la variabilité inter-sujets</em>. Chaque sujet sert de son propre contrôle (Cohen, 1988).</p>
+
+<hr>
+
+<h2>📋 Guide de Décision Complet du Test t</h2>
+
+<table>
+  <thead>
+    <tr><th>Scénario</th><th>Test</th><th>H₀</th><th>Formule</th><th>dl</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Un échantillon vs. valeur connue</td><td>t uniéchantillon</td><td>μ = μ₀</td><td>(x̄ − μ₀) / (s/√n)</td><td>n − 1</td></tr>
+    <tr><td>Deux groupes indépendants, var. égales</td><td>t de Student</td><td>μ₁ = μ₂</td><td>(x̄₁ − x̄₂) / (s<sub>p</sub>√(1/n₁+1/n₂))</td><td>n₁ + n₂ − 2</td></tr>
+    <tr><td>Deux groupes indépendants, var. inégales</td><td>t de Welch ✅</td><td>μ₁ = μ₂</td><td>(x̄₁ − x̄₂) / √(s₁²/n₁+s₂²/n₂)</td><td>Welch-Satterthwaite</td></tr>
+    <tr><td>Mêmes sujets, deux conditions</td><td>t apparié</td><td>μ<sub>d</sub> = 0</td><td>d̄ / (s<sub>d</sub>/√n)</td><td>n − 1</td></tr>
+    <tr><td>Grand échantillon, σ connu</td><td>Test z</td><td>μ = μ₀</td><td>(x̄ − μ₀) / (σ/√n)</td><td>∞ (normale)</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>📏 Taille d'Effet : Au-Delà de la Significativité</h2>
+
+<h3>d de Cohen</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>d = (x̄₁ − x̄₂) / s<sub>pooled</sub></strong></p>
+
+<table>
+  <thead>
+    <tr><th>d de Cohen</th><th>Interprétation</th><th>Analogie</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0.2</td><td>Petit effet</td><td>Différence de taille entre filles de 15 et 16 ans</td></tr>
+    <tr><td>0.5</td><td>Effet moyen</td><td>Différence de taille entre filles de 14 et 18 ans</td></tr>
+    <tr><td>0.8</td><td>Grand effet</td><td>Différence de taille entre filles de 13 et 18 ans</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📐 <strong>Règle de la « Nouvelle Statistique » :</strong> Toujours rapporter : (1) la statistique de test et les degrés de liberté, (2) la valeur p exacte, (3) une taille d'effet avec intervalle de confiance, et (4) les statistiques descriptives. Exemple : « L'irrigation goutte-à-goutte a produit des rendements significativement plus élevés, t(31.4) = 2.16, p = .038, d = 0.74, IC 95% [0.04, 1.44]. » (Cumming, 2014).</blockquote>
+
+<hr>
+
+<h2>⚖️ Test z pour les Proportions</h2>
+
+<h3>Test z uniéchantillon pour une proportion</h3>
+<p style="text-align:center; font-size:1.1em;"><strong>z = (p̂ − p₀) / √(p₀(1−p₀)/n)</strong></p>
+
+<h3>Test z biéchantillon pour comparer deux proportions</h3>
+<p style="text-align:center; font-size:1.1em;"><strong>z = (p̂₁ − p̂₂) / √(p̄(1−p̄)(1/n₁ + 1/n₂))</strong></p>
+
+<p><strong>Exemple :</strong> Région A : 420/500 = 84% vaccinés. Région B : 360/500 = 72%. p̄ = 0.78. z = 0.12 / 0.0262 = <strong>4.58</strong>. Hautement significatif.</p>
+
+<hr>
+
+<h2>🔍 Vérification des Hypothèses : Guide Pratique</h2>
+
+<h3>Tester la Normalité</h3>
+<table>
+  <thead>
+    <tr><th>Méthode</th><th>Fonctionnement</th><th>Idéal Pour</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📊 <strong>Shapiro-Wilk</strong></td><td>Test omnibus le plus puissant</td><td>n &lt; 2000</td></tr>
+    <tr><td>📈 <strong>Diagramme Q-Q</strong></td><td>Visuel : les points doivent suivre la diagonale</td><td>Toute taille</td></tr>
+    <tr><td>📐 <strong>Asymétrie &amp; Kurtosis</strong></td><td>Valeurs proches de 0</td><td>Vérification rapide</td></tr>
+  </tbody>
+</table>
+
+<h3>Tester l'Homogénéité des Variances</h3>
+<table>
+  <thead>
+    <tr><th>Test</th><th>Fonctionnement</th><th>Robustesse</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>⚖️ <strong>Levene</strong></td><td>ANOVA sur les déviations absolues des moyennes de groupe</td><td>Modérée</td></tr>
+    <tr><td>⚖️ <strong>Brown-Forsythe</strong></td><td>Comme Levene mais utilise les médianes</td><td>Bonne — recommandé pour données asymétriques</td></tr>
+    <tr><td>⚖️ <strong>Bartlett</strong></td><td>Test du rapport de vraisemblance</td><td>Faible — très sensible à la non-normalité</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🔄 Quand les Hypothèses Échouent : Alternatives</h2>
+
+<table>
+  <thead>
+    <tr><th>Problème</th><th>Remède</th><th>Test Alternatif</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Non-normalité (légère)</td><td>Test t robuste ; procéder pour n ≥ 25–30</td><td>—</td></tr>
+    <tr><td>Non-normalité (sévère, petit n)</td><td>Transformation, bootstrap</td><td>Mann-Whitney (indépendant) / Wilcoxon (apparié)</td></tr>
+    <tr><td>Variances inégales</td><td>Test t de Welch (recommandation par défaut)</td><td>—</td></tr>
+    <tr><td>Valeurs aberrantes</td><td>Moyennes tronquées (test de Yuen), méthodes robustes</td><td>Wilcox (2017)</td></tr>
+    <tr><td>Non-indépendance</td><td>Modèles mixtes, mesures répétées</td><td>Pas de solution non paramétrique simple</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🆚 Paramétrique vs. Non Paramétrique</h2>
+
+<table>
+  <thead>
+    <tr><th>Critère</th><th>Tests Paramétriques</th><th>Tests Non Paramétriques</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Hypothèses</strong></td><td>Normalité, homogénéité des variances</td><td>Distribution-free</td></tr>
+    <tr><td><strong>Niveau de données</strong></td><td>Intervalle / ratio</td><td>Ordinal ou supérieur</td></tr>
+    <tr><td><strong>Puissance (hypothèses satisfaites)</strong></td><td>Plus élevée</td><td>Plus faible</td></tr>
+    <tr><td><strong>Puissance (hypothèses violées)</strong></td><td>Peut être inférieure</td><td>Peut être supérieure</td></tr>
+    <tr><td><strong>Correspondances</strong></td><td>t à 1 éch., t indépendant, t apparié, ANOVA</td><td>Test du signe, Mann-Whitney, Wilcoxon, Kruskal-Wallis</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧩 Synthèse</h2>
+
+<p>Les tests paramétriques — test z, test t de Student et test t de Welch — sont les outils fondamentaux de la comparaison statistique. Nés du besoin pratique de Gosset d'évaluer les ingrédients de la bière avec de petits échantillons, ils sont devenus les méthodes les plus appliquées en médecine, psychologie, agriculture et ingénierie. Leur puissance vient de l'exploitation des hypothèses distributionnelles — mais avec cette puissance vient la responsabilité de vérifier ces hypothèses et de rapporter les résultats complètement.</p>
+
+<hr>
+
+<h2>📚 Références</h2>
+
+<p>American Psychological Association. (2010). <em>Publication manual of the APA</em> (6e éd.). Author.</p>
+<p>Boneau, C. A. (1960). The effects of violations of assumptions underlying the t test. <em>Psychological Bulletin</em>, <em>57</em>(1), 49–64.</p>
+<p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2e éd.). Lawrence Erlbaum.</p>
+<p>Cumming, G. (2014). The new statistics: Why and how. <em>Psychological Science</em>, <em>25</em>(1), 7–29.</p>
+<p>Delacre, M., Lakens, D., &amp; Leys, C. (2017). Why psychologists should by default use Welch's t-test. <em>International Review of Social Psychology</em>, <em>30</em>(1), 92–101.</p>
+<p>Fisher, R. A. (1925). <em>Statistical methods for research workers</em>. Oliver and Boyd.</p>
+<p>Glass, G. V., Peckham, P. D., &amp; Sanders, J. R. (1972). Consequences of failure to meet assumptions. <em>Review of Educational Research</em>, <em>42</em>(3), 237–288.</p>
+<p>Lehmann, E. L. (2006). <em>Nonparametrics: Statistical methods based on ranks</em>. Springer.</p>
+<p>Lehmann, E. L., &amp; Romano, J. P. (2005). <em>Testing statistical hypotheses</em> (3e éd.). Springer.</p>
+<p>Levene, H. (1960). Robust tests for equality of variances. In I. Olkin (Éd.), <em>Contributions to probability and statistics</em> (pp. 278–292). Stanford University Press.</p>
+<p>Sheskin, D. J. (2011). <em>Handbook of parametric and nonparametric statistical procedures</em> (5e éd.). Chapman &amp; Hall/CRC.</p>
+<p>Student. (1908). The probable error of a mean. <em>Biometrika</em>, <em>6</em>(1), 1–25.</p>
+<p>Welch, B. L. (1947). The generalization of "Student's" problem. <em>Biometrika</em>, <em>34</em>(1–2), 28–35.</p>
+<p>Wilcox, R. R. (2017). <em>Introduction to robust estimation and hypothesis testing</em> (4e éd.). Academic Press.</p>

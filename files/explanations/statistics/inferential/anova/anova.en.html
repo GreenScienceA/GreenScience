@@ -1,0 +1,351 @@
+<h2>📈 ANOVA: Dissecting Variance to Discover Truth</h2>
+
+<p>It is 1919 in Harpenden, England. A young mathematician named <strong>Ronald Aylmer Fisher</strong> — just 29, with no formal position and a family to feed — accepts a temporary post at the <strong>Rothamsted Experimental Station</strong>, the world's oldest agricultural research centre. His task: to make sense of 70 years of accumulated crop data that nobody has been able to properly analyze. The station's director, Sir John Russell, later recalled that he quickly realized Fisher was "more than a man of great ability; he was in fact a genius who must be retained" (Russell, 1966, p. 327). Within five years, Fisher would invent the most widely used statistical method in all of experimental science — the <strong>Analysis of Variance</strong>, or <strong>ANOVA</strong>.</p>
+
+<p>ANOVA answers a deceptively simple question: <em>Are the means of three or more groups truly different, or could the observed differences be explained by random chance?</em> But behind that simple question lies one of the most elegant ideas in all of statistics — the idea that <strong>total variability can be partitioned into meaningful components</strong>, each attributable to a different source. Fisher's insight was that instead of comparing means directly (which becomes hopelessly complicated with many groups), you compare <em>variances</em> — the between-group variance against the within-group variance — and the ratio of these two quantities tells you everything you need to know (Fisher, 1925).</p>
+
+<blockquote>💡 <strong>The Big Idea:</strong> ANOVA does not compare means — it compares <em>variances</em>. If the variance <em>between</em> groups is much larger than the variance <em>within</em> groups, then the group means must be truly different. This variance-ratio approach — the F-test — is the beating heart of ANOVA and the foundation of virtually all experimental design in science.</blockquote>
+
+<hr>
+
+<h2>🌾 Historical Origins: How Wheat Fields Gave Birth to Modern Statistics</h2>
+
+<h3>Fisher at Rothamsted (1919–1933)</h3>
+
+<p>When Fisher arrived at Rothamsted in 1919, the station had been running continuous agricultural experiments since 1843 — the famous Broadbalk wheat experiment, still running today, is the longest continuous agricultural experiment in the world (Langkjær-Bain, 2018). The station possessed mountains of data on crop yields, fertilizers, and weather conditions, but the scientists lacked the mathematical tools to extract reliable conclusions from them.</p>
+
+<p>Fisher's first breakthrough came in a 1923 paper with Winifred Mackenzie, "Studies in Crop Variation II," analyzing potato yields across different varieties and manure treatments. In this paper, he introduced the <strong>partition of sums of squares</strong> — the core mathematical operation of ANOVA — showing how the total variation in crop yield could be decomposed into components due to variety, treatment, and residual error (Fisher &amp; Mackenzie, 1923). This partition was formalized into the now-familiar <strong>ANOVA table</strong> and published systematically in Fisher's landmark book <em>Statistical Methods for Research Workers</em> (1925), which went through 14 editions and became arguably the most influential statistics textbook ever written.</p>
+
+<p>In 1935, Fisher published <em>The Design of Experiments</em>, which introduced the three foundational principles of experimental design — <strong>randomization</strong>, <strong>replication</strong>, and <strong>blocking</strong> — alongside factorial experiments and the famous "Lady Tasting Tea" thought experiment, the first formal statement of the null hypothesis (Fisher, 1935). Together, ANOVA and experimental design revolutionized not only agriculture but every field of empirical science: medicine, psychology, education, engineering, and ecology all adopted Fisher's framework within decades.</p>
+
+<blockquote>🧠 <strong>A Statistician's Humility:</strong> Fisher described ANOVA as merely "a simple method of arranging arithmetical facts so as to isolate and display the essential features of a body of data with the utmost simplicity." Richard Mead of Rothamsted called it "probably the most important thing that's ever come out of Rothamsted from a statistics perspective, because it's the day-to-day tool of most scientists" (Langkjær-Bain, 2018).</blockquote>
+
+<hr>
+
+<h2>🔬 The Core Logic: Why Compare Variances Instead of Means?</h2>
+
+<h3>The Multiple Comparisons Problem</h3>
+
+<p>Suppose you are an agronomist in Sétif, Algeria, testing three fertilizer treatments (A, B, C) on wheat yield. Your first instinct might be to run three separate t-tests: A vs. B, A vs. C, and B vs. C. The problem? Each t-test carries a 5% chance of a false positive (Type I error). With three tests, your overall false-positive risk inflates to approximately 1 − (1 − 0.05)³ ≈ 14.3%. With 10 groups, you would need 45 pairwise t-tests and your family-wise error rate would balloon to 1 − (0.95)⁴⁵ ≈ 90% — meaning you are almost <em>guaranteed</em> to find at least one spurious difference even when none exists (Maxwell &amp; Delaney, 2004).</p>
+
+<p>ANOVA solves this problem by performing a single <strong>omnibus test</strong> that evaluates all group means simultaneously while maintaining the Type I error rate at the chosen α level (typically 0.05). Only if the omnibus test is significant do you proceed to investigate <em>which</em> specific groups differ, using carefully controlled post-hoc procedures.</p>
+
+<h3>The Partition of Variance</h3>
+
+<p>ANOVA's genius lies in decomposing the total variability in the data into additive components. Consider <em>N</em> observations distributed across <em>k</em> groups. The <strong>total sum of squares</strong> (SS<sub>Total</sub>) measures the overall variability around the grand mean. ANOVA partitions this into:</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>SS<sub>Total</sub> = SS<sub>Between</sub> + SS<sub>Within</sub></strong></p>
+
+<p><strong>SS<sub>Between</sub></strong> (also called SS<sub>Treatment</sub> or SS<sub>Model</sub>) captures how much the <em>group means</em> deviate from the grand mean — this is the variability <em>explained</em> by the grouping factor.</p>
+
+<p><strong>SS<sub>Within</sub></strong> (also called SS<sub>Error</sub> or SS<sub>Residual</sub>) captures how much individual observations deviate from their own group mean — this is the <em>unexplained</em> or random variability.</p>
+
+<p>If the treatment has a real effect, SS<sub>Between</sub> will be large relative to SS<sub>Within</sub>. If there is no effect, both components will reflect only random noise and their ratio will be approximately 1 (Keppel &amp; Wickens, 2004).</p>
+
+<h3>The F-Ratio: Fisher's Variance Ratio</h3>
+
+<p>Each sum of squares is converted to a <strong>mean square</strong> (MS) by dividing by its degrees of freedom:</p>
+
+<table>
+  <thead>
+    <tr><th>Source</th><th>SS</th><th>df</th><th>MS</th><th>F</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Between groups</td><td>SS<sub>B</sub></td><td>k − 1</td><td>SS<sub>B</sub> / (k − 1)</td><td rowspan="2" style="vertical-align:middle"><strong>MS<sub>B</sub> / MS<sub>W</sub></strong></td></tr>
+    <tr><td>Within groups</td><td>SS<sub>W</sub></td><td>N − k</td><td>SS<sub>W</sub> / (N − k)</td></tr>
+    <tr><td>Total</td><td>SS<sub>T</sub></td><td>N − 1</td><td>—</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<p>The <strong>F-ratio</strong> = MS<sub>Between</sub> / MS<sub>Within</sub> follows the <strong>F-distribution</strong> with (k − 1, N − k) degrees of freedom under the null hypothesis. Large F-values indicate that group means differ more than random variation would predict (Fisher, 1925).</p>
+
+<hr>
+
+<h2>📊 One-Way ANOVA: A Complete Worked Example</h2>
+
+<h3>🌾 Scenario: Fertilizer Effects on Wheat Yield in Sétif</h3>
+
+<p>An agronomist in the highlands of Sétif tests three fertilizer treatments on durum wheat: <strong>Control</strong> (no fertilizer), <strong>NPK</strong> (mineral), and <strong>Compost</strong> (organic). Six plots are randomly assigned to each treatment (n = 6 per group, N = 18 total). Yield (tonnes/hectare):</p>
+
+<table>
+  <thead>
+    <tr><th>Control</th><th>NPK</th><th>Compost</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>2.1</td><td>3.5</td><td>3.0</td></tr>
+    <tr><td>2.4</td><td>3.8</td><td>2.8</td></tr>
+    <tr><td>1.9</td><td>3.2</td><td>3.3</td></tr>
+    <tr><td>2.3</td><td>4.0</td><td>3.1</td></tr>
+    <tr><td>2.0</td><td>3.6</td><td>2.9</td></tr>
+    <tr><td>2.5</td><td>3.7</td><td>3.5</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Step 1: Group means and grand mean.</strong></p>
+<p>X̄<sub>Control</sub> = 2.200, &nbsp; X̄<sub>NPK</sub> = 3.633, &nbsp; X̄<sub>Compost</sub> = 3.100, &nbsp; Grand mean X̄ = 2.978</p>
+
+<p><strong>Step 2: Compute sums of squares.</strong></p>
+<p>SS<sub>Between</sub> = 6[(2.200 − 2.978)² + (3.633 − 2.978)² + (3.100 − 2.978)²] = 6[0.606 + 0.430 + 0.015] = <strong>6.307</strong></p>
+<p>SS<sub>Within</sub> = Σ(each observation − its group mean)² = <strong>0.847</strong></p>
+<p>SS<sub>Total</sub> = 6.307 + 0.847 = <strong>7.153</strong></p>
+
+<p><strong>Step 3: Mean squares.</strong></p>
+<p>MS<sub>Between</sub> = 6.307 / (3 − 1) = <strong>3.153</strong></p>
+<p>MS<sub>Within</sub> = 0.847 / (18 − 3) = <strong>0.056</strong></p>
+
+<p><strong>Step 4: F-ratio.</strong></p>
+<p style="text-align:center; font-size:1.15em;"><strong>F(2, 15) = 3.153 / 0.056 = 55.89</strong></p>
+
+<p><strong>Step 5: Decision.</strong> The critical F-value at α = 0.05 with df = (2, 15) is 3.68. Since 55.89 ≫ 3.68, we reject H₀. <em>p</em> &lt; 0.001.</p>
+
+<p><strong>Step 6: Effect size.</strong></p>
+<p>η² = SS<sub>Between</sub> / SS<sub>Total</sub> = 6.307 / 7.153 = <strong>0.882</strong> — meaning 88.2% of the total variance in yield is explained by fertilizer treatment. This is a very large effect (Cohen, 1988).</p>
+
+<p><strong>Conclusion:</strong> There is a statistically significant difference in wheat yield across the three fertilizer treatments, <em>F</em>(2, 15) = 55.89, <em>p</em> &lt; .001, η² = .88. But <em>which</em> treatments differ from which? For that, we need post-hoc tests.</p>
+
+<hr>
+
+<h2>🎯 Post-Hoc Multiple Comparisons: Where Is the Difference?</h2>
+
+<p>A significant ANOVA tells you that <em>at least one</em> group mean differs — but not <em>which</em> ones. Post-hoc tests make all pairwise comparisons while controlling the family-wise Type I error rate (Lee &amp; Lee, 2018).</p>
+
+<h3>Tukey's Honestly Significant Difference (HSD)</h3>
+
+<p>Developed by <strong>John W. Tukey</strong> in his monumental 1953 unpublished manuscript "The Problem of Multiple Comparisons" at Princeton University, the HSD method uses the <strong>Studentized range distribution</strong> to simultaneously test all pairwise differences while maintaining the family-wise error rate at exactly α (Tukey, 1953). It is the most widely recommended method when all pairwise comparisons are of interest and group sizes are equal.</p>
+
+<p>The critical difference (HSD) is calculated as:</p>
+<p style="text-align:center; font-size:1.1em;"><strong>HSD = q<sub>α, k, df<sub>W</sub></sub> × √(MS<sub>Within</sub> / n)</strong></p>
+
+<p>For our example: q<sub>0.05, 3, 15</sub> = 3.67 (from the Studentized range table), so HSD = 3.67 × √(0.056 / 6) = 3.67 × 0.0968 = <strong>0.355</strong>.</p>
+
+<table>
+  <thead>
+    <tr><th>Comparison</th><th>|Difference|</th><th>&gt; HSD?</th><th>Significant?</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>NPK − Control</td><td>1.433</td><td>Yes</td><td>✅ <em>p</em> &lt; .001</td></tr>
+    <tr><td>Compost − Control</td><td>0.900</td><td>Yes</td><td>✅ <em>p</em> &lt; .001</td></tr>
+    <tr><td>NPK − Compost</td><td>0.533</td><td>Yes</td><td>✅ <em>p</em> &lt; .01</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Result:</strong> All three treatments differ significantly from each other. NPK produces the highest yield, followed by Compost, then Control.</p>
+
+<h3>Other Major Post-Hoc Methods</h3>
+
+<table>
+  <thead>
+    <tr><th>Method</th><th>Best For</th><th>Characteristics</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Bonferroni</strong></td><td>Small number of planned comparisons</td><td>Divides α by number of comparisons. Simple but conservative when many comparisons.</td></tr>
+    <tr><td><strong>Scheffé</strong></td><td>Complex contrasts (not just pairs)</td><td>Most conservative for pairwise, but controls error for <em>all possible</em> contrasts including non-pairwise (Scheffé, 1959).</td></tr>
+    <tr><td><strong>Tukey HSD</strong></td><td>All pairwise comparisons, equal n</td><td>Best balance of power and error control for all pairs (Tukey, 1953).</td></tr>
+    <tr><td><strong>Tukey-Kramer</strong></td><td>All pairwise, unequal n</td><td>Extension of Tukey HSD for unbalanced designs (Kramer, 1956).</td></tr>
+    <tr><td><strong>Games-Howell</strong></td><td>Unequal variances</td><td>Does not assume equal variances; pairs with Welch's ANOVA.</td></tr>
+    <tr><td><strong>Dunnett</strong></td><td>All treatments vs. one control</td><td>More powerful than Tukey when only comparisons to a single control are needed.</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧮 Two-Way ANOVA: When Two Factors Act Simultaneously</h2>
+
+<p>Real experiments often involve more than one factor. Fisher himself recognized this when studying how <em>both</em> potato varieties <em>and</em> manure treatments affected yield (Fisher &amp; Mackenzie, 1923). <strong>Two-way ANOVA</strong> (also called factorial ANOVA) simultaneously tests the effects of two independent variables and, crucially, their <strong>interaction</strong>.</p>
+
+<h3>Partitioning Variance with Two Factors</h3>
+
+<p style="text-align:center; font-size:1.05em;"><strong>SS<sub>Total</sub> = SS<sub>A</sub> + SS<sub>B</sub> + SS<sub>A×B</sub> + SS<sub>Error</sub></strong></p>
+
+<p>Where:</p>
+<p>• <strong>SS<sub>A</sub></strong> = main effect of Factor A (e.g., fertilizer type)<br>
+• <strong>SS<sub>B</sub></strong> = main effect of Factor B (e.g., wheat variety)<br>
+• <strong>SS<sub>A×B</sub></strong> = interaction effect — does the effect of fertilizer <em>depend on</em> which variety is planted?<br>
+• <strong>SS<sub>Error</sub></strong> = residual variation</p>
+
+<h3>Understanding Interaction</h3>
+
+<p>The interaction effect is perhaps the most important contribution of factorial ANOVA. An interaction means that the effect of one factor changes depending on the level of the other factor. For example: NPK fertilizer might boost Yield dramatically for Variety A but have minimal effect on Variety B. Without factorial ANOVA, this crucial pattern would be invisible — each factor tested alone would give misleading results (Maxwell &amp; Delaney, 2004).</p>
+
+<blockquote>💡 <strong>Fisher's Efficiency Argument:</strong> Before Fisher, researchers tested one variable at a time — requiring separate experiments for each factor. Fisher showed that factorial designs are not only more informative (they reveal interactions) but actually more <em>efficient</em> than one-factor-at-a-time experiments because every observation contributes information about every factor simultaneously (Fisher, 1935).</blockquote>
+
+<hr>
+
+<h2>🔁 Repeated-Measures ANOVA</h2>
+
+<p>When the <em>same subjects</em> are measured multiple times (e.g., plant growth measured at Week 2, Week 4, and Week 6), the observations are correlated. Standard one-way ANOVA assumes independence and would be inappropriate. <strong>Repeated-measures ANOVA</strong> accounts for within-subject correlation by partitioning out the individual subject variability:</p>
+
+<p style="text-align:center; font-size:1.05em;"><strong>SS<sub>Total</sub> = SS<sub>Treatment</sub> + SS<sub>Subjects</sub> + SS<sub>Error</sub></strong></p>
+
+<p>By removing SS<sub>Subjects</sub> from the error term, repeated-measures ANOVA typically has much greater statistical power than between-subjects designs, because each subject serves as their own control (Maxwell &amp; Delaney, 2004).</p>
+
+<h3>The Sphericity Assumption</h3>
+
+<p>Repeated-measures ANOVA introduces an additional assumption: <strong>sphericity</strong> — the requirement that the variances of <em>all pairwise differences</em> between conditions are equal. When sphericity is violated (as it often is), the F-test becomes liberal (inflated Type I error). Mauchly's test (1940) detects violations, and two corrections are available:</p>
+
+<p>• <strong>Greenhouse-Geisser ε correction</strong> (Greenhouse &amp; Geisser, 1959): Conservative; recommended when ε &lt; 0.75.<br>
+• <strong>Huynh-Feldt ε correction</strong> (Huynh &amp; Feldt, 1976): Less conservative; recommended when ε ≥ 0.75.</p>
+
+<p>Both corrections reduce the degrees of freedom, making the F-test more conservative and correcting for the inflated false-positive rate.</p>
+
+<hr>
+
+<h2>🔧 Assumptions and Diagnostics</h2>
+
+<p>ANOVA rests on three core assumptions. Understanding when they matter — and when they don't — is essential for responsible use.</p>
+
+<table>
+  <thead>
+    <tr><th>Assumption</th><th>What It Means</th><th>Test</th><th>Consequence of Violation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>1. Independence</strong></td><td>Observations are independent of each other</td><td>Study design (no statistical test)</td><td>Most critical. Violation invalidates all results. Use repeated-measures or mixed models if observations are correlated.</td></tr>
+    <tr><td><strong>2. Normality</strong></td><td>Residuals are normally distributed within each group</td><td>Shapiro-Wilk test; Q-Q plots</td><td>ANOVA is <em>robust</em> to non-normality when sample sizes are moderate (n ≥ 15 per group) and approximately balanced (Glass et al., 1972). For small or heavily skewed samples, use Kruskal-Wallis instead.</td></tr>
+    <tr><td><strong>3. Homoscedasticity</strong></td><td>Equal variances across groups</td><td>Levene's test (1960); Brown-Forsythe test (1974)</td><td>When violated, use <strong>Welch's ANOVA</strong> (Welch, 1951), which does not assume equal variances. Especially critical when group sizes are unequal.</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🧠 <strong>The Robustness Insight:</strong> Glass, Peckham, and Sanders (1972) showed in their landmark review that ANOVA is remarkably robust to violations of normality, especially with balanced designs and moderate sample sizes. The most dangerous violation is <em>heteroscedasticity combined with unequal sample sizes</em> — this inflates Type I error when the larger group has the smaller variance, or deflates power in the reverse case. In such situations, Welch's ANOVA is strongly recommended.</blockquote>
+
+<hr>
+
+<h2>⚡ Welch's ANOVA: The Modern Robust Alternative</h2>
+
+<p>In 1951, <strong>Bernard Lewis Welch</strong> — extending his earlier two-sample t-test to multiple groups — published "On the Comparison of Several Mean Values: An Alternative Approach" in <em>Biometrika</em> (Welch, 1951). Welch's ANOVA uses weighted means and adjusted degrees of freedom (via the Satterthwaite approximation) to produce valid F-tests even when group variances are unequal.</p>
+
+<p>Key advantages of Welch's ANOVA:</p>
+
+<p>• Maintains Type I error close to the nominal α even with heteroscedasticity<br>
+• Loses almost no power compared to classical ANOVA when variances <em>are</em> equal<br>
+• When paired with the <strong>Games-Howell</strong> post-hoc test, provides a complete robust analysis pipeline</p>
+
+<p>Many modern statisticians recommend using Welch's ANOVA as the <em>default</em>, rather than the classical F-test, because it is valid whether variances are equal or not — at negligible cost in power when they are (Delacre et al., 2019).</p>
+
+<hr>
+
+<h2>📐 Effect Sizes: How Big Is the Difference?</h2>
+
+<p>Statistical significance alone is insufficient — a <em>p</em>-value tells you whether an effect exists, but not <em>how large</em> it is. Effect sizes quantify the practical magnitude of differences and are essential for scientific interpretation and APA reporting (APA, 2020).</p>
+
+<table>
+  <thead>
+    <tr><th>Measure</th><th>Formula</th><th>Interpretation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>η² (eta squared)</strong></td><td>SS<sub>Effect</sub> / SS<sub>Total</sub></td><td>Proportion of total variance explained. Simple but positively biased (overestimates in the population). Benchmarks: .01 = small, .06 = medium, .14 = large (Cohen, 1988).</td></tr>
+    <tr><td><strong>Partial η²</strong></td><td>SS<sub>Effect</sub> / (SS<sub>Effect</sub> + SS<sub>Error</sub>)</td><td>Proportion of variance explained by a factor <em>after controlling for other factors</em>. Standard in factorial designs. Note: SPSS reports partial η² by default (Richardson, 2011).</td></tr>
+    <tr><td><strong>ω² (omega squared)</strong></td><td>(SS<sub>B</sub> − (k−1)MS<sub>W</sub>) / (SS<sub>T</sub> + MS<sub>W</sub>)</td><td>Less biased estimator than η². Recommended for population-level inference (Lakens, 2013). Can be negative when F &lt; 1 (set to 0).</td></tr>
+    <tr><td><strong>Cohen's <em>f</em></strong></td><td>√(η² / (1 − η²))</td><td>Used primarily for power analysis. Benchmarks: 0.10 = small, 0.25 = medium, 0.40 = large (Cohen, 1988).</td></tr>
+  </tbody>
+</table>
+
+<p>For our worked example: ω² = (6.307 − 2 × 0.056) / (7.153 + 0.056) = 6.195 / 7.209 = <strong>0.859</strong>, confirming a very large treatment effect even with the less biased estimator.</p>
+
+<hr>
+
+<h2>📝 APA Reporting Guidelines</h2>
+
+<p>The American Psychological Association (APA, 2020) requires reporting the F-statistic, degrees of freedom, exact <em>p</em>-value, and an effect size measure. Following best practice:</p>
+
+<h3>One-Way ANOVA</h3>
+<p><em>"A one-way ANOVA revealed a statistically significant difference in wheat yield across the three fertilizer treatments, F(2, 15) = 55.89, p &lt; .001, η² = .88. Tukey HSD post-hoc comparisons indicated that NPK (M = 3.63, SD = 0.28) produced significantly higher yield than both Compost (M = 3.10, SD = 0.24, p &lt; .01) and Control (M = 2.20, SD = 0.23, p &lt; .001). Compost also significantly outperformed Control (p &lt; .001)."</em></p>
+
+<h3>Two-Way ANOVA</h3>
+<p><em>"A 3 × 2 factorial ANOVA revealed a significant main effect of fertilizer, F(2, 30) = 42.17, p &lt; .001, partial η² = .74, and a significant main effect of variety, F(1, 30) = 18.33, p &lt; .001, partial η² = .38. The fertilizer × variety interaction was also significant, F(2, 30) = 5.61, p = .009, partial η² = .27, indicating that the advantage of NPK over Compost was greater for Variety A than Variety B."</em></p>
+
+<h3>Welch's ANOVA</h3>
+<p><em>"Because Levene's test indicated unequal variances, F(2, 15) = 5.22, p = .019, Welch's ANOVA was used. The test revealed a significant difference in yield, Welch's F(2, 9.87) = 48.12, p &lt; .001, ω² = .84. Games-Howell post-hoc tests confirmed that all pairwise differences were significant (all ps &lt; .01)."</em></p>
+
+<hr>
+
+<h2>🗺️ The Complete ANOVA Family</h2>
+
+<table>
+  <thead>
+    <tr><th>Design</th><th>ANOVA Type</th><th>When to Use</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>One factor, independent groups</td><td><strong>One-way ANOVA</strong></td><td>Comparing 3+ groups (e.g., 3 fertilizer treatments)</td></tr>
+    <tr><td>Two factors, independent groups</td><td><strong>Two-way (factorial) ANOVA</strong></td><td>Two crossed factors (e.g., fertilizer × variety). Tests main effects + interaction.</td></tr>
+    <tr><td>One factor, same subjects</td><td><strong>Repeated-measures ANOVA</strong></td><td>Same subjects measured at 3+ time points or conditions.</td></tr>
+    <tr><td>Two factors: one between, one within</td><td><strong>Mixed (split-plot) ANOVA</strong></td><td>Groups differ on one factor, measured repeatedly on another (e.g., Treatment group × Week).</td></tr>
+    <tr><td>One factor, with continuous covariate</td><td><strong>ANCOVA</strong></td><td>Controls for a confounding variable (e.g., initial soil nitrogen). Increases power.</td></tr>
+    <tr><td>Multiple dependent variables</td><td><strong>MANOVA</strong></td><td>Tests group differences on several outcomes simultaneously (e.g., yield + protein + weight).</td></tr>
+    <tr><td>Unequal variances, independent groups</td><td><strong>Welch's ANOVA</strong></td><td>Robust alternative when homoscedasticity is violated (Welch, 1951).</td></tr>
+    <tr><td>Non-normal / ordinal data</td><td><strong>Kruskal-Wallis H test</strong></td><td>Non-parametric alternative to one-way ANOVA (Kruskal &amp; Wallis, 1952).</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>⚠️ Common Mistakes and How to Avoid Them</h2>
+
+<p><strong>1. Running multiple t-tests instead of ANOVA.</strong> This inflates Type I error. Always use ANOVA first, then post-hoc tests if significant.</p>
+
+<p><strong>2. Ignoring the interaction in factorial designs.</strong> If a significant interaction exists, main effects alone can be misleading. Always examine the interaction first before interpreting main effects (Maxwell &amp; Delaney, 2004).</p>
+
+<p><strong>3. Reporting only <em>p</em>-values without effect sizes.</strong> A tiny <em>p</em>-value with a tiny η² means the effect is statistically significant but practically meaningless. Always report η², partial η², or ω² (Lakens, 2013).</p>
+
+<p><strong>4. Using classical ANOVA when variances are unequal.</strong> If Levene's test is significant, switch to Welch's ANOVA with Games-Howell post-hoc (Delacre et al., 2019).</p>
+
+<p><strong>5. Forgetting to check assumptions.</strong> Always test normality (Shapiro-Wilk) and homoscedasticity (Levene's) before choosing between classical ANOVA, Welch's ANOVA, or Kruskal-Wallis.</p>
+
+<p><strong>6. Conducting post-hoc tests after a non-significant ANOVA.</strong> Post-hoc tests are only justified when the omnibus F-test is significant. A non-significant ANOVA means there is insufficient evidence of group differences.</p>
+
+<hr>
+
+<h2>🧩 Summary: The Architecture of Experimental Evidence</h2>
+
+<p>Fisher's Analysis of Variance is, at its core, a framework for thinking about evidence. It asks: of all the variability we observe in an experiment, how much is attributable to our deliberate manipulation (the treatment), and how much is just noise? When the signal overwhelms the noise — when the F-ratio is large — we have evidence that the treatment matters.</p>
+
+<p>From its origins in the wheat fields of Rothamsted to its ubiquitous application in modern medicine, psychology, agriculture, ecology, and engineering, ANOVA remains the most widely used statistical method for comparing group means. Its extensions — factorial designs, repeated measures, ANCOVA, MANOVA — form a coherent family of tools that can handle virtually any experimental design. And when its assumptions are violated, robust alternatives like Welch's ANOVA ensure that valid conclusions are always within reach.</p>
+
+<p>As Fisher himself wrote in <em>The Design of Experiments</em>: "To consult the statistician after an experiment is finished is often merely to ask him to conduct a post-mortem examination. He can perhaps say what the experiment died of." The lesson is clear — ANOVA is not just a calculation; it is a way of thinking about experiments, from their design through their analysis to the interpretation of results. Mastering it means mastering the logic of experimental science itself.</p>
+
+<hr>
+
+<h2>📚 References</h2>
+
+<p>American Psychological Association. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.). Author. https://doi.org/10.1037/0000165-000</p>
+
+<p>Brown, M. B., &amp; Forsythe, A. B. (1974). Robust tests for the equality of variances. <em>Journal of the American Statistical Association</em>, <em>69</em>(346), 364–367. https://doi.org/10.1080/01621459.1974.10482955</p>
+
+<p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
+
+<p>Delacre, M., Leys, C., Mora, Y. L., &amp; Lakens, D. (2019). Taking parametric assumptions seriously: Arguments for the use of Welch's F-test instead of the classical F-test in one-way ANOVA. <em>International Review of Social Psychology</em>, <em>32</em>(1), 13. https://doi.org/10.5334/irsp.198</p>
+
+<p>Fisher, R. A. (1925). <em>Statistical methods for research workers</em>. Oliver and Boyd.</p>
+
+<p>Fisher, R. A. (1935). <em>The design of experiments</em>. Oliver and Boyd.</p>
+
+<p>Fisher, R. A., &amp; Mackenzie, W. A. (1923). Studies in crop variation. II. The manurial response of different potato varieties. <em>Journal of Agricultural Science</em>, <em>13</em>(3), 311–320. https://doi.org/10.1017/S0021859600003592</p>
+
+<p>Glass, G. V., Peckham, P. D., &amp; Sanders, J. R. (1972). Consequences of failure to meet assumptions underlying the fixed effects analyses of variance and covariance. <em>Review of Educational Research</em>, <em>42</em>(3), 237–288. https://doi.org/10.3102/00346543042003237</p>
+
+<p>Greenhouse, S. W., &amp; Geisser, S. (1959). On methods in the analysis of profile data. <em>Psychometrika</em>, <em>24</em>(2), 95–112. https://doi.org/10.1007/BF02289823</p>
+
+<p>Huynh, H., &amp; Feldt, L. S. (1976). Estimation of the Box correction for degrees of freedom from sample data in randomized block and split-plot designs. <em>Journal of Educational Statistics</em>, <em>1</em>(1), 69–82. https://doi.org/10.3102/10769986001001069</p>
+
+<p>Keppel, G., &amp; Wickens, T. D. (2004). <em>Design and analysis: A researcher's handbook</em> (4th ed.). Pearson Prentice Hall.</p>
+
+<p>Kruskal, W. H., &amp; Wallis, W. A. (1952). Use of ranks in one-criterion variance analysis. <em>Journal of the American Statistical Association</em>, <em>47</em>(260), 583–621. https://doi.org/10.1080/01621459.1952.10483441</p>
+
+<p>Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. <em>Frontiers in Psychology</em>, <em>4</em>, 863. https://doi.org/10.3389/fpsyg.2013.00863</p>
+
+<p>Langkjær-Bain, R. (2018). Where the seeds of modern statistics were sown. <em>Significance</em>, <em>15</em>(4), 16–21. https://doi.org/10.1111/j.1740-9713.2018.01144.x</p>
+
+<p>Lee, S., &amp; Lee, D. K. (2018). What is the proper way to apply the multiple comparison test? <em>Korean Journal of Anesthesiology</em>, <em>71</em>(5), 353–360. https://doi.org/10.4097/kja.d.18.00242</p>
+
+<p>Levene, H. (1960). Robust tests for equality of variances. In I. Olkin (Ed.), <em>Contributions to probability and statistics</em> (pp. 278–292). Stanford University Press.</p>
+
+<p>Maxwell, S. E., &amp; Delaney, H. D. (2004). <em>Designing experiments and analyzing data: A model comparison perspective</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
+
+<p>Richardson, J. T. E. (2011). Eta squared and partial eta squared as measures of effect size in educational research. <em>Educational Research Review</em>, <em>6</em>(2), 135–147. https://doi.org/10.1016/j.edurev.2010.12.001</p>
+
+<p>Russell, E. J. (1966). <em>A history of agricultural science in Great Britain, 1620–1954</em>. Allen and Unwin.</p>
+
+<p>Scheffé, H. (1959). <em>The analysis of variance</em>. Wiley.</p>
+
+<p>Tukey, J. W. (1953). <em>The problem of multiple comparisons</em>. Unpublished manuscript, Princeton University. [Reprinted in H. I. Braun (Ed.), <em>The collected works of John W. Tukey: Vol. VIII. Multiple comparisons, 1948–1983</em> (pp. 1–300). Chapman and Hall, 1994.]</p>
+
+<p>Welch, B. L. (1951). On the comparison of several mean values: An alternative approach. <em>Biometrika</em>, <em>38</em>(3/4), 330–336. https://doi.org/10.1093/biomet/38.3-4.330</p>

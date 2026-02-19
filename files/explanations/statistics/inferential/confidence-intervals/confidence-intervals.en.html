@@ -1,0 +1,318 @@
+<h2>📏 Confidence Intervals: Quantifying Uncertainty with Precision</h2>
+
+<p>Imagine you are a soil scientist in Sétif, Algeria, measuring the average organic carbon content of farmland soil. You collect 40 samples and find a mean of 1.85%. But you know this number isn't <em>exactly</em> the true population mean — if you sampled 40 different plots tomorrow, you'd get a slightly different average. So how do you report your finding in a way that honestly communicates both what you learned <em>and</em> how uncertain you are? You could say "the mean is 1.85%" — but that single number hides the inevitable sampling error. You could run a hypothesis test — but that only tells you whether the result is "significant," not <em>how large</em> the true value might be. The answer is a <strong>confidence interval</strong>: a range of plausible values for the population parameter, calculated from your sample data, that conveys both the <em>estimate</em> and its <em>precision</em> in a single, interpretable package.</p>
+
+<p>Confidence intervals are arguably the most useful tool in all of inferential statistics. They answer the question every researcher really cares about: <em>"How much?"</em> and <em>"How precisely do I know it?"</em> — not merely <em>"Is the effect nonzero?"</em> (Cumming, 2014). Since the 1980s, leading journals, professional organizations, and methodological reformers have urged scientists to shift from p-values toward estimation with confidence intervals (Gardner &amp; Altman, 1986; APA, 2010; Wasserstein &amp; Lazar, 2016).</p>
+
+<blockquote>💡 <strong>The Big Idea:</strong> A point estimate is like a dart thrown at a target — it gives you a single best guess. A confidence interval is the <em>ring around the dart</em> that tells you how close you probably are. The wider the ring, the less precise your estimate; the narrower the ring, the more information your data carry about the true value.</blockquote>
+
+<hr>
+
+<h2>📜 Historical Origins: Neyman's Revolutionary Idea</h2>
+
+<p>The confidence interval was invented by the Polish-American mathematician <strong>Jerzy Neyman</strong> in the 1930s, making it a remarkably modern concept. The story begins in Warsaw around 1930, when Neyman's student Wacław Pytkowski asked a seemingly simple question: how should one characterize the precision of an estimated regression coefficient without making dogmatic claims? Neyman worked on this problem for years, publishing preliminary ideas in 1934 and the full theory in his landmark 1937 paper in the <em>Philosophical Transactions of the Royal Society</em> (Neyman, 1937).</p>
+
+<p>Neyman's brilliant insight was to shift the focus from the <em>probability of a parameter</em> (which, in frequentist theory, is a fixed unknown constant with no probability distribution) to the <em>probability of the procedure</em>. He asked: can we design an algorithm that, when applied repeatedly to random samples from the same population, produces intervals that <em>capture</em> the true parameter value a specified proportion of the time? He called the resulting intervals "confidence intervals" — deliberately avoiding the word "probability" to prevent confusion with Bayesian credible intervals (Neyman, 1937).</p>
+
+<p>It took another 50 years before medical journals began systematically advocating the reporting of confidence intervals. The watershed moment came with Gardner and Altman's (1986) influential paper in the <em>British Medical Journal</em>, which argued that confidence intervals convey far more useful information than p-values alone. Today, confidence intervals are required or strongly recommended by the American Psychological Association (APA, 2010), the International Committee of Medical Journal Editors (ICMJE), and numerous discipline-specific reporting guidelines such as CONSORT and STROBE.</p>
+
+<blockquote>🧠 <strong>Neyman's Own Words:</strong> "The statistician who computes confidence intervals approaches the problem of estimation entirely differently from the Bayesian. They do not claim that the parameter has any probability of being in the interval. Instead, they claim that the <em>method</em> they used has a known long-run success rate." This subtle but critical distinction remains the source of most misunderstandings about confidence intervals today.</blockquote>
+
+<hr>
+
+<h2>🔬 The Anatomy of a Confidence Interval</h2>
+
+<p>Every confidence interval has the same fundamental structure:</p>
+
+<p style="text-align:center; font-size:1.15em;"><strong>CI = Point Estimate ± Margin of Error</strong></p>
+
+<p>Or equivalently:</p>
+
+<p style="text-align:center; font-size:1.15em;"><strong>CI = (Lower Bound, Upper Bound) = (θ̂ − E, θ̂ + E)</strong></p>
+
+<p>Let's dissect each component:</p>
+
+<table>
+  <thead>
+    <tr><th>Component</th><th>Symbol</th><th>What It Represents</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🎯 <strong>Point Estimate</strong></td><td>θ̂ (e.g., x̄ or p̂)</td><td>The single best guess for the parameter — the center of the interval</td><td>x̄ = 1.85% organic carbon</td></tr>
+    <tr><td>📐 <strong>Margin of Error (E)</strong></td><td>E = z* × SE or t* × SE</td><td>The "radius" of the interval — how far the bounds extend from the center</td><td>E = 1.96 × 0.12 = 0.235</td></tr>
+    <tr><td>🔢 <strong>Critical Value</strong></td><td>z* or t*</td><td>Multiplier determined by the confidence level and distribution used</td><td>z* = 1.96 for 95% CI</td></tr>
+    <tr><td>📊 <strong>Standard Error (SE)</strong></td><td>σ/√n or s/√n</td><td>Measures sampling variability — how much x̄ would vary across repeated samples</td><td>SE = 0.76/√40 = 0.12</td></tr>
+    <tr><td>🔒 <strong>Confidence Level</strong></td><td>1 − α (e.g., 95%)</td><td>The long-run capture rate of the procedure</td><td>95%: if we repeat this 100 times, ~95 intervals capture μ</td></tr>
+  </tbody>
+</table>
+
+<p>For our soil science example: CI = 1.85 ± 0.235 = <strong>(1.615%, 2.085%)</strong>. We can report: "The mean soil organic carbon content was estimated at 1.85% (95% CI: 1.62 to 2.09)."</p>
+
+<hr>
+
+<h2>📊 Formulas for Common Confidence Intervals</h2>
+
+<h3>Case 1: CI for a Population Mean (σ Known — Z-interval)</h3>
+
+<p>When the population standard deviation σ is known (rare in practice but important theoretically), we use the standard normal distribution:</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>x̄ ± z<sub>α/2</sub> · (σ / √n)</strong></p>
+
+<p>where z<sub>α/2</sub> is the critical value from the standard normal distribution cutting off α/2 in each tail.</p>
+
+<h3>Case 2: CI for a Population Mean (σ Unknown — t-interval)</h3>
+
+<p>This is the most common scenario. When σ is unknown and estimated by the sample standard deviation s, we use the Student's t-distribution with (n − 1) degrees of freedom:</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>x̄ ± t<sub>α/2, n−1</sub> · (s / √n)</strong></p>
+
+<p>The t-distribution has heavier tails than the normal, producing wider intervals — a "penalty" for the additional uncertainty of estimating σ. As n increases, the t-distribution converges to the normal, and for n ≥ 30 the difference becomes negligible (Gosset [Student], 1908; see Lehmann &amp; Romano, 2005).</p>
+
+<h3>Case 3: CI for a Population Proportion</h3>
+
+<p>For categorical data (yes/no, success/failure) where the sample proportion is p̂ = x/n:</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>p̂ ± z<sub>α/2</sub> · √(p̂(1 − p̂) / n)</strong></p>
+
+<p>This is the <strong>Wald interval</strong>, valid when np̂ ≥ 5 and n(1 − p̂) ≥ 5. For small samples or extreme proportions, the Wilson score interval or the Agresti-Coull interval provide better coverage (Agresti &amp; Coull, 1998; Brown et al., 2001).</p>
+
+<h3>Case 4: CI for the Difference Between Two Means (Independent Samples)</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>(x̄₁ − x̄₂) ± t<sub>α/2, df</sub> · √(s₁²/n₁ + s₂²/n₂)</strong></p>
+
+<p>The degrees of freedom are calculated using the Welch-Satterthwaite approximation when variances are unequal (Welch, 1947).</p>
+
+<h3>Case 5: CI for the Difference Between Two Proportions</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>(p̂₁ − p̂₂) ± z<sub>α/2</sub> · √(p̂₁(1−p̂₁)/n₁ + p̂₂(1−p̂₂)/n₂)</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Confidence Level (1 − α)</th><th>α</th><th>z<sub>α/2</sub></th><th>Interpretation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>90%</td><td>0.10</td><td>1.645</td><td>Wider net, less certainty, narrower interval</td></tr>
+    <tr><td>95%</td><td>0.05</td><td>1.960</td><td>Standard in most fields</td></tr>
+    <tr><td>99%</td><td>0.01</td><td>2.576</td><td>Very conservative, widest interval</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🎯 The Correct Interpretation — and the Six Classic Misconceptions</h2>
+
+<p>The interpretation of confidence intervals is one of the most persistently misunderstood topics in all of statistics. A landmark study by Hoekstra et al. (2014), published in <em>Psychonomic Bulletin &amp; Review</em>, surveyed 120 researchers and 442 students — all with statistics training — and found that both groups endorsed, on average, more than three out of six false statements about confidence intervals. Even experienced researchers with PhDs performed no better than first-year students.</p>
+
+<h3>✅ The Correct Interpretation</h3>
+
+<p>"If we were to repeat the sampling procedure many times, each time constructing a 95% confidence interval, then approximately 95% of those intervals would contain the true population parameter."</p>
+
+<p>This is a statement about the <em>procedure</em> (the method of constructing intervals), not about any <em>particular</em> interval. Once you compute a specific CI — say, (1.62, 2.09) — the true parameter μ is either inside that interval or it isn't. There is no probability about it. The "confidence" refers to the long-run reliability of the method (Neyman, 1937; Morey et al., 2016).</p>
+
+<h3>❌ Six Common Misconceptions</h3>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>False Statement</th><th>Why It's Wrong</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>"There is a 95% probability that the true mean lies within this CI"</td><td>The parameter is fixed, not random. The interval either covers it or doesn't. This confuses <em>confidence</em> with <em>posterior probability</em> (a Bayesian concept).</td></tr>
+    <tr><td>2</td><td>"95% of the sample data fall within the CI"</td><td>The CI is about the <em>population parameter</em>, not the distribution of individual data points. A CI for the mean can be much narrower than the data range.</td></tr>
+    <tr><td>3</td><td>"If we repeat the experiment, 95% of the new sample means will fall within this CI"</td><td>Future sample means have their own sampling distribution. This CI is anchored to <em>this</em> sample; future means could fall anywhere.</td></tr>
+    <tr><td>4</td><td>"We can be 95% confident that the true mean equals the point estimate"</td><td>The CI is a range of plausible values, not a confirmation of the point estimate.</td></tr>
+    <tr><td>5</td><td>"If the CI doesn't include zero, the result is practically important"</td><td>Statistical significance ≠ practical significance. A CI of (0.001, 0.003) excludes zero but may represent a trivially small effect.</td></tr>
+    <tr><td>6</td><td>"A wider CI means the study is poorly designed"</td><td>Width depends on sample size, variability, and confidence level. A wide CI with proper design honestly reflects high uncertainty.</td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚠️ <strong>The Fundamental Confidence Fallacy:</strong> Misconception #1 above is so common it has its own name. Hoekstra et al. (2014) found that 57% of researchers and 47% of master's students endorsed it. Even 70% of introductory statistics textbooks contain definitions that inadvertently promote this fallacy (Hoekstra et al., as reported in Morey et al., 2016). Understanding why this is wrong requires grasping the subtle distinction between <em>frequentist</em> and <em>Bayesian</em> probability — the CI lives in the frequentist world where parameters are fixed constants.</blockquote>
+
+<hr>
+
+<h2>🔎 What Controls the Width? Four Key Factors</h2>
+
+<p>The width of a confidence interval (Width = 2 × E) is determined by four factors, each of which a researcher can influence to some degree:</p>
+
+<table>
+  <thead>
+    <tr><th>Factor</th><th>Effect on Width</th><th>Researcher's Control</th><th>Analogy</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📏 <strong>Sample Size (n)</strong></td><td>↑n → ↓Width (by √n)</td><td>High — collect more data</td><td>More witnesses → more precise testimony</td></tr>
+    <tr><td>📈 <strong>Variability (σ or s)</strong></td><td>↑σ → ↑Width</td><td>Moderate — better measurement, homogeneous samples</td><td>Noisier signal → harder to pinpoint</td></tr>
+    <tr><td>🔒 <strong>Confidence Level (1−α)</strong></td><td>↑Confidence → ↑Width</td><td>High — choose your level</td><td>Casting a wider net catches more fish but less precisely</td></tr>
+    <tr><td>📐 <strong>Critical Value (z* or t*)</strong></td><td>Directly increases with confidence level</td><td>Determined by confidence level &amp; df</td><td>Higher confidence demands a larger multiplier</td></tr>
+  </tbody>
+</table>
+
+<p>The most powerful lever is <strong>sample size</strong>. Because the standard error is inversely proportional to √n, quadrupling the sample size <em>halves</em> the margin of error. This is why well-funded clinical trials with thousands of participants produce impressively narrow confidence intervals, while small pilot studies produce wide, uncertain ones.</p>
+
+<blockquote>📐 <strong>The Precision-Confidence Trade-off:</strong> You cannot simultaneously have high confidence <em>and</em> a narrow interval unless you increase the sample size. Wanting 99% confidence with ±1% precision? You'll need a <em>much</em> larger sample than for 90% confidence with ±5% precision. This is the fundamental trade-off in interval estimation, and understanding it is key to intelligent study design (Cochran, 1977).</blockquote>
+
+<hr>
+
+<h2>📐 Sample Size Determination: Planning for Precision</h2>
+
+<p>One of the most practical applications of confidence interval theory is <strong>determining the sample size before data collection</strong>. Instead of asking "How precise is my estimate?" after the study, you ask "How large a sample do I need to achieve the precision I want?" This reverses the CI formula to solve for n.</p>
+
+<h3>For Estimating a Mean:</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>n = (z<sub>α/2</sub> · σ / E)²</strong></p>
+
+<h3>For Estimating a Proportion (Cochran's Formula):</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>n₀ = z<sub>α/2</sub>² · p(1−p) / E²</strong></p>
+
+<p>When p is unknown, use p = 0.5 for maximum variability (the most conservative estimate). For a finite population of size N, apply the <strong>finite population correction</strong>:</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>n = n₀ / (1 + (n₀ − 1)/N)</strong></p>
+
+<p><strong>Example:</strong> A researcher wants to estimate the proportion of Algerian farmers who practice crop rotation, with 95% confidence and ±4% margin of error. No prior data exist, so p = 0.5.</p>
+
+<p>n₀ = (1.96)² × 0.5 × 0.5 / (0.04)² = 3.8416 × 0.25 / 0.0016 = <strong>600.25 ≈ 601 farmers</strong></p>
+
+<p>If the target population has only N = 2,000 farmers in a particular region: n = 601 / (1 + 600/2000) = 601 / 1.30 = <strong>462 farmers</strong>.</p>
+
+<table>
+  <thead>
+    <tr><th>Confidence Level</th><th>Margin of Error ±3%</th><th>±5%</th><th>±10%</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>90%</td><td>752</td><td>271</td><td>68</td></tr>
+    <tr><td>95%</td><td>1,068</td><td>385</td><td>97</td></tr>
+    <tr><td>99%</td><td>1,849</td><td>666</td><td>167</td></tr>
+  </tbody>
+</table>
+<p><em>Table: Required sample sizes for estimating a proportion (p = 0.5, infinite population)</em></p>
+
+<hr>
+
+<h2>🔗 Confidence Intervals and Hypothesis Testing: Two Sides of the Same Coin</h2>
+
+<p>Confidence intervals and hypothesis tests are mathematically equivalent — they always agree on the same conclusion at the same α level. But confidence intervals provide <em>strictly more information</em> than a simple "reject/fail to reject" decision (Gardner &amp; Altman, 1986).</p>
+
+<table>
+  <thead>
+    <tr><th>Feature</th><th>Hypothesis Test</th><th>Confidence Interval</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Output</strong></td><td>Binary decision: reject or fail to reject H₀</td><td>Range of plausible parameter values</td></tr>
+    <tr><td><strong>Information</strong></td><td>Whether the effect is "significant"</td><td>How large the effect might be + precision</td></tr>
+    <tr><td><strong>Direction</strong></td><td>Which side of H₀ the data fall on</td><td>Same + shows the full range of plausible values</td></tr>
+    <tr><td><strong>Practical Significance</strong></td><td>Hard to assess from p-value alone</td><td>Can directly evaluate against meaningful thresholds</td></tr>
+    <tr><td><strong>Equivalence</strong></td><td>p &lt; 0.05</td><td>95% CI does not include H₀ value</td></tr>
+  </tbody>
+</table>
+
+<p><strong>The Duality Rule:</strong> A 95% CI for θ contains exactly those values of θ₀ for which a two-sided hypothesis test at α = 0.05 would <em>fail to reject</em> H₀: θ = θ₀. Conversely, any value <em>outside</em> the 95% CI would be rejected at the 5% level. This means the CI is literally the set of all "non-rejected" parameter values — making it far richer than a single test result (Lehmann &amp; Romano, 2005).</p>
+
+<blockquote>🎯 <strong>Reading a CI Like a Pro:</strong> When evaluating a 95% CI for the difference between two treatments:
+<br>• If the CI is entirely above zero → the treatment effect is statistically significant <em>and</em> positive.
+<br>• If the CI contains zero → the test is non-significant; you cannot rule out no effect.
+<br>• If the CI is entirely below zero → the effect is significant in the negative direction.
+<br>• If the CI is narrow and near zero → precise evidence that the effect, if any, is small.
+<br>• If the CI is wide → insufficient precision; more data needed regardless of significance.</blockquote>
+
+<hr>
+
+<h2>🌍 Real-World Applications and Worked Examples</h2>
+
+<h3>Example 1: Agriculture — Crop Yield Estimation</h3>
+
+<p>An agronomist measures wheat yield in n = 36 randomly selected plots, finding x̄ = 4.2 t/ha and s = 0.9 t/ha. Construct a 95% CI for the population mean yield.</p>
+
+<p><strong>Solution:</strong> SE = s/√n = 0.9/√36 = 0.15. For 95% confidence with df = 35: t* ≈ 2.030. CI = 4.2 ± 2.030(0.15) = 4.2 ± 0.305 = <strong>(3.895, 4.505) t/ha</strong>. Interpretation: We are 95% confident that the method used produces intervals that capture the true mean yield; this particular interval suggests the true mean is between approximately 3.9 and 4.5 tonnes per hectare.</p>
+
+<h3>Example 2: Public Health — Vaccination Coverage</h3>
+
+<p>In a survey of 500 randomly selected households, 380 report that children are fully vaccinated. Estimate the population vaccination rate with a 99% CI.</p>
+
+<p><strong>Solution:</strong> p̂ = 380/500 = 0.76. SE = √(0.76 × 0.24 / 500) = √(0.000365) = 0.0191. z* = 2.576. CI = 0.76 ± 2.576(0.0191) = 0.76 ± 0.049 = <strong>(0.711, 0.809)</strong> or <strong>71.1% to 80.9%</strong>. Even at the highly conservative 99% level, we can say the vaccination rate is at least 71%.</p>
+
+<h3>Example 3: Environmental Science — Comparing Two Sites</h3>
+
+<p>Soil pH is measured at two sites: Site A (n₁ = 25, x̄₁ = 6.8, s₁ = 0.5) and Site B (n₂ = 30, x̄₂ = 7.3, s₂ = 0.6). Construct a 95% CI for the difference in mean pH (μ₂ − μ₁).</p>
+
+<p><strong>Solution:</strong> Difference = 7.3 − 6.8 = 0.5. SE = √(0.5²/25 + 0.6²/30) = √(0.01 + 0.012) = √0.022 = 0.148. Using Welch df ≈ 52: t* ≈ 2.007. CI = 0.5 ± 2.007(0.148) = 0.5 ± 0.297 = <strong>(0.203, 0.797)</strong>. Since the entire interval is above zero, Site B has a statistically significantly higher pH than Site A, with the true difference estimated between 0.2 and 0.8 pH units.</p>
+
+<hr>
+
+<h2>⚙️ Advanced Topics and Modern Perspectives</h2>
+
+<h3>Bootstrap Confidence Intervals</h3>
+
+<p>When the sampling distribution is unknown or data violate normality assumptions, <strong>bootstrap methods</strong> offer a powerful nonparametric alternative. Introduced by Efron (1979), the bootstrap constructs a CI by resampling the observed data thousands of times with replacement, computing the statistic of interest for each resample, and using the percentiles of the resulting distribution as confidence bounds. This approach requires no distributional assumptions and works for virtually any statistic — medians, correlation coefficients, regression parameters, or custom measures (Efron &amp; Tibshirani, 1993).</p>
+
+<h3>Bayesian Credible Intervals</h3>
+
+<p>The Bayesian alternative to the confidence interval is the <strong>credible interval</strong>, which <em>does</em> have the intuitive interpretation that most people mistakenly attribute to confidence intervals: "There is a 95% probability that the parameter lies within this interval." This is possible because Bayesian inference treats parameters as random variables with probability distributions. The two approaches often give similar numerical results for large samples with uninformative priors, but their philosophical foundations differ fundamentally (Kruschke, 2015).</p>
+
+<h3>The "New Statistics" Movement</h3>
+
+<p>Cumming (2012, 2014) has been a leading advocate for what he calls the "new statistics" — a research approach built around effect sizes, confidence intervals, and meta-analysis rather than null hypothesis significance testing (NHST). This movement, endorsed by the APA Publication Manual's 6th and 7th editions, argues that CIs encourage researchers to think about <em>magnitude</em> and <em>precision</em> rather than the binary dichotomy of "significant/not significant." The 2016 ASA Statement on p-values further reinforced this shift by emphasizing that no single index — including the p-value — should serve as the sole basis for scientific inference (Wasserstein &amp; Lazar, 2016).</p>
+
+<hr>
+
+<h2>✅ Best Practices and Reporting Guidelines</h2>
+
+<table>
+  <thead>
+    <tr><th>Practice</th><th>Recommendation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔢 <strong>Always report CIs</strong></td><td>Present CIs alongside point estimates and p-values, not as an afterthought</td></tr>
+    <tr><td>📐 <strong>State the confidence level</strong></td><td>Always specify (e.g., 95% CI), as different levels yield different intervals</td></tr>
+    <tr><td>📏 <strong>Report both bounds</strong></td><td>Use the format "95% CI [lower, upper]" or "(lower, upper)" consistently</td></tr>
+    <tr><td>🎯 <strong>Interpret substantively</strong></td><td>Discuss what the CI means in context — does the range include clinically/practically meaningful values?</td></tr>
+    <tr><td>⚠️ <strong>Check assumptions</strong></td><td>Verify normality (for t-intervals), adequate sample size (for proportion intervals), and independence</td></tr>
+    <tr><td>🔄 <strong>Use appropriate methods</strong></td><td>Use t-intervals when σ is unknown, Wilson intervals for extreme proportions, and bootstrap when assumptions fail</td></tr>
+    <tr><td>📊 <strong>Visualize</strong></td><td>Use error bar plots, forest plots, or Gardner-Altman plots to display CIs graphically</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧩 Summary: Why Confidence Intervals Matter</h2>
+
+<p>Confidence intervals represent one of the most important advances in applied statistics. They transform raw numbers into meaningful scientific communication by simultaneously conveying an estimate, its precision, and its relationship to hypothesis tests — all in a single, compact summary. As the statistician Douglas Altman and colleagues have long argued, estimation with confidence intervals should be the primary mode of statistical reporting in science, because it encourages researchers to think in terms of <em>magnitude</em> and <em>uncertainty</em> rather than the sterile dichotomy of "significant" versus "not significant" (Altman et al., 2000).</p>
+
+<p>Whether you are estimating crop yields in Algerian farmlands, measuring vaccination rates in a public health survey, comparing treatment effects in a clinical trial, or reporting the results of any scientific study — confidence intervals give your readers the information they truly need to evaluate, replicate, and build upon your work.</p>
+
+<hr>
+
+<h2>📚 References</h2>
+
+<p>Agresti, A., &amp; Coull, B. A. (1998). Approximate is better than "exact" for interval estimation of binomial proportions. <em>The American Statistician</em>, <em>52</em>(2), 119–126. https://doi.org/10.1080/00031305.1998.10480550</p>
+
+<p>Altman, D. G., Machin, D., Bryant, T. N., &amp; Gardner, M. J. (2000). <em>Statistics with confidence: Confidence intervals and statistical guidelines</em> (2nd ed.). BMJ Books.</p>
+
+<p>American Psychological Association. (2010). <em>Publication manual of the American Psychological Association</em> (6th ed.). Author.</p>
+
+<p>Brown, L. D., Cai, T. T., &amp; DasGupta, A. (2001). Interval estimation for a binomial proportion. <em>Statistical Science</em>, <em>16</em>(2), 101–133. https://doi.org/10.1214/ss/1009213286</p>
+
+<p>Cochran, W. G. (1977). <em>Sampling techniques</em> (3rd ed.). John Wiley &amp; Sons.</p>
+
+<p>Cumming, G. (2012). <em>Understanding the new statistics: Effect sizes, confidence intervals, and meta-analysis</em>. Routledge.</p>
+
+<p>Cumming, G. (2014). The new statistics: Why and how. <em>Psychological Science</em>, <em>25</em>(1), 7–29. https://doi.org/10.1177/0956797613504966</p>
+
+<p>Efron, B. (1979). Bootstrap methods: Another look at the jackknife. <em>The Annals of Statistics</em>, <em>7</em>(1), 1–26. https://doi.org/10.1214/aos/1176344552</p>
+
+<p>Efron, B., &amp; Tibshirani, R. J. (1993). <em>An introduction to the bootstrap</em>. Chapman &amp; Hall/CRC.</p>
+
+<p>Gardner, M. J., &amp; Altman, D. G. (1986). Confidence intervals rather than P values: Estimation rather than hypothesis testing. <em>British Medical Journal</em>, <em>292</em>(6522), 746–750. https://doi.org/10.1136/bmj.292.6522.746</p>
+
+<p>Gosset, W. S. [Student]. (1908). The probable error of a mean. <em>Biometrika</em>, <em>6</em>(1), 1–25. https://doi.org/10.2307/2331554</p>
+
+<p>Hoekstra, R., Morey, R. D., Rouder, J. N., &amp; Wagenmakers, E.-J. (2014). Robust misinterpretation of confidence intervals. <em>Psychonomic Bulletin &amp; Review</em>, <em>21</em>(5), 1157–1164. https://doi.org/10.3758/s13423-013-0572-3</p>
+
+<p>Kruschke, J. K. (2015). <em>Doing Bayesian data analysis: A tutorial with R, JAGS, and Stan</em> (2nd ed.). Academic Press.</p>
+
+<p>Lehmann, E. L., &amp; Romano, J. P. (2005). <em>Testing statistical hypotheses</em> (3rd ed.). Springer.</p>
+
+<p>Morey, R. D., Hoekstra, R., Rouder, J. N., &amp; Wagenmakers, E.-J. (2016). Continued misinterpretation of confidence intervals: Response to Miller and Ulrich. <em>Psychonomic Bulletin &amp; Review</em>, <em>23</em>(1), 131–140. https://doi.org/10.3758/s13423-015-0955-8</p>
+
+<p>Neyman, J. (1937). Outline of a theory of statistical estimation based on the classical theory of probability. <em>Philosophical Transactions of the Royal Society of London. Series A</em>, <em>236</em>(767), 333–380. https://doi.org/10.1098/rsta.1937.0005</p>
+
+<p>Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA statement on p-values: Context, process, and purpose. <em>The American Statistician</em>, <em>70</em>(2), 129–133. https://doi.org/10.1080/00031305.2016.1154108</p>
+
+<p>Welch, B. L. (1947). The generalization of "Student's" problem when several different population variances are involved. <em>Biometrika</em>, <em>34</em>(1–2), 28–35. https://doi.org/10.1093/biomet/34.1-2.28</p>
