@@ -31,7 +31,7 @@ const apps = [
   // └────────────────────────────────────────────┘
   {
     id:       'green-science-quiz',
-    icon:     '<img src="../files/images/icons/GSQuiz.svg" width="40" height="40" alt="logo">',
+    icon:     '<img src="./files/images/icons/GSQuiz.svg" width="40" height="40" alt="logo">',
     name:     { en: 'Green Science Quiz', fr: 'Green Science Quiz', ar: 'Green Science Quiz' },
     description: {
       en: 'Download quiz files, import them into the app, and test your knowledge with multiple choice questions.',
@@ -55,7 +55,7 @@ const apps = [
   // └────────────────────────────────────────────┘
   {
     id:       'research-manager',
-    icon:     '<img src="../files/images/icons/OS.ico" width="40" height="40" alt="logo">',
+    icon:     '<img src="./files/images/icons/OS.ico" width="40" height="40" alt="logo">',
     name:     { en: 'Research Manager', fr: 'Research Manager', ar: 'Research Manager' },
     description: {
       en: 'A powerful and intuitive Research Manager App designed to streamline your academic workflow.',
