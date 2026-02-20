@@ -22,18 +22,7 @@
 // ══════════════════════════════════════════════════════════════════════
 // █  APPS  (shown in the carousel on the home page)
 // ══════════════════════════════════════════════════════════════════════
-//
-//  TEMPLATE:
-//  {
-//    id:          'unique-id',
-//    icon:        '🧪',
-//    name:        { en: '', fr: '', ar: '' },
-//    description: { en: '', fr: '', ar: '' },
-//    videoId:     'YOUTUBE_VIDEO_ID',
-//    storeUrl:    'https://...',
-//    steps: [ { title: {...}, desc: {...} }, ... ]
-//  }
-// ──────────────────────────────────────────────────────────────────────
+
 
 const apps = [
 
@@ -92,26 +81,7 @@ const apps = [
 // ══════════════════════════════════════════════════════════════════════
 // █  QUICK ACCESS CARDS  (shown on the homepage strip)
 // ══════════════════════════════════════════════════════════════════════
-//
-//  HOW TO ADD A NEW CARD:
-//  1. Copy one of the blocks below
-//  2. Change: id, icon, gradient, title, count (function returning number),
-//     href or scrollTo, and illustration SVG
-//  3. Cards auto-rotate in a carousel when there are more than 4
-//
-//  FIELDS:
-//    id:         Unique string identifier
-//    icon:       Emoji shown in badge
-//    gradient:   CSS class suffix for the card background (qa-books, qa-quizzes, etc.)
-//    gradientCSS: Inline CSS gradient (for custom cards not in the preset list)
-//    title:      { en, fr, ar } — main label
-//    badge:      { en, fr, ar } — small badge label above the title
-//    countFn:    function() returning the count number (called at render time)
-//    countLabel: i18n key for the count suffix (e.g. 'booksSection')
-//    href:       URL to navigate to (for page links)
-//    scrollTo:   DOM element ID to smooth-scroll to (for on-page links)
-//    illustration: SVG string for the decorative illustration
-// ──────────────────────────────────────────────────────────────────────
+
 
 const quickAccessCards = [
   {
@@ -192,27 +162,14 @@ const quickAccessCards = [
 // ══════════════════════════════════════════════════════════════════════
 // █  ADMIN CONFIG  (for site analytics)
 // ══════════════════════════════════════════════════════════════════════
-//
-//  Set your admin password below. When you type it on any page,
-//  the admin stats panel will appear.
-//  Default: 'greenadmin' — CHANGE THIS to your own password!
-// ──────────────────────────────────────────────────────────────────────
+
 
 const ADMIN_KEY = 'greenadmin';
-const MODULES_GRID_LIMIT = 6;
+const MODULES_GRID_LIMIT = 10;
 
 
 // ══════════════════════════════════════════════════════════════════════
 // █  MODULES ARRAY  (populated by modules/*.js files)
 // ══════════════════════════════════════════════════════════════════════
-//
-//  Each module file (e.g. modules/soil.js) calls:
-//    modules.push({ id: 'soil', ... });
-//
-//  To add a new module:
-//  1. Create modules/your-module.js  (copy an existing one)
-//  2. Add <script src="modules/your-module.js"></script> in all HTML files
-//  3. Add a gradient in config.js if using a new category
-// ──────────────────────────────────────────────────────────────────────
 
 const modules = [];

@@ -106,11 +106,7 @@ function coverFallback(img) {
 // ══════════════════════════════════════════════════
 // LANGUAGE BADGE RENDERER
 // ══════════════════════════════════════════════════
-// Renders compact colored language badges for any item.
-// Accepts: { langs: ['EN','FR','AR'] }        — explicit langs array
-//          { lang: 'EN' }                      — single lang string
-//          { title: { en: '...', fr: '...' } } — auto-detect from title keys
-// Returns HTML string of badges.
+
 
 var langBadgeMap = { en: 'EN', fr: 'FR', ar: 'AR', EN: 'EN', FR: 'FR', AR: 'AR' };
 
@@ -628,7 +624,7 @@ function buildExplToc(container) {
 // NEWS & EVENTS
 // ══════════════════════════════════════════════════
 
-var NEWS_HOME_LIMIT = 3;
+var NEWS_HOME_LIMIT = 4;
 
 var newsTypeIcons = {
   video:   '🎬',
@@ -758,7 +754,7 @@ function renderNews() {
 // BOOKS
 // ══════════════════════════════════════════════════
 
-var BOOKS_INLINE_LIMIT = 6;
+var BOOKS_INLINE_LIMIT = 8;
 
 
 // ══════════════════════════════════════════════════
