@@ -21,7 +21,7 @@ modules.push({
         { id: 'essential-elements', icon: '🥀', order: 1,
           title:       { en: 'Essential Elements',    fr: 'Éléments Essentiels',     ar: 'العناصر الأساسية' },
           description: { en: 'Criteria of essentiality, Arnon\'s criteria, 17 essential elements',    fr: 'Critères d\'essentialité, critères d\'Arnon, 17 éléments essentiels',     ar: 'معايير الأساسية، معايير أرنون، 17 عنصراً أساسياً' },
-          explanation: '', videoId: '5kiYXWiHWEU', playlist: 'https://www.youtube.com/watch?v=FP_nltHwsCo&list=PLpot-tBGux4n6R8PU9Zc3Pao1Td4HUL-L',
+          explanation: 'files/explanations/botany/plant-nutrition/essential-elements/essential-elements', videoId: '5kiYXWiHWEU', playlist: 'https://www.youtube.com/watch?v=FP_nltHwsCo&list=PLpot-tBGux4n6R8PU9Zc3Pao1Td4HUL-L',
           courseFiles: [], books: [], exercises: [], quizzes: [],
         },
       ],
