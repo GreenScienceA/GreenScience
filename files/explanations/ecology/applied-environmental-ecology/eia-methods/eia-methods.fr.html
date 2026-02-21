@@ -1,0 +1,346 @@
+<h2>📊 Méthodes et outils d'ÉIE : La boîte à outils scientifique pour prédire les conséquences environnementales</h2>
+
+<p>Le 1er janvier 1970, les États-Unis promulguèrent le <strong>National Environmental Policy Act (NEPA)</strong> — une loi qui, pour la première fois dans l'histoire, obligeait les agences fédérales à évaluer les conséquences environnementales de leurs actions <em>avant</em> de les réaliser. Idée révolutionnaire : on ne peut construire le barrage d'abord et s'inquiéter des poissons après. Mais le NEPA avait un problème — il disait aux agences <em>quoi</em> faire, mais pas <em>comment</em>. Comme l'écrivit Robert Gillette dans <em>Science</em> en 1971, les instructions étaient « pas suffisamment précises pour garantir qu'une agence examine pleinement, ou même utilement, les effets environnementaux » (Leopold et al., 1971).</p>
+
+<p>Ce fossé entre mandat juridique et méthode scientifique déclencha l'une des périodes les plus créatives de la science environnementale. En une décennie (1971–1982), les chercheurs inventèrent toute une famille d'outils — <strong>matrices, listes de contrôle, réseaux, cartographie par superposition et systèmes quantitatifs</strong> — chacun conçu pour répondre : <em>« Qu'arrivera-t-il à l'environnement si nous faisons ceci ? »</em></p>
+
+<p>Aujourd'hui, plus de 200 pays ont adopté une législation d'ÉIE, et ces méthodes fondamentales — affinées, numérisées et intégrées aux SIG — demeurent l'ossature de l'évaluation environnementale mondiale (Morgan, 2012).</p>
+
+<blockquote>💡 <strong>L'idée centrale :</strong> Les méthodes d'ÉIE sont des cadres systématiques transformant la complexité des interactions projet-environnement en évaluations structurées et communicables. Aucune méthode n'est parfaite — la pratique professionnelle combine toujours plusieurs méthodes.</blockquote>
+
+<hr>
+
+<h2>🗂️ Vue d'ensemble : La famille des méthodes d'ÉIE</h2>
+
+<table>
+  <thead>
+    <tr><th>Famille</th><th>Principe</th><th>Exemples</th><th>Date</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔲 <strong>Ad hoc</strong></td><td>Jugement d'experts, brainstorming</td><td>Panels, technique Delphi</td><td>Avant 1970</td></tr>
+    <tr><td>✅ <strong>Listes de contrôle</strong></td><td>Listes prédéfinies d'impacts potentiels</td><td>Simples, descriptives, à échelle, pondérées</td><td>Années 1970</td></tr>
+    <tr><td>📊 <strong>Matrices</strong></td><td>Grilles 2D : actions × facteurs environnementaux</td><td><strong>Matrice de Leopold</strong> (1971), Matrice d'interaction (1974)</td><td>1971</td></tr>
+    <tr><td>🔗 <strong>Réseaux</strong></td><td>Chaînes cause-effet</td><td>Réseau de Sorensen (1971), Analyse de voies d'Odum (1971)</td><td>1971</td></tr>
+    <tr><td>🗺️ <strong>Cartographie</strong></td><td>Superposition spatiale de couches de sensibilité</td><td><strong>Superposition McHarg</strong> (1969), analyse SIG pondérée</td><td>1969</td></tr>
+    <tr><td>🔢 <strong>Systèmes quantitatifs</strong></td><td>Notation, pondération, agrégation en unités commensurables</td><td><strong>Battelle EES</strong> (1972), <strong>RIAM</strong> (1998)</td><td>1972</td></tr>
+  </tbody>
+</table>
+
+<p>Chaque famille est née pour résoudre une faiblesse spécifique : les listes ont corrigé le hasard des méthodes ad hoc ; les matrices ont ajouté le croisement systématique ; les réseaux ont révélé les chaînes causales ; les superpositions ont introduit la dimension spatiale ; et les systèmes quantitatifs ont permis la comparaison numérique.</p>
+
+<hr>
+
+<h2>1️⃣ Méthodes ad hoc</h2>
+
+<h3>La technique Delphi</h3>
+
+<p>Développée par la RAND Corporation dans les années 1950, la technique Delphi structure l'opinion d'experts en tours itératifs :</p>
+
+<p><strong>Tour 1 :</strong> Chaque expert identifie indépendamment les impacts potentiels et note leur sévérité. Les réponses sont anonymes.</p>
+<p><strong>Tour 2 :</strong> Les résultats du Tour 1 sont compilés et partagés (médiane, quartiles). Chaque expert peut réviser sa notation avec justification écrite.</p>
+<p><strong>Tour 3+ :</strong> Le processus se répète jusqu'à convergence (3–4 tours). L'anonymat élimine le « groupthink ».</p>
+
+<p><strong>Forces :</strong> Rapide, économique, expertise approfondie. Idéal pour le cadrage préliminaire. <strong>Faiblesses :</strong> Dépend de la sélection des experts, non reproductible, difficile à défendre juridiquement (Glasson et al., 2012).</p>
+
+<hr>
+
+<h2>2️⃣ Listes de contrôle</h2>
+
+<table>
+  <thead>
+    <tr><th>Type</th><th>Fonctionnement</th><th>Sortie</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Simple</strong></td><td>« Ce facteur est-il pertinent ? Oui/Non. »</td><td>Qualitatif — vérification binaire</td></tr>
+    <tr><td><strong>Descriptive</strong></td><td>Ajoute des conseils sur <em>comment</em> mesurer chaque facteur.</td><td>Qualitatif avec guidance de mesure</td></tr>
+    <tr><td><strong>À échelle</strong></td><td>Score numérique (1–5) selon la gravité.</td><td>Semi-quantitatif — classement</td></tr>
+    <tr><td><strong>Pondérée</strong></td><td>Score + poids d'importance → somme pondérée.</td><td>Quantitatif — score composite</td></tr>
+  </tbody>
+</table>
+
+<h3>Approche par seuil de préoccupation</h3>
+
+<p>Certains cadres réglementaires utilisent un <strong>seuil de préoccupation</strong> : si l'impact prédit dépasse le seuil (ex. « Le bruit dépassera-t-il 65 dB ? »), une étude détaillée est automatiquement déclenchée. Cela transforme la liste passive en outil de décision actif.</p>
+
+<p><strong>Forces :</strong> Systématique, reproductible, normalisable. <strong>Faiblesses :</strong> Statique, pas de cause-effet, pas de dimension spatiale, risque de « cochage mécanique » (Canter, 1996).</p>
+
+<hr>
+
+<h2>3️⃣ La Matrice de Leopold (1971) : L'innovation fondatrice</h2>
+
+<p>En 1971, le géologue <strong>Luna Bergere Leopold</strong> publia la méthode d'ÉIE la plus citée de l'histoire (USGS Circular 645) (Leopold et al., 1971).</p>
+
+<h3>Structure</h3>
+
+<p><strong>Axe horizontal (100 colonnes) :</strong> Actions du projet en 10 catégories — modification de régime, transformation du terrain, extraction, traitement, altération, renouvellement, trafic, déchets, traitement chimique, accidents.</p>
+
+<p><strong>Axe vertical (88 lignes) :</strong> Facteurs environnementaux en 4 catégories — (A) Physique/chimique (terre, eau, atmosphère, processus), (B) Biologique (flore, faune), (C) Culturel (utilisation du sol, récréation, esthétique, statut culturel), (D) Relations écologiques (salinisation, eutrophisation, vecteurs de maladie, chaînes alimentaires).</p>
+
+<p><strong>8 800 interactions potentielles</strong> — mais seulement 25–50 sont significatives pour un projet typique.</p>
+
+<h3>Procédure pas-à-pas</h3>
+
+<p><strong>Étape 1 :</strong> Cocher les actions pertinentes (généralement ~12 actions significatives).</p>
+<p><strong>Étape 2 :</strong> Pour chaque action cochée, placer une barre diagonale (/) dans chaque cellule d'interaction significative.</p>
+<p><strong>Étape 3 :</strong> Dans le triangle supérieur gauche, noter la <strong>magnitude (−10 à +10)</strong>. Base factuelle autant que possible.</p>
+<p><strong>Étape 4 :</strong> Dans le triangle inférieur droit, noter l'<strong>importance (1 à 10)</strong>. Jugement professionnel subjectif.</p>
+<p><strong>Étape 5 :</strong> Rédiger le texte justificatif — Leopold insistait : le narratif est plus important que les chiffres.</p>
+
+<h3>Système de notation</h3>
+
+<table>
+  <thead>
+    <tr><th>Score</th><th>Position</th><th>Échelle</th><th>Base</th><th>Signification</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Magnitude (M)</strong></td><td>Triangle ◣</td><td>−10 à +10</td><td>Factuel/objectif</td><td>Ampleur de l'impact. (−) néfaste, (+) bénéfique</td></tr>
+    <tr><td><strong>Importance (I)</strong></td><td>Triangle ◥</td><td>1 à 10</td><td>Subjectif/professionnel</td><td>Signification contextuelle. 1 = minimale, 10 = maximale</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🧠 <strong>Distinction cruciale :</strong> Un cours d'eau peut modifier fortement l'érosion (magnitude élevée), mais si le cours transporte naturellement beaucoup de sédiments, ce n'est pas significatif (importance faible). Inversement, une faible contamination pesticide (magnitude faible) dans une source d'eau potable est extrêmement importante (importance élevée).</blockquote>
+
+<h3>Méthodes d'agrégation</h3>
+
+<p><strong>Somme par ligne :</strong> Impact total sur chaque facteur environnemental → identifie les facteurs les plus impactés.</p>
+<p><strong>Somme par colonne :</strong> Impact total de chaque action → identifie les actions les plus dommageables.</p>
+<p><strong>Bilan global :</strong> Compter les interactions positives vs négatives, et haute magnitude vs basse magnitude.</p>
+
+<h3>Exemple : Construction routière en zone agricole</h3>
+
+<table>
+  <thead>
+    <tr><th>Facteur ↓ / Action →</th><th>Défrichement</th><th>Déblai/Remblai</th><th>Revêtement</th><th>Exploitation</th><th>Somme (M)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Sol arable</strong></td><td>M: −6 / I: 8</td><td>M: −5 / I: 7</td><td>—</td><td>—</td><td><strong>−11</strong></td></tr>
+    <tr><td><strong>Eaux de surface</strong></td><td>M: −3 / I: 5</td><td>M: −7 / I: 9</td><td>M: −4 / I: 6</td><td>M: −3 / I: 4</td><td><strong>−17</strong></td></tr>
+    <tr><td><strong>Recharge nappes</strong></td><td>—</td><td>M: −4 / I: 6</td><td>M: −5 / I: 7</td><td>—</td><td><strong>−9</strong></td></tr>
+    <tr><td><strong>Habitat faunique</strong></td><td>M: −8 / I: 9</td><td>M: −5 / I: 7</td><td>—</td><td>M: −4 / I: 6</td><td><strong>−17</strong></td></tr>
+    <tr><td><strong>Bruit</strong></td><td>M: −3 / I: 4</td><td>M: −4 / I: 5</td><td>—</td><td>M: −7 / I: 8</td><td><strong>−14</strong></td></tr>
+    <tr><td><strong>Emploi local</strong></td><td>M: +3 / I: 4</td><td>M: +5 / I: 6</td><td>M: +4 / I: 5</td><td>M: +2 / I: 3</td><td><strong>+14</strong></td></tr>
+    <tr><td><strong>Somme colonne (M)</strong></td><td><strong>−17</strong></td><td><strong>−20</strong></td><td><strong>−5</strong></td><td><strong>−12</strong></td><td></td></tr>
+  </tbody>
+</table>
+
+<p><strong>Lecture :</strong> Les sommes par ligne révèlent que les <em>eaux de surface</em> et l'<em>habitat faunique</em> (−17) sont les plus impactés. La somme par colonne montre que <em>Déblai/Remblai</em> (−20) est l'action la plus dommageable → focaliser l'atténuation sur le contrôle de l'érosion pendant les travaux de terrassement.</p>
+
+<h3>Matrices modifiées et étendues</h3>
+
+<p><strong>Leopold simplifiée :</strong> Réduit la grille 100×88 aux seuls actions et facteurs pertinents (ex. 15×20).</p>
+<p><strong>Leopold tridimensionnelle :</strong> Ajoute un troisième axe pour les phases temporelles (construction, exploitation, déclassement).</p>
+<p><strong>Matrice d'interaction des composantes (Environnement Canada, 1974) :</strong> Au lieu de croiser actions × facteurs, cette matrice croise <em>facteurs × facteurs</em> pour détecter les liens indirects. Cellules marquées 0 (pas de lien), 1 (lien primaire), 2 (lien secondaire) (Canter, 1996).</p>
+
+<p><strong>Forces :</strong> Complète, visuelle, flexible, sépare magnitude et importance, permet l'agrégation. <strong>Limites :</strong> Pas de chaînes causales, pas de dynamique temporelle, subjective, double-comptage possible, biais biophysique (Glasson et al., 2012).</p>
+
+<hr>
+
+<h2>4️⃣ Réseaux : Tracer les chaînes de conséquences</h2>
+
+<h3>Réseau de Sorensen (1971)</h3>
+
+<p>Cartographie : <em>Action → Changement initial → Changement conséquent → Effet</em>.</p>
+
+<p><strong>Exemple — Barrage d'irrigation (trois chaînes) :</strong></p>
+<p><strong>Chaîne 1 :</strong> Construction → ↓ Débit aval → ↓ Transport sédimentaire → Érosion côtière → ↓ Tourisme → Stress économique communautaire</p>
+<p><strong>Chaîne 2 :</strong> Construction → Réservoir → Engorgement → Salinisation → ↓ Rendement → Abandon agricole</p>
+<p><strong>Chaîne 3 :</strong> Construction → Réservoir → Habitat moustiques → ↑ Paludisme → ↑ Coûts santé → ↓ Productivité</p>
+
+<p>La puissance des réseaux est immédiate : l'impact final de la Chaîne 1 (stress économique) est à <em>sept étapes</em> de l'action initiale. Aucune matrice ne le capturerait.</p>
+
+<h3>Analyse de voies d'Odum (1971)</h3>
+
+<p>Utilise les <strong>diagrammes de flux d'énergie</strong> de l'écologie systémique pour tracer les impacts à travers les voies écosystémiques — particulièrement puissant pour les projets modifiant les flux énergétiques.</p>
+
+<p><strong>Forces :</strong> Révèle les impacts indirects et cumulatifs, permet l'atténuation ciblée (Canter, 1996). <strong>Faiblesses :</strong> Très complexe, difficile à quantifier, pas de format standard.</p>
+
+<hr>
+
+<h2>5️⃣ Cartographie par superposition : La dimension spatiale</h2>
+
+<p>En 1969, <strong>Ian McHarg</strong> publia <em>Design with Nature</em>, introduisant la cartographie de sensibilité environnementale par transparents superposés. Son argument central : l'environnement lui-même indique où le développement devrait ou non avoir lieu (McHarg, 1969).</p>
+
+<h3>Méthode manuelle originale</h3>
+
+<p><strong>Étape 1 :</strong> Préparer des cartes thématiques sur acétate transparent (pente, érodibilité, risque inondation, corridors écologiques, zones de recharge, sites archéologiques, valeur paysagère).</p>
+<p><strong>Étape 2 :</strong> Attribuer une intensité d'ombrage selon la sensibilité (foncé = très sensible).</p>
+<p><strong>Étape 3 :</strong> Empiler les transparents. Zones les plus sombres = contrainte maximale.</p>
+
+<h3>Analyse SIG pondérée moderne</h3>
+
+<p><strong>Conversion raster :</strong> Chaque carte → grille pixellisée avec valeur de sensibilité (1–5).</p>
+<p><strong>Reclassification :</strong> Toutes les couches sur une échelle commune (1–5 ou 1–10).</p>
+<p><strong>Pondération :</strong> Poids relatif par couche (ex. habitat faunique = 25%, ressources en eau = 20%, etc.).</p>
+<p><strong>Superposition pondérée :</strong> <strong>Score = Σ (Couche<sub>i</sub> × Poids<sub>i</sub>)</strong> → carte continue de contrainte environnementale.</p>
+
+<p><strong>Forces :</strong> Spatiale, visuelle, idéale pour tracés/sites, scénarios rapides en SIG. <strong>Faiblesses :</strong> Pas de dynamique temporelle, données intensives, pondération subjective (Glasson et al., 2012).</p>
+
+<hr>
+
+<h2>6️⃣ Système Battelle (1972) : La première méthode commensurable</h2>
+
+<p>Développé par <strong>Dee et al. (1972)</strong>, premier système convertissant tous les impacts en <strong>Unités d'Impact Environnemental (UIE)</strong> (Dee et al., 1973).</p>
+
+<h3>Distribution des Unités d'Importance (UIP)</h3>
+
+<table>
+  <thead>
+    <tr><th>Catégorie</th><th>UIP</th><th>%</th><th>Composantes clés</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Écologie</strong></td><td>240</td><td>24%</td><td>Espèces terrestres/aquatiques, habitats</td></tr>
+    <tr><td><strong>Physique/Chimique</strong></td><td>402</td><td>40,2%</td><td>Pollution eau/air/sol, bruit</td></tr>
+    <tr><td><strong>Esthétique</strong></td><td>153</td><td>15,3%</td><td>Paysage, eau, biota, objets humains</td></tr>
+    <tr><td><strong>Intérêt humain</strong></td><td>205</td><td>20,5%</td><td>Éducation/science, histoire, culture</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>1 000</strong></td><td><strong>100%</strong></td><td></td></tr>
+  </tbody>
+</table>
+
+<h3>Processus de calcul</h3>
+
+<p><strong>Étape 1 :</strong> Mesurer chaque paramètre en unités naturelles (conditions actuelles).</p>
+<p><strong>Étape 2 :</strong> Transformer via <strong>fonctions de valeur</strong> en score de Qualité Environnementale (QE) sur échelle 0–1.</p>
+<p><strong>Étape 3 :</strong> <strong>UIE<sub>i</sub> = QE<sub>i</sub> × UIP<sub>i</sub></strong></p>
+<p><strong>Étape 4 :</strong> <strong>Impact net = Σ UIE<sub>avec projet</sub> − Σ UIE<sub>sans projet</sub></strong></p>
+
+<h3>Fragment de calcul</h3>
+
+<table>
+  <thead>
+    <tr><th>Paramètre</th><th>UIP</th><th>QE sans</th><th>UIE₁</th><th>QE avec</th><th>UIE₂</th><th>Δ</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Oxygène dissous</td><td>31</td><td>0,85</td><td>26,4</td><td>0,55</td><td>17,1</td><td>−9,3</td></tr>
+    <tr><td>DBO</td><td>25</td><td>0,80</td><td>20,0</td><td>0,40</td><td>10,0</td><td>−10,0</td></tr>
+    <tr><td>Diversité spécifique</td><td>14</td><td>0,70</td><td>9,8</td><td>0,45</td><td>6,3</td><td>−3,5</td></tr>
+    <tr><td>Emploi</td><td>13</td><td>0,30</td><td>3,9</td><td>0,65</td><td>8,5</td><td>+4,6</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Forces :</strong> Quantitatif, commensurable, comparaison directe d'alternatives. <strong>Faiblesses :</strong> Fonctions de valeur subjectives, fausse précision, données intensives, complexe (Canter, 1996).</p>
+
+<hr>
+
+<h2>7️⃣ RIAM : Matrice d'évaluation rapide (1998)</h2>
+
+<p>Développée par <strong>Pastakia &amp; Jensen (1998)</strong> au Danemark pour résoudre deux critiques persistantes : <strong>manque de cohérence</strong> entre méthodes et <strong>manque de transparence</strong> des jugements (Pastakia &amp; Jensen, 1998).</p>
+
+<h3>Catégories : PC (Physique/Chimique), BE (Biologique/Écologique), SC (Social/Culturel), EO (Économique/Opérationnel).</h3>
+
+<h3>Cinq critères d'évaluation</h3>
+
+<table>
+  <thead>
+    <tr><th>Critère</th><th>Code</th><th>Échelle</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Importance de la condition</strong></td><td>A1</td><td>0–4</td><td>0 = sans importance → 4 = importance internationale</td></tr>
+    <tr><td><strong>Magnitude du changement</strong></td><td>A2</td><td>−3 à +3</td><td>−3 = négatif majeur → +3 = bénéfice majeur</td></tr>
+    <tr><td><strong>Permanence</strong></td><td>B1</td><td>1–3</td><td>1 = temporaire → 3 = permanent</td></tr>
+    <tr><td><strong>Réversibilité</strong></td><td>B2</td><td>1–3</td><td>1 = réversible → 3 = irréversible</td></tr>
+    <tr><td><strong>Cumulativité</strong></td><td>B3</td><td>1–3</td><td>1 = non cumulatif → 3 = cumulatif/synergique</td></tr>
+  </tbody>
+</table>
+
+<h3>Formule</h3>
+
+<p style="text-align:center;"><strong>AT = A1 × A2</strong> (score primaire) &nbsp;&nbsp;|&nbsp;&nbsp; <strong>BT = B1 + B2 + B3</strong> (score secondaire)</p>
+<p style="text-align:center;"><strong>Score Environnemental (SE) = AT × BT</strong></p>
+
+<h3>Bandes de classification</h3>
+
+<table>
+  <thead>
+    <tr><th>Plage SE</th><th>Bande</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>−72 à −36</td><td>−E</td><td>Changement négatif majeur</td></tr>
+    <tr><td>−35 à −19</td><td>−D</td><td>Changement négatif significatif</td></tr>
+    <tr><td>−18 à −10</td><td>−C</td><td>Changement négatif modéré</td></tr>
+    <tr><td>−9 à −1</td><td>−B</td><td>Changement négatif léger</td></tr>
+    <tr><td>0</td><td>N</td><td>Pas de changement</td></tr>
+    <tr><td>+1 à +9</td><td>+B</td><td>Changement positif léger</td></tr>
+    <tr><td>+10 à +18</td><td>+C</td><td>Changement positif modéré</td></tr>
+    <tr><td>+19 à +35</td><td>+D</td><td>Changement positif significatif</td></tr>
+    <tr><td>+36 à +72</td><td>+E</td><td>Changement positif majeur</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Forces :</strong> Transparent, informatisé (graphiques à barres), rapide, comparaison d'alternatives. <strong>Faiblesses :</strong> Subjectif, pas de dimension spatiale, la formule multiplicative peut éliminer des impacts significatifs.</p>
+
+<hr>
+
+<h2>8️⃣ Analyse coûts-bénéfices dans l'ÉIE</h2>
+
+<p>Convertit les changements écologiques en valeurs monétaires : évaluation contingente (consentement à payer), prix hédoniques (valeur immobilière), coût de remplacement (services écosystémiques), coût des dommages évités (protection contre les inondations).</p>
+
+<p><strong>Controverse :</strong> Réduire des valeurs naturelles irremplaçables à des chiffres monétaires est éthiquement contesté, mais puissant pour communiquer les coûts environnementaux aux décideurs (Glasson et al., 2012).</p>
+
+<hr>
+
+<h2>📐 Tableau comparatif</h2>
+
+<table>
+  <thead>
+    <tr><th>Critère</th><th>Ad Hoc</th><th>Liste</th><th>Leopold</th><th>Réseau</th><th>Overlay</th><th>Battelle</th><th>RIAM</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Identification</td><td>⚠️</td><td>✅</td><td>✅✅</td><td>✅</td><td>⚠️</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Chaînes causales</td><td>❌</td><td>❌</td><td>❌</td><td>✅✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+    <tr><td>Magnitude</td><td>❌</td><td>⚠️</td><td>✅</td><td>❌</td><td>❌</td><td>✅✅</td><td>✅</td></tr>
+    <tr><td>Spatiale</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>✅✅</td><td>❌</td><td>❌</td></tr>
+    <tr><td>Temporelle</td><td>❌</td><td>❌</td><td>⚠️</td><td>⚠️</td><td>❌</td><td>❌</td><td>✅</td></tr>
+    <tr><td>Alternatives</td><td>❌</td><td>⚠️</td><td>⚠️</td><td>❌</td><td>✅</td><td>✅✅</td><td>✅✅</td></tr>
+    <tr><td>Facilité</td><td>✅✅</td><td>✅</td><td>⚠️</td><td>⚠️</td><td>⚠️</td><td>❌</td><td>✅</td></tr>
+    <tr><td>Communication</td><td>❌</td><td>⚠️</td><td>✅</td><td>✅</td><td>✅✅</td><td>❌</td><td>✅</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🎯 <strong>Règle d'or :</strong> Aucune méthode ne suffit. Les professionnels combinent : <strong>checklists pour le cadrage</strong>, <strong>Leopold pour l'identification</strong>, <strong>réseaux pour les effets indirects</strong>, <strong>SIG pour l'analyse spatiale</strong>, <strong>Battelle/RIAM pour les alternatives</strong>, <strong>ACB pour le contexte économique</strong> (Morgan, 2012).</blockquote>
+
+<hr>
+
+<h2>🌾 Exemple complet : ÉIE multi-méthodes pour un barrage à Sétif</h2>
+
+<p>Un barrage en terre de 45 m est proposé sur l'Oued Boussellam pour irriguer 5 000 ha de céréales.</p>
+
+<p><strong>Phase 1 — Cadrage :</strong> Équipe pluridisciplinaire + Delphi + checklist réglementaire (Loi 03-10). Enjeux : débit aval, sédimentation, submersion 350 ha, déplacement 180 familles, site archéologique, paludisme, salinisation.</p>
+
+<p><strong>Phase 2 — Leopold (12×10) :</strong> « Remplissage × Terres agricoles » (M: −8, I: 9). « Exploitation × Débit aval » (M: −7, I: 10). Somme ligne : écologie aval (−23) = catégorie la plus impactée.</p>
+
+<p><strong>Phase 3 — Réseau :</strong> ↓ Débit → ↓ Recharge → ↓ Puits de 12 villages aval → Stress hydrique → Conflit. Sédimentation → Capacité réduite de 80 à 45 ans → Viabilité économique questionnée.</p>
+
+<p><strong>Phase 4 — SIG (7 couches) :</strong> Superposition révèle chevauchement avec Zone Archéologique ottomane et zone de recharge aquifère Classe I. Site alternatif B (3 km amont) évite les deux — perte de 8% de capacité seulement.</p>
+
+<p><strong>Phase 5 — RIAM (25 composantes) :</strong> Site A : −142 (9 en −D/−E). Site B : −87 (3 en −D, aucune −E). Recommandation claire : Site B.</p>
+
+<p><strong>Conclusion :</strong> L'approche multi-méthodes a révélé des impacts critiques qu'aucune méthode seule n'aurait captés. Recommandation : Site B, débit écologique minimum 2 m³/s, programme anti-moustiques, suivi sédimentaire 15 ans, compensation des 180 familles.</p>
+
+<hr>
+
+<h2>⚠️ Idées fausses courantes</h2>
+
+<p><strong>1.</strong> « La matrice de Leopold donne des résultats objectifs. » → Cadre de jugement professionnel, pas mesure objective. Le texte justificatif est plus important que les chiffres.</p>
+<p><strong>2.</strong> « Quantitatif = toujours mieux. » → Battelle : 487 vs 492 peut refléter du bruit, pas une vraie différence.</p>
+<p><strong>3.</strong> « Les méthodes prédisent exactement. » → Elles identifient des impacts <em>probables</em>. L'incertitude est inhérente.</p>
+<p><strong>4.</strong> « Une méthode suffit. » → Aucune ne couvre toutes les dimensions simultanément.</p>
+<p><strong>5.</strong> « La matrice EST l'ÉIE. » → C'est un outil <em>parmi</em> d'autres (études de base, consultation publique, plans d'atténuation, suivi).</p>
+<p><strong>6.</strong> « Plus complexe = mieux. » → La meilleure méthode est la plus simple qui répond adéquatement aux besoins. Une petite extension de carrière n'a pas besoin de l'arsenal complet.</p>
+
+<hr>
+
+<h2>📚 Références</h2>
+
+<p>Canter, L. W. (1996). <em>Environmental impact assessment</em> (2nd ed.). McGraw-Hill.</p>
+
+<p>Dee, N., Baker, J., Drobny, N., Duke, K., Whitman, I., &amp; Fahringer, D. (1973). An environmental evaluation system for water resource planning. <em>Water Resources Research</em>, <em>9</em>(3), 523–535. https://doi.org/10.1029/WR009i003p00523</p>
+
+<p>Glasson, J., Therivel, R., &amp; Chadwick, A. (2012). <em>Introduction to environmental impact assessment</em> (4th ed.). Routledge.</p>
+
+<p>Leopold, L. B., Clarke, F. E., Hanshaw, B. B., &amp; Balsley, J. R. (1971). <em>A procedure for evaluating environmental impact</em> (U.S. Geological Survey Circular 645). USGS. https://doi.org/10.3133/cir645</p>
+
+<p>McHarg, I. L. (1969). <em>Design with nature</em>. Natural History Press.</p>
+
+<p>Morgan, R. K. (2012). Environmental impact assessment: The state of the art. <em>Impact Assessment and Project Appraisal</em>, <em>30</em>(1), 5–14. https://doi.org/10.1080/14615517.2012.661557</p>
+
+<p>Pastakia, C. M. R., &amp; Jensen, A. (1998). The rapid impact assessment matrix (RIAM) for EIA. <em>Environmental Impact Assessment Review</em>, <em>18</em>(5), 461–482. https://doi.org/10.1016/S0195-9255(98)00018-3</p>
