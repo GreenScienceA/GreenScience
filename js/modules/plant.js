@@ -8,7 +8,18 @@ modules.push({
   description: { en: 'Comprehensive study of plant structure, growth, functions, and classification.',
                  fr: 'Étude complète de la structure des plantes, de leur croissance, de leurs fonctions et de leur classification.',
                  ar: 'دراسة شاملة لتركيب النباتات، نموها، وظائفها، وتصنيفها' },
-  books: [],
+  books: [
+    { icon: '📕',
+      title:  { en: 'Comprendre l\'amélioration des plantes: Enjeux, méthodes, objectifs et critères de sélection', fr: 'Comprendre l\'amélioration des plantes: Enjeux, méthodes, objectifs et critères de sélection', ar: 'Comprendre l\'amélioration des plantes: Enjeux, méthodes, objectifs et critères de sélection' },
+      author: { en: 'André Gallais  - 2015', fr: 'André Gallais  - 2015', ar: 'أندريه غاليس - 2015' },
+      langs: ['fr'], cover:  'files/images/books/botany/CAPEMOCS.jpg',
+      file:   'https://drive.google.com/file/d/1wiUHnyQQUQLTLZpxXggry7rnSk6c5qzl/view?usp=drive_link' },
+      { icon: '📕',
+      title:  { en: 'Atlas Manuel de Botanique', fr: 'Atlas Manuel de Botanique', ar: 'Atlas Manuel de Botanique' },
+      author: { en: ' Deniker Joseph - 1886', fr: 'Deniker Joseph - 1886', ar: 'Deniker Joseph - 1886' },
+      langs: ['fr'], cover:  'files/images/books/botany/AtlsMB.jpg',
+      file:   'https://drive.google.com/file/d/1LAOLf2C9VkF4IhmYTjKOI5-zBUXbTVog/view?usp=sharing' },
+  ],
  
   subModules: [
      // ── Sub: Plant Nutrition  ──────────────────────
