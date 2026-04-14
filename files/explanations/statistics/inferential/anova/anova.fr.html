@@ -1,10 +1,10 @@
-<h2>📈 ANOVA : Disséquer la Variance pour Découvrir la Vérité</h2>
+<h2>📈 ANOVA : Disséquer la variance pour découvrir la vérité</h2>
 
-<p>Nous sommes en 1919 à Harpenden, en Angleterre. Un jeune mathématicien nommé <strong>Ronald Aylmer Fisher</strong> — à peine 29 ans, sans poste formel et une famille à nourrir — accepte un emploi temporaire à la <strong>Station expérimentale de Rothamsted</strong>, le plus ancien centre de recherche agricole au monde. Sa mission : donner un sens à 70 années de données agronomiques accumulées que personne n'avait su correctement analyser. Le directeur, Sir John Russell, reconnut rapidement qu'il était « plus qu'un homme de grande capacité ; c'était en fait un génie qu'il fallait garder » (Russell, 1966, p. 327). En cinq ans, Fisher allait inventer la méthode statistique la plus utilisée de toute la science expérimentale — l'<strong>Analyse de la Variance</strong>, ou <strong>ANOVA</strong>.</p>
+<p>Nous sommes en 1919, à Harpenden, en Angleterre. Un jeune mathématicien nommé <strong>Ronald Aylmer Fisher</strong> — âgé de seulement 29 ans, sans poste universitaire formel et avec une jeune famille à nourrir — accepte un emploi temporaire à la <strong>Rothamsted Experimental Station</strong>, le plus ancien centre de recherche agronomique au monde. Sa tâche semble peu glorieuse : donner un sens à 70 années de données agricoles accumulées que personne n'a été capable d'analyser correctement. Le directeur de la station, Sir John Russell, se souvint plus tard qu'il avait rapidement compris que Fisher était « more than a man of great ability; he was in fact a genius who must be retained » (Russell, 1966, p. 327). En cinq ans, cet homme discret et besicié, travaillant parmi les champs de blé, allait inventer la méthode statistique la plus utilisée de toute la science expérimentale — l'<strong>Analyse de la Variance</strong>, ou <strong>ANOVA</strong>.</p>
 
-<p>L'ANOVA répond à une question d'apparence simple : <em>Les moyennes de trois groupes ou plus sont-elles vraiment différentes, ou les différences observées pourraient-elles être expliquées par le seul hasard ?</em> Mais derrière cette question se cache une idée parmi les plus élégantes de toute la statistique — l'idée que la <strong>variabilité totale peut être partitionnée en composantes significatives</strong>, chacune attribuable à une source différente. L'intuition de Fisher : au lieu de comparer les moyennes directement (ce qui devient ingérable avec plusieurs groupes), on compare les <em>variances</em> — la variance inter-groupes contre la variance intra-groupes — et le rapport de ces deux quantités dit tout ce qu'il faut savoir (Fisher, 1925).</p>
+<p>Ce que Fisher a créé n'était pas simplement une formule. C'était une <em>manière de penser</em> la preuve — un cadre pour se demander si les patterns observés dans les données reflètent des effets réels ou simplement le bruit du hasard. Aujourd'hui, plus d'un siècle plus tard, l'ANOVA demeure l'épine dorsale de l'analyse expérimentale en médecine, psychologie, agriculture, écologie, ingénierie et dans pratiquement toute discipline empirique. Une revue de 2005 a montré que l'ANOVA et ses variantes apparaissaient dans plus de 50 % de tous les articles de recherche dans les principales revues de psychologie (Keselman et al., 1998), et sa domination s'étend à tous les domaines qui conduisent des expériences contrôlées.</p>
 
-<blockquote>💡 <strong>L'idée centrale :</strong> L'ANOVA ne compare pas des moyennes — elle compare des <em>variances</em>. Si la variance <em>entre</em> les groupes est beaucoup plus grande que la variance <em>à l'intérieur</em> des groupes, alors les moyennes des groupes sont nécessairement différentes. Cette approche par rapport de variances — le test F — est le cœur battant de l'ANOVA et le fondement de pratiquement tout le design expérimental en science.</blockquote>
+<blockquote>💡 <strong>L'idée fondamentale :</strong> L'ANOVA ne compare pas les moyennes directement — elle compare les <em>variances</em>. Si la variance <em>inter</em>-groupes est beaucoup plus grande que la variance <em>intra</em>-groupes, alors les moyennes des groupes doivent être véritablement différentes. Cette élégante approche par ratio de variances — le test F — est le cœur battant de l'ANOVA et le fondement de pratiquement tout plan expérimental en science.</blockquote>
 
 <hr>
 
@@ -12,13 +12,19 @@
 
 <h3>Fisher à Rothamsted (1919–1933)</h3>
 
-<p>Lorsque Fisher arriva à Rothamsted en 1919, la station menait des expériences agricoles continues depuis 1843 — la célèbre expérience de Broadbalk sur le blé, toujours en cours aujourd'hui, est la plus longue expérience agricole continue au monde (Langkjær-Bain, 2018). La station possédait des montagnes de données sur les rendements, les engrais et les conditions météorologiques, mais les chercheurs manquaient d'outils mathématiques pour en extraire des conclusions fiables.</p>
+<p>Lorsque Fisher arriva à Rothamsted en 1919, la station menait des expériences agricoles continues depuis 1843. La célèbre <strong>expérience de blé Broadbalk</strong>, débutée cette année-là, est la plus longue expérience agricole continue au monde et se poursuit encore aujourd'hui (Langkjær-Bain, 2018). La station possédait des montagnes de données sur les rendements des cultures, les engrais, les précipitations et les conditions du sol couvrant sept décennies — mais les scientifiques manquaient des outils mathématiques pour extraire des conclusions fiables de ce trésor.</p>
 
-<p>La première percée de Fisher fut un article de 1923 avec Winifred Mackenzie, « Studies in Crop Variation II », analysant les rendements de pommes de terre selon différentes variétés et traitements de fumure. Dans cet article, il introduisit la <strong>partition des sommes des carrés</strong> — l'opération fondamentale de l'ANOVA — montrant comment la variation totale du rendement pouvait être décomposée en composantes dues à la variété, au traitement et à l'erreur résiduelle (Fisher &amp; Mackenzie, 1923). Cette partition fut formalisée dans le fameux <strong>tableau d'ANOVA</strong> et publiée systématiquement dans l'ouvrage pionnier de Fisher, <em>Statistical Methods for Research Workers</em> (1925), qui connut 14 éditions et demeure probablement le manuel de statistique le plus influent jamais écrit.</p>
+<p>La première percée majeure de Fisher vint dans un article de 1923 avec Winifred Mackenzie, « Studies in Crop Variation II », analysant les rendements de pommes de terre à travers différentes variétés et traitements de fumier. Dans cet article, il introduisit la <strong>partition des sommes des carrés</strong> — l'opération mathématique fondamentale de l'ANOVA — montrant comment la variation totale du rendement pouvait être décomposée en composantes attribuables à la variété, au traitement et à l'erreur résiduelle (Fisher &amp; Mackenzie, 1923). Cette idée apparemment simple — que la variabilité totale égale la variabilité expliquée plus la variabilité inexpliquée — allait transformer la science.</p>
 
-<p>En 1935, Fisher publia <em>The Design of Experiments</em>, qui introduisit les trois principes fondamentaux du plan expérimental — <strong>randomisation</strong>, <strong>répétition</strong> et <strong>blocage</strong> — ainsi que les plans factoriels et la célèbre expérience de pensée « The Lady Tasting Tea », première formulation formelle de l'hypothèse nulle (Fisher, 1935).</p>
+<p>Fisher formalisa cette partition dans le désormais familier <strong>tableau d'ANOVA</strong> et la publia systématiquement dans son ouvrage fondateur <em>Statistical Methods for Research Workers</em> (1925), qui connut 14 éditions et devint sans doute le manuel de statistique le plus influent jamais écrit. Il y introduisit non seulement l'ANOVA mais aussi les concepts de degrés de liberté, la distribution F (nommée en son honneur par George Snedecor), et la logique fondamentale du test de signification de l'hypothèse nulle.</p>
 
-<blockquote>🧠 <strong>L'humilité d'un statisticien :</strong> Fisher décrivit l'ANOVA comme simplement « une méthode simple pour arranger les faits arithmétiques de manière à isoler et présenter les caractéristiques essentielles d'un ensemble de données avec la plus grande simplicité. » Richard Mead de Rothamsted l'a qualifiée de « probablement la chose la plus importante jamais sortie de Rothamsted du point de vue statistique, car c'est l'outil quotidien de la plupart des scientifiques » (Langkjær-Bain, 2018).</blockquote>
+<p>En 1935, Fisher publia <em>The Design of Experiments</em>, qui introduisit les trois principes fondamentaux du plan expérimental — la <strong>randomisation</strong>, la <strong>réplication</strong> et le <strong>blocage</strong> — aux côtés des plans factoriels et de la célèbre expérience de pensée « Lady Tasting Tea », le premier énoncé formel d'un test exact d'une hypothèse nulle (Fisher, 1935). Ensemble, l'ANOVA et le plan expérimental révolutionnèrent non seulement l'agriculture mais tous les domaines de la science empirique. La médecine, la psychologie, l'éducation, l'ingénierie, l'écologie et l'économie adoptèrent toutes le cadre de Fisher en l'espace de quelques décennies.</p>
+
+<blockquote>🧠 <strong>L'humilité d'un statisticien :</strong> Fisher lui-même décrivit l'ANOVA comme simplement « a simple method of arranging arithmetical facts so as to isolate and display the essential features of a body of data with the utmost simplicity. » Richard Mead de Rothamsted l'a qualifiée de « probably the most important thing that's ever come out of Rothamsted from a statistics perspective, because it's the day-to-day tool of most scientists » (Langkjær-Bain, 2018). L'humilité de la description masque l'ampleur de la révolution : l'ANOVA a donné aux scientifiques, pour la première fois, un langage mathématique rigoureux pour séparer le signal du bruit dans les expériences à conditions multiples.</blockquote>
+
+<h3>Le contexte intellectuel : Pourquoi l'ANOVA était nécessaire</h3>
+
+<p>Avant Fisher, les scientifiques comparant plusieurs traitements faisaient face à un dilemme impossible. William Sealy Gosset (« Student ») avait développé le <strong>test t</strong> en 1908 pour comparer deux moyennes à la brasserie Guinness de Dublin — mais que faire si l'on avait trois, quatre ou dix traitements à comparer ? Effectuer des tests t séparés pour chaque paire semblait logique mais, comme Fisher le reconnut, conduisait à une inflation catastrophique des taux de faux positifs. La communauté scientifique avait besoin d'une méthode capable d'évaluer <em>tous les groupes simultanément</em> tout en maintenant un contrôle rigoureux de l'erreur. L'approche par ratio de variances de Fisher fut la solution élégante : un test omnibus unique qui partitionne la variabilité totale en composantes significatives, chacune testable contre un terme d'erreur commun (Scheffé, 1959).</p>
 
 <hr>
 
@@ -26,206 +32,407 @@
 
 <h3>Le problème des comparaisons multiples</h3>
 
-<p>Supposons que vous soyez agronome à Sétif, en Algérie, testant trois traitements fertilisants (A, B, C) sur le rendement du blé. Votre premier réflexe serait de réaliser trois tests t distincts : A vs B, A vs C, et B vs C. Le problème ? Chaque test t comporte un risque d'erreur de Type I de 5 %. Avec trois tests, votre risque global d'erreur passe à environ 1 − (1 − 0,05)³ ≈ 14,3 %. Avec 10 groupes, il faudrait 45 comparaisons et le risque atteindrait environ 90 % — ce qui garantit pratiquement de trouver au moins une différence fictive même quand aucune n'existe (Maxwell &amp; Delaney, 2004).</p>
+<p>Supposons qu'une entreprise pharmaceutique teste trois doses d'un nouveau médicament antihypertenseur (faible, moyenne, élevée) contre un placebo, en mesurant la réduction de la pression artérielle systolique après 12 semaines. Le premier réflexe d'un chercheur serait d'effectuer six tests t séparés comparant chaque paire : faible vs. placebo, moyenne vs. placebo, élevée vs. placebo, faible vs. moyenne, faible vs. élevée, moyenne vs. élevée. Le problème ? Chaque test t comporte un risque de 5 % d'erreur de type I (faux positif). Avec six tests, le risque global de faux positif — le <strong>taux d'erreur par famille</strong> (FWER) — gonfle à environ 1 − (1 − 0.05)⁶ ≈ 26.5 %. Avec 10 groupes, il faudrait 45 tests t par paires et le FWER atteindrait 1 − (0.95)⁴⁵ ≈ 90 % — ce qui signifie qu'on est presque <em>garanti</em> de trouver au moins une différence fallacieuse même quand aucune n'existe (Maxwell &amp; Delaney, 2004).</p>
 
-<p>L'ANOVA résout ce problème en effectuant un seul <strong>test omnibus</strong> qui évalue toutes les moyennes simultanément tout en maintenant le taux d'erreur de Type I au niveau α choisi (typiquement 0,05).</p>
+<p>Ce n'est pas une abstraction théorique. Dans les essais cliniques, un faux positif pourrait signifier l'approbation d'un médicament inefficace ou dangereux. En science alimentaire, cela pourrait conduire à déclarer un conservateur sûr alors qu'il ne l'est pas. En recherche éducative, cela pourrait mener à l'adoption d'une méthode pédagogique qui n'offre en réalité aucun avantage. L'inflation de l'erreur de type I à travers les comparaisons multiples est l'un des pièges les plus dangereux en statistique appliquée.</p>
 
-<h3>La partition de la variance</h3>
+<p>L'ANOVA résout ce problème en effectuant un seul <strong>test omnibus</strong> qui évalue toutes les moyennes des groupes simultanément tout en maintenant le taux d'erreur de type I au niveau α choisi (typiquement 0.05). Ce n'est que si le test omnibus est significatif que l'on procède à l'investigation de <em>quels</em> groupes spécifiques diffèrent, en utilisant des procédures post-hoc soigneusement contrôlées qui maintiennent le FWER.</p>
 
-<p>Le génie de l'ANOVA réside dans la décomposition de la variabilité totale en composantes additives :</p>
+<h3>La partition de la variance : Le trait de génie de Fisher</h3>
 
-<p style="text-align:center; font-size:1.1em;"><strong>SS<sub>Total</sub> = SS<sub>Inter</sub> + SS<sub>Intra</sub></strong></p>
+<p>Le génie de l'ANOVA réside dans la décomposition de la variabilité totale des données en composantes additives. Considérons <em>N</em> observations totales distribuées dans <em>k</em> groupes. La <strong>somme totale des carrés</strong> (SS<sub>Total</sub>) mesure la variabilité globale de toutes les observations autour de la moyenne générale. L'ANOVA partitionne ce total en exactement deux composantes :</p>
 
-<p><strong>SS<sub>Inter</sub></strong> (ou SS<sub>Traitement</sub>) mesure combien les <em>moyennes des groupes</em> s'écartent de la moyenne générale — c'est la variabilité <em>expliquée</em> par le facteur.</p>
+<p style="text-align:center; font-size:1.15em;"><strong>SS<sub>Total</sub> = SS<sub>Inter</sub> + SS<sub>Intra</sub></strong></p>
 
-<p><strong>SS<sub>Intra</sub></strong> (ou SS<sub>Erreur</sub>) mesure combien les observations individuelles s'écartent de leur propre moyenne de groupe — c'est la variabilité <em>inexpliquée</em> ou aléatoire.</p>
+<p><strong>SS<sub>Inter</sub></strong> (aussi appelée SS<sub>Traitement</sub> ou SS<sub>Modèle</sub>) capture combien les <em>moyennes de groupes</em> s'écartent de la moyenne générale. C'est la variabilité <em>expliquée</em> par le facteur de groupement — le signal que nous espérons détecter.</p>
 
-<h3>Le rapport F de Fisher</h3>
+<p><strong>SS<sub>Intra</sub></strong> (aussi appelée SS<sub>Erreur</sub> ou SS<sub>Résiduelle</sub>) capture combien les observations individuelles s'écartent de la moyenne de leur propre groupe. C'est la variabilité <em>inexpliquée</em> ou aléatoire — le bruit inhérent à toute mesure.</p>
 
-<p>Chaque somme des carrés est convertie en un <strong>carré moyen</strong> (CM) en divisant par ses degrés de liberté :</p>
+<p>La logique est d'une beauté intuitive. Si un traitement a un effet réel, les moyennes des groupes seront très éloignées les unes des autres (grande SS<sub>Inter</sub>), tandis que les observations individuelles au sein de chaque groupe se regrouperont étroitement autour de leur moyenne de groupe (SS<sub>Intra</sub> relativement faible). S'il n'y a aucun effet du traitement, les deux composantes de variabilité ne reflètent que le bruit aléatoire, et leur ratio oscillera autour de 1.0 (Keppel &amp; Wickens, 2004).</p>
+
+<h3>Le ratio F : Le ratio de variances de Fisher</h3>
+
+<p>Chaque somme des carrés est convertie en un <strong>carré moyen</strong> (CM ou MS) en divisant par ses degrés de liberté, produisant une estimation non biaisée de la variance :</p>
 
 <table>
   <thead>
     <tr><th>Source</th><th>SS</th><th>ddl</th><th>CM</th><th>F</th></tr>
   </thead>
   <tbody>
-    <tr><td>Inter-groupes</td><td>SS<sub>Inter</sub></td><td>k − 1</td><td>SS<sub>Inter</sub> / (k − 1)</td><td rowspan="2" style="vertical-align:middle"><strong>CM<sub>Inter</sub> / CM<sub>Intra</sub></strong></td></tr>
-    <tr><td>Intra-groupes</td><td>SS<sub>Intra</sub></td><td>N − k</td><td>SS<sub>Intra</sub> / (N − k)</td></tr>
-    <tr><td>Total</td><td>SS<sub>Total</sub></td><td>N − 1</td><td>—</td><td>—</td></tr>
+    <tr><td>Inter-groupes</td><td>SS<sub>I</sub></td><td>k − 1</td><td>SS<sub>I</sub> / (k − 1)</td><td rowspan="2" style="vertical-align:middle"><strong>CM<sub>I</sub> / CM<sub>R</sub></strong></td></tr>
+    <tr><td>Intra-groupes (Erreur)</td><td>SS<sub>R</sub></td><td>N − k</td><td>SS<sub>R</sub> / (N − k)</td></tr>
+    <tr><td>Total</td><td>SS<sub>T</sub></td><td>N − 1</td><td>—</td><td>—</td></tr>
   </tbody>
 </table>
 
-<p>Le <strong>rapport F</strong> = CM<sub>Inter</sub> / CM<sub>Intra</sub> suit la <strong>distribution F</strong> avec (k − 1, N − k) degrés de liberté sous l'hypothèse nulle. De grandes valeurs de F indiquent que les moyennes des groupes diffèrent davantage que ne le prédirait la seule variation aléatoire (Fisher, 1925).</p>
+<p>Le <strong>ratio F</strong> = CM<sub>Inter</sub> / CM<sub>Intra</sub> suit la <strong>distribution F</strong> avec (k − 1, N − k) degrés de liberté sous l'hypothèse nulle que toutes les moyennes de population sont égales. De grandes valeurs de F indiquent que les moyennes des groupes diffèrent plus que ne le prédirait la seule variation aléatoire. La distribution F est asymétrique à droite et toujours positive, puisqu'il s'agit d'un ratio de deux estimations de variance (Fisher, 1925).</p>
+
+<p>Les formules mathématiques pour chaque composante sont :</p>
+
+<p><strong>SS<sub>Inter</sub></strong> = Σ n<sub>j</sub>(X̄<sub>j</sub> − X̄<sub>Général</sub>)², sommée sur les k groupes, où n<sub>j</sub> est l'effectif du groupe j, X̄<sub>j</sub> est la moyenne du groupe j, et X̄<sub>Général</sub> est la moyenne générale de toutes les observations.</p>
+
+<p><strong>SS<sub>Intra</sub></strong> = ΣΣ (X<sub>ij</sub> − X̄<sub>j</sub>)², sommée sur toutes les observations au sein de chaque groupe, où X<sub>ij</sub> est l'observation i dans le groupe j.</p>
+
+<p><strong>SS<sub>Total</sub></strong> = ΣΣ (X<sub>ij</sub> − X̄<sub>Général</sub>)², sommée sur toutes les observations.</p>
 
 <hr>
 
 <h2>📊 ANOVA à un facteur : Exemple complet pas à pas</h2>
 
-<h3>🌾 Scénario : Effet des engrais sur le rendement du blé à Sétif</h3>
+<h3>🧪 Scénario : Comparaison de trois méthodes pédagogiques sur la performance en statistique</h3>
 
-<p>Un agronome des hauts plateaux de Sétif teste trois traitements fertilisants sur le blé dur : <strong>Témoin</strong> (sans engrais), <strong>NPK</strong> (minéral) et <strong>Compost</strong> (organique). Six parcelles sont assignées aléatoirement à chaque traitement (n = 6 par groupe, N = 18 au total). Rendement (tonnes/hectare) :</p>
+<p>Un psychologue de l'éducation dans une grande université souhaite déterminer si la méthode d'enseignement affecte la performance des étudiants en statistique introductive. Trois méthodes sont comparées : <strong>Cours magistral traditionnel</strong>, <strong>Classe inversée</strong> (cours vidéo à domicile, résolution de problèmes en classe) et <strong>Apprentissage par simulation</strong> (simulations informatiques interactives). Vingt-quatre étudiants sont répartis aléatoirement dans l'une des trois méthodes (n = 8 par groupe, N = 24 au total). Après 10 semaines, tous les étudiants passent le même examen standardisé (noté de 0 à 100) :</p>
 
 <table>
   <thead>
-    <tr><th>Témoin</th><th>NPK</th><th>Compost</th></tr>
+    <tr><th>Traditionnel</th><th>Inversée</th><th>Simulation</th></tr>
   </thead>
   <tbody>
-    <tr><td>2,1</td><td>3,5</td><td>3,0</td></tr>
-    <tr><td>2,4</td><td>3,8</td><td>2,8</td></tr>
-    <tr><td>1,9</td><td>3,2</td><td>3,3</td></tr>
-    <tr><td>2,3</td><td>4,0</td><td>3,1</td></tr>
-    <tr><td>2,0</td><td>3,6</td><td>2,9</td></tr>
-    <tr><td>2,5</td><td>3,7</td><td>3,5</td></tr>
+    <tr><td>65</td><td>78</td><td>82</td></tr>
+    <tr><td>72</td><td>74</td><td>88</td></tr>
+    <tr><td>68</td><td>81</td><td>79</td></tr>
+    <tr><td>60</td><td>77</td><td>91</td></tr>
+    <tr><td>74</td><td>85</td><td>85</td></tr>
+    <tr><td>67</td><td>73</td><td>87</td></tr>
+    <tr><td>71</td><td>80</td><td>83</td></tr>
+    <tr><td>63</td><td>76</td><td>90</td></tr>
   </tbody>
 </table>
 
-<p><strong>Étape 1 :</strong> Moyennes des groupes : X̄<sub>Témoin</sub> = 2,200, X̄<sub>NPK</sub> = 3,633, X̄<sub>Compost</sub> = 3,100, Moyenne générale = 2,978</p>
+<p><strong>Étape 1 : Formuler les hypothèses.</strong></p>
+<p>H₀ : μ<sub>Traditionnel</sub> = μ<sub>Inversée</sub> = μ<sub>Simulation</sub> (toutes les moyennes de population sont égales)<br>
+H₁ : Au moins une moyenne de population diffère des autres</p>
 
-<p><strong>Étape 2 :</strong> SS<sub>Inter</sub> = <strong>6,307</strong> ; SS<sub>Intra</sub> = <strong>0,847</strong> ; SS<sub>Total</sub> = <strong>7,153</strong></p>
+<p><strong>Étape 2 : Calculer les moyennes de groupes et la moyenne générale.</strong></p>
+<p>X̄<sub>Traditionnel</sub> = (65 + 72 + 68 + 60 + 74 + 67 + 71 + 63) / 8 = 540 / 8 = <strong>67.50</strong></p>
+<p>X̄<sub>Inversée</sub> = (78 + 74 + 81 + 77 + 85 + 73 + 80 + 76) / 8 = 624 / 8 = <strong>78.00</strong></p>
+<p>X̄<sub>Simulation</sub> = (82 + 88 + 79 + 91 + 85 + 87 + 83 + 90) / 8 = 685 / 8 = <strong>85.625</strong></p>
+<p>Moyenne générale X̄ = (540 + 624 + 685) / 24 = 1849 / 24 = <strong>77.042</strong></p>
 
-<p><strong>Étape 3 :</strong> CM<sub>Inter</sub> = 6,307 / 2 = <strong>3,153</strong> ; CM<sub>Intra</sub> = 0,847 / 15 = <strong>0,056</strong></p>
+<p><strong>Étape 3 : Calculer les sommes des carrés.</strong></p>
+<p><em>SS<sub>Inter</sub></em> = n × Σ(X̄<sub>j</sub> − X̄<sub>Général</sub>)² = 8 × [(67.50 − 77.042)² + (78.00 − 77.042)² + (85.625 − 77.042)²]</p>
+<p>= 8 × [91.065 + 0.918 + 73.635] = 8 × 165.618 = <strong>1324.95</strong></p>
+<p><em>SS<sub>Intra</sub></em> = Σ(chaque observation − sa moyenne de groupe)² = <strong>329.375</strong></p>
+<p>(Calculée en sommant les écarts au carré au sein de chaque groupe : Traditionnel = 152.00, Inversée = 114.00, Simulation = 63.375 → total = 329.375)</p>
+<p><em>SS<sub>Total</sub></em> = 1324.95 + 329.375 = <strong>1654.33</strong></p>
 
-<p><strong>Étape 4 :</strong></p>
-<p style="text-align:center; font-size:1.15em;"><strong>F(2, 15) = 3,153 / 0,056 = 55,89</strong></p>
+<p><strong>Étape 4 : Calculer les carrés moyens.</strong></p>
+<p>CM<sub>Inter</sub> = 1324.95 / (3 − 1) = 1324.95 / 2 = <strong>662.48</strong></p>
+<p>CM<sub>Intra</sub> = 329.375 / (24 − 3) = 329.375 / 21 = <strong>15.685</strong></p>
 
-<p><strong>Étape 5 :</strong> F<sub>critique</sub> à α = 0,05 pour ddl (2, 15) = 3,68. Comme 55,89 ≫ 3,68, on rejette H₀. <em>p</em> &lt; 0,001.</p>
+<p><strong>Étape 5 : Calculer le ratio F.</strong></p>
+<p style="text-align:center; font-size:1.15em;"><strong>F(2, 21) = 662.48 / 15.685 = 42.24</strong></p>
 
-<p><strong>Étape 6 :</strong> Taille d'effet — η² = 6,307 / 7,153 = <strong>0,882</strong>. Soit 88,2 % de la variance totale est expliquée par le traitement fertilisant. C'est un très grand effet (Cohen, 1988).</p>
+<p><strong>Étape 6 : Décision.</strong> La valeur critique de F au seuil α = 0.05 avec ddl = (2, 21) est 3.47. Puisque 42.24 ≫ 3.47, nous rejetons H₀. La valeur <em>p</em> exacte est <em>p</em> &lt; .001.</p>
+
+<p><strong>Étape 7 : Taille de l'effet.</strong></p>
+<p>η² = SS<sub>Inter</sub> / SS<sub>Total</sub> = 1324.95 / 1654.33 = <strong>0.801</strong> — ce qui signifie que 80.1 % de la variance totale des scores d'examen est expliquée par la méthode pédagogique. C'est un effet très large selon les critères de Cohen (1988) (petit = .01, moyen = .06, grand = .14).</p>
+<p>ω² = (SS<sub>I</sub> − (k−1) × CM<sub>R</sub>) / (SS<sub>T</sub> + CM<sub>R</sub>) = (1324.95 − 2 × 15.685) / (1654.33 + 15.685) = 1293.58 / 1670.01 = <strong>0.774</strong> — l'estimateur moins biaisé confirme un effet très large.</p>
+
+<p><strong>Tableau ANOVA complet :</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Source</th><th>SS</th><th>ddl</th><th>CM</th><th>F</th><th><em>p</em></th><th>η²</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Inter (Méthode)</td><td>1324.95</td><td>2</td><td>662.48</td><td>42.24</td><td>&lt; .001</td><td>.801</td></tr>
+    <tr><td>Intra (Erreur)</td><td>329.375</td><td>21</td><td>15.685</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Total</td><td>1654.33</td><td>23</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Conclusion :</strong> Il existe une différence statistiquement significative dans les scores d'examen entre les trois méthodes pédagogiques, <em>F</em>(2, 21) = 42.24, <em>p</em> &lt; .001, η² = .80. Mais le test omnibus nous indique seulement qu'<em>au moins un</em> groupe diffère — pas <em>lesquels</em>. Pour cela, nous avons besoin des tests post-hoc.</p>
 
 <hr>
 
-<h2>🎯 Tests post-hoc : Où est la différence ?</h2>
+<h2>🎯 Comparaisons multiples post-hoc : Où se situe la différence ?</h2>
 
-<p>Une ANOVA significative indique qu'<em>au moins un</em> groupe diffère — mais pas <em>lequel</em>. Les tests post-hoc effectuent toutes les comparaisons par paires en contrôlant le taux d'erreur de Type I global (Lee &amp; Lee, 2018).</p>
+<p>Une ANOVA omnibus significative indique qu'au moins une moyenne de groupe diffère des autres — mais elle ne précise pas <em>quelles</em> paires spécifiques diffèrent. Les tests post-hoc effectuent toutes les comparaisons par paires tout en contrôlant le taux d'erreur de type I par famille, garantissant que la probabilité globale d'un seul faux positif reste à α (Lee &amp; Lee, 2018).</p>
 
-<h3>Test HSD de Tukey</h3>
+<h3>La différence honnêtement significative de Tukey (HSD)</h3>
 
-<p>Développé par <strong>John W. Tukey</strong> en 1953 dans son manuscrit « The Problem of Multiple Comparisons » à l'Université de Princeton, le HSD utilise la <strong>distribution de l'étendue studentisée</strong> pour tester simultanément toutes les différences par paires (Tukey, 1953). C'est la méthode la plus recommandée lorsque toutes les comparaisons par paires sont d'intérêt et que les tailles de groupes sont égales.</p>
+<p>Développée par <strong>John W. Tukey</strong> dans son monumental manuscrit non publié de 1953 « The Problem of Multiple Comparisons » à l'Université de Princeton, la méthode HSD utilise la <strong>distribution de l'étendue studentisée</strong> (distribution q) pour tester simultanément toutes les différences par paires tout en maintenant le taux d'erreur par famille exactement à α (Tukey, 1953). C'est la méthode la plus recommandée lorsque toutes les comparaisons par paires sont d'intérêt et que les tailles de groupes sont égales.</p>
 
-<p>Pour notre exemple : HSD = 3,67 × √(0,056 / 6) = <strong>0,355</strong>. Toutes les comparaisons par paires dépassent ce seuil — les trois traitements diffèrent significativement entre eux.</p>
+<p>La différence critique (HSD) est calculée comme :</p>
+<p style="text-align:center; font-size:1.1em;"><strong>HSD = q<sub>α, k, ddl<sub>R</sub></sub> × √(CM<sub>Intra</sub> / n)</strong></p>
+
+<p>Pour notre exemple des méthodes pédagogiques : q<sub>0.05, 3, 21</sub> = 3.57 (d'après la table de l'étendue studentisée), donc :</p>
+<p>HSD = 3.57 × √(15.685 / 8) = 3.57 × √1.961 = 3.57 × 1.400 = <strong>5.00</strong></p>
+<p>Toute paire de moyennes de groupes différant de plus de 5.00 points est significativement différente au seuil α = 0.05.</p>
+
+<table>
+  <thead>
+    <tr><th>Comparaison</th><th>|Différence des moyennes|</th><th>&gt; HSD (5.00) ?</th><th>Significatif ?</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Simulation − Traditionnel</td><td>18.125</td><td>Oui</td><td>✅ <em>p</em> &lt; .001</td></tr>
+    <tr><td>Inversée − Traditionnel</td><td>10.500</td><td>Oui</td><td>✅ <em>p</em> &lt; .001</td></tr>
+    <tr><td>Simulation − Inversée</td><td>7.625</td><td>Oui</td><td>✅ <em>p</em> &lt; .001</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Résultat :</strong> Les trois méthodes diffèrent significativement les unes des autres. La méthode par simulation produit les scores les plus élevés (M = 85.63), suivie de la classe inversée (M = 78.00), le cours magistral traditionnel obtenant les scores les plus faibles (M = 67.50). Toutes les différences par paires dépassent le seuil HSD.</p>
 
 <h3>Autres méthodes post-hoc majeures</h3>
 
 <table>
   <thead>
-    <tr><th>Méthode</th><th>Meilleur usage</th><th>Caractéristiques</th></tr>
+    <tr><th>Méthode</th><th>Idéale pour</th><th>Caractéristiques clés</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Bonferroni</strong></td><td>Peu de comparaisons planifiées</td><td>Divise α par le nombre de comparaisons. Simple mais conservateur.</td></tr>
-    <tr><td><strong>Scheffé</strong></td><td>Contrastes complexes</td><td>Le plus conservateur pour les paires, mais contrôle l'erreur pour <em>tous</em> les contrastes possibles (Scheffé, 1959).</td></tr>
-    <tr><td><strong>Tukey-Kramer</strong></td><td>Toutes les paires, n inégaux</td><td>Extension de Tukey HSD pour designs déséquilibrés (Kramer, 1956).</td></tr>
-    <tr><td><strong>Games-Howell</strong></td><td>Variances inégales</td><td>N'assume pas l'égalité des variances ; s'associe à l'ANOVA de Welch.</td></tr>
-    <tr><td><strong>Dunnett</strong></td><td>Traitements vs. un témoin</td><td>Plus puissant que Tukey quand seules les comparaisons avec un contrôle sont nécessaires.</td></tr>
+    <tr><td><strong>Bonferroni</strong></td><td>Petit nombre de comparaisons planifiées</td><td>Divise α par le nombre de comparaisons (α/m). Simple et polyvalente mais de plus en plus conservatrice à mesure que le nombre de comparaisons augmente. Fonctionne pour des tailles de groupes égales et inégales.</td></tr>
+    <tr><td><strong>Scheffé</strong></td><td>Contrastes complexes (pas seulement par paires)</td><td>La plus conservatrice pour les comparaisons par paires, mais contrôle de manière unique l'erreur pour <em>tous les contrastes possibles</em>, y compris les combinaisons non-pairées comme (μ₁ + μ₂)/2 vs. μ₃ (Scheffé, 1959). À utiliser pour tester des hypothèses complexes.</td></tr>
+    <tr><td><strong>Tukey HSD</strong></td><td>Toutes les comparaisons par paires, n égaux</td><td>Meilleur équilibre entre puissance statistique et contrôle de l'erreur pour tester toutes les comparaisons par paires avec des groupes de taille égale (Tukey, 1953). La recommandation par défaut pour les plans équilibrés.</td></tr>
+    <tr><td><strong>Tukey-Kramer</strong></td><td>Toutes les comparaisons par paires, n inégaux</td><td>Extension du Tukey HSD pour les plans déséquilibrés où les tailles de groupes diffèrent. Utilise la moyenne harmonique des deux tailles de groupes comparés.</td></tr>
+    <tr><td><strong>Games-Howell</strong></td><td>Variances et/ou n inégaux</td><td>Ne suppose pas l'homoscédasticité. Basée sur le test t de Welch avec correction par l'étendue studentisée. Se combine naturellement avec l'ANOVA de Welch lorsque les variances sont inégales.</td></tr>
+    <tr><td><strong>Dunnett</strong></td><td>Tous les traitements vs. un seul contrôle</td><td>Plus puissante que Tukey lorsque seules les comparaisons contre un groupe de référence unique sont nécessaires (ex. : trois doses de médicament vs. placebo). Ne teste pas les différences traitement-traitement.</td></tr>
+    <tr><td><strong>Holm-Bonferroni</strong></td><td>Correction séquentielle descendante</td><td>Plus puissante que le Bonferroni standard tout en contrôlant le FWER. Classe les valeurs p et applique des seuils progressivement moins stricts. Recommandée comme amélioration universelle du Bonferroni (Holm, 1979).</td></tr>
   </tbody>
 </table>
 
+<blockquote>🧠 <strong>Choisir le bon test post-hoc :</strong> Si vous avez des groupes de taille égale et des variances égales, utilisez le Tukey HSD. Si les tailles de groupes sont inégales mais les variances égales, utilisez Tukey-Kramer ou Holm-Bonferroni. Si les variances sont inégales, utilisez Games-Howell (couplé avec l'ANOVA de Welch). Si vous devez seulement comparer des traitements à un seul groupe contrôle, utilisez Dunnett pour une puissance maximale. Si vous testez des contrastes complexes non-pairés, Scheffé est la seule méthode qui contrôle l'erreur pour tous les contrastes possibles (Lee &amp; Lee, 2018).</blockquote>
+
 <hr>
 
-<h2>🧮 ANOVA à deux facteurs : Quand deux facteurs agissent simultanément</h2>
+<h2>🧮 ANOVA factorielle à deux facteurs : Quand deux facteurs agissent simultanément</h2>
 
-<p>Les expériences réelles impliquent souvent plus d'un facteur. Fisher lui-même l'a reconnu en étudiant comment <em>à la fois</em> les variétés de pommes de terre <em>et</em> les traitements de fumure affectaient le rendement (Fisher &amp; Mackenzie, 1923). L'<strong>ANOVA à deux facteurs</strong> (ou ANOVA factorielle) teste simultanément les effets de deux variables indépendantes et, surtout, leur <strong>interaction</strong>.</p>
+<p>Les expériences réelles impliquent souvent plus d'un facteur. Fisher lui-même le reconnut en étudiant comment <em>à la fois</em> les variétés de pommes de terre <em>et</em> les traitements de fumier affectaient simultanément le rendement (Fisher &amp; Mackenzie, 1923). L'<strong>ANOVA à deux facteurs</strong> (aussi appelée ANOVA factorielle) teste simultanément les effets de deux variables indépendantes et, de manière cruciale, leur <strong>interaction</strong> — si l'effet d'un facteur dépend du niveau de l'autre.</p>
+
+<h3>Partition de la variance avec deux facteurs</h3>
+
+<p>Dans un plan à deux facteurs, la variabilité totale est partitionnée en quatre composantes :</p>
 
 <p style="text-align:center; font-size:1.05em;"><strong>SS<sub>Total</sub> = SS<sub>A</sub> + SS<sub>B</sub> + SS<sub>A×B</sub> + SS<sub>Erreur</sub></strong></p>
 
-<p>L'<strong>interaction</strong> signifie que l'effet d'un facteur <em>dépend</em> du niveau de l'autre. Par exemple : le NPK pourrait augmenter considérablement le rendement de la Variété A mais avoir un effet minimal sur la Variété B. Sans ANOVA factorielle, ce pattern crucial serait invisible (Maxwell &amp; Delaney, 2004).</p>
+<p><strong>SS<sub>A</sub></strong> = effet principal du Facteur A (ex. : dose du médicament). Cela capture combien les moyennes des groupes diffèrent à travers les niveaux du Facteur A, en moyennant sur tous les niveaux du Facteur B.</p>
 
-<blockquote>💡 <strong>L'argument d'efficacité de Fisher :</strong> Avant Fisher, les chercheurs testaient une variable à la fois — nécessitant des expériences séparées pour chaque facteur. Fisher montra que les plans factoriels sont non seulement plus informatifs (ils révèlent les interactions) mais aussi plus <em>efficaces</em> car chaque observation contribue des informations sur chaque facteur simultanément (Fisher, 1935).</blockquote>
+<p><strong>SS<sub>B</sub></strong> = effet principal du Facteur B (ex. : sexe du patient). Cela capture combien les moyennes des groupes diffèrent à travers les niveaux du Facteur B, en moyennant sur tous les niveaux du Facteur A.</p>
+
+<p><strong>SS<sub>A×B</sub></strong> = effet d'interaction. Cela capture la variabilité qui ne peut être expliquée par les effets principaux seuls — le degré auquel l'effet du Facteur A <em>change</em> à travers les niveaux du Facteur B (et vice versa).</p>
+
+<p><strong>SS<sub>Erreur</sub></strong> = variation résiduelle (intra-cellule) — bruit aléatoire non attribuable à aucune source systématique.</p>
+
+<h3>Comprendre l'interaction : Le concept le plus important</h3>
+
+<p>L'effet d'interaction est peut-être la contribution la plus importante de l'ANOVA factorielle. Une <strong>interaction</strong> signifie que l'effet d'un facteur change selon le niveau de l'autre facteur. Considérons un exemple réel : un essai clinique testant deux antidépresseurs (médicament A et médicament B) à deux dosages (faible et élevé). Il est possible que le médicament A fonctionne mieux à dose élevée tandis que le médicament B fonctionne mieux à faible dose — c'est une <strong>interaction de croisement</strong> classique. Sans ANOVA factorielle, chaque facteur testé séparément donnerait des résultats trompeurs ou incomplets car le pattern critique existe <em>entre</em> les facteurs, pas au sein de l'un ou l'autre seul (Maxwell &amp; Delaney, 2004).</p>
+
+<p>Les interactions peuvent prendre plusieurs formes. Dans une <strong>interaction ordinale</strong>, l'effet d'un facteur est plus large à un niveau de l'autre facteur mais ne s'inverse pas — par exemple, les deux médicaments fonctionnent mieux à dose élevée, mais l'amélioration du médicament A est plus prononcée. Dans une <strong>interaction disordinale (de croisement)</strong>, l'effet s'inverse réellement — le médicament A surpasse le médicament B à faible dose, mais le médicament B surpasse le médicament A à dose élevée. Les interactions disordinales sont particulièrement dangereuses à manquer, car rapporter uniquement les effets principaux serait activement trompeur.</p>
+
+<blockquote>💡 <strong>L'argument d'efficacité de Fisher :</strong> Avant Fisher, les chercheurs testaient une variable à la fois — nécessitant des expériences séparées pour chaque facteur et étant incapables de détecter les interactions. Fisher prouva mathématiquement que les plans factoriels sont non seulement plus informatifs (ils révèlent les interactions) mais en réalité plus <em>efficients</em> que les expériences un-facteur-à-la-fois car chaque observation contribue simultanément de l'information sur chaque facteur. Un plan factoriel 2×2 avec 10 sujets par cellule (N = 40) donne autant d'information sur chaque effet principal que deux expériences à un facteur séparées avec 20 sujets chacune — plus l'interaction, que les expériences séparées ne peuvent pas du tout détecter (Fisher, 1935).</blockquote>
+
+<h3>Règle d'interprétation : Toujours examiner l'interaction en premier</h3>
+
+<p>Lors de l'analyse d'une ANOVA à deux facteurs, examinez toujours l'interaction <em>avant</em> d'interpréter les effets principaux. Si l'interaction est significative, les effets principaux seuls peuvent être trompeurs ou dénués de sens. Par exemple, si le médicament A réduit la pression artérielle de 20 mmHg chez les hommes mais de seulement 2 mmHg chez les femmes, tandis que le médicament B montre le pattern inverse, les effets principaux du médicament et du sexe pourraient apparaître non significatifs (les avantages s'annulent), même si l'interaction révèle des effets différentiels d'importance critique. Lorsqu'une interaction significative est présente, l'étape appropriée suivante est d'analyser les <strong>effets simples</strong> — l'effet d'un facteur à chaque niveau fixé de l'autre facteur (Maxwell &amp; Delaney, 2004).</p>
 
 <hr>
 
 <h2>🔁 ANOVA à mesures répétées</h2>
 
-<p>Lorsque les <em>mêmes sujets</em> sont mesurés à plusieurs reprises, les observations sont corrélées. L'ANOVA standard assume l'indépendance. L'<strong>ANOVA à mesures répétées</strong> tient compte de la corrélation intra-sujet en partitionnant la variabilité due aux sujets :</p>
+<p>Lorsque les <em>mêmes sujets</em> sont mesurés sous plusieurs conditions ou à plusieurs points temporels (ex. : la pression artérielle de patients mesurée à l'inclusion, à 4 semaines et à 12 semaines), les observations au sein de chaque sujet sont corrélées. L'ANOVA standard à un facteur suppose l'indépendance de toutes les observations et serait invalide ici. L'<strong>ANOVA à mesures répétées</strong> tient compte de la corrélation intra-sujet en partitionnant la variabilité individuelle des sujets :</p>
 
 <p style="text-align:center; font-size:1.05em;"><strong>SS<sub>Total</sub> = SS<sub>Traitement</sub> + SS<sub>Sujets</sub> + SS<sub>Erreur</sub></strong></p>
 
-<p>Elle introduit une hypothèse supplémentaire : la <strong>sphéricité</strong> — l'exigence que les variances de <em>toutes les différences par paires</em> soient égales. Lorsqu'elle est violée, deux corrections sont disponibles : <strong>Greenhouse-Geisser</strong> (1959), recommandée quand ε &lt; 0,75 ; et <strong>Huynh-Feldt</strong> (1976), moins conservatrice, recommandée quand ε ≥ 0,75.</p>
+<p>En retirant SS<sub>Sujets</sub> du terme d'erreur, l'ANOVA à mesures répétées atteint typiquement une puissance statistique <em>dramatiquement</em> supérieure à celle des plans inter-sujets, car chaque sujet sert de son propre contrôle. Les différences individuelles qui gonfleraient le terme d'erreur dans un plan inter-sujets (ex. : certains patients ont naturellement une pression artérielle plus élevée) sont proprement éliminées, ne laissant que l'interaction traitement-par-sujet comme terme d'erreur (Maxwell &amp; Delaney, 2004).</p>
+
+<p>Le gain en puissance peut être substantiel. Si la corrélation entre les mesures répétées est r = 0.70, la variance d'erreur effective dans un plan à mesures répétées n'est que de 30 % de ce qu'elle serait dans un plan inter-sujets — ce qui signifie qu'on peut détecter le même effet avec beaucoup moins de sujets. C'est pourquoi les plans à mesures répétées sont si populaires dans les essais cliniques, les expériences de psychologie et les études longitudinales.</p>
+
+<h3>L'hypothèse de sphéricité</h3>
+
+<p>L'ANOVA à mesures répétées introduit une hypothèse supplémentaire au-delà de la normalité et de l'indépendance : la <strong>sphéricité</strong> — l'exigence que les variances de <em>toutes les différences par paires</em> entre conditions soient égales. Dans un plan à trois conditions (A, B, C), la sphéricité exige que Var(A − B) = Var(A − C) = Var(B − C). Lorsque la sphéricité est violée (comme c'est souvent le cas en pratique), le test F devient libéral, produisant des taux d'erreur de type I gonflés — on rejette H₀ trop souvent.</p>
+
+<p>Le <strong>test de Mauchly</strong> (1940) est utilisé pour détecter les violations de la sphéricité. Lorsque la violation est significative, deux corrections sont disponibles pour ajuster les degrés de liberté :</p>
+
+<p><strong>Correction ε de Greenhouse-Geisser</strong> (Greenhouse &amp; Geisser, 1959) : La correction la plus conservatrice. Recommandée lorsque ε &lt; 0.75, indiquant un écart substantiel à la sphéricité. Multiplie les ddl du numérateur et du dénominateur par ε, les réduisant et rendant la valeur critique de F plus grande.</p>
+
+<p><strong>Correction ε de Huynh-Feldt</strong> (Huynh &amp; Feldt, 1976) : Moins conservatrice que Greenhouse-Geisser. Recommandée lorsque ε ≥ 0.75, indiquant un écart léger à modéré. Offre un meilleur équilibre entre le contrôle de l'erreur de type I et la puissance statistique.</p>
+
+<p>Les deux corrections réduisent les degrés de liberté du test F, le rendant plus conservateur et corrigeant le taux de faux positifs gonflé. Une règle pratique : rapportez Greenhouse-Geisser lorsque ε &lt; 0.75, et Huynh-Feldt lorsque ε ≥ 0.75. Si ε = 1.0 (sphéricité parfaite), les deux corrections donnent des résultats identiques au test non corrigé (Girden, 1992).</p>
+
+<hr>
+
+<h2>📐 ANCOVA : Contrôler les variables confondantes</h2>
+
+<p>L'<strong>Analyse de Covariance</strong> (ANCOVA) étend l'ANOVA en incorporant une ou plusieurs <strong>covariables</strong> continues — des variables qui ne sont pas l'objet principal de l'étude mais qui influencent la variable dépendante et, si elles ne sont pas contrôlées, gonflent le terme d'erreur. En ajustant statistiquement pour ces covariables, l'ANCOVA atteint deux objectifs critiques : elle élimine les effets confondants et augmente la puissance statistique (Tabachnick &amp; Fidell, 2019).</p>
+
+<p>Considérons un essai clinique comparant trois protocoles de kinésithérapie pour la rééducation du genou après chirurgie du ligament croisé antérieur. Les scores de récupération des patients après 8 semaines sont la variable dépendante, et le protocole thérapeutique est la variable indépendante. Cependant, les patients diffèrent dans leur fonction initiale du genou avant le début de la thérapie — certains sont entrés dans l'étude avec une meilleure mobilité initiale que d'autres. Sans contrôler cette différence de base, le terme d'erreur est gonflé et les vraies différences de traitement peuvent être masquées. L'ANCOVA élimine la variance attribuable à la fonction de base, fournissant un test plus propre et plus puissant de l'effet du traitement.</p>
+
+<p>La partition de la variance dans l'ANCOVA est :</p>
+<p style="text-align:center; font-size:1.05em;"><strong>SS<sub>Total</sub> = SS<sub>Traitement</sub> + SS<sub>Covariable</sub> + SS<sub>Erreur</sub></strong></p>
+
+<p>L'ANCOVA exige une hypothèse supplémentaire au-delà des hypothèses standard de l'ANOVA : l'<strong>homogénéité des pentes de régression</strong> — la relation entre la covariable et la variable dépendante doit être la même dans tous les groupes. Si les pentes de régression diffèrent significativement entre les groupes, l'ANCOVA est inappropriée et des approches alternatives (comme l'inclusion de l'interaction groupe × covariable dans le modèle) sont nécessaires.</p>
 
 <hr>
 
 <h2>🔧 Hypothèses et diagnostics</h2>
 
+<p>L'ANOVA repose sur trois hypothèses fondamentales. Comprendre quand elles importent — et quand elles peuvent être tolérées sans risque — est essentiel pour une utilisation responsable de la méthode.</p>
+
 <table>
   <thead>
-    <tr><th>Hypothèse</th><th>Signification</th><th>Test</th><th>Conséquence de la violation</th></tr>
+    <tr><th>Hypothèse</th><th>Signification</th><th>Comment la tester</th><th>Conséquence de la violation</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>1. Indépendance</strong></td><td>Les observations sont indépendantes</td><td>Plan d'étude</td><td>La plus critique. Utiliser mesures répétées ou modèles mixtes si violation.</td></tr>
-    <tr><td><strong>2. Normalité</strong></td><td>Les résidus suivent une loi normale</td><td>Shapiro-Wilk ; graphiques Q-Q</td><td>L'ANOVA est <em>robuste</em> aux violations de normalité quand n ≥ 15 par groupe (Glass et al., 1972). Sinon, utiliser Kruskal-Wallis.</td></tr>
-    <tr><td><strong>3. Homoscédasticité</strong></td><td>Variances égales entre les groupes</td><td>Test de Levene (1960) ; Brown-Forsythe (1974)</td><td>Si violée, utiliser l'<strong>ANOVA de Welch</strong> (1951). Critique surtout quand les tailles de groupes sont inégales.</td></tr>
+    <tr><td><strong>1. Indépendance</strong></td><td>Les observations sont indépendantes les unes des autres — connaître une observation ne donne aucune information sur une autre</td><td>Plan de l'étude et randomisation (aucun test statistique ne peut pleinement vérifier ceci)</td><td><strong>Hypothèse la plus critique.</strong> La violation invalide fondamentalement le test F. Si les observations sont corrélées (ex. : étudiants dans la même classe, mesures répétées sur le même sujet), utiliser l'ANOVA à mesures répétées, les modèles à effets mixtes ou les modèles multiniveaux.</td></tr>
+    <tr><td><strong>2. Normalité</strong></td><td>Les résidus (pas les données brutes) sont normalement distribués au sein de chaque groupe</td><td>Test de Shapiro-Wilk (préféré pour n &lt; 50) ; diagrammes Q-Q ; valeurs d'asymétrie et d'aplatissement</td><td>L'ANOVA est remarquablement <em>robuste</em> aux violations de la normalité lorsque les tailles d'échantillon sont modérées (n ≥ 15–20 par groupe) et approximativement équilibrées, grâce au Théorème Central Limite (Glass et al., 1972). Pour les petits échantillons avec forte asymétrie ou queues lourdes, utiliser le test H de Kruskal-Wallis.</td></tr>
+    <tr><td><strong>3. Homoscédasticité</strong></td><td>La variance des résidus est égale dans tous les groupes (homogénéité des variances)</td><td>Test de Levene (1960) basé sur les écarts aux médianes de groupe ; test de Brown-Forsythe (1974)</td><td>En cas de violation, utiliser l'<strong>ANOVA de Welch</strong> (Welch, 1951), qui ne suppose pas l'égalité des variances. L'hétéroscédasticité est <em>particulièrement</em> dangereuse combinée à des tailles de groupes inégales : lorsque le groupe le plus grand a la plus petite variance, l'erreur de type I est gonflée ; dans le cas inverse, la puissance est réduite (Glass et al., 1972).</td></tr>
   </tbody>
 </table>
 
-<blockquote>🧠 <strong>L'insight de robustesse :</strong> Glass, Peckham et Sanders (1972) ont montré que l'ANOVA est remarquablement robuste aux violations de normalité. La violation la plus dangereuse est l'<em>hétéroscédasticité combinée à des tailles d'échantillons inégales</em>. Dans ce cas, l'ANOVA de Welch est fortement recommandée.</blockquote>
+<blockquote>🧠 <strong>L'insight de la robustesse :</strong> Glass, Peckham et Sanders (1972) ont montré dans leur revue fondamentale que l'ANOVA est remarquablement robuste aux violations de la normalité, surtout avec des plans équilibrés et des tailles d'échantillon modérées. Le scénario le plus dangereux est l'<em>hétéroscédasticité combinée à des tailles de groupes inégales</em> — c'est la seule combinaison qui peut sérieusement déformer les résultats. L'implication pratique est claire : vérifiez toujours l'égalité des variances (test de Levene), et en cas de doute, utilisez l'ANOVA de Welch, qui est valide que les variances soient égales ou non (Delacre et al., 2019).</blockquote>
+
+<h3>Protocole diagnostique : Guide étape par étape</h3>
+
+<p><strong>Étape 1 :</strong> Vérifier l'indépendance par l'examen du plan de l'étude. Les sujets ont-ils été assignés aléatoirement ? Les observations sont-elles indépendantes ? Si non, envisager les mesures répétées ou les modèles mixtes.</p>
+
+<p><strong>Étape 2 :</strong> Tester la normalité en utilisant le test de Shapiro-Wilk sur les résidus au sein de chaque groupe et inspecter les diagrammes Q-Q. En cas de violation avec de petits échantillons, envisager Kruskal-Wallis. Si les tailles d'échantillon sont modérées et équilibrées (n ≥ 15–20 par groupe), l'ANOVA est robuste à une non-normalité modérée.</p>
+
+<p><strong>Étape 3 :</strong> Tester l'homoscédasticité en utilisant le test de Levene. S'il est significatif (p &lt; .05), passer à l'ANOVA de Welch avec tests post-hoc de Games-Howell. Si le test de Levene est non significatif, procéder avec l'ANOVA classique et le Tukey HSD.</p>
 
 <hr>
 
 <h2>⚡ ANOVA de Welch : L'alternative robuste moderne</h2>
 
-<p>En 1951, <strong>Bernard Lewis Welch</strong> publia dans <em>Biometrika</em> une extension de son test t à plusieurs groupes (Welch, 1951). L'ANOVA de Welch utilise des moyennes pondérées et des degrés de liberté ajustés pour produire des tests F valides même avec des variances inégales. Beaucoup de statisticiens modernes la recommandent comme <em>choix par défaut</em> (Delacre et al., 2019).</p>
+<p>En 1951, <strong>Bernard Lewis Welch</strong> — étendant son précédent test t à deux échantillons au cas à k échantillons — publia « On the Comparison of Several Mean Values: An Alternative Approach » dans <em>Biometrika</em> (Welch, 1951). L'ANOVA de Welch utilise des <strong>moyennes de groupes pondérées</strong> (pondérant chaque groupe inversement par sa variance) et des <strong>degrés de liberté ajustés</strong> via l'approximation de Satterthwaite-Welch pour produire des tests F valides même lorsque les variances des groupes sont substantiellement inégales.</p>
+
+<p>Avantages clés de l'ANOVA de Welch :</p>
+
+<p><strong>1. Maintien du contrôle de l'erreur de type I :</strong> Même avec des variances sévèrement inégales et des tailles d'échantillon inégales, l'ANOVA de Welch maintient le taux réel d'erreur de type I proche du α nominal, alors que l'ANOVA classique peut le gonfler à 10–15 % ou plus (Delacre et al., 2019).</p>
+
+<p><strong>2. Perte de puissance négligeable :</strong> Lorsque les variances <em>sont</em> effectivement égales, l'ANOVA de Welch perd presque aucune puissance statistique par rapport au test F classique — typiquement moins de 1 % (Delacre et al., 2019).</p>
+
+<p><strong>3. Pipeline robuste complet :</strong> Couplée avec le <strong>test post-hoc de Games-Howell</strong> (qui ne suppose pas non plus l'égalité des variances), l'ANOVA de Welch fournit un pipeline d'analyse complet valide sous un éventail plus large de conditions.</p>
+
+<p>Étant donné ces propriétés, de nombreux statisticiens modernes — dont Delacre et al. (2019) dans leur article influent dans l'<em>International Review of Social Psychology</em> — recommandent d'utiliser l'ANOVA de Welch comme approche <em>par défaut</em>, remplaçant entièrement le test F classique. Le raisonnement est convaincant : le test de Welch est valide que les variances soient égales ou non, il fournit donc des conclusions correctes sous strictement plus de conditions que le test classique, à un coût essentiellement nul.</p>
 
 <hr>
 
-<h2>📐 Tailles d'effet</h2>
+<h2>📏 Tailles d'effet : Quelle est l'ampleur de la différence ?</h2>
+
+<p>La signification statistique seule est insuffisante pour l'interprétation scientifique. Une valeur <em>p</em> vous dit si un effet <em>existe</em>, mais pas <em>quelle est son ampleur</em>. Avec un échantillon suffisamment grand, même des différences trivialement petites peuvent être statistiquement significatives. Inversement, avec de petits échantillons, des différences pratiquement importantes peuvent ne pas atteindre la signification. Les <strong>tailles d'effet</strong> quantifient l'ampleur des différences et sont essentielles pour l'interprétation scientifique, l'analyse de puissance et la méta-analyse. Le manuel de publication de l'APA (7e éd.) impose de rapporter les tailles d'effet aux côtés des tests de signification (APA, 2020).</p>
 
 <table>
   <thead>
-    <tr><th>Mesure</th><th>Formule</th><th>Interprétation</th></tr>
+    <tr><th>Mesure</th><th>Formule</th><th>Interprétation et critères de référence</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>η²</strong></td><td>SS<sub>Effet</sub> / SS<sub>Total</sub></td><td>Proportion de variance totale expliquée. Biaisé positivement. Seuils : 0,01 = petit, 0,06 = moyen, 0,14 = grand (Cohen, 1988).</td></tr>
-    <tr><td><strong>η² partiel</strong></td><td>SS<sub>Effet</sub> / (SS<sub>Effet</sub> + SS<sub>Erreur</sub>)</td><td>Standard dans les plans factoriels. C'est ce que SPSS rapporte par défaut (Richardson, 2011).</td></tr>
-    <tr><td><strong>ω²</strong></td><td>(SS<sub>B</sub> − (k−1)CM<sub>W</sub>) / (SS<sub>T</sub> + CM<sub>W</sub>)</td><td>Estimateur moins biaisé que η². Recommandé pour l'inférence populationnelle (Lakens, 2013).</td></tr>
-    <tr><td><strong><em>f</em> de Cohen</strong></td><td>√(η² / (1 − η²))</td><td>Pour l'analyse de puissance. Seuils : 0,10 = petit, 0,25 = moyen, 0,40 = grand (Cohen, 1988).</td></tr>
+    <tr><td><strong>η² (êta carré)</strong></td><td>SS<sub>Effet</sub> / SS<sub>Total</sub></td><td>Proportion de la variance totale expliquée par le facteur. Simple et intuitive, mais positivement biaisée — elle surestime systématiquement l'effet dans la population, surtout avec de petits échantillons. Critères de Cohen (1988) : .01 = petit, .06 = moyen, .14 = grand.</td></tr>
+    <tr><td><strong>η² partiel</strong></td><td>SS<sub>Effet</sub> / (SS<sub>Effet</sub> + SS<sub>Erreur</sub>)</td><td>Proportion de la variance expliquée par un facteur <em>après avoir retiré la variance attribuable aux autres facteurs</em>. Standard dans les plans factoriels. Note importante : SPSS rapporte le η² partiel par défaut et l'étiquette simplement « eta squared » — une source commune de confusion (Richardson, 2011).</td></tr>
+    <tr><td><strong>ω² (oméga carré)</strong></td><td>(SS<sub>I</sub> − (k−1) × CM<sub>R</sub>) / (SS<sub>T</sub> + CM<sub>R</sub>)</td><td>Estimateur de population moins biaisé que η². Recommandé pour l'inférence au niveau de la population et la méta-analyse (Lakens, 2013). Peut produire des valeurs négatives lorsque F &lt; 1 (conventionnellement fixé à 0, indiquant un effet nul).</td></tr>
+    <tr><td><strong><em>f</em> de Cohen</strong></td><td>√(η² / (1 − η²))</td><td>Utilisé principalement pour l'analyse de puissance <em>a priori</em> avec G*Power ou un logiciel similaire. Critères : 0.10 = petit, 0.25 = moyen, 0.40 = grand (Cohen, 1988).</td></tr>
   </tbody>
 </table>
+
+<p>Pour notre exemple des méthodes pédagogiques : η² = .801 et ω² = .774, les deux indiquant un effet très large. La méthode pédagogique explique environ 77–80 % de la variance des scores d'examen — un résultat remarquablement fort qui aurait des implications pratiques claires pour la conception des programmes d'études.</p>
+
+<hr>
+
+<h2>⚡ Puissance statistique et planification de la taille d'échantillon</h2>
+
+<p>La <strong>puissance</strong> statistique — la probabilité de rejeter correctement H₀ lorsqu'elle est fausse — est l'un des aspects les plus négligés de la planification de recherche. Une étude sous-puissante risque de ne pas détecter de vrais effets (erreur de type II), gaspillant des ressources et conduisant potentiellement à la conclusion erronée qu'un traitement est inefficace. Cohen (1988) recommandait une puissance minimale de .80 (80 % de chance de détecter un effet réel), et de nombreuses revues exigent désormais des analyses de puissance <em>a priori</em> dans le cadre du plan de recherche.</p>
+
+<p>Pour l'ANOVA à un facteur, quatre quantités sont interreliées : la taille d'échantillon (N), le nombre de groupes (k), la taille d'effet (<em>f</em> de Cohen), le seuil de signification (α) et la puissance (1 − β). Fixer quatre de ces quantités détermine la cinquième. En utilisant les lignes directrices de Cohen (1988) pour une ANOVA à un facteur à 3 groupes avec α = .05 et puissance = .80 :</p>
+
+<table>
+  <thead>
+    <tr><th>Effet attendu</th><th><em>f</em> de Cohen</th><th>n par groupe</th><th>N total</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Petit (η² = .01)</td><td>0.10</td><td>322</td><td>966</td></tr>
+    <tr><td>Moyen (η² = .06)</td><td>0.25</td><td>52</td><td>156</td></tr>
+    <tr><td>Grand (η² = .14)</td><td>0.40</td><td>21</td><td>63</td></tr>
+  </tbody>
+</table>
+
+<p>Ces chiffres donnent à réfléchir. Détecter un petit effet à travers trois groupes nécessite près de 1000 sujets — bien plus que ce que la plupart des études emploient. C'est pourquoi les études sous-puissantes sont endémiques dans les domaines qui utilisent routinièrement de petits échantillons. Une analyse fondatrice de Cohen (1962) a montré que la puissance médiane des études publiées dans le <em>Journal of Abnormal and Social Psychology</em> n'était que de .48 pour détecter des effets moyens — à peine mieux qu'un tirage au sort. Des décennies plus tard, des méta-analyses ont confirmé que la puissance statistique reste chroniquement faible dans de nombreux domaines (Maxwell, 2004). Planifier la taille d'échantillon <em>avant</em> de collecter les données — en utilisant des outils comme G*Power (Faul et al., 2007) — n'est pas optionnel ; c'est une obligation éthique.</p>
 
 <hr>
 
 <h2>📝 Directives de rédaction APA</h2>
 
-<p>L'APA (2020) exige de rapporter le F, les degrés de liberté, la valeur <em>p</em> exacte et une mesure de taille d'effet :</p>
+<p>Le manuel de publication de l'American Psychological Association (APA, 2020) exige que les résultats de l'ANOVA incluent la statistique F, les deux degrés de liberté, la valeur <em>p</em> exacte (ou <em>p</em> &lt; .001 pour les valeurs très petites), et au moins une mesure de taille d'effet. Voici des modèles de rédaction pour différents plans d'ANOVA :</p>
 
-<p><em>« Une ANOVA à un facteur a révélé une différence statistiquement significative du rendement en blé entre les trois traitements fertilisants, F(2, 15) = 55,89, p &lt; ,001, η² = ,88. Les comparaisons post-hoc de Tukey HSD ont montré que le NPK (M = 3,63, ÉT = 0,28) a produit un rendement significativement supérieur au Compost (M = 3,10, ÉT = 0,24, p &lt; ,01) et au Témoin (M = 2,20, ÉT = 0,23, p &lt; ,001). »</em></p>
+<h3>ANOVA à un facteur</h3>
+<p><em>« Une ANOVA à un facteur a révélé un effet statistiquement significatif de la méthode pédagogique sur les scores d'examen, F(2, 21) = 42.24, p &lt; .001, η² = .80. Les comparaisons post-hoc par Tukey HSD ont indiqué que la méthode par simulation (M = 85.63, ET = 4.03) produisait des scores significativement plus élevés que la classe inversée (M = 78.00, ET = 3.78, p &lt; .001) et le cours magistral traditionnel (M = 67.50, ET = 4.90, p &lt; .001). La classe inversée surpassait également significativement le cours magistral traditionnel (p &lt; .001). »</em></p>
+
+<h3>ANOVA factorielle à deux facteurs</h3>
+<p><em>« Une ANOVA factorielle 3 × 2 a révélé un effet principal significatif de la méthode pédagogique, F(2, 42) = 38.15, p &lt; .001, η² partiel = .65, et un effet principal significatif de l'expérience antérieure, F(1, 42) = 12.40, p = .001, η² partiel = .23. L'interaction méthode × expérience était également significative, F(2, 42) = 4.87, p = .013, η² partiel = .19, indiquant que l'avantage de l'enseignement par simulation sur le cours magistral traditionnel était plus grand pour les étudiants sans expérience préalable en statistique. »</em></p>
+
+<h3>ANOVA de Welch</h3>
+<p><em>« Le test de Levene ayant indiqué des variances inégales, F(2, 21) = 5.88, p = .009, l'ANOVA de Welch a été utilisée. Le test a révélé un effet significatif de la méthode pédagogique sur les scores d'examen, F de Welch(2, 13.22) = 39.71, p &lt; .001, ω² est. = .77. Les tests post-hoc de Games-Howell ont confirmé que toutes les différences par paires étaient significatives (tous les p &lt; .01). »</em></p>
+
+<h3>ANOVA à mesures répétées</h3>
+<p><em>« Une ANOVA à mesures répétées avec correction de Greenhouse-Geisser (test de Mauchly : χ²(2) = 8.41, p = .015, ε = .72) a révélé un effet significatif du temps sur les scores de dépression, F(1.44, 34.56) = 22.18, p &lt; .001, η² partiel = .48. Les comparaisons par paires ajustées par Bonferroni ont montré des réductions significatives de l'inclusion à 4 semaines (p = .003) et de l'inclusion à 12 semaines (p &lt; .001), mais pas de 4 à 12 semaines (p = .112). »</em></p>
 
 <hr>
 
-<h2>🗺️ La famille complète de l'ANOVA</h2>
+<h2>🗺️ La famille complète de l'ANOVA : Guide de décision</h2>
 
 <table>
   <thead>
-    <tr><th>Plan</th><th>Type d'ANOVA</th><th>Quand utiliser</th></tr>
+    <tr><th>Plan de recherche</th><th>Type d'ANOVA</th><th>Quand l'utiliser</th></tr>
   </thead>
   <tbody>
-    <tr><td>Un facteur, groupes indépendants</td><td><strong>ANOVA à un facteur</strong></td><td>Comparer 3+ groupes</td></tr>
-    <tr><td>Deux facteurs, groupes indépendants</td><td><strong>ANOVA factorielle (à deux facteurs)</strong></td><td>Deux facteurs croisés. Teste effets principaux + interaction.</td></tr>
-    <tr><td>Un facteur, mêmes sujets</td><td><strong>ANOVA à mesures répétées</strong></td><td>Mêmes sujets mesurés à 3+ moments ou conditions.</td></tr>
-    <tr><td>Deux facteurs : un inter, un intra</td><td><strong>ANOVA mixte (split-plot)</strong></td><td>Groupes différents sur un facteur, mesures répétées sur l'autre.</td></tr>
-    <tr><td>Un facteur, avec covariable continue</td><td><strong>ANCOVA</strong></td><td>Contrôle une variable confondante. Augmente la puissance.</td></tr>
-    <tr><td>Plusieurs variables dépendantes</td><td><strong>MANOVA</strong></td><td>Teste les différences sur plusieurs résultats simultanément.</td></tr>
-    <tr><td>Variances inégales</td><td><strong>ANOVA de Welch</strong></td><td>Alternative robuste (Welch, 1951).</td></tr>
-    <tr><td>Données non normales / ordinales</td><td><strong>Test H de Kruskal-Wallis</strong></td><td>Alternative non paramétrique (Kruskal &amp; Wallis, 1952).</td></tr>
+    <tr><td>Un facteur, groupes indépendants</td><td><strong>ANOVA à un facteur</strong></td><td>Comparer 3+ groupes indépendants sur une variable dépendante (ex. : trois méthodes pédagogiques).</td></tr>
+    <tr><td>Deux facteurs, groupes indépendants</td><td><strong>ANOVA à deux facteurs (factorielle)</strong></td><td>Deux facteurs croisés (ex. : méthode pédagogique × expérience antérieure). Teste deux effets principaux + une interaction.</td></tr>
+    <tr><td>Trois+ facteurs, groupes indépendants</td><td><strong>ANOVA factorielle d'ordre supérieur</strong></td><td>Trois facteurs croisés ou plus. Teste tous les effets principaux, interactions à deux voies, interactions à trois voies, etc. L'interprétation devient complexe avec les interactions d'ordre supérieur.</td></tr>
+    <tr><td>Un facteur, mêmes sujets</td><td><strong>ANOVA à mesures répétées</strong></td><td>Mêmes sujets mesurés à 3+ points temporels ou sous 3+ conditions. Nécessite vérification de la sphéricité.</td></tr>
+    <tr><td>Deux facteurs : un inter, un intra</td><td><strong>ANOVA mixte (split-plot)</strong></td><td>Les groupes diffèrent sur un facteur (inter-sujets) et sont mesurés de façon répétée sur un autre (intra-sujets). Exemple : groupe de traitement × temps.</td></tr>
+    <tr><td>Un facteur + covariable continue</td><td><strong>ANCOVA</strong></td><td>Contrôle une variable confondante continue (ex. : score de base). Augmente la puissance et réduit le biais.</td></tr>
+    <tr><td>Plusieurs variables dépendantes</td><td><strong>MANOVA</strong></td><td>Teste les différences entre groupes simultanément sur plusieurs variables de résultat corrélées (ex. : scores en lecture + maths + sciences).</td></tr>
+    <tr><td>Variances inégales, groupes indépendants</td><td><strong>ANOVA de Welch</strong></td><td>Alternative robuste lorsque l'homoscédasticité est violée (Welch, 1951). De nombreux experts la recommandent par défaut.</td></tr>
+    <tr><td>Données non-normales ou ordinales</td><td><strong>Test H de Kruskal-Wallis</strong></td><td>Alternative non paramétrique à l'ANOVA à un facteur. Basé sur les rangs. À utiliser lorsque la normalité est violée et les tailles d'échantillon sont petites (Kruskal &amp; Wallis, 1952).</td></tr>
+    <tr><td>Non-normal, mesures répétées</td><td><strong>Test de Friedman</strong></td><td>Alternative non paramétrique à l'ANOVA à mesures répétées. Basé sur les rangs intra-sujets.</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>⚠️ Erreurs courantes à éviter</h2>
+<h2>🌍 L'ANOVA en pratique : Applications réelles à travers les disciplines</h2>
 
-<p><strong>1.</strong> Effectuer des tests t multiples au lieu d'une ANOVA — cela gonfle l'erreur de Type I.</p>
-<p><strong>2.</strong> Ignorer l'interaction dans les plans factoriels — si l'interaction est significative, les effets principaux seuls sont trompeurs (Maxwell &amp; Delaney, 2004).</p>
-<p><strong>3.</strong> Ne rapporter que les valeurs <em>p</em> sans tailles d'effet — toujours inclure η², η² partiel ou ω² (Lakens, 2013).</p>
-<p><strong>4.</strong> Utiliser l'ANOVA classique quand les variances sont inégales — passer à l'ANOVA de Welch avec Games-Howell (Delacre et al., 2019).</p>
-<p><strong>5.</strong> Oublier de vérifier les hypothèses — toujours tester normalité (Shapiro-Wilk) et homoscédasticité (Levene).</p>
-<p><strong>6.</strong> Faire des tests post-hoc après une ANOVA non significative — les tests post-hoc ne sont justifiés que si le test omnibus est significatif.</p>
+<p>La polyvalence de l'ANOVA est démontrée par son application ubiquitaire dans pratiquement toute discipline empirique. Voici des exemples illustratifs de la façon dont différents domaines emploient des plans d'ANOVA pour répondre à des questions de recherche critiques :</p>
+
+<p><strong>Médecine et essais cliniques :</strong> Un essai multinational de Phase III compare trois dosages d'un nouveau médicament antihypertenseur plus un placebo auprès de 400 patients dans des hôpitaux à Tokyo, São Paulo, Londres et Toronto. L'ANOVA à un facteur (ou l'ANOVA de Welch si les variances diffèrent entre les groupes de dosage) teste si la réduction moyenne de la pression artérielle diffère entre les quatre groupes. Si l'essai stratifie également par sexe et groupe d'âge, une ANOVA factorielle révèle si l'efficacité du médicament dépend des caractéristiques démographiques du patient — information critique pour la médecine personnalisée.</p>
+
+<p><strong>Psychologie et sciences cognitives :</strong> Un chercheur en mémoire à l'Université de Toronto mesure la précision du rappel sous trois conditions d'encodage (visuel, auditif, kinesthésique), chaque participant étant testé dans les trois conditions à des jours différents. L'ANOVA à mesures répétées, avec correction de la sphéricité, teste si la modalité d'encodage affecte le rappel tout en contrôlant les différences individuelles dans la capacité de mémoire de base.</p>
+
+<p><strong>Agriculture et science alimentaire :</strong> Des chercheurs agricoles au CIMMYT (Centre International d'Amélioration du Maïs et du Blé) au Mexique testent quatre cultivars de blé sous trois régimes d'irrigation dans un plan factoriel 4 × 3 répliqué dans des stations de terrain en Inde, au Kenya et en Australie. L'ANOVA factorielle révèle non seulement si le cultivar et l'irrigation affectent chacun le rendement, mais si certains cultivars performent de manière disproportionnément bonne en conditions de sécheresse — l'interaction cultivar × irrigation — information vitale pour la sécurité alimentaire dans les régions soumises au stress hydrique.</p>
+
+<p><strong>Fabrication et contrôle qualité :</strong> Un ingénieur dans une usine de fabrication de semi-conducteurs à Dresde teste si les taux de défauts des puces diffèrent entre trois équipes de production (jour, soir, nuit) tout en contrôlant le niveau de contamination de base de chaque lot de salle blanche. L'ANCOVA élimine l'effet de la contamination, fournissant un test plus propre pour déterminer si l'équipe elle-même — et ses facteurs humains associés — contribue aux taux de défauts.</p>
+
+<p><strong>Sciences environnementales :</strong> Des écologistes mesurant la biodiversité (richesse spécifique) à travers quatre types d'habitats (forêt primaire, forêt secondaire, plantation, prairie) sur 12 sites couvrant trois continents utilisent l'ANOVA à un facteur pour tester si le type d'habitat prédit la biodiversité. Si les mêmes sites sont inventoriés en saison sèche et humide, une ANOVA mixte avec l'habitat comme facteur inter-sujets et la saison comme facteur intra-sujets capture à la fois la variation spatiale et temporelle.</p>
+
+<hr>
+
+<h2>⚠️ Erreurs courantes et comment les éviter</h2>
+
+<p><strong>1. Effectuer de multiples tests t au lieu de l'ANOVA.</strong> Cela gonfle dramatiquement le taux d'erreur de type I par famille. Avec 5 groupes, 10 tests t par paires à α = .05 donnent une probabilité de 40 % d'au moins un faux positif. Utilisez toujours l'ANOVA d'abord comme test omnibus, puis procédez aux comparaisons post-hoc uniquement si le test F est significatif.</p>
+
+<p><strong>2. Ignorer l'interaction dans les plans factoriels.</strong> Si une interaction significative existe, interpréter les effets principaux seuls peut être trompeur ou dénué de sens. Examinez toujours l'interaction <em>en premier</em>. Si elle est significative, analysez les effets simples ; si elle n'est pas significative, procédez à l'interprétation des effets principaux (Maxwell &amp; Delaney, 2004).</p>
+
+<p><strong>3. Ne rapporter que les valeurs <em>p</em> sans les tailles d'effet.</strong> Une valeur <em>p</em> minuscule avec un η² minuscule signifie que l'effet est statistiquement significatif mais pratiquement trivial — souvent le résultat d'un très grand échantillon. Inversement, un grand effet avec p = .07 peut être scientifiquement important mais sous-puissant. Rapportez toujours η², η² partiel ou ω² aux côtés du test F (Lakens, 2013).</p>
+
+<p><strong>4. Utiliser l'ANOVA classique lorsque les variances sont inégales.</strong> Si le test de Levene est significatif, le test F classique peut produire des erreurs de type I gonflées (surtout avec des tailles de groupes inégales). Passez à l'ANOVA de Welch avec les tests post-hoc de Games-Howell. Mieux encore, envisagez de faire de l'ANOVA de Welch votre méthode par défaut (Delacre et al., 2019).</p>
+
+<p><strong>5. Oublier de vérifier les hypothèses avant l'analyse.</strong> Testez toujours la normalité (test de Shapiro-Wilk sur les résidus) et l'homoscédasticité (test de Levene) avant de choisir entre l'ANOVA classique, l'ANOVA de Welch ou une alternative non paramétrique. Le protocole diagnostique devrait être habituel, pas une réflexion après coup.</p>
+
+<p><strong>6. Effectuer des tests post-hoc après une ANOVA non significative.</strong> Les comparaisons multiples post-hoc ne sont justifiées que lorsque le test F omnibus est significatif. Une ANOVA non significative signifie qu'il n'y a pas de preuve suffisante que les moyennes des groupes diffèrent — effectuer des tests post-hoc à ce stade revient à fouiller dans les données et invalide le contrôle de l'erreur.</p>
+
+<p><strong>7. Confondre η² et η² partiel.</strong> Dans les plans factoriels, η² (proportion de la variance totale) et η² partiel (proportion de la variance non expliquée par les autres facteurs) peuvent différer substantiellement. SPSS rapporte le η² partiel par défaut mais peut l'étiqueter de manière ambiguë. Clarifiez toujours quelle mesure vous rapportez (Richardson, 2011).</p>
+
+<p><strong>8. Négliger l'analyse de puissance et la planification de la taille d'échantillon.</strong> De nombreuses études publiées sont sévèrement sous-puissantes, particulièrement pour détecter des effets petits à moyens. Conduisez une analyse de puissance <em>a priori</em> en utilisant G*Power ou des outils similaires avant de collecter les données. Une étude sous-puissante qui ne trouve « aucune différence significative » ne peut pas distinguer entre « pas d'effet réel » et « preuves insuffisantes » (Cohen, 1988).</p>
 
 <hr>
 
 <h2>🧩 Synthèse : L'architecture de la preuve expérimentale</h2>
 
-<p>L'Analyse de la Variance de Fisher est, en son cœur, un cadre de pensée sur la preuve. Elle demande : de toute la variabilité observée dans une expérience, quelle part est attribuable à notre manipulation délibérée (le traitement), et quelle part n'est que du bruit ? Quand le signal domine le bruit — quand le rapport F est grand — nous avons la preuve que le traitement a un effet.</p>
+<p>L'Analyse de la Variance de Fisher est, en son cœur, un cadre pour penser la preuve. Elle pose une question d'une simplicité trompeuse : de toute la variabilité que nous observons dans une expérience, quelle part est attribuable à notre manipulation délibérée — le traitement, l'intervention, la variable indépendante — et quelle part n'est que du bruit ? Quand le signal submerge le bruit, quand le ratio F est grand et la valeur p est petite, nous avons la preuve que notre manipulation <em>compte</em>.</p>
 
-<p>De ses origines dans les champs de blé de Rothamsted à son application ubiquitaire en médecine, psychologie, agriculture, écologie et ingénierie, l'ANOVA reste la méthode statistique la plus utilisée pour comparer des moyennes de groupes. Comme Fisher l'a écrit : « Consulter le statisticien après la fin d'une expérience, c'est souvent lui demander de procéder à un examen post-mortem. Il peut peut-être dire de quoi l'expérience est morte. » La leçon est claire — l'ANOVA n'est pas un simple calcul ; c'est une façon de penser les expériences.</p>
+<p>De ses origines dans les champs de blé de Rothamsted à son application ubiquitaire dans les essais cliniques modernes, les expériences psychologiques, la recherche agronomique, le contrôle qualité industriel et les inventaires écologiques, l'ANOVA demeure la méthode statistique la plus utilisée pour comparer les moyennes de groupes. Ses extensions — les plans factoriels qui révèlent les interactions, les plans à mesures répétées qui exploitent la puissance intra-sujets, l'ANCOVA qui contrôle les variables confondantes, la MANOVA qui gère les résultats multiples — forment une famille cohérente d'outils capables de traiter pratiquement n'importe quel plan expérimental. Et lorsque ses hypothèses sont violées, des alternatives robustes comme l'ANOVA de Welch et des tests non paramétriques comme Kruskal-Wallis garantissent que des conclusions valides sont toujours à portée de main.</p>
+
+<p>Mais la leçon la plus profonde de l'ANOVA n'est pas computationnelle — elle est philosophique. Fisher comprenait que la qualité de l'analyse statistique dépend entièrement de la qualité du plan expérimental. La randomisation protège contre les variables confondantes. La réplication fournit le terme d'erreur contre lequel les effets de traitement sont évalués. Le blocage réduit le bruit et augmente la puissance. Ces principes — conçus dans les champs agricoles il y a un siècle — demeurent le socle de toute expérience bien conçue aujourd'hui.</p>
+
+<p>Comme Fisher lui-même l'écrivit dans <em>The Design of Experiments</em> : « To consult the statistician after an experiment is finished is often merely to ask him to conduct a post-mortem examination. He can perhaps say what the experiment died of. » La leçon est claire — l'ANOVA n'est pas simplement un calcul à effectuer après la collecte des données. C'est une manière de penser les expériences depuis leur conception, à travers leur planification, jusqu'à leur analyse et l'interprétation des résultats. Maîtriser l'ANOVA, c'est maîtriser la logique de la science expérimentale elle-même.</p>
 
 <hr>
 
@@ -235,9 +442,13 @@
 
 <p>Brown, M. B., &amp; Forsythe, A. B. (1974). Robust tests for the equality of variances. <em>Journal of the American Statistical Association</em>, <em>69</em>(346), 364–367. https://doi.org/10.1080/01621459.1974.10482955</p>
 
+<p>Cohen, J. (1962). The statistical power of abnormal-social psychological research: A review. <em>Journal of Abnormal and Social Psychology</em>, <em>65</em>(3), 145–153. https://doi.org/10.1037/h0045186</p>
+
 <p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
 
 <p>Delacre, M., Leys, C., Mora, Y. L., &amp; Lakens, D. (2019). Taking parametric assumptions seriously: Arguments for the use of Welch's F-test instead of the classical F-test in one-way ANOVA. <em>International Review of Social Psychology</em>, <em>32</em>(1), 13. https://doi.org/10.5334/irsp.198</p>
+
+<p>Faul, F., Erdfelder, E., Lang, A.-G., &amp; Buchner, A. (2007). G*Power 3: A flexible statistical power analysis program for the social, behavioral, and biomedical sciences. <em>Behavior Research Methods</em>, <em>39</em>(2), 175–191. https://doi.org/10.3758/BF03193146</p>
 
 <p>Fisher, R. A. (1925). <em>Statistical methods for research workers</em>. Oliver and Boyd.</p>
 
@@ -245,31 +456,41 @@
 
 <p>Fisher, R. A., &amp; Mackenzie, W. A. (1923). Studies in crop variation. II. The manurial response of different potato varieties. <em>Journal of Agricultural Science</em>, <em>13</em>(3), 311–320. https://doi.org/10.1017/S0021859600003592</p>
 
+<p>Girden, E. R. (1992). <em>ANOVA: Repeated measures</em>. Sage.</p>
+
 <p>Glass, G. V., Peckham, P. D., &amp; Sanders, J. R. (1972). Consequences of failure to meet assumptions underlying the fixed effects analyses of variance and covariance. <em>Review of Educational Research</em>, <em>42</em>(3), 237–288. https://doi.org/10.3102/00346543042003237</p>
 
 <p>Greenhouse, S. W., &amp; Geisser, S. (1959). On methods in the analysis of profile data. <em>Psychometrika</em>, <em>24</em>(2), 95–112. https://doi.org/10.1007/BF02289823</p>
+
+<p>Holm, S. (1979). A simple sequentially rejective multiple test procedure. <em>Scandinavian Journal of Statistics</em>, <em>6</em>(2), 65–70.</p>
 
 <p>Huynh, H., &amp; Feldt, L. S. (1976). Estimation of the Box correction for degrees of freedom from sample data in randomized block and split-plot designs. <em>Journal of Educational Statistics</em>, <em>1</em>(1), 69–82. https://doi.org/10.3102/10769986001001069</p>
 
 <p>Keppel, G., &amp; Wickens, T. D. (2004). <em>Design and analysis: A researcher's handbook</em> (4th ed.). Pearson Prentice Hall.</p>
 
+<p>Keselman, H. J., Huberty, C. J., Lix, L. M., Olejnik, S., Cribbie, R. A., Donahue, B., Kowalchuk, R. K., Lowman, L. L., Petoskey, M. D., Keselman, J. C., &amp; Levin, J. R. (1998). Statistical practices of educational researchers: An analysis of their ANOVA, MANOVA, and ANCOVA analyses. <em>Review of Educational Research</em>, <em>68</em>(3), 350–386. https://doi.org/10.3102/00346543068003350</p>
+
 <p>Kruskal, W. H., &amp; Wallis, W. A. (1952). Use of ranks in one-criterion variance analysis. <em>Journal of the American Statistical Association</em>, <em>47</em>(260), 583–621. https://doi.org/10.1080/01621459.1952.10483441</p>
 
-<p>Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science. <em>Frontiers in Psychology</em>, <em>4</em>, 863. https://doi.org/10.3389/fpsyg.2013.00863</p>
+<p>Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. <em>Frontiers in Psychology</em>, <em>4</em>, 863. https://doi.org/10.3389/fpsyg.2013.00863</p>
 
 <p>Langkjær-Bain, R. (2018). Where the seeds of modern statistics were sown. <em>Significance</em>, <em>15</em>(4), 16–21. https://doi.org/10.1111/j.1740-9713.2018.01144.x</p>
 
 <p>Lee, S., &amp; Lee, D. K. (2018). What is the proper way to apply the multiple comparison test? <em>Korean Journal of Anesthesiology</em>, <em>71</em>(5), 353–360. https://doi.org/10.4097/kja.d.18.00242</p>
 
-<p>Levene, H. (1960). Robust tests for equality of variances. In I. Olkin (Ed.), <em>Contributions to probability and statistics</em> (pp. 278–292). Stanford University Press.</p>
+<p>Levene, H. (1960). Robust tests for equality of variances. In I. Olkin (Ed.), <em>Contributions to probability and statistics: Essays in honor of Harold Hotelling</em> (pp. 278–292). Stanford University Press.</p>
 
-<p>Maxwell, S. E., &amp; Delaney, H. D. (2004). <em>Designing experiments and analyzing data</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
+<p>Maxwell, S. E. (2004). The persistence of underpowered studies in psychological research: Causes, consequences, and remedies. <em>Psychological Methods</em>, <em>9</em>(2), 147–163. https://doi.org/10.1037/1082-989X.9.2.147</p>
+
+<p>Maxwell, S. E., &amp; Delaney, H. D. (2004). <em>Designing experiments and analyzing data: A model comparison perspective</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
 
 <p>Richardson, J. T. E. (2011). Eta squared and partial eta squared as measures of effect size in educational research. <em>Educational Research Review</em>, <em>6</em>(2), 135–147. https://doi.org/10.1016/j.edurev.2010.12.001</p>
 
 <p>Russell, E. J. (1966). <em>A history of agricultural science in Great Britain, 1620–1954</em>. Allen and Unwin.</p>
 
 <p>Scheffé, H. (1959). <em>The analysis of variance</em>. Wiley.</p>
+
+<p>Tabachnick, B. G., &amp; Fidell, L. S. (2019). <em>Using multivariate statistics</em> (7th ed.). Pearson.</p>
 
 <p>Tukey, J. W. (1953). <em>The problem of multiple comparisons</em>. Unpublished manuscript, Princeton University.</p>
 

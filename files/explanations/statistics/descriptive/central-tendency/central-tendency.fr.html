@@ -1,26 +1,28 @@
-<h2>🎯 Tendance Centrale : Trouver le Cœur de Vos Données</h2>
+<h2>🎯 Tendance Centrale : Trouver le cœur de vos données</h2>
 
-<p>Imaginez que vous êtes un chercheur agronome dans la steppe algérienne, mesurant les rendements de blé sur 50 parcelles expérimentales. Vous avez 50 chiffres différents — certains élevés, d'autres bas, d'autres intermédiaires. Un collègue vous demande : <em>« Alors, quel était le rendement ? »</em> Vous ne pouvez pas réciter les 50 valeurs. Vous avez besoin d'<strong>un seul nombre</strong> qui capture l'essence de l'ensemble des données. Ce nombre est une <strong>mesure de tendance centrale</strong>.</p>
+<p>En 1835, un astronome belge nommé Adolphe Quetelet fit quelque chose qui allait remodeler les sciences sociales pour toujours. Il prit des milliers de mesures de corps humains — tours de poitrine de soldats écossais, tailles de conscrits français, taux de criminalité à travers les provinces — et découvrit qu'elles se regroupaient autour d'une valeur centrale avec une régularité stupéfiante. Il appela cette figure centrale <em>l'homme moyen</em> et soutint que ce fantôme statistique, qui n'existait nulle part en chair et en os mais décrivait tout le monde en agrégat, était le portrait le plus fidèle d'une société. L'idée était si puissante qu'elle lança la statistique sociale moderne, inspira Francis Galton et Karl Pearson, et ancra le mot <em>moyenne</em> si profondément dans le langage humain que nous l'utilisons désormais pour décrire tout, du temps qu'il fait à l'intelligence en passant par la performance économique (Stigler, 1986). Quetelet ne calculait pas simplement des nombres — il affirmait que derrière le chaos de la variation individuelle se cache un <strong>centre de gravité</strong> caché, et que le trouver est la première tâche de toute science traitant des données.</p>
 
-<p>Les mesures de tendance centrale comptent parmi les concepts les plus fondamentaux de toute la statistique. Elles répondent à la question apparemment simple : <em>« Quelle est la valeur typique dans ce jeu de données ? »</em> Pourtant, derrière cette simplicité se cache une profondeur remarquable — différentes mesures donnent des réponses différentes, et choisir la mauvaise peut mener à des conclusions profondément trompeuses. Comme l'a souligné Weisberg (1992), le choix d'une mesure de tendance centrale n'est pas une simple commodité mathématique mais une <strong>décision scientifique substantielle</strong> qui reflète notre conception du « typique » dans un contexte donné.</p>
+<p>Cette affirmation reste le fondement de la statistique descriptive aujourd'hui. Les mesures de tendance centrale répondent à la question d'apparence simple : <em>quelle est la valeur typique dans ce jeu de données ?</em> Mais derrière cette simplicité se cache une profondeur remarquable — différentes mesures capturent différentes notions de « typique », et choisir la mauvaise peut produire des conclusions qui ne sont pas simplement imprécises mais <strong>activement trompeuses</strong>. Quand un gouvernement rapporte que le revenu « moyen » des ménages a augmenté, il peut dire la vérité mathématiquement tout en dissimulant une réalité dans laquelle la plupart des ménages sont en fait plus pauvres — parce que les gains des milliardaires ont tiré la moyenne vers le haut tandis que la médiane stagne. Quand une entreprise pharmaceutique rapporte l'efficacité « moyenne » d'un médicament, le choix entre moyenne et médiane peut déterminer si un médicament est approuvé ou rejeté. Quand un climatologue rapporte la température globale « moyenne », la méthode de moyenne spatiale peut déplacer l'estimation d'un degré entier — la différence entre l'alarme politique et la complaisance (Wilks, 2019).</p>
 
-<blockquote>💡 <strong>Les Trois Grands :</strong> Les trois mesures classiques de tendance centrale sont la <strong>moyenne arithmétique</strong> (le point d'équilibre), la <strong>médiane</strong> (la valeur du milieu) et le <strong>mode</strong> (la valeur la plus fréquente). Chacune capture un aspect fondamentalement différent du « centre » — et dans une distribution parfaitement symétrique, les trois convergent vers le même point. Quand elles divergent, l'histoire devient passionnante.</blockquote>
+<p>Cette explication explore chaque mesure de tendance centrale en profondeur — non pas simplement <em>comment</em> les calculer, ce que n'importe quelle calculatrice peut faire, mais <em>pourquoi</em> chacune existe, <em>quand</em> chacune est appropriée, et <em>ce qui se passe quand on choisit la mauvaise</em>. Elle progresse de la moyenne arithmétique familière à travers les moyennes pondérée, géométrique et harmonique jusqu'à la médiane, le mode et la moyenne tronquée — vous équipant pour prendre la décision scientifique substantielle que, comme l'a souligné Weisberg (1992), le choix de la tendance centrale représente toujours.</p>
+
+<blockquote>💡 <strong>Les Trois Grandes et au-delà :</strong> Les trois mesures classiques — <strong>moyenne arithmétique</strong> (le point d'équilibre), <strong>médiane</strong> (la valeur du milieu) et <strong>mode</strong> (la valeur la plus fréquente) — capturent chacune un aspect fondamentalement différent du « centre ». Dans une distribution parfaitement symétrique, les trois convergent vers un seul point. Quand elles divergent, les données vous disent quelque chose d'important sur leur forme — et ignorer ce message est l'une des erreurs les plus courantes en statistique appliquée.</blockquote>
 
 <hr>
 
-<h2>📊 Pourquoi la Tendance Centrale Est-elle Importante ?</h2>
+<h2>📊 Pourquoi la tendance centrale importe</h2>
 
-<p>Les mesures de tendance centrale remplissent quatre fonctions essentielles dans l'analyse des données (Agresti & Finlay, 2018) :</p>
+<p>Les mesures de tendance centrale ne sont pas de simples résumés commodes — elles sont le <strong>fondement conceptuel</strong> sur lequel repose tout l'édifice de la statistique inférentielle. Chaque test t compare deux moyennes. Chaque ANOVA décompose la variance autour d'une moyenne générale. Chaque droite de régression passe par le point des moyennes. Chaque intervalle de confiance est centré sur une statistique de tendance centrale échantillonnale. Sans mesure fiable de « où vivent les données », aucune analyse ultérieure n'est possible (Agresti &amp; Finlay, 2018). Les quatre fonctions essentielles sont :</p>
 
 <table>
   <thead>
     <tr><th>Fonction</th><th>Description</th><th>Exemple</th></tr>
   </thead>
   <tbody>
-    <tr><td>📝 <strong>Résumé</strong></td><td>Condenser de nombreuses valeurs en un seul nombre représentatif</td><td>« Le rendement moyen était de 3,2 tonnes/ha »</td></tr>
-    <tr><td>⚖️ <strong>Comparaison</strong></td><td>Comparer des groupes, des périodes ou des traitements</td><td>« Les parcelles traitées ont produit 15 % de plus que les témoins »</td></tr>
-    <tr><td>🔮 <strong>Prédiction</strong></td><td>Estimer la valeur la plus probable pour une nouvelle observation</td><td>« D'après les données historiques, on s'attend à ~3 tonnes/ha »</td></tr>
-    <tr><td>🧱 <strong>Fondation</strong></td><td>Servir de blocs de construction pour les méthodes avancées (ANOVA, régression, tests d'hypothèses)</td><td>Chaque test t commence par comparer deux moyennes</td></tr>
+    <tr><td><strong>Résumé</strong></td><td>Condenser des milliers de valeurs en un seul nombre représentatif que l'esprit humain peut saisir</td><td>La Banque mondiale rapporte que l'espérance de vie mondiale à la naissance est de 72,7 ans — un seul nombre résumant 8 milliards de durées de vie individuelles</td></tr>
+    <tr><td><strong>Comparaison</strong></td><td>Comparer des groupes, des périodes, des traitements ou des régions sur une métrique commune</td><td>L'âge médian du Japon (48,4 ans) versus celui du Nigeria (18,1 ans) révèle des mondes démographiques éloignés</td></tr>
+    <tr><td><strong>Prédiction</strong></td><td>Estimer la valeur la plus probable pour un nouveau cas non observé de la même population</td><td>Si la taille moyenne des hommes de 20 ans dans une population est de 175,3 cm, c'est la meilleure prédiction à un seul nombre pour le prochain homme échantillonné</td></tr>
+    <tr><td><strong>Fondation</strong></td><td>Servir de briques de base pour toute méthode statistique avancée — variance, écart-type, scores z, tests d'hypothèses, régression</td><td>La formule de la variance est <em>littéralement</em> définie comme la moyenne des écarts carrés par rapport à la moyenne — pas de moyenne, pas de variance, pas de statistique inférentielle</td></tr>
   </tbody>
 </table>
 
@@ -28,343 +30,307 @@
 
 <h2>➕ La Moyenne Arithmétique (x̄ ou μ)</h2>
 
-<h3>Définition et Calcul</h3>
+<h3>Définition et intuition</h3>
 
-<p>La <strong>moyenne arithmétique</strong> est la somme de toutes les valeurs observées divisée par le nombre d'observations. C'est la mesure de tendance centrale la plus utilisée en statistique et en sciences naturelles (Moore et al., 2021). La moyenne de la population est notée <strong>μ</strong> (mu), tandis que la moyenne de l'échantillon est notée <strong>x̄</strong> (x-barre) :</p>
+<p>La <strong>moyenne arithmétique</strong> est la somme de toutes les valeurs observées divisée par le nombre d'observations. C'est la mesure de tendance centrale la plus utilisée dans toutes les disciplines quantitatives — de la physique à l'économie en passant par la médecine et l'agronomie. La moyenne de la population est notée <strong>μ</strong> (mu), tandis que la moyenne de l'échantillon est notée <strong>x̄</strong> (x-barre).</p>
 
 <table>
   <thead>
     <tr><th>Contexte</th><th>Formule</th><th>Notation</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Moyenne de population</strong></td><td>μ = (Σxᵢ) / N</td><td>N = taille de la population</td></tr>
-    <tr><td><strong>Moyenne d'échantillon</strong></td><td>x̄ = (Σxᵢ) / n</td><td>n = taille de l'échantillon</td></tr>
+    <tr><td><strong>Moyenne de la population</strong></td><td>μ = (Σxᵢ) / N</td><td>N = nombre total d'individus dans la population</td></tr>
+    <tr><td><strong>Moyenne de l'échantillon</strong></td><td>x̄ = (Σxᵢ) / n</td><td>n = nombre d'observations dans l'échantillon</td></tr>
   </tbody>
 </table>
 
-<p><strong>Exemple résolu :</strong> Cinq parcelles donnent 2,8 ; 3,1 ; 3,5 ; 2,9 et 3,2 tonnes/ha. La moyenne est :</p>
-<p style="text-align:center;"><strong>x̄ = (2,8 + 3,1 + 3,5 + 2,9 + 3,2) / 5 = 15,5 / 5 = 3,10 tonnes/ha</strong></p>
+<p>L'intuition la plus profonde de la moyenne est <strong>physique</strong> : c'est le point d'équilibre (centre de gravité) des données. Si vous placiez chaque valeur comme un poids sur une droite numérique, la moyenne est le point exact où la droite s'équilibrerait sur un pivot. Cette analogie physique, formalisée pour la première fois par le grand mathématicien Carl Friedrich Gauss, explique à la fois la puissance et la vulnérabilité de la moyenne : tout comme un seul poids lourd éloigné du centre peut faire basculer une balance, une seule observation extrême peut entraîner la moyenne loin de l'endroit où la plupart des données se concentrent réellement (Moore et al., 2021).</p>
 
-<h3>Propriétés Mathématiques Fondamentales</h3>
+<h3>Exemple détaillé</h3>
 
-<p>La moyenne arithmétique possède plusieurs propriétés mathématiques remarquables qui en font la pierre angulaire des statistiques paramétriques (Wackerly et al., 2014) :</p>
+<p>Considérons les précipitations annuelles (en mm) enregistrées sur dix ans dans une station météorologique : 412, 389, 445, 401, 378, 425, 398, 410, 392, 430. La moyenne arithmétique est : x̄ = (412 + 389 + 445 + 401 + 378 + 425 + 398 + 410 + 392 + 430) / 10 = 4 080 / 10 = <strong>408,0 mm</strong>. Ce seul nombre résume une décennie de données climatiques en une valeur qu'un hydrologue peut comparer entre stations, décennies ou modèles climatiques.</p>
+
+<h3>Propriétés mathématiques</h3>
+
+<p>La moyenne arithmétique possède plusieurs propriétés qui en font la <strong>pierre angulaire de la statistique paramétrique</strong> (Wackerly et al., 2014) :</p>
 
 <table>
   <thead>
-    <tr><th>#</th><th>Propriété</th><th>Expression Mathématique</th><th>Pourquoi C'est Important</th></tr>
+    <tr><th>Propriété</th><th>Énoncé</th><th>Signification</th></tr>
   </thead>
   <tbody>
-    <tr><td>1</td><td>🔄 <strong>Somme nulle des écarts</strong></td><td>Σ(xᵢ − x̄) = 0</td><td>La moyenne est le point d'équilibre exact — les écarts positifs et négatifs s'annulent parfaitement</td></tr>
-    <tr><td>2</td><td>📐 <strong>Moindres carrés</strong></td><td>Σ(xᵢ − x̄)² est minimisé</td><td>Aucune autre valeur ne produit une plus petite somme des carrés des écarts — c'est pourquoi la moyenne est optimale pour la variance, l'ANOVA et la régression</td></tr>
-    <tr><td>3</td><td>🔗 <strong>Manipulabilité algébrique</strong></td><td>Σxᵢ = n · x̄</td><td>Connaître la moyenne et n permet de retrouver le total ; les moyennes peuvent être combinées entre sous-groupes</td></tr>
-    <tr><td>4</td><td>📈 <strong>Stabilité d'échantillonnage</strong></td><td>Var(x̄) = σ²/n</td><td>La distribution d'échantillonnage de la moyenne a une variance plus faible que les observations individuelles — le fondement de la statistique inférentielle</td></tr>
-    <tr><td>5</td><td>⚡ <strong>Transformation linéaire</strong></td><td>Si y = a + bx, alors ȳ = a + bx̄</td><td>La conversion d'unités (ex. Celsius en Fahrenheit) transforme la moyenne de la même manière</td></tr>
+    <tr><td><strong>Optimalité des moindres carrés</strong></td><td>La moyenne minimise la somme des écarts carrés : Σ(xᵢ − x̄)² est plus petit que Σ(xᵢ − c)² pour toute autre constante c</td><td>C'est <em>pourquoi</em> la variance est définie par rapport à la moyenne — et pourquoi la régression des moindres carrés fonctionne</td></tr>
+    <tr><td><strong>Somme des écarts nulle</strong></td><td>Les écarts par rapport à la moyenne s'annulent toujours exactement : Σ(xᵢ − x̄) = 0</td><td>La moyenne est le point d'équilibre parfait — les écarts positifs et négatifs se compensent précisément</td></tr>
+    <tr><td><strong>Transformation linéaire</strong></td><td>Si y = a + bx, alors ȳ = a + bx̄</td><td>Convertir la température de Celsius en Fahrenheit ? Transformez simplement la moyenne — pas besoin de convertir chaque observation d'abord</td></tr>
+    <tr><td><strong>Additivité</strong></td><td>La moyenne d'une somme égale la somme des moyennes : mean(X + Y) = mean(X) + mean(Y)</td><td>Le revenu moyen total d'une entreprise = revenu moyen des produits + revenu moyen des services</td></tr>
+    <tr><td><strong>Sensibilité à chaque valeur</strong></td><td>Modifier une seule observation modifie la moyenne</td><td>À la fois une force (utilise toute l'information) et une faiblesse (vulnérable aux valeurs aberrantes)</td></tr>
+    <tr><td><strong>Efficacité d'échantillonnage</strong></td><td>Parmi tous les estimateurs sans biais de la moyenne d'une population normale, x̄ a la plus petite variance (borne de Cramér-Rao)</td><td>Pour des données normalement distribuées, la moyenne échantillonnale est le <em>meilleur estimateur possible</em> de la moyenne de la population — on ne peut littéralement pas faire mieux</td></tr>
   </tbody>
 </table>
 
-<blockquote>🧪 <strong>La propriété #2 est révolutionnaire.</strong> Le fait que la moyenne minimise la somme des carrés des écarts est le fondement mathématique de tout le cadre des moindres carrés — du calcul de la variance et de l'écart-type à l'exécution de l'ANOVA et de la régression linéaire. Quand vous comprenez cette seule propriété, vous comprenez pourquoi la moyenne est au centre de la statistique moderne (Freedman et al., 2007).</blockquote>
+<h3>Le problème des valeurs aberrantes : Quand la moyenne ment</h3>
 
-<h3>Moyenne pour Données Groupées (Tableaux de Fréquences)</h3>
-
-<p>Lorsque les données sont organisées dans un tableau de fréquences — comme c'est courant dans les grandes enquêtes biologiques — on calcule la moyenne en utilisant les centres de classes :</p>
-
-<table>
-  <thead>
-    <tr><th>Intervalle de Classe</th><th>Centre (mᵢ)</th><th>Fréquence (fᵢ)</th><th>fᵢ × mᵢ</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>10 – 20</td><td>15</td><td>4</td><td>60</td></tr>
-    <tr><td>20 – 30</td><td>25</td><td>8</td><td>200</td></tr>
-    <tr><td>30 – 40</td><td>35</td><td>12</td><td>420</td></tr>
-    <tr><td>40 – 50</td><td>45</td><td>6</td><td>270</td></tr>
-    <tr><td colspan="2"><strong>Total</strong></td><td><strong>n = 30</strong></td><td><strong>Σfᵢmᵢ = 950</strong></td></tr>
-  </tbody>
-</table>
-
-<p style="text-align:center;"><strong>x̄ = Σ(fᵢ × mᵢ) / Σfᵢ = 950 / 30 = 31,67</strong></p>
-
-<h3>La Moyenne Pondérée</h3>
-
-<p>Lorsque différentes observations ont des niveaux d'importance différents, on utilise la <strong>moyenne pondérée</strong>. Ceci est essentiel dans des domaines comme l'analyse de portefeuille, le calcul de la MPC (moyenne pondérée des coefficients), et la conception expérimentale avec des tailles d'échantillon inégales (Triola, 2018) :</p>
-
-<p style="text-align:center;"><strong>x̄<sub>p</sub> = Σ(wᵢ × xᵢ) / Σwᵢ</strong></p>
-
-<p><strong>Exemple — Calcul de la MPC :</strong> Un étudiant obtient 16/20 (coeff. 4), 12/20 (coeff. 3) et 10/20 (coeff. 1) :</p>
-<p style="text-align:center;">x̄<sub>p</sub> = (4×16 + 3×12 + 1×10) / (4+3+1) = 110/8 = <strong>13,75</strong></p>
-<p>La moyenne simple serait (16+12+10)/3 = 12,67 — la moyenne pondérée donne correctement plus d'influence à la matière à fort coefficient.</p>
-
-<h3>⚠️ Le Talon d'Achille : Sensibilité aux Valeurs Aberrantes</h3>
-
-<p>La plus grande force de la moyenne — utiliser chaque point de données — est aussi sa plus grande faiblesse. Puisque chaque valeur contribue à la somme, une seule valeur aberrante peut considérablement fausser le résultat. Considérez les revenus des ménages dans un petit village (Agresti & Finlay, 2018) :</p>
-
-<table>
-  <thead>
-    <tr><th>Ménage</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>Revenu (DA)</strong></td><td>25k</td><td>28k</td><td>30k</td><td>30k</td><td>32k</td><td>35k</td><td>36k</td><td>38k</td><td>40k</td><td>500k</td></tr>
-  </tbody>
-</table>
-
-<p><strong>Moyenne = 79 400 DA</strong> — pourtant 9 ménages sur 10 gagnent moins de 40 000 DA ! Le seul ménage riche tire la moyenne très au-dessus du revenu typique. La <strong>médiane (33 500 DA)</strong> représente mieux cette communauté. C'est exactement pourquoi les gouvernements publient le revenu <em>médian</em> des ménages plutôt que le revenu moyen.</p>
+<p>La plus grande force de la moyenne — sa sensibilité à chaque valeur — est aussi sa <strong>vulnérabilité fatale</strong>. Considérons dix employés d'une petite entreprise avec des salaires annuels (en USD) : 35 000 ; 38 000 ; 40 000 ; 42 000 ; 44 000 ; 45 000 ; 47 000 ; 50 000 ; 55 000 ; et 604 000 (le PDG). Le salaire moyen est de 100 000 $ — un nombre qui ne décrit <em>personne</em>. Neuf employés sur dix gagnent moins de la moitié de la « moyenne ». Le seul salaire du PDG, vingt fois plus élevé que celui du travailleur typique, a détourné la moyenne. Ce n'est pas un exemple fabriqué — c'est <strong>exactement le schéma</strong> observé dans les distributions de revenus, les marchés immobiliers, les comptages de citations académiques et les sinistres d'assurance dans le monde entier. Comme l'a averti le statisticien Frederick Mosteller : « Il est facile de mentir avec les statistiques, mais plus facile de mentir sans elles — et le premier mensonge est généralement la moyenne d'une distribution asymétrique » (Mosteller &amp; Tukey, 1977).</p>
 
 <hr>
 
-<h2>📏 La Médiane (Md ou x̃)</h2>
+<h2>⚖️ La Moyenne Pondérée (x̄w)</h2>
 
-<h3>Définition et Calcul</h3>
+<h3>Définition et logique</h3>
 
-<p>La <strong>médiane</strong> est la valeur qui divise un ensemble de données ordonnées en deux moitiés égales — exactement 50 % des observations sont en dessous et 50 % au-dessus. C'est le 50ème percentile (Devore & Berk, 2012).</p>
+<p>La <strong>moyenne pondérée</strong> attribue des importances (poids) différentes à différentes observations, reconnaissant que tous les points de données ne contribuent pas également à la grandeur mesurée. La formule est : <strong>x̄w = Σ(wᵢ · xᵢ) / Σwᵢ</strong>, où wᵢ est le poids attribué à l'observation xᵢ. La moyenne arithmétique ordinaire est simplement une moyenne pondérée où tous les poids sont égaux (wᵢ = 1 pour tout i).</p>
 
-<table>
-  <thead>
-    <tr><th>Situation</th><th>Règle</th><th>Exemple</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>n impair</strong></td><td>La valeur du milieu : position = (n+1)/2</td><td>Données : 3, 5, <strong>7</strong>, 9, 11 → Médiane = 7</td></tr>
-    <tr><td><strong>n pair</strong></td><td>Moyenne des deux valeurs centrales : positions n/2 et (n/2)+1</td><td>Données : 3, 5, <strong>7, 9</strong>, 11, 13 → Médiane = (7+9)/2 = 8</td></tr>
-  </tbody>
-</table>
-
-<h3>Médiane pour Données Groupées</h3>
-
-<p>Pour les données en tableaux de fréquences, la médiane se trouve par interpolation dans la <strong>classe médiane</strong> — la classe dont la fréquence cumulée atteint ou dépasse n/2 pour la première fois :</p>
-
-<p style="text-align:center;"><strong>Md = L + [(n/2 − FC) / f] × h</strong></p>
+<h3>Où la moyenne pondérée est essentielle</h3>
 
 <table>
   <thead>
-    <tr><th>Symbole</th><th>Signification</th></tr>
+    <tr><th>Application</th><th>Valeurs (xᵢ)</th><th>Poids (wᵢ)</th><th>Pourquoi la pondération est nécessaire</th></tr>
   </thead>
   <tbody>
-    <tr><td>L</td><td>Borne inférieure de la classe médiane</td></tr>
-    <tr><td>n</td><td>Nombre total d'observations</td></tr>
-    <tr><td>FC</td><td>Fréquence cumulée <em>avant</em> la classe médiane</td></tr>
-    <tr><td>f</td><td>Fréquence de la classe médiane</td></tr>
-    <tr><td>h</td><td>Amplitude de l'intervalle de la classe médiane</td></tr>
+    <tr><td><strong>Moyenne pondérée cumulative (GPA)</strong></td><td>Note dans chaque cours</td><td>Crédits par cours</td><td>Un cours de 4 crédits devrait compter quatre fois plus qu'un cours d'1 crédit</td></tr>
+    <tr><td><strong>Indice des prix à la consommation (IPC)</strong></td><td>Variation de prix de chaque catégorie de biens</td><td>Part des dépenses du ménage</td><td>Une hausse de 10 % du coût du logement importe plus qu'une hausse de 10 % du cirage, parce que les ménages dépensent bien plus en logement</td></tr>
+    <tr><td><strong>Indice de développement humain (IDH)</strong></td><td>Indices de santé, d'éducation et de revenu</td><td>Poids égaux (1/3 chacun) par conception</td><td>Reflète une décision normative selon laquelle la santé, l'éducation et le revenu contribuent également au développement humain</td></tr>
+    <tr><td><strong>Rendement de portefeuille</strong></td><td>Rendement de chaque actif</td><td>Part de chaque actif dans le portefeuille</td><td>Un actif représentant 80 % de votre portefeuille domine votre rendement total, peu importe ce que font les 20 % restants</td></tr>
+    <tr><td><strong>Méta-analyse</strong></td><td>Taille d'effet de chaque étude</td><td>Inverse de la variance (ou taille d'échantillon)</td><td>Les études plus grandes et plus précises devraient contribuer davantage à l'estimation globale (Borenstein et al., 2009)</td></tr>
   </tbody>
 </table>
 
-<p><strong>Exemple :</strong> Avec le tableau de fréquences ci-dessus (n=30), n/2 = 15. Les fréquences cumulées sont 4, 12, 24, 30. La classe médiane est 30–40 (FC dépasse 15 à cette classe).</p>
-<p style="text-align:center;">Md = 30 + [(15 − 12) / 12] × 10 = 30 + 2,5 = <strong>32,5</strong></p>
+<h3>Exemple détaillé : GPA</h3>
 
-<h3>Propriétés Clés de la Médiane</h3>
+<p>Notes d'un étudiant au semestre : Statistiques (4 crédits, note A = 4,0), Biologie (3 crédits, note B+ = 3,3), Philosophie (3 crédits, note A− = 3,7), Éducation physique (1 crédit, note B = 3,0). Moyenne non pondérée = (4,0 + 3,3 + 3,7 + 3,0) / 4 = 3,50. GPA pondéré = [(4 × 4,0) + (3 × 3,3) + (3 × 3,7) + (1 × 3,0)] / (4 + 3 + 3 + 1) = (16,0 + 9,9 + 11,1 + 3,0) / 11 = 40,0 / 11 = <strong>3,64</strong>. Le GPA pondéré est plus élevé parce que la meilleure note de l'étudiant (A) est dans le cours le plus lourd (4 crédits). Ignorer les poids sous-évaluerait la meilleure performance de l'étudiant.</p>
+
+<blockquote>⚠️ <strong>Le piège de la pondération :</strong> Chaque moyenne pondérée intègre un jugement de valeur — le choix des poids détermine le résultat. Quand le Fonds Monétaire International calcule la croissance du PIB mondial en utilisant les taux de croissance nationaux pondérés par la parité de pouvoir d'achat (PPA), le poids de la Chine est d'environ 18 %. Quand il utilise les poids des taux de change du marché, le poids de la Chine tombe à ~15 %. Mêmes données, poids différents, « moyenne mondiale » différente. Demandez toujours : <em>qui a choisi les poids, et pourquoi ?</em> (Stiglitz et al., 2010).</blockquote>
+
+<hr>
+
+<h2>📐 La Moyenne Géométrique (G)</h2>
+
+<h3>Définition et logique</h3>
+
+<p>La <strong>moyenne géométrique</strong> est la racine n-ième du produit de n valeurs : <strong>G = (x₁ · x₂ · ... · xₙ)^(1/n)</strong>, ou de manière équivalente, exp[Σ ln(xᵢ) / n] — l'exponentielle de la moyenne arithmétique des logarithmes. Tandis que la moyenne arithmétique répond à « quel est le centre additif ? », la moyenne géométrique répond à « <strong>quel est le centre multiplicatif ?</strong> » — ce qui en fait la mesure naturelle pour les données impliquant des taux, des ratios, des facteurs de croissance et des proportions (Bland &amp; Altman, 1996).</p>
+
+<h3>Quand la moyenne géométrique est essentielle</h3>
 
 <table>
   <thead>
-    <tr><th>Propriété</th><th>Explication</th></tr>
+    <tr><th>Application</th><th>Pourquoi géométrique, pas arithmétique</th><th>Exemple</th></tr>
   </thead>
   <tbody>
-    <tr><td>🛡️ <strong>Robustesse</strong></td><td>Résistante aux valeurs aberrantes — changer une valeur extrême n'affecte pas la médiane sauf si l'ordre des rangs change</td></tr>
-    <tr><td>📐 <strong>Minimise les écarts absolus</strong></td><td>Σ|xᵢ − Md| est minimisé — aucune autre valeur ne produit une plus petite somme des écarts absolus</td></tr>
-    <tr><td>📊 <strong>Fonctionne avec des données ordinales</strong></td><td>Peut être calculée pour toute donnée ordonnée, même quand les opérations arithmétiques n'ont pas de sens</td></tr>
-    <tr><td>🔢 <strong>Unicité</strong></td><td>Donne toujours exactement une valeur (contrairement au mode qui peut avoir zéro, une ou plusieurs valeurs)</td></tr>
+    <tr><td><strong>Rendements d'investissement</strong></td><td>Les rendements se composent de manière multiplicative, pas additive. Un investissement qui gagne 100 % puis perd 50 % a une moyenne arithmétique de +25 % mais une moyenne géométrique de 0 % — et la moyenne géométrique est correcte : 100 $ → 200 $ → 100 $</td><td>Le taux de croissance annuel composé (CAGR) de Berkshire Hathaway 1965–2023 est sa moyenne géométrique des rendements annuels</td></tr>
+    <tr><td><strong>Taux de croissance démographique</strong></td><td>La population croît de manière exponentielle, pas linéaire — la croissance de chaque année multiplie le total de l'année précédente</td><td>Si la population d'un pays a crû de 3 %, 2 % et 4 % sur trois ans, le taux annuel moyen est G = (1,03 × 1,02 × 1,04)^(1/3) − 1 = 2,997 %, <em>pas</em> la moyenne arithmétique de 3,0 %</td></tr>
+    <tr><td><strong>Concentrations biologiques</strong></td><td>Les concentrations de polluants, bactéries et hormones suivent souvent une distribution log-normale — la moyenne géométrique est le centre naturel d'une distribution log-normale</td><td>L'OMS rapporte les moyennes géométriques des niveaux de plomb dans le sang parce que la distribution est fortement asymétrique à droite</td></tr>
+    <tr><td><strong>Nombres indices</strong></td><td>Les ratios de prix et indices de productivité sont intrinsèquement multiplicatifs</td><td>L'Indice de développement humain du PNUD utilise la moyenne géométrique de ses trois indices dimensionnels — garantissant qu'une faible performance dans une dimension ne peut être entièrement compensée par une haute performance dans une autre</td></tr>
   </tbody>
 </table>
 
-<blockquote>📐 <strong>La propriété d'optimisation de la médiane :</strong> Tout comme la moyenne minimise la somme des écarts <em>au carré</em>, la médiane minimise la somme des écarts <em>absolus</em>. Cela signifie que si vous deviez trouver la valeur unique qui est, en moyenne, la plus proche de chaque point de données en termes de distance absolue, la réponse est toujours la médiane. Cette propriété rend la médiane optimale pour les situations où les valeurs aberrantes ne doivent pas être amplifiées par la mise au carré (Huber & Ronchetti, 2009).</blockquote>
+<p><strong>Propriété critique :</strong> La moyenne géométrique est toujours <strong>inférieure ou égale</strong> à la moyenne arithmétique (avec égalité uniquement quand toutes les valeurs sont identiques). C'est l'<em>inégalité AM-GM</em>, l'une des inégalités les plus importantes en mathématiques, rigoureusement démontrée par Cauchy en 1821. L'écart entre AM et GM augmente avec la variabilité des données — fournissant un diagnostic informel de la dispersion des données (Steele, 2004).</p>
+
+<hr>
+
+<h2>🔄 La Moyenne Harmonique (H)</h2>
+
+<h3>Définition et logique</h3>
+
+<p>La <strong>moyenne harmonique</strong> est l'inverse de la moyenne arithmétique des inverses : <strong>H = n / Σ(1/xᵢ)</strong>. C'est la moyenne correcte pour les <strong>taux</strong> — les situations où des quantités égales (pas des temps égaux) sont consacrées à des taux différents. La relation entre les trois moyennes pythagoriciennes est toujours : <strong>H ≤ G ≤ AM</strong>, avec égalité uniquement quand toutes les valeurs sont identiques (Bullen, 2003).</p>
+
+<h3>Le problème classique de vitesse</h3>
+
+<p>Un conducteur voyage de la ville A à la ville B (200 km) à 80 km/h, puis retourne de B à A (200 km) à 120 km/h. La réponse intuitive — (80 + 120) / 2 = 100 km/h — est <strong>fausse</strong>. La réponse correcte est la moyenne harmonique : H = 2 / (1/80 + 1/120) = 2 / (0,0125 + 0,00833) = 2 / 0,02083 = <strong>96 km/h</strong>. Pourquoi ? Parce que le conducteur passe <em>plus de temps</em> à la vitesse la plus lente (2,5 heures à 80 km/h vs. 1,67 heure à 120 km/h). Distance totale = 400 km, temps total = 4,167 heures, vitesse moyenne réelle = 400 / 4,167 = 96 km/h. La moyenne arithmétique surestime parce qu'elle donne un poids égal aux deux vitesses, ignorant que plus de temps est passé à la vitesse inférieure.</p>
+
+<h3>Autres applications</h3>
+
+<p>La moyenne harmonique apparaît en : <strong>finance</strong> (investissement programmé à montant fixe — investir des montants fixes à des prix différents produit un prix d'achat moyen harmonique) ; <strong>apprentissage automatique</strong> (le F1-score est la moyenne harmonique de la précision et du rappel, pénalisant les modèles qui sacrifient l'un au profit de l'autre) ; <strong>génétique des populations</strong> (la taille effective de la population sous des tailles de recensement fluctuantes est la moyenne harmonique des tailles de générations — un seul goulot d'étranglement populationnel domine) ; et <strong>physique</strong> (résistances en parallèle, lentilles en série) (Bullen, 2003 ; Sokal &amp; Rohlf, 2012).</p>
+
+<hr>
+
+<h2>✂️ La Moyenne Tronquée</h2>
+
+<h3>Définition et logique</h3>
+
+<p>La <strong>moyenne tronquée</strong> (ou moyenne élaguée) supprime un pourcentage fixe d'observations des deux extrêmes avant de calculer la moyenne arithmétique des données restantes. Une <strong>moyenne tronquée à 5 %</strong> supprime les 5 % les plus bas et les 5 % les plus hauts ; une <strong>moyenne tronquée à 25 %</strong> (qui supprime les quartiles inférieur et supérieur) égale la <strong>moyenne interquartile</strong>. Le cas extrême d'une troncature à 50 % donne la médiane (Wilcox, 2012).</p>
+
+<p>La moyenne tronquée représente un <strong>compromis raisonné</strong> entre la moyenne (efficacité maximale pour les données normales, aucune robustesse aux valeurs aberrantes) et la médiane (robustesse maximale, efficacité moindre pour les données normales). Elle conserve plus d'information que la médiane tout en étant bien moins sensible aux valeurs extrêmes que la moyenne non tronquée. C'est pourquoi la <strong>Banque d'Angleterre</strong>, la <strong>Federal Reserve Bank de Cleveland</strong> et <strong>Statistique Canada</strong> publient toutes des taux d'inflation en moyenne tronquée aux côtés de l'IPC global — parce que quelques catégories volatiles (énergie, alimentation fraîche) peuvent fausser la moyenne de l'IPC, tandis que la moyenne tronquée capture la <em>tendance sous-jacente</em> des pressions générales sur les prix (Bryan &amp; Cecchetti, 1994).</p>
+
+<h3>Exemple détaillé</h3>
+
+<p>Jeu de données (n = 20) : 12, 14, 15, 16, 17, 18, 19, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 45, 102. La moyenne arithmétique = 28,15 — tirée fortement vers le haut par les valeurs aberrantes 45 et 102. La moyenne tronquée à 10 % supprime les 2 plus basses (12, 14) et les 2 plus hautes (45, 102), puis calcule la moyenne des 16 restantes : moyenne de {15, 16, 17, 18, 19, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30} = 21,88 — une valeur bien plus représentative. La médiane = 21,5. La moyenne tronquée (21,88) se situe entre la moyenne faussée (28,15) et la médiane (21,5), offrant un compromis équilibré.</p>
+
+<hr>
+
+<h2>📍 La Médiane (Med ou x̃)</h2>
+
+<h3>Définition et intuition</h3>
+
+<p>La <strong>médiane</strong> est la valeur du milieu lorsque les observations sont classées par ordre croissant. Pour un nombre impair d'observations, c'est la valeur centrale ; pour un nombre pair, c'est la moyenne des deux valeurs centrales. Tandis que la moyenne demande « quel est le point d'équilibre ? », la médiane demande « <strong>quelle valeur divise les données en deux moitiés égales ?</strong> » — ce qui en fait une mesure de <em>position</em> plutôt que de <em>magnitude</em>.</p>
+
+<table>
+  <thead>
+    <tr><th>Propriété</th><th>Moyenne arithmétique</th><th>Médiane</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Critère d'optimalité</strong></td><td>Minimise Σ(xᵢ − c)² (somme des écarts carrés)</td><td>Minimise Σ|xᵢ − c| (somme des écarts absolus)</td></tr>
+    <tr><td><strong>Sensibilité aux valeurs aberrantes</strong></td><td>Très sensible — une seule valeur extrême peut déplacer la moyenne arbitrairement loin</td><td>Extrêmement robuste — remplacer la valeur maximale par l'infini ne change pas du tout la médiane</td></tr>
+    <tr><td><strong>Utilisation de l'information</strong></td><td>Utilise la valeur numérique exacte de chaque observation</td><td>N'utilise que l'ordre des rangs ; les valeurs réelles des extrêmes sont sans importance</td></tr>
+    <tr><td><strong>Efficacité (données normales)</strong></td><td>Estimateur le plus efficace de la localisation (efficacité relative de 100 %)</td><td>Moins efficace (~64 % d'efficacité relative pour les données normales — nécessite ~57 % d'observations supplémentaires pour atteindre la même précision)</td></tr>
+    <tr><td><strong>Point de rupture</strong></td><td>0 % — une seule observation allant vers ±∞ envoie la moyenne vers ±∞</td><td>50 % — jusqu'à la moitié des données peuvent être corrompues avant que la médiane ne soit affectée</td></tr>
+  </tbody>
+</table>
+
+<h3>Le problème « Bill Gates entre dans un bar »</h3>
+
+<p>Imaginez un bar avec 50 clients dont le revenu annuel moyen est de 45 000 $. Bill Gates (fortune nette ~130 milliards $) entre. Le revenu moyen dans le bar bondit instantanément à environ 2,5 milliards $ — faisant du bar statistiquement l'une des salles les plus riches de la Terre. La médiane, cependant, change à peine — de 45 000 $ à peut-être 45 500 $ — parce que Gates n'est qu'une personne supplémentaire, et le milieu de la liste triée se déplace d'une position au maximum. Cette célèbre expérience de pensée, utilisée dans les manuels de statistiques du monde entier (Moore et al., 2021 ; Agresti &amp; Finlay, 2018), illustre pourquoi les économistes préfèrent universellement la <strong>médiane</strong> pour rapporter le revenu des ménages, la richesse et les prix immobiliers. Le Bureau du recensement américain, la Banque mondiale et pratiquement tous les offices statistiques nationaux rapportent le revenu <em>médian</em> des ménages — pas la moyenne — précisément parce que les distributions de revenus sont asymétriques à droite, et que la moyenne donnerait une image trompeusement rose (Haughton &amp; Khandker, 2009).</p>
+
+<h3>Quand la médiane est supérieure</h3>
+
+<p>La médiane est la mesure préférée quand : la distribution est <strong>asymétrique</strong> (revenus, richesse, immobilier, citations, durées d'hospitalisation) ; les données contiennent des <strong>valeurs aberrantes</strong> ou des valeurs extrêmes suspectes ; les données sont <strong>censurées</strong> (analyse de survie — certains patients sont encore vivants, donc on sait seulement que leur temps de survie dépasse la période d'observation ; la médiane de survie peut néanmoins être calculée même quand la moyenne ne le peut pas) ; ou l'échelle de mesure est <strong>ordinale</strong> (échelles de Likert, évaluations de la douleur, scores de satisfaction) où les opérations arithmétiques sur les codes numériques sont discutables (Stevens, 1946).</p>
 
 <hr>
 
 <h2>📈 Le Mode (Mo)</h2>
 
-<h3>Définition</h3>
+<h3>Définition et propriétés</h3>
 
-<p>Le <strong>mode</strong> est la valeur qui apparaît le plus fréquemment dans un jeu de données. C'est la mesure de tendance centrale la plus simple et la <strong>seule mesure applicable aux données nominales (catégorielles)</strong> — on ne peut pas calculer une moyenne ou une médiane de « groupes sanguins » ou « espèces végétales », mais on peut identifier quelle catégorie est la plus courante (Agresti & Finlay, 2018).</p>
-
-<h3>Types de Distributions Modales</h3>
+<p>Le <strong>mode</strong> est la valeur qui apparaît le plus fréquemment dans un jeu de données. C'est la <em>seule</em> mesure de tendance centrale applicable aux <strong>données nominales (catégorielles)</strong> — on ne peut pas calculer la moyenne de {rouge, bleu, bleu, vert, bleu, rouge}, mais on peut identifier que « bleu » est le mode. Contrairement à la moyenne et à la médiane, qui existent toujours et sont toujours uniques, le mode peut être <strong>inexistant</strong> (si toutes les valeurs apparaissent aussi souvent) ou <strong>non unique</strong> (si deux ou plusieurs valeurs sont à égalité pour la plus haute fréquence).</p>
 
 <table>
   <thead>
-    <tr><th>Type</th><th>Description</th><th>Exemple</th></tr>
+    <tr><th>Terme</th><th>Définition</th><th>Exemple</th></tr>
   </thead>
   <tbody>
-    <tr><td>🔵 <strong>Unimodale</strong></td><td>Un seul mode — un pic net</td><td>Notes d'examen : 65, 70, 72, 72, 72, 75, 80 → Mode = 72</td></tr>
-    <tr><td>🔴🔵 <strong>Bimodale</strong></td><td>Deux modes — deux pics distincts</td><td>Tailles d'un échantillon mixte d'adultes : pics à ~163 cm et ~177 cm (sous-groupes féminin et masculin)</td></tr>
-    <tr><td>🌈 <strong>Multimodale</strong></td><td>Trois modes ou plus</td><td>Heures d'achat des clients : pics à 8h, 12h et 18h</td></tr>
-    <tr><td>⚪ <strong>Amodale</strong></td><td>Toutes les valeurs apparaissent avec la même fréquence</td><td>Données : 2, 4, 6, 8, 10 — aucune valeur ne se répète</td></tr>
+    <tr><td><strong>Unimodal</strong></td><td>Un seul pic — une seule valeur ou classe la plus fréquente</td><td>Taille humaine dans un seul sexe : un pic autour de la moyenne</td></tr>
+    <tr><td><strong>Bimodal</strong></td><td>Deux pics distincts — signalant souvent deux sous-populations</td><td>Taille humaine combinée des deux sexes : pics vers ~164 cm (femmes) et ~176 cm (hommes)</td></tr>
+    <tr><td><strong>Multimodal</strong></td><td>Trois pics ou plus</td><td>Intervalles d'éruption du geyser Old Faithful : grappes vers ~55 min et ~80 min avec une grappe plus petite vers ~65 min</td></tr>
+    <tr><td><strong>Amodal</strong></td><td>Pas de mode — toutes les valeurs sont également fréquentes</td><td>Une distribution parfaitement uniforme (ex. un dé équilibré : chaque face apparaît aussi souvent)</td></tr>
   </tbody>
 </table>
 
-<h3>Mode pour Données Groupées</h3>
+<h3>Pourquoi le mode compte plus qu'on ne le pense</h3>
 
-<p>Pour les distributions de fréquences, le mode est estimé dans la <strong>classe modale</strong> (la classe avec la fréquence la plus élevée) par la formule d'interpolation :</p>
+<p>Le mode est souvent écarté comme la mesure de tendance centrale « la plus faible », mais cela reflète un biais envers les données continues. En pratique, le mode est indispensable en : <strong>étude de marché</strong> (la pointure de chaussure modale est la plus importante pour la planification des stocks — pas la moyenne, qui est une taille que personne ne porte) ; <strong>épidémiologie</strong> (l'âge modal d'apparition révèle quand une maladie frappe le plus souvent) ; <strong>écologie</strong> (la taille de ponte modale chez les oiseaux reflète la stratégie reproductive optimale — principe de Lack) ; <strong>fabrication</strong> (le type de défaut modal détermine les priorités d'amélioration de la qualité) ; et <strong>analyse électorale</strong> (le schéma de vote modal dans un district détermine la représentation). Dans l'analyse de données catégorielles — la majorité des données en sciences sociales — le mode n'est pas une alternative faible à la moyenne mais <em>la seule mesure valide disponible</em> (Agresti, 2018).</p>
 
-<p style="text-align:center;"><strong>Mo = L + [Δ₁ / (Δ₁ + Δ₂)] × h</strong></p>
-
-<table>
-  <thead>
-    <tr><th>Symbole</th><th>Signification</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>L</td><td>Borne inférieure de la classe modale</td></tr>
-    <tr><td>Δ₁</td><td>f<sub>modale</sub> − f<sub>précédente</sub> (excès de fréquence par rapport à la classe précédente)</td></tr>
-    <tr><td>Δ₂</td><td>f<sub>modale</sub> − f<sub>suivante</sub> (excès de fréquence par rapport à la classe suivante)</td></tr>
-    <tr><td>h</td><td>Amplitude de l'intervalle de classe</td></tr>
-  </tbody>
-</table>
-
-<p><strong>Exemple :</strong> Dans notre tableau, la classe modale est 30–40 (f=12). Δ₁ = 12−8 = 4, Δ₂ = 12−6 = 6.</p>
-<p style="text-align:center;">Mo = 30 + [4/(4+6)] × 10 = 30 + 4 = <strong>34,0</strong></p>
-
-<h3>Propriétés du Mode</h3>
-
-<table>
-  <thead>
-    <tr><th>✅ Forces</th><th>❌ Limites</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Seule mesure pour données nominales</td><td>Peut ne pas exister ou ne pas être unique</td></tr>
-    <tr><td>Facile à déterminer par inspection</td><td>Non basé sur toutes les observations</td></tr>
-    <tr><td>Non affecté par les valeurs extrêmes</td><td>Instable dans les petits échantillons</td></tr>
-    <tr><td>Représente la valeur la plus « populaire »</td><td>Ne peut pas être utilisé dans des calculs algébriques ultérieurs</td></tr>
-    <tr><td>Identifie les pics dans la forme de la distribution</td><td>Pour les données continues, dépend du choix des classes</td></tr>
-  </tbody>
-</table>
+<p>Pour les <strong>données continues</strong>, le mode échantillonnal est rarement rapporté directement car la probabilité qu'une valeur exacte se répète est proche de zéro. À la place, les statisticiens estiment le mode par <strong>estimation par noyau de densité (KDE)</strong> — une courbe lisse ajustée à l'histogramme dont le(s) pic(s) identifient les régions modales. Cette approche révèle la multimodalité que les fréquences brutes manquent et constitue une pratique standard en analyse exploratoire des données (Silverman, 1986).</p>
 
 <hr>
 
-<h2>🔬 Au-delà des Trois Grands : Autres Mesures de Tendance Centrale</h2>
+<h2>🔀 Relations entre les mesures : La forme des données</h2>
 
-<h3>📐 La Moyenne Géométrique (MG)</h3>
+<h3>Symétrie : Quand les trois s'accordent</h3>
 
-<p>La <strong>moyenne géométrique</strong> est la racine nième du produit de n valeurs. C'est la moyenne appropriée pour les données <em>multiplicatives</em> — taux de croissance, ratios, changements relatifs et intérêts composés (Bland & Altman, 1996) :</p>
+<p>Dans une <strong>distribution parfaitement symétrique</strong> — la distribution normale (gaussienne) étant l'exemple le plus important — la moyenne, la médiane et le mode coïncident tous au centre. Ce n'est pas une coïncidence mais une nécessité mathématique : la symétrie signifie que le point d'équilibre (moyenne), le 50e percentile (médiane) et le point le plus haut de la courbe de densité (mode) se trouvent tous sur l'axe de symétrie. La prédominance de la distribution normale en statistique vient précisément de cette élégance — les trois mesures s'accordent, et la moyenne seule suffit pour décrire le centre (Casella &amp; Berger, 2002).</p>
 
-<p style="text-align:center;"><strong>MG = (x₁ × x₂ × ... × xₙ)<sup>1/n</sup></strong></p>
+<h3>Asymétrie : Quand elles divergent</h3>
 
-<p>De manière équivalente : MG = exp[Σ ln(xᵢ) / n].</p>
-
-<p><strong>Exemple — Rendements d'investissement :</strong> Un investissement croît de +10 %, −5 % et +20 % sur trois ans. Les facteurs de croissance sont 1,10 ; 0,95 et 1,20.</p>
-<p style="text-align:center;">MG = (1,10 × 0,95 × 1,20)<sup>1/3</sup> = (1,254)<sup>1/3</sup> = <strong>1,0783</strong> → croissance annuelle moyenne ≈ 7,83 %</p>
-<p>La moyenne arithmétique des facteurs (1,0833) <em>surestimerait</em> le taux de croissance composé réel.</p>
-
-<h3>⚖️ La Moyenne Harmonique (MH)</h3>
-
-<p>La <strong>moyenne harmonique</strong> est l'inverse de la moyenne arithmétique des inverses. C'est la moyenne correcte pour les <em>taux</em> — vitesses, ratios cours/bénéfices, ou toute quantité exprimée comme un rapport à numérateur fixe (Bland & Altman, 1996) :</p>
-
-<p style="text-align:center;"><strong>MH = n / Σ(1/xᵢ)</strong></p>
-
-<p><strong>Exemple — Vitesse moyenne :</strong> Vous parcourez 60 km à 30 km/h et revenez 60 km à 60 km/h. Quelle est votre vitesse moyenne ?</p>
-<p style="text-align:center;">MH = 2 / (1/30 + 1/60) = 2 / (3/60) = <strong>40 km/h</strong></p>
-<p>La moyenne arithmétique (45 km/h) est fausse — elle ignore que vous avez passé <em>plus de temps</em> à rouler lentement. Distance totale = 120 km, temps total = 2h + 1h = 3h, vitesse réelle = 120/3 = 40 km/h ✓</p>
-
-<h3>✂️ La Moyenne Tronquée (Trimmed Mean)</h3>
-
-<p>La <strong>moyenne tronquée</strong> supprime un pourcentage fixe d'observations de chaque extrémité avant de calculer la moyenne arithmétique. C'est un <strong>estimateur robuste</strong> qui conserve les forces de la moyenne tout en réduisant la sensibilité aux valeurs aberrantes (Wilcox, 2017).</p>
-
-<h3>📊 L'Inégalité des Moyennes</h3>
-
-<p>Pour tout ensemble de valeurs positives et inégales (Hardy et al., 1952) :</p>
-
-<p style="text-align:center;font-size:1.15em;"><strong>Moyenne Harmonique ≤ Moyenne Géométrique ≤ Moyenne Arithmétique</strong></p>
-
-<p>L'égalité n'est atteinte que si toutes les valeurs sont identiques. Cette inégalité — connue sous le nom d'<strong>inégalité AM–GM–HM</strong> — est l'un des résultats les plus élégants des mathématiques.</p>
-
-<hr>
-
-<h2>🔄 Relation Moyenne–Médiane–Mode et Asymétrie</h2>
-
-<p>Les positions relatives de la moyenne, de la médiane et du mode révèlent la <strong>forme</strong> d'une distribution — en particulier son asymétrie (Freedman et al., 2007) :</p>
+<p>L'<strong>asymétrie</strong> (skewness) mesure le degré d'asymétrie d'une distribution. Quand la queue droite est plus longue (asymétrie positive/à droite), les valeurs extrêmes élevées tirent la moyenne vers la droite, la médiane suit mais moins, et le mode reste au pic — produisant l'ordonnancement : <strong>Mode &lt; Médiane &lt; Moyenne</strong>. Quand la queue gauche est plus longue (asymétrie négative/à gauche), l'ordonnancement s'inverse : <strong>Moyenne &lt; Médiane &lt; Mode</strong>. Cette relation empirique fut d'abord notée par Karl Pearson, qui la formalisa sous le nom de <strong>règle empirique de Pearson</strong> : Moyenne − Mode ≈ 3 × (Moyenne − Médiane) — une approximation qui tient remarquablement bien pour les distributions unimodales modérément asymétriques (von Hippel, 2005).</p>
 
 <table>
   <thead>
-    <tr><th>Forme de la Distribution</th><th>Relation</th><th>Description Visuelle</th><th>Exemple Concret</th></tr>
+    <tr><th>Forme de la distribution</th><th>Ordonnancement</th><th>Exemples réels</th></tr>
   </thead>
   <tbody>
-    <tr><td>🔔 <strong>Symétrique</strong></td><td>Moyenne = Médiane = Mode</td><td>Courbe en cloche parfaite ; moitiés identiques</td><td>Tailles des hommes adultes dans une population</td></tr>
-    <tr><td>➡️ <strong>Asymétrie droite (positive)</strong></td><td>Mode < Médiane < Moyenne</td><td>Longue queue vers la droite ; la moyenne est tirée vers les grandes valeurs</td><td>Revenus des ménages, comptages de colonies bactériennes</td></tr>
-    <tr><td>⬅️ <strong>Asymétrie gauche (négative)</strong></td><td>Moyenne < Médiane < Mode</td><td>Longue queue vers la gauche ; la moyenne est tirée vers les petites valeurs</td><td>Âge à la retraite, notes d'un examen facile</td></tr>
+    <tr><td><strong>Symétrique</strong> (asymétrie ≈ 0)</td><td>Moyenne ≈ Médiane ≈ Mode</td><td>Taille humaine, scores de QI, erreurs de mesure, pression artérielle chez les adultes sains</td></tr>
+    <tr><td><strong>Asymétrique à droite</strong> (asymétrie positive)</td><td>Mode &lt; Médiane &lt; Moyenne</td><td>Revenus, richesse, prix immobiliers, taille des populations urbaines, citations d'articles, coûts hospitaliers, sinistres d'assurance</td></tr>
+    <tr><td><strong>Asymétrique à gauche</strong> (asymétrie négative)</td><td>Moyenne &lt; Médiane &lt; Mode</td><td>Âge au décès dans les pays développés (la plupart meurent âgés), scores à un examen facile, temps pour accomplir une tâche simple</td></tr>
   </tbody>
 </table>
 
-<blockquote>📊 <strong>Règle empirique de Karl Pearson :</strong> Pour les distributions unimodales modérément asymétriques : <strong>Moyenne − Mode ≈ 3 × (Moyenne − Médiane)</strong>. Cette approximation élégante, proposée vers 1895, permet d'estimer l'une des trois mesures si l'on connaît les deux autres (Doane, 2004).</blockquote>
+<blockquote>📊 <strong>Principe diagnostique :</strong> Si moyenne ≈ médiane, la distribution est approximativement symétrique et les deux sont fiables. Si moyenne ≠ médiane, la distribution est asymétrique, et vous devez rapporter les deux — ou choisir celle qui est appropriée à votre objectif. Rapporter uniquement la moyenne d'une distribution asymétrique sans révéler la médiane est, au mieux, incomplet et, au pire, délibérément trompeur (Huff, 1954).</blockquote>
 
 <hr>
 
-<h2>🧭 Choisir la Bonne Mesure : Cadre de Décision</h2>
+<h2>🧭 Choisir la bonne mesure : Un cadre décisionnel</h2>
+
+<p>Le choix de la mesure de tendance centrale n'est pas arbitraire — il dépend de <strong>quatre facteurs</strong> : le niveau de mesure, la forme de la distribution, la présence de valeurs aberrantes et l'objectif de l'analyse (Stevens, 1946 ; Agresti &amp; Finlay, 2018).</p>
 
 <table>
   <thead>
-    <tr><th>Critère</th><th>Utiliser la Moyenne</th><th>Utiliser la Médiane</th><th>Utiliser le Mode</th></tr>
+    <tr><th>Scénario</th><th>Mesure recommandée</th><th>Justification</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Échelle de mesure</strong></td><td>Intervalle / Ratio</td><td>Ordinale / Intervalle / Ratio</td><td>Toute échelle (y compris Nominale)</td></tr>
-    <tr><td><strong>Forme de la distribution</strong></td><td>Symétrique ou presque</td><td>Asymétrique ; valeurs aberrantes</td><td>Toute ; surtout bimodale/multimodale</td></tr>
-    <tr><td><strong>Analyses ultérieures ?</strong></td><td>Oui — la plupart des tests inférentiels exigent la moyenne</td><td>Tests non paramétriques utilisent les rangs</td><td>Rarement utilisé dans d'autres calculs</td></tr>
-    <tr><td><strong>Sensibilité aux extrêmes</strong></td><td>Très sensible</td><td>Résistante</td><td>Non affecté</td></tr>
-    <tr><td><strong>Unicité</strong></td><td>Toujours unique</td><td>Toujours unique</td><td>Peut ne pas exister ou être multiple</td></tr>
-    <tr><td><strong>Idéal pour...</strong></td><td>Données quantitatives symétriques ; statistiques paramétriques</td><td>Données asymétriques ; indicateurs économiques ; analyse de survie</td><td>Données catégorielles ; identification des pics</td></tr>
+    <tr><td>Données nominales (catégories)</td><td><strong>Mode</strong></td><td>Seule option valide — on ne peut pas calculer la moyenne ou la médiane de catégories</td></tr>
+    <tr><td>Données ordinales (échelles de Likert, classements)</td><td><strong>Médiane</strong></td><td>Les rangs ont un ordre mais les distances entre rangs sont indéfinies — la moyenne suppose des intervalles égaux, la médiane non</td></tr>
+    <tr><td>Intervalle/ratio, symétrique, sans valeurs aberrantes</td><td><strong>Moyenne arithmétique</strong></td><td>Estimateur le plus efficace ; utilise toute l'information ; fondation des méthodes paramétriques</td></tr>
+    <tr><td>Intervalle/ratio, asymétrique ou avec valeurs aberrantes</td><td><strong>Médiane</strong> (ou moyenne tronquée)</td><td>Robuste aux valeurs extrêmes ; représente l'observation « typique » mieux que la moyenne</td></tr>
+    <tr><td>Taux ou ratios (croissance, rendements, vitesses sur distances égales)</td><td><strong>Moyenne géométrique</strong> (croissance/rendements) ou <strong>Moyenne harmonique</strong> (vitesses/taux)</td><td>Ces quantités sont intrinsèquement multiplicatives ou réciproques — la moyenne arithmétique donne des résultats mathématiquement incorrects</td></tr>
+    <tr><td>Données avec valeurs extrêmes inconnues (données censurées)</td><td><strong>Médiane</strong></td><td>Peut être calculée même quand les valeurs exactes des extrêmes sont inconnues (ex. analyse de survie avec observations en cours)</td></tr>
+    <tr><td>Recherche de la tendance d'inflation sous-jacente</td><td><strong>Moyenne tronquée</strong></td><td>Supprime les extrêmes volatils tout en conservant plus d'information que la médiane — standard dans les grandes banques centrales</td></tr>
   </tbody>
 </table>
 
-<blockquote>🎯 <strong>La règle pratique :</strong> En cas de doute avec des données quantitatives, rapportez <em>à la fois</em> la moyenne et la médiane. Si elles sont proches, la moyenne est un bon résumé. Si elles sont éloignées, la distribution est asymétrique et la médiane représente mieux l'observation « typique » (Wasserstein & Lazar, 2016).</blockquote>
+<blockquote>🎯 <strong>La règle d'or :</strong> Ne rapportez jamais une seule mesure de tendance centrale sans une mesure de dispersion. Une moyenne ou une médiane seule, c'est comme rapporter le centre d'une cible sans dire quelle est la taille de la cible. « La température corporelle humaine moyenne est de 37 °C » signifie quelque chose de très différent si l'écart-type est de 0,3 °C (variation saine) versus 3 °C (quelque chose ne va vraiment pas avec votre échantillon). Tendance centrale et dispersion sont des <em>partenaires inséparables</em> dans tout résumé honnête de données (Tukey, 1977).</blockquote>
 
 <hr>
 
-<h2>🌍 Applications Concrètes Selon les Disciplines</h2>
+<h2>🌍 Études de cas : La tendance centrale dans le monde réel</h2>
 
-<table>
-  <thead>
-    <tr><th>Domaine</th><th>Application</th><th>Mesure Préférée</th><th>Pourquoi</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>🌾 <strong>Agriculture</strong></td><td>Analyse des rendements</td><td>Moyenne</td><td>Données souvent approximativement normales ; permet les comparaisons ANOVA</td></tr>
-    <tr><td>💰 <strong>Économie</strong></td><td>Revenu des ménages</td><td>Médiane</td><td>Distributions fortement asymétriques à droite</td></tr>
-    <tr><td>🏥 <strong>Médecine</strong></td><td>Temps de survie après diagnostic</td><td>Médiane</td><td>Données de survie typiquement asymétriques à droite</td></tr>
-    <tr><td>📈 <strong>Finance</strong></td><td>Rendement d'investissement</td><td>Moyenne géométrique</td><td>Les rendements se composent de manière multiplicative</td></tr>
-    <tr><td>🚗 <strong>Ingénierie</strong></td><td>Vitesse moyenne d'un trajet</td><td>Moyenne harmonique</td><td>La vitesse est un taux ; la moyenne arithmétique donne un résultat incorrect</td></tr>
-    <tr><td>🔬 <strong>Microbiologie</strong></td><td>Comptages de colonies bactériennes</td><td>Moyenne géométrique</td><td>Comptages souvent log-normalement distribués</td></tr>
-    <tr><td>🏫 <strong>Éducation</strong></td><td>Calcul de la MPC</td><td>Moyenne pondérée</td><td>Les matières ont des coefficients différents</td></tr>
-    <tr><td>👗 <strong>Commerce</strong></td><td>Pointure la plus populaire</td><td>Mode</td><td>Besoin de stocker la taille la plus achetée</td></tr>
-  </tbody>
-</table>
+<h3>Cas 1 : L'inégalité des revenus mondiaux — Moyenne vs. Médiane</h3>
+
+<p>Le PIB par habitant <strong>moyen</strong> mondial (2023) est d'environ 13 000 $ — mais la <strong>médiane</strong> est plus proche de 4 500 $. La raison est une forte asymétrie à droite : un petit nombre de pays à hauts revenus (les États-Unis, la Suisse, la Norvège, Singapour) avec des revenus par habitant supérieurs à 60 000 $ tirent la moyenne bien au-dessus de l'expérience d'un être humain typique. Quand les organisations internationales comme la Banque mondiale font des rapports sur la pauvreté mondiale, elles se fondent sur le revenu <em>médian</em> et les distributions de revenus — jamais la moyenne seule — parce que la moyenne crée l'illusion d'un monde plus riche que celui dans lequel vivent réellement la plupart des gens (Milanovic, 2016).</p>
+
+<h3>Cas 2 : La catastrophe de Challenger — Un mode tragique</h3>
+
+<p>Le 28 janvier 1986, la navette spatiale Challenger se désintégra 73 secondes après le décollage, tuant les sept membres d'équipage. L'enquête de la Commission Rogers révéla que les défaillances des joints toriques (O-rings) dans les propulseurs à poudre étaient causées par les basses températures. Les ingénieurs de Morton Thiokol disposaient de données montrant l'érosion des O-rings à basse température mais présentèrent les données de manière inadéquate — en partie parce qu'ils se concentrèrent sur la <em>moyenne</em> de la profondeur d'érosion sur tous les lancements plutôt que sur le <em>schéma modal</em> : le résultat le plus fréquent à basse température était une <em>érosion significative</em>, tandis qu'à haute température le résultat le plus fréquent était <em>aucune érosion</em>. Si l'analyse s'était concentrée sur le mode (ou, plus précisément, sur la distribution de probabilité conditionnelle), le schéma aurait été indéniable. L'analyse d'Edward Tufte de ce cas reste l'une des démonstrations les plus puissantes de la façon dont le choix de la statistique résumante peut littéralement être une question de vie ou de mort (Tufte, 1997).</p>
+
+<h3>Cas 3 : Essais cliniques — Temps de survie médian</h3>
+
+<p>En oncologie, le critère d'efficacité primaire pour la plupart des essais cliniques est la <strong>survie globale médiane</strong> — pas la survie moyenne. Cela s'explique par le fait que les données de survie sont invariablement asymétriques à droite (quelques patients survivent bien plus longtemps que la plupart) et souvent <strong>censurées</strong> (certains patients sont encore vivants quand l'étude se termine, donc leur vrai temps de survie est inconnu). La médiane peut être estimée dès que 50 % des patients ont vécu l'événement, même avec des données censurées, en utilisant l'estimateur de Kaplan-Meier (Kaplan &amp; Meier, 1958). La moyenne, en revanche, nécessite que toutes les observations soient complètes ou exige des hypothèses sur la distribution de la queue. La FDA et l'EMA acceptent toutes deux la survie médiane comme résumé standard — une décision réglementaire enracinée dans la robustesse statistique (Bland &amp; Altman, 1996).</p>
+
+<h3>Cas 4 : Surveillance environnementale — Moyenne géométrique</h3>
+
+<p>Les normes de qualité de l'eau dans le monde — y compris l'EPA américaine, l'Agence européenne pour l'environnement et le NHMRC australien — spécifient que la contamination bactérienne (coliformes fécaux, <em>E. coli</em>) doit être rapportée sous forme de <strong>moyenne géométrique</strong> sur une période de surveillance, et non de moyenne arithmétique. Cela s'explique par le fait que les comptages bactériens suivent une distribution log-normale : la plupart des échantillons montrent des comptages bas, mais des échantillons occasionnels montrent des comptages extrêmement élevés (après des orages, par exemple). La moyenne arithmétique est dominée par ces pics, donnant une impression trompeuse de contamination chronique. La moyenne géométrique, qui équivaut à la moyenne des valeurs transformées en logarithmes retransformées à l'échelle originale, représente la qualité de l'eau <em>typique</em> que les baigneurs et les écosystèmes expérimentent la plupart des jours (Helsel &amp; Hirsch, 2002).</p>
 
 <hr>
 
-<h2>⚡ Tableau Comparatif Récapitulatif</h2>
+<h2>⚠️ Idées fausses courantes</h2>
 
-<table>
-  <thead>
-    <tr><th>Caractéristique</th><th>Moyenne (x̄)</th><th>Médiane (Md)</th><th>Mode (Mo)</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>Définition</strong></td><td>Somme / effectif</td><td>Valeur centrale</td><td>Valeur la plus fréquente</td></tr>
-    <tr><td><strong>Utilise toutes les données ?</strong></td><td>✅ Oui</td><td>❌ Non (position seulement)</td><td>❌ Non (fréquence seulement)</td></tr>
-    <tr><td><strong>Affectée par les extrêmes ?</strong></td><td>✅ Oui (fortement)</td><td>❌ Non</td><td>❌ Non</td></tr>
-    <tr><td><strong>Données nominales ?</strong></td><td>❌ Non</td><td>❌ Non</td><td>✅ Oui</td></tr>
-    <tr><td><strong>Toujours unique ?</strong></td><td>✅ Oui</td><td>✅ Oui</td><td>❌ Non</td></tr>
-    <tr><td><strong>Statistique inférentielle ?</strong></td><td>✅ Largement</td><td>⚠️ Certains tests</td><td>❌ Rarement</td></tr>
-    <tr><td><strong>Propriété d'optimisation</strong></td><td>Minimise Σ(xᵢ − c)²</td><td>Minimise Σ|xᵢ − c|</td><td>Maximise P(X = c)</td></tr>
-    <tr><td><strong>Distributions asymétriques</strong></td><td>Tirée vers la queue</td><td>Résistante à la queue</td><td>Située au pic</td></tr>
-  </tbody>
-</table>
+<p><strong>1. « La moyenne est toujours la meilleure mesure de tendance centrale. »</strong> Ce n'est vrai que pour des données symétriques, sans valeurs aberrantes, mesurées à l'échelle d'intervalle ou de ratio — un ensemble de conditions qui décrit une minorité des jeux de données réels. Pour les distributions asymétriques, la médiane est plus représentative ; pour les données catégorielles, seul le mode est valide ; pour les taux et ratios, la moyenne géométrique ou harmonique est mathématiquement correcte ; et pour les données avec valeurs aberrantes, la moyenne tronquée offre un compromis raisonné. Il n'existe pas de mesure universellement « meilleure » — seulement la mesure <em>la plus appropriée</em> pour un jeu de données et un objectif donnés (Moore et al., 2021).</p>
+
+<p><strong>2. « La médiane n'est que pour les données non normales. »</strong> La médiane est valide pour <em>toutes</em> les données ayant au moins un niveau de mesure ordinal — y compris les données parfaitement normales. Pour les données normales, la moyenne et la médiane coïncident, donc rapporter la médiane au lieu de la moyenne ne perd rien. La médiane « est pour » toute situation où la robustesse aux valeurs aberrantes ou à l'asymétrie importe, ce qui est la plupart des situations pratiques.</p>
+
+<p><strong>3. « Le mode est trivial et sans importance. »</strong> Le mode est la <em>seule</em> mesure valide de tendance centrale pour les données nominales, et la multimodalité est l'une des caractéristiques les plus importantes qu'une distribution puisse révéler — elle signale souvent la présence de sous-populations distinctes. Rejeter le mode reflète une focalisation étroite sur les données numériques continues.</p>
+
+<p><strong>4. « On ne peut pas avoir plus d'un mode. »</strong> Les distributions peuvent être bimodales (deux modes), multimodales (trois ou plus) ou amodales (pas de mode). La bimodalité en particulier est un diagnostic critique — elle suggère que les données peuvent provenir d'un <em>mélange</em> de deux populations distinctes, et calculer une seule moyenne ou médiane pour le mélange peut être dénué de sens (Everitt &amp; Hand, 1981).</p>
+
+<p><strong>5. « Une moyenne plus élevée signifie toujours une meilleure performance. »</strong> Le contexte détermine l'interprétation. Une température corporelle moyenne plus élevée (au-dessus de 37 °C) signale la fièvre, pas la santé. Un temps de réponse moyen plus élevé dans un système signale la lenteur, pas la rapidité. Un taux d'erreur moyen plus élevé signale l'inexactitude, pas la précision. Interprétez toujours la tendance centrale dans la direction qui a un sens substantif pour la variable mesurée.</p>
+
+<p><strong>6. « La moyenne géométrique n'est que pour les données financières. »</strong> La moyenne géométrique est appropriée chaque fois que les données sont multiplicatives — concentrations bactériennes, changements de pli dans l'expression génique, indices de prix, taux de croissance démographique, intérêts composés, coefficients de perméabilité, seuils d'audition, et toute donnée suivant une distribution log-normale. La finance n'est que l'application la plus fréquemment citée (Bland &amp; Altman, 1996).</p>
+
+<hr>
+
+<h2>🧩 Synthèse : Un jeu de données, plusieurs centres</h2>
+
+<p>La tendance centrale n'est pas un concept unique mais une <strong>famille de concepts</strong>, chacun répondant à une question légèrement différente sur l'endroit où les données « vivent ». La moyenne arithmétique trouve le point d'équilibre. La moyenne pondérée trouve le point d'équilibre quand les observations portent des importances différentes. La moyenne géométrique trouve le centre multiplicatif — essentielle pour les taux de croissance, les rendements et les données log-normales. La moyenne harmonique trouve la moyenne des taux — essentielle pour les vitesses, les prix et le F1-score. La moyenne tronquée trouve un point d'équilibre robuste en excluant les extrêmes. La médiane trouve le centre positionnel — immunisée contre les valeurs aberrantes, valide pour les données ordinales, calculable même avec des observations censurées. Le mode trouve la valeur la plus courante — la seule option pour les données catégorielles et la clé pour détecter les sous-populations.</p>
+
+<p>Le choix entre elles n'est jamais arbitraire. Il dépend du niveau de mesure (nominal, ordinal, d'intervalle, de ratio), de la forme de la distribution (symétrique vs. asymétrique), de la présence de valeurs aberrantes ou de censure, de la nature mathématique de la variable (additive vs. multiplicative vs. taux) et de l'objectif de l'analyse (description, comparaison, prédiction ou inférence). Maîtriser la tendance centrale signifie non seulement calculer chaque mesure — <em>n'importe quel logiciel peut le faire</em> — mais comprendre laquelle calculer, pourquoi, et ce que la divergence entre les mesures révèle sur la structure cachée des données. Comme l'écrivit John Tukey, l'un des plus grands statisticiens du XXe siècle : « La plus grande valeur d'une image est quand elle nous force à remarquer ce que nous ne nous attendions jamais à voir » (Tukey, 1977). Il en va de même pour la tendance centrale : la plus grande valeur de la comparaison entre moyenne, médiane et mode est quand leur désaccord nous force à remarquer quelque chose sur les données — asymétrie, valeurs aberrantes, sous-populations, censure — qu'un seul résumé aurait caché.</p>
 
 <hr>
 
 <h2>📚 Références</h2>
 
-<p>Agresti, A., & Finlay, B. (2018). <em>Statistical methods for the social sciences</em> (5th ed.). Pearson.</p>
-
-<p>Bland, J. M., & Altman, D. G. (1996). Statistics notes: The use of transformation when comparing two means. <em>BMJ</em>, 312(7039), 1153. https://doi.org/10.1136/bmj.312.7039.1153</p>
-
-<p>Devore, J. L., & Berk, K. N. (2012). <em>Modern mathematical statistics with applications</em> (2nd ed.). Springer.</p>
-
-<p>Doane, D. P. (2004). Using simulation to teach distributions. <em>Journal of Statistics Education</em>, 12(1). https://doi.org/10.1080/10691898.2004.11910731</p>
-
-<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton & Company.</p>
-
-<p>Hardy, G. H., Littlewood, J. E., & Pólya, G. (1952). <em>Inequalities</em> (2nd ed.). Cambridge University Press.</p>
-
-<p>Huber, P. J., & Ronchetti, E. M. (2009). <em>Robust statistics</em> (2nd ed.). Wiley.</p>
-
-<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
-
-<p>Triola, M. F. (2018). <em>Elementary statistics</em> (13th ed.). Pearson.</p>
-
-<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>
-
-<p>Wasserstein, R. L., & Lazar, N. A. (2016). The ASA statement on p-values: Context, process, and purpose. <em>The American Statistician</em>, 70(2), 129–133. https://doi.org/10.1080/00031305.2016.1154108</p>
-
+<p>Agresti, A. (2018). <em>Statistical methods for the social sciences</em> (5th ed.). Pearson.</p>
+<p>Agresti, A., &amp; Finlay, B. (2018). <em>Statistical methods for the social sciences</em> (5th ed.). Pearson.</p>
+<p>Bland, J. M., &amp; Altman, D. G. (1996). Statistics notes: The use of transformation when comparing two means. <em>BMJ</em>, <em>312</em>(7039), 1153. https://doi.org/10.1136/bmj.312.7039.1153</p>
+<p>Borenstein, M., Hedges, L. V., Higgins, J. P. T., &amp; Rothstein, H. R. (2009). <em>Introduction to meta-analysis</em>. Wiley.</p>
+<p>Bryan, M. F., &amp; Cecchetti, S. G. (1994). Measuring core inflation. In N. G. Mankiw (Ed.), <em>Monetary policy</em> (pp. 195–215). University of Chicago Press.</p>
+<p>Bullen, P. S. (2003). <em>Handbook of means and their inequalities</em> (2nd ed.). Kluwer Academic.</p>
+<p>Casella, G., &amp; Berger, R. L. (2002). <em>Statistical inference</em> (2nd ed.). Cengage Learning.</p>
+<p>Everitt, B. S., &amp; Hand, D. J. (1981). <em>Finite mixture distributions</em>. Chapman &amp; Hall.</p>
+<p>Haughton, J., &amp; Khandker, S. R. (2009). <em>Handbook on poverty and inequality</em>. World Bank.</p>
+<p>Helsel, D. R., &amp; Hirsch, R. M. (2002). <em>Statistical methods in water resources</em>. USGS Techniques of Water-Resources Investigations, Book 4. U.S. Geological Survey.</p>
+<p>Huff, D. (1954). <em>How to lie with statistics</em>. W. W. Norton.</p>
+<p>Kaplan, E. L., &amp; Meier, P. (1958). Nonparametric estimation from incomplete observations. <em>Journal of the American Statistical Association</em>, <em>53</em>(282), 457–481.</p>
+<p>Milanovic, B. (2016). <em>Global inequality: A new approach for the age of globalization</em>. Harvard University Press.</p>
+<p>Moore, D. S., McCabe, G. P., &amp; Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+<p>Mosteller, F., &amp; Tukey, J. W. (1977). <em>Data analysis and regression</em>. Addison-Wesley.</p>
+<p>Silverman, B. W. (1986). <em>Density estimation for statistics and data analysis</em>. Chapman &amp; Hall.</p>
+<p>Sokal, R. R., &amp; Rohlf, F. J. (2012). <em>Biometry: The principles and practice of statistics in biological research</em> (4th ed.). W. H. Freeman.</p>
+<p>Steele, J. M. (2004). <em>The Cauchy-Schwarz master class</em>. Cambridge University Press.</p>
+<p>Stevens, S. S. (1946). On the theory of scales of measurement. <em>Science</em>, <em>103</em>(2684), 677–680.</p>
+<p>Stigler, S. M. (1986). <em>The history of statistics: The measurement of uncertainty before 1900</em>. Harvard University Press.</p>
+<p>Stiglitz, J. E., Sen, A., &amp; Fitoussi, J.-P. (2010). <em>Mismeasuring our lives: Why GDP doesn't add up</em>. The New Press.</p>
+<p>Tufte, E. R. (1997). <em>Visual explanations: Images and quantities, evidence and narrative</em>. Graphics Press.</p>
+<p>Tukey, J. W. (1977). <em>Exploratory data analysis</em>. Addison-Wesley.</p>
+<p>von Hippel, P. T. (2005). Mean, median, and skew: Correcting a textbook rule. <em>Journal of Statistics Education</em>, <em>13</em>(2). https://doi.org/10.1080/10691898.2005.11910556</p>
+<p>Wackerly, D. D., Mendenhall, W., &amp; Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>
 <p>Weisberg, H. F. (1992). <em>Central tendency and variability</em>. Sage Publications.</p>
-
-<p>Wilcox, R. R. (2017). <em>Introduction to robust estimation and hypothesis testing</em> (4th ed.). Academic Press.</p>
+<p>Wilcox, R. R. (2012). <em>Introduction to robust estimation and hypothesis testing</em> (3rd ed.). Academic Press.</p>
+<p>Wilks, D. S. (2019). <em>Statistical methods in the atmospheric sciences</em> (4th ed.). Elsevier.</p>

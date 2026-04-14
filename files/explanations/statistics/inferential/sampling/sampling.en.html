@@ -1,163 +1,169 @@
-<h2>🎯 Sampling: The Art & Science of Choosing Who to Study</h2>
+<h2>🎯 Sampling: The Art and Science of Choosing Who to Study</h2>
 
-<p>Imagine you are an agricultural researcher in Algeria and you want to know the average wheat yield across the entire Sétif province — thousands of farms spanning diverse microclimates, soil types, and farming practices. You cannot possibly measure <em>every</em> field. So what do you do? You <strong>sample</strong>: you select a carefully chosen subset of fields, measure them, and use those measurements to draw conclusions about the entire province. This seemingly simple act — choosing <em>who</em> or <em>what</em> to study — is one of the most consequential decisions in all of statistics.</p>
+<p>In November 1936, the editors of the <em>Literary Digest</em> — then America's most prestigious news magazine — announced with supreme confidence that Alfred Landon would defeat Franklin Roosevelt in the presidential election by a commanding 57% to 43%. Their prediction was based on what appeared to be overwhelming evidence: <strong>2.4 million returned questionnaires</strong>, the largest poll ever conducted. Two weeks later, Roosevelt won in a historic landslide — 62% to 38% — carrying every state but two. The <em>Literary Digest</em> had committed the most spectacular polling failure in history, and within eighteen months the magazine ceased publication entirely. Meanwhile, a young statistician named George Gallup, using a <em>scientific sample</em> of just 50,000 respondents, had predicted Roosevelt's victory with remarkable accuracy (Squire, 1988). The lesson was devastating in its simplicity: <strong>how</strong> you choose your sample matters infinitely more than <strong>how many</strong> you choose.</p>
 
-<p>Sampling is the bridge between a <strong>population</strong> (the complete set of elements you want to study) and the <strong>sample</strong> (the subset you actually observe). Get the sampling right, and a few hundred observations can tell you something meaningful about millions. Get it wrong, and even millions of observations will mislead you. As Cochran (1977) emphasized, the quality of any statistical inference depends first and foremost on the quality of the sample from which it was drawn.</p>
+<p>The <em>Literary Digest</em> had mailed questionnaires to ten million Americans — but drawn its mailing list from telephone directories and automobile registration records. In 1936, during the Great Depression, telephones and automobiles were luxuries owned disproportionately by wealthier Americans who favoured Landon's Republican platform. The magazine had systematically excluded the working-class voters who would overwhelmingly support Roosevelt's New Deal. Two-point-four million responses could not correct a flaw baked into the method itself. Compounding the selection bias was <strong>non-response bias</strong>: of ten million questionnaires mailed, only 2.4 million returned — a 24% response rate. Those motivated to respond were disproportionately opponents of the incumbent, introducing a second layer of systematic distortion (Squire, 1988; Bryson, 1976). This catastrophe did not merely embarrass one magazine — it <strong>transformed an entire discipline</strong>, launching the era of scientific probability sampling that underpins all modern survey research, clinical trials, quality control, ecological monitoring, and agricultural experimentation (Groves et al., 2009).</p>
 
-<blockquote>💡 <strong>The Core Principle:</strong> A well-designed sample of 1,000 people can accurately predict the behaviour of 300 million — but a poorly designed sample of 2 million can be spectacularly wrong. The 1936 Literary Digest poll surveyed over 2.4 million Americans yet predicted the presidential election <em>incorrectly</em>, while George Gallup's scientific sample of just 50,000 got it right (Squire, 1988). <strong>Method beats size, every time.</strong></blockquote>
+<p>Sampling is the bridge between a <strong>population</strong> (the complete set of elements you want to understand) and a <strong>sample</strong> (the subset you actually observe). It is the foundational act of inferential statistics — every confidence interval, every hypothesis test, every regression coefficient you will ever encounter assumes that the sample was obtained through a defensible procedure. Get the sampling right, and a few hundred observations can illuminate the condition of millions. Get it wrong, and millions of observations will systematically mislead. As William Cochran — the father of modern sampling theory — wrote in his landmark textbook: « The quality of any statistical investigation depends to a large degree on the quality of the sampling » (Cochran, 1977, p. 1). This explanation unpacks the theory, methods, mathematics, and real-world applications of sampling — giving you the knowledge to design samples that yield trustworthy knowledge, and to detect the flaws that make other samples unreliable.</p>
+
+<blockquote>💡 <strong>The Core Principle:</strong> A well-designed sample of 1,000 can accurately represent a population of 300 million — but a poorly designed sample of 2.4 million can be spectacularly wrong. The <em>Literary Digest</em> debacle proves it: <strong>method beats size, every single time.</strong> The entire edifice of modern statistics rests on this insight. What makes a sample trustworthy is not its volume but its <em>mechanism of selection</em> — specifically, whether every member of the target population had a known, non-zero probability of being included (Kish, 1965). This distinction between <em>probability</em> and <em>non-probability</em> sampling is the single most important methodological boundary in all of empirical research.</blockquote>
 
 <hr>
 
-<h2>📚 Fundamental Concepts</h2>
+<h2>📚 Part I — Fundamental Concepts: The Language of Sampling</h2>
 
-<h3>Population vs. Sample</h3>
+<h3>Population, Sample, and the Inferential Chain</h3>
 
-<p>The distinction between population and sample is the very foundation of inferential statistics (Moore et al., 2021). Every inferential procedure — from confidence intervals to hypothesis tests — exists because we work with samples rather than complete populations.</p>
+<p>The distinction between population and sample is the very foundation of inferential statistics — every inferential procedure exists because we work with samples rather than complete populations (Moore et al., 2021). Understanding this distinction requires precision in terminology, because confusion between a <strong>parameter</strong> (a fixed but usually unknown characteristic of the population) and a <strong>statistic</strong> (a calculated value from the sample that <em>estimates</em> the parameter) is the source of countless errors in research interpretation. Jerzy Neyman formalised this logic in his 1934 paper on representative sampling — the intellectual breakthrough that established the mathematical foundation for drawing valid conclusions from a part about the whole (Neyman, 1934).</p>
 
 <table>
   <thead>
     <tr><th>Concept</th><th>Symbol</th><th>Definition</th><th>Example</th></tr>
   </thead>
   <tbody>
-    <tr><td>🌍 <strong>Population</strong></td><td>N</td><td>The <em>complete</em> set of all elements of interest</td><td>All 50,000 olive trees in a region</td></tr>
-    <tr><td>🔍 <strong>Sample</strong></td><td>n</td><td>A <em>subset</em> of the population actually observed</td><td>200 olive trees measured for oil content</td></tr>
-    <tr><td>📊 <strong>Parameter</strong></td><td>μ, σ, p</td><td>A numerical characteristic of the <em>population</em> (usually unknown)</td><td>True mean oil content: μ = ?</td></tr>
-    <tr><td>📈 <strong>Statistic</strong></td><td>x̄, s, p̂</td><td>A numerical characteristic of the <em>sample</em> (calculated from data)</td><td>Sample mean oil content: x̄ = 18.3%</td></tr>
-    <tr><td>📋 <strong>Sampling Frame</strong></td><td>—</td><td>A list or map of all accessible elements from which the sample is drawn</td><td>Registry of all registered olive groves</td></tr>
-    <tr><td>🧩 <strong>Sampling Unit</strong></td><td>—</td><td>The individual element selected for measurement</td><td>A single olive tree</td></tr>
-    <tr><td>⚙️ <strong>Census</strong></td><td>—</td><td>Data collection from <em>every</em> member of the population</td><td>Measuring all 50,000 trees (impractical!)</td></tr>
+    <tr><td>🌍 <strong>Population (Target)</strong></td><td>N</td><td>The <em>complete</em> set of all elements about which the researcher wants to draw conclusions</td><td>All 12 million schoolchildren in Brazil aged 6–14</td></tr>
+    <tr><td>🔍 <strong>Sample</strong></td><td>n</td><td>A <em>subset</em> of the population actually observed and measured</td><td>3,200 schoolchildren selected from 160 schools across 5 states</td></tr>
+    <tr><td>📊 <strong>Parameter</strong></td><td>μ, σ, p, β</td><td>A fixed numerical characteristic of the <em>population</em> — usually unknown and the target of inference</td><td>True mean reading score of all 12 million children: μ = ?</td></tr>
+    <tr><td>📈 <strong>Statistic (Estimator)</strong></td><td>x̄, s, p̂, b</td><td>A numerical characteristic calculated from the <em>sample</em> — used to estimate the corresponding parameter</td><td>Sample mean reading score: x̄ = 72.4 points</td></tr>
+    <tr><td>📋 <strong>Sampling Frame</strong></td><td>—</td><td>The operational list of all accessible elements from which the sample is actually drawn — ideally identical to the target population, but often imperfect</td><td>Ministry of Education school registry (may exclude unregistered private schools and homeschooled children)</td></tr>
+    <tr><td>🧩 <strong>Sampling Unit</strong></td><td>—</td><td>The individual element selected for inclusion at each stage of sampling</td><td>Stage 1: schools; Stage 2: students within selected schools</td></tr>
+    <tr><td>⚙️ <strong>Census</strong></td><td>—</td><td>Complete data collection from <em>every</em> member of the population — the alternative to sampling</td><td>National population census (conducted every 10 years in most countries — India's 2011 census enumerated 1.21 billion people)</td></tr>
   </tbody>
 </table>
 
-<blockquote>🧪 <strong>Why not just do a census?</strong> Three compelling reasons: (1) <strong>Cost</strong> — a census of millions of elements is prohibitively expensive; (2) <strong>Time</strong> — by the time you measure everyone, conditions may have changed; (3) <strong>Destructive testing</strong> — you cannot test the breaking strength of every steel beam or the germination rate of every seed without destroying the population itself (Lohr, 2022). Sampling is not a compromise — it is a <em>necessity</em>.</blockquote>
+<blockquote>🧪 <strong>Why not just do a census?</strong> Four compelling reasons make sampling not merely convenient but <em>necessary</em>: (1) <strong>Cost</strong> — the U.S. 2020 Census cost approximately $14.2 billion (U.S. Census Bureau, 2020); India's 2011 census cost $2.2 billion and employed 2.7 million enumerators; a well-designed sample survey costs a fraction of either; (2) <strong>Time</strong> — by the time a census is completed and processed, conditions may have changed; the U.S. Census takes years to process fully, and India's 2021 census was postponed indefinitely due to COVID-19; (3) <strong>Destructive testing</strong> — you cannot test the breaking strength of every steel beam, the shelf life of every medication, the germination rate of every seed, or the blood glucose of every patient without destroying the population or harming subjects; (4) <strong>Accuracy paradox</strong> — a census requires training thousands of enumerators, introducing measurement error that a smaller, better-supervised sample avoids. The U.S. Census Bureau itself uses post-enumeration surveys (samples!) to evaluate census accuracy — and consistently finds that census counts contain more per-unit error than well-conducted sample surveys. Census data are, paradoxically, often <em>less accurate</em> on a per-unit basis than data from a well-conducted sample (Cochran, 1977; Deming, 1950).</blockquote>
+
+<h3>The Sampling Frame Problem: Coverage Error</h3>
+
+<p>The gap between the <strong>target population</strong> (what you want to study) and the <strong>sampling frame</strong> (the list from which you actually draw) is called <strong>coverage error</strong>, and it is one of the most insidious sources of bias in research (Groves et al., 2009). The <em>Literary Digest</em> disaster was fundamentally a coverage error — telephone and automobile registries were the frame, but the target population was all voters. Modern examples persist with striking regularity: telephone surveys exclude the estimated 3% of U.S. households with no phone and the growing share using only mobile devices; internet-based panels exclude elderly and low-income populations who lack reliable internet access; hospital-based clinical studies exclude patients who never seek medical care (the « clinical iceberg » phenomenon described by Last, 1963). In low-income countries, sampling frames based on national identity registries may exclude millions of unregistered citizens — the World Bank estimates that approximately 850 million people worldwide lack official identification. No statistical technique can correct for people who were never given the chance to be selected. The solution is to choose frames that match the target population as closely as possible, use dual-frame or multi-frame designs when a single frame is insufficient, and explicitly acknowledge the coverage gaps that remain.</p>
 
 <hr>
 
-<h2>🎲 Probability Sampling Methods</h2>
+<h2>🎲 Part II — Probability Sampling Methods: The Gold Standard</h2>
 
-<p>Probability sampling is the gold standard of scientific research. Its defining feature: every element in the population has a <strong>known, non-zero probability</strong> of being selected. This mathematical property is what allows us to quantify sampling error, construct confidence intervals, and make valid inferences about the population (Kish, 1965). There are four principal probability sampling methods:</p>
+<p>Probability sampling is the <strong>gold standard</strong> of scientific research. Its defining feature: every element in the population has a <strong>known, non-zero probability of selection</strong>. This mathematical property — and this property alone — is what allows us to quantify sampling error, construct valid confidence intervals, perform hypothesis tests, and make legitimate inferences from sample to population. Leslie Kish, whose 1965 textbook <em>Survey Sampling</em> remains the field's bible, called this the « essential requirement » that separates science from speculation (Kish, 1965). The idea has deep roots: Pierre-Simon Laplace used probability-based selection as early as 1786 to estimate the population of France from parish birth records — one of the earliest documented applications of what we now call probability sampling (Stigler, 1986). Neyman's 1934 paper formalised the theory, proving that random selection with known probabilities is both <em>necessary</em> and <em>sufficient</em> for valid inference (Neyman, 1934). There are four principal probability sampling methods, each with distinct strengths, limitations, and domains of application.</p>
 
 <h3>1. Simple Random Sampling (SRS)</h3>
 
-<p><strong>Simple Random Sampling</strong> is the most fundamental method: every possible sample of size <em>n</em> has an equal probability of being selected from the population of size <em>N</em>. It is the "baseline" against which all other designs are compared (Cochran, 1977).</p>
+<p><strong>Simple Random Sampling</strong> is the most fundamental probability design: every possible sample of size <em>n</em> from a population of size <em>N</em> has an equal probability of selection. There are C(N, n) = N! / (n!(N−n)!) such samples, and each has probability 1/C(N, n). It is the theoretical baseline against which all other designs are compared, and the implicit assumption of most introductory statistical formulas (Cochran, 1977). In SRS, each element has an inclusion probability of <em>n/N</em>, and — critically — the selection of any one element is <strong>independent</strong> of the selection of any other. In practice, SRS is implemented via computer-generated random numbers, hardware random number generators, or historically, random number tables such as those published by Fisher and Yates (1938) and the RAND Corporation (1955).</p>
 
 <table>
   <thead>
     <tr><th>Feature</th><th>Details</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Selection Mechanism</strong></td><td>Random number generator or lottery; each element has probability n/N of inclusion</td></tr>
-    <tr><td><strong>Requires</strong></td><td>A complete sampling frame (list of all N elements)</td></tr>
-    <tr><td><strong>Strengths</strong></td><td>Eliminates selection bias; simple calculations; basis of statistical theory</td></tr>
-    <tr><td><strong>Weaknesses</strong></td><td>Needs complete frame; may miss rare subgroups; geographically scattered sample can be expensive</td></tr>
-    <tr><td><strong>Best For</strong></td><td>Homogeneous populations; situations where a complete frame exists</td></tr>
+    <tr><td><strong>Selection Mechanism</strong></td><td>Random number generator, random number table, or lottery; each element has probability n/N of inclusion; draws are independent</td></tr>
+    <tr><td><strong>Requires</strong></td><td>A complete, accurate sampling frame listing all N elements</td></tr>
+    <tr><td><strong>Strengths</strong></td><td>Eliminates selection bias; formulas are simple and well-understood; provides the theoretical foundation for all of sampling theory; produces unbiased estimates of population parameters</td></tr>
+    <tr><td><strong>Weaknesses</strong></td><td>Requires a complete frame (often unavailable); may miss rare subgroups by chance; geographically scattered sample can be expensive to reach; does not exploit known population structure</td></tr>
+    <tr><td><strong>Best For</strong></td><td>Relatively homogeneous populations; studies where a complete frame exists; situations where simplicity and transparency are paramount; baseline comparison for more complex designs</td></tr>
   </tbody>
 </table>
 
-<p><strong>Example:</strong> A soil scientist wants to estimate the average organic matter content of 500 agricultural plots in a commune. She assigns each plot a number (1–500), uses a random number generator to select 50 plots, and measures each one. Every plot had the same 50/500 = 10% chance of being included.</p>
+<p><strong>Example:</strong> A pharmaceutical company wants to estimate the average dissolution rate of tablets from a production batch of 10,000 units. Each tablet is assigned a number (1–10,000), a computer generates 200 random numbers, and the corresponding tablets are pulled for laboratory testing. Every tablet had the same 200/10,000 = 2% probability of selection, and the results are used to determine whether the batch meets pharmacopeial standards (USP dissolution testing, <90%+ within 30 minutes).</p>
 
 <h3>2. Systematic Sampling</h3>
 
-<p><strong>Systematic Sampling</strong> selects every <em>k</em>th element from an ordered list after a random starting point, where <em>k = N/n</em> (the sampling interval). It is operationally simpler than SRS and often produces equally representative samples (Thompson, 2012).</p>
+<p><strong>Systematic Sampling</strong> selects every <em>k</em>th element from an ordered list after a random starting point, where <em>k = N/n</em> (the <strong>sampling interval</strong>). It produces samples that are spread evenly across the entire frame — a property that often yields <em>better</em> precision than SRS when the list has a natural ordering correlated with the variable of interest (Thompson, 2012). It was the method used by Pierre-Simon Laplace as early as 1786 to estimate the population of France from birth records — one of the earliest documented applications of probability sampling (Stigler, 1986). Systematic sampling is also the workhorse of industrial quality control: every <em>k</em>th item on an assembly line is inspected, providing continuous monitoring without halting production.</p>
 
 <table>
   <thead>
     <tr><th>Feature</th><th>Details</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Selection Mechanism</strong></td><td>Choose random start <em>r</em> between 1 and <em>k</em>, then select elements r, r+k, r+2k, …</td></tr>
-    <tr><td><strong>Requires</strong></td><td>An ordered list or physical arrangement of elements</td></tr>
-    <tr><td><strong>Strengths</strong></td><td>Simple to implement; spreads sample evenly across the frame; faster than SRS in the field</td></tr>
-    <tr><td><strong>Weaknesses</strong></td><td>⚠️ Dangerous if the list has a <em>periodic pattern</em> matching the interval <em>k</em> (hidden bias)</td></tr>
-    <tr><td><strong>Best For</strong></td><td>Production lines, patient queues, agricultural rows, geographically linear populations</td></tr>
+    <tr><td><strong>Selection Mechanism</strong></td><td>Choose a random start <em>r</em> between 1 and <em>k</em>; select elements at positions r, r+k, r+2k, r+3k, … through the frame</td></tr>
+    <tr><td><strong>Requires</strong></td><td>An ordered list or physical arrangement of elements (a production line, a row of plants, a patient queue, a transect line)</td></tr>
+    <tr><td><strong>Strengths</strong></td><td>Operationally simpler than SRS; spreads the sample evenly across the frame; often produces implicit stratification along the ordering variable; faster in the field; ideal for continuous production processes</td></tr>
+    <tr><td><strong>Weaknesses</strong></td><td>⚠️ Dangerous if the list has a <em>periodic pattern</em> whose cycle coincides with the sampling interval <em>k</em> — this creates hidden bias that is undetectable from the sample itself</td></tr>
+    <tr><td><strong>Best For</strong></td><td>Production lines, quality control, patient arrivals, agricultural rows, ecological transects, any population with natural linear ordering</td></tr>
   </tbody>
 </table>
 
-<p><strong>Example:</strong> An agronomist studying insect damage on a 1,000-tree orchard wants n = 100 trees. The interval is k = 1000/100 = 10. She randomly picks starting tree #7, then inspects trees 7, 17, 27, 37, … through 997.</p>
+<p><strong>Example:</strong> An ecologist studying benthic invertebrates along a 10-kilometre river reach in the Mekong Delta wants 100 samples. The interval is k = 10,000m/100 = 100m. She randomly selects a starting point at 43m, then collects samples at 43m, 143m, 243m, 343m, … through 9,943m. The systematic design guarantees even spatial coverage, which a simple random selection might not achieve (some stretches could be oversampled, others missed entirely). This property — called <strong>implicit stratification</strong> — often makes systematic sampling more precise than SRS for spatially structured populations (Cochran, 1977).</p>
 
-<blockquote>⚠️ <strong>The Periodicity Trap:</strong> If houses on a street alternate between corner lots and interior lots with k matching this pattern, systematic sampling could select <em>only</em> corner lots — creating severe bias. Always verify that no cyclical pattern coincides with your sampling interval (Cochran, 1977).</blockquote>
+<blockquote>⚠️ <strong>The Periodicity Trap:</strong> In a residential neighbourhood where every 8th house is a corner lot (larger yard, different drainage, higher property value), a systematic sample with k = 8 could select <em>only</em> corner lots or <em>no</em> corner lots — either way producing severe bias invisible from the data. In ecological studies, if organisms are distributed in regular patches matching the sampling interval (e.g., tidal zones, agricultural ridges, or plantation rows), systematic sampling can drastically over- or underestimate abundance. Madow and Madow (1944) provided the first formal analysis of this risk, showing that periodic populations can make systematic sampling the worst possible design. The safeguard: always check for periodicity in the frame <em>before</em> selecting k, and consider a small random perturbation (« jittering ») of each sampling point (Cochran, 1977; Thompson, 2012).</blockquote>
 
 <h3>3. Stratified Random Sampling</h3>
 
-<p><strong>Stratified sampling</strong> divides the population into non-overlapping, exhaustive subgroups called <strong>strata</strong> (singular: stratum), and then draws a separate random sample from each stratum. It is one of the most powerful and widely used designs in survey research and agricultural experimentation (Lohr, 2022).</p>
+<p><strong>Stratified sampling</strong> divides the population into non-overlapping, exhaustive subgroups called <strong>strata</strong> (singular: stratum), then draws a <em>separate</em> independent random sample from each stratum. It is arguably the most powerful and widely used design in survey research, agricultural experimentation, ecological monitoring, and public health surveillance (Lohr, 2022). The logic is elegant: if you can identify sources of variability <em>before</em> sampling, you can use that knowledge to <em>reduce</em> variability in your estimates. Neyman (1934) proved mathematically that optimal allocation across strata minimises the variance of the overall estimate for any given total sample size — a result that remains one of the most practically important theorems in all of sampling theory.</p>
 
 <table>
   <thead>
     <tr><th>Feature</th><th>Details</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Selection Mechanism</strong></td><td>Divide population into L strata; SRS or systematic sample within each stratum</td></tr>
-    <tr><td><strong>Allocation Types</strong></td><td><strong>Proportional:</strong> nₕ ∝ Nₕ (stratum size) — <strong>Optimal (Neyman):</strong> nₕ ∝ Nₕ·σₕ (size × variability)</td></tr>
-    <tr><td><strong>Strengths</strong></td><td>Guarantees representation of all subgroups; reduces variance (often substantially); allows subgroup analysis</td></tr>
-    <tr><td><strong>Weaknesses</strong></td><td>Requires prior knowledge of stratification variable; more complex administration</td></tr>
-    <tr><td><strong>Best For</strong></td><td>Heterogeneous populations with known subgroups; comparing groups; ensuring minority representation</td></tr>
+    <tr><td><strong>Selection Mechanism</strong></td><td>Divide population into L non-overlapping strata; conduct independent SRS (or systematic) within each stratum</td></tr>
+    <tr><td><strong>Allocation Types</strong></td><td><strong>Proportional allocation:</strong> nₕ ∝ Nₕ (sample mirrors population composition). <strong>Optimal (Neyman) allocation:</strong> nₕ ∝ Nₕ · σₕ (allocate more sample to strata with higher variability — minimises variance for fixed total n). <strong>Equal allocation:</strong> same n in each stratum (maximises subgroup comparison power). <strong>Cost-optimal allocation:</strong> nₕ ∝ Nₕ · σₕ / √cₕ (accounts for differing per-unit costs across strata)</td></tr>
+    <tr><td><strong>Strengths</strong></td><td>Guarantees representation of all important subgroups; reduces overall variance (often substantially); allows independent estimation and comparison of subgroups; mathematically Var(ȳ_strat) ≤ Var(ȳ_SRS) under proportional allocation</td></tr>
+    <tr><td><strong>Weaknesses</strong></td><td>Requires prior knowledge of the stratification variable for the entire population; more complex administration and weighting; stratification variable must be correlated with the outcome variable to yield gains</td></tr>
+    <tr><td><strong>Best For</strong></td><td>Heterogeneous populations with known subgroups; ensuring representation of minorities or rare categories; comparing subgroups; maximising precision per unit cost</td></tr>
   </tbody>
 </table>
 
-<p><strong>Example:</strong> To estimate average crop yield across a region with three soil types (clay, loam, sand), a researcher stratifies by soil type and samples proportionally. If 50% of farms are on clay, 30% on loam, and 20% on sand, a sample of n = 200 would include 100 clay-farm measurements, 60 loam, and 40 sand. This ensures each soil type is properly represented.</p>
+<p><strong>Example:</strong> The World Bank commissions a survey of household income across a country with three regions: the wealthy capital district (10% of households, high income variability), the industrial mid-belt (30% of households, moderate variability), and the rural south (60% of households, low variability). Under <strong>proportional allocation</strong> with n = 2,000, the capital gets 200, mid-belt 600, rural south 1,200 — mirroring the population. Under <strong>Neyman optimal allocation</strong>, the capital (high variability) gets more than its proportional share and the rural south (low variability) gets less, minimising the overall variance of the income estimate for the same total cost. The gain can be dramatic: Cochran (1977, Ch. 5) showed that optimal allocation can reduce variance by 30–50% compared to SRS in highly heterogeneous populations.</p>
 
-<blockquote>📐 <strong>Why Stratification Beats SRS:</strong> Mathematically, the variance of the stratified mean is always ≤ the variance of the SRS mean when proportional allocation is used. The gain is greatest when strata are internally homogeneous but differ substantially from each other — the classic principle: <em>"maximize between-stratum variance, minimize within-stratum variance"</em> (Cochran, 1977).</blockquote>
+<blockquote>📐 <strong>Why Stratification Beats SRS — The Mathematics:</strong> Let the population have L strata with weights Wₕ = Nₕ/N, means μₕ, and variances σ²ₕ. The variance of the stratified mean under proportional allocation is Var(ȳ_strat) = Σ Wₕ · σ²ₕ / n. The variance of SRS is Var(ȳ_SRS) = σ² / n, where σ² includes <em>both</em> within-stratum and between-stratum variance. The total variance decomposes as: σ² = Σ Wₕ · σ²ₕ + Σ Wₕ · (μₕ − μ)². Since stratification removes the between-stratum component Σ Wₕ · (μₕ − μ)², it follows that Var(ȳ_strat) ≤ Var(ȳ_SRS) <em>always</em>. The gain is greatest when strata are internally homogeneous but differ substantially from one another — the classic principle: « maximise between-stratum variance, minimise within-stratum variance. » Under optimal allocation, the reduction can exceed 50% when strata variances differ markedly (Cochran, 1977, Chapter 5; Neyman, 1934).</blockquote>
 
 <h3>4. Cluster Sampling</h3>
 
-<p><strong>Cluster sampling</strong> divides the population into groups (clusters) — often based on geography — then randomly selects <em>entire clusters</em> and studies all (or a random subsample of) elements within them. It is the method of choice when no sampling frame of individuals exists, but a list of clusters does (Kish, 1965).</p>
+<p><strong>Cluster sampling</strong> divides the population into groups (clusters) — typically based on geography, institutional affiliation, or administrative boundaries — then randomly selects <em>entire clusters</em> and studies all (or a subsample of) elements within them. It is the method of choice when no sampling frame of individuals exists, when the population is geographically dispersed over a vast area, or when reaching sampled individuals is prohibitively expensive without clustering (Kish, 1965). The United Nations, WHO, UNICEF, and virtually every national statistical office rely on cluster sampling for their large-scale surveys. The logic is pragmatic: it is far cheaper to interview 25 households in each of 40 villages than to interview 1,000 households scattered across an entire country, even though the latter would yield higher precision for the same total n.</p>
 
 <table>
   <thead>
     <tr><th>Feature</th><th>Details</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Selection Mechanism</strong></td><td>Randomly select <em>m</em> clusters from <em>M</em> total; study all units in selected clusters (one-stage) or subsample within (two-stage)</td></tr>
-    <tr><td><strong>Strengths</strong></td><td>No need for a frame of individuals; drastically reduces travel costs; practical for large dispersed populations</td></tr>
-    <tr><td><strong>Weaknesses</strong></td><td>Higher sampling error than SRS for the same <em>n</em> (design effect > 1); clusters may be internally homogeneous</td></tr>
-    <tr><td><strong>Best For</strong></td><td>Household surveys, school-based studies, agricultural regions, health surveys in developing countries</td></tr>
+    <tr><td><strong>Selection Mechanism</strong></td><td>Randomly select <em>m</em> clusters from <em>M</em> total clusters; study all units in selected clusters (<strong>one-stage</strong>) or draw a random subsample within each (<strong>two-stage</strong>)</td></tr>
+    <tr><td><strong>Strengths</strong></td><td>No frame of individuals needed — only a list of clusters; drastically reduces travel and administrative costs; practical for large, dispersed populations; enables face-to-face data collection in selected areas</td></tr>
+    <tr><td><strong>Weaknesses</strong></td><td>Higher sampling error than SRS for the same total n (design effect > 1); clusters tend to be internally homogeneous (people in the same village share economic conditions, students in the same school share teachers), so each additional unit within a cluster adds less new information than an independently selected unit; variance estimation is more complex</td></tr>
+    <tr><td><strong>Best For</strong></td><td>National household surveys, school-based studies, vaccination coverage, health surveys in developing countries, ecological surveys across large territories, any situation where individual-level frames do not exist</td></tr>
   </tbody>
 </table>
 
-<p><strong>Example:</strong> WHO needs to estimate vaccination coverage in a country with 10,000 villages but no list of individual children. They randomly select 30 villages (clusters), then survey every child in each selected village. This is a classic <strong>one-stage cluster sample</strong>.</p>
+<p><strong>Example:</strong> WHO's <strong>Expanded Programme on Immunization (EPI)</strong> coverage surveys use a classic <strong>30×7 two-stage cluster design</strong>: 30 clusters (villages/wards) are selected with probability proportional to size (PPS), then 7 children aged 12–23 months are sampled in each cluster, yielding n = 210 children per survey. This design, developed by Henderson and Sundaresan (1982) and used in over 100 countries across Africa, Asia, and Latin America, balances statistical validity against the logistical reality of fieldwork in resource-limited settings — a team of two can complete one cluster per day. The intraclass correlation coefficient (ICC or ρ) — measuring how similar individuals within clusters are — typically ranges from 0.02 to 0.05 for vaccination coverage, yielding design effects of 1.1–1.3 (Katz et al., 2012).</p>
 
-<blockquote>🔄 <strong>Stratified vs. Cluster — The Mirror Image:</strong> Stratification selects <em>some elements from every group</em>; clustering selects <em>every element from some groups</em>. They are opposite strategies: stratification works best when groups are internally homogeneous (reducing variance), while clustering works best when each cluster mirrors the population's diversity (Lohr, 2022).</blockquote>
+<blockquote>🔄 <strong>Stratified vs. Cluster — The Mirror Image:</strong> Stratification samples <em>some elements from every group</em>; clustering samples <em>every element from some groups</em>. They are mathematically opposite strategies. Stratification works best when groups are internally homogeneous and differ from each other (separating sources of variability); clustering works best when each cluster is internally heterogeneous and mirrors the population's diversity (so that a few clusters capture the full range). In practice, stratification <em>improves</em> precision relative to SRS (DEFF < 1), while clustering <em>reduces</em> it (DEFF > 1). Mathematically, the design effect for cluster sampling is DEFF ≈ 1 + (m̄ − 1) · ρ, where m̄ is the average cluster size and ρ is the intraclass correlation coefficient. When ρ = 0 (elements within clusters are no more similar than random population members), DEFF = 1 and clustering costs nothing in precision. When ρ is high, DEFF rises steeply. This is why advanced surveys combine both approaches — stratify first, then cluster within strata — capturing the benefits of each (Lohr, 2022; Kish, 1965).</blockquote>
 
-<h3>Comparison of Probability Methods</h3>
+<h3>Comparison of Probability Sampling Methods</h3>
 
 <table>
   <thead>
-    <tr><th>Method</th><th>Frame Needed?</th><th>Precision vs SRS</th><th>Cost</th><th>Complexity</th></tr>
+    <tr><th>Method</th><th>Frame Required</th><th>Precision vs. SRS</th><th>Cost Efficiency</th><th>Design Complexity</th></tr>
   </thead>
   <tbody>
-    <tr><td>🎯 Simple Random</td><td>Complete list</td><td>Baseline</td><td>Can be high</td><td>Low</td></tr>
-    <tr><td>📏 Systematic</td><td>Ordered list</td><td>≈ SRS (often better)</td><td>Low</td><td>Very Low</td></tr>
-    <tr><td>📊 Stratified</td><td>List + strata info</td><td>Better (often much better)</td><td>Moderate</td><td>Moderate</td></tr>
-    <tr><td>🏘️ Cluster</td><td>List of clusters only</td><td>Worse (design effect)</td><td>Low</td><td>Moderate–High</td></tr>
+    <tr><td>🎯 Simple Random</td><td>Complete individual list</td><td>Baseline (DEFF = 1.0)</td><td>Can be high (dispersed)</td><td>Low</td></tr>
+    <tr><td>📏 Systematic</td><td>Ordered list</td><td>≈ SRS (often slightly better due to implicit stratification)</td><td>Low (efficient fieldwork)</td><td>Very Low</td></tr>
+    <tr><td>📊 Stratified</td><td>List + strata classification</td><td>Better (DEFF < 1)</td><td>Moderate</td><td>Moderate</td></tr>
+    <tr><td>🏘️ Cluster</td><td>List of clusters only</td><td>Worse (DEFF typically 1.5–3.0)</td><td>Much lower (reduced travel)</td><td>Moderate–High</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>📋 Non-Probability Sampling Methods</h2>
+<h2>📋 Part III — Non-Probability Sampling Methods</h2>
 
-<p>In non-probability sampling, the probability of selecting any particular element is <strong>unknown</strong>. This means we cannot formally quantify sampling error or construct valid confidence intervals. However, non-probability methods are indispensable in situations where probability sampling is impractical, impossible, or unnecessary — particularly in exploratory, qualitative, and pilot research (Etikan et al., 2016).</p>
+<p>In non-probability sampling, the probability of selecting any particular element is <strong>unknown or undefined</strong>. This means we cannot formally quantify sampling error, construct valid confidence intervals, or claim statistical generalisability. Yet non-probability methods are <strong>indispensable</strong> in situations where probability sampling is impractical, impossible, or unnecessary — particularly in exploratory research, qualitative inquiry, pilot studies, and investigations of hard-to-reach populations (Etikan et al., 2016; Patton, 2015). The key ethical and scientific obligation is <em>transparency</em>: acknowledge the method and its limitations rather than pretending a convenience sample carries the inferential weight of a probability design. A troubling meta-analysis by Heckman (1979) showed that self-selection into studies can bias effect estimates by 50–100% — a reminder that the consequences of ignoring selection mechanisms are not merely theoretical.</p>
 
 <table>
   <thead>
-    <tr><th>Method</th><th>How It Works</th><th>Best For</th><th>Limitation</th></tr>
+    <tr><th>Method</th><th>How It Works</th><th>Best For</th><th>Key Limitation</th></tr>
   </thead>
   <tbody>
-    <tr><td>🛒 <strong>Convenience</strong></td><td>Select the most accessible, readily available elements</td><td>Pilot studies, preliminary testing, student research</td><td>High risk of unrepresentative sample; weakest generalizability</td></tr>
-    <tr><td>🎯 <strong>Purposive (Judgmental)</strong></td><td>Researcher deliberately selects elements based on expertise and judgment</td><td>Qualitative research, expert panels, case studies</td><td>Subjective; depends on researcher's knowledge</td></tr>
-    <tr><td>📊 <strong>Quota</strong></td><td>Set quotas matching known population proportions, then fill each quota non-randomly</td><td>Market research, opinion polls when random access is impossible</td><td>Non-random selection within quotas can introduce hidden bias</td></tr>
-    <tr><td>❄️ <strong>Snowball</strong></td><td>Existing participants recruit new participants from their networks</td><td>Hard-to-reach populations (rare diseases, illegal behaviours, marginalized groups)</td><td>Network homophily — participants tend to recruit similar people</td></tr>
-    <tr><td>🔄 <strong>Consecutive</strong></td><td>Every element that meets inclusion criteria is selected until the target sample size is reached</td><td>Clinical studies, patient recruitment over a time period</td><td>May not represent the full population if patterns change over time</td></tr>
+    <tr><td>🛒 <strong>Convenience</strong></td><td>Select the most accessible, readily available elements — whoever is easiest to recruit</td><td>Pilot studies, preliminary testing, instrument validation, student classroom projects</td><td>Highest risk of unrepresentative sample; weakest generalisability; the « sample of convenience » is the most criticised design in peer review — yet remains the most common in published psychology research (Henrich et al., 2010)</td></tr>
+    <tr><td>🎯 <strong>Purposive (Judgmental)</strong></td><td>Researcher deliberately selects elements based on expertise, judgment, and the study's theoretical framework</td><td>Qualitative research (Patton's « information-rich cases »), expert panels, extreme/deviant case studies, critical case sampling</td><td>Entirely dependent on researcher's knowledge and potential biases; not generalisable in the statistical sense; strength lies in depth, not breadth</td></tr>
+    <tr><td>📊 <strong>Quota</strong></td><td>Set quotas matching known population proportions (e.g., 52% female, 48% male; 30% urban, 70% rural), then fill each quota through non-random selection</td><td>Market research, opinion polls when random access is impossible, rapid assessments, exit polls</td><td>Looks representative on the stratification variables but selection within quotas can introduce substantial hidden bias on unmeasured variables — the « quota fulfillment problem »</td></tr>
+    <tr><td>❄️ <strong>Snowball (Chain Referral)</strong></td><td>Initial participants recruit further participants from their social networks; the sample grows like a rolling snowball</td><td>Hard-to-reach populations: people living with HIV, undocumented migrants, drug users, homeless individuals, sex workers, rare genetic conditions</td><td>Network homophily — participants tend to recruit people similar to themselves, creating homogeneous clusters that may not represent the broader population. Heckathorn (1997) developed Respondent-Driven Sampling (RDS) to partially address this through mathematical weighting</td></tr>
+    <tr><td>🔄 <strong>Consecutive</strong></td><td>Every individual meeting inclusion criteria is selected sequentially until the target sample size is reached</td><td>Clinical studies, hospital-based research, patient recruitment over a defined time window</td><td>Vulnerable to temporal bias — patients presenting in winter may differ systematically from those in summer; the sample window may not capture the full population diversity</td></tr>
   </tbody>
 </table>
 
-<blockquote>⚖️ <strong>When is non-probability acceptable?</strong> Non-probability samples are legitimate when: (a) the goal is exploration or theory-building rather than generalization; (b) the population is hidden or hard to enumerate (e.g., undocumented workers); (c) resources do not permit probability sampling; or (d) you are running a pilot test before a larger study. The key is to be <em>transparent</em> about the method and its limitations (Taherdoost, 2016).</blockquote>
+<blockquote>⚖️ <strong>When is non-probability sampling legitimate?</strong> (a) When the goal is <em>exploration or theory-building</em> rather than population generalisation — qualitative research seeks transferability, not statistical representativeness (Patton, 2015). (b) When the population is <em>hidden or impossible to enumerate</em> — you cannot construct a sampling frame of undocumented workers or people who inject drugs; UNAIDS estimates of HIV prevalence among key populations rely almost entirely on snowball and RDS methods. (c) When resources <em>do not permit</em> probability sampling — a graduate student's thesis budget may not stretch to a national random sample. (d) When you are running a <em>pilot study</em> to refine instruments before a larger probability-based investigation. (e) When studying <em>rare or extreme cases</em> — studying all known cases of a rare disease is purposive sampling, and it may be the only option. In all cases, report the method transparently and refrain from language implying statistical generalisability (Taherdoost, 2016).</blockquote>
 
 <hr>
 
-<h2>⚠️ Sampling Bias: The Silent Threat</h2>
+<h2>⚠️ Part IV — Sampling Bias: The Silent Destroyer of Validity</h2>
 
-<p>Sampling bias occurs when the sampling method systematically favours certain members of the population over others, producing a sample that does not accurately represent the target population (Groves et al., 2009). Unlike sampling <em>error</em> (which decreases with larger samples), sampling <em>bias</em> persists no matter how large the sample — it is a systematic, not random, distortion.</p>
+<p>Sampling bias occurs when the sampling procedure <strong>systematically favours</strong> certain members of the population over others, producing a sample that does not accurately represent the target population (Groves et al., 2009). Unlike sampling <em>error</em> — the natural, random fluctuation that decreases as sample size increases — sampling <em>bias</em> is a systematic distortion that <strong>persists regardless of sample size</strong>. You cannot fix a biased method by collecting more data; you can only fix it by changing the method. As the statistician Frederick Mosteller put it: « It is easy to lie with statistics, but easier to lie without them » — and sampling bias is the primary mechanism through which data deceives (Mosteller, 1979).</p>
 
 <h3>Major Types of Sampling Bias</h3>
 
@@ -166,86 +172,89 @@
     <tr><th>Type of Bias</th><th>What Happens</th><th>Classic Example</th><th>Prevention</th></tr>
   </thead>
   <tbody>
-    <tr><td>📉 <strong>Undercoverage</strong></td><td>Some population segments are excluded from the sampling frame</td><td>1936 <em>Literary Digest</em> poll: telephone/car registries excluded poorer voters, predicting Landon over Roosevelt (Squire, 1988)</td><td>Use multiple, up-to-date frames; verify frame completeness</td></tr>
-    <tr><td>🚫 <strong>Non-response</strong></td><td>Selected individuals refuse or fail to respond; non-respondents differ systematically from respondents</td><td>Mail surveys: response rates often below 30%; those with strong opinions are overrepresented</td><td>Follow-up reminders; incentives; callbacks; compare respondent demographics to population</td></tr>
-    <tr><td>🙋 <strong>Self-selection (Voluntary Response)</strong></td><td>Participants choose themselves into the study</td><td>Online polls, call-in radio surveys overrepresent people with extreme views</td><td>Use random selection rather than voluntary participation</td></tr>
-    <tr><td>🏆 <strong>Survivorship</strong></td><td>Only "surviving" elements are observed; failures are invisible</td><td>Stock fund performance studies: failed funds are removed, inflating average returns (Malkiel, 1995)</td><td>Track all elements from the start; include those that drop out</td></tr>
-    <tr><td>🏥 <strong>Healthy User</strong></td><td>Those willing to participate are healthier/more active than the population</td><td>Exercise studies recruit active people; drug trials exclude the sickest patients</td><td>Broader inclusion criteria; community-based recruitment</td></tr>
+    <tr><td>📉 <strong>Undercoverage (Selection Bias)</strong></td><td>Some population segments are absent from the sampling frame, so they have zero probability of selection</td><td><em>Literary Digest</em> 1936: telephone/car registries excluded lower-income voters, predicting Landon over Roosevelt despite 2.4 million responses (Squire, 1988). More recently: early COVID-19 seroprevalence studies recruited via social media, missing elderly and digitally excluded populations</td><td>Use multiple overlapping frames (dual-frame designs); verify frame completeness against external benchmarks; explicitly document who is excluded</td></tr>
+    <tr><td>🚫 <strong>Non-response Bias</strong></td><td>Selected individuals refuse or fail to respond, and non-respondents differ systematically from respondents on the variable of interest</td><td>The U.S. National Health Interview Survey found that non-respondents had significantly worse health outcomes than respondents — meaning survey-based health estimates were biased optimistically (Groves &amp; Peytcheva, 2008). Survey response rates have plummeted globally: Pew Research Center reports that U.S. telephone survey response rates fell from 36% in 1997 to 6% in 2018</td><td>Multiple follow-ups (3+ contact attempts); incentives; mixed-mode (mail + phone + web); compare respondent demographics to population; conduct non-response analysis; use propensity weighting</td></tr>
+    <tr><td>🙋 <strong>Voluntary Response (Self-Selection)</strong></td><td>Participants choose themselves into the study; those with strong opinions or extreme experiences are overrepresented</td><td>Online product reviews: 1-star and 5-star ratings dominate because moderately satisfied customers rarely bother (the « J-shaped distribution » of voluntary reviews). Call-in radio polls and online petitions suffer the same distortion</td><td>Use random selection rather than opt-in; if voluntary, acknowledge the bias explicitly and avoid generalisation</td></tr>
+    <tr><td>🏆 <strong>Survivorship Bias</strong></td><td>Only « surviving » elements are observed; those that failed, dropped out, or disappeared are invisible to the researcher</td><td>During WWII, Abraham Wald demonstrated that bullet holes on <em>returning</em> aircraft showed where planes could survive damage — the missing data (planes that did <em>not</em> return) indicated the truly vulnerable areas (Mangel &amp; Samaniego, 1984). In finance, mutual fund performance studies that exclude closed funds inflate average returns by 0.9–1.6% annually (Malkiel, 1995). In entrepreneurship, studying only surviving firms overstates the profitability and wisdom of business strategies</td><td>Track all elements from the beginning; include dropouts and failures in analysis; design studies prospectively rather than retrospectively; in meta-analysis, search for unpublished negative results (the « file drawer problem »)</td></tr>
+    <tr><td>🏥 <strong>Healthy User / Volunteer Bias</strong></td><td>Those willing to participate in research are systematically healthier, more educated, or more motivated than the population</td><td>The « healthy volunteer effect » in epidemiology: cohort study volunteers have 10–60% lower mortality than the general population, regardless of the intervention being studied (Froom et al., 1999). The UK Biobank, despite 500,000 participants, is not representative of the UK population — participants are wealthier, better educated, and healthier than average</td><td>Broader inclusion criteria; community-based recruitment; population-based registries; sensitivity analyses comparing volunteers to population benchmarks</td></tr>
+    <tr><td>🕐 <strong>Temporal Bias</strong></td><td>Sampling occurs at a time that is not representative of the full temporal range of the phenomenon</td><td>Surveying tourist satisfaction only during peak season overestimates positive experiences; measuring river pollution only during dry season misses the seasonal flush of agricultural runoff; studying emergency department usage only on weekdays misses the weekend pattern</td><td>Sample across multiple time points; stratify by season/period; use longitudinal or repeated cross-sectional designs</td></tr>
   </tbody>
 </table>
 
-<blockquote>🔑 <strong>The Cardinal Rule:</strong> <em>Increasing sample size reduces sampling error but does NOT reduce sampling bias.</em> The <em>Literary Digest</em> polled 2.4 million people yet failed catastrophically because the bias was built into the method. Meanwhile, Gallup's 50,000-person <em>random</em> sample predicted the outcome accurately (Groves et al., 2009). Quality of method always trumps quantity of observations.</blockquote>
+<blockquote>🔑 <strong>The Cardinal Rule:</strong> <em>Increasing sample size reduces sampling error but does NOT reduce sampling bias.</em> The <em>Literary Digest</em> polled 2.4 million people yet failed catastrophically because the bias was structural. Gallup's 50,000-person <em>random</em> sample predicted the election accurately. Abraham Wald's insight about bullet holes on surviving aircraft was not discovered by examining more planes — it was discovered by asking: « What about the planes that are <em>missing</em>? » In every domain, <strong>the quality of the method trumps the quantity of observations</strong> (Groves et al., 2009). Or as Deming (1950, p. 26) put it with characteristic bluntness: « No amount of arithmetic can make up for a biased sample. »</blockquote>
 
 <hr>
 
-<h2>🔬 Sampling Error & the Sampling Distribution</h2>
+<h2>🔬 Part V — Sampling Error and the Sampling Distribution</h2>
 
-<p>Even with a perfectly designed probability sample, the sample statistic (e.g., x̄) will almost never <em>exactly</em> equal the population parameter (μ). The difference between them is called the <strong>sampling error</strong>. This is not a "mistake" — it is the inherent, unavoidable variability that arises from studying a subset rather than the whole (Moore et al., 2021).</p>
+<p>Even with a perfectly designed probability sample, the sample statistic (e.g., x̄) will almost never <em>exactly</em> equal the population parameter (μ). The difference — <strong>sampling error</strong> — is not a « mistake » but an inherent, unavoidable consequence of observing a part rather than the whole. What makes sampling error manageable — and what makes all of inferential statistics possible — is that its behaviour is <em>predictable</em> (Moore et al., 2021). This predictability is not an accident of nature but a mathematical <em>theorem</em> — and one of the most beautiful results in all of science.</p>
 
-<p>The behaviour of a statistic across all possible samples is described by its <strong>sampling distribution</strong>. For the sample mean:</p>
+<p>Imagine drawing every possible sample of size n from a population, computing x̄ for each, and plotting the results. The resulting distribution is the <strong>sampling distribution of the mean</strong> — the theoretical foundation of confidence intervals and hypothesis tests:</p>
 
 <table>
   <thead>
     <tr><th>Property</th><th>Formula</th><th>Interpretation</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Mean of sampling distribution</strong></td><td>E(x̄) = μ</td><td>The sample mean is an <em>unbiased</em> estimator of the population mean</td></tr>
-    <tr><td><strong>Standard error (SE)</strong></td><td>SE = σ / √n</td><td>The standard deviation of x̄ across repeated samples; measures precision</td></tr>
-    <tr><td><strong>Key implication</strong></td><td>SE ↓ as n ↑</td><td>Larger samples → more precise estimates (the √n law of diminishing returns)</td></tr>
+    <tr><td><strong>Mean of sampling distribution</strong></td><td>E(x̄) = μ</td><td>The sample mean is an <em>unbiased</em> estimator: its average across all possible samples equals the population mean — regardless of the population's shape</td></tr>
+    <tr><td><strong>Standard Error (SE)</strong></td><td>SE(x̄) = σ / √n</td><td>The standard deviation of x̄ across repeated samples; quantifies the precision of the estimate; the « margin of uncertainty » — crucially, it depends on √n, not n itself</td></tr>
+    <tr><td><strong>Key implication</strong></td><td>SE ↓ as n ↑</td><td>Larger samples → smaller standard error → more precise estimates — but with <strong>diminishing returns</strong> governed by the √n denominator</td></tr>
+    <tr><td><strong>FPC adjustment</strong></td><td>SE = (σ/√n) · √((N−n)/(N−1))</td><td>When sampling more than ~5% of the population, the finite population correction (FPC) reduces SE — because you are covering a meaningful fraction of all elements. At n = N (a census), SE = 0</td></tr>
   </tbody>
 </table>
 
-<p>The <strong>Central Limit Theorem</strong> guarantees that for sufficiently large <em>n</em>, the sampling distribution of x̄ is approximately normal regardless of the shape of the original population — which is why normal-based inference works so broadly (Agresti & Franklin, 2018).</p>
+<p>The <strong>Central Limit Theorem (CLT)</strong> — one of the most remarkable results in all of mathematics — guarantees that for sufficiently large <em>n</em> (conventionally n ≥ 30 for moderately skewed populations, though heavily skewed distributions may require n ≥ 50–100), the sampling distribution of x̄ is approximately <em>normal</em> regardless of the shape of the original population distribution. The theorem was first stated by Abraham de Moivre in 1733, proved rigorously by Laplace in 1810, and generalised by Lindeberg and Lévy in the early twentieth century. This is why normal-based inference (z-tests, t-tests, confidence intervals) works so broadly across different types of data — the CLT provides a universal bridge from the unknown population shape to the known, tractable normal distribution (Agresti &amp; Franklin, 2018; Rice, 2007).</p>
 
-<blockquote>📈 <strong>The √n Rule in Practice:</strong> To halve the standard error, you must <em>quadruple</em> the sample size. Going from n = 100 to n = 400 cuts SE in half. Going from n = 400 to n = 1,600 halves it again. This diminishing-returns pattern explains why very large samples yield only marginally better precision — and why smart sampling design (stratification, optimal allocation) is more cost-effective than brute-force sample enlargement.</blockquote>
+<blockquote>📈 <strong>The √n Rule in Practice:</strong> To halve the standard error, you must <em>quadruple</em> the sample size. Going from n = 100 to n = 400 cuts SE by 50%. Going from n = 400 to n = 1,600 halves it again. Going from n = 1,600 to n = 6,400 halves it yet again. This relentless pattern of diminishing returns explains why national polling organisations typically survey 1,000–1,500 people rather than 100,000 — the extra precision from a 100-fold increase in sample size is not worth the 100-fold increase in cost. The Gallup World Poll surveys approximately 1,000 adults per country in over 140 nations; the Eurobarometer uses ~1,000 per EU member state. <strong>Smart design (stratification, optimal allocation) is always more cost-effective than brute-force sample enlargement.</strong></blockquote>
 
 <hr>
 
-<h2>📐 Sample Size Determination</h2>
+<h2>📐 Part VI — Sample Size Determination</h2>
 
-<p>One of the most important practical questions in research is: <em>"How many observations do I need?"</em> Too few observations → insufficient precision; too many → wasted resources. Sample size determination balances these competing demands (Cochran, 1977).</p>
+<p>One of the most important practical questions in any study is: « How many observations do I need? » Too few → wide confidence intervals, underpowered hypothesis tests, inconclusive results. Too many → wasted resources, ethical concerns (in clinical research, exposing more patients than necessary to experimental treatments), and logistical impracticability. Sample size determination is the art of balancing these competing demands (Cochran, 1977; Lenth, 2001). As Cohen (1992) demonstrated in his influential paper on statistical power, a disturbingly high proportion of published studies are underpowered — meaning they had insufficient sample sizes to detect real effects, contributing to the « replication crisis » in science.</p>
 
 <h3>Cochran's Formula — Estimating a Proportion</h3>
 
-<p>The most widely used formula for estimating sample size when measuring a proportion is Cochran's (1977) formula:</p>
+<p>The most widely used formula for estimating the required sample size when measuring a proportion (e.g., « What percentage of the population supports policy X? ») is Cochran's (1977) formula for large populations:</p>
 
 <table>
   <thead>
     <tr><th>Component</th><th>Symbol</th><th>Description</th><th>Typical Value</th></tr>
   </thead>
   <tbody>
-    <tr><td>Z-value</td><td>z</td><td>Critical value for desired confidence level</td><td>1.96 for 95% CL</td></tr>
-    <tr><td>Estimated proportion</td><td>p</td><td>Expected prevalence of the attribute</td><td>0.5 (maximum variability, most conservative)</td></tr>
-    <tr><td>Margin of error</td><td>e</td><td>Acceptable precision (half-width of CI)</td><td>0.05 (±5%)</td></tr>
+    <tr><td>Z-value</td><td>z</td><td>Critical value for desired confidence level</td><td>1.645 for 90% CL; 1.96 for 95% CL; 2.576 for 99% CL</td></tr>
+    <tr><td>Estimated proportion</td><td>p</td><td>Expected prevalence of the attribute of interest</td><td>0.5 yields maximum variability (most conservative); use pilot data if available</td></tr>
+    <tr><td>Complement</td><td>q = 1 − p</td><td>Probability of not having the attribute</td><td>0.5 if p = 0.5</td></tr>
+    <tr><td>Margin of error</td><td>e</td><td>Acceptable half-width of the confidence interval</td><td>0.05 (± 5%) is the most common choice; 0.03 for higher-precision surveys</td></tr>
   </tbody>
 </table>
 
 <p style="text-align:center;"><strong>n₀ = z² · p · (1 − p) / e²</strong></p>
 
-<p><strong>Worked Example:</strong> With 95% confidence (z = 1.96), maximum variability (p = 0.5), and ±5% margin of error:</p>
+<p><strong>Worked Example:</strong> A public health researcher wants to estimate the proportion of adults in a city who have received a COVID-19 booster vaccine, with 95% confidence and ±5% margin of error. No prior estimate exists, so she uses p = 0.5 (the most conservative assumption, yielding the largest required n):</p>
 <p style="text-align:center;"><strong>n₀ = (1.96)² × 0.5 × 0.5 / (0.05)² = 3.8416 × 0.25 / 0.0025 = 384.16 ≈ 385</strong></p>
 
 <h3>Finite Population Correction (FPC)</h3>
 
-<p>When the population is small (roughly n₀ > 5% of N), the above formula overestimates the needed sample. The correction is:</p>
+<p>When the population is small and the initial n₀ exceeds approximately 5% of N, Cochran's formula overestimates the required sample. The finite population correction adjusts for this:</p>
 
 <p style="text-align:center;"><strong>n = n₀ / (1 + (n₀ − 1) / N)</strong></p>
 
-<p><strong>Example:</strong> For N = 600 students: n = 385 / (1 + 384/600) = 385 / 1.64 ≈ 235. You need only 235 students instead of 385.</p>
+<p><strong>Example:</strong> If the city has only N = 600 eligible adults (perhaps a small island community or a single workplace): n = 385 / (1 + 384/600) = 385 / 1.64 ≈ 235. You need only 235 observations instead of 385 — a 39% reduction — because you are sampling a substantial fraction of the entire population.</p>
 
 <h3>Sample Size for Estimating a Mean</h3>
 
-<p>When the target is a population mean rather than a proportion:</p>
+<p>When the target is a population mean rather than a proportion (e.g., « What is the average crop yield in kg/ha? »), the formula is:</p>
 
 <p style="text-align:center;"><strong>n = (z · σ / e)²</strong></p>
 
-<p>where σ is the population standard deviation (estimated from a pilot study or literature) and e is the desired margin of error in the same units as the variable.</p>
+<p>where σ is the population standard deviation (estimated from a pilot study, literature review, or expert judgment) and e is the desired margin of error expressed in the same units as the variable. <strong>Example:</strong> To estimate mean rice yield with e = ±50 kg/ha, σ ≈ 300 kg/ha (from a pilot study in the Mekong Delta), and 95% confidence: n = (1.96 × 300 / 50)² = (11.76)² ≈ 139 plots.</p>
 
-<h3>Quick Reference: Required Sample Sizes</h3>
+<h3>Quick Reference: Required Sample Sizes for Proportions (Large Populations)</h3>
 
 <table>
   <thead>
-    <tr><th>Confidence Level</th><th>Margin of Error</th><th>p = 0.5</th><th>p = 0.3</th><th>p = 0.1</th></tr>
+    <tr><th>Confidence Level</th><th>Margin of Error</th><th>p = 0.5 (max)</th><th>p = 0.3</th><th>p = 0.1</th></tr>
   </thead>
   <tbody>
     <tr><td>90%</td><td>±5%</td><td>271</td><td>228</td><td>98</td></tr>
@@ -256,93 +265,104 @@
   </tbody>
 </table>
 
-<blockquote>🎯 <strong>Practical Insight:</strong> Notice that moving from ±5% to ±1% precision increases the required sample by more than 40×. This is the √n law at work — precision gains are costly. In practice, most researchers accept ±5% error at 95% confidence, which requires approximately <strong>385 observations</strong> for large populations — one of the most-cited numbers in all of survey research (Cochran, 1977).</blockquote>
+<blockquote>🎯 <strong>Practical Insight:</strong> Notice that tightening from ±5% to ±1% precision increases the required sample by <em>more than 40-fold</em> — this is the √n law of diminishing returns made concrete. In practice, most surveys accept ±3–5% error at 95% confidence, requiring 385–1,068 observations for large populations. This is why the number <strong>n ≈ 385</strong> appears ubiquitously in research proposals worldwide — it is Cochran's formula with the most conservative assumptions (p = 0.5, z = 1.96, e = 0.05) and has become a « magic number » in the survey literature (Cochran, 1977; Bartlett et al., 2001). For sample size calculations involving <em>hypothesis testing</em> rather than estimation, <strong>power analysis</strong> (Cohen, 1988) is the appropriate framework — balancing the probability of Type I error (α), Type II error (β), effect size, and sample size.</blockquote>
 
 <hr>
 
-<h2>🛠️ Multi-Stage & Complex Sampling Designs</h2>
+<h2>🛠️ Part VII — Multi-Stage and Complex Sampling Designs</h2>
 
-<p>Real-world surveys rarely use a single method. Instead, they combine techniques into <strong>multi-stage designs</strong> that balance cost, precision, and feasibility (Kish, 1965).</p>
+<p>Real-world surveys — especially large national and international studies — rarely use a single sampling method in isolation. Instead, they combine techniques into <strong>multi-stage designs</strong> that balance cost, precision, logistical feasibility, and the available frame infrastructure. The Demographic and Health Surveys (DHS), the World Health Survey, the Programme for International Student Assessment (PISA), the Living Standards Measurement Study (LSMS), the Multiple Indicator Cluster Surveys (MICS), and virtually every national census supplement all employ multi-stage stratified cluster designs (Kish, 1965; Lohr, 2022).</p>
 
 <table>
   <thead>
-    <tr><th>Design</th><th>Description</th><th>Example</th></tr>
+    <tr><th>Design</th><th>Description</th><th>Real-World Example</th></tr>
   </thead>
   <tbody>
-    <tr><td>📊 <strong>Two-Stage Cluster</strong></td><td>Stage 1: randomly select clusters; Stage 2: randomly sample <em>within</em> selected clusters</td><td>Select 30 schools, then sample 25 students per school</td></tr>
-    <tr><td>🔗 <strong>Stratified Cluster</strong></td><td>Stratify the population, then apply cluster sampling within each stratum</td><td>Stratify by urban/rural, then sample villages within each</td></tr>
-    <tr><td>📐 <strong>PPS (Probability Proportional to Size)</strong></td><td>Clusters are selected with probability proportional to their size, ensuring larger clusters are more likely to be chosen</td><td>WHO Expanded Programme on Immunization uses PPS in 30×7 cluster sampling</td></tr>
-    <tr><td>🔄 <strong>Double (Two-Phase) Sampling</strong></td><td>Phase 1: cheap measurement on large sample to classify; Phase 2: expensive measurement on subsample</td><td>Screen 10,000 soil samples by colour, then lab-analyze 500 selected ones</td></tr>
+    <tr><td>📊 <strong>Two-Stage Cluster</strong></td><td>Stage 1: randomly select clusters (primary sampling units — PSUs); Stage 2: randomly select individuals within chosen clusters</td><td>DHS surveys in 90+ countries: Stage 1 selects ~400 census enumeration areas; Stage 2 selects ~25 households per area, yielding n ≈ 10,000 households — the gold standard for health and demographic data in low- and middle-income countries</td></tr>
+    <tr><td>🔗 <strong>Stratified Cluster</strong></td><td>First stratify the population (e.g., by urban/rural, region, or socioeconomic zone), then apply cluster sampling independently within each stratum</td><td>PISA (OECD): countries are stratified by region and school type; within each stratum, schools (clusters) are selected with PPS; 35 students are randomly sampled within each school — covering 600,000+ students in 80+ countries</td></tr>
+    <tr><td>📐 <strong>PPS (Probability Proportional to Size)</strong></td><td>Clusters are selected with probability proportional to their population size — larger clusters have proportionally higher selection probability, giving each individual approximately equal overall probability</td><td>WHO EPI 30×7 design: 30 clusters selected PPS from census data, 7 children per cluster — used in 100+ countries since 1978 (Henderson &amp; Sundaresan, 1982). Updated to 30×14 in WHO's revised 2015 protocol</td></tr>
+    <tr><td>🔄 <strong>Double (Two-Phase) Sampling</strong></td><td>Phase 1: inexpensive measurement on a large sample to classify or screen; Phase 2: expensive, detailed measurement on a stratified subsample selected from Phase 1 results</td><td>Epidemiological screening: Phase 1 administers a brief depression questionnaire (PHQ-9) to 10,000 adults; Phase 2 conducts full clinical diagnostic interviews with 500 selected by questionnaire score strata — enabling precise prevalence estimation at a fraction of the cost of interviewing all 10,000</td></tr>
   </tbody>
 </table>
 
-<blockquote>⚙️ <strong>Design Effect (DEFF):</strong> Complex designs produce different precision than SRS. The <em>design effect</em> is the ratio DEFF = Var(complex) / Var(SRS). For cluster sampling, DEFF is typically 1.5–3.0, meaning you need 1.5–3× more observations to achieve the same precision as SRS. For stratified sampling, DEFF < 1, meaning you actually need <em>fewer</em> observations — one of stratification's great advantages (Kish, 1965).</blockquote>
+<blockquote>⚙️ <strong>Design Effect (DEFF):</strong> Complex designs produce different precision than the same number of observations under SRS. The <em>design effect</em> is defined as DEFF = Var(complex design) / Var(SRS with same n). For cluster sampling, DEFF is typically 1.5–3.0 (and sometimes higher in highly homogeneous clusters), meaning you need 1.5–3× more observations to achieve SRS-equivalent precision — the « cost » of the administrative convenience of clustering. For well-designed stratified sampling, DEFF < 1, meaning you actually need <em>fewer</em> observations than SRS — the « reward » of exploiting population structure. The effective sample size is n_eff = n / DEFF. Survey analysts who ignore the design effect will underestimate standard errors and produce falsely narrow confidence intervals — a critical methodological error flagged by Kish (1965) and present in every survey methods textbook since. Software packages like Stata (<em>svy:</em> commands), R (<em>survey</em> package), and SPSS Complex Samples module exist specifically to handle design effects correctly (Lohr, 2022).</blockquote>
 
 <hr>
 
-<h2>🌾 Sampling in Agricultural & Biological Research</h2>
+<h2>🌾 Part VIII — Sampling in Practice: Domain Applications</h2>
 
-<p>Sampling takes on special challenges in the life sciences, where populations are often spatially structured, temporally variable, and impractical to enumerate (Scheiner & Gurevitch, 2001).</p>
+<p>Sampling theory is universal, but its application requires domain-specific knowledge. The choice of design, frame, and unit depends on the practical realities of the field — spatial structure in ecology, ethical constraints in medicine, logistical challenges in developing-country surveys, and production workflows in industry (Scheiner &amp; Gurevitch, 2001; Thompson, 2012). The following table illustrates how the same fundamental principles adapt to radically different contexts:</p>
 
 <table>
   <thead>
-    <tr><th>Application</th><th>Population</th><th>Recommended Design</th><th>Why</th></tr>
+    <tr><th>Domain</th><th>Typical Population</th><th>Recommended Design</th><th>Rationale</th></tr>
   </thead>
   <tbody>
-    <tr><td>🌾 Crop yield estimation</td><td>All plots in a region</td><td>Stratified by soil type or irrigation</td><td>High between-strata variability in yield</td></tr>
-    <tr><td>🐛 Pest monitoring</td><td>Insects in a field</td><td>Systematic grid with random start</td><td>Efficient spatial coverage; detects aggregation</td></tr>
-    <tr><td>🧫 Soil microbiology</td><td>Microorganisms per gram</td><td>Stratified by depth and land use</td><td>Microbial communities vary drastically with depth</td></tr>
-    <tr><td>🌲 Forest inventory</td><td>Trees in a national forest</td><td>Two-stage: select plots, then measure trees</td><td>No complete tree census exists; plots reduce cost</td></tr>
-    <tr><td>🐄 Livestock health</td><td>Herds in a province</td><td>Cluster sampling of herds</td><td>Frame of herds exists, but not of individual animals</td></tr>
-    <tr><td>💧 Water quality</td><td>Rivers and wells</td><td>Stratified by upstream/downstream</td><td>Water quality varies systematically along gradient</td></tr>
+    <tr><td>🌾 Agricultural yield estimation</td><td>All fields in a region or country</td><td>Stratified by agro-ecological zone, crop type, or irrigation status; crop-cutting experiments on randomly selected plots</td><td>Yield varies enormously between zones; stratification captures this heterogeneity; crop-cutting (pioneered in India in the 1940s) remains the global standard for objective yield measurement</td></tr>
+    <tr><td>🏥 Clinical trials</td><td>Patients with a specific condition</td><td>Consecutive or multi-centre stratified (by disease severity, age, site); randomisation to treatment arms</td><td>Ethical requirement to offer treatment to eligible patients; stratification controls known confounders; randomisation ensures unbiased comparison between groups</td></tr>
+    <tr><td>🌲 Forest inventory</td><td>Trees in a national forest</td><td>Two-stage: systematic grid of plots (clusters), then measure all trees within each plot</td><td>No complete tree census exists; plot-based sampling reduces cost while enabling biomass and carbon estimation; the U.S. Forest Inventory and Analysis (FIA) programme maintains ~300,000 permanent plots across the nation</td></tr>
+    <tr><td>📊 National household surveys</td><td>All households in a country</td><td>Stratified multi-stage cluster (DHS, MICS, LSMS model)</td><td>No household-level frame; census enumeration areas serve as PSUs; stratification by urban/rural and region ensures national representativeness</td></tr>
+    <tr><td>🏭 Industrial quality control</td><td>Production batch of N units</td><td>Systematic or acceptance sampling (MIL-STD-1916, ISO 2859)</td><td>Continuous production flow makes systematic sampling natural; acceptance sampling provides lot-by-lot decision rules for accepting or rejecting batches</td></tr>
+    <tr><td>🐛 Ecological abundance estimation</td><td>Organisms in a habitat</td><td>Stratified random quadrats or systematic transects with random start</td><td>Spatial structure (aggregation, gradients) makes stratification or systematic coverage essential; Krebs (1999) showed that random quadrats in aggregated populations can require 5× the sample to achieve the precision of stratified designs</td></tr>
+    <tr><td>💧 Water quality monitoring</td><td>Bodies of water in a region</td><td>Stratified by watershed, upstream/downstream, land use type</td><td>Pollution varies systematically along spatial gradients; stratification ensures all conditions are represented; the EU Water Framework Directive mandates stratified monitoring by water body type</td></tr>
+    <tr><td>📱 Market research / Opinion polling</td><td>Adult population of a country</td><td>Stratified random digit dialling (RDD) or address-based sampling (ABS)</td><td>No complete population list; phone/address frames provide near-universal coverage; stratification by region/demographics improves precision; the shift from RDD to ABS reflects declining landline use globally</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>✅ Best Practices: A Decision Framework</h2>
+<h2>✅ Part IX — Best Practices: A Decision Framework</h2>
 
-<p>Choosing the right sampling method depends on your research objectives, available resources, and population characteristics. Here is a practical decision guide synthesized from leading methodology textbooks (Cochran, 1977; Lohr, 2022; Thompson, 2012):</p>
+<p>Choosing the right sampling method depends on the research question, available resources, population characteristics, and desired inference. The following decision framework synthesises guidance from the leading methodology references (Cochran, 1977; Kish, 1965; Lohr, 2022; Thompson, 2012; Groves et al., 2009):</p>
 
 <table>
   <thead>
     <tr><th>Step</th><th>Question to Ask</th><th>Action</th></tr>
   </thead>
   <tbody>
-    <tr><td>1️⃣</td><td>Do you need to generalize to a population?</td><td><strong>Yes</strong> → Probability sampling required. <strong>No</strong> → Non-probability may suffice</td></tr>
-    <tr><td>2️⃣</td><td>Do you have a complete sampling frame?</td><td><strong>Yes</strong> → SRS or Systematic. <strong>No</strong> → Cluster or Multi-stage</td></tr>
-    <tr><td>3️⃣</td><td>Is the population heterogeneous with known subgroups?</td><td><strong>Yes</strong> → Stratified sampling. <strong>No</strong> → SRS or Systematic</td></tr>
-    <tr><td>4️⃣</td><td>Is the population geographically dispersed?</td><td><strong>Yes</strong> → Cluster sampling to reduce travel costs</td></tr>
-    <tr><td>5️⃣</td><td>Is the population hard to reach or hidden?</td><td><strong>Yes</strong> → Snowball or purposive (acknowledge limitations)</td></tr>
-    <tr><td>6️⃣</td><td>What precision do you need?</td><td>Use Cochran's formula (or power analysis) to determine <em>n</em></td></tr>
-    <tr><td>7️⃣</td><td>What is your budget?</td><td>Balance precision against cost; consider optimal allocation in stratified designs</td></tr>
+    <tr><td>1️⃣</td><td>Do you need to make statistical generalisations to a defined population?</td><td><strong>Yes</strong> → Probability sampling is required. <strong>No</strong> (exploration, theory-building) → Non-probability may be appropriate</td></tr>
+    <tr><td>2️⃣</td><td>Do you have a complete, accurate sampling frame of individuals?</td><td><strong>Yes</strong> → SRS or Systematic. <strong>No</strong> → Cluster or Multi-stage design using available cluster-level frames</td></tr>
+    <tr><td>3️⃣</td><td>Is the population heterogeneous with known, measurable subgroups?</td><td><strong>Yes</strong> → Stratify by the variable(s) most correlated with the outcome of interest</td></tr>
+    <tr><td>4️⃣</td><td>Is the population geographically dispersed over a large area?</td><td><strong>Yes</strong> → Cluster sampling to reduce travel costs; consider PPS for unequal-sized clusters</td></tr>
+    <tr><td>5️⃣</td><td>Is the population hidden, rare, or hard to enumerate?</td><td><strong>Yes</strong> → Snowball, respondent-driven sampling (RDS), or purposive; acknowledge limitations explicitly</td></tr>
+    <tr><td>6️⃣</td><td>What precision and confidence do you need?</td><td>Use Cochran's formula (proportions) or power analysis (means/effects) to calculate minimum <em>n</em>; consult Cohen (1988) for effect-size-based power calculations</td></tr>
+    <tr><td>7️⃣</td><td>What is your budget and logistical capacity?</td><td>Balance precision against cost; stratified + optimal allocation maximises precision per dollar; cluster designs minimise travel per observation</td></tr>
+    <tr><td>8️⃣</td><td>What is your expected non-response rate?</td><td>Inflate the initial sample by the anticipated non-response rate: n_initial = n_required / (1 − non-response rate). If non-response rate is 30%, inflate by 1/(1−0.30) ≈ 1.43</td></tr>
   </tbody>
 </table>
+
+<blockquote>🧭 <strong>The Sampling Paradox:</strong> The most statistically efficient design is not always the best choice. A stratified sample may offer superior precision, but if the stratification variable is unavailable, a simpler SRS is more defensible. A cluster sample may sacrifice precision, but if no individual-level frame exists, it is the only feasible option. The « best » sampling design is always the one that maximises the quality of inference achievable within the constraints of reality — budget, time, frame availability, geographic access, and ethical obligations. Sampling, as Cochran (1977) noted, is always a compromise between the ideal and the possible. The mark of a skilled researcher is not choosing the theoretically optimal design but choosing the most defensible design given real-world constraints — and being transparent about the trade-offs made.</blockquote>
 
 <hr>
 
 <h2>📖 References</h2>
 
-<p>Agresti, A., & Franklin, C. (2018). <em>Statistics: The art and science of learning from data</em> (4th ed.). Pearson.</p>
-
-<p>Cochran, W. G. (1977). <em>Sampling techniques</em> (3rd ed.). John Wiley & Sons.</p>
-
-<p>Etikan, I., Musa, S. A., & Alkassim, R. S. (2016). Comparison of convenience sampling and purposive sampling. <em>American Journal of Theoretical and Applied Statistics</em>, <em>5</em>(1), 1–4. https://doi.org/10.11648/j.ajtas.20160501.11</p>
-
-<p>Groves, R. M., Fowler, F. J., Couper, M. P., Lepkowski, J. M., Singer, E., & Tourangeau, R. (2009). <em>Survey methodology</em> (2nd ed.). John Wiley & Sons.</p>
-
-<p>Kish, L. (1965). <em>Survey sampling</em>. John Wiley & Sons.</p>
-
+<p>Agresti, A., &amp; Franklin, C. (2018). <em>Statistics: The art and science of learning from data</em> (4th ed.). Pearson.</p>
+<p>Bartlett, J. E., Kotrlik, J. W., &amp; Higgins, C. C. (2001). Organizational research: Determining appropriate sample size in survey research. <em>Information Technology, Learning, and Performance Journal</em>, <em>19</em>(1), 43–50.</p>
+<p>Bryson, M. C. (1976). The Literary Digest poll: Making of a statistical myth. <em>The American Statistician</em>, <em>30</em>(4), 184–185. https://doi.org/10.1080/00031305.1976.10479173</p>
+<p>Cochran, W. G. (1977). <em>Sampling techniques</em> (3rd ed.). John Wiley &amp; Sons.</p>
+<p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum.</p>
+<p>Cohen, J. (1992). A power primer. <em>Psychological Bulletin</em>, <em>112</em>(1), 155–159. https://doi.org/10.1037/0033-2909.112.1.155</p>
+<p>Deming, W. E. (1950). <em>Some theory of sampling</em>. John Wiley &amp; Sons.</p>
+<p>Etikan, I., Musa, S. A., &amp; Alkassim, R. S. (2016). Comparison of convenience sampling and purposive sampling. <em>American Journal of Theoretical and Applied Statistics</em>, <em>5</em>(1), 1–4. https://doi.org/10.11648/j.ajtas.20160501.11</p>
+<p>Froom, P., Melamed, S., Kristal-Boneh, E., Benbassat, J., &amp; Ribak, J. (1999). Healthy volunteer effect in industrial workers. <em>Journal of Clinical Epidemiology</em>, <em>52</em>(8), 731–735. https://doi.org/10.1016/S0895-4356(99)00070-0</p>
+<p>Groves, R. M., Fowler, F. J., Couper, M. P., Lepkowski, J. M., Singer, E., &amp; Tourangeau, R. (2009). <em>Survey methodology</em> (2nd ed.). John Wiley &amp; Sons.</p>
+<p>Groves, R. M., &amp; Peytcheva, E. (2008). The impact of nonresponse rates on nonresponse bias: A meta-analysis. <em>Public Opinion Quarterly</em>, <em>72</em>(2), 167–189. https://doi.org/10.1093/poq/nfn011</p>
+<p>Heckathorn, D. D. (1997). Respondent-driven sampling: A new approach to the study of hidden populations. <em>Social Problems</em>, <em>44</em>(2), 174–199. https://doi.org/10.2307/3096941</p>
+<p>Heckman, J. J. (1979). Sample selection bias as a specification error. <em>Econometrica</em>, <em>47</em>(1), 153–161. https://doi.org/10.2307/1912352</p>
+<p>Henderson, R. H., &amp; Sundaresan, T. (1982). Cluster sampling to assess immunization coverage: A review of experience with a simplified sampling method. <em>Bulletin of the World Health Organization</em>, <em>60</em>(2), 253–260.</p>
+<p>Henrich, J., Heine, S. J., &amp; Norenzayan, A. (2010). The weirdest people in the world? <em>Behavioral and Brain Sciences</em>, <em>33</em>(2–3), 61–83. https://doi.org/10.1017/S0140525X0999152X</p>
+<p>Kish, L. (1965). <em>Survey sampling</em>. John Wiley &amp; Sons.</p>
+<p>Lenth, R. V. (2001). Some practical guidelines for effective sample size determination. <em>The American Statistician</em>, <em>55</em>(3), 187–193. https://doi.org/10.1198/000313001317098149</p>
 <p>Lohr, S. L. (2022). <em>Sampling: Design and analysis</em> (3rd ed.). CRC Press.</p>
-
 <p>Malkiel, B. G. (1995). Returns from investing in equity mutual funds 1971 to 1991. <em>The Journal of Finance</em>, <em>50</em>(2), 549–572. https://doi.org/10.1111/j.1540-6261.1995.tb04795.x</p>
-
-<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
-
-<p>Scheiner, S. M., & Gurevitch, J. (Eds.). (2001). <em>Design and analysis of ecological experiments</em> (2nd ed.). Oxford University Press.</p>
-
+<p>Mangel, M., &amp; Samaniego, F. J. (1984). Abraham Wald's work on aircraft survivability. <em>Journal of the American Statistical Association</em>, <em>79</em>(386), 259–267. https://doi.org/10.1080/01621459.1984.10478038</p>
+<p>Moore, D. S., McCabe, G. P., &amp; Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+<p>Neyman, J. (1934). On the two different aspects of the representative method: The method of stratified sampling and the method of purposive selection. <em>Journal of the Royal Statistical Society</em>, <em>97</em>(4), 558–625. https://doi.org/10.2307/2342192</p>
+<p>Patton, M. Q. (2015). <em>Qualitative research &amp; evaluation methods</em> (4th ed.). Sage.</p>
+<p>Rice, J. A. (2007). <em>Mathematical statistics and data analysis</em> (3rd ed.). Thomson Brooks/Cole.</p>
+<p>Scheiner, S. M., &amp; Gurevitch, J. (Eds.). (2001). <em>Design and analysis of ecological experiments</em> (2nd ed.). Oxford University Press.</p>
 <p>Squire, P. (1988). Why the 1936 Literary Digest poll failed. <em>Public Opinion Quarterly</em>, <em>52</em>(1), 125–133. https://doi.org/10.1086/269085</p>
-
+<p>Stigler, S. M. (1986). <em>The history of statistics: The measurement of uncertainty before 1900</em>. Harvard University Press.</p>
 <p>Taherdoost, H. (2016). Sampling methods in research methodology: How to choose a sampling technique for research. <em>International Journal of Academic Research in Management</em>, <em>5</em>(2), 18–27. https://doi.org/10.2139/ssrn.3205035</p>
-
-<p>Thompson, S. K. (2012). <em>Sampling</em> (3rd ed.). John Wiley & Sons.</p>
+<p>Thompson, S. K. (2012). <em>Sampling</em> (3rd ed.). John Wiley &amp; Sons.</p>

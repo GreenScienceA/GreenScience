@@ -1,255 +1,302 @@
-<h2>↔️ La Dispersion : Mesurer l'Étendue de vos Données</h2>
+<h2>↔️ Dispersion : Mesurer l'étendue de vos données</h2>
 
-<p>Deux classes d'étudiants passent le même examen. Les deux obtiennent une moyenne de 75 sur 100. Le doyen regarde les résultats et déclare : <em>« Les deux classes ont obtenu des résultats équivalents. »</em> Mais est-ce vrai ? Dans la classe A, chaque étudiant a obtenu entre 70 et 80 — un regroupement serré et rassurant. Dans la classe B, les notes vont de 20 à 100 — des montagnes russes. Les <strong>moyennes sont identiques</strong>, mais les <em>histoires</em> sont complètement différentes. C'est précisément pourquoi nous avons besoin des <strong>mesures de dispersion</strong>.</p>
+<p>En février 1953, l'ingénieur néerlandais Johan van Veen fixa un marégraphe et fit un calcul qui allait le hanter. La marée haute moyenne à Hoek van Holland était bien dans les limites de sécurité — les digues avaient été construites pour résister aux ondes de tempête moyennes avec une marge confortable. Mais van Veen ne s'intéressait pas à la moyenne. Il était obsédé par la <em>variabilité</em> — la queue extrême de la distribution où se tapissaient les ondes centenaires. Il avertit que les digues étaient dangereusement inadéquates face à la <em>dispersion</em> des hauteurs d'onde possibles. Ses avertissements furent largement ignorés. Dans la nuit du 31 janvier 1953, une onde de tempête en mer du Nord atteignant <strong>3,85 mètres au-dessus du niveau moyen de la mer</strong> frappa la côte néerlandaise, perçant les digues en plus de 150 points, inondant 200 000 hectares et tuant <strong>1 836 personnes</strong>. La moyenne était sûre. La variabilité fut meurtrière. Les Pays-Bas répondirent par le Plan Delta — l'un des plus grands projets d'ingénierie de l'histoire humaine — conçu non autour des moyennes mais autour des queues extrêmes des distributions de probabilité (Gerritsen, 2005 ; Deltacommissie, 2008).</p>
 
-<p>La dispersion — également appelée variabilité, étalement ou éparpillement — quantifie le degré auquel les valeurs des données diffèrent les unes des autres et du centre. Si la tendance centrale vous dit <em>où</em> se trouvent les données, la dispersion vous dit <em>à quel point vous pouvez faire confiance à ce centre</em>. Comme l'ont souligné Freedman et al. (2007), rapporter une moyenne sans mesure de dispersion, c'est comme indiquer une destination sans mentionner l'état de la route. Weisberg (1992) a défendu l'idée que tendance centrale et variabilité sont des partenaires inséparables : l'une n'a pas de sens sans l'autre.</p>
+<p>Voici la leçon fondamentale de la dispersion : <strong>la moyenne peut mentir</strong>. Deux jeux de données peuvent partager des moyennes, des médianes et des modes identiques — tout en racontant des histoires fondamentalement différentes. Une ville où chaque ménage gagne 50 000 $ et une ville où la moitié ne gagne rien et l'autre moitié gagne 100 000 $ affichent toutes deux un revenu moyen de 50 000 $, mais seule l'une fait face à une crise sociale. Une entreprise pharmaceutique dont le médicament abaisse la tension artérielle de 10 mmHg en moyenne semble efficace — jusqu'à ce que vous appreniez que l'écart-type est de 25 mmHg, signifiant que le médicament <em>augmente</em> la tension chez une proportion substantielle de patients. Comme Freedman et al. (2007) l'ont averti, rapporter une moyenne sans mesure de dispersion revient à annoncer une destination sans mentionner l'état de la route.</p>
 
-<blockquote>💡 <strong>L'Idée Centrale :</strong> Deux ensembles de données peuvent avoir la même moyenne, la même médiane et le même mode — et pourtant être fondamentalement différents. Les mesures de dispersion capturent ce que la tendance centrale manque : <strong>le degré d'incertitude, de risque et de variabilité</strong> caché dans les données. De l'agriculture à la finance, comprendre l'étalement est souvent plus important que de connaître la moyenne.</blockquote>
+<p>La dispersion — aussi appelée variabilité, étendue ou éparpillement — quantifie le degré auquel les valeurs des données diffèrent les unes des autres et du centre. Si la tendance centrale vous dit <em>où</em> se trouvent les données, la dispersion vous dit <em>dans quelle mesure vous pouvez faire confiance à ce centre</em>. Weisberg (1992) argumenta que tendance centrale et variabilité sont des partenaires inséparables : ni l'une ni l'autre n'a de sens sans l'autre. Cette explication vous guidera à travers chaque mesure majeure de dispersion — du cliché le plus simple à l'outil inférentiel le plus puissant — montrant non seulement comment calculer chacune mais <em>pourquoi</em> elle existe, <em>quand</em> l'utiliser, et <em>ce qu'</em>elle révèle que les autres ne peuvent révéler.</p>
+
+<blockquote>💡 <strong>L'idée fondamentale :</strong> Deux jeux de données peuvent avoir la même moyenne, la même médiane et le même mode — tout en étant fondamentalement différents en caractère. Les mesures de dispersion capturent ce que la tendance centrale manque : <strong>le degré d'incertitude, de risque et de variabilité</strong> caché dans les données. Dans des domaines allant de l'hydrologie à la finance, de la médecine à l'agriculture, comprendre la dispersion est souvent plus important que connaître la moyenne. L'inondation de la mer du Nord en 1953 tua près de deux mille personnes non parce que la marée <em>moyenne</em> était dangereuse, mais parce que la <em>variabilité</em> avait été sous-estimée.</blockquote>
 
 <hr>
 
-<h2>📊 Pourquoi la Dispersion est Importante</h2>
+<h2>📊 Pourquoi la dispersion est importante : Six fonctions essentielles</h2>
 
-<p>Les mesures de dispersion remplissent des fonctions essentielles dans toute discipline utilisant des données (Moore et al., 2021 ; Agresti & Finlay, 2018) :</p>
+<p>Les mesures de dispersion remplissent des fonctions essentielles dans chaque discipline utilisant des données quantitatives (Moore et al., 2021 ; Agresti &amp; Finlay, 2018 ; Wackerly et al., 2014) :</p>
 
 <table>
   <thead>
-    <tr><th>Fonction</th><th>Description</th><th>Exemple</th></tr>
+    <tr><th>Fonction</th><th>Description</th><th>Exemple concret</th></tr>
   </thead>
   <tbody>
-    <tr><td>🎯 <strong>Évaluation de la précision</strong></td><td>Évaluer à quel point les mesures se regroupent autour du centre</td><td>Instruments de laboratoire avec σ = 0,01 mm vs σ = 2 mm</td></tr>
-    <tr><td>⚖️ <strong>Comparaison de groupes</strong></td><td>Déterminer si deux groupes diffèrent réellement ou se chevauchent</td><td>Efficacité du médicament A vs B — même moyenne mais étalement différent</td></tr>
-    <tr><td>🔔 <strong>Normalité et forme</strong></td><td>L'écart-type définit la largeur des courbes en cloche et des intervalles de confiance</td><td>La règle 68-95-99,7% nécessite de connaître σ</td></tr>
-    <tr><td>🧪 <strong>Contrôle qualité</strong></td><td>Surveiller la régularité des processus en fabrication et agriculture</td><td>Variation acceptable du poids des semences par lot</td></tr>
-    <tr><td>📈 <strong>Risque et décision</strong></td><td>Plus de variabilité = plus d'incertitude = plus de risque</td><td>Les investisseurs préfèrent des portefeuilles à CV plus faible pour le même rendement</td></tr>
-    <tr><td>🧱 <strong>Fondement de l'inférence</strong></td><td>La variance est le moteur de tout test inférentiel : t-tests, ANOVA, régression, intervalles de confiance</td><td>Erreur standard = σ/√n — le pont entre statistique descriptive et inférentielle</td></tr>
+    <tr><td>🎯 <strong>Évaluation de la précision</strong></td><td>Évaluer à quel point les mesures se regroupent autour du centre</td><td>Une pipette de laboratoire avec σ = 0,01 mL vs. une avec σ = 0,5 mL — la première est de qualité recherche, la seconde est inutilisable pour un travail précis</td></tr>
+    <tr><td>⚖️ <strong>Comparaison de groupes</strong></td><td>Déterminer si deux groupes diffèrent réellement ou se chevauchent simplement</td><td>Un essai clinique trouve que les médicaments A et B réduisent le cholestérol de 20 mg/dL en moyenne — mais A a un ET = 5 tandis que B a un ET = 30. Le médicament A est fiable ; B est un pari</td></tr>
+    <tr><td>🔔 <strong>Forme de la distribution</strong></td><td>L'écart-type définit la largeur des courbes en cloche et les bornes des intervalles de confiance</td><td>La règle empirique 68–95–99,7 % exige la connaissance de σ pour identifier où le « normal » se termine et l'« extrême » commence</td></tr>
+    <tr><td>🧪 <strong>Contrôle de qualité</strong></td><td>Surveiller la constance des processus dans la fabrication, la santé et la recherche</td><td>La méthodologie Six Sigma chez Motorola (1986) définit la qualité comme ±6σ par rapport à la cible, n'autorisant que 3,4 défauts par million — toute la philosophie repose sur le contrôle de la dispersion (Harry &amp; Schroeder, 2000)</td></tr>
+    <tr><td>📈 <strong>Risque et décision</strong></td><td>Variabilité plus élevée = incertitude plus grande = risque plus élevé</td><td>Harry Markowitz reçut le Prix Nobel d'économie 1990 pour avoir montré que la sélection optimale de portefeuille dépend non de la maximisation du rendement mais de la minimisation de la <em>variance</em> des rendements à rendement espéré donné — la Théorie Moderne du Portefeuille est une <em>théorie de la variance</em> (Markowitz, 1952)</td></tr>
+    <tr><td>🧱 <strong>Fondation de l'inférence</strong></td><td>La variance est le moteur de tout test inférentiel : tests t, ANOVA, régression, intervalles de confiance</td><td>Erreur standard = s/√n — le pont entre statistique descriptive et inférentielle. Sans mesure de dispersion, aucun test d'hypothèse, aucun intervalle de confiance, aucun coefficient de régression n'est possible</td></tr>
   </tbody>
 </table>
 
-<blockquote>🧪 <strong>Perspective Agronomique :</strong> Un agronome testant un nouveau cultivar de blé sur les hauts plateaux algériens a besoin de plus que la moyenne du rendement. Si le cultivar a une moyenne de 35 q/ha mais varie de 15 à 55 entre les parcelles, ce cultivar est <em>risqué</em>. Un second cultivar avec une moyenne de 32 q/ha mais variant de 28 à 36 est bien plus <strong>fiable</strong> — et la fiabilité compte souvent plus que les moyennes brutes en contexte de sécurité alimentaire (Gomez & Gomez, 1984).</blockquote>
+<blockquote>🌊 <strong>Aperçu des sciences climatiques :</strong> Le Groupe d'experts intergouvernemental sur l'évolution du climat (GIEC) ne rapporte pas simplement les augmentations moyennes projetées de la température mondiale — il rapporte des <em>fourchettes</em> et des <em>intervalles de confiance</em>. La différence entre « un réchauffement moyen de 2°C » et « 2°C ± 1,5°C » est la différence entre une adaptation gérable et une incertitude catastrophique. Chaque projection du Sixième Rapport d'Évaluation du GIEC (2021) est encadrée par sa dispersion — parce que les décideurs doivent planifier non pour le scénario moyen mais pour les extrêmes plausibles.</blockquote>
 
 <hr>
 
-<h2>📏 Taxonomie des Mesures de Dispersion</h2>
+<h2>📏 La taxonomie des mesures de dispersion</h2>
 
-<p>Avant d'examiner chaque mesure, voyons la vue d'ensemble. Les mesures de dispersion se divisent en deux grandes familles (Wackerly et al., 2014) :</p>
+<p>Avant d'examiner chaque mesure en détail, il est utile de voir le paysage d'ensemble. Les mesures de dispersion se répartissent en deux grandes familles, chacune servant des objectifs distincts (Wackerly et al., 2014) :</p>
 
 <table>
   <thead>
-    <tr><th>Type</th><th>Mesures</th><th>Unités originales ?</th><th>Comparable entre jeux de données différents ?</th></tr>
+    <tr><th>Type</th><th>Mesures</th><th>Utilise les unités originales ?</th><th>Comparable entre jeux de données différents ?</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Mesures absolues</strong></td><td>Étendue, EIQ, Écart moyen, Variance, Écart-type</td><td>✅ (sauf la variance qui met au carré)</td><td>❌ Uniquement si mêmes unités et moyennes similaires</td></tr>
-    <tr><td><strong>Mesures relatives</strong></td><td>Coefficient de Variation (CV)</td><td>❌ Sans dimension (en %)</td><td>✅ Peut comparer entre unités et échelles différentes</td></tr>
+    <tr><td><strong>Mesures absolues</strong></td><td>Étendue, EIQ, Écart moyen absolu, Variance, Écart-type</td><td>✅ (sauf la Variance, qui élève les unités au carré)</td><td>❌ Seulement si mêmes unités et moyennes similaires</td></tr>
+    <tr><td><strong>Mesures relatives</strong></td><td>Coefficient de Variation (CV)</td><td>❌ Sans dimension (généralement exprimé en %)</td><td>✅ Peut comparer entre unités, échelles et ordres de grandeur différents</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>1️⃣ L'Étendue (R) — L'Aperçu le Plus Simple</h2>
+<h2>1️⃣ Étendue (R) — L'instantané le plus simple</h2>
 
-<h3>Définition et Calcul</h3>
+<h3>Définition et calcul</h3>
 
-<p>L'<strong>étendue</strong> est la différence entre la valeur maximale et la valeur minimale d'un jeu de données. C'est la mesure de dispersion la plus rapide et la plus intuitive — une simple soustraction qui indique l'envergure totale de vos données (Triola, 2018) :</p>
+<p>L'<strong>étendue</strong> est la différence entre la valeur maximale et la valeur minimale d'un jeu de données. C'est la mesure de dispersion la plus rapide et la plus intuitive — une simple soustraction qui vous donne l'envergure totale de vos données (Triola, 2018) :</p>
 
 <p style="text-align:center;"><strong>R = X<sub>max</sub> − X<sub>min</sub></strong></p>
 
-<p><strong>Exemple :</strong> Cinq parcelles de blé produisent 28, 31, 35, 29 et 32 q/ha.</p>
-<p style="text-align:center;"><strong>R = 35 − 28 = 7 q/ha</strong></p>
+<p><strong>Exemple résolu :</strong> Températures maximales journalières (°C) enregistrées pendant une semaine à São Paulo, Brésil : 28, 31, 35, 29, 32, 27, 33.</p>
+<p style="text-align:center;"><strong>R = 35 − 27 = 8°C</strong></p>
 
-<h3>Propriétés de l'Étendue</h3>
+<h3>Propriétés de l'étendue</h3>
 
 <table>
   <thead>
     <tr><th>Propriété</th><th>Évaluation</th></tr>
   </thead>
   <tbody>
-    <tr><td>✅ Simplicité</td><td>Triviale à calculer — ne nécessite que les valeurs extrêmes</td></tr>
-    <tr><td>✅ Intuitive</td><td>Tout le monde comprend « les données vont de X à Y »</td></tr>
-    <tr><td>❌ Sensible aux valeurs aberrantes</td><td>Une seule valeur extrême peut gonfler énormément l'étendue</td></tr>
-    <tr><td>❌ Ignore les données intérieures</td><td>N'utilise que 2 des n observations — ne dit rien sur la répartition du reste</td></tr>
-    <tr><td>❌ Croît avec la taille de l'échantillon</td><td>Les échantillons plus grands capturent plus facilement les extrêmes</td></tr>
+    <tr><td>✅ Simplicité</td><td>Triviale à calculer — ne requiert que les deux valeurs extrêmes</td></tr>
+    <tr><td>✅ Intuitivité</td><td>Tout le monde comprend « les données vont de X à Y »</td></tr>
+    <tr><td>❌ Sensibilité aux valeurs aberrantes</td><td>Une seule valeur extrême peut gonfler l'étendue énormément — une erreur d'enregistrement de 99°C donnerait R = 72°C au lieu de 8°C</td></tr>
+    <tr><td>❌ Ignore les données intérieures</td><td>N'utilise que 2 des n observations — ne dit rien sur la distribution des n − 2 valeurs restantes</td></tr>
+    <tr><td>❌ Croît avec la taille de l'échantillon</td><td>Les échantillons plus grands ont plus de chances de capturer des valeurs extrêmes, rendant l'étendue non comparable entre échantillons de tailles différentes. Cette propriété fut formellement démontrée par Cox (1948)</td></tr>
   </tbody>
 </table>
 
+<blockquote>⚠️ <strong>Pourquoi l'étendue seule est dangereuse :</strong> Considérez deux jeux de données : A = {49, 50, 50, 50, 51} et B = {10, 50, 50, 50, 90}. Le jeu A a R = 2 (compact) tandis que B a R = 80 (valeurs aberrantes extrêmes) — l'étendue capture cette différence, ce qui est utile. Mais considérez maintenant C = {10, 50, 50, 50, 50} et D = {10, 10, 10, 10, 50}. Tous deux ont R = 40, pourtant leurs distributions internes sont complètement différentes — C a une valeur aberrante basse tandis que D a une valeur aberrante haute. L'étendue est aveugle à ces différences. Pour cette raison, l'étendue ne devrait <strong>jamais</strong> être utilisée comme seule mesure de dispersion dans toute analyse sérieuse (Devore &amp; Berk, 2012).</blockquote>
+
 <hr>
 
-<h2>2️⃣ Écart Interquartile (EIQ) — Le Milieu Robuste</h2>
+<h2>2️⃣ Écart interquartile (EIQ) — Le milieu robuste</h2>
 
 <h3>Définition</h3>
 
-<p>L'<strong>écart interquartile</strong> mesure la dispersion des 50% centraux des données. Il est défini comme la différence entre le troisième quartile (Q₃) et le premier quartile (Q₁) :</p>
+<p>L'<strong>écart interquartile</strong> mesure la dispersion des 50 % centraux des données. Il est défini comme la différence entre le troisième quartile (Q₃, le 75e percentile) et le premier quartile (Q₁, le 25e percentile) :</p>
 
 <p style="text-align:center;"><strong>EIQ = Q₃ − Q₁</strong></p>
 
-<p>L'EIQ est le partenaire naturel de la <strong>médiane</strong> — tout comme l'écart-type accompagne la moyenne. Parce qu'il écarte les 25% inférieurs et supérieurs, il est <strong>résistant aux valeurs aberrantes</strong>, ce qui en fait la mesure de dispersion préférée pour les distributions asymétriques (Moore et al., 2021).</p>
+<p>L'EIQ est le partenaire naturel de la <strong>médiane</strong> — tout comme l'écart-type s'associe à la moyenne. Parce qu'il élimine les 25 % inférieurs et les 25 % supérieurs des valeurs, il est <strong>résistant aux valeurs aberrantes</strong>, ce qui en fait la mesure de dispersion préférée pour les distributions asymétriques ou les données avec des valeurs extrêmes (Moore et al., 2021).</p>
 
-<blockquote>📦 <strong>Lien avec le Diagramme en Boîte :</strong> L'EIQ est exactement ce que la « boîte » représente dans un diagramme en boîte à moustaches. La boîte capture les 50% centraux des observations, et sa largeur (l'EIQ) donne un sentiment visuel immédiat de la dispersion. Les valeurs aberrantes sont signalées comme des points au-delà de 1,5 × EIQ — une règle proposée par John Tukey (1977).</blockquote>
+<h3>Exemple résolu</h3>
+
+<p><strong>Précipitations mensuelles (mm) dans 9 villes à travers le monde :</strong> données triées {12, 15, 18, 22, 25, 30, 35, 42, 50}.</p>
+<p>Q₁ = médiane de la moitié inférieure {12, 15, 18, 22} = (15 + 18)/2 = 16,5</p>
+<p>Q₃ = médiane de la moitié supérieure {30, 35, 42, 50} = (35 + 42)/2 = 38,5</p>
+<p style="text-align:center;"><strong>EIQ = 38,5 − 16,5 = 22 mm</strong></p>
+
+<p>Cela nous dit que la moitié centrale des villes reçoit des précipitations couvrant une étendue de 22 mm — indépendamment de si la ville la plus sèche reçoit 0 mm ou la plus humide 200 mm. L'EIQ est immunisé contre ces extrêmes.</p>
+
+<h3>L'EIQ et la détection des valeurs aberrantes</h3>
+
+<p>L'EIQ est le fondement de la règle de détection des valeurs aberrantes la plus utilisée au monde, proposée par John Tukey (1977) — l'un des statisticiens les plus influents du XXe siècle. Toute observation tombant en dessous de Q₁ − 1,5 × EIQ ou au-dessus de Q₃ + 1,5 × EIQ est signalée comme une <strong>valeur aberrante potentielle</strong>. Les observations au-delà de Q₁ − 3 × EIQ ou Q₃ + 3 × EIQ sont des <strong>valeurs aberrantes extrêmes</strong>. C'est précisément ainsi que les diagrammes en boîte à moustaches déterminent quels points afficher comme des points individuels au-delà des moustaches.</p>
+
+<blockquote>📦 <strong>Connexion avec le diagramme en boîte :</strong> L'EIQ est exactement ce que la « boîte » dans un diagramme en boîte à moustaches représente. La boîte capture les 50 % centraux des observations, et sa largeur (l'EIQ) vous donne un aperçu visuel immédiat de la dispersion des données. Tukey développa le diagramme en boîte et la règle des 1,5 × EIQ simultanément dans le cadre de sa révolution de l'Analyse Exploratoire des Données (EDA) — un changement philosophique qui mettait l'accent sur <em>regarder les données</em> avant de les modéliser, laissant les données parler avant d'imposer des hypothèses (Tukey, 1977).</blockquote>
 
 <hr>
 
-<h2>3️⃣ Écart Moyen Absolu (EMA) — L'Alternative Intuitive</h2>
+<h2>3️⃣ Écart moyen absolu (EMA) — L'alternative intuitive</h2>
 
-<p>L'<strong>écart moyen absolu</strong> est la moyenne des différences absolues entre chaque valeur et la moyenne. Il répond à une question magnifiquement simple : <em>« En moyenne, à quelle distance les données se trouvent-elles du centre ? »</em></p>
+<h3>Définition</h3>
+
+<p>L'<strong>écart moyen absolu</strong> est la moyenne des différences absolues entre chaque point de données et la moyenne. Il répond à une question d'une belle simplicité : <em>« En moyenne, à quelle distance les points de données se trouvent-ils du centre ? »</em></p>
 
 <p style="text-align:center;"><strong>EMA = (1/n) × Σ|xᵢ − x̄|</strong></p>
 
-<p>L'EMA est sans doute plus intuitif que la variance car il ne met rien au carré. Pourtant, il est tombé en disgrâce car les <strong>valeurs absolues sont mathématiquement difficiles</strong> à manipuler — impossibles à dériver proprement et sans les propriétés algébriques des carrés. C'est pourquoi Pearson, Fisher et les architectes de la statistique moderne ont privilégié la variance (Gorard, 2005).</p>
+<h3>Exemple résolu</h3>
+
+<p><strong>Données :</strong> Notes de 5 étudiants : {2, 4, 6, 8, 10}.</p>
+<p>Moyenne = 6. Écarts par rapport à la moyenne : |2−6| + |4−6| + |6−6| + |8−6| + |10−6| = 4 + 2 + 0 + 2 + 4 = 12.</p>
+<p style="text-align:center;"><strong>EMA = 12/5 = 2,4</strong></p>
+
+<p>Cela signifie : en moyenne, chaque note s'écarte de 2,4 unités de la moyenne de 6. Pas de mise au carré, pas de racine carrée — juste la distance brute et interprétable.</p>
+
+<h3>Pourquoi l'EMA a-t-il perdu face à l'écart-type ?</h3>
+
+<p>L'EMA est sans doute plus intuitif que la variance ou l'écart-type — il n'élève rien au carré, il moyenne simplement les distances brutes. Pourtant il tomba en disgrâce au début du XXe siècle pour des raisons mathématiques profondes : <strong>les valeurs absolues sont mathématiquement intractables</strong>. La fonction |x| possède un coin aigu (un « point anguleux ») à zéro, ce qui signifie qu'elle n'y est pas dérivable. On ne peut pas effectuer d'optimisation par le calcul infinitésimal de manière fluide, et elle ne se décompose pas algébriquement comme le font les écarts au carré. C'est pourquoi Karl Pearson, Ronald Fisher et les architectes de la statistique paramétrique moderne choisirent la variance et l'écart-type — ils avaient besoin de mesures fonctionnant harmonieusement avec le calcul infinitésimal, l'algèbre matricielle et la théorie des probabilités (Gorard, 2005).</p>
+
+<blockquote>🔬 <strong>Une renaissance :</strong> Malgré son abandon précoce, l'EMA a connu une renaissance remarquable. Les travaux fondateurs de Peter Huber sur la statistique robuste ont montré que l'<em>écart absolu médian</em> (une variante utilisant la médiane au lieu de la moyenne comme point central) est extraordinairement résistant aux valeurs aberrantes — il peut tolérer jusqu'à 50 % de données contaminées sans s'effondrer. Ce « point de rupture » de 50 % est le maximum théorique, faisant de l'EMA basé sur la médiane l'un des estimateurs statistiques les plus robustes connus. C'est désormais un outil standard dans des domaines allant du traitement du signal à l'astrophysique (Huber &amp; Ronchetti, 2009).</blockquote>
 
 <hr>
 
-<h2>4️⃣ Variance (σ² ou s²) — Le Cheval de Bataille de la Statistique</h2>
+<h2>4️⃣ Variance (σ² ou s²) — Le cheval de trait de la statistique</h2>
 
-<h3>Pourquoi Élever au Carré ?</h3>
+<h3>Pourquoi le carré ? La motivation mathématique</h3>
 
-<p>Si nous faisions simplement la moyenne des écarts à la moyenne sans valeur absolue, les écarts positifs et négatifs s'annuleraient, donnant toujours zéro (rappel : Σ(xᵢ − x̄) = 0 est une propriété fondamentale de la moyenne). Deux options existent : prendre les valeurs absolues (→ EMA) ou <strong>mettre au carré</strong> (→ variance). Le monde statistique a choisi la mise au carré, pour des raisons profondes (Wackerly et al., 2014) :</p>
+<p>Si nous faisions simplement la moyenne des écarts par rapport à la moyenne sans valeurs absolues, les écarts positifs et négatifs s'annuleraient, donnant zéro à chaque fois — un résultat mathématiquement élégant mais inutile (rappel : Σ(xᵢ − x̄) = 0 est une propriété algébrique fondamentale de la moyenne arithmétique). Nous avons besoin d'un moyen de rendre tous les écarts positifs. Deux options existent : prendre les valeurs absolues (donnant l'EMA) ou <strong>élever les écarts au carré</strong> (donnant la variance). Le monde statistique a choisi la mise au carré, et pour cinq raisons profondes (Wackerly et al., 2014 ; Devore &amp; Berk, 2012) :</p>
 
 <table>
   <thead>
     <tr><th>Raison</th><th>Explication</th></tr>
   </thead>
   <tbody>
-    <tr><td>📐 <strong>Dérivabilité</strong></td><td>x² est lisse et dérivable partout, tandis que |x| a un point anguleux en zéro — rendant possible l'optimisation par les moindres carrés</td></tr>
-    <tr><td>🧮 <strong>Décomposition algébrique</strong></td><td>La variance se décompose : variance totale = variance inter-groupes + variance intra-groupes. C'est le fondement de l'ANOVA</td></tr>
-    <tr><td>🔗 <strong>Additivité</strong></td><td>Pour des variables indépendantes, Var(X + Y) = Var(X) + Var(Y). Aucune telle propriété n'existe pour les écarts absolus</td></tr>
-    <tr><td>⚡ <strong>Accentuation des extrêmes</strong></td><td>La mise au carré pénalise les grands écarts de façon disproportionnée — un point à 3 unités contribue 9, pas 3</td></tr>
-    <tr><td>🔔 <strong>Lien avec la loi normale</strong></td><td>La distribution normale est entièrement définie par deux paramètres : la moyenne et la variance</td></tr>
+    <tr><td>📐 <strong>Dérivabilité</strong></td><td>x² est lisse et dérivable partout, tandis que |x| a un point anguleux à zéro — rendant l'optimisation par le calcul (méthode des moindres carrés) possible. C'est pourquoi Gauss et Legendre choisirent les écarts au carré au début du XIXe siècle</td></tr>
+    <tr><td>🧮 <strong>Décomposition algébrique</strong></td><td>La variance se décompose magnifiquement : SC totale = SC inter-groupes + SC intra-groupes. Cette décomposition est le fondement mathématique de l'ANOVA, inventée par R. A. Fisher dans les années 1920</td></tr>
+    <tr><td>🔗 <strong>Additivité</strong></td><td>Pour des variables aléatoires indépendantes, Var(X + Y) = Var(X) + Var(Y). Aucune propriété analogue n'existe pour les écarts absolus. Cette additivité est essentielle pour construire des modèles complexes à partir de composantes simples</td></tr>
+    <tr><td>⚡ <strong>Amplification des extrêmes</strong></td><td>La mise au carré pénalise les grands écarts de manière disproportionnée — un point à 3 unités du centre contribue 9, et non 3, à la variance. Cette sensibilité est une fonctionnalité, non un défaut, pour détecter l'hétérogénéité et les valeurs aberrantes</td></tr>
+    <tr><td>🔔 <strong>Lien avec la loi normale</strong></td><td>La distribution normale (gaussienne) est entièrement définie par deux paramètres : la moyenne (μ) et la variance (σ²). La variance est la mesure naturelle pour tous les modèles paramétriques fondés sur la normalité</td></tr>
   </tbody>
 </table>
 
-<h3>Variance de Population vs Variance d'Échantillon</h3>
+<h3>Variance de population vs. variance d'échantillon</h3>
+
+<p>Il existe deux versions de la formule de variance, et la distinction entre elles est l'une des plus critiques de toute la statistique (Triola, 2018 ; Moore et al., 2021) :</p>
 
 <table>
   <thead>
     <tr><th>Contexte</th><th>Formule</th><th>Symbole</th><th>Dénominateur</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Variance de population</strong></td><td>σ² = Σ(xᵢ − μ)² / N</td><td>σ²</td><td>N (taille de la population)</td></tr>
+    <tr><td><strong>Variance de population</strong></td><td>σ² = Σ(xᵢ − μ)² / N</td><td>σ² (sigma au carré)</td><td>N (taille totale de la population)</td></tr>
     <tr><td><strong>Variance d'échantillon</strong></td><td>s² = Σ(xᵢ − x̄)² / (n − 1)</td><td>s²</td><td>n − 1 (correction de Bessel)</td></tr>
   </tbody>
 </table>
 
-<h3>🔑 La Correction de Bessel : Pourquoi n − 1 ?</h3>
+<h3>🔑 La correction de Bessel : Pourquoi n − 1 ?</h3>
 
-<p>Lorsqu'on calcule la variance d'un échantillon, on divise par <strong>n − 1</strong> au lieu de n. Cet ajustement, appelé <strong>correction de Bessel</strong>, du nom de Friedrich Bessel qui appliqua des techniques similaires dans son analyse d'observations astronomiques en 1818 (Reichel, 2025).</p>
+<p>C'est l'une des questions les plus fréquemment posées en statistique introductive, et la comprendre en profondeur distingue les apprenants superficiels de ceux qui saisissent véritablement l'inférence statistique. Lorsque nous calculons la variance d'échantillon, nous divisons par <strong>n − 1</strong> au lieu de n. Cet ajustement est appelé la <strong>correction de Bessel</strong>, du nom de l'astronome allemand Friedrich Bessel qui appliqua des techniques similaires de correction du biais dans son analyse de 1818 des observations astronomiques à l'Observatoire de Königsberg (Reichel, 2025).</p>
 
-<p><strong>L'intuition :</strong> La moyenne échantillonnale x̄ est toujours positionnée au centre exact des données de l'échantillon (par définition). Mais la moyenne de population μ pourrait être n'importe où. Parce que x̄ est <em>garanti</em> d'être plus proche des points de l'échantillon que μ ne l'est habituellement, diviser par n <strong>sous-estime systématiquement</strong> la vraie variance de population. Le facteur n − 1 compense ce biais descendant.</p>
+<p><strong>L'intuition :</strong> La moyenne d'échantillon x̄ est toujours positionnée au centre exact des données de l'échantillon (par définition, elle minimise la somme des écarts au carré par rapport à elle-même). Mais la vraie moyenne de population μ pourrait se trouver n'importe où — elle n'est pas contrainte de se situer au centre de l'échantillon. Parce que x̄ est <em>garantie</em> d'être plus proche des points de l'échantillon que μ ne l'est typiquement, utiliser la moyenne d'échantillon au lieu de la moyenne de population dans la formule de variance crée un <strong>biais systématique vers le bas</strong>. Diviser par n − 1 au lieu de n augmente l'estimation juste assez pour compenser, produisant un <strong>estimateur sans biais</strong> de la variance de population.</p>
 
-<p><strong>Interprétation par les degrés de liberté :</strong> Dans un échantillon de n observations, une fois la moyenne connue, seules n − 1 valeurs sont « libres » de varier indépendamment. La dernière est déterminée par les autres et la moyenne. Il n'y a donc que <strong>n − 1 degrés de liberté</strong> disponibles pour estimer la variance (Wackerly et al., 2014).</p>
+<p><strong>L'interprétation par les degrés de liberté :</strong> Dans un échantillon de n observations, une fois que vous connaissez la moyenne d'échantillon x̄, seules n − 1 valeurs sont « libres » de varier indépendamment. La dernière valeur est mathématiquement déterminée par les n − 1 autres valeurs et la moyenne (puisqu'elles doivent sommer à n × x̄). Ainsi, il n'y a que <strong>n − 1 degrés de liberté</strong> disponibles pour estimer la variance. Ce concept, formalisé par R. A. Fisher dans les années 1920, est le fondement de toute la statistique inférentielle (Wackerly et al., 2014).</p>
 
-<blockquote>🎓 <strong>Le cas extrême :</strong> Si n = 1, diviser par n donne variance = 0 pour toute population — clairement faux. Diviser par n − 1 = 0 est indéfini, signalant correctement qu'on ne peut pas estimer la variance à partir d'une seule observation. La correction perd son importance quand n est grand (999 vs 1000), mais pour de petits échantillons biologiques (n = 5, 10, 20), elle est cruciale (Freedman et al., 2007).</blockquote>
+<blockquote>🎓 <strong>Considérez le cas extrême :</strong> Si n = 1 (une seule observation), diviser par n donne une variance = 0 pour n'importe quelle population — clairement faux, puisqu'une seule observation ne nous dit rien sur la dispersion. Diviser par n − 1 = 0 est indéfini, signalant correctement que la variance <em>ne peut pas</em> être estimée à partir d'une seule observation. À mesure que n augmente, la correction importe moins (pour n = 1 000, diviser par 999 vs. 1 000 fait une différence négligeable), mais pour les petits échantillons typiques en biologie, psychologie et études pilotes (n = 5, 10, 20), la correction de Bessel est essentielle (Freedman et al., 2007).</blockquote>
 
-<h3>Exemple Détaillé Pas à Pas</h3>
+<h3>Exemple résolu pas à pas</h3>
 
-<p>Données : Cinq mesures de pH du sol dans un champ à Sétif : {6,2 ; 6,8 ; 7,1 ; 6,5 ; 7,4}.</p>
+<p><strong>Données :</strong> Concentration de mercure (μg/L) dans cinq échantillons d'eau du Danube : {0,42 ; 0,58 ; 0,71 ; 0,35 ; 0,94}.</p>
 
 <table>
   <thead>
     <tr><th>Étape</th><th>Opération</th><th>Résultat</th></tr>
   </thead>
   <tbody>
-    <tr><td>1</td><td>Calculer la moyenne : x̄ = (6,2 + 6,8 + 7,1 + 6,5 + 7,4) / 5</td><td>x̄ = 34,0 / 5 = <strong>6,80</strong></td></tr>
-    <tr><td>2</td><td>Calculer les écarts : (xᵢ − x̄)</td><td>−0,6 ; 0,0 ; 0,3 ; −0,3 ; 0,6</td></tr>
-    <tr><td>3</td><td>Mettre au carré : (xᵢ − x̄)²</td><td>0,36 ; 0,00 ; 0,09 ; 0,09 ; 0,36</td></tr>
-    <tr><td>4</td><td>Somme des carrés : Σ(xᵢ − x̄)²</td><td><strong>0,90</strong></td></tr>
-    <tr><td>5</td><td>Diviser par (n − 1) = 4</td><td>s² = 0,90 / 4 = <strong>0,225</strong></td></tr>
+    <tr><td>1</td><td>Calculer la moyenne : x̄ = (0,42 + 0,58 + 0,71 + 0,35 + 0,94) / 5</td><td>x̄ = 3,00 / 5 = <strong>0,600</strong></td></tr>
+    <tr><td>2</td><td>Calculer les écarts : (xᵢ − x̄)</td><td>−0,18 ; −0,02 ; +0,11 ; −0,25 ; +0,34</td></tr>
+    <tr><td>3</td><td>Élever chaque écart au carré : (xᵢ − x̄)²</td><td>0,0324 ; 0,0004 ; 0,0121 ; 0,0625 ; 0,1156</td></tr>
+    <tr><td>4</td><td>Somme des carrés : Σ(xᵢ − x̄)²</td><td><strong>0,2230</strong></td></tr>
+    <tr><td>5</td><td>Diviser par (n − 1) = 4</td><td>s² = 0,2230 / 4 = <strong>0,05575</strong></td></tr>
   </tbody>
 </table>
 
-<p>La variance est <strong>s² = 0,225</strong>. Mais attention : elle est en <strong>unités au carré</strong> (pH²), ce qui n'est pas directement interprétable. D'où la nécessité de l'écart-type.</p>
+<p>La variance d'échantillon est <strong>s² = 0,056 (μg/L)²</strong>. Mais notez le problème : la variance est en <strong>unités au carré</strong> — « microgrammes par litre au carré » n'a aucune signification physique. C'est exactement pourquoi nous avons besoin de l'écart-type.</p>
+
+<h3>Variance pour données groupées</h3>
+
+<p>Lorsque les données proviennent d'un tableau de fréquences plutôt que d'observations brutes, la formule s'adapte pour utiliser les centres de classes et les fréquences :</p>
+
+<p style="text-align:center;"><strong>s² = [Σfᵢ(mᵢ − x̄)²] / (n − 1)</strong></p>
+
+<p>où mᵢ est le centre de chaque classe, fᵢ est la fréquence de classe, x̄ = Σfᵢmᵢ / n, et n = Σfᵢ est le nombre total d'observations.</p>
 
 <hr>
 
-<h2>5️⃣ Écart-Type (σ ou s) — L'Étalon-Or</h2>
+<h2>5️⃣ Écart-type (σ ou s) — L'étalon-or</h2>
 
 <h3>Définition</h3>
 
-<p>L'<strong>écart-type</strong> est simplement la <strong>racine carrée de la variance</strong>. Cette transformation résout le problème des unités au carré et donne une mesure exprimée dans les <em>mêmes unités que les données originales</em> (Moore et al., 2021) :</p>
+<p>L'<strong>écart-type</strong> est simplement la <strong>racine carrée de la variance</strong>. Cette unique transformation résout le problème des unités au carré et nous donne une mesure de dispersion exprimée dans les <em>mêmes unités que les données originales</em> — la rendant directement interprétable et la mesure de dispersion la plus largement rapportée en sciences, médecine, ingénierie et sciences sociales (Moore et al., 2021) :</p>
 
 <table>
   <thead>
     <tr><th>Contexte</th><th>Formule</th><th>Symbole</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Population</strong></td><td>σ = √[Σ(xᵢ − μ)² / N]</td><td>σ (sigma)</td></tr>
+    <tr><td><strong>Population</strong></td><td>σ = √[Σ(xᵢ − μ)² / N]</td><td>σ (sigma minuscule grec)</td></tr>
     <tr><td><strong>Échantillon</strong></td><td>s = √[Σ(xᵢ − x̄)² / (n − 1)]</td><td>s</td></tr>
   </tbody>
 </table>
 
-<p>De notre exemple : <strong>s = √0,225 ≈ 0,474 unités pH</strong>. Les mesures de pH s'écartent typiquement de 0,47 unités de la moyenne de 6,80.</p>
+<p>De notre exemple du Danube : <strong>s = √0,05575 ≈ 0,236 μg/L</strong>. Cela nous dit que les concentrations de mercure dans le tronçon échantillonné du Danube s'écartent typiquement d'environ 0,24 μg/L de la moyenne de 0,60 μg/L — un énoncé directement significatif dans les unités de la mesure originale.</p>
 
-<h3>La Règle Empirique (68–95–99,7)</h3>
+<h3>La règle empirique (règle 68–95–99,7 %)</h3>
 
-<p>Pour des données approximativement <strong>normalement distribuées</strong>, l'écart-type a une interprétation remarquable (Triola, 2018) :</p>
+<p>Pour des données approximativement <strong>distribuées normalement</strong> (en forme de cloche), l'écart-type possède une interprétation remarquablement précise connue sous le nom de <strong>règle empirique</strong>, parfois appelée <strong>règle des trois sigma</strong>. Cette relation fut d'abord décrite par Abraham de Moivre en 1733 puis formalisée par Carl Friedrich Gauss (Stigler, 1986 ; Triola, 2018) :</p>
 
 <table>
   <thead>
-    <tr><th>Intervalle</th><th>Contient environ</th><th>Signification</th></tr>
+    <tr><th>Intervalle</th><th>Contient approximativement</th><th>Signification</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>x̄ ± 1s</strong></td><td>~68% des données</td><td>Environ deux tiers des observations tombent à un écart-type de la moyenne</td></tr>
-    <tr><td><strong>x̄ ± 2s</strong></td><td>~95% des données</td><td>Presque toutes les observations « normales » tombent à deux écarts-types</td></tr>
-    <tr><td><strong>x̄ ± 3s</strong></td><td>~99,7% des données</td><td>Pratiquement toutes — au-delà est extrêmement rare</td></tr>
+    <tr><td><strong>x̄ ± 1s</strong></td><td>~68 % des données</td><td>Environ deux tiers des observations tombent dans un écart-type de la moyenne</td></tr>
+    <tr><td><strong>x̄ ± 2s</strong></td><td>~95 % des données</td><td>Presque toutes les observations « normales » tombent dans deux écarts-types</td></tr>
+    <tr><td><strong>x̄ ± 3s</strong></td><td>~99,7 % des données</td><td>Virtuellement toutes les observations tombent dans trois écarts-types — tout ce qui est au-delà est extrêmement rare (environ 3 sur 1 000)</td></tr>
   </tbody>
 </table>
 
-<h3>Théorème de Tchebychev — Pour Toute Distribution</h3>
+<blockquote>📊 <strong>Puissance pratique :</strong> Le poids de naissance humain dans les populations bien nourries suit approximativement une distribution normale avec μ ≈ 3 400 g et σ ≈ 500 g (OMS, 2006). La règle empirique nous dit : ~68 % des nouveau-nés pèsent entre 2 900 et 3 900 g, ~95 % pèsent entre 2 400 et 4 400 g, et virtuellement aucun ne pèse en dessous de 1 900 g ou au-dessus de 4 900 g dans une population saine. Les néonatologistes utilisent précisément ces seuils basés sur σ pour identifier les nourrissons de faible poids de naissance et les macrosomes nécessitant des soins spéciaux.</blockquote>
 
-<p>Et si les données ne sont <em>pas</em> normales ? Pafnouti Tchebychev a prouvé une borne universelle applicable à <strong>toute distribution</strong> (Wackerly et al., 2014) :</p>
+<h3>Le théorème de Tchebychev — Pour toute distribution</h3>
 
-<p style="text-align:center;"><strong>Au moins (1 − 1/k²) × 100% des données se trouvent dans k écarts-types de la moyenne</strong></p>
+<p>Que faire si les données ne sont <em>pas</em> distribuées normalement ? Le mathématicien russe Pafnouti Tchebychev prouva en 1867 une borne universelle qui s'applique à <strong>absolument toute distribution</strong>, quelle que soit sa forme — symétrique, asymétrique, bimodale ou autre (Wackerly et al., 2014) :</p>
+
+<p style="text-align:center;"><strong>Au moins (1 − 1/k²) × 100 % des données se trouvent dans k écarts-types de la moyenne</strong></p>
 
 <table>
   <thead>
-    <tr><th>k</th><th>Minimum % dans x̄ ± ks</th></tr>
+    <tr><th>k</th><th>Minimum % dans x̄ ± ks</th><th>Comparaison avec la règle empirique (données normales)</th></tr>
   </thead>
   <tbody>
-    <tr><td>2</td><td>Au moins 75%</td></tr>
-    <tr><td>3</td><td>Au moins 88,9%</td></tr>
-    <tr><td>4</td><td>Au moins 93,75%</td></tr>
+    <tr><td>2</td><td>Au moins 75 %</td><td>La règle empirique donne ~95 % — Tchebychev est conservateur</td></tr>
+    <tr><td>3</td><td>Au moins 88,9 %</td><td>La règle empirique donne ~99,7 % — encore conservateur</td></tr>
+    <tr><td>4</td><td>Au moins 93,75 %</td><td>Au-delà de la plage habituelle de la règle empirique</td></tr>
   </tbody>
 </table>
 
-<h3>Propriétés Clés de l'Écart-Type</h3>
+<p>Le théorème de Tchebychev est plus faible que la règle empirique (il garantit moins), mais il a l'immense avantage de <strong>ne faire absolument aucune hypothèse</strong> sur la forme de la distribution. Cela le rend inestimable pour les données réelles qui sont rarement parfaitement normales — les distributions de revenus, les données pluviométriques, les abondances d'espèces et la plupart des mesures biologiques sont asymétriques ou à queues lourdes.</p>
+
+<h3>Propriétés clés de l'écart-type</h3>
 
 <table>
   <thead>
-    <tr><th>#</th><th>Propriété</th><th>Énoncé</th><th>Importance</th></tr>
+    <tr><th>#</th><th>Propriété</th><th>Énoncé mathématique</th><th>Pourquoi c'est important</th></tr>
   </thead>
   <tbody>
-    <tr><td>1</td><td>✅ <strong>Non-négatif</strong></td><td>s ≥ 0, et s = 0 seulement quand toutes les valeurs sont identiques</td><td>Dispersion nulle = aucune variabilité</td></tr>
-    <tr><td>2</td><td>📐 <strong>Mêmes unités</strong></td><td>Si les données sont en kg, s est en kg</td><td>Directement interprétable, contrairement à la variance</td></tr>
-    <tr><td>3</td><td>🔗 <strong>Transformation linéaire</strong></td><td>Si y = a + bx, alors s<sub>y</sub> = |b| × s<sub>x</sub></td><td>Ajouter une constante ne change pas la dispersion ; multiplier l'ajuste proportionnellement</td></tr>
-    <tr><td>4</td><td>⚡ <strong>Sensible aux valeurs extrêmes</strong></td><td>La mise au carré amplifie les grands écarts</td><td>Un avantage pour la détection, un inconvénient pour la robustesse</td></tr>
-    <tr><td>5</td><td>📈 <strong>Fondement de l'inférence</strong></td><td>ES = s/√n ; IC = x̄ ± z × ES</td><td>Erreur standard, intervalles de confiance et tests d'hypothèses dépendent tous de s</td></tr>
+    <tr><td>1</td><td>✅ <strong>Non négatif</strong></td><td>s ≥ 0, et s = 0 seulement quand toutes les valeurs sont identiques</td><td>Zéro dispersion signifie zéro variabilité — une constante, non une variable</td></tr>
+    <tr><td>2</td><td>📐 <strong>Mêmes unités que les données</strong></td><td>Si les données sont en kg, s est en kg ; si en °C, s est en °C</td><td>Directement interprétable, contrairement à la variance qui est en unités au carré</td></tr>
+    <tr><td>3</td><td>🔗 <strong>Transformation linéaire</strong></td><td>Si y = a + bx, alors s<sub>y</sub> = |b| × s<sub>x</sub></td><td>Ajouter une constante (a) ne change pas la dispersion ; multiplier par une constante (b) l'échelonne proportionnellement. Convertir des températures de °C en °F multiplie s par 1,8 mais n'y ajoute pas 32</td></tr>
+    <tr><td>4</td><td>⚡ <strong>Sensible aux valeurs aberrantes</strong></td><td>La mise au carré amplifie les écarts extrêmes de manière disproportionnée</td><td>Une fonctionnalité pour la détection (les valeurs aberrantes gonflent s de manière visible), une faiblesse pour la robustesse (une seule valeur extrême peut distordre s dramatiquement)</td></tr>
+    <tr><td>5</td><td>📈 <strong>Fondation de l'inférence</strong></td><td>ES = s/√n ; IC = x̄ ± z × ES ; t = (x̄ − μ₀) / ES</td><td>Erreur standard, intervalles de confiance, tests t et virtuellement toute l'inférence paramétrique dépendent de s. Sans l'écart-type, la statistique inférentielle moderne n'existerait pas</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>6️⃣ Coefficient de Variation (CV) — La Mesure Relative</h2>
+<h2>6️⃣ Coefficient de variation (CV) — La mesure relative</h2>
 
-<h3>Le Problème Résolu par le CV</h3>
+<h3>Le problème que le CV résout</h3>
 
-<p>Imaginez que vous mesurez la hauteur de tournesols (moyenne = 180 cm, s = 12 cm) et la longueur de leurs graines (moyenne = 1,2 cm, s = 0,3 cm). Quelle variable est « plus variable » ? Vous <strong>ne pouvez pas</strong> répondre en comparant les écarts-types — ils utilisent des unités et des échelles différentes. C'est là qu'intervient le <strong>coefficient de variation</strong> (Pearson, 1896).</p>
+<p>Imaginez un biologiste de la faune sauvage étudiant les éléphants d'Afrique (masse corporelle moyenne = 5 000 kg, ET = 800 kg) et les musaraignes étrusques (masse corporelle moyenne = 1,8 g, ET = 0,3 g). Quelle espèce montre plus de variabilité dans la masse corporelle ? Comparer les écarts-types directement est absurde — 800 kg vs. 0,3 g — parce que les mesures existent sur des échelles entièrement différentes. C'est le problème que le <strong>coefficient de variation</strong> résout.</p>
 
-<h3>Définition</h3>
+<h3>Définition et origine</h3>
 
-<p>Le <strong>coefficient de variation</strong>, introduit par Karl Pearson en 1896, exprime l'écart-type en pourcentage de la moyenne. C'est une mesure <strong>adimensionnelle</strong> permettant de comparer la variabilité entre jeux de données complètement différents :</p>
+<p>Le <strong>coefficient de variation</strong>, introduit par Karl Pearson en 1896 dans son article fondateur sur la régression et l'hérédité, exprime l'écart-type en pourcentage de la moyenne. C'est une mesure <strong>adimensionnelle, sans unité</strong> qui permet de comparer la variabilité entre des jeux de données complètement différents, des unités différentes et des ordres de grandeur différents (Pearson, 1896) :</p>
 
-<p style="text-align:center;"><strong>CV = (s / x̄) × 100%</strong></p>
+<p style="text-align:center;"><strong>CV = (s / x̄) × 100 %</strong></p>
+
+<p><strong>Retour à notre exemple de la faune :</strong></p>
 
 <table>
   <thead>
-    <tr><th>Variable</th><th>Moyenne</th><th>Écart-type</th><th>CV</th><th>Interprétation</th></tr>
+    <tr><th>Espèce</th><th>Moyenne</th><th>ET</th><th>CV</th><th>Interprétation</th></tr>
   </thead>
   <tbody>
-    <tr><td>Hauteur des plantes</td><td>180 cm</td><td>12 cm</td><td>(12/180) × 100 = <strong>6,67%</strong></td><td>Faible variabilité relative</td></tr>
-    <tr><td>Longueur des graines</td><td>1,2 cm</td><td>0,3 cm</td><td>(0,3/1,2) × 100 = <strong>25,0%</strong></td><td>Forte variabilité relative</td></tr>
+    <tr><td>Éléphant d'Afrique</td><td>5 000 kg</td><td>800 kg</td><td>(800/5000) × 100 = <strong>16,0 %</strong></td><td>Variabilité relative modérée</td></tr>
+    <tr><td>Musaraigne étrusque</td><td>1,8 g</td><td>0,3 g</td><td>(0,3/1,8) × 100 = <strong>16,7 %</strong></td><td>Variabilité relative modérée</td></tr>
   </tbody>
 </table>
 
-<p>Malgré un écart-type <em>beaucoup plus petit</em> en valeur absolue, la longueur des graines est bien <strong>plus variable</strong> relativement à sa moyenne.</p>
+<p>Un résultat frappant : malgré un écart-type de 800 kg pour les éléphants contre 0,3 g pour les musaraignes — un facteur de près de 3 milliards en termes absolus — les deux espèces montrent une variabilité relative <em>quasi identique</em> de la masse corporelle (~16 %). Le CV révèle une régularité biologique que l'écart-type brut masque complètement.</p>
 
 <h3>Interprétation du CV</h3>
 
@@ -258,125 +305,175 @@
     <tr><th>Plage du CV</th><th>Interprétation</th><th>Contexte typique</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>CV < 10%</strong></td><td>Faible variabilité — très homogène</td><td>Analyses de laboratoire, instruments de précision</td></tr>
-    <tr><td><strong>10% ≤ CV ≤ 20%</strong></td><td>Variabilité modérée — acceptable</td><td>Essais agronomiques, mesures biologiques</td></tr>
-    <tr><td><strong>20% < CV ≤ 30%</strong></td><td>Forte variabilité — à surveiller</td><td>Enquêtes en sciences sociales, données écologiques</td></tr>
-    <tr><td><strong>CV > 30%</strong></td><td>Très forte variabilité — données hétérogènes</td><td>Distributions de revenus, traits biologiques très variables</td></tr>
+    <tr><td><strong>CV &lt; 10 %</strong></td><td>Faible variabilité — données très consistantes</td><td>Dosages de laboratoire de précision, contrôle qualité industriel, expériences bien contrôlées</td></tr>
+    <tr><td><strong>10 % ≤ CV ≤ 20 %</strong></td><td>Variabilité modérée — généralement acceptable</td><td>Essais agronomiques au champ, mesures biologiques, données cliniques</td></tr>
+    <tr><td><strong>20 % &lt; CV ≤ 30 %</strong></td><td>Variabilité élevée — nécessite attention</td><td>Enquêtes en sciences sociales, données écologiques de terrain, expériences en phase préliminaire</td></tr>
+    <tr><td><strong>CV &gt; 30 %</strong></td><td>Très haute variabilité — données hétérogènes</td><td>Distributions de revenus, abondances d'espèces, traits biologiques très variables</td></tr>
   </tbody>
 </table>
 
-<h3>Quand NE PAS Utiliser le CV</h3>
+<h3>Quand NE PAS utiliser le CV</h3>
+
+<p>Le CV possède des limitations importantes qui doivent être respectées (Wackerly et al., 2014 ; Abdi, 2010) :</p>
 
 <table>
   <thead>
     <tr><th>Limitation</th><th>Explication</th></tr>
   </thead>
   <tbody>
-    <tr><td>⚠️ <strong>Moyenne proche de zéro</strong></td><td>Si x̄ ≈ 0, le CV explose vers l'infini</td></tr>
-    <tr><td>⚠️ <strong>Échelle d'intervalle uniquement</strong></td><td>Le CV n'est valable que pour les données à <strong>échelle de rapport</strong>. La température en °C n'a pas de vrai zéro — le même jeu en Celsius et Fahrenheit donne des CV différents</td></tr>
-    <tr><td>⚠️ <strong>Valeurs négatives</strong></td><td>Si les données contiennent des valeurs négatives, le CV n'a pas de sens</td></tr>
+    <tr><td>⚠️ <strong>Moyenne proche de zéro</strong></td><td>Si x̄ ≈ 0, le CV explose vers l'infini, devenant dénué de sens. La vitesse du vent dans un site abrité avec une moyenne de 0,5 m/s et un ET de 0,4 m/s donne CV = 80 % — non parce que le vent est erratique mais parce que le dénominateur est minuscule</td></tr>
+    <tr><td>⚠️ <strong>Échelles de rapport uniquement</strong></td><td>Le CV n'est valide que pour les <strong>données de rapport</strong> (où zéro signifie « absence de la quantité »). La température en °C n'a pas de vrai zéro — le même jeu de données en Celsius et en Fahrenheit donne des CV différents, prouvant que la mesure est dénuée de sens pour les échelles d'intervalle</td></tr>
+    <tr><td>⚠️ <strong>Valeurs négatives</strong></td><td>Si les données contiennent des valeurs négatives ou si la moyenne est négative, le CV n'est pas défini. Les données de bénéfice/perte net, l'altitude relative au niveau de la mer et les jeux de données similaires nécessitent des approches alternatives</td></tr>
   </tbody>
 </table>
 
-<blockquote>🌾 <strong>Application Agronomique :</strong> Dans les essais au champ, le CV est l'indicateur standard de la précision expérimentale. Gomez & Gomez (1984) suggèrent qu'un CV inférieur à 12% indique un bon contrôle expérimental pour la plupart des traits culturaux, tandis qu'un CV supérieur à 20% signale une variation excessive nécessitant un remaniement du protocole. Les tableaux ANOVA en recherche agronomique rapportent systématiquement le CV.</blockquote>
+<blockquote>🌾 <strong>Standard agronomique :</strong> Dans les expérimentations au champ à travers le monde, le CV est l'indicateur standard de qualité pour la précision expérimentale. Gomez &amp; Gomez (1984), dans leur ouvrage de référence classique <em>Statistical Procedures for Agricultural Research</em>, suggèrent qu'un CV inférieur à 12 % indique un bon contrôle expérimental pour la plupart des caractères des cultures, tandis que des CV supérieurs à 20 % suggèrent une variation incontrôlée excessive pouvant nécessiter de repenser l'expérience, d'augmenter les répétitions ou d'ajuster la structure des blocs. Les tableaux d'ANOVA dans les revues de recherche agronomique rapportent systématiquement le CV aux côtés des statistiques F et des valeurs P comme mesure de la qualité des données.</blockquote>
 
 <hr>
 
-<h2>🔄 Comparaison Complète de Toutes les Mesures</h2>
+<h2>🔄 Comparaison complète de toutes les mesures de dispersion</h2>
 
 <table>
   <thead>
-    <tr><th>Mesure</th><th>Formule</th><th>Unités</th><th>Utilise toutes les données ?</th><th>Résistant aux valeurs aberrantes ?</th><th>Meilleur usage</th></tr>
+    <tr><th>Mesure</th><th>Formule</th><th>Unités</th><th>Utilise toutes les données ?</th><th>Résistante aux valeurs aberrantes ?</th><th>Meilleur emploi</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Étendue</strong></td><td>X<sub>max</sub> − X<sub>min</sub></td><td>Identiques</td><td>❌ Extrêmes seulement</td><td>❌ Très sensible</td><td>Aperçu rapide</td></tr>
-    <tr><td><strong>EIQ</strong></td><td>Q₃ − Q₁</td><td>Identiques</td><td>❌ 50% centraux</td><td>✅ Très robuste</td><td>Médiane, boîtes à moustaches</td></tr>
-    <tr><td><strong>EMA</strong></td><td>Σ|xᵢ − x̄| / n</td><td>Identiques</td><td>✅</td><td>Modéré</td><td>Analyse robuste</td></tr>
-    <tr><td><strong>Variance</strong></td><td>Σ(xᵢ − x̄)² / (n−1)</td><td>Au carré</td><td>✅</td><td>❌ Sensible</td><td>ANOVA, travail théorique</td></tr>
-    <tr><td><strong>Écart-type</strong></td><td>√Variance</td><td>Identiques</td><td>✅</td><td>❌ Sensible</td><td>Moyenne, loi normale</td></tr>
-    <tr><td><strong>CV</strong></td><td>(s / x̄) × 100%</td><td>Sans dimension (%)</td><td>✅</td><td>❌ Sensible</td><td>Comparaison inter-groupes</td></tr>
+    <tr><td><strong>Étendue</strong></td><td>X<sub>max</sub> − X<sub>min</sub></td><td>Mêmes que les données</td><td>❌ Seulement les extrêmes</td><td>❌ Extrêmement sensible</td><td>Aperçu rapide, inspection préliminaire</td></tr>
+    <tr><td><strong>EIQ</strong></td><td>Q₃ − Q₁</td><td>Mêmes que les données</td><td>❌ Seulement les 50 % centraux</td><td>✅ Très robuste</td><td>Médiane, diagrammes en boîte, données asymétriques</td></tr>
+    <tr><td><strong>EMA</strong></td><td>Σ|xᵢ − x̄| / n</td><td>Mêmes que les données</td><td>✅</td><td>Modéré (basé sur la moyenne) à Très robuste (basé sur la médiane)</td><td>Analyse robuste, données contaminées</td></tr>
+    <tr><td><strong>Variance</strong></td><td>Σ(xᵢ − x̄)² / (n−1)</td><td>Unités au carré</td><td>✅</td><td>❌ Sensible</td><td>ANOVA, régression, dérivations théoriques</td></tr>
+    <tr><td><strong>Écart-type</strong></td><td>√Variance</td><td>Mêmes que les données</td><td>✅</td><td>❌ Sensible</td><td>Moyenne, distribution normale, intervalles de confiance</td></tr>
+    <tr><td><strong>CV</strong></td><td>(s / x̄) × 100 %</td><td>Sans dimension %</td><td>✅</td><td>❌ Sensible</td><td>Comparaison inter-groupes/inter-variables</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>🧮 Formule de Calcul Rapide de la Variance</h2>
+<h2>🧮 Formule de calcul rapide de la variance</h2>
 
-<p>Pour le calcul à la main, la <strong>formule computationnelle</strong> évite de calculer les écarts un par un (Triola, 2018) :</p>
+<p>Pour le calcul à la main, la <strong>formule de calcul</strong> (aussi appelée « formule en scores bruts ») évite de calculer les écarts individuels et réduit les erreurs d'arrondi cumulatives. Elle est algébriquement équivalente à la formule de définition mais plus efficace en calcul (Triola, 2018) :</p>
 
 <p style="text-align:center;"><strong>s² = [n(Σxᵢ²) − (Σxᵢ)²] / [n(n − 1)]</strong></p>
 
-<p><strong>Vérification avec nos données pH :</strong></p>
-<p style="text-align:center;">s² = [5(232,10) − (34,0)²] / [5(4)] = [1160,50 − 1156,00] / 20 = 4,50 / 20 = <strong>0,225</strong> ✓</p>
-
-<hr>
-
-<h2>🔬 Exemple Complet : Comparer Deux Traitements d'Engrais</h2>
-
-<p>Un chercheur à Batna, Algérie, teste deux engrais azotés sur l'orge. Dix parcelles reçoivent chacune le traitement A ou B, et les rendements (en q/ha) sont enregistrés :</p>
+<p><strong>Vérification avec nos données de mercure du Danube :</strong></p>
 
 <table>
   <thead>
-    <tr><th>Statistique</th><th>Traitement A</th><th>Traitement B</th></tr>
+    <tr><th>xᵢ</th><th>xᵢ²</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0,42</td><td>0,1764</td></tr>
+    <tr><td>0,58</td><td>0,3364</td></tr>
+    <tr><td>0,71</td><td>0,5041</td></tr>
+    <tr><td>0,35</td><td>0,1225</td></tr>
+    <tr><td>0,94</td><td>0,8836</td></tr>
+    <tr><td><strong>Σxᵢ = 3,00</strong></td><td><strong>Σxᵢ² = 2,0230</strong></td></tr>
+  </tbody>
+</table>
+
+<p style="text-align:center;">s² = [5(2,0230) − (3,00)²] / [5(4)] = [10,1150 − 9,0000] / 20 = 1,1150 / 20 = <strong>0,05575</strong> ✓</p>
+
+<p>Le résultat correspond exactement à notre calcul pas à pas, confirmant l'équivalence algébrique des deux formules.</p>
+
+<hr>
+
+<h2>🔬 Exemple complet résolu : Comparaison de deux méthodes d'irrigation</h2>
+
+<p>Une équipe de recherche du Centre International de Recherche Agricole dans les Zones Arides (ICARDA) teste deux méthodes d'irrigation sur l'orge dans un essai en zone semi-aride. Dix parcelles reçoivent chacune l'irrigation goutte à goutte (Méthode A) ou l'irrigation par sillons (Méthode B), et les rendements (en q/ha) sont enregistrés :</p>
+
+<table>
+  <thead>
+    <tr><th>Méthode A (Goutte à goutte)</th><th>Méthode B (Sillons)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>28, 30, 32, 29, 31, 33, 30, 31, 29, 27</td><td>20, 35, 25, 40, 22, 38, 28, 42, 18, 32</td></tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr><th>Statistique</th><th>Méthode A (Goutte à goutte)</th><th>Méthode B (Sillons)</th></tr>
   </thead>
   <tbody>
     <tr><td><strong>Moyenne (x̄)</strong></td><td>30,0 q/ha</td><td>30,0 q/ha</td></tr>
     <tr><td><strong>Étendue</strong></td><td>33 − 27 = 6</td><td>42 − 18 = 24</td></tr>
     <tr><td><strong>Variance (s²)</strong></td><td>3,11</td><td>72,22</td></tr>
     <tr><td><strong>Écart-type (s)</strong></td><td>1,76 q/ha</td><td>8,50 q/ha</td></tr>
-    <tr><td><strong>CV</strong></td><td>5,87%</td><td>28,33%</td></tr>
+    <tr><td><strong>CV</strong></td><td>5,87 %</td><td>28,33 %</td></tr>
   </tbody>
 </table>
 
-<p><strong>Interprétation :</strong> Les deux engrais produisent le même rendement moyen — mais l'histoire sous la moyenne est radicalement différente. Le traitement A offre des résultats homogènes et prévisibles (CV ≈ 6%). Le traitement B est un pari : certaines parcelles excellent tandis que d'autres échouent (CV ≈ 28%). Pour un agriculteur prudent, le traitement A est le choix évident malgré la moyenne identique. C'est la puissance de l'analyse de la dispersion.</p>
+<p><strong>Interprétation :</strong> Les deux méthodes d'irrigation produisent le même rendement moyen — mais l'histoire sous la moyenne est radicalement différente. La Méthode A (goutte à goutte) fournit des résultats consistants et prévisibles avec un CV d'environ 6 %, indiquant une excellente uniformité. La Méthode B (sillons) est un pari : certaines parcelles donnent des rendements spectaculaires (42 q/ha) tandis que d'autres échouent lourdement (18 q/ha), avec un CV approchant 28 % — une variabilité très élevée. Pour un agriculteur gérant des terres pauvres en eau, la Méthode A est clairement supérieure malgré la moyenne identique. C'est la puissance de l'analyse de dispersion — la moyenne seule aurait déclaré ces méthodes d'irrigation équivalentes, alors que l'une est un outil fiable et l'autre un coup de dés.</p>
 
 <hr>
 
-<h2>📐 Dispersion et Forme des Distributions</h2>
+<h2>📐 Dispersion et forme des distributions</h2>
+
+<p>Les mesures de dispersion interagissent intimement avec la forme d'une distribution. Choisir la bonne mesure de dispersion dépend de son appariement avec les caractéristiques de la distribution — un jumelage aussi important que le choix de la bonne mesure de tendance centrale (Weisberg, 1992 ; Moore et al., 2021) :</p>
 
 <table>
   <thead>
-    <tr><th>Forme de la distribution</th><th>Meilleure tendance centrale</th><th>Meilleure dispersion</th><th>Pourquoi</th></tr>
+    <tr><th>Forme de distribution</th><th>Meilleure tendance centrale</th><th>Meilleure dispersion</th><th>Pourquoi</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Symétrique (normale)</strong></td><td>Moyenne</td><td>Écart-type</td><td>Moyenne et σ caractérisent entièrement la loi normale</td></tr>
-    <tr><td><strong>Asymétrique</strong></td><td>Médiane</td><td>EIQ</td><td>Les deux résistent à l'influence de la queue longue</td></tr>
-    <tr><td><strong>Données contaminées</strong></td><td>Moyenne tronquée</td><td>Écart absolu médian</td><td>Mesures robustes résistent aux valeurs extrêmes</td></tr>
-    <tr><td><strong>Échelles différentes</strong></td><td>Moyenne</td><td>Coefficient de variation</td><td>Le CV normalise la dispersion par rapport au centre</td></tr>
+    <tr><td><strong>Symétrique (normale)</strong></td><td>Moyenne</td><td>Écart-type</td><td>Moyenne et ET ensemble caractérisent pleinement la distribution normale — ce sont des statistiques suffisantes</td></tr>
+    <tr><td><strong>Asymétrique</strong></td><td>Médiane</td><td>EIQ</td><td>Tous deux résistent à l'attraction de la queue longue. Rapporter moyenne ± ET pour des données de revenus, par exemple, peut produire des bornes inférieures négatives — une impossibilité logique</td></tr>
+    <tr><td><strong>Contaminée par des valeurs aberrantes</strong></td><td>Moyenne tronquée ou Médiane</td><td>Écart absolu médian</td><td>Les mesures robustes résistent à l'influence des valeurs extrêmes — l'EMA basé sur la médiane a un point de rupture de 50 %</td></tr>
+    <tr><td><strong>Comparaison d'échelles différentes</strong></td><td>Moyenne</td><td>Coefficient de Variation</td><td>Le CV normalise la dispersion par rapport au centre, permettant la comparaison entre variables mesurées en unités différentes</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>⚠️ Erreurs Courantes et Idées Fausses</h2>
+<h2>🌍 Applications réelles à travers les disciplines</h2>
 
 <table>
   <thead>
-    <tr><th>Piège</th><th>L'Erreur</th><th>La Correction</th></tr>
+    <tr><th>Domaine</th><th>La dispersion en action</th></tr>
   </thead>
   <tbody>
-    <tr><td>❌ <strong>Moyenne sans dispersion</strong></td><td>« Le rendement moyen était de 30 q/ha » — sans écart-type</td><td>Toujours accompagner la moyenne d'une mesure de dispersion et de n</td></tr>
-    <tr><td>❌ <strong>Comparer des σ d'échelles différentes</strong></td><td>Conclure que la taille (σ = 12 cm) est moins variable que le poids (σ = 8 kg)</td><td>Utiliser le CV pour les comparaisons inter-variables</td></tr>
-    <tr><td>❌ <strong>Écart-type pour données asymétriques</strong></td><td>Rapporter moyenne ± σ pour les revenus (très asymétriques)</td><td>Utiliser médiane et EIQ pour les distributions asymétriques</td></tr>
-    <tr><td>❌ <strong>Confondre σ et s</strong></td><td>Utiliser les formules de population (÷ n) sur des données échantillonnales</td><td>Toujours utiliser n − 1 pour les échantillons</td></tr>
-    <tr><td>❌ <strong>Interpréter la variance directement</strong></td><td>« La variance est 25 cm² » — que signifie « centimètres carrés » ?</td><td>Rapporter l'écart-type (5 cm) pour l'interprétabilité</td></tr>
+    <tr><td>🌾 <strong>Agriculture</strong></td><td>Le CV des rendements des cultures évalue la stabilité des cultivars à travers les environnements ; une faible s² dans les essais de fertilisation indique des recommandations de traitement fiables. Gomez &amp; Gomez (1984) ont établi le CV comme critère standard de qualité pour les expérimentations au champ dans le monde entier</td></tr>
+    <tr><td>🔬 <strong>Sciences de laboratoire</strong></td><td>La répétabilité se mesure par le CV des mesures répliquées. La validation des méthodes analytiques exige typiquement un CV &lt; 10 % pour la précision, selon les lignes directrices ICH Q2(R1) utilisées mondialement dans les laboratoires pharmaceutiques</td></tr>
+    <tr><td>💊 <strong>Médecine</strong></td><td>La variabilité de la pression artérielle (ET des mesures de visite en visite) est désormais reconnue comme un prédicteur <em>indépendant</em> du risque cardiovasculaire — pas seulement le niveau moyen. Rothwell et al. (2010) ont montré dans <em>The Lancet</em> que les patients présentant une haute variabilité de la PA systolique avaient un risque d'AVC significativement accru, même lorsque la PA moyenne était contrôlée</td></tr>
+    <tr><td>💰 <strong>Finance</strong></td><td>Risque du portefeuille = écart-type des rendements. Le ratio de Sharpe = (rendement − taux sans risque) / σ, faisant de σ le dénominateur de la performance ajustée au risque. La Théorie Moderne du Portefeuille de Markowitz (1952) est fondamentalement une théorie de la minimisation de la variance</td></tr>
+    <tr><td>🏭 <strong>Industrie</strong></td><td>La méthodologie Six Sigma, développée chez Motorola en 1986, vise une variation de processus si faible que 99,99966 % des produits tombent dans les limites de spécification (±6σ de la moyenne cible), n'autorisant que 3,4 défauts par million d'opportunités (Harry &amp; Schroeder, 2000)</td></tr>
+    <tr><td>🌿 <strong>Écologie</strong></td><td>Les indices de diversité spécifique (Simpson, Shannon-Wiener) intègrent la variance de l'abondance entre espèces pour distinguer les communautés à distributions équitables de celles dominées par une seule espèce — la variance de l'abondance est écologiquement plus informative que la moyenne</td></tr>
+    <tr><td>🌡️ <strong>Sciences climatiques</strong></td><td>Les projections de température mondiale sont dénuées de sens sans bornes d'incertitude. Le GIEC rapporte les scénarios de réchauffement sous forme de fourchettes (ex. 1,5–4,5°C pour la sensibilité climatique), et les décideurs planifient pour les queues de la distribution, pas pour le centre</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>🎯 Arbre de Décision : Choisir la Bonne Mesure</h2>
+<h2>⚠️ Pièges courants et idées fausses</h2>
+
+<table>
+  <thead>
+    <tr><th>Piège</th><th>L'erreur</th><th>La correction</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>❌ <strong>Rapporter la moyenne sans dispersion</strong></td><td>« Le score moyen était de 72 » — sans ET, ES ou IC rapportés</td><td>Toujours accompagner la moyenne d'une mesure de dispersion (ET pour la description, ES pour l'inférence) et indiquer la taille n. Le Manuel de publication de l'American Psychological Association (APA) l'exige explicitement</td></tr>
+    <tr><td>❌ <strong>Comparer les ET entre échelles différentes</strong></td><td>Conclure que la taille (ET = 12 cm) est « moins variable » que le poids (ET = 8 kg)</td><td>Utiliser le CV pour les comparaisons inter-variables — il normalise par la moyenne, rendant les comparaisons significatives quelle que soit l'unité</td></tr>
+    <tr><td>❌ <strong>Utiliser l'ET pour des données asymétriques</strong></td><td>Rapporter moyenne ± ET pour les revenus des ménages (fortement asymétrique à droite), donnant une borne inférieure de −5 000 $</td><td>Utiliser médiane et EIQ pour les distributions asymétriques — ils résistent à l'attraction de la longue queue et ne produisent jamais de valeurs impossibles</td></tr>
+    <tr><td>❌ <strong>Confondre σ et s</strong></td><td>Utiliser la formule de population (÷ n) sur des données d'échantillon, sous-estimant systématiquement la variance de population</td><td>Toujours utiliser n − 1 pour les échantillons (correction de Bessel) ; réserver n aux populations connues et complètes. La plupart des données réelles sont des échantillons</td></tr>
+    <tr><td>❌ <strong>Interpréter la variance directement</strong></td><td>« La variance est de 25 cm² » — que signifie physiquement « centimètres carrés » ?</td><td>Rapporter l'écart-type (5 cm) pour l'interprétabilité et la communication ; utiliser la variance pour le travail computationnel et théorique (ANOVA, régression)</td></tr>
+    <tr><td>❌ <strong>Ignorer la dispersion dans la prise de décision</strong></td><td>Choisir le Traitement B plutôt que A parce que sa moyenne est 1 unité plus haute, ignorant que son ET est 10× plus grand</td><td>Toujours considérer le <em>compromis risque-rendement</em> : une moyenne légèrement plus basse avec une variabilité bien moindre est souvent préférable, surtout dans les contextes averses au risque comme la médecine, l'agriculture et l'ingénierie</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🎯 Organigramme de décision : Choisir la bonne mesure</h2>
 
 <table>
   <thead>
     <tr><th>Question</th><th>Si OUI →</th><th>Si NON →</th></tr>
   </thead>
   <tbody>
-    <tr><td>Juste un aperçu rapide de la dispersion totale ?</td><td>Utilisez l'<strong>Étendue</strong></td><td>↓</td></tr>
-    <tr><td>Données asymétriques ou avec valeurs aberrantes ?</td><td>Utilisez l'<strong>EIQ</strong> (avec Médiane)</td><td>↓</td></tr>
-    <tr><td>Données approximativement normales ?</td><td>Utilisez l'<strong>Écart-type</strong> (avec Moyenne)</td><td>↓</td></tr>
-    <tr><td>Comparer des groupes d'unités ou de moyennes très différentes ?</td><td>Utilisez le <strong>CV</strong></td><td>↓</td></tr>
-    <tr><td>ANOVA, régression ou dérivations théoriques ?</td><td>Utilisez la <strong>Variance</strong></td><td>Utilisez σ ou EIQ selon le cas</td></tr>
+    <tr><td>Avez-vous juste besoin d'un aperçu rapide de la dispersion totale ?</td><td>Utiliser l'<strong>Étendue</strong> — mais jamais comme seule mesure</td><td>↓</td></tr>
+    <tr><td>Les données sont-elles asymétriques ou contiennent-elles des valeurs aberrantes ?</td><td>Utiliser l'<strong>EIQ</strong> (accompagné de la Médiane)</td><td>↓</td></tr>
+    <tr><td>Les données sont-elles approximativement normales (en forme de cloche) ?</td><td>Utiliser l'<strong>Écart-type</strong> (accompagné de la Moyenne)</td><td>↓</td></tr>
+    <tr><td>Comparez-vous des groupes avec des unités différentes ou des moyennes très différentes ?</td><td>Utiliser le <strong>Coefficient de Variation</strong></td><td>↓</td></tr>
+    <tr><td>Effectuez-vous une ANOVA, une régression ou des dérivations théoriques ?</td><td>Utiliser la <strong>Variance</strong> — le moteur computationnel de l'inférence</td><td>Utiliser l'ET ou l'EIQ selon la distribution</td></tr>
   </tbody>
 </table>
 
@@ -384,30 +481,44 @@
 
 <h2>📚 Références</h2>
 
-<p>Agresti, A., & Finlay, B. (2018). <em>Statistical methods for the social sciences</em> (5th ed.). Pearson.</p>
+<p>Abdi, H. (2010). Coefficient of variation. In N. Salkind (Ed.), <em>Encyclopedia of research design</em> (pp. 169–171). Sage.</p>
 
-<p>Devore, J. L., & Berk, K. N. (2012). <em>Modern mathematical statistics with applications</em> (2nd ed.). Springer.</p>
+<p>Agresti, A., &amp; Finlay, B. (2018). <em>Statistical methods for the social sciences</em> (5th ed.). Pearson.</p>
 
-<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton & Company.</p>
+<p>Cox, D. R. (1948). A note on the asymptotic distribution of range. <em>Biometrika</em>, <em>35</em>(3–4), 310–315.</p>
 
-<p>Gomez, K. A., & Gomez, A. A. (1984). <em>Statistical procedures for agricultural research</em> (2nd ed.). John Wiley & Sons.</p>
+<p>Deltacommissie. (2008). <em>Working together with water: A living land builds for its future</em>. Deltacommissie.</p>
 
-<p>Gorard, S. (2005). Revisiting a 90-year-old debate: The advantages of the mean deviation. <em>British Journal of Educational Studies</em>, 53(4), 417–430. https://doi.org/10.1111/j.1467-8527.2005.00304.x</p>
+<p>Devore, J. L., &amp; Berk, K. N. (2012). <em>Modern mathematical statistics with applications</em> (2nd ed.). Springer.</p>
 
-<p>Huber, P. J., & Ronchetti, E. M. (2009). <em>Robust statistics</em> (2nd ed.). Wiley.</p>
+<p>Freedman, D., Pisani, R., &amp; Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton &amp; Company.</p>
 
-<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+<p>Gerritsen, H. (2005). What happened in 1953? The Big Flood in the Netherlands in retrospect. <em>Philosophical Transactions of the Royal Society A</em>, <em>363</em>(1831), 1271–1291. https://doi.org/10.1098/rsta.2005.1568</p>
 
-<p>Pearson, K. (1896). Mathematical contributions to the theory of evolution. III. Regression, heredity, and panmixia. <em>Philosophical Transactions of the Royal Society of London, Series A</em>, 187, 253–318.</p>
+<p>Gomez, K. A., &amp; Gomez, A. A. (1984). <em>Statistical procedures for agricultural research</em> (2nd ed.). John Wiley &amp; Sons.</p>
+
+<p>Gorard, S. (2005). Revisiting a 90-year-old debate: The advantages of the mean deviation. <em>British Journal of Educational Studies</em>, <em>53</em>(4), 417–430. https://doi.org/10.1111/j.1467-8527.2005.00304.x</p>
+
+<p>Harry, M. J., &amp; Schroeder, R. (2000). <em>Six Sigma: The breakthrough management strategy revolutionizing the world's top corporations</em>. Currency/Doubleday.</p>
+
+<p>Huber, P. J., &amp; Ronchetti, E. M. (2009). <em>Robust statistics</em> (2nd ed.). Wiley.</p>
+
+<p>Markowitz, H. (1952). Portfolio selection. <em>The Journal of Finance</em>, <em>7</em>(1), 77–91. https://doi.org/10.2307/2975974</p>
+
+<p>Moore, D. S., McCabe, G. P., &amp; Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+
+<p>Pearson, K. (1896). Mathematical contributions to the theory of evolution. III. Regression, heredity, and panmixia. <em>Philosophical Transactions of the Royal Society of London, Series A</em>, <em>187</em>, 253–318.</p>
 
 <p>Reichel, F. (2025). On Bessel's correction: Unbiased sample variance, the bariance, and a novel runtime-optimized estimator. <em>arXiv preprint</em> arXiv:2503.22333.</p>
 
-<p>Rothwell, P. M., et al. (2010). Prognostic significance of visit-to-visit variability, maximum systolic blood pressure, and episodic hypertension. <em>The Lancet</em>, 375(9718), 895–905. https://doi.org/10.1016/S0140-6736(10)60308-X</p>
+<p>Rothwell, P. M., Howard, S. C., Dolan, E., O'Brien, E., Dobson, J. E., Dahlöf, B., Sever, P. S., &amp; Poulter, N. R. (2010). Prognostic significance of visit-to-visit variability, maximum systolic blood pressure, and episodic hypertension. <em>The Lancet</em>, <em>375</em>(9718), 895–905. https://doi.org/10.1016/S0140-6736(10)60308-X</p>
+
+<p>Stigler, S. M. (1986). <em>The history of statistics: The measurement of uncertainty before 1900</em>. Harvard University Press.</p>
 
 <p>Triola, M. F. (2018). <em>Elementary statistics</em> (13th ed.). Pearson.</p>
 
 <p>Tukey, J. W. (1977). <em>Exploratory data analysis</em>. Addison-Wesley.</p>
 
-<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>
+<p>Wackerly, D. D., Mendenhall, W., &amp; Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>
 
 <p>Weisberg, H. F. (1992). <em>Central tendency and variability</em>. Sage Publications.</p>

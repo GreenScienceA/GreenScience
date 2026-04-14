@@ -1,176 +1,190 @@
-<h2>📏 Intervalles de Confiance : Quantifier l'Incertitude avec Précision</h2>
+<h2>📏 Intervalles de Confiance : Quantifier l'incertitude avec précision</h2>
 
-<p>Imaginez que vous êtes un pédologue à Sétif, en Algérie, mesurant la teneur moyenne en carbone organique des sols agricoles. Vous prélevez 40 échantillons et obtenez une moyenne de 1,85 %. Mais vous savez que ce chiffre n'est pas <em>exactement</em> la vraie moyenne de la population — si vous échantillonniez 40 parcelles différentes demain, vous obtiendriez une moyenne légèrement différente. Alors comment présenter votre résultat de manière à communiquer honnêtement à la fois ce que vous avez appris <em>et</em> votre degré d'incertitude ? Vous pourriez dire « la moyenne est de 1,85 % » — mais ce chiffre unique cache l'inévitable erreur d'échantillonnage. Vous pourriez effectuer un test d'hypothèse — mais cela ne vous dit que si le résultat est « significatif », pas <em>quelle est la valeur</em> du vrai paramètre. La réponse est un <strong>intervalle de confiance</strong> : un ensemble de valeurs plausibles pour le paramètre de la population, calculé à partir des données de l'échantillon, qui transmet à la fois l'<em>estimation</em> et sa <em>précision</em> dans un seul résultat interprétable.</p>
+<p>Au matin du 8 novembre 2016, chaque grand institut de sondage américain rapportait la même conclusion : Hillary Clinton allait presque certainement remporter l'élection présidentielle. Le <em>New York Times</em> lui accordait 85 % de chances. Le Princeton Election Consortium disait 99 %. Mais quand les votes furent dépouillés, Donald Trump l'emporta — et le monde exigea une explication. L'American Association for Public Opinion Research (AAPOR) lança une enquête formelle, et son rapport de 2017 identifia un échec statistique crucial : les sondages au niveau des États avaient publié des estimations ponctuelles du soutien aux candidats — « Clinton mène de 3 points » — sans communiquer adéquatement l'<em>incertitude</em> autour de ces estimations. Les marges d'erreur, bien que techniquement rapportées, étaient enfouies dans les notes de bas de page et systématiquement mal comprises par les journalistes et le public. Une avance de 3 % avec une marge d'erreur de ±4 % ne signifie pas que le candidat en tête gagnera — cela signifie que la course est, statistiquement parlant, <em>indécise</em>. Les chiffres n'étaient jamais aussi certains que les gros titres le suggéraient ; ce qui échoua ne fut pas les mathématiques mais la communication de l'incertitude (Kennedy et al., 2018).</p>
 
-<p>Les intervalles de confiance sont sans doute l'outil le plus utile de toute la statistique inférentielle. Ils répondent à la question que tout chercheur se pose réellement : <em>« Combien ? »</em> et <em>« Avec quelle précision le sais-je ? »</em> — et pas seulement <em>« L'effet est-il non nul ? »</em> (Cumming, 2014). Depuis les années 1980, les revues de premier plan, les organisations professionnelles et les réformateurs méthodologiques exhortent les scientifiques à passer des valeurs p à l'estimation avec intervalles de confiance (Gardner &amp; Altman, 1986 ; APA, 2010 ; Wasserstein &amp; Lazar, 2016).</p>
+<p>C'est le problème que les intervalles de confiance ont été inventés pour résoudre. Une <strong>estimation ponctuelle</strong> — un nombre unique comme « la moyenne est 4,2 » ou « le candidat mène de 3 % » — est la meilleure estimation à partir des données, mais elle dissimule l'incertitude inévitable qui découle de l'observation d'un <em>échantillon</em> plutôt que de la <em>population</em> entière. Un <strong>intervalle de confiance</strong> remplace ce nombre unique par un <em>ensemble de valeurs plausibles</em> pour le paramètre de population, calculé à partir des données de l'échantillon, qui transmet à la fois l'estimation <em>et</em> sa précision dans un seul ensemble interprétable. Il répond à la question qui préoccupe véritablement chaque chercheur : non pas simplement <em>« L'effet est-il non nul ? »</em> mais <em>« Quelle est sa taille, et avec quelle précision le sais-je ? »</em> (Cumming, 2014).</p>
 
-<blockquote>💡 <strong>L'Idée Fondamentale :</strong> Une estimation ponctuelle est comme une fléchette lancée sur une cible — elle donne votre meilleure supposition. Un intervalle de confiance est l'<em>anneau autour de la fléchette</em> qui indique à quel point vous êtes probablement proche. Plus l'anneau est large, moins votre estimation est précise ; plus l'anneau est étroit, plus vos données sont informatives sur la vraie valeur.</blockquote>
+<p>Depuis les années 1980, les revues de premier plan, les organisations professionnelles et les réformateurs méthodologiques ont exhorté les scientifiques à passer des valeurs p à l'estimation par intervalles de confiance. L'article marquant de Gardner et Altman (1986) dans le <em>British Medical Journal</em> a démontré que les intervalles de confiance transmettent des informations bien plus utiles que les valeurs p seules. L'American Psychological Association a imposé leur présentation dans la 6e édition de son <em>Publication Manual</em> (APA, 2010). La déclaration historique de l'American Statistical Association de 2016 sur les valeurs p — la première prise de position formelle dans les 177 ans d'histoire de l'ASA — a souligné qu'« aucun indice unique ne devrait se substituer au raisonnement scientifique » et a pointé les intervalles de confiance comme une alternative plus riche (Wasserstein &amp; Lazar, 2016). Aujourd'hui, les intervalles de confiance sont requis ou fortement recommandés par le Comité international des rédacteurs de revues médicales (ICMJE) et les directives de reporting incluant CONSORT (essais cliniques), STROBE (études observationnelles) et PRISMA (revues systématiques).</p>
 
-<hr>
-
-<h2>📜 Origines Historiques : L'Idée Révolutionnaire de Neyman</h2>
-
-<p>L'intervalle de confiance a été inventé par le mathématicien polono-américain <strong>Jerzy Neyman</strong> dans les années 1930 — un concept remarquablement moderne. L'histoire commence à Varsovie vers 1930, quand l'étudiant de Neyman, Wacław Pytkowski, posa une question en apparence simple : comment caractériser la précision d'un coefficient de régression estimé sans faire d'affirmations dogmatiques ? Neyman travailla sur ce problème pendant des années, publiant des idées préliminaires en 1934 et la théorie complète dans son article fondateur de 1937 dans les <em>Philosophical Transactions of the Royal Society</em> (Neyman, 1937).</p>
-
-<p>L'idée brillante de Neyman fut de déplacer l'attention de la <em>probabilité d'un paramètre</em> (qui, en théorie fréquentiste, est une constante fixe inconnue sans distribution de probabilité) vers la <em>probabilité de la procédure</em>. Il se demanda : peut-on concevoir un algorithme qui, appliqué de manière répétée à des échantillons aléatoires d'une même population, produit des intervalles qui <em>capturent</em> la vraie valeur du paramètre une proportion spécifiée du temps ? Il appela les intervalles résultants « intervalles de confiance » — évitant délibérément le mot « probabilité » pour prévenir toute confusion avec les intervalles crédibles bayésiens (Neyman, 1937).</p>
-
-<p>Il fallut encore 50 ans avant que les revues médicales ne commencent à préconiser systématiquement la publication des intervalles de confiance. Le tournant vint avec l'article influent de Gardner et Altman (1986) dans le <em>British Medical Journal</em>, qui argumentait que les intervalles de confiance transmettent des informations bien plus utiles que les valeurs p seules. Aujourd'hui, les intervalles de confiance sont exigés ou fortement recommandés par l'American Psychological Association (APA, 2010), l'International Committee of Medical Journal Editors (ICMJE), et de nombreuses directives de publication spécifiques comme CONSORT et STROBE.</p>
-
-<blockquote>🧠 <strong>Les Propres Mots de Neyman :</strong> « Le statisticien qui calcule des intervalles de confiance aborde le problème de l'estimation d'une manière entièrement différente du bayésien. Il ne prétend pas que le paramètre a une quelconque probabilité de se trouver dans l'intervalle. Il affirme plutôt que la <em>méthode</em> utilisée a un taux de succès connu à long terme. » Cette distinction subtile mais cruciale reste la source de la plupart des malentendus sur les intervalles de confiance aujourd'hui.</blockquote>
+<blockquote>💡 <strong>L'idée fondamentale :</strong> Une estimation ponctuelle est comme une fléchette lancée sur une cible — elle donne votre meilleure estimation unique. Un intervalle de confiance est l'<em>anneau autour de la fléchette</em> qui vous indique à quel point vous êtes probablement proche. Plus l'anneau est large, moins votre estimation est précise ; plus l'anneau est étroit, plus vos données portent d'information sur la vraie valeur. Rapporter une estimation ponctuelle sans intervalle de confiance revient à rapporter vos coordonnées GPS sans dire si la précision est de ±1 mètre ou ±1 kilomètre.</blockquote>
 
 <hr>
 
-<h2>🔬 Anatomie d'un Intervalle de Confiance</h2>
+<h2>📜 Partie I — Origines historiques : L'idée révolutionnaire de Neyman</h2>
 
-<p>Tout intervalle de confiance a la même structure fondamentale :</p>
+<p>L'intervalle de confiance fut inventé par le mathématicien polono-américain <strong>Jerzy Neyman</strong> dans les années 1930 — un concept remarquablement moderne avec une histoire intellectuelle tumultueuse. L'histoire commence à Varsovie vers 1930, quand le doctorant de Neyman, Wacław Pytkowski, posa une question en apparence simple : comment caractériser la précision d'un coefficient de régression estimé sans formuler de revendications probabilistes dogmatiques sur le paramètre lui-même ? Neyman travailla sur ce problème pendant des années, publiant des idées préliminaires dans un article de 1934 et présentant la théorie complète lors d'une réunion de la Royal Statistical Society à Londres en 1934, avant sa publication définitive dans les <em>Philosophical Transactions of the Royal Society</em> en 1937 (Neyman, 1937).</p>
 
-<p style="text-align:center; font-size:1.15em;"><strong>IC = Estimation Ponctuelle ± Marge d'Erreur</strong></p>
+<p>La percée conceptuelle brillante de Neyman fut de déplacer le focus de la <em>probabilité d'un paramètre</em> (qui, dans la théorie fréquentiste, est une constante inconnue fixe sans distribution de probabilité) vers la <em>probabilité de la procédure</em>. Il demanda : pouvons-nous concevoir un algorithme qui, appliqué de manière répétée à des échantillons aléatoires de la même population, produit des intervalles qui <em>capturent</em> la vraie valeur du paramètre une proportion spécifiée du temps ? Il appela les intervalles résultants « intervalles de confiance » — évitant délibérément le mot « probabilité » pour prévenir toute confusion avec l'approche bayésienne d'assignation de distributions de probabilité aux paramètres (Neyman, 1937).</p>
+
+<p>L'accueil fut conflictuel. <strong>Ronald Fisher</strong>, alors la figure dominante de la statistique britannique, rejeta les intervalles de confiance comme inférieurs à ses propres « intervalles fiduciaires » — une approche concurrente qui tentait d'assigner des probabilités aux paramètres sans a priori bayésiens. Le différend Neyman-Fisher fut amer et personnel, durant des décennies et divisant la profession statistique. L'histoire a donné raison à Neyman : les intervalles de confiance sont devenus l'outil standard de la statistique appliquée dans le monde entier, tandis que l'argument fiduciaire de Fisher est aujourd'hui considéré comme logiquement défectueux par la plupart des statisticiens (Lehmann, 1993 ; Reid &amp; Cox, 2015). L'ironie est que les praticiens interprètent routinièrement les intervalles de confiance comme s'ils <em>étaient</em> des énoncés de probabilité sur les paramètres — l'interprétation même que Neyman a explicitement rejetée et que Fisher a poursuivie par erreur.</p>
+
+<p>Il fallut encore cinquante ans avant que les sciences médicales ne commencent à adopter systématiquement les intervalles de confiance. Le moment charnière vint avec l'article influent de Gardner et Altman (1986) dans le <em>BMJ</em>, qui démontra à travers des exemples détaillés que les intervalles de confiance transmettent des informations cliniquement bien plus utiles que les valeurs p. Suivit l'ouvrage de référence <em>Statistics with Confidence</em> (Altman et al., 2000), qui devint la référence standard pour l'estimation par intervalles en recherche biomédicale. Dans les années 2000, le mouvement s'était étendu à travers les disciplines : l'APA imposa les IC pour la psychologie (2010), l'ICMJE les recommanda pour toute recherche clinique, et les directives CONSORT et STROBE les intégrèrent comme exigences de publication.</p>
+
+<blockquote>🧠 <strong>Les propres mots de Neyman :</strong> « Le statisticien qui calcule des intervalles de confiance aborde le problème de l'estimation d'une manière entièrement différente du bayésien. Il ne prétend pas que le paramètre a une quelconque probabilité d'être dans l'intervalle. Il prétend plutôt que la <em>méthode</em> qu'il a utilisée a un taux de réussite à long terme connu. » Cette distinction subtile mais cruciale — entre la confiance dans la <em>méthode</em> et la probabilité du <em>paramètre</em> — reste la source de la plupart des malentendus sur les intervalles de confiance quatre-vingts ans plus tard.</blockquote>
+
+<hr>
+
+<h2>🔬 Partie II — L'anatomie d'un intervalle de confiance</h2>
+
+<p>Chaque intervalle de confiance possède la même structure fondamentale, qu'il concerne une moyenne, une proportion, un coefficient de régression ou tout autre paramètre :</p>
+
+<p style="text-align:center; font-size:1.15em;"><strong>IC = Estimation ponctuelle ± Marge d'erreur</strong></p>
 
 <p>Ou de manière équivalente :</p>
 
-<p style="text-align:center; font-size:1.15em;"><strong>IC = (Borne Inférieure, Borne Supérieure) = (θ̂ − E, θ̂ + E)</strong></p>
+<p style="text-align:center; font-size:1.15em;"><strong>IC = (Borne inférieure, Borne supérieure) = (θ̂ − E, θ̂ + E)</strong></p>
+
+<p>Disséquons chaque composante avec un exemple concret. Supposons qu'un chercheur en santé publique à São Paulo, au Brésil, mesure la pression artérielle systolique de n = 64 adultes sélectionnés aléatoirement, trouvant une moyenne d'échantillon de x̄ = 128 mmHg avec un écart-type d'échantillon de s = 16 mmHg.</p>
 
 <table>
   <thead>
-    <tr><th>Composante</th><th>Symbole</th><th>Ce qu'elle représente</th><th>Exemple</th></tr>
+    <tr><th>Composante</th><th>Symbole</th><th>Ce qu'elle représente</th><th>Exemple pression artérielle</th></tr>
   </thead>
   <tbody>
-    <tr><td>🎯 <strong>Estimation Ponctuelle</strong></td><td>θ̂ (ex. : x̄ ou p̂)</td><td>La meilleure supposition unique pour le paramètre — le centre de l'intervalle</td><td>x̄ = 1,85 % de carbone organique</td></tr>
-    <tr><td>📐 <strong>Marge d'Erreur (E)</strong></td><td>E = z* × ES ou t* × ES</td><td>Le « rayon » de l'intervalle — l'étendue de chaque côté du centre</td><td>E = 1,96 × 0,12 = 0,235</td></tr>
-    <tr><td>🔢 <strong>Valeur Critique</strong></td><td>z* ou t*</td><td>Multiplicateur déterminé par le niveau de confiance et la distribution utilisée</td><td>z* = 1,96 pour un IC à 95 %</td></tr>
-    <tr><td>📊 <strong>Erreur Standard (ES)</strong></td><td>σ/√n ou s/√n</td><td>Mesure la variabilité d'échantillonnage — combien x̄ varierait d'un échantillon à l'autre</td><td>ES = 0,76/√40 = 0,12</td></tr>
-    <tr><td>🔒 <strong>Niveau de Confiance</strong></td><td>1 − α (ex. : 95 %)</td><td>Le taux de capture à long terme de la procédure</td><td>95 % : en répétant 100 fois, ~95 intervalles capturent μ</td></tr>
+    <tr><td>🎯 <strong>Estimation ponctuelle</strong></td><td>θ̂ (ex. : x̄ ou p̂)</td><td>La meilleure estimation unique du paramètre — le centre de l'intervalle</td><td>x̄ = 128 mmHg</td></tr>
+    <tr><td>📐 <strong>Marge d'erreur (E)</strong></td><td>E = z* × SE ou t* × SE</td><td>Le « rayon » de l'intervalle — l'étendue des bornes depuis le centre</td><td>E = 1,998 × 2,0 = 3,996 ≈ 4,0</td></tr>
+    <tr><td>🔢 <strong>Valeur critique</strong></td><td>z* ou t*</td><td>Multiplicateur déterminé par le niveau de confiance et la distribution de référence</td><td>t* = 1,998 pour un IC à 95 % avec df = 63</td></tr>
+    <tr><td>📊 <strong>Erreur standard (SE)</strong></td><td>σ/√n ou s/√n</td><td>Mesure la variabilité d'échantillonnage — combien x̄ varierait à travers des échantillons répétés</td><td>SE = 16/√64 = 2,0 mmHg</td></tr>
+    <tr><td>🔒 <strong>Niveau de confiance</strong></td><td>1 − α (ex. : 95 %)</td><td>Le taux de capture à long terme de la procédure — <em>pas</em> la probabilité que cet intervalle particulier contienne μ</td><td>95 % : si nous répétions 100 fois, ~95 intervalles captureraient μ</td></tr>
   </tbody>
 </table>
 
-<p>Pour notre exemple pédologique : IC = 1,85 ± 0,235 = <strong>(1,615 %, 2,085 %)</strong>. On peut rapporter : « La teneur moyenne en carbone organique du sol a été estimée à 1,85 % (IC 95 % : 1,62 à 2,09). »</p>
+<p>Pour notre exemple de pression artérielle : IC = 128 ± 4,0 = <strong>(124,0 ; 132,0) mmHg</strong>. Nous rapportons : « La pression artérielle systolique moyenne a été estimée à 128 mmHg (IC à 95 % : 124,0 à 132,0). » Cet énoncé unique communique l'estimation, sa précision et le niveau de confiance — tout ce dont un clinicien a besoin pour évaluer le résultat.</p>
 
 <hr>
 
-<h2>📊 Formules des Intervalles de Confiance Courants</h2>
+<h2>📊 Partie III — Formules des intervalles de confiance courants</h2>
 
-<h3>Cas 1 : IC pour une Moyenne (σ connu — Intervalle Z)</h3>
+<h3>Cas 1 : IC pour une moyenne de population (σ connu — intervalle Z)</h3>
 
-<p>Lorsque l'écart-type de la population σ est connu (rare en pratique mais important théoriquement), on utilise la loi normale centrée réduite :</p>
+<p>Lorsque l'écart-type de la population σ est connu (rare en pratique mais théoriquement important comme cas fondateur), la distribution d'échantillonnage de x̄ est exactement normale par le Théorème Central Limite, et on utilise :</p>
 
 <p style="text-align:center; font-size:1.1em;"><strong>x̄ ± z<sub>α/2</sub> · (σ / √n)</strong></p>
 
-<h3>Cas 2 : IC pour une Moyenne (σ inconnu — Intervalle t)</h3>
+<p>où z<sub>α/2</sub> est la valeur critique de la distribution normale standard coupant α/2 dans chaque queue. Cette formule était utilisée dans les contextes de contrôle qualité où σ était établi à partir de décennies de données de processus — par exemple, dans les travaux pionniers de Walter Shewhart sur le contrôle statistique des processus aux Bell Telephone Laboratories dans les années 1920 et 1930 (Shewhart, 1931).</p>
 
-<p>C'est le scénario le plus courant. Lorsque σ est inconnu et estimé par l'écart-type de l'échantillon s, on utilise la loi de Student à (n − 1) degrés de liberté :</p>
+<h3>Cas 2 : IC pour une moyenne de population (σ inconnu — intervalle t)</h3>
+
+<p>C'est le cheval de bataille de la statistique appliquée — l'IC le plus couramment utilisé en pratique. Lorsque σ est inconnu et doit être estimé par l'écart-type de l'échantillon s, on utilise la <strong>distribution t de Student</strong> avec (n − 1) degrés de liberté :</p>
 
 <p style="text-align:center; font-size:1.1em;"><strong>x̄ ± t<sub>α/2, n−1</sub> · (s / √n)</strong></p>
 
-<p>La distribution t a des queues plus épaisses que la loi normale, produisant des intervalles plus larges — une « pénalité » pour l'incertitude supplémentaire liée à l'estimation de σ. Lorsque n augmente, la loi t converge vers la loi normale, et pour n ≥ 30, la différence devient négligeable (Gosset [Student], 1908 ; voir Lehmann &amp; Romano, 2005).</p>
+<p>La distribution t, découverte par William Sealy Gosset travaillant à la brasserie Guinness à Dublin et publiée sous le pseudonyme « Student » en 1908, possède des queues plus lourdes que la distribution normale — produisant des intervalles plus larges comme « pénalité » pour l'incertitude supplémentaire liée à l'estimation de σ à partir de l'échantillon. La pénalité est substantielle pour les petits échantillons (pour n = 5, t*₀,₀₂₅ = 2,776 contre z*₀,₀₂₅ = 1,960) mais diminue rapidement à mesure que n augmente. Pour n ≥ 30, les intervalles t et z sont quasi identiques, bien que l'intervalle t reste techniquement correct et doive toujours être utilisé quand σ est inconnu (Gosset [Student], 1908 ; Lehmann &amp; Romano, 2005).</p>
 
-<h3>Cas 3 : IC pour une Proportion</h3>
+<h3>Cas 3 : IC pour une proportion de population</h3>
 
-<p>Pour des données catégorielles (oui/non, succès/échec) où la proportion de l'échantillon est p̂ = x/n :</p>
+<p>Pour les données catégorielles (oui/non, succès/échec, infecté/non infecté) où la proportion d'échantillon est p̂ = x/n, l'<strong>intervalle de Wald</strong> standard est :</p>
 
 <p style="text-align:center; font-size:1.1em;"><strong>p̂ ± z<sub>α/2</sub> · √(p̂(1 − p̂) / n)</strong></p>
 
-<p>C'est l'<strong>intervalle de Wald</strong>, valide quand np̂ ≥ 5 et n(1 − p̂) ≥ 5. Pour les petits échantillons ou les proportions extrêmes, l'intervalle de Wilson ou l'intervalle d'Agresti-Coull offrent une meilleure couverture (Agresti &amp; Coull, 1998 ; Brown et al., 2001).</p>
+<p>Cet intervalle fonctionne correctement quand np̂ ≥ 10 et n(1 − p̂) ≥ 10, mais sa couverture réelle peut être sérieusement inadéquate pour les petits échantillons ou les proportions extrêmes (proches de 0 ou 1). Brown, Cai et DasGupta (2001), dans une comparaison exhaustive des méthodes d'intervalles publiée dans <em>Statistical Science</em>, ont démontré que la probabilité de couverture réelle de l'intervalle de Wald peut tomber bien en dessous du niveau nominal. Ils ont recommandé l'<strong>intervalle de score de Wilson</strong> ou l'<strong>intervalle d'Agresti-Coull</strong> plus simple à calculer — qui ajoute simplement deux succès et deux échecs artificiels avant de calculer l'intervalle de Wald (Agresti &amp; Coull, 1998). L'ajustement « ajouter-2 » d'Agresti-Coull est désormais largement enseigné comme méthode par défaut pour les IC de proportions dans les cours d'introduction.</p>
 
-<h3>Cas 4 : IC pour la Différence de Deux Moyennes (Échantillons Indépendants)</h3>
+<h3>Cas 4 : IC pour la différence entre deux moyennes indépendantes</h3>
 
-<p style="text-align:center; font-size:1.1em;"><strong>(x̄₁ − x̄₂) ± t<sub>α/2, dl</sub> · √(s₁²/n₁ + s₂²/n₂)</strong></p>
+<p style="text-align:center; font-size:1.1em;"><strong>(x̄₁ − x̄₂) ± t<sub>α/2, df</sub> · √(s₁²/n₁ + s₂²/n₂)</strong></p>
 
-<p>Les degrés de liberté sont calculés par l'approximation de Welch-Satterthwaite lorsque les variances sont inégales (Welch, 1947).</p>
+<p>Les degrés de liberté sont calculés à l'aide de l'<strong>approximation de Welch-Satterthwaite</strong> lorsque les variances des populations sont inégales — la recommandation par défaut depuis que Welch (1947) a démontré que le regroupement des variances lorsqu'elles diffèrent conduit à une couverture incorrecte. La plupart des logiciels statistiques modernes (R, SPSS, Stata, scipy de Python) utilisent la procédure de Welch par défaut.</p>
 
-<h3>Cas 5 : IC pour la Différence de Deux Proportions</h3>
+<h3>Cas 5 : IC pour la différence entre deux proportions</h3>
 
 <p style="text-align:center; font-size:1.1em;"><strong>(p̂₁ − p̂₂) ± z<sub>α/2</sub> · √(p̂₁(1−p̂₁)/n₁ + p̂₂(1−p̂₂)/n₂)</strong></p>
 
+<p>C'est l'intervalle standard pour comparer deux groupes sur un résultat binaire — par exemple, comparer les taux de guérison entre deux traitements, les préférences électorales entre deux candidats, ou les taux de défauts entre deux lignes de production. Comme pour les proportions simples, la méthode de Newcombe-Wilson offre une meilleure couverture pour les petits échantillons (Newcombe, 1998).</p>
+
 <table>
   <thead>
-    <tr><th>Niveau de Confiance (1 − α)</th><th>α</th><th>z<sub>α/2</sub></th><th>Interprétation</th></tr>
+    <tr><th>Niveau de confiance (1 − α)</th><th>α</th><th>z<sub>α/2</sub></th><th>Cas d'utilisation</th></tr>
   </thead>
   <tbody>
-    <tr><td>90 %</td><td>0,10</td><td>1,645</td><td>Filet plus large, moins de certitude, intervalle plus étroit</td></tr>
-    <tr><td>95 %</td><td>0,05</td><td>1,960</td><td>Standard dans la plupart des disciplines</td></tr>
-    <tr><td>99 %</td><td>0,01</td><td>2,576</td><td>Très conservateur, intervalle le plus large</td></tr>
+    <tr><td>90 %</td><td>0,10</td><td>1,645</td><td>Études exploratoires, recherche pilote ; intervalle plus étroit, certitude moindre</td></tr>
+    <tr><td>95 %</td><td>0,05</td><td>1,960</td><td>Standard dans la plupart des domaines scientifiques — le défaut conventionnel</td></tr>
+    <tr><td>99 %</td><td>0,01</td><td>2,576</td><td>Applications à enjeux élevés (sécurité pharmaceutique, ingénierie nucléaire) ; intervalle le plus large, certitude la plus élevée</td></tr>
+    <tr><td>99,7 %</td><td>0,003</td><td>3,000</td><td>Physique des particules — le seuil de preuve « 3-sigma »</td></tr>
+    <tr><td>99,99994 %</td><td>5,7 × 10⁻⁷</td><td>5,000</td><td>Physique des particules — le seuil de découverte « 5-sigma » (utilisé pour le boson de Higgs, 2012)</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>🎯 L'Interprétation Correcte — et les Six Idées Fausses Classiques</h2>
+<h2>🎯 Partie IV — L'interprétation correcte — et les six idées fausses classiques</h2>
 
-<p>L'interprétation des intervalles de confiance est l'un des sujets les plus durablement mal compris de toute la statistique. Une étude marquante de Hoekstra et al. (2014), publiée dans <em>Psychonomic Bulletin &amp; Review</em>, a interrogé 120 chercheurs et 442 étudiants — tous formés en statistique — et a constaté que les deux groupes approuvaient, en moyenne, plus de trois des six fausses affirmations sur les intervalles de confiance. Même les chercheurs expérimentés titulaires d'un doctorat ne faisaient pas mieux que les étudiants de première année.</p>
+<p>L'interprétation des intervalles de confiance est l'un des sujets les plus persistamment mal compris de toute la statistique — un problème documenté à travers les pays, les disciplines et les niveaux d'expertise. Une étude marquante de Hoekstra, Morey, Rouder et Wagenmakers (2014), publiée dans <em>Psychonomic Bulletin &amp; Review</em>, a sondé 120 chercheurs (professeurs, post-doctorants et doctorants) et 442 étudiants — tous avec une formation statistique formelle — et leur a présenté six énoncés sur un intervalle de confiance à 95 % spécifique. Les résultats furent édifiants : les deux groupes ont endossé, en moyenne, plus de trois des six énoncés <em>faux</em>. Les chercheurs titulaires d'un doctorat n'ont pas fait mieux que les étudiants de première année. Les auteurs ont conclu que « la mauvaise interprétation robuste des intervalles de confiance ne se limite pas aux étudiants — elle s'étend aux chercheurs qui enseignent et appliquent la statistique professionnellement. »</p>
 
-<h3>✅ L'Interprétation Correcte</h3>
+<h3>✅ L'interprétation fréquentiste correcte</h3>
 
-<p>« Si nous répétions la procédure d'échantillonnage de nombreuses fois, en construisant à chaque fois un intervalle de confiance à 95 %, alors environ 95 % de ces intervalles contiendraient le vrai paramètre de la population. »</p>
+<p>« Si nous devions répéter l'ensemble de la procédure d'échantillonnage de nombreuses fois, construisant à chaque fois un intervalle de confiance à 95 % avec la même méthode, alors environ 95 % de ces intervalles contiendraient le vrai paramètre de population. »</p>
 
-<p>C'est une affirmation sur la <em>procédure</em> (la méthode de construction des intervalles), pas sur un intervalle <em>particulier</em>. Une fois que vous avez calculé un IC spécifique — disons (1,62 ; 2,09) — le vrai paramètre μ est soit à l'intérieur, soit à l'extérieur. Il n'y a pas de probabilité là-dessus. La « confiance » fait référence à la fiabilité à long terme de la méthode (Neyman, 1937 ; Morey et al., 2016).</p>
+<p>C'est un énoncé sur la <em>procédure</em> (la méthode de construction des intervalles), pas sur un intervalle <em>particulier</em>. Une fois que vous avez calculé un IC spécifique — disons (124,0 ; 132,0) — le vrai paramètre μ se trouve soit à l'intérieur de cet intervalle, soit à l'extérieur. Il n'y a pas de probabilité à ce sujet ; μ est une constante fixe dans la théorie fréquentiste. La « confiance » se réfère à la fiabilité à long terme de la méthode, pas au contenu d'un seul intervalle. Pensez-y ainsi : une usine qui produit des composants fiables à 95 % ne garantit pas que le prochain composant sortant de la chaîne fonctionnera — elle garantit que 95 % de tous les composants fonctionneront (Neyman, 1937 ; Morey et al., 2016).</p>
 
-<h3>❌ Six Idées Fausses Courantes</h3>
-
-<table>
-  <thead>
-    <tr><th>#</th><th>Affirmation Fausse</th><th>Pourquoi c'est faux</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>1</td><td>« Il y a 95 % de probabilité que la vraie moyenne se trouve dans cet IC »</td><td>Le paramètre est fixe, pas aléatoire. L'intervalle le couvre ou non. Cela confond <em>confiance</em> avec <em>probabilité a posteriori</em> (un concept bayésien).</td></tr>
-    <tr><td>2</td><td>« 95 % des données de l'échantillon se trouvent dans l'IC »</td><td>L'IC concerne le <em>paramètre de la population</em>, pas la distribution des observations individuelles.</td></tr>
-    <tr><td>3</td><td>« Si on répète l'expérience, 95 % des nouvelles moyennes tomberont dans cet IC »</td><td>Les futures moyennes ont leur propre distribution d'échantillonnage. Cet IC est ancré à <em>cet</em> échantillon.</td></tr>
-    <tr><td>4</td><td>« On peut être sûr à 95 % que la vraie moyenne est égale à l'estimation ponctuelle »</td><td>L'IC est un ensemble de valeurs plausibles, pas une confirmation de l'estimation ponctuelle.</td></tr>
-    <tr><td>5</td><td>« Si l'IC n'inclut pas zéro, le résultat est important en pratique »</td><td>Significativité statistique ≠ importance pratique. Un IC de (0,001 ; 0,003) exclut zéro mais peut représenter un effet trivialement petit.</td></tr>
-    <tr><td>6</td><td>« Un IC large signifie que l'étude est mal conçue »</td><td>La largeur dépend de la taille de l'échantillon, de la variabilité et du niveau de confiance. Un IC large avec un bon protocole reflète honnêtement une grande incertitude.</td></tr>
-  </tbody>
-</table>
-
-<blockquote>⚠️ <strong>L'Erreur Fondamentale de Confiance :</strong> L'idée fausse n°1 est si courante qu'elle a son propre nom. Hoekstra et al. (2014) ont trouvé que 57 % des chercheurs et 47 % des étudiants de master l'approuvaient. Même 70 % des manuels d'introduction à la statistique contiennent des définitions qui promeuvent involontairement cette erreur (Hoekstra et al., rapporté dans Morey et al., 2016).</blockquote>
-
-<hr>
-
-<h2>🔎 Qu'est-ce qui Contrôle la Largeur ? Quatre Facteurs Clés</h2>
-
-<p>La largeur d'un intervalle de confiance (Largeur = 2 × E) est déterminée par quatre facteurs :</p>
+<h3>❌ Six idées fausses courantes</h3>
 
 <table>
   <thead>
-    <tr><th>Facteur</th><th>Effet sur la Largeur</th><th>Contrôle du Chercheur</th><th>Analogie</th></tr>
+    <tr><th>#</th><th>Énoncé faux</th><th>Pourquoi c'est faux</th></tr>
   </thead>
   <tbody>
-    <tr><td>📏 <strong>Taille d'Échantillon (n)</strong></td><td>↑n → ↓Largeur (par √n)</td><td>Élevé — collecter plus de données</td><td>Plus de témoins → témoignage plus précis</td></tr>
-    <tr><td>📈 <strong>Variabilité (σ ou s)</strong></td><td>↑σ → ↑Largeur</td><td>Modéré — meilleures mesures, échantillons homogènes</td><td>Signal plus bruité → plus difficile à localiser</td></tr>
-    <tr><td>🔒 <strong>Niveau de Confiance (1−α)</strong></td><td>↑Confiance → ↑Largeur</td><td>Élevé — choisir son niveau</td><td>Un filet plus large attrape plus de poissons mais moins précisément</td></tr>
-    <tr><td>📐 <strong>Valeur Critique (z* ou t*)</strong></td><td>Augmente directement avec le niveau de confiance</td><td>Déterminé par le niveau de confiance et les dl</td><td>Plus de confiance exige un multiplicateur plus grand</td></tr>
+    <tr><td>1</td><td>« Il y a une probabilité de 95 % que la vraie moyenne se trouve dans cet IC »</td><td>Le paramètre est fixe, pas aléatoire. L'intervalle le couvre ou non. Cela confond la <em>confiance</em> (propriété de la méthode) avec la <em>probabilité a posteriori</em> (concept bayésien nécessitant un a priori). C'est l'idée fausse la plus courante et la plus lourde de conséquences.</td></tr>
+    <tr><td>2</td><td>« 95 % des données de l'échantillon se trouvent dans l'IC »</td><td>L'IC concerne le <em>paramètre de population</em> (la moyenne par ex.), pas la distribution des données individuelles. Un IC pour la moyenne sera bien plus étroit que l'étendue des données — il se rétrécit quand n augmente, contrairement à l'étendue des données.</td></tr>
+    <tr><td>3</td><td>« Si nous répétons l'expérience, 95 % des nouvelles moyennes d'échantillon tomberont dans cet IC »</td><td>Les moyennes futures ont leur propre distribution d'échantillonnage centrée sur μ, pas sur x̄. Cet IC est ancré à <em>cet</em> échantillon particulier ; les moyennes futures ne sont pas contraintes d'y tomber.</td></tr>
+    <tr><td>4</td><td>« Nous pouvons être sûrs à 95 % que la vraie moyenne est égale à l'estimation ponctuelle »</td><td>L'IC est un <em>ensemble</em> de valeurs plausibles, pas une confirmation de l'estimation ponctuelle. L'estimation ponctuelle est le centre — l'intervalle communique que la vraie valeur pourrait se trouver n'importe où dans l'intervalle.</td></tr>
+    <tr><td>5</td><td>« Si l'IC n'inclut pas zéro, le résultat est pratiquement important »</td><td>Significativité statistique ≠ importance pratique. Un IC de (0,001 ; 0,003) exclut zéro mais représente un effet trivialement petit. Inversement, un IC de (−2 ; 12) inclut zéro mais suggère que l'effet <em>pourrait être</em> grand — il est simplement trop imprécis pour trancher. Évaluez toujours les bornes de l'IC par rapport à des <em>seuils significatifs</em>, pas seulement par rapport à zéro.</td></tr>
+    <tr><td>6</td><td>« Un IC large signifie que l'étude était mal conçue »</td><td>La largeur dépend de la taille d'échantillon, de la variabilité de la population et du niveau de confiance choisi. Un IC large avec un design correct reflète honnêtement une forte incertitude — peut-être dans une population difficile à étudier. Des IC étroits provenant d'échantillons biaisés ou non représentatifs sont pires que des IC larges mais honnêtes.</td></tr>
   </tbody>
 </table>
 
-<p>Le levier le plus puissant est la <strong>taille d'échantillon</strong>. Comme l'erreur standard est inversement proportionnelle à √n, quadrupler la taille de l'échantillon <em>divise par deux</em> la marge d'erreur.</p>
-
-<blockquote>📐 <strong>Le Compromis Précision-Confiance :</strong> On ne peut pas avoir simultanément un niveau de confiance élevé <em>et</em> un intervalle étroit, sauf en augmentant la taille de l'échantillon. Vous voulez 99 % de confiance avec ±1 % de précision ? Il faudra un échantillon <em>beaucoup</em> plus grand que pour 90 % de confiance avec ±5 % de précision. C'est le compromis fondamental de l'estimation par intervalle (Cochran, 1977).</blockquote>
+<blockquote>⚠️ <strong>Le sophisme fondamental de la confiance :</strong> L'idée fausse n°1 est si courante qu'elle a gagné son propre nom. Hoekstra et al. (2014) ont constaté que 73 % des chercheurs titulaires d'un doctorat l'ont endossée. Même les manuels de statistique ne sont pas immunisés — Morey et al. (2016) ont documenté qu'environ la moitié des manuels d'introduction largement utilisés contiennent des définitions qui promeuvent involontairement ce sophisme. Comprendre pourquoi c'est faux requiert de saisir la distinction subtile entre probabilité <em>fréquentiste</em> et <em>bayésienne</em> : l'IC vit dans le monde fréquentiste où les paramètres sont des constantes fixes, et la « confiance » est une propriété de la <em>procédure</em> d'estimation, non de l'<em>intervalle</em>.</blockquote>
 
 <hr>
 
-<h2>📐 Détermination de la Taille d'Échantillon : Planifier la Précision</h2>
+<h2>🔎 Partie V — Qu'est-ce qui contrôle la largeur ? Quatre facteurs clés</h2>
 
-<p>L'une des applications les plus pratiques de la théorie des intervalles de confiance est la <strong>détermination de la taille d'échantillon avant la collecte des données</strong>.</p>
+<p>La largeur d'un intervalle de confiance (Largeur = 2 × E) est déterminée par quatre facteurs, sur chacun desquels le chercheur peut exercer une influence :</p>
 
-<h3>Pour Estimer une Moyenne :</h3>
+<table>
+  <thead>
+    <tr><th>Facteur</th><th>Effet sur la largeur</th><th>Contrôle du chercheur</th><th>Analogie</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📏 <strong>Taille d'échantillon (n)</strong></td><td>↑n → ↓Largeur (par √n)</td><td>Élevé — collecter plus de données (budget permettant)</td><td>Plus de témoins → témoignage plus précis</td></tr>
+    <tr><td>📈 <strong>Variabilité de la population (σ ou s)</strong></td><td>↑σ → ↑Largeur</td><td>Modéré — meilleurs instruments de mesure, stratification, échantillons plus homogènes</td><td>Signal plus bruité → plus difficile à localiser</td></tr>
+    <tr><td>🔒 <strong>Niveau de confiance (1−α)</strong></td><td>↑Confiance → ↑Largeur</td><td>Élevé — choisissez votre niveau</td><td>Un filet plus large attrape plus de poissons mais dit moins sur leur position</td></tr>
+    <tr><td>📐 <strong>Valeur critique (z* ou t*)</strong></td><td>Augmente directement avec le niveau de confiance</td><td>Déterminé par le niveau de confiance et les degrés de liberté</td><td>Une confiance plus élevée exige un multiplicateur plus grand</td></tr>
+  </tbody>
+</table>
+
+<p>Le levier le plus puissant est la <strong>taille d'échantillon</strong>. Parce que l'erreur standard est inversement proportionnelle à √n, <em>quadrupler</em> la taille d'échantillon <em>divise par deux</em> la marge d'erreur. Cette relation de racine carrée a des implications profondes : atteindre une amélioration de 10 fois la précision nécessite une augmentation de 100 fois la taille d'échantillon. C'est pourquoi les grands essais cliniques recrutant des milliers de patients produisent des intervalles de confiance impressionnamment étroits, tandis que les petites études pilotes donnent des intervalles larges et incertains — et pourquoi les chercheurs doivent planifier les tailles d'échantillon soigneusement <em>avant</em> de collecter les données (Cochran, 1977).</p>
+
+<p>Le deuxième facteur le plus important est la <strong>variabilité de la population</strong>. Une étude de la température corporelle (σ ≈ 0,4°C) produira des IC bien plus étroits pour toute taille d'échantillon donnée qu'une étude des revenus des ménages (σ dépassant souvent 50 000 $). Les chercheurs peuvent réduire la variabilité effective par de meilleurs protocoles de mesure, l'échantillonnage stratifié, ou l'étude de sous-populations plus homogènes — mais ne peuvent l'éliminer entièrement.</p>
+
+<blockquote>📐 <strong>Le compromis précision-confiance :</strong> Vous ne pouvez pas simultanément avoir une confiance élevée <em>et</em> un intervalle étroit à moins d'augmenter la taille d'échantillon. Vous voulez une confiance de 99 % avec une précision de ±1 % ? Vous aurez besoin d'un échantillon <em>bien plus grand</em> que pour une confiance de 90 % avec une précision de ±5 %. C'est le compromis fondamental en estimation par intervalles, et le comprendre est la clé d'une conception d'étude intelligente. Comme W. Edwards Deming l'aurait dit : « Sans données, vous n'êtes qu'une personne de plus avec une opinion. Avec des données mais sans quantification de l'incertitude, vous n'êtes qu'une personne de plus avec un chiffre trompeur » (Cochran, 1977).</blockquote>
+
+<hr>
+
+<h2>📐 Partie VI — Détermination de la taille d'échantillon : Planifier pour la précision</h2>
+
+<p>L'une des applications les plus pratiques de la théorie des intervalles de confiance est la <strong>détermination de la taille d'échantillon requise avant la collecte des données</strong>. Au lieu de demander « Quelle est la précision de mon estimation ? » après l'étude, vous demandez « Quelle taille d'échantillon ai-je besoin pour atteindre la précision souhaitée ? » Cela inverse la formule de l'IC pour résoudre n — transformant l'intervalle de confiance d'un résumé a posteriori en un outil de planification prospective.</p>
+
+<h3>Pour estimer une moyenne :</h3>
 
 <p style="text-align:center; font-size:1.1em;"><strong>n = (z<sub>α/2</sub> · σ / E)²</strong></p>
 
-<h3>Pour Estimer une Proportion (Formule de Cochran) :</h3>
+<p>où E est la marge d'erreur souhaitée et σ est l'écart-type de population anticipé (obtenu à partir d'études pilotes, de la littérature antérieure, ou du jugement d'expert).</p>
+
+<h3>Pour estimer une proportion (Formule de Cochran) :</h3>
 
 <p style="text-align:center; font-size:1.1em;"><strong>n₀ = z<sub>α/2</sub>² · p(1−p) / E²</strong></p>
 
-<p>Quand p est inconnu, on utilise p = 0,5 pour la variabilité maximale. Pour une population finie de taille N, on applique la <strong>correction pour population finie</strong> :</p>
+<p>Quand p est inconnue, utiliser p = 0,5 pour la variabilité maximale (l'estimation la plus conservatrice, car p(1−p) est maximisé à p = 0,5). Pour une population finie de taille N, appliquer la <strong>correction pour population finie</strong> :</p>
 
 <p style="text-align:center; font-size:1.1em;"><strong>n = n₀ / (1 + (n₀ − 1)/N)</strong></p>
 
-<p><strong>Exemple :</strong> Un chercheur veut estimer la proportion d'agriculteurs algériens pratiquant la rotation des cultures, avec 95 % de confiance et ±4 % de marge d'erreur. Pas de données antérieures, donc p = 0,5.</p>
+<p><strong>Exemple :</strong> Un chercheur en santé publique veut estimer la proportion d'adultes ayant reçu le vaccin antigrippal la saison dernière dans une ville de N = 80 000 résidents, avec une confiance de 95 % et une marge d'erreur de ±3 %. Aucune donnée antérieure n'existe, donc p = 0,5.</p>
 
-<p>n₀ = (1,96)² × 0,5 × 0,5 / (0,04)² = 3,8416 × 0,25 / 0,0016 = <strong>600,25 ≈ 601 agriculteurs</strong></p>
-
-<p>Si la population cible ne compte que N = 2 000 agriculteurs : n = 601 / (1 + 600/2000) = 601 / 1,30 = <strong>462 agriculteurs</strong>.</p>
+<p>n₀ = (1,96)² × 0,5 × 0,5 / (0,03)² = 3,8416 × 0,25 / 0,0009 = <strong>1 068</strong>. En appliquant la correction pour population finie : n = 1 068 / (1 + 1 067/80 000) = 1 068 / 1,01334 = <strong>1 054 résidents</strong>. La correction n'économise que 14 participants ici car N est grand par rapport à n₀ ; pour les populations plus petites, les économies sont substantielles.</p>
 
 <table>
   <thead>
-    <tr><th>Niveau de Confiance</th><th>Marge d'Erreur ±3 %</th><th>±5 %</th><th>±10 %</th></tr>
+    <tr><th>Niveau de confiance</th><th>Marge d'erreur ±3 %</th><th>±5 %</th><th>±10 %</th></tr>
   </thead>
   <tbody>
     <tr><td>90 %</td><td>752</td><td>271</td><td>68</td></tr>
@@ -178,134 +192,166 @@
     <tr><td>99 %</td><td>1 849</td><td>666</td><td>167</td></tr>
   </tbody>
 </table>
-<p><em>Tableau : Tailles d'échantillon requises pour estimer une proportion (p = 0,5, population infinie)</em></p>
+<p><em>Tableau : Tailles d'échantillon requises pour estimer une proportion (p = 0,5, population infinie). Notez le coût dramatique de la précision : réduire la marge d'erreur de ±10 % à ±3 % nécessite environ 11 fois plus de participants à 95 % de confiance.</em></p>
 
 <hr>
 
-<h2>🔗 Intervalles de Confiance et Tests d'Hypothèses : Deux Faces de la Même Médaille</h2>
+<h2>🔗 Partie VII — Intervalles de confiance et tests d'hypothèses : Les deux faces d'une même pièce</h2>
 
-<p>Les intervalles de confiance et les tests d'hypothèses sont mathématiquement équivalents — ils aboutissent toujours à la même conclusion au même niveau α. Mais les intervalles de confiance fournissent <em>strictement plus d'information</em> qu'une simple décision « rejeter / ne pas rejeter » (Gardner &amp; Altman, 1986).</p>
+<p>Les intervalles de confiance et les tests d'hypothèses sont mathématiquement duaux — ils atteignent toujours la même conclusion au même niveau de significativité. Mais les intervalles de confiance fournissent <em>strictement plus d'information</em> qu'une simple décision « rejeter/ne pas rejeter », raison pour laquelle les méthodologues plaident depuis longtemps pour leur supériorité comme outil de reporting (Gardner &amp; Altman, 1986 ; Cumming, 2012).</p>
 
 <table>
   <thead>
-    <tr><th>Caractéristique</th><th>Test d'Hypothèse</th><th>Intervalle de Confiance</th></tr>
+    <tr><th>Caractéristique</th><th>Test d'hypothèse</th><th>Intervalle de confiance</th></tr>
   </thead>
   <tbody>
     <tr><td><strong>Résultat</strong></td><td>Décision binaire : rejeter ou ne pas rejeter H₀</td><td>Ensemble de valeurs plausibles du paramètre</td></tr>
-    <tr><td><strong>Information</strong></td><td>L'effet est-il « significatif » ?</td><td>Quelle est la taille de l'effet + précision</td></tr>
-    <tr><td><strong>Signification Pratique</strong></td><td>Difficile à évaluer à partir de la valeur p seule</td><td>Évaluation directe par rapport à des seuils pertinents</td></tr>
-    <tr><td><strong>Équivalence</strong></td><td>p &lt; 0,05</td><td>L'IC à 95 % n'inclut pas la valeur de H₀</td></tr>
+    <tr><td><strong>Information</strong></td><td>L'effet est-il « statistiquement significatif »</td><td>Quelle est la taille probable de l'effet + précision de l'estimation</td></tr>
+    <tr><td><strong>Direction</strong></td><td>De quel côté de H₀ se trouvent les données</td><td>Idem — plus l'ensemble complet des valeurs plausibles</td></tr>
+    <tr><td><strong>Importance pratique</strong></td><td>Difficile à évaluer à partir de la valeur p seule</td><td>Peut être directement évaluée par rapport à des seuils cliniquement ou pratiquement significatifs</td></tr>
+    <tr><td><strong>Équivalence</strong></td><td>p &lt; 0,05 ↔</td><td>L'IC à 95 % n'inclut pas la valeur de H₀</td></tr>
   </tbody>
 </table>
 
-<p><strong>La Règle de Dualité :</strong> Un IC à 95 % pour θ contient exactement les valeurs de θ₀ pour lesquelles un test bilatéral à α = 0,05 <em>ne rejetterait pas</em> H₀ : θ = θ₀. Inversement, toute valeur <em>en dehors</em> de l'IC à 95 % serait rejetée au niveau 5 %. L'IC est littéralement l'ensemble de toutes les valeurs « non rejetées » — ce qui le rend bien plus riche qu'un seul résultat de test (Lehmann &amp; Romano, 2005).</p>
+<p><strong>Le principe de dualité :</strong> Un IC à (1−α) % pour θ contient exactement les valeurs de θ₀ pour lesquelles un test bilatéral au niveau de significativité α ne <em>rejetterait pas</em> H₀ : θ = θ₀. Inversement, toute valeur <em>en dehors</em> de l'IC serait rejetée au niveau α. Cela signifie que l'IC est littéralement l'ensemble de toutes les valeurs d'hypothèse nulle « non rejetées » — ce qui en fait un résumé bien plus riche que tout résultat de test unique. Comme Lehmann et Romano (2005) l'ont formalisé : l'IC inverse une <em>famille</em> entière de tests d'hypothèses en un seul résumé visuel.</p>
 
-<blockquote>🎯 <strong>Lire un IC Comme un Expert :</strong> Pour un IC à 95 % de la différence entre deux traitements :
-<br>• Si l'IC est entièrement au-dessus de zéro → l'effet est significatif <em>et</em> positif.
+<blockquote>🎯 <strong>Lire un IC comme un professionnel :</strong> Lors de l'évaluation d'un IC à 95 % pour la différence entre deux traitements :
+<br>• Si l'IC entier est au-dessus de zéro → l'effet est statistiquement significatif <em>et</em> positif au niveau de 5 %.
 <br>• Si l'IC contient zéro → le test est non significatif ; on ne peut exclure l'absence d'effet.
-<br>• Si l'IC est entièrement en dessous de zéro → l'effet est significatif dans la direction négative.
-<br>• Si l'IC est étroit et proche de zéro → preuve précise que l'effet, s'il existe, est petit.
-<br>• Si l'IC est large → précision insuffisante ; plus de données nécessaires.</blockquote>
+<br>• Si l'IC entier est en dessous de zéro → l'effet est significatif dans la direction négative.
+<br>• Si l'IC est étroit et proche de zéro (ex. : −0,2 à 0,3) → preuve précise que l'effet, s'il existe, est petit — potentiellement cliniquement négligeable.
+<br>• Si l'IC est très large (ex. : −5 à 15) → précision insuffisante pour conclure ; les données sont compatibles avec tout, d'un préjudice modéré à un bénéfice important ; plus de données sont nécessaires.
+<br>• Si l'IC est étroit et éloigné de zéro (ex. : 4,2 à 5,8) → preuve forte d'un effet substantiel estimé avec précision — le résultat idéal.</blockquote>
 
 <hr>
 
-<h2>🌍 Applications Concrètes et Exemples Résolus</h2>
+<h2>🌍 Partie VIII — Applications concrètes à travers les disciplines</h2>
 
-<h3>Exemple 1 : Agriculture — Estimation du Rendement</h3>
+<h3>Exemple 1 : Médecine clinique — Essai d'efficacité médicamenteuse</h3>
 
-<p>Un agronome mesure le rendement de blé dans n = 36 parcelles sélectionnées aléatoirement : x̄ = 4,2 t/ha et s = 0,9 t/ha. Construire un IC à 95 % pour le rendement moyen.</p>
+<p>Un essai contrôlé randomisé à Toronto, Canada, teste un nouvel antihypertenseur contre un placebo. Après 12 semaines, le groupe traité (n₁ = 120, x̄₁ = 128 mmHg, s₁ = 14) montre une pression artérielle systolique plus basse que le groupe placebo (n₂ = 115, x̄₂ = 136 mmHg, s₂ = 15). Construire un IC à 95 % pour la différence des moyennes.</p>
 
-<p><strong>Solution :</strong> ES = s/√n = 0,9/√36 = 0,15. Pour 95 % avec dl = 35 : t* ≈ 2,030. IC = 4,2 ± 2,030(0,15) = 4,2 ± 0,305 = <strong>(3,895 ; 4,505) t/ha</strong>.</p>
+<p><strong>Solution :</strong> Différence = 128 − 136 = −8,0 mmHg (le médicament est plus bas). SE = √(14²/120 + 15²/115) = √(1,633 + 1,957) = √3,590 = 1,895. Avec df Welch ≈ 230 : t* ≈ 1,970. IC = −8,0 ± 1,970(1,895) = −8,0 ± 3,733 = <strong>(−11,7 ; −4,3) mmHg</strong>. L'IC entier est en dessous de zéro, confirmant que le médicament abaisse significativement la pression artérielle de 4,3 à 11,7 mmHg — un intervalle cliniquement significatif qu'un cardiologue peut directement évaluer par rapport aux directives thérapeutiques.</p>
 
-<h3>Exemple 2 : Santé Publique — Couverture Vaccinale</h3>
+<h3>Exemple 2 : Sondages politiques — Enquête électorale</h3>
 
-<p>Dans une enquête de 500 ménages, 380 déclarent que les enfants sont complètement vaccinés. Estimer le taux de vaccination avec un IC à 99 %.</p>
+<p>Un sondage national en Allemagne interroge n = 1 200 électeurs probables et trouve que 34 % soutiennent le Parti A. Construire un IC à 95 % pour le vrai niveau de soutien.</p>
 
-<p><strong>Solution :</strong> p̂ = 380/500 = 0,76. ES = √(0,76 × 0,24 / 500) = 0,0191. z* = 2,576. IC = 0,76 ± 2,576(0,0191) = 0,76 ± 0,049 = <strong>(0,711 ; 0,809)</strong> soit <strong>71,1 % à 80,9 %</strong>.</p>
+<p><strong>Solution :</strong> p̂ = 0,34. SE = √(0,34 × 0,66 / 1 200) = √(0,000187) = 0,01368. z* = 1,96. IC = 0,34 ± 1,96(0,01368) = 0,34 ± 0,027 = <strong>(31,3 % ; 36,7 %)</strong>. Si le Parti B est sondé à 31 %, leurs plages de soutien se chevauchent — et un journaliste responsable rapporterait la course comme compétitive plutôt que de déclarer le Parti A clairement en tête.</p>
 
-<h3>Exemple 3 : Sciences de l'Environnement — Comparaison de Deux Sites</h3>
+<h3>Exemple 3 : Sciences environnementales — Comparaison de la qualité de l'eau</h3>
 
-<p>Le pH du sol est mesuré sur deux sites : Site A (n₁ = 25, x̄₁ = 6,8, s₁ = 0,5) et Site B (n₂ = 30, x̄₂ = 7,3, s₂ = 0,6). Construire un IC à 95 % pour la différence de pH moyen.</p>
+<p>L'oxygène dissous (OD) est mesuré en amont (n₁ = 30, x̄₁ = 8,4 mg/L, s₁ = 1,2) et en aval (n₂ = 30, x̄₂ = 6,9 mg/L, s₂ = 1,5) d'une usine de papier sur le Mékong au Laos. Construire un IC à 95 % pour la différence.</p>
 
-<p><strong>Solution :</strong> Différence = 0,5. ES = √(0,25/25 + 0,36/30) = √0,022 = 0,148. Avec dl de Welch ≈ 52 : t* ≈ 2,007. IC = 0,5 ± 0,297 = <strong>(0,203 ; 0,797)</strong>. L'intervalle entier étant au-dessus de zéro, le Site B a un pH significativement plus élevé.</p>
+<p><strong>Solution :</strong> Différence = 8,4 − 6,9 = 1,5 mg/L. SE = √(1,2²/30 + 1,5²/30) = √(0,048 + 0,075) = √0,123 = 0,351. df Welch ≈ 55 : t* ≈ 2,004. IC = 1,5 ± 2,004(0,351) = 1,5 ± 0,703 = <strong>(0,80 ; 2,20) mg/L</strong>. L'intervalle entier est positif, confirmant que l'OD est significativement plus bas en aval. La borne inférieure (0,80 mg/L de différence) est écologiquement significative — une baisse de cette amplitude peut stresser les organismes aquatiques — et la borne supérieure (2,20 mg/L) suggère un impact écologique potentiellement sévère.</p>
 
-<hr>
+<h3>Exemple 4 : Éducation — Comparaison de méthodes d'enseignement</h3>
 
-<h2>⚙️ Sujets Avancés et Perspectives Modernes</h2>
+<p>Une université à Kyoto, Japon, randomise 200 étudiants en deux sections de chimie introductive : l'une enseignée par cours magistraux traditionnels (n₁ = 100, x̄₁ = 72,3, s₁ = 11,5) et l'autre par apprentissage actif (n₂ = 100, x̄₂ = 76,8, s₂ = 10,2). Construire un IC à 95 % pour la différence des moyennes d'examen.</p>
 
-<h3>Intervalles de Confiance Bootstrap</h3>
+<p><strong>Solution :</strong> Différence = 76,8 − 72,3 = 4,5 points. SE = √(11,5²/100 + 10,2²/100) = √(1,3225 + 1,0404) = √2,3629 = 1,537. Avec df ≈ 195 : t* ≈ 1,972. IC = 4,5 ± 1,972(1,537) = 4,5 ± 3,031 = <strong>(1,47 ; 7,53) points</strong>. L'apprentissage actif surpasse les cours magistraux de 1,5 à 7,5 points — un résultat cohérent avec la méta-analyse de Freeman et al. (2014) dans <em>PNAS</em> qui a trouvé que l'apprentissage actif augmente les scores d'examen d'environ un demi écart-type à travers les disciplines STEM.</p>
 
-<p>Quand la distribution d'échantillonnage est inconnue ou que les données violent les hypothèses de normalité, les <strong>méthodes bootstrap</strong> offrent une alternative non paramétrique puissante. Introduites par Efron (1979), elles construisent un IC en rééchantillonnant les données observées des milliers de fois avec remise (Efron &amp; Tibshirani, 1993).</p>
+<h3>Exemple 5 : Économie agricole — Estimation du rendement des cultures</h3>
 
-<h3>Intervalles Crédibles Bayésiens</h3>
+<p>Une coopérative au Pendjab, Inde, mesure le rendement rizicole dans n = 50 rizières sélectionnées aléatoirement, trouvant x̄ = 5,8 t/ha et s = 1,1 t/ha. Construire un IC à 99 % pour le rendement moyen de la coopérative.</p>
 
-<p>L'alternative bayésienne est l'<strong>intervalle crédible</strong>, qui <em>possède</em> l'interprétation intuitive que la plupart des gens attribuent à tort aux intervalles de confiance : « Il y a 95 % de probabilité que le paramètre se trouve dans cet intervalle. » Les deux approches donnent souvent des résultats numériques similaires pour les grands échantillons avec des a priori non informatifs (Kruschke, 2015).</p>
-
-<h3>Le Mouvement de la « Nouvelle Statistique »</h3>
-
-<p>Cumming (2012, 2014) est un défenseur majeur de la « nouvelle statistique » — une approche fondée sur les tailles d'effet, les intervalles de confiance et la méta-analyse plutôt que les tests de significativité. La déclaration de l'ASA de 2016 sur les valeurs p a renforcé ce changement (Wasserstein &amp; Lazar, 2016).</p>
+<p><strong>Solution :</strong> SE = 1,1/√50 = 0,1556. Avec df = 49 : t* ≈ 2,680. IC = 5,8 ± 2,680(0,1556) = 5,8 ± 0,417 = <strong>(5,38 ; 6,22) t/ha</strong>. La coopérative peut rapporter avec une confiance de 99 % que son rendement moyen se situe entre 5,4 et 6,2 tonnes par hectare — une information critique pour les contrats d'approvisionnement, la planification du stockage et les prévisions de revenus.</p>
 
 <hr>
 
-<h2>✅ Bonnes Pratiques et Directives de Publication</h2>
+<h2>⚙️ Partie IX — Sujets avancés et perspectives modernes</h2>
+
+<h3>Intervalles de confiance bootstrap</h3>
+
+<p>Lorsque la distribution d'échantillonnage est inconnue, les données sont fortement asymétriques, ou le paramètre d'intérêt n'a pas d'erreur standard en forme close, les <strong>méthodes bootstrap</strong> offrent une alternative non paramétrique puissante. Introduites par Bradley Efron de l'Université Stanford en 1979, elles construisent un intervalle de confiance en : (1) rééchantillonnant les données observées des milliers de fois <em>avec remplacement</em>, (2) calculant la statistique d'intérêt pour chaque rééchantillon, et (3) utilisant les percentiles de la distribution empirique résultante comme bornes de confiance. La version la plus simple — le <strong>bootstrap percentile</strong> — prend les 2,5e et 97,5e percentiles de la distribution bootstrap comme bornes d'un IC à 95 %. Les méthodes plus raffinées incluent le <strong>bootstrap BCa</strong> (corrigé pour le biais et accéléré), qui ajuste pour l'asymétrie et le biais dans la distribution bootstrap (Efron &amp; Tibshirani, 1993). Le bootstrap ne requiert aucune hypothèse distributionnelle et fonctionne pour virtuellement toute statistique — médianes, coefficients de corrélation, paramètres de régression ou mesures personnalisées.</p>
+
+<h3>Intervalles crédibles bayésiens</h3>
+
+<p>L'alternative bayésienne à l'intervalle de confiance est l'<strong>intervalle crédible</strong> (aussi appelé <em>intervalle a posteriori</em>), qui <em>possède</em> l'interprétation intuitive que la plupart des gens attribuent à tort aux intervalles de confiance : « Il y a une probabilité de 95 % que le paramètre se trouve dans cet intervalle. » Cette interprétation est possible car l'inférence bayésienne traite les paramètres comme des variables aléatoires avec des distributions de probabilité (la <em>distribution a posteriori</em>), combinant croyances a priori et données observées via le théorème de Bayes. Les deux approches — IC fréquentistes et intervalles crédibles bayésiens — donnent souvent des résultats numériquement similaires quand les tailles d'échantillon sont grandes et les a priori vagues (« non informatifs »). Cependant, leurs fondements philosophiques diffèrent fondamentalement : l'IC fait un énoncé sur la <em>méthode</em> ; l'intervalle crédible fait un énoncé sur le <em>paramètre</em>. Pour les petits échantillons ou l'information a priori forte, les deux peuvent diverger substantiellement (Kruschke, 2015).</p>
+
+<h3>Intervalles de confiance basés sur la vraisemblance et intervalles de profil</h3>
+
+<p>Pour l'estimation par maximum de vraisemblance (EMV), les intervalles de confiance peuvent être construits à partir de la <strong>fonction de vraisemblance</strong> plutôt qu'en s'appuyant sur l'approximation normale. L'<strong>IC de vraisemblance profilée</strong> inverse le test du rapport de vraisemblance : il inclut toutes les valeurs du paramètre pour lesquelles le rapport de log-vraisemblance est inférieur à χ²₁,α/2. Ces intervalles sont particulièrement utiles pour les paramètres proches de valeurs limites, les vraisemblances asymétriques et les modèles non linéaires où les intervalles de Wald (basés sur l'ES) peuvent être trompeurs (Pawitan, 2001). Ils sont la méthode par défaut pour les modèles linéaires généralisés dans la fonction <code>confint()</code> de R.</p>
+
+<h3>Intervalles de confiance simultanés et comparaisons multiples</h3>
+
+<p>Lors de la construction d'IC pour plusieurs paramètres simultanément — par exemple, en comparant cinq groupes de traitement — le taux de couverture global tombe en dessous du niveau nominal. Si vous construisez dix IC individuels à 95 %, la probabilité que <em>tous</em> capturent simultanément leurs vrais paramètres est d'environ 0,95¹⁰ ≈ 0,60, pas 0,95. Les solutions incluent : la <strong>correction de Bonferroni</strong> (utiliser α/k pour k intervalles — conservatrice mais simple), la <strong>différence honnêtement significative de Tukey</strong> (Tukey HSD, conçue spécifiquement pour toutes les comparaisons par paires de moyennes), et la <strong>méthode de Scheffé</strong> (valide pour tous les contrastes possibles). Le choix dépend du nombre de comparaisons et de leur caractère planifié ou post-hoc (Hochberg &amp; Tamhane, 1987).</p>
+
+<h3>Le mouvement de la « nouvelle statistique »</h3>
+
+<p>Geoff Cumming de l'Université La Trobe a été le principal défenseur de ce qu'il appelle la « nouvelle statistique » — un paradigme de recherche construit autour des <strong>tailles d'effet</strong>, des <strong>intervalles de confiance</strong> et de la <strong>méta-analyse</strong> plutôt que du test de significativité de l'hypothèse nulle (NHST). Dans son article influent de 2014 dans <em>Psychological Science</em>, Cumming a argumenté que les IC encouragent les chercheurs à penser en termes de <em>magnitude</em> et de <em>précision</em> plutôt que la dichotomie stérile « significatif/non significatif ». Ce mouvement, endossé par le <em>Publication Manual</em> de l'APA (6e et 7e éditions), représente un changement fondamental dans la manière dont de nombreuses disciplines abordent le reporting statistique. L'éditorial de 2019 de Wasserstein, Schirm et Lazar dans <em>The American Statistician</em> — « Vers un monde au-delà de p &lt; 0,05 » — est allé encore plus loin, exhortant les chercheurs à abandonner entièrement le concept de « significativité statistique » et à rapporter plutôt les estimations avec des intervalles de confiance, acceptant l'incertitude inhérente à la connaissance scientifique.</p>
+
+<hr>
+
+<h2>✅ Partie X — Bonnes pratiques et directives de reporting</h2>
 
 <table>
   <thead>
-    <tr><th>Pratique</th><th>Recommandation</th></tr>
+    <tr><th>Pratique</th><th>Recommandation</th><th>Source</th></tr>
   </thead>
   <tbody>
-    <tr><td>🔢 <strong>Toujours rapporter les IC</strong></td><td>Présenter les IC aux côtés des estimations ponctuelles et des valeurs p</td></tr>
-    <tr><td>📐 <strong>Indiquer le niveau de confiance</strong></td><td>Toujours spécifier (ex. : IC 95 %)</td></tr>
-    <tr><td>📏 <strong>Rapporter les deux bornes</strong></td><td>Format « IC 95 % [inf, sup] » de manière cohérente</td></tr>
-    <tr><td>🎯 <strong>Interpréter en substance</strong></td><td>Discuter ce que l'IC signifie en contexte pratique</td></tr>
-    <tr><td>⚠️ <strong>Vérifier les hypothèses</strong></td><td>Normalité, taille d'échantillon adéquate, indépendance</td></tr>
-    <tr><td>🔄 <strong>Utiliser les méthodes appropriées</strong></td><td>Intervalles t, intervalles de Wilson, bootstrap selon les cas</td></tr>
-    <tr><td>📊 <strong>Visualiser</strong></td><td>Barres d'erreur, forest plots, diagrammes de Gardner-Altman</td></tr>
+    <tr><td>🔢 <strong>Toujours rapporter les IC</strong></td><td>Présenter les IC aux côtés des estimations ponctuelles et des valeurs p — non comme un ajout mais comme un résultat principal</td><td>APA (2010) ; directives ICMJE</td></tr>
+    <tr><td>📐 <strong>Préciser le niveau de confiance</strong></td><td>Toujours spécifier le niveau (ex. : « IC à 95 % »), car différents niveaux produisent différents intervalles</td><td>CONSORT ; STROBE</td></tr>
+    <tr><td>📏 <strong>Rapporter les deux bornes</strong></td><td>Utiliser le format « IC à 95 % [inférieur ; supérieur] » de manière cohérente ; ne jamais rapporter seulement la marge d'erreur</td><td>APA (2010)</td></tr>
+    <tr><td>🎯 <strong>Interpréter de manière substantive</strong></td><td>Discuter ce que l'IC signifie en contexte — l'intervalle inclut-il des valeurs cliniquement, écologiquement ou pratiquement significatives ?</td><td>Gardner &amp; Altman (1986)</td></tr>
+    <tr><td>⚠️ <strong>Vérifier les hypothèses</strong></td><td>Vérifier la normalité (pour les intervalles t), les comptages suffisants succès/échecs (pour les intervalles de proportions) et l'indépendance des observations</td><td>Agresti &amp; Coull (1998)</td></tr>
+    <tr><td>🔄 <strong>Utiliser les méthodes appropriées</strong></td><td>Intervalles t quand σ est inconnu ; Wilson/Agresti-Coull pour les proportions extrêmes ; bootstrap quand les hypothèses paramétriques échouent ; vraisemblance profilée pour les modèles non linéaires</td><td>Brown et al. (2001)</td></tr>
+    <tr><td>📊 <strong>Visualiser graphiquement les IC</strong></td><td>Utiliser des diagrammes à barres d'erreur, des forest plots (pour les méta-analyses), ou des diagrammes d'estimation de Gardner-Altman pour afficher les IC visuellement avec les données</td><td>Cumming (2012)</td></tr>
+    <tr><td>📝 <strong>Planifier la taille d'échantillon a priori</strong></td><td>Utiliser la formule de largeur de l'IC pour déterminer n <em>avant</em> la collecte de données afin d'assurer une précision adéquate pour la question de recherche</td><td>Cochran (1977)</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>🧩 Synthèse : Pourquoi les Intervalles de Confiance Comptent</h2>
+<h2>⚠️ Écueils courants en pratique</h2>
 
-<p>Les intervalles de confiance représentent l'une des avancées les plus importantes de la statistique appliquée. Ils transforment des chiffres bruts en communication scientifique significative en transmettant simultanément une estimation, sa précision et sa relation avec les tests d'hypothèses. Comme Altman et ses collègues l'ont longtemps soutenu, l'estimation avec intervalles de confiance devrait être le mode principal de présentation statistique en science (Altman et al., 2000).</p>
+<p><strong>1. Confondre intervalles de confiance et intervalles de prédiction.</strong> Un IC à 95 % pour la moyenne estime <em>où se trouve la moyenne de la population</em> ; un intervalle de prédiction à 95 % estime <em>où tombera une nouvelle observation unique</em>. Les intervalles de prédiction sont toujours plus larges car ils tiennent compte à la fois de l'incertitude d'échantillonnage (où est μ ?) <em>et</em> de la variabilité individuelle (à quelle distance une observation est-elle de μ ?). Les confondre peut mener à des conclusions radicalement incorrectes — par exemple, prétendre que 95 % des patients auront une pression artérielle entre 124 et 132 mmHg alors que ce n'est que l'IC pour la <em>moyenne</em>.</p>
+
+<p><strong>2. Calculer des IC à partir d'échantillons non aléatoires.</strong> Toutes les formules d'IC supposent un échantillonnage probabiliste. Un IC calculé à partir d'un échantillon de commodité (ex. : volontaires en ligne, patients d'hôpital disponibles par hasard) n'a pas de validité formelle — l'intervalle peut avoir une couverture nominale de 95 % mais une couverture réelle bien inférieure si l'échantillon est systématiquement biaisé. Les mathématiques des IC ne peuvent compenser des designs d'échantillonnage défectueux (Cochran, 1977).</p>
+
+<p><strong>3. Ignorer les hypothèses.</strong> L'intervalle t suppose une normalité approximative de la distribution d'échantillonnage. Pour les petits échantillons de populations fortement asymétriques, le bootstrap ou les alternatives non paramétriques sont préférables. L'intervalle de Wald pour les proportions peut avoir une couverture réelle bien inférieure au niveau nominal quand n est petit ou p extrême — toujours considérer les alternatives de Wilson ou Agresti-Coull.</p>
+
+<p><strong>4. Reporting sélectif.</strong> Ne rapporter que les IC qui « semblent bien » (étroits, excluant zéro) tout en supprimant les IC larges ou contenant zéro est une forme de biais de publication qui déforme la littérature scientifique. Toutes les analyses pré-spécifiées devraient rapporter les IC quel que soit le résultat (Cumming, 2014).</p>
+
+<p><strong>5. Surinterprétation du chevauchement (ou non-chevauchement) de deux IC.</strong> Deux IC individuels à 95 % peuvent <em>se chevaucher</em> même quand la différence entre les groupes est statistiquement significative. L'approche correcte est de construire un IC pour la <em>différence</em> entre les groupes, pas de comparer visuellement deux IC séparés. Inversement, deux IC ne se chevauchant pas garantissent la significativité, mais des IC se chevauchant ne garantissent pas la non-significativité (Goldstein &amp; Healy, 1995).</p>
+
+<hr>
+
+<h2>🧩 Synthèse : Pourquoi les intervalles de confiance comptent</h2>
+
+<p>Les intervalles de confiance représentent l'une des avancées les plus importantes de la statistique appliquée depuis la fondation de la discipline. Ils transforment des nombres bruts en communication scientifique significative en transmettant simultanément une estimation, sa précision et sa relation aux tests d'hypothèses — le tout dans un résumé unique, compact et interprétable. Nés de l'idée de Jerzy Neyman en 1937 selon laquelle l'inférence statistique devrait évaluer la <em>fiabilité des méthodes</em> plutôt qu'assigner des probabilités à des paramètres fixes, les IC sont devenus le standard recommandé pour le reporting des résultats quantitatifs en médecine, psychologie, écologie, ingénierie, économie et sciences sociales.</p>
+
+<p>La leçon de la débâcle des sondages américains de 2016 — et d'innombrables essais cliniques, évaluations environnementales et études scientifiques — est que l'incertitude n'est pas une faiblesse à dissimuler mais une caractéristique essentielle de l'investigation honnête. Une estimation ponctuelle sans intervalle de confiance est une histoire incomplète ; un intervalle de confiance sans interprétation substantive est une occasion manquée. Ensemble, ils donnent aux lecteurs l'information dont ils ont véritablement besoin pour évaluer, répliquer et prolonger le travail scientifique. Comme Douglas Altman l'a écrit dans une phrase qui devrait être affichée sur le mur du bureau de chaque statisticien : « Les intervalles de confiance indiquent la force des preuves concernant des quantités d'intérêt direct, telles que les effets de traitement. Ils sont, par conséquent, d'une grande importance pratique » (Altman et al., 2000, p. 3).</p>
 
 <hr>
 
 <h2>📚 Références</h2>
 
-<p>Agresti, A., &amp; Coull, B. A. (1998). Approximate is better than "exact" for interval estimation of binomial proportions. <em>The American Statistician</em>, <em>52</em>(2), 119–126.</p>
-
-<p>Altman, D. G., Machin, D., Bryant, T. N., &amp; Gardner, M. J. (2000). <em>Statistics with confidence</em> (2e éd.). BMJ Books.</p>
-
-<p>American Psychological Association. (2010). <em>Publication manual of the APA</em> (6e éd.). Author.</p>
-
-<p>Brown, L. D., Cai, T. T., &amp; DasGupta, A. (2001). Interval estimation for a binomial proportion. <em>Statistical Science</em>, <em>16</em>(2), 101–133.</p>
-
-<p>Cochran, W. G. (1977). <em>Sampling techniques</em> (3e éd.). John Wiley &amp; Sons.</p>
-
-<p>Cumming, G. (2012). <em>Understanding the new statistics</em>. Routledge.</p>
-
-<p>Cumming, G. (2014). The new statistics: Why and how. <em>Psychological Science</em>, <em>25</em>(1), 7–29.</p>
-
-<p>Efron, B. (1979). Bootstrap methods: Another look at the jackknife. <em>The Annals of Statistics</em>, <em>7</em>(1), 1–26.</p>
-
+<p>Agresti, A., &amp; Coull, B. A. (1998). Approximate is better than "exact" for interval estimation of binomial proportions. <em>The American Statistician</em>, <em>52</em>(2), 119–126. https://doi.org/10.1080/00031305.1998.10480550</p>
+<p>Altman, D. G., Machin, D., Bryant, T. N., &amp; Gardner, M. J. (2000). <em>Statistics with confidence: Confidence intervals and statistical guidelines</em> (2nd ed.). BMJ Books.</p>
+<p>American Psychological Association. (2010). <em>Publication manual of the American Psychological Association</em> (6th ed.). Author.</p>
+<p>Brown, L. D., Cai, T. T., &amp; DasGupta, A. (2001). Interval estimation for a binomial proportion. <em>Statistical Science</em>, <em>16</em>(2), 101–133. https://doi.org/10.1214/ss/1009213286</p>
+<p>Cochran, W. G. (1977). <em>Sampling techniques</em> (3rd ed.). John Wiley &amp; Sons.</p>
+<p>Cumming, G. (2012). <em>Understanding the new statistics: Effect sizes, confidence intervals, and meta-analysis</em>. Routledge.</p>
+<p>Cumming, G. (2014). The new statistics: Why and how. <em>Psychological Science</em>, <em>25</em>(1), 7–29. https://doi.org/10.1177/0956797613504966</p>
+<p>Efron, B. (1979). Bootstrap methods: Another look at the jackknife. <em>The Annals of Statistics</em>, <em>7</em>(1), 1–26. https://doi.org/10.1214/aos/1176344552</p>
 <p>Efron, B., &amp; Tibshirani, R. J. (1993). <em>An introduction to the bootstrap</em>. Chapman &amp; Hall/CRC.</p>
-
-<p>Gardner, M. J., &amp; Altman, D. G. (1986). Confidence intervals rather than P values. <em>British Medical Journal</em>, <em>292</em>(6522), 746–750.</p>
-
-<p>Gosset, W. S. [Student]. (1908). The probable error of a mean. <em>Biometrika</em>, <em>6</em>(1), 1–25.</p>
-
-<p>Hoekstra, R., Morey, R. D., Rouder, J. N., &amp; Wagenmakers, E.-J. (2014). Robust misinterpretation of confidence intervals. <em>Psychonomic Bulletin &amp; Review</em>, <em>21</em>(5), 1157–1164.</p>
-
-<p>Kruschke, J. K. (2015). <em>Doing Bayesian data analysis</em> (2e éd.). Academic Press.</p>
-
-<p>Lehmann, E. L., &amp; Romano, J. P. (2005). <em>Testing statistical hypotheses</em> (3e éd.). Springer.</p>
-
-<p>Morey, R. D., Hoekstra, R., Rouder, J. N., &amp; Wagenmakers, E.-J. (2016). Continued misinterpretation of confidence intervals. <em>Psychonomic Bulletin &amp; Review</em>, <em>23</em>(1), 131–140.</p>
-
-<p>Neyman, J. (1937). Outline of a theory of statistical estimation. <em>Philosophical Transactions of the Royal Society of London. Series A</em>, <em>236</em>(767), 333–380.</p>
-
-<p>Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA statement on p-values. <em>The American Statistician</em>, <em>70</em>(2), 129–133.</p>
-
-<p>Welch, B. L. (1947). The generalization of "Student's" problem. <em>Biometrika</em>, <em>34</em>(1–2), 28–35.</p>
+<p>Freeman, S., Eddy, S. L., McDonough, M., Smith, M. K., Okoroafor, N., Jordt, H., &amp; Wenderoth, M. P. (2014). Active learning increases student performance in science, engineering, and mathematics. <em>Proceedings of the National Academy of Sciences</em>, <em>111</em>(23), 8410–8415. https://doi.org/10.1073/pnas.1319030111</p>
+<p>Gardner, M. J., &amp; Altman, D. G. (1986). Confidence intervals rather than P values: Estimation rather than hypothesis testing. <em>British Medical Journal</em>, <em>292</em>(6522), 746–750. https://doi.org/10.1136/bmj.292.6522.746</p>
+<p>Goldstein, H., &amp; Healy, M. J. R. (1995). The graphical presentation of a collection of means. <em>Journal of the Royal Statistical Society: Series A</em>, <em>158</em>(1), 175–177. https://doi.org/10.2307/2983411</p>
+<p>Gosset, W. S. [Student]. (1908). The probable error of a mean. <em>Biometrika</em>, <em>6</em>(1), 1–25. https://doi.org/10.2307/2331554</p>
+<p>Hochberg, Y., &amp; Tamhane, A. C. (1987). <em>Multiple comparison procedures</em>. John Wiley &amp; Sons.</p>
+<p>Hoekstra, R., Morey, R. D., Rouder, J. N., &amp; Wagenmakers, E.-J. (2014). Robust misinterpretation of confidence intervals. <em>Psychonomic Bulletin &amp; Review</em>, <em>21</em>(5), 1157–1164. https://doi.org/10.3758/s13423-013-0572-3</p>
+<p>Kennedy, C., Blumenthal, M., Clement, S., Clinton, J. D., Durand, C., Franklin, C., McGeeney, K., Miringoff, L., Olson, K., Rivers, D., Saad, L., Witt, G. E., &amp; Wlezien, C. (2018). An evaluation of the 2016 election polls in the United States. <em>Public Opinion Quarterly</em>, <em>82</em>(1), 1–33. https://doi.org/10.1093/poq/nfx047</p>
+<p>Kruschke, J. K. (2015). <em>Doing Bayesian data analysis: A tutorial with R, JAGS, and Stan</em> (2nd ed.). Academic Press.</p>
+<p>Lehmann, E. L. (1993). The Fisher, Neyman-Pearson theories of testing hypotheses: One theory or two? <em>Journal of the American Statistical Association</em>, <em>88</em>(424), 1242–1249. https://doi.org/10.1080/01621459.1993.10476404</p>
+<p>Lehmann, E. L., &amp; Romano, J. P. (2005). <em>Testing statistical hypotheses</em> (3rd ed.). Springer.</p>
+<p>Morey, R. D., Hoekstra, R., Rouder, J. N., &amp; Wagenmakers, E.-J. (2016). Continued misinterpretation of confidence intervals: Response to Miller and Ulrich. <em>Psychonomic Bulletin &amp; Review</em>, <em>23</em>(1), 131–140. https://doi.org/10.3758/s13423-015-0955-8</p>
+<p>Newcombe, R. G. (1998). Two-sided confidence intervals for the single proportion: Comparison of seven methods. <em>Statistics in Medicine</em>, <em>17</em>(8), 857–872. https://doi.org/10.1002/(SICI)1097-0258(19980430)17:8&lt;857::AID-SIM777&gt;3.0.CO;2-E</p>
+<p>Neyman, J. (1937). Outline of a theory of statistical estimation based on the classical theory of probability. <em>Philosophical Transactions of the Royal Society of London. Series A</em>, <em>236</em>(767), 333–380. https://doi.org/10.1098/rsta.1937.0005</p>
+<p>Pawitan, Y. (2001). <em>In all likelihood: Statistical modelling and inference using likelihood</em>. Oxford University Press.</p>
+<p>Reid, N., &amp; Cox, D. R. (2015). On some principles of statistical inference. <em>International Statistical Review</em>, <em>83</em>(2), 293–308. https://doi.org/10.1111/insr.12067</p>
+<p>Shewhart, W. A. (1931). <em>Economic control of quality of manufactured product</em>. D. Van Nostrand.</p>
+<p>Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA statement on p-values: Context, process, and purpose. <em>The American Statistician</em>, <em>70</em>(2), 129–133. https://doi.org/10.1080/00031305.2016.1154108</p>
+<p>Wasserstein, R. L., Schirm, A. L., &amp; Lazar, N. A. (2019). Moving to a world beyond "p &lt; 0.05." <em>The American Statistician</em>, <em>73</em>(sup1), 1–19. https://doi.org/10.1080/00031305.2019.1583913</p>
+<p>Welch, B. L. (1947). The generalization of "Student's" problem when several different population variances are involved. <em>Biometrika</em>, <em>34</em>(1–2), 28–35. https://doi.org/10.1093/biomet/34.1-2.28</p>

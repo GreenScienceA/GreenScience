@@ -1,370 +1,343 @@
-<h2>📋 Variables et Types de Données : L'ADN de Toute Analyse Statistique</h2>
+<h2>📋 Variables et Types de Données : L'ADN de toute analyse statistique</h2>
 
-<p>Avant de pouvoir calculer une seule moyenne, tracer un seul graphique ou tester une seule hypothèse, vous devez répondre à une question trompeusement simple : <strong>quel type de données suis-je en train d'examiner ?</strong> Cette question — qui semble presque trivialement évidente — est en réalité la décision la plus déterminante de toute la statistique. Si vous répondez correctement, votre analyse s'orientera naturellement vers des conclusions significatives. Si vous vous trompez, chaque nombre que vous produirez, aussi précisément calculé soit-il, sera dépourvu de sens.</p>
+<p>Durant l'été 1854, une épidémie dévastatrice de choléra ravagea le quartier de Broad Street à Soho, Londres, tuant 616 personnes en quelques semaines. La théorie médicale dominante — la <em>miasme</em>, la croyance que la maladie se propageait par l'air vicié — n'offrait aucun remède exploitable. Mais le médecin John Snow fit quelque chose de révolutionnaire : il <strong>collecta des données</strong>. Il enregistra l'<em>adresse</em> de chaque décès (une variable qualitative nominale), le <em>nombre de décès par ménage</em> (une variable quantitative discrète), la <em>distance à la pompe à eau la plus proche</em> (une variable quantitative continue) et la <em>source d'eau</em> utilisée par chaque ménage — la pompe de Broad Street versus d'autres fournisseurs (une variable qualitative nominale). En cartographiant ces variables sur un diagramme de densité de points des rues de Londres, Snow démontra que les cas de choléra se regroupaient étroitement autour de la pompe contaminée de Broad Street. La poignée fut retirée le 8 septembre 1854 et l'épidémie régressa. Snow ne connaissait pas encore la bactérie <em>Vibrio cholerae</em> — cela attendrait le microscope de Robert Koch trois décennies plus tard — mais sa classification minutieuse des variables et leur analyse produisirent l'une des interventions de santé publique les plus déterminantes de l'histoire (Snow, 1855 ; Freedman, 2009).</p>
 
-<p>Considérez ce scénario : un chercheur enregistre les numéros de maillot de joueurs de football (7, 10, 23, 45) et calcule leur moyenne à 21,25. Est-ce significatif ? Bien sûr que non — les numéros de maillot sont des étiquettes, pas des quantités. Le « numéro de maillot moyen » ne nous apprend rien sur l'équipe. Pourtant, ce type exact d'erreur — appliquer des opérations numériques à des étiquettes catégorielles — est l'une des erreurs les plus courantes en recherche appliquée (Stevens, 1946 ; Agresti, 2013).</p>
+<p>Le triomphe de Snow ne fut pas simplement un acte de courage ou d'intuition. Ce fut, en son cœur, un triomphe de la <strong>classification des variables</strong>. Il comprit que les adresses sont des catégories, non des nombres ; que les décès sont des dénombrements, non des mesures ; que les distances sont des grandeurs continues permettant l'arithmétique ; et que les sources d'eau sont des étiquettes non ordonnées exigeant une analyse de fréquences plutôt qu'un calcul de moyennes. S'il avait confondu ces types — s'il avait, par exemple, tenté de calculer la <em>moyenne</em> des étiquettes de sources d'eau ou traité les adresses comme des coordonnées numériques sans raisonnement spatial — son analyse se serait effondrée dans l'absurde, et la poignée de la pompe serait peut-être restée en place des semaines supplémentaires.</p>
 
-<blockquote>💡 <strong>Le principe fondamental :</strong> Le type de variable avec lequel vous travaillez détermine <em>tout</em> — quelles statistiques résumées sont valides, quels graphiques sont appropriés, quels tests d'hypothèses vous pouvez appliquer, et finalement, quelles conclusions vous pouvez tirer. Comme le conseillait le grand statisticien John Tukey : <strong>« La plus grande valeur d'une image est lorsqu'elle nous force à remarquer ce que nous ne nous attendions jamais à voir »</strong> — mais seulement si vous choisissez la bonne image pour votre type de données (Tukey, 1977).</blockquote>
+<p>Telle est la leçon fondatrice de toute la statistique : <strong>le type de variable détermine tout</strong> — quelles statistiques descriptives sont valides, quels graphiques sont appropriés, quels tests d'hypothèses s'appliquent, quels modèles sont légitimes, et en fin de compte, quelles conclusions peuvent être tirées. Cette explication fournit un traitement complet et rigoureux des variables et des types de données, construisant depuis les principes premiers à travers les échelles de mesure de Stevens jusqu'aux cadres décisionnels pratiques que les chercheurs utilisent quotidiennement. Maîtrisez ce matériel, et chaque concept statistique ultérieur — de la moyenne à la régression multivariée, du test du khi-deux au modèle d'équations structurelles — reposera sur des fondations de granit plutôt que de sable.</p>
+
+<blockquote>💡 <strong>Le principe fondateur :</strong> Chaque méthode statistique porte une hypothèse implicite sur le type de données qu'elle reçoit. Appliquez une méthode conçue pour des données continues à échelle de rapport à des catégories ordinales, et vous obtenez des nombres qui <em>semblent</em> précis mais sont substantiellement dénués de sens — ce que les statisticiens appellent <strong>« garbage in, garbage out »</strong>. Comme l'avertit John Tukey : « La plus grande valeur d'une image est quand elle nous force à remarquer ce que nous ne nous attendions jamais à voir » — mais seulement si vous choisissez la bonne image pour votre type de données. La première compétence de tout analyste n'est pas le calcul mais la <em>classification</em> (Tukey, 1977).</blockquote>
 
 <hr>
 
-<h2>🔤 Qu'est-ce qu'une Variable ?</h2>
+<h2>🔤 Partie I — Qu'est-ce qu'une variable ?</h2>
 
-<p>En statistique, une <strong>variable</strong> est toute caractéristique, propriété ou attribut qui peut différer d'une observation à une autre. Le mot vient du latin <em>variabilis</em> — « changeant ». Les variables sont les briques de base de tout jeu de données, les colonnes de chaque tableur et les axes de chaque graphique. Sans variables, il n'y a rien à mesurer, rien à comparer et rien à analyser.</p>
+<p>Une <strong>variable</strong> est toute caractéristique, propriété ou attribut qui peut différer d'une observation à l'autre au sein d'une étude. Le terme dérive du latin <em>variabilis</em> — « susceptible de changer » — et sa caractéristique déterminante est la <em>variation</em> : si chaque observation dans votre jeu de données a la même valeur pour un attribut donné, cet attribut est une <strong>constante</strong>, non une variable. La distinction importe car l'analyse statistique existe précisément pour décrire, expliquer et modéliser la <em>variation</em> — sans elle, il n'y a rien à analyser (Moore et al., 2021).</p>
 
-<p>Mais toutes les variables ne sont pas égales. Certaines décrivent des <em>qualités</em> (catégories, étiquettes, groupes), tandis que d'autres décrivent des <em>quantités</em> (mesures, comptages, montants). Certaines peuvent prendre n'importe quelle valeur le long d'un spectre continu, tandis que d'autres sont limitées à des valeurs spécifiques et isolées. Comprendre ces distinctions n'est pas une question de pédanterie académique — c'est le premier pas essentiel qui façonne chaque décision analytique ultérieure (Moore et al., 2021).</p>
+<p>Plus formellement, une variable est une fonction qui associe chaque unité d'observation (personne, parcelle, pays, cellule, molécule) à une valeur dans un ensemble défini. La nature de cet ensemble — qu'il soit composé de noms, de rangs ordonnés, d'entiers ou de nombres réels — détermine le <strong>type</strong> de la variable, et le type détermine à son tour l'ensemble de la boîte à outils analytique disponible pour le chercheur.</p>
 
 <table>
   <thead>
     <tr><th>Terme</th><th>Définition</th><th>Exemple</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Variable</strong></td><td>Une caractéristique qui varie d'une observation à l'autre</td><td>Taille, groupe sanguin, revenu, couleur des yeux</td></tr>
-    <tr><td><strong>Observation</strong></td><td>Une unité ou un cas unique dans un jeu de données (une ligne)</td><td>Un patient, une plante, un pays</td></tr>
-    <tr><td><strong>Valeur</strong></td><td>La mesure ou catégorie spécifique enregistrée</td><td>172 cm, Groupe A, 45 000 €, Brun</td></tr>
-    <tr><td><strong>Jeu de données</strong></td><td>Une collection structurée d'observations et de variables</td><td>Un tableur avec des lignes (observations) et des colonnes (variables)</td></tr>
+    <tr><td><strong>Unité d'observation</strong></td><td>L'entité sur laquelle les mesures sont effectuées — le « qui » ou « quoi » de l'étude</td><td>Un patient dans un essai clinique ; une parcelle de blé dans un essai au champ ; un pays dans une enquête transnationale ; un neurone dans un scan cérébral</td></tr>
+    <tr><td><strong>Variable</strong></td><td>Une caractéristique qui varie selon les unités d'observation</td><td>Tension artérielle (mmHg) ; rendement des cultures (t/ha) ; PIB par habitant (USD) ; taux de décharge neuronale (impulsions/s)</td></tr>
+    <tr><td><strong>Observation (point de données)</strong></td><td>Une valeur unique enregistrée d'une variable pour une unité</td><td>La pression artérielle systolique du patient n°47 = 138 mmHg</td></tr>
+    <tr><td><strong>Jeu de données</strong></td><td>La collection complète d'observations pour toutes les variables et toutes les unités</td><td>Un tableur avec 200 patients × 15 variables = 3 000 points de données</td></tr>
+    <tr><td><strong>Constante</strong></td><td>Une caractéristique qui ne change pas entre les unités au sein de l'étude</td><td>Si tous les patients d'une étude sont des femmes, alors le sexe est une constante (pas une variable) dans cette étude</td></tr>
   </tbody>
 </table>
 
-<blockquote>🧪 <strong>Exemple agronomique :</strong> Imaginez que vous étudiez des variétés de blé dans la région de Sétif en Algérie. Pour chaque parcelle, vous enregistrez : le <em>nom de la variété</em> (HD1220, Ain Abid, Waha) — une variable qualitative ; le <em>rendement en grains</em> (3,2 t/ha, 4,1 t/ha) — une variable quantitative continue ; le <em>nombre de talles par plante</em> (3, 5, 7) — une variable quantitative discrète ; et la <em>note de sévérité de maladie</em> (aucune, légère, modérée, sévère) — une variable qualitative ordinale. Chaque variable exige un traitement analytique différent.</blockquote>
+<blockquote>🧪 <strong>Exemple de recherche mondiale :</strong> Une équipe multinationale étudie la productivité du riz en Asie du Sud et du Sud-Est. Pour chaque champ, ils enregistrent : la <em>variété de riz</em> (IR64, Basmati 370, Jasmine 105) — une variable qualitative nominale ; le <em>rendement en grains</em> (4,2 t/ha, 5,8 t/ha) — une variable quantitative continue ; le <em>nombre de panicules par m²</em> (285, 312, 298) — une variable quantitative discrète ; la <em>sévérité des dommages d'inondation</em> (aucune, légère, modérée, sévère) — une variable qualitative ordinale ; et le <em>pH du sol</em> (5,4, 6,1, 7,3) — une variable quantitative continue sur une échelle de rapport. Chaque type de variable exige un traitement analytique fondamentalement différent — et en confondre deux quelconques compromettrait l'étude entière.</blockquote>
 
 <hr>
 
-<h2>🌳 L'Arbre de Classification : Une Taxonomie Complète des Variables</h2>
+<h2>🌳 Partie II — L'arbre de classification : Une taxonomie complète des variables</h2>
 
-<p>Les variables en statistique sont classées selon deux axes indépendants, créant une taxonomie riche qui guide chaque décision analytique. Le premier axe distingue les variables <strong>qualitatives</strong> des variables <strong>quantitatives</strong> selon la nature de l'information qu'elles portent. Le second axe, proposé par Stanley Smith Stevens dans son article fondateur de 1946 dans <em>Science</em>, classe les variables selon leur <strong>échelle de mesure</strong> — les relations mathématiques qui tiennent entre leurs valeurs (Stevens, 1946).</p>
+<p>Les variables se divisent en deux grandes familles — <strong>qualitatives</strong> (catégorielles) et <strong>quantitatives</strong> (numériques) — chacune subdivisée en sous-types aux propriétés mathématiques distinctes. Cette taxonomie, formalisée par Stevens (1946) dans son article fondateur dans <em>Science</em> intitulé « On the theory of scales of measurement », reste le cadre standard enseigné dans chaque programme de statistique à travers le monde, malgré des décennies de débat sur ses frontières. Comprendre cet arbre est le prérequis le plus important pour tout apprentissage statistique ultérieur.</p>
 
 <table>
   <thead>
-    <tr><th colspan="4" style="text-align:center;">📊 Classification Complète des Variables</th></tr>
-    <tr><th>Type Principal</th><th>Sous-type</th><th>Échelle</th><th>Exemples</th></tr>
+    <tr><th>Niveau 1</th><th>Niveau 2</th><th>Définition</th><th>Exemples</th><th>Opérations clés</th></tr>
   </thead>
   <tbody>
-    <tr><td rowspan="2"><strong>🔵 Qualitative</strong><br>(Catégorielle)</td><td>Nominale</td><td>Nominale</td><td>Groupe sanguin (A, B, AB, O) ; Espèce cultivée ; Pays</td></tr>
-    <tr><td>Ordinale</td><td>Ordinale</td><td>Niveau de douleur (léger → sévère) ; Niveau d'éducation ; Note de qualité du sol</td></tr>
-    <tr><td rowspan="2"><strong>🔴 Quantitative</strong><br>(Numérique)</td><td>Discrète</td><td>Intervalle ou Rapport</td><td>Nombre d'enfants ; Comptage d'œufs ; Nombre d'insectes nuisibles</td></tr>
-    <tr><td>Continue</td><td>Intervalle ou Rapport</td><td>Température ; Poids ; Taille ; Pluviométrie (mm) ; Rendement (t/ha)</td></tr>
+    <tr><td rowspan="2"><strong>Qualitative (Catégorielle)</strong></td><td><strong>Nominale</strong></td><td>Catégories non ordonnées — noms, étiquettes ou types sans classement inhérent</td><td>Groupe sanguin (A, B, AB, O) ; pays de naissance ; espèce végétale ; couleur des yeux ; langage de programmation</td><td>Fréquence, mode, test du khi-deux, diagramme en barres</td></tr>
+    <tr><td><strong>Ordinale</strong></td><td>Catégories ordonnées — rangs où la distance entre niveaux est inconnue ou inégale</td><td>Niveau d'éducation (primaire → secondaire → supérieur) ; sévérité de la douleur (légère → modérée → sévère) ; échelle de dureté de Mohs ; grade militaire</td><td>Médiane, percentile, Spearman ρ, Mann-Whitney U, diagramme en barres empilées</td></tr>
+    <tr><td rowspan="2"><strong>Quantitative (Numérique)</strong></td><td><strong>Discrète</strong></td><td>Valeurs dénombrables — typiquement des nombres entiers issus de processus de comptage</td><td>Nombre d'enfants ; buts marqués par match ; colonies bactériennes par boîte ; séismes par an ; défauts par lot</td><td>Moyenne, écart-type, modèles de Poisson/binomiale négative, histogramme (classes entières)</td></tr>
+    <tr><td><strong>Continue</strong></td><td>Toute valeur dans un intervalle — limitée uniquement par la précision de l'instrument de mesure</td><td>Taille (cm) ; température (°C) ; temps de réaction (ms) ; pluviométrie (mm) ; concentration (mg/L) ; longueur d'onde (nm)</td><td>Moyenne, écart-type, test t, ANOVA, régression, courbe de densité</td></tr>
   </tbody>
 </table>
+
+<p>Cette classification en quatre volets — nominale, ordinale, discrète, continue — est le fondement sur lequel l'édifice entier de la statistique descriptive et inférentielle est construit. Chaque méthode statistique suppose un type de variable particulier ; violer cette hypothèse produit des résultats valides computationnellement mais scientifiquement dénués de sens (Agresti, 2019).</p>
 
 <hr>
 
-<h2>🔵 Variables Qualitatives (Catégorielles)</h2>
+<h2>🔵 Partie III — Variables qualitatives (catégorielles) : Le monde des catégories</h2>
 
-<p>Une variable qualitative, aussi appelée <strong>variable catégorielle</strong>, classe les observations en groupes ou catégories distincts. La caractéristique clé est que ses valeurs sont des <em>étiquettes</em>, pas des nombres ayant une signification mathématique inhérente. Même quand on attribue des nombres aux catégories (codage homme = 1, femme = 2), ces nombres ne servent que d'étiquettes pratiques — les additionner, les moyenner ou les multiplier produit des résultats absurdes (Agresti, 2013).</p>
+<p>Les variables qualitatives décrivent des <em>qualités</em> ou des <em>attributs</em> plutôt que des quantités. Leurs valeurs sont des catégories — noms, étiquettes, types ou rangs — qui classent les observations en groupes. L'opération fondamentale sur les données catégorielles est le <strong>dénombrement</strong> : combien d'observations tombent dans chaque catégorie ? Les opérations arithmétiques (addition, soustraction, multiplication, division) sur les étiquettes de catégories elles-mêmes sont dépourvues de sens — on ne peut additionner « groupe sanguin A » et « groupe sanguin B » pour obtenir « groupe sanguin AB. » Cette contrainte définit la frontière entre l'analyse qualitative et quantitative et détermine quels outils statistiques sont admissibles (Agresti, 2019).</p>
 
-<h3>🏷️ Variables Nominales — Des Noms Sans Ordre</h3>
+<h3>🏷️ Variables nominales — Des noms sans ordre</h3>
 
-<p>Le mot « nominal » dérive du latin <em>nomen</em> (nom). Les variables nominales assignent les observations à des catégories qui n'ont <strong>aucun ordre ou classement inhérent</strong>. Il n'y a aucun sens logique selon lequel une catégorie serait « supérieure » ou « inférieure » à une autre.</p>
-
-<table>
-  <thead>
-    <tr><th>Variable</th><th>Valeurs Possibles</th><th>Peut-on les classer ?</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Groupe sanguin</td><td>A, B, AB, O</td><td>❌ Non — le groupe A n'est pas « plus » que le groupe O</td></tr>
-    <tr><td>Espèce cultivée</td><td>Blé, orge, maïs, riz</td><td>❌ Non — pas de hiérarchie naturelle</td></tr>
-    <tr><td>État civil</td><td>Célibataire, marié(e), divorcé(e), veuf(ve)</td><td>❌ Non — les catégories sont de simples étiquettes</td></tr>
-    <tr><td>Couleur du sol</td><td>Noir, brun, rouge, jaune, gris</td><td>❌ Non — les couleurs n'ont pas de rang inhérent</td></tr>
-    <tr><td>Méthode d'irrigation</td><td>Goutte-à-goutte, aspersion, sillon, submersion</td><td>❌ Non — ce sont des méthodes, pas des classements</td></tr>
-  </tbody>
-</table>
-
-<p>Un cas spécial des variables nominales est la variable <strong>binaire</strong> (ou dichotomique), qui a exactement deux catégories : oui/non, vivant/mort, présent/absent, mâle/femelle, succès/échec. Les variables binaires sont extrêmement importantes en statistique car elles forment la base de la régression logistique, l'une des méthodes statistiques les plus utilisées en science moderne (Hosmer et al., 2013).</p>
-
-<blockquote>⚠️ <strong>Le piège du déguisement numérique :</strong> Les nombres qui servent d'étiquettes restent <em>nominaux</em>. Les codes postaux (16000 pour Sétif, 31000 pour Oran), les indicatifs téléphoniques, les numéros d'étudiants et les numéros de maillot sont tous nominaux bien qu'exprimés en chiffres. Le test critique est : <strong>l'arithmétique a-t-elle un sens ?</strong> Si additionner, soustraire ou moyenner les valeurs produit des résultats absurdes, la variable est catégorielle, indépendamment de l'apparence numérique de ses valeurs (Freedman et al., 2007).</blockquote>
-
-<h3>📊 Variables Ordinales — Des Catégories Classées</h3>
-
-<p>Les variables ordinales partagent la nature catégorielle des variables nominales mais ajoutent une propriété cruciale : leurs catégories ont un <strong>ordre logique significatif</strong>. On peut dire qu'une catégorie est « plus que » ou « moins que » une autre. Cependant — et c'est la limitation critique — les <strong>distances entre catégories ne sont ni égales ni mesurables</strong>. On connaît la direction de la différence mais pas son ampleur.</p>
+<p>Une <strong>variable nominale</strong> (du latin <em>nomen</em>, « nom ») assigne chaque observation à l'une de plusieurs catégories non ordonnées. Les catégories sont mutuellement exclusives (chaque observation appartient à exactement une) et collectivement exhaustives (chaque observation peut être classée), mais elles ne portent <strong>aucun classement inhérent</strong>. Réarranger les catégories dans n'importe quel ordre ne change pas le contenu informationnel — lister les groupes sanguins comme « O, A, B, AB » est statistiquement identique à les lister comme « AB, B, A, O. »</p>
 
 <table>
   <thead>
-    <tr><th>Variable</th><th>Catégories Ordonnées</th><th>Intervalles égaux ?</th></tr>
+    <tr><th>Domaine</th><th>Variable</th><th>Catégories</th><th>Pourquoi nominale ?</th></tr>
   </thead>
   <tbody>
-    <tr><td>Niveau d'éducation</td><td>Primaire → Secondaire → Universitaire → Post-gradué</td><td>❌ L'écart entre niveaux varie</td></tr>
-    <tr><td>Satisfaction (Likert)</td><td>Très insatisfait → Insatisfait → Neutre → Satisfait → Très satisfait</td><td>❌ Distance psychologique inégale</td></tr>
-    <tr><td>Sévérité de maladie</td><td>Aucune → Légère → Modérée → Sévère → Critique</td><td>❌ Différence clinique entre stades variable</td></tr>
-    <tr><td>Classe de drainage du sol</td><td>Très mauvais → Mauvais → Modéré → Bon → Excessif</td><td>❌ Différence physique non uniforme</td></tr>
-    <tr><td>Grade militaire</td><td>Soldat → Caporal → Sergent → Lieutenant → Capitaine</td><td>❌ Hiérarchie claire, intervalles non</td></tr>
+    <tr><td>Médecine</td><td>Groupe sanguin</td><td>A, B, AB, O</td><td>Aucun type n'est « supérieur » ou « plus » qu'un autre ; les catégories sont des classes biochimiques distinctes</td></tr>
+    <tr><td>Écologie</td><td>Type d'habitat</td><td>Forêt, prairie, zone humide, désert, marin</td><td>Les habitats sont des écosystèmes qualitativement distincts, non des positions sur une échelle</td></tr>
+    <tr><td>Sociologie</td><td>État civil</td><td>Célibataire, marié, divorcé, veuf</td><td>Catégories décrivant différents statuts juridiques sans ordonnancement naturel</td></tr>
+    <tr><td>Informatique</td><td>Système d'exploitation</td><td>Windows, macOS, Linux, ChromeOS</td><td>Étiquettes pour différentes plateformes logicielles — aucun rang intrinsèque</td></tr>
+    <tr><td>Génétique</td><td>Génotype</td><td>AA, Aa, aa</td><td>Configurations génétiques distinctes, non une grandeur</td></tr>
+    <tr><td>Géographie</td><td>Continent</td><td>Afrique, Asie, Europe, Amériques, Océanie, Antarctique</td><td>Noms de masses terrestres sans hiérarchie inhérente</td></tr>
   </tbody>
 </table>
 
-<p>La distinction entre variables nominales et ordinales a des conséquences analytiques profondes. Pour les variables nominales, la seule mesure de tendance centrale valide est le <strong>mode</strong> (catégorie la plus fréquente). Pour les variables ordinales, le mode et la <strong>médiane</strong> (valeur de rang intermédiaire) sont valides. Cependant, la <strong>moyenne</strong> est théoriquement invalide pour les données ordinales car elle nécessite des intervalles égaux — une propriété que les échelles ordinales ne garantissent pas (Stevens, 1946). Malgré cette restriction théorique, de nombreux chercheurs en sciences sociales calculent couramment des moyennes pour les échelles de Likert, une pratique qui reste activement débattue dans la littérature méthodologique (Norman, 2010 ; Carifio & Perla, 2008).</p>
+<p><strong>Statistiques admissibles :</strong> Fréquences, proportions (pourcentages), le <strong>mode</strong> (catégorie la plus fréquente), test du khi-deux (χ²) d'association, V de Cramér pour la taille d'effet, test exact de Fisher pour les petits échantillons, et modèles log-linéaires pour les tableaux de contingence multidimensionnels. <strong>Inadmissibles :</strong> moyenne, médiane, écart-type, corrélation — celles-ci exigent des valeurs numériques ayant au moins des propriétés ordinales.</p>
 
-<blockquote>🔬 <strong>Le débat de l'échelle de Likert :</strong> Peut-on calculer la moyenne d'une note de satisfaction de 1 à 5 ? Strictement parlant, Stevens (1946) a dit non — ce sont des données ordinales. Cependant, Norman (2010) a démontré par des études de simulation que les tests paramétriques appliqués aux données de Likert sont remarquablement robustes, même avec de petits échantillons et des distributions asymétriques. La plupart des statisticiens modernes adoptent une position pragmatique : traiter les échelles de Likert comme quasi-intervallaires est acceptable <em>si</em> l'échelle comporte au moins 5 points et que les réponses sont approximativement normalement distribuées (Carifio & Perla, 2008).</blockquote>
+<p><strong>Cas spécial — variables dichotomiques (binaires) :</strong> Une variable nominale à exactement deux catégories (oui/non, masculin/féminin, vivant/décédé, réussi/échoué) est dite <strong>dichotomique</strong> ou <strong>binaire</strong>. Codée en 0/1, la variable binaire acquiert une double identité unique : elle peut être traitée comme nominale <em>ou</em> comme quantitative. La moyenne d'une variable 0/1 est égale à la proportion de 1 — une commodité mathématique exploitée tout au long de la régression logistique, de l'analyse de survie et de la classification en apprentissage automatique (Agresti, 2019).</p>
+
+<blockquote>⚠️ <strong>Le piège du déguisement numérique :</strong> Les nombres qui servent d'étiquettes sont <em>toujours nominaux</em>. Les codes postaux (10001 pour Manhattan, SW1A 1AA pour Buckingham Palace, 75001 pour le Louvre), les indicatifs téléphoniques, les numéros d'identification d'étudiants, les numéros de maillot des joueurs FIFA et les codes pays ISO sont tous nominaux bien qu'exprimés en chiffres. Le test critique est : <strong>l'arithmétique a-t-elle un sens ?</strong> Si additionner, soustraire ou calculer la moyenne des valeurs produit des résultats absurdes (quel est le « code postal moyen » ?), la variable est catégorielle indépendamment du fait que ses valeurs ressemblent à des nombres. C'est l'erreur de classification la plus courante en recherche appliquée — et elle mène directement à des analyses invalides (Freedman et al., 2007).</blockquote>
+
+<h3>📊 Variables ordinales — Des catégories rangées</h3>
+
+<p>Une <strong>variable ordinale</strong> (du latin <em>ordo</em>, « rang ») assigne chaque observation à une catégorie qui occupe une position définie dans une hiérarchie. Les catégories possèdent un <strong>ordonnancement naturel</strong> — le premier est moins que le deuxième, léger est moins que modéré, d'accord est moins que tout à fait d'accord — mais les <strong>distances entre catégories adjacentes sont inconnues ou inégales</strong>. L'écart entre « douleur légère » et « douleur modérée » peut être très différent de l'écart entre « douleur modérée » et « douleur sévère », pourtant l'échelle ordinale ne fournit aucun moyen de quantifier ces différences. C'est ce qui distingue l'échelle ordinale des échelles d'intervalle et de rapport, où des distances égales sont garanties (Stevens, 1946).</p>
+
+<table>
+  <thead>
+    <tr><th>Domaine</th><th>Variable</th><th>Catégories ordonnées</th><th>Pourquoi ordinale ?</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Médecine</td><td>Stade du cancer</td><td>Stade I → II → III → IV</td><td>Les stades supérieurs indiquent une plus grande sévérité, mais la différence biologique entre I→II n'est pas nécessairement égale à III→IV</td></tr>
+    <tr><td>Éducation</td><td>Niveau de diplôme</td><td>Secondaire → Licence → Master → Doctorat</td><td>Hiérarchie claire de niveau d'études, mais la « distance » entre niveaux est inégale (2 vs 4 vs 3+ ans)</td></tr>
+    <tr><td>Sciences de la Terre</td><td>Dureté de Mohs</td><td>1 (talc) → ... → 10 (diamant)</td><td>Les minéraux sont ordonnés par résistance à la rayure, mais les incréments sont très inégaux — l'écart de 9 (corindon) à 10 (diamant) est plus grand que de 1 à 9 combinés</td></tr>
+    <tr><td>Psychologie</td><td>Cotation de Likert</td><td>Pas du tout d'accord → Pas d'accord → Neutre → D'accord → Tout à fait d'accord</td><td>Réponses ordonnées avec un espacement inconnu entre les niveaux</td></tr>
+    <tr><td>Militaire</td><td>Grade</td><td>Soldat → Caporal → Sergent → Lieutenant → Capitaine → Colonel → Général</td><td>Hiérarchie stricte avec des sauts inégaux en autorité et responsabilité</td></tr>
+    <tr><td>Économie</td><td>Tranche de revenu</td><td>Basse → Moyenne → Haute</td><td>Bandes ordonnées, mais les fourchettes monétaires au sein de chaque tranche diffèrent et sont définies arbitrairement</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Statistiques admissibles :</strong> Fréquences, proportions, <strong>médiane</strong>, <strong>percentiles</strong>, écart interquartile, corrélation de rang de Spearman (ρ), tau de Kendall (τ), test de Mann-Whitney U, test des rangs signés de Wilcoxon, test H de Kruskal-Wallis, et régression logistique ordinale. <strong>Inadmissibles (strictement) :</strong> moyenne et écart-type, qui supposent un espacement égal entre les valeurs.</p>
+
+<blockquote>🔬 <strong>Le débat de l'échelle de Likert — une résolution contemporaine :</strong> Peut-on calculer la moyenne d'une cotation de satisfaction de 1 à 5 ? S.S. Stevens (1946), qui a formalisé la théorie des échelles de mesure, a dit catégoriquement <em>non</em> — les réponses Likert sont ordinales, et la moyenne requiert des propriétés d'intervalle. Pendant des décennies, cela a engendré un débat féroce. Cependant, Norman (2010), dans une étude phare publiée dans <em>Advances in Health Sciences Education</em>, a démontré par des simulations extensives que les tests paramétriques (tests t, ANOVA, r de Pearson) appliqués aux données Likert sont <strong>remarquablement robustes</strong> — produisant des conclusions valides même avec de petits échantillons (n &lt; 10), des distributions non normales et des variances inégales. Carifio &amp; Perla (2008) ont renforcé ce résultat, montrant que le théorème central limite protège les scores Likert agrégés des violations d'ordinalité au niveau individuel. Le consensus moderne est pragmatique : traiter les échelles de type Likert comme approximativement d'intervalle est acceptable <em>si</em> l'échelle a ≥ 5 catégories de réponse et les scores sont agrégés sur plusieurs items — mais les chercheurs devraient toujours vérifier leurs conclusions avec des alternatives non paramétriques appropriées en guise de contrôle de sensibilité (Harpe, 2015).</blockquote>
 
 <hr>
 
-<h2>🔴 Variables Quantitatives (Numériques)</h2>
+<h2>🔴 Partie IV — Variables quantitatives (numériques) : Le monde des nombres</h2>
 
-<p>Une variable quantitative enregistre une <strong>mesure ou un comptage numérique</strong> où les opérations arithmétiques sont significatives. Contrairement aux variables catégorielles, qui répondent à « quel type ? », les variables quantitatives répondent à « combien ? » ou « quelle quantité ? ». Les valeurs sur une échelle quantitative portent une signification mathématique réelle — les différences, sommes et rapports peuvent être interprétés de manière substantielle (Agresti & Franklin, 2018).</p>
+<p>Les variables quantitatives mesurent <em>combien</em> ou <em>quel nombre</em>. Leurs valeurs sont de véritables nombres sur lesquels les opérations arithmétiques — addition, soustraction, multiplication, division — sont significatives. C'est la distinction déterminante : si vous pouvez calculer une somme ou une moyenne significative, vous travaillez avec une variable quantitative. La famille quantitative se divise en deux branches selon la nature de l'ensemble de nombres : <strong>discrète</strong> (dénombrable, à valeurs entières) et <strong>continue</strong> (toute valeur dans un intervalle). La distinction n'est pas seulement taxonomique — elle détermine les distributions de probabilité qui modélisent les données, et donc quelles méthodes inférentielles sont appropriées (Wasserman, 2004).</p>
 
-<h3>🔢 Variables Discrètes — Valeurs Dénombrables et Isolées</h3>
+<h3>🔢 Variables discrètes — Valeurs dénombrables et isolées</h3>
 
-<p>Une variable discrète ne peut prendre que des <strong>valeurs spécifiques et séparées</strong> — typiquement des nombres entiers résultant d'un comptage. Entre deux valeurs adjacentes, il n'existe aucune valeur intermédiaire possible. On ne peut pas avoir 2,5 enfants, 3,7 œufs ou 1,4 chromosomes. Les variables discrètes proviennent du processus de <em>comptage</em> : combien ? (Wackerly et al., 2014).</p>
-
-<table>
-  <thead>
-    <tr><th>Variable</th><th>Valeurs Possibles</th><th>Pourquoi discrète ?</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Nombre de graines par gousse</td><td>0, 1, 2, 3, 4, 5, ...</td><td>Les graines sont des unités entières indivisibles</td></tr>
-    <tr><td>Comptage de ravageurs par feuille</td><td>0, 1, 2, 3, ...</td><td>On compte des insectes individuels</td></tr>
-    <tr><td>Taille de la famille</td><td>1, 2, 3, 4, 5, ...</td><td>Les personnes sont indivisibles</td></tr>
-    <tr><td>Nombre de produits défectueux</td><td>0, 1, 2, ..., n</td><td>Les défauts sont comptés, pas mesurés</td></tr>
-    <tr><td>Note d'examen (sur 20)</td><td>0, 1, 2, ..., 20</td><td>Ensemble fini de résultats entiers</td></tr>
-  </tbody>
-</table>
-
-<blockquote>💡 <strong>L'exception du « grand discret » :</strong> Parfois, une variable discrète peut prendre un si grand nombre de valeurs qu'elle se comporte effectivement comme une variable continue. Par exemple, le revenu annuel en dinars est techniquement discret (on ne peut pas gagner une fraction de centime), mais comme les valeurs possibles sont si nombreuses et si finement espacées par rapport à l'échelle de variation, il est couramment traité comme continu en analyse statistique (Freedman et al., 2007).</blockquote>
-
-<h3>📏 Variables Continues — N'importe Quelle Valeur dans un Intervalle</h3>
-
-<p>Une variable continue peut prendre <strong>n'importe quelle valeur dans un intervalle donné</strong>, y compris tous les nombres réels entre deux points quelconques. Entre 170 cm et 171 cm, il existe une infinité de tailles possibles : 170,1 ; 170,15 ; 170,153 ; et ainsi de suite. La précision est limitée uniquement par l'instrument de mesure, pas par la nature de la variable elle-même. Les variables continues proviennent du processus de <em>mesure</em> : combien ? quelle longueur ? quel poids ? (Wackerly et al., 2014).</p>
+<p>Une <strong>variable discrète</strong> prend un ensemble fini ou dénombrablement infini de valeurs, typiquement des nombres entiers issus de processus de <em>comptage</em>. Entre deux valeurs consécutives possibles, il n'y a <strong>aucune valeur intermédiaire admissible</strong> — on peut observer 3 enfants ou 4 enfants mais jamais 3,7 enfants. La distribution de probabilité pour des données discrètes assigne une probabilité positive à chaque valeur isolée, créant une fonction de masse de probabilité (PMF) plutôt qu'une fonction de densité de probabilité (PDF).</p>
 
 <table>
   <thead>
-    <tr><th>Variable</th><th>Valeurs Exemples</th><th>Pourquoi continue ?</th></tr>
+    <tr><th>Domaine</th><th>Variable</th><th>Valeurs possibles</th><th>Distribution typique</th></tr>
   </thead>
   <tbody>
-    <tr><td>Hauteur de plante (cm)</td><td>45,3 ; 67,82 ; 112,457</td><td>Peut prendre n'importe quelle valeur — limitée uniquement par la précision de la règle</td></tr>
-    <tr><td>pH du sol</td><td>5,4 ; 6,72 ; 7,001</td><td>Mesure chimique continue</td></tr>
-    <tr><td>Pluviométrie journalière (mm)</td><td>0,0 ; 12,5 ; 47,83</td><td>Le volume d'eau est infiniment divisible</td></tr>
-    <tr><td>Rendement en grains (t/ha)</td><td>2,15 ; 3,847 ; 5,0</td><td>La masse est une quantité physique continue</td></tr>
-    <tr><td>Température (°C)</td><td>−2,5 ; 18,33 ; 36,7</td><td>L'énergie thermique varie de manière continue</td></tr>
+    <tr><td>Épidémiologie</td><td>Nombre de nouveaux cas COVID par jour dans une ville</td><td>0, 1, 2, 3, ..., n</td><td>Poisson ou binomiale négative</td></tr>
+    <tr><td>Écologie</td><td>Nombre d'espèces dans un quadrat</td><td>0, 1, 2, ..., S</td><td>Poisson (faibles dénombrements) ; approximation normale (grand S)</td></tr>
+    <tr><td>Fabrication</td><td>Articles défectueux par lot de 1 000</td><td>0, 1, 2, ..., 1000</td><td>Binomiale</td></tr>
+    <tr><td>Sismologie</td><td>Séismes ≥ 5,0 de magnitude par an au niveau mondial</td><td>0, 1, 2, ..., n</td><td>Poisson</td></tr>
+    <tr><td>Sport</td><td>Buts marqués par match</td><td>0, 1, 2, 3, ...</td><td>Poisson (football) ; binomiale négative (points au basketball)</td></tr>
+    <tr><td>Génomique</td><td>Nombre de mutations par gène</td><td>0, 1, 2, ..., n</td><td>Poisson ou Poisson à inflation de zéros</td></tr>
   </tbody>
 </table>
 
-<p>La distinction discret/continu a une importance considérable pour la modélisation statistique. Les données de comptage discrètes suivent souvent les distributions de <strong>Poisson</strong> ou <strong>binomiale</strong>, tandis que les mesures continues suivent typiquement la distribution <strong>normale</strong> (gaussienne) ou ses dérivées. Utiliser le mauvais modèle de distribution peut produire des résultats gravement trompeurs (McCullagh & Nelder, 1989).</p>
+<p><strong>Modèles probabilistes clés :</strong> La <strong>distribution de Poisson</strong> modélise les dénombrements d'événements rares dans un temps/espace fixe (λ = moyenne = variance) ; la <strong>distribution binomiale</strong> modélise les dénombrements de succès dans n essais indépendants ; la <strong>binomiale négative</strong> relâche la contrainte moyenne=variance de Poisson pour gérer la <em>surdispersion</em> — quand la variance excède la moyenne, fréquent dans les données de comptage écologiques et génomiques (McCullagh &amp; Nelder, 1989). Choisir le bon modèle de comptage n'est pas une décision cosmétique — appliquer un test t de distribution normale à des données de comptage avec beaucoup de zéros (comme souvent observé dans les dénombrements d'espèces ou l'incidence de maladies) produit des taux d'erreur de type I gonflés et des intervalles de confiance peu fiables.</p>
 
-<blockquote>🌾 <strong>Illustration agronomique :</strong> Compter les pucerons par plante (discret) nécessite des méthodes statistiques différentes de la mesure de la surface foliaire en cm² (continu). Si vous comptez 0, 3, 0, 1, 0, 12, 0, 0, 2 pucerons sur 9 plantes — avec beaucoup de zéros et des valeurs asymétriques à droite — une distribution normale est clairement inappropriée. Un modèle de Poisson ou binomial négatif tient compte de la nature discrète et non-négative des données de comptage. Choisir le bon modèle n'est pas une décision cosmétique — cela affecte directement la validité de vos valeurs p et intervalles de confiance (McCullagh & Nelder, 1989).</blockquote>
+<blockquote>💡 <strong>L'exception du « grand discret » :</strong> Parfois, une variable discrète peut prendre tellement de valeurs possibles qu'elle se comporte effectivement comme une variable continue. Le revenu annuel d'un ménage en dollars américains est techniquement discret (on ne peut gagner une fraction de centime), mais parce que les valeurs possibles sont si nombreuses et finement espacées relativement à l'échelle de variation, le revenu est routinièrement traité comme continu. De même, la population totale d'un pays est techniquement discrète mais analysée avec des méthodes continues. Cette approche pragmatique est standard quand le nombre de valeurs discrètes possibles est très grand relativement à la taille de l'échantillon — la nature discrète devient analytiquement négligeable (Freedman et al., 2007).</blockquote>
+
+<h3>📏 Variables continues — Toute valeur dans un intervalle</h3>
+
+<p>Une <strong>variable continue</strong> peut prendre <em>n'importe quelle</em> valeur dans un intervalle sur la droite des nombres réels. Entre deux valeurs observées quelconques, une infinité de valeurs intermédiaires sont théoriquement possibles — la précision n'est limitée que par l'instrument de mesure, non par la variable elle-même. Tandis qu'un thermomètre à mercure lit la température au dixième de degré près et une sonde numérique au centième, la température sous-jacente varie de manière continue. Les données continues sont modélisées par des fonctions de densité de probabilité (PDF), où la probabilité correspond à l'<em>aire sous la courbe</em> plutôt qu'à la hauteur en un point — un concept fondamental pour comprendre les distributions normales, les intervalles de confiance et les tests d'hypothèses (Wasserman, 2004).</p>
+
+<table>
+  <thead>
+    <tr><th>Domaine</th><th>Variable</th><th>Unité</th><th>Distribution typique</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Biomédecine</td><td>Pression artérielle systolique</td><td>mmHg</td><td>Approximativement normale</td></tr>
+    <tr><td>Climatologie</td><td>Pluviométrie annuelle</td><td>mm</td><td>Gamma ou log-normale</td></tr>
+    <tr><td>Physique</td><td>Temps de réaction</td><td>millisecondes</td><td>Ex-Gaussienne (normale + exponentielle)</td></tr>
+    <tr><td>Agriculture</td><td>Rendement des cultures</td><td>t/ha</td><td>Normale (grands essais) ; bêta (données proportionnelles)</td></tr>
+    <tr><td>Finance</td><td>Rendement boursier quotidien</td><td>% de variation</td><td>À queues lourdes (Student t, non normale)</td></tr>
+    <tr><td>Chimie</td><td>Concentration de solution</td><td>mg/L</td><td>Log-normale (positive, asymétrique à droite)</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Modèles probabilistes clés :</strong> La <strong>distribution normale (gaussienne)</strong> est le modèle par défaut pour de nombreuses variables continues, justifié par le théorème central limite quand les données résultent de sommes ou de moyennes de nombreuses contributions indépendantes. Cependant, toutes les données continues ne sont pas normalement distribuées : les temps de réaction, les revenus, les concentrations de polluants et de nombreuses mesures biologiques suivent des <strong>distributions asymétriques</strong> (log-normale, gamma, Weibull). Identifier la forme distributionnelle via des histogrammes, des graphiques Q-Q et des tests formels (Shapiro-Wilk, Anderson-Darling) est une étape préliminaire critique avant toute analyse inférentielle (Field, 2018).</p>
+
+<blockquote>🌾 <strong>Illustration agronomique — contexte mondial :</strong> Un essai multisite à travers le Brésil, l'Inde et le Nigéria compare la performance d'hybrides de maïs. Compter les <em>épis par plante</em> (0, 1, 2, 3) produit des données discrètes mieux modélisées par une distribution de Poisson. Mesurer l'<em>humidité du grain à la récolte</em> (13,2 %, 14,7 %, 12,8 %) produit des données continues adaptées à l'ANOVA. Si le chercheur applique un test t standard aux données de comptage d'épis — qui contiennent beaucoup de zéros et une forte asymétrie à droite — les valeurs de p résultantes peuvent être sévèrement biaisées. À la place, un modèle linéaire généralisé avec une fonction de lien de Poisson respecte la nature discrète et non négative des données et produit une inférence valide. Choisir le bon modèle n'est pas un luxe statistique — c'est la différence entre une conclusion défendable et un article rétracté (McCullagh &amp; Nelder, 1989).</blockquote>
 
 <hr>
 
-<h2>📐 Les Échelles de Mesure de Stevens : Les Quatre Niveaux</h2>
+<h2>📐 Partie V — Les échelles de mesure de Stevens : Les quatre niveaux</h2>
 
-<p>En 1946, le psychologue <strong>Stanley Smith Stevens</strong> publia ce qui allait devenir l'un des articles les plus influents de l'histoire de la théorie de la mesure. Dans son article « On the Theory of Scales of Measurement » dans la revue <em>Science</em>, Stevens proposa que toute mesure en science opère sur l'une de quatre échelles — <strong>nominale</strong>, <strong>ordinale</strong>, <strong>intervalle</strong> et <strong>rapport</strong> — distinguées par les transformations mathématiques qu'elles permettent et, par conséquent, par les opérations statistiques qu'elles supportent (Stevens, 1946).</p>
-
-<p>Ce cadre — souvent mémorisé par le mnémonique <strong>NOIR</strong> (<strong>N</strong>ominale, <strong>O</strong>rdinale, <strong>I</strong>ntervalle, <strong>R</strong>apport) — reste la classification standard enseignée dans les cours de statistique du monde entier (Velleman & Wilkinson, 1993).</p>
+<p>En 1946, le psychologue de Harvard S.S. Stevens publia « On the theory of scales of measurement » dans <em>Science</em>, proposant une hiérarchie à quatre niveaux de mesure qui reste le cadre standard dans les sciences sociales, comportementales et naturelles. Stevens argumenta que <em>l'échelle de mesure contraint les statistiques admissibles</em> — un principe qui, bien que débattu (voir Velleman &amp; Wilkinson, 1993), reste fondamental pour comprendre pourquoi certaines analyses sont appropriées pour certains types de données et d'autres ne le sont pas. Les quatre échelles forment une hiérarchie cumulative : chaque niveau supérieur hérite de toutes les propriétés des niveaux inférieurs et en ajoute une nouvelle.</p>
 
 <table>
   <thead>
-    <tr><th>Échelle</th><th>Propriétés</th><th>Opérations Permises</th><th>Statistiques Valides</th><th>Exemple</th></tr>
+    <tr><th>Échelle</th><th>Propriété</th><th>Groupe mathématique</th><th>Statistiques admissibles</th><th>Exemples</th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td>🏷️ <strong>Nominale</strong></td>
-      <td>Identité (= ≠)</td>
-      <td>Classifier, compter</td>
-      <td>Mode, fréquence, test χ²</td>
-      <td>Groupe sanguin, nationalité, variété cultivée</td>
-    </tr>
-    <tr>
-      <td>📊 <strong>Ordinale</strong></td>
-      <td>Identité + Ordre (&lt; &gt;)</td>
-      <td>Classifier, compter, ranger</td>
-      <td>Médiane, percentiles, Spearman r<sub>s</sub>, Mann-Whitney U</td>
-      <td>Niveau d'éducation, échelle de douleur, Likert</td>
-    </tr>
-    <tr>
-      <td>🌡️ <strong>Intervalle</strong></td>
-      <td>Identité + Ordre + Intervalles égaux</td>
-      <td>Classifier, compter, ranger, additionner/soustraire</td>
-      <td>Moyenne, écart-type, Pearson r, test t, ANOVA</td>
-      <td>Température (°C/°F), année calendaire, score QI</td>
-    </tr>
-    <tr>
-      <td>⚖️ <strong>Rapport</strong></td>
-      <td>Identité + Ordre + Intervalles égaux + Zéro absolu</td>
-      <td>Toutes les précédentes + multiplier/diviser</td>
-      <td>Toutes les précédentes + moyenne géométrique, CV, rapports</td>
-      <td>Poids, taille, revenu, âge, rendement, distance</td>
-    </tr>
+    <tr><td><strong>Nominale</strong></td><td>Identité seulement — les catégories sont distinctes et mutuellement exclusives</td><td>Groupe de permutations (toute substitution biunivoque d'étiquettes)</td><td>Mode, fréquence, χ², coefficient de contingence, V de Cramér</td><td>Groupe sanguin, nationalité, espèce, langue, religion</td></tr>
+    <tr><td><strong>Ordinale</strong></td><td>Identité + ordre — les catégories ont une séquence significative</td><td>Transformations monotones croissantes (toute fonction préservant l'ordre)</td><td>Médiane, percentile, Spearman ρ, Kendall τ, Mann-Whitney U, Kruskal-Wallis H</td><td>Échelle de Likert, stade du cancer, niveau d'éducation, classe socio-économique</td></tr>
+    <tr><td><strong>D'intervalle</strong></td><td>Identité + ordre + intervalles égaux — les différences entre valeurs sont significatives et constantes</td><td>Transformations linéaires positives : y = ax + b (a &gt; 0)</td><td>Moyenne, écart-type, Pearson r, test t, ANOVA, régression linéaire</td><td>Température (°C, °F), année civile (EC), score de QI, score SAT, pH</td></tr>
+    <tr><td><strong>De rapport</strong></td><td>Identité + ordre + intervalles égaux + vrai zéro — le zéro signifie absence complète</td><td>Transformations de similitude : y = ax (a &gt; 0)</td><td>Tout ce qui précède + moyenne géométrique, coefficient de variation, rapports (« deux fois plus »)</td><td>Masse (kg), taille (cm), revenu ($), distance (km), concentration (mol/L), température (K), âge (ans)</td></tr>
   </tbody>
 </table>
 
-<h3>🌡️ Échelle d'Intervalle — Distances Égales, Pas de Vrai Zéro</h3>
+<h3>🌡️ Échelle d'intervalle — Distances égales, pas de vrai zéro</h3>
 
-<p>L'échelle d'intervalle ajoute une propriété critique que les échelles ordinales ne possèdent pas : des <strong>intervalles égaux et mesurables</strong> entre les valeurs. La différence entre 10°C et 20°C est exactement la même qu'entre 30°C et 40°C. L'addition et la soustraction sont donc pleinement significatives. Cependant, l'échelle d'intervalle n'a <strong>pas de vrai point zéro</strong> — le zéro est arbitraire. Quand le thermomètre indique 0°C, cela ne signifie pas « absence de température ». Puisqu'il n'y a pas de zéro absolu, <strong>les rapports n'ont pas de sens</strong> : 40°C n'est pas « deux fois plus chaud » que 20°C (Stevens, 1946).</p>
+<p>L'<strong>échelle d'intervalle</strong> possède un espacement égal entre les unités mais son point zéro est arbitraire — choisi par convention plutôt que représentant « rien ». Cela signifie que les <em>différences</em> entre valeurs sont significatives (20°C est 10 degrés plus chaud que 10°C), mais les <em>rapports</em> ne le sont pas (20°C n'est <em>pas</em> « deux fois plus chaud » que 10°C, car le point zéro est arbitraire). La température en Celsius et en Fahrenheit sont les exemples classiques : 0°C marque le point de congélation de l'eau, non l'absence d'énergie thermique. La conversion entre Celsius et Fahrenheit (F = 1,8C + 32) implique à la fois une multiplication <em>et</em> une addition — la signature d'une échelle d'intervalle, où la constante additive reflète le zéro arbitraire (Stevens, 1946).</p>
 
-<h3>⚖️ Échelle de Rapport — L'Échelle Complète</h3>
+<p><strong>Autres exemples d'échelle d'intervalle :</strong> L'année civile (l'an 0 EC est un repère historique arbitraire, non « pas de temps ») ; les scores de tests standardisés (QI, SAT, GRE) où le zéro est défini par la formule de standardisation, non par l'absence de capacité ; le pH, où 0 ne signifie pas « aucune acidité » mais une concentration spécifique en ions hydrogène (10⁰ mol/L = 1 mol/L) ; et les degrés de longitude/latitude (0° de longitude est le méridien arbitraire de Greenwich).</p>
 
-<p>L'échelle de rapport est le niveau de mesure le plus informatif. Elle possède toutes les propriétés des échelles nominale, ordinale et d'intervalle, plus un <strong>vrai point zéro non arbitraire</strong> qui représente une absence réelle de la quantité mesurée. Zéro kilogramme signifie pas de masse ; zéro mètre signifie pas de longueur ; zéro dinar signifie pas d'argent. Grâce à ce vrai zéro, <strong>les rapports sont significatifs</strong> : une plante de 80 cm est véritablement deux fois plus haute qu'une plante de 40 cm (Stevens, 1946).</p>
+<h3>⚖️ Échelle de rapport — L'échelle complète</h3>
 
-<blockquote>🔑 <strong>Le test intervalle vs. rapport :</strong> Posez-vous la question : <em>« Une valeur de zéro signifie-t-elle une absence complète ? »</em> Si oui → échelle de rapport. Si non → échelle d'intervalle. Température en Celsius : 0°C ne signifie pas « pas de température » → intervalle. Température en Kelvin : 0 K signifie le zéro absolu → rapport. Poids en kilogrammes : 0 kg signifie pas de masse → rapport. Année calendaire : l'an 0 est un repère historique arbitraire → intervalle.</blockquote>
+<p>L'<strong>échelle de rapport</strong> possède toutes les propriétés de l'intervalle <em>plus</em> un <strong>vrai zéro (non arbitraire)</strong> indiquant l'absence complète de la quantité mesurée. Cela rend les rapports significatifs : 80 kg est véritablement deux fois plus lourd que 40 kg parce que 0 kg signifie « pas de masse ». La plupart des mesures physiques (masse, longueur, temps, courant électrique, température en Kelvin) et de nombreuses mesures sociales (revenu, âge, nombre de publications, temps de réaction) opèrent sur des échelles de rapport. La conséquence mathématique : les données à échelle de rapport ne peuvent être transformées que par multiplication (y = ax), jamais par addition d'une constante — préservant le zéro significatif (Stevens, 1946).</p>
+
+<p><strong>Le privilège de l'échelle de rapport :</strong> Seules les données de rapport permettent la <strong>moyenne géométrique</strong> (utilisée pour les taux de croissance, les rapports de concentration et les processus multiplicatifs), le <strong>coefficient de variation</strong> (écart-type/moyenne × 100, permettant la comparaison de la variabilité entre variables d'unités différentes) et les changements de pourcentage significatifs (« le PIB a augmenté de 3,2 % »). Ce sont les statistiques descriptives les plus informatives disponibles, et elles sont exclusives aux mesures à échelle de rapport.</p>
+
+<blockquote>🔑 <strong>Le test intervalle vs. rapport — une seule question tranche :</strong> Demandez-vous : <em>« Une valeur de zéro signifie-t-elle absence complète ? »</em> Si <strong>oui → échelle de rapport</strong>. Si <strong>non → échelle d'intervalle</strong>. Température en Celsius : 0°C ne signifie pas « pas de température » (l'eau gèle, mais les molécules bougent encore) → intervalle. Température en Kelvin : 0 K signifie zéro absolu (aucun mouvement moléculaire du tout) → rapport. Masse : 0 kg signifie pas de masse → rapport. Année civile : l'an 0 EC est un repère historique arbitraire → intervalle. Solde bancaire : 0 $ signifie pas d'argent → rapport. Longitude : 0° est le méridien arbitraire de Greenwich → intervalle. Cette seule question — « <em>le zéro est-il vraiment zéro ?</em> » — distingue de manière fiable les deux échelles de mesure les plus puissantes (Field, 2018).</blockquote>
 
 <hr>
 
-<h2>🔄 Transformations Entre Types : Monter et Descendre la Hiérarchie</h2>
+<h2>🔄 Partie VI — Transformations entre types : Monter et descendre dans la hiérarchie</h2>
 
-<p>Une compétence pratique importante est de comprendre comment les variables peuvent être <strong>converties</strong> entre types — et surtout, de reconnaître que ces conversions ne sont pas équivalentes dans les deux sens. Le principe général est : <strong>on peut toujours descendre la hiérarchie de mesure (en perdant de l'information), mais on ne peut jamais remonter (en créant de l'information qui n'existe pas)</strong>.</p>
+<p>Les quatre échelles de mesure forment une hiérarchie stricte : rapport &gt; intervalle &gt; ordinal &gt; nominal. Un principe critique gouverne le mouvement au sein de cette hiérarchie : <strong>la conversion descendante (élevé → bas) est toujours possible mais détruit toujours de l'information ; la conversion ascendante (bas → élevé) est généralement impossible</strong>. Comprendre cette asymétrie a des conséquences pratiques profondes pour la conception de la recherche et la collecte des données (Agresti, 2019).</p>
 
 <table>
   <thead>
-    <tr><th>Transformation</th><th>Direction</th><th>Exemple</th><th>Effet sur l'Information</th></tr>
+    <tr><th>Transformation</th><th>Direction</th><th>Exemple</th><th>Conséquence informationnelle</th></tr>
   </thead>
   <tbody>
-    <tr><td>Continue → Discrète</td><td>⬇️ Descente</td><td>Âge exact (23,7 ans) → Tranche d'âge (20–29)</td><td>⚠️ Information perdue — impossible de récupérer l'âge exact</td></tr>
-    <tr><td>Quantitative → Qualitative</td><td>⬇️ Descente</td><td>Revenu (52 000 €) → Tranche de revenu (Moyen)</td><td>⚠️ Information perdue — précision sacrifiée</td></tr>
-    <tr><td>Rapport → Ordinale</td><td>⬇️ Descente</td><td>Rendement (4,2 t/ha) → Catégorie (Élevé)</td><td>⚠️ Information perdue — rendement exact inconnu</td></tr>
-    <tr><td>Qualitative → Quantitative</td><td>⬆️ Montée</td><td>Niveau de douleur (Sévère) → Score (8)</td><td>🚫 Impossible de créer une précision non mesurée</td></tr>
+    <tr><td>Continue → ordinale</td><td>Descendante ↓</td><td>IMC exact (24,7, 31,2) → catégories (insuffisance pondérale, normal, surpoids, obèse)</td><td><strong>Perte permanente.</strong> La précision originale est détruite ; impossible de retrouver 24,7 à partir de « normal »</td></tr>
+    <tr><td>Rapport → intervalle</td><td>Descendante ↓</td><td>Température en Kelvin → Celsius (ajout d'un décalage de 273,15)</td><td>Perte du vrai zéro — les rapports deviennent dénués de sens</td></tr>
+    <tr><td>Ordinale → nominale</td><td>Descendante ↓</td><td>Niveau de douleur (légère → modérée → sévère) → douleur présente (oui/non)</td><td>Information d'ordre détruite ; trois catégories effondrées en deux</td></tr>
+    <tr><td>Nominale → ordinale</td><td>Ascendante ↑</td><td>Religions → classées par « importance » ?</td><td><strong>Impossible sans imposer des jugements de valeur externes</strong></td></tr>
+    <tr><td>Ordinale → intervalle</td><td>Ascendante ↑</td><td>Likert (1–5) → traiter comme intervalles égaux ?</td><td><strong>Hypothèse requise</strong> — la validité dépend du contexte (voir le débat Likert ci-dessus)</td></tr>
   </tbody>
 </table>
 
-<blockquote>⚠️ <strong>Le principe d'irréversibilité :</strong> Convertir une variable continue en catégories (appelé <strong>discrétisation</strong> ou <strong>regroupement en classes</strong>) détruit définitivement de l'information. C'est pourquoi la plupart des statisticiens conseillent : <strong>collectez toujours les données au niveau de mesure le plus élevé possible</strong>. Vous pourrez toujours simplifier plus tard, mais vous ne pourrez jamais restaurer la précision perdue (Altman & Royston, 2006).</blockquote>
+<blockquote>⚠️ <strong>Le principe d'irréversibilité — un avertissement pour tous les chercheurs :</strong> Convertir une variable continue en catégories (appelé <strong>discrétisation</strong> ou <strong>regroupement en classes</strong>) détruit de l'information de façon permanente. Si vous convertissez des lectures exactes de pression artérielle (127,4, 138,2, 152,1 mmHg) en catégories (normale, élevée, hypertensive), vous ne pourrez <em>jamais</em> retrouver les mesures originales. Altman &amp; Royston (2006), dans leur article influent dans le <em>BMJ</em>, ont démontré que la dichotomisation des variables continues entraîne une perte de puissance statistique équivalente à jeter un tiers des données — et ont qualifié cette pratique de « catégorisation : une mauvaise stratégie épidémiologique. » La règle est claire : <strong>collectez toujours les données au niveau de mesure le plus élevé possible</strong>. Vous pouvez toujours simplifier ultérieurement, mais vous ne pourrez jamais restaurer la précision perdue. En recherche clinique, enregistrer les valeurs exactes de glycémie (5,4, 7,8, 11,2 mmol/L) est toujours préférable à enregistrer des catégories (normal, pré-diabétique, diabétique). En surveillance environnementale, enregistrer les concentrations exactes de PM₂,₅ (μg/m³) est toujours supérieur à enregistrer des catégories d'indice de qualité de l'air (bon, modéré, malsain).</blockquote>
 
 <hr>
 
-<h2>🎯 Choisir la Bonne Analyse : Un Cadre de Décision</h2>
+<h2>🎯 Partie VII — Choisir la bonne analyse : Un cadre décisionnel</h2>
 
-<p>Le but entier de la compréhension des types de variables est de vous guider vers l'approche analytique correcte. Utiliser une méthode inappropriée produit des résultats qui vont du non-sens au dangeureusement trompeur.</p>
+<p>Le type de variable détermine quelles méthodes statistiques sont appropriées. Le tableau suivant fournit un cadre décisionnel complet liant les types de variables aux résumés descriptifs, aux affichages graphiques et aux tests inférentiels — l'outil de référence que les chercheurs consultent quotidiennement (Moore et al., 2021 ; Field, 2018).</p>
 
 <table>
   <thead>
-    <tr><th>Type de Variable</th><th>Statistiques Résumées</th><th>Représentation Graphique</th><th>Tests d'Hypothèses</th></tr>
+    <tr><th>Objectif</th><th>Type(s) de variable</th><th>Statistiques descriptives</th><th>Affichage graphique</th><th>Test(s) inférentiel(s)</th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td>🏷️ <strong>Nominale</strong></td>
-      <td>Mode, fréquence, proportion</td>
-      <td>Diagramme en barres, diagramme circulaire</td>
-      <td>Test χ², test exact de Fisher</td>
-    </tr>
-    <tr>
-      <td>📊 <strong>Ordinale</strong></td>
-      <td>Médiane, percentiles, EIQ</td>
-      <td>Diagramme en barres, barres empilées</td>
-      <td>Mann-Whitney U, Kruskal-Wallis, Spearman ρ</td>
-    </tr>
-    <tr>
-      <td>🔢 <strong>Discrète</strong></td>
-      <td>Moyenne, médiane, écart-type, variance</td>
-      <td>Diagramme en barres, diagramme de points</td>
-      <td>Test de Poisson, test binomial, χ²</td>
-    </tr>
-    <tr>
-      <td>📏 <strong>Continue</strong></td>
-      <td>Moyenne, médiane, écart-type, CV, étendue</td>
-      <td>Histogramme, boîte à moustaches, nuage de points</td>
-      <td>Test t, ANOVA, Pearson r, régression</td>
-    </tr>
+    <tr><td>Décrire une variable catégorielle</td><td>Nominale</td><td>Fréquences, proportions, mode</td><td>Diagramme en barres, diagramme circulaire (avec prudence)</td><td>Khi-deux d'adéquation ; test binomial (pour binaire)</td></tr>
+    <tr><td>Décrire une variable ordinale</td><td>Ordinale</td><td>Fréquences, médiane, EIQ</td><td>Diagramme en barres (ordonné), barres empilées</td><td>Test de Kolmogorov-Smirnov à un échantillon</td></tr>
+    <tr><td>Décrire une variable continue</td><td>Continue</td><td>Moyenne, écart-type, médiane, EIQ, asymétrie, aplatissement</td><td>Histogramme, boîte à moustaches, courbe de densité, graphique Q-Q</td><td>Test t à un échantillon ; rangs signés de Wilcoxon (non paramétrique)</td></tr>
+    <tr><td>Association : 2 variables catégorielles</td><td>Nominale × Nominale</td><td>Tableau croisé, proportions conditionnelles</td><td>Barres groupées, graphique en mosaïque</td><td>Khi-deux d'indépendance ; test exact de Fisher ; V de Cramér</td></tr>
+    <tr><td>Association : 2 variables ordinales</td><td>Ordinale × Ordinale</td><td>Tableau croisé, Spearman ρ, Kendall τ</td><td>Barres empilées, carte de chaleur</td><td>Test de corrélation de rang de Spearman ; tau-b de Kendall</td></tr>
+    <tr><td>Association : 1 catégorielle + 1 continue</td><td>Nominale × Continue</td><td>Moyennes et écarts-types par groupe, médianes</td><td>Boîtes à moustaches côte à côte, graphiques en violon</td><td>Test t indépendant (2 groupes) ; ANOVA (3+ groupes) ; Kruskal-Wallis (non paramétrique)</td></tr>
+    <tr><td>Association : 2 variables continues</td><td>Continue × Continue</td><td>Pearson r, covariance</td><td>Nuage de points, droite de régression</td><td>Test de corrélation de Pearson ; régression linéaire simple ; Spearman (non paramétrique)</td></tr>
+    <tr><td>Prédire un résultat continu</td><td>Prédicteurs multiples → Continue</td><td>R², R² ajusté, coefficients de régression</td><td>Graphiques de régression partielle, graphiques des résidus</td><td>Régression linéaire multiple ; ANCOVA</td></tr>
+    <tr><td>Prédire un résultat catégoriel</td><td>Prédicteurs multiples → Nominale</td><td>Rapports de cotes, précision de classification</td><td>Courbe ROC, matrice de confusion</td><td>Régression logistique ; analyse discriminante</td></tr>
+    <tr><td>Modéliser des données de comptage</td><td>Discrète (dénombrements)</td><td>Moyenne, variance, indice de dispersion</td><td>Diagramme en barres (classes entières), rootogramme</td><td>Régression de Poisson ; régression binomiale négative ; modèles à inflation de zéros</td></tr>
   </tbody>
 </table>
 
-<blockquote>🧭 <strong>Règle de décision rapide :</strong> Face à tout jeu de données, posez trois questions en séquence : <strong>(1)</strong> Les valeurs sont-elles des catégories ou des nombres ? → Si catégories : qualitative. <strong>(2)</strong> Si qualitative, y a-t-il un ordre naturel ? → Si oui : ordinale ; si non : nominale. <strong>(3)</strong> Si quantitative, les valeurs peuvent-elles prendre n'importe quel nombre ou seulement des entiers ? → Si n'importe quel : continue ; si seulement des entiers issus du comptage : discrète (Moore et al., 2021).</blockquote>
+<blockquote>🧭 <strong>La règle de décision en trois questions :</strong> Face à n'importe quel jeu de données, posez trois questions en séquence : <strong>(1)</strong> Les valeurs sont-elles des catégories ou des nombres ? → Si catégories : qualitatif. <strong>(2)</strong> Si qualitatif, existe-t-il un ordre naturel parmi les catégories ? → Si oui : ordinal ; si non : nominal. <strong>(3)</strong> Si quantitatif, les valeurs peuvent-elles théoriquement prendre n'importe quel nombre ou seulement des nombres entiers issus du comptage ? → Si n'importe quelle valeur dans un intervalle : continu ; si seulement des entiers isolés issus du comptage : discret. Ces trois questions, posées dans cet ordre exact, classeront correctement n'importe quelle variable que vous rencontrez — du groupe sanguin à la pression artérielle, du nombre de séismes à la magnitude des séismes (Moore et al., 2021).</blockquote>
 
 <hr>
 
-<h2>⚙️ Variables Dépendantes vs. Indépendantes : Les Rôles en Recherche</h2>
+<h2>⚙️ Partie VIII — Variables dépendantes et indépendantes : Les rôles dans le plan de recherche</h2>
 
-<p>Au-delà de la classification des variables par leur nature (qualitative/quantitative) et leur échelle (NOIR), les chercheurs doivent aussi identifier le <strong>rôle</strong> que chaque variable joue dans leur étude.</p>
+<p>Au-delà de leur <em>type</em> (nominal, ordinal, discret, continu), les variables ont aussi des <em>rôles</em> au sein d'un plan de recherche. La même variable peut jouer des rôles différents dans différentes études — la taille est une variable <em>indépendante</em> quand on prédit la performance au basketball mais une variable <em>dépendante</em> quand on étudie l'effet de la nutrition infantile sur la stature adulte. Comprendre ces rôles est essentiel pour formuler les questions de recherche, sélectionner les modèles appropriés et interpréter correctement les résultats (Shadish et al., 2002).</p>
 
 <table>
   <thead>
-    <tr><th>Rôle</th><th>Autres Noms</th><th>Définition</th><th>Exemple</th></tr>
+    <tr><th>Rôle</th><th>Aussi appelé</th><th>Définition</th><th>Position dans un modèle</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Variable indépendante (X)</strong></td><td>Prédicteur, explicative, facteur, traitement</td><td>La variable manipulée ou utilisée pour expliquer/prédire</td><td>Type d'engrais, niveau d'irrigation, dose de médicament</td></tr>
-    <tr><td><strong>Variable dépendante (Y)</strong></td><td>Réponse, résultat, critère</td><td>La variable mesurée comme résultat</td><td>Rendement de culture, guérison du patient, note d'examen</td></tr>
-    <tr><td><strong>Variable confondante</strong></td><td>Variable latente, covariable</td><td>Une variable qui affecte X et Y, créant potentiellement une fausse association</td><td>Qualité du sol affectant à la fois l'application d'engrais et le rendement</td></tr>
-    <tr><td><strong>Variable contrôlée</strong></td><td>Maintenue constante</td><td>Une variable intentionnellement gardée identique entre les groupes</td><td>Même date de semis, même irrigation pour toutes les parcelles</td></tr>
+    <tr><td><strong>Variable indépendante</strong></td><td>Prédicteur, explicatif, facteur, exposition, traitement, régresseur, X</td><td>La variable supposée <em>causer</em> ou <em>expliquer</em> la variation du résultat — la variable que le chercheur manipule (dans les expériences) ou observe comme influence potentielle (dans les études observationnelles)</td><td>Côté droit : Y = f(<strong>X₁, X₂, ...</strong>)</td></tr>
+    <tr><td><strong>Variable dépendante</strong></td><td>Résultat, réponse, critère, critère de jugement, cible, Y</td><td>La variable supposée être <em>affectée par</em> ou <em>associée à</em> la ou les variables indépendantes — la variable que vous mesurez comme résultat ou conséquence</td><td>Côté gauche : <strong>Y</strong> = f(X₁, X₂, ...)</td></tr>
+    <tr><td><strong>Variable de confusion</strong></td><td>Facteur de confusion, variable cachée, troisième variable</td><td>Une variable associée à <em>la fois</em> à la variable indépendante et dépendante, pouvant créer une association fallacieuse entre elles si elle n'est pas contrôlée</td><td>Doit être contrôlée par le plan (randomisation, appariement) ou l'analyse (stratification, ajustement par régression)</td></tr>
+    <tr><td><strong>Variable médiatrice</strong></td><td>Médiateur, variable intervenante</td><td>Une variable qui se situe sur le chemin causal entre la variable indépendante et dépendante — X → M → Y</td><td>Étape intermédiaire dans la chaîne causale ; analysée par des modèles de médiation (Baron &amp; Kenny, 1986)</td></tr>
+    <tr><td><strong>Variable modératrice</strong></td><td>Modérateur, modificateur d'effet</td><td>Une variable qui change la <em>force ou la direction</em> de la relation entre la variable indépendante et dépendante</td><td>Terme d'interaction en régression : Y = β₀ + β₁X + β₂Z + β₃(X×Z)</td></tr>
   </tbody>
 </table>
 
-<blockquote>🔬 <strong>Exemple de plan expérimental :</strong> Un agronome étudie l'effet de trois doses d'azote (0, 50, 100 kg N/ha) sur le rendement de blé pour deux variétés (HD1220 et Waha). Ici, la <strong>dose d'engrais</strong> est une variable indépendante, la <strong>variété</strong> est une variable indépendante (qualitative, nominale), le <strong>rendement</strong> est la variable dépendante (quantitative, continue, échelle de rapport), et les facteurs confondants potentiels incluent la fertilité du sol, la pluviométrie et la pression des ravageurs.</blockquote>
+<blockquote>🔬 <strong>Exemple de plan de recherche — un essai clinique mondial :</strong> Un essai contrôlé randomisé (ECR) de Phase III à travers 12 pays teste si un nouvel antihypertenseur réduit les événements cardiovasculaires. Le <strong>groupe de traitement</strong> (médicament vs. placebo) est la variable indépendante (qualitative, nominale, binaire). Le <strong>critère de jugement principal</strong> — le délai jusqu'au premier événement cardiovasculaire majeur (MACE) — est la variable dépendante (quantitative, continue, échelle de rapport). Les <strong>facteurs de confusion</strong> contrôlés par randomisation comprennent l'âge, le sexe, l'IMC, le statut tabagique, la pression artérielle de base et les comorbidités. Les <strong>modérateurs</strong> examinés dans des analyses de sous-groupes pré-spécifiées comprennent l'ethnie (nominale) et la fonction rénale de base (continue). Les types de variables dictent le plan d'analyse : régression de Cox à risques proportionnels pour le résultat temps-événement, régression logistique pour les critères secondaires binaires (décès oui/non), et termes d'interaction pour l'analyse des modérateurs. Chaque choix analytique découle directement de la classification des variables (Shadish et al., 2002).</blockquote>
 
 <hr>
 
-<h2>🌍 Application Concrète : Construire un Dictionnaire de Données Complet</h2>
+<h2>🌍 Partie IX — Application réelle : Construire un dictionnaire de données complet</h2>
 
-<p>Les chercheurs professionnels commencent toujours un projet en construisant un <strong>dictionnaire de données</strong> — un document systématique qui enregistre le nom, le type, l'échelle, le rôle et la plage valide de chaque variable.</p>
+<p>Avant de collecter un seul point de données, toute étude bien conçue produit un <strong>dictionnaire de données</strong> — un document exhaustif qui liste chaque variable, son type, son échelle de mesure, ses valeurs admissibles et son rôle analytique prévu. Le dictionnaire de données n'est pas une surcharge bureaucratique ; c'est le plan qui prévient les erreurs les plus courantes et les plus coûteuses en recherche appliquée. Voici un exemple issu d'une étude hypothétique multinationale sur la qualité de l'air urbain et la santé respiratoire — le type de dictionnaire de données qui accompagnerait une enquête épidémiologique financée par l'OMS (Moore et al., 2021).</p>
 
 <table>
   <thead>
-    <tr><th>Variable</th><th>Type</th><th>Échelle</th><th>Rôle</th><th>Plage / Niveaux</th><th>Unités</th></tr>
+    <tr><th>#</th><th>Variable</th><th>Type</th><th>Échelle</th><th>Valeurs admissibles</th><th>Rôle</th></tr>
   </thead>
   <tbody>
-    <tr><td>ID parcelle</td><td>Qualitative</td><td>Nominale</td><td>Identifiant</td><td>P001 – P120</td><td>—</td></tr>
-    <tr><td>Variété</td><td>Qualitative</td><td>Nominale</td><td>Indépendante</td><td>HD1220, Waha, Ain Abid</td><td>—</td></tr>
-    <tr><td>Dose N</td><td>Quantitative</td><td>Rapport</td><td>Indépendante</td><td>0, 50, 100</td><td>kg N/ha</td></tr>
-    <tr><td>Texture du sol</td><td>Qualitative</td><td>Ordinale</td><td>Covariable</td><td>Sableux, limoneux, argileux</td><td>—</td></tr>
-    <tr><td>Hauteur de plante</td><td>Quantitative</td><td>Rapport</td><td>Dépendante</td><td>30 – 150</td><td>cm</td></tr>
-    <tr><td>Talles/plante</td><td>Quantitative</td><td>Rapport</td><td>Dépendante</td><td>0 – 15</td><td>nombre</td></tr>
-    <tr><td>Rendement grains</td><td>Quantitative</td><td>Rapport</td><td>Dépendante</td><td>0,5 – 8,0</td><td>t/ha</td></tr>
-    <tr><td>Note de maladie</td><td>Qualitative</td><td>Ordinale</td><td>Dépendante</td><td>Aucune, légère, modérée, sévère</td><td>—</td></tr>
-    <tr><td>Date de récolte</td><td>Quantitative</td><td>Intervalle</td><td>Contrôle</td><td>Mai – Juillet</td><td>date</td></tr>
+    <tr><td>1</td><td>Ville</td><td>Qualitative — nominale</td><td>Nominale</td><td>São Paulo, Lagos, Delhi, Le Caire, Jakarta, Mexico, Dacca, Pékin, Lima, Nairobi</td><td>Regroupement / stratification</td></tr>
+    <tr><td>2</td><td>ID de la station de surveillance</td><td>Qualitative — nominale</td><td>Nominale</td><td>Code alphanumérique (ex. SP-042, LG-017)</td><td>Identifiant (non analysé)</td></tr>
+    <tr><td>3</td><td>Date de mesure</td><td>Quantitative — continue</td><td>D'intervalle (zéro arbitraire)</td><td>2020-01-01 à 2024-12-31</td><td>Indépendante (tendance temporelle)</td></tr>
+    <tr><td>4</td><td>Concentration de PM₂,₅</td><td>Quantitative — continue</td><td>De rapport (vrai zéro = pas de particules)</td><td>0 – 500+ μg/m³</td><td>Indépendante (exposition)</td></tr>
+    <tr><td>5</td><td>Concentration de NO₂</td><td>Quantitative — continue</td><td>De rapport</td><td>0 – 200+ ppb</td><td>Indépendante (co-exposition)</td></tr>
+    <tr><td>6</td><td>Catégorie IQA</td><td>Qualitative — ordinale</td><td>Ordinale</td><td>Bon → Modéré → Malsain pour groupes sensibles → Malsain → Très malsain → Dangereux</td><td>Dérivé de PM₂,₅ (discrétisé)</td></tr>
+    <tr><td>7</td><td>Visites aux urgences pour asthme par jour</td><td>Quantitative — discrète</td><td>De rapport (vrai zéro = aucune visite)</td><td>0, 1, 2, 3, ..., n</td><td>Dépendante (résultat sanitaire)</td></tr>
+    <tr><td>8</td><td>Âge du patient</td><td>Quantitative — continue</td><td>De rapport</td><td>0 – 120 ans</td><td>Facteur de confusion</td></tr>
+    <tr><td>9</td><td>Sexe du patient</td><td>Qualitative — nominale</td><td>Nominale (binaire)</td><td>Masculin, Féminin</td><td>Facteur de confusion</td></tr>
+    <tr><td>10</td><td>Statut tabagique</td><td>Qualitative — ordinale</td><td>Ordinale</td><td>Jamais → Ancien → Actuel</td><td>Facteur de confusion</td></tr>
+    <tr><td>11</td><td>Statut socio-économique</td><td>Qualitative — ordinale</td><td>Ordinale</td><td>Bas → Moyen → Haut</td><td>Facteur de confusion / modérateur</td></tr>
+    <tr><td>12</td><td>Saison</td><td>Qualitative — nominale</td><td>Nominale (cyclique)</td><td>Printemps, Été, Automne, Hiver</td><td>Facteur de confusion</td></tr>
   </tbody>
 </table>
 
-<blockquote>📝 <strong>Bonne pratique :</strong> Créer un dictionnaire de données avant de collecter toute donnée vous oblige à penser clairement à ce que vous mesurez, comment vous le mesurez, et quelles analyses seront appropriées. Comme l'a observé le statisticien George Box : <strong>« Tous les modèles sont faux, mais certains sont utiles »</strong> — et la première étape vers un modèle utile est de correctement identifier vos types de variables (Box, 1976).</blockquote>
+<blockquote>📝 <strong>Bonne pratique :</strong> Créer un dictionnaire de données avant de collecter toute donnée vous force à réfléchir clairement à ce que vous mesurez, comment vous le mesurerez, et quelles analyses seront appropriées. Cette discipline simple prévient les erreurs les plus dévastatrices en recherche appliquée : utiliser le mauvais test statistique, mal interpréter les résultats, et produire des analyses irréproductibles. Comme George Box l'a observé avec sa célèbre formule : « Tous les modèles sont faux, mais certains sont utiles » — et la première étape vers un modèle utile est d'identifier correctement vos types de variables <em>avant</em> d'ouvrir le moindre logiciel statistique (Box, 1976).</blockquote>
 
 <hr>
 
-<h2>⚠️ Erreurs Courantes et Comment les Éviter</h2>
+<h2>⚠️ Partie X — Erreurs courantes et comment les éviter</h2>
 
 <table>
   <thead>
-    <tr><th>❌ Erreur</th><th>Pourquoi c'est Faux</th><th>✅ Approche Correcte</th></tr>
+    <tr><th>#</th><th>Erreur</th><th>Pourquoi elle survient</th><th>Conséquence</th><th>Solution</th></tr>
   </thead>
   <tbody>
-    <tr><td>Calculer la moyenne de numéros de maillot</td><td>Les numéros de maillot sont nominaux — l'arithmétique est absurde</td><td>Reporter le mode ou un tableau de fréquences</td></tr>
-    <tr><td>Utiliser un diagramme circulaire pour des données continues</td><td>Les diagrammes circulaires affichent des proportions de catégories</td><td>Utiliser un histogramme ou une boîte à moustaches</td></tr>
-    <tr><td>Appliquer la corrélation de Pearson à des rangs ordinaux</td><td>Pearson r suppose des intervalles égaux</td><td>Utiliser la corrélation de rang de Spearman (ρ)</td></tr>
-    <tr><td>Traiter les codes postaux comme quantitatifs</td><td>Les codes postaux sont des étiquettes nominales</td><td>Utiliser des comptages de fréquence et des tableaux croisés</td></tr>
-    <tr><td>Convertir inutilement des données continues en catégories</td><td>Détruit l'information et réduit la puissance statistique</td><td>Garder les données continues telles quelles</td></tr>
+    <tr><td>1</td><td>Traiter les nominales codées comme quantitatives</td><td>Des variables comme les codes postaux (10001), les numéros de maillot (7) ou les codes CIM de maladies (E11.9) ressemblent à des nombres</td><td>Calculer un « code postal moyen » ou un « code de maladie moyen » produit des résultats absurdes ; les modèles ajustés à ces « nombres » révèlent des patterns fallacieux</td><td>Appliquer le <strong>test arithmétique</strong> : si l'addition/soustraction des valeurs est dépourvue de sens, la variable est nominale. Coder avec des étiquettes explicites dans le logiciel (factor en R, Categorical en Python/pandas)</td></tr>
+    <tr><td>2</td><td>Calculer moyenne/écart-type pour des données ordinales</td><td>Les échelles de Likert (1–5) et les scores de cotation tentent les chercheurs vers les statistiques paramétriques</td><td>La moyenne de données ordinales implique un espacement égal qui peut ne pas exister — conclusions potentiellement trompeuses sur les différences entre groupes</td><td>Rapporter la <strong>médiane et l'EIQ</strong> comme résumés principaux ; utiliser les tests non paramétriques (Mann-Whitney, Kruskal-Wallis) comme analyse principale ; si traité comme intervalle, vérifier avec une alternative non paramétrique en contrôle de sensibilité (Norman, 2010)</td></tr>
+    <tr><td>3</td><td>Ignorer la nature discrète des données de comptage</td><td>Les chercheurs utilisent par défaut les tests t et l'ANOVA pour toutes les données numériques</td><td>Les données de comptage (dénombrements d'espèces, incidence de maladies, défauts par lot) violent les hypothèses de normalité et d'homoscédasticité → taux d'erreur de type I gonflé, intervalles de confiance invalides</td><td>Utiliser les <strong>MLG de Poisson ou binomiale négative</strong> pour les données de comptage ; vérifier la surdispersion (variance &gt; moyenne) et l'inflation de zéros (McCullagh &amp; Nelder, 1989)</td></tr>
+    <tr><td>4</td><td>Discrétisation inutile de variables continues</td><td>Les chercheurs catégorisent les données continues (ex. IMC → obèse/non obèse) pour « simplifier » l'analyse</td><td><strong>Perte d'information</strong> permanente équivalente à jeter ~33 % des données ; puissance statistique réduite ; la sélection arbitraire du seuil biaise les résultats</td><td>Garder les variables continues comme continues ; utiliser la régression, l'ANCOVA ou les splines. Si des catégories sont nécessaires pour la décision clinique, les créer à l'étape du rapport, non de l'analyse (Altman &amp; Royston, 2006)</td></tr>
+    <tr><td>5</td><td>Confondre le rôle de la variable avec son type</td><td>Les chercheurs supposent « indépendante = catégorielle » et « dépendante = continue »</td><td>Les variables indépendantes peuvent être continues (dose, température, âge) ; les variables dépendantes peuvent être catégorielles (survie oui/non, stade de la maladie). Confondre rôle et type mène au mauvais choix de modèle</td><td>Classifier le type (nominal/ordinal/discret/continu) et le rôle (indépendant/dépendant/confondant) <strong>séparément</strong> ; la combinaison des deux détermine le bon modèle</td></tr>
+    <tr><td>6</td><td>Traiter les pourcentages comme des variables continues non bornées</td><td>Les proportions (0–100 %) sont bornées ; appliquer la régression linéaire standard ignore ces bornes</td><td>Les modèles peuvent prédire des valeurs impossibles (&lt; 0 % ou &gt; 100 %) ; les résidus sont hétéroscédastiques ; les intervalles de confiance sont peu fiables</td><td>Utiliser la <strong>régression logistique</strong> (pour les résultats binaires), la <strong>régression bêta</strong> (pour les proportions), ou la <strong>transformation arc-sinus de la racine carrée</strong> pour les données en pourcentage (Warton &amp; Hui, 2011)</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>📖 Résumé : L'Organigramme de Décision</h2>
+<h2>📖 Partie XI — Synthèse : L'organigramme décisionnel</h2>
+
+<p>Le système de classification entier se réduit à une séquence structurée de questions. Mémorisez cet organigramme, et vous ne classerez plus jamais mal une variable :</p>
 
 <table>
   <thead>
-    <tr><th>Étape</th><th>Question</th><th>Si Oui</th><th>Si Non</th></tr>
+    <tr><th>Étape</th><th>Question</th><th>Si OUI</th><th>Si NON</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>1</strong></td><td>L'arithmétique (addition, soustraction) a-t-elle un sens sur ces valeurs ?</td><td>→ Quantitative (aller à l'étape 3)</td><td>→ Qualitative (aller à l'étape 2)</td></tr>
-    <tr><td><strong>2</strong></td><td>Les catégories peuvent-elles être logiquement ordonnées/classées ?</td><td>→ Ordinale</td><td>→ Nominale</td></tr>
-    <tr><td><strong>3</strong></td><td>La variable peut-elle prendre n'importe quelle valeur dans un intervalle ?</td><td>→ Continue</td><td>→ Discrète</td></tr>
-    <tr><td><strong>4</strong></td><td>Une valeur de zéro signifie-t-elle une absence réelle ?</td><td>→ Échelle de rapport</td><td>→ Échelle d'intervalle</td></tr>
+    <tr><td><strong>1</strong></td><td>Les valeurs sont-elles des catégories (noms, étiquettes, groupes) ?</td><td>→ <strong>QUALITATIVE.</strong> Aller à l'étape 2.</td><td>→ <strong>QUANTITATIVE.</strong> Aller à l'étape 4.</td></tr>
+    <tr><td><strong>2</strong></td><td>Les catégories ont-elles un ordre naturel et significatif ?</td><td>→ <strong>ORDINALE</strong> (ex. niveau d'éducation, sévérité de la douleur, échelle de Likert)</td><td>→ <strong>NOMINALE</strong> (ex. groupe sanguin, nationalité, type d'habitat)</td></tr>
+    <tr><td><strong>3</strong></td><td>La variable nominale a-t-elle exactement deux catégories ?</td><td>→ <strong>BINAIRE / DICHOTOMIQUE</strong> (cas spécial : codable en 0/1 pour la régression)</td><td>→ <strong>NOMINALE POLYTOMIQUE</strong> (3+ catégories non ordonnées)</td></tr>
+    <tr><td><strong>4</strong></td><td>La variable peut-elle prendre n'importe quelle valeur dans un intervalle, y compris des décimales ?</td><td>→ <strong>CONTINUE.</strong> Aller à l'étape 6.</td><td>→ <strong>DISCRÈTE</strong> (nombres entiers issus du comptage). Aller à l'étape 5.</td></tr>
+    <tr><td><strong>5</strong></td><td>Y a-t-il tellement de valeurs discrètes possibles que la variable se comporte comme continue ?</td><td>→ Traiter comme <strong>quasi-continue</strong> (ex. revenu en centimes, effectif de population)</td><td>→ Traiter comme <strong>discrète</strong> ; utiliser des modèles de comptage (Poisson, binomiale négative)</td></tr>
+    <tr><td><strong>6</strong></td><td>Une valeur de zéro signifie-t-elle absence complète ?</td><td>→ <strong>ÉCHELLE DE RAPPORT</strong> (ex. masse, taille, revenu, concentration)</td><td>→ <strong>ÉCHELLE D'INTERVALLE</strong> (ex. température en °C, année civile, pH, score de QI)</td></tr>
   </tbody>
 </table>
-
-<p>Maîtrisez cet organigramme, et vous aurez maîtrisé la compétence la plus fondamentale — et sans doute la plus importante — en statistique appliquée. Chaque méthode statistique que vous apprendrez, du plus simple diagramme en barres au modèle multivarié le plus complexe, commence par cette classification.</p>
 
 <hr>
 
 <h2>📚 Références</h2>
 
-<p>Agresti, A. (2013). <em>Categorical data analysis</em> (3e éd.). Wiley. https://doi.org/10.1002/0471249688</p>
-
-<p>Agresti, A., & Franklin, C. (2018). <em>Statistics: The art and science of learning from data</em> (4e éd.). Pearson.</p>
-
-<p>Altman, D. G., & Royston, P. (2006). The cost of dichotomising continuous variables. <em>BMJ</em>, <em>332</em>(7549), 1080. https://doi.org/10.1136/bmj.332.7549.1080</p>
-
+<p>Agresti, A. (2019). <em>An introduction to categorical data analysis</em> (3rd ed.). Wiley.</p>
+<p>Altman, D. G., &amp; Royston, P. (2006). The cost of dichotomising continuous variables. <em>BMJ</em>, <em>332</em>(7549), 1080. https://doi.org/10.1136/bmj.332.7549.1080</p>
 <p>Box, G. E. P. (1976). Science and statistics. <em>Journal of the American Statistical Association</em>, <em>71</em>(356), 791–799. https://doi.org/10.1080/01621459.1976.10480949</p>
-
-<p>Carifio, J., & Perla, R. (2008). Resolving the 50-year debate around using and misusing Likert scales. <em>Medical Education</em>, <em>42</em>(12), 1150–1152. https://doi.org/10.1111/j.1365-2923.2008.03172.x</p>
-
-<p>Fisher, R. A. (1925). <em>Statistical methods for research workers</em>. Oliver & Boyd.</p>
-
-<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4e éd.). W. W. Norton.</p>
-
-<p>Hosmer, D. W., Lemeshow, S., & Sturdivant, R. X. (2013). <em>Applied logistic regression</em> (3e éd.). Wiley. https://doi.org/10.1002/9781118548387</p>
-
-<p>McCullagh, P., & Nelder, J. A. (1989). <em>Generalized linear models</em> (2e éd.). Chapman & Hall/CRC. https://doi.org/10.1007/978-1-4899-3242-6</p>
-
-<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10e éd.). W. H. Freeman.</p>
-
-<p>Norman, G. (2010). Likert scales, levels of measurement and the "laws" of statistics. <em>Advances in Health Sciences Education</em>, <em>15</em>(5), 625–632. https://doi.org/10.1007/s10459-010-9222-y</p>
-
+<p>Carifio, J., &amp; Perla, R. (2008). Resolving the 50-year debate around using and misusing Likert scales. <em>Medical Education</em>, <em>42</em>(12), 1150–1152. https://doi.org/10.1111/j.1365-2923.2008.03172.x</p>
+<p>Field, A. (2018). <em>Discovering statistics using IBM SPSS Statistics</em> (5th ed.). Sage.</p>
+<p>Freedman, D. A. (2009). <em>Statistical models: Theory and practice</em> (2nd ed.). Cambridge University Press.</p>
+<p>Freedman, D., Pisani, R., &amp; Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton.</p>
+<p>Harpe, S. E. (2015). How to analyze Likert and other rating scale data. <em>Currents in Pharmacy Teaching and Learning</em>, <em>7</em>(6), 836–850. https://doi.org/10.1016/j.cptl.2015.08.001</p>
+<p>McCullagh, P., &amp; Nelder, J. A. (1989). <em>Generalized linear models</em> (2nd ed.). Chapman &amp; Hall/CRC.</p>
+<p>Moore, D. S., McCabe, G. P., &amp; Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+<p>Norman, G. (2010). Likert scales, levels of measurement and the « laws » of statistics. <em>Advances in Health Sciences Education</em>, <em>15</em>(5), 625–632. https://doi.org/10.1007/s10459-010-9222-y</p>
+<p>Shadish, W. R., Cook, T. D., &amp; Campbell, D. T. (2002). <em>Experimental and quasi-experimental designs for generalized causal inference</em>. Houghton Mifflin.</p>
+<p>Snow, J. (1855). <em>On the mode of communication of cholera</em> (2nd ed.). John Churchill.</p>
 <p>Stevens, S. S. (1946). On the theory of scales of measurement. <em>Science</em>, <em>103</em>(2684), 677–680. https://doi.org/10.1126/science.103.2684.677</p>
-
 <p>Tukey, J. W. (1977). <em>Exploratory data analysis</em>. Addison-Wesley.</p>
-
-<p>Velleman, P. F., & Wilkinson, L. (1993). Nominal, ordinal, interval, and ratio typologies are misleading. <em>The American Statistician</em>, <em>47</em>(1), 65–72. https://doi.org/10.1080/00031305.1993.10475938</p>
-
-<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7e éd.). Cengage Learning.</p>
+<p>Velleman, P. F., &amp; Wilkinson, L. (1993). Nominal, ordinal, interval, and ratio typologies are misleading. <em>The American Statistician</em>, <em>47</em>(1), 65–72. https://doi.org/10.1080/00031305.1993.10475938</p>
+<p>Warton, D. I., &amp; Hui, F. K. C. (2011). The arcsine is asinine: The analysis of proportions in ecology. <em>Ecology</em>, <em>92</em>(1), 3–10. https://doi.org/10.1890/10-0340.1</p>
+<p>Wasserman, L. (2004). <em>All of statistics: A concise course in statistical inference</em>. Springer.</p>

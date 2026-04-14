@@ -1,46 +1,48 @@
 <h2>↔️ Dispersion: Measuring the Spread of Your Data</h2>
 
-<p>Two groups of students sit for the same exam. Both classes score an average of 75 out of 100. The dean looks at the results and declares: <em>"Both classes performed equally."</em> But did they? In Class A, every student scored between 70 and 80 — a tight, reassuring cluster. In Class B, scores ranged from 20 to 100 — a wild roller coaster. The <strong>averages are identical</strong>, but the <em>stories</em> are completely different. This is precisely why we need <strong>measures of dispersion</strong>.</p>
+<p>In February 1953, the Dutch engineer Johan van Veen stared at a tidal gauge and made a calculation that would haunt him. The mean high tide at Hoek van Holland was well within safe limits — the dykes had been built to withstand average storm surges with comfortable margin. But van Veen was not interested in the mean. He was obsessed with the <em>variability</em> — the extreme tail of the distribution where once-in-a-century surges lurked. He warned that the dykes were dangerously inadequate for the <em>spread</em> of possible surge heights. His warnings were largely ignored. On the night of 31 January 1953, a North Sea storm surge <strong>3.85 metres above mean sea level</strong> struck the Dutch coast, breaching the dykes in over 150 places, flooding 200,000 hectares, and killing <strong>1,836 people</strong>. The mean had been safe. The variability was lethal. The Netherlands responded with the Delta Works — one of the largest engineering projects in human history — designed not around averages but around the extreme tails of probability distributions (Gerritsen, 2005; Deltacommissie, 2008).</p>
 
-<p>Dispersion — also called variability, spread, or scatter — quantifies the degree to which data values differ from one another and from the center. If central tendency tells you <em>where</em> the data is, dispersion tells you <em>how much you can trust that center</em>. As Freedman et al. (2007) put it, reporting an average without a measure of spread is like reporting a destination without mentioning how bumpy the road is. Weisberg (1992) argued that central tendency and variability are inseparable partners: neither makes sense without the other.</p>
+<p>This is the fundamental lesson of dispersion: <strong>the average can lie</strong>. Two datasets can share identical means, identical medians, identical modes — yet tell fundamentally different stories. A city where every household earns $50,000 and a city where half earn nothing and half earn $100,000 both show a mean income of $50,000, but only one faces a social crisis. A pharmaceutical company whose drug lowers blood pressure by an average of 10 mmHg sounds effective — until you learn the standard deviation is 25 mmHg, meaning the drug raises blood pressure in a substantial proportion of patients. As Freedman et al. (2007) warned, reporting an average without a measure of spread is like reporting a destination without mentioning how bumpy the road is.</p>
 
-<blockquote>💡 <strong>The Core Idea:</strong> Two datasets can have the same mean, the same median, and the same mode — yet be fundamentally different in character. Measures of dispersion capture what central tendency misses: <strong>the degree of uncertainty, risk, and variability</strong> hiding within the data. In fields from agriculture to finance, understanding spread is often more important than knowing the average.</blockquote>
+<p>Dispersion — also called variability, spread, or scatter — quantifies the degree to which data values differ from one another and from the center. If central tendency tells you <em>where</em> the data is, dispersion tells you <em>how much you can trust that center</em>. Weisberg (1992) argued that central tendency and variability are inseparable partners: neither makes sense without the other. This explanation will take you through every major measure of dispersion — from the simplest snapshot to the most powerful inferential tool — showing not just how to calculate each one but <em>why</em> it exists, <em>when</em> to use it, and <em>what</em> it reveals that the others cannot.</p>
+
+<blockquote>💡 <strong>The Core Idea:</strong> Two datasets can have the same mean, the same median, and the same mode — yet be fundamentally different in character. Measures of dispersion capture what central tendency misses: <strong>the degree of uncertainty, risk, and variability</strong> hiding within the data. In fields from hydrology to finance, from medicine to agriculture, understanding spread is often more important than knowing the average. The 1953 North Sea flood killed nearly two thousand people not because the <em>average</em> tide was dangerous, but because the <em>variability</em> was underestimated.</blockquote>
 
 <hr>
 
-<h2>📊 Why Dispersion Matters</h2>
+<h2>📊 Why Dispersion Matters: Six Essential Functions</h2>
 
-<p>Measures of dispersion serve essential functions across every discipline that uses data (Moore et al., 2021; Agresti & Finlay, 2018):</p>
+<p>Measures of dispersion serve essential functions across every discipline that uses quantitative data (Moore et al., 2021; Agresti &amp; Finlay, 2018; Wackerly et al., 2014):</p>
 
 <table>
   <thead>
-    <tr><th>Function</th><th>Description</th><th>Example</th></tr>
+    <tr><th>Function</th><th>Description</th><th>Real-World Example</th></tr>
   </thead>
   <tbody>
-    <tr><td>🎯 <strong>Precision Assessment</strong></td><td>Evaluate how tightly measurements cluster around the center</td><td>Lab instruments with σ = 0.01 mm vs. σ = 2 mm</td></tr>
-    <tr><td>⚖️ <strong>Group Comparison</strong></td><td>Determine if two groups truly differ or just overlap</td><td>Drug A vs. Drug B efficacy — same mean but different spread</td></tr>
-    <tr><td>🔔 <strong>Normality & Distribution Shape</strong></td><td>Standard deviation defines the width of bell curves and confidence intervals</td><td>68-95-99.7% rule requires knowing σ</td></tr>
-    <tr><td>🧪 <strong>Quality Control</strong></td><td>Monitor process consistency in manufacturing and agriculture</td><td>Acceptable variation in seed weight batches</td></tr>
-    <tr><td>📈 <strong>Risk & Decision-Making</strong></td><td>Higher variability = higher uncertainty = higher risk</td><td>Investors prefer lower CV portfolios at same return</td></tr>
-    <tr><td>🧱 <strong>Foundation for Inference</strong></td><td>Variance is the engine of every inferential test: t-tests, ANOVA, regression, confidence intervals</td><td>Standard error = σ/√n — the bridge from descriptive to inferential statistics</td></tr>
+    <tr><td>🎯 <strong>Precision Assessment</strong></td><td>Evaluate how tightly measurements cluster around the center</td><td>A laboratory pipette with σ = 0.01 mL vs. one with σ = 0.5 mL — the first is research-grade, the second is unreliable for precise work</td></tr>
+    <tr><td>⚖️ <strong>Group Comparison</strong></td><td>Determine whether two groups truly differ or merely overlap</td><td>A clinical trial finds Drug A and Drug B both reduce cholesterol by 20 mg/dL on average — but Drug A has SD = 5 while Drug B has SD = 30. Drug A is reliable; Drug B is a gamble</td></tr>
+    <tr><td>🔔 <strong>Distribution Shape</strong></td><td>Standard deviation defines the width of bell curves and the boundaries of confidence intervals</td><td>The 68–95–99.7% empirical rule requires knowing σ to identify where "normal" ends and "extreme" begins</td></tr>
+    <tr><td>🧪 <strong>Quality Control</strong></td><td>Monitor process consistency in manufacturing, healthcare, and research</td><td>Six Sigma methodology at Motorola (1986) defined quality as ±6σ from the target, allowing only 3.4 defects per million — the entire philosophy is built on controlling dispersion (Harry &amp; Schroeder, 2000)</td></tr>
+    <tr><td>📈 <strong>Risk &amp; Decision-Making</strong></td><td>Higher variability = higher uncertainty = higher risk</td><td>Harry Markowitz won the 1990 Nobel Prize in Economics for showing that optimal portfolio selection depends not on maximising return but on minimising the variance of returns at a given expected return — Modern Portfolio Theory is <em>variance theory</em> (Markowitz, 1952)</td></tr>
+    <tr><td>🧱 <strong>Foundation for Inference</strong></td><td>Variance is the engine of every inferential test: t-tests, ANOVA, regression, confidence intervals</td><td>Standard error = s/√n — the bridge from descriptive to inferential statistics. Without a measure of spread, no hypothesis test, no confidence interval, no regression coefficient is possible</td></tr>
   </tbody>
 </table>
 
-<blockquote>🧪 <strong>Agricultural Insight:</strong> An agronomist testing a new wheat cultivar in the Algerian high plateaus needs more than the mean yield. If the cultivar averages 35 q/ha but varies from 15 to 55 across plots, that cultivar is <em>risky</em>. A second cultivar averaging 32 q/ha but ranging from 28 to 36 is far more <strong>reliable</strong> — and reliability often matters more than raw averages in food-security contexts (Gomez & Gomez, 1984).</blockquote>
+<blockquote>🌊 <strong>Climate Science Insight:</strong> The Intergovernmental Panel on Climate Change (IPCC) does not merely report projected mean global temperature increases — it reports <em>ranges</em> and <em>confidence intervals</em>. The difference between "2°C warming on average" and "2°C ± 1.5°C" is the difference between manageable adaptation and catastrophic uncertainty. Every projection in the IPCC Sixth Assessment Report (2021) is framed by its dispersion — because policymakers need to plan not for the average scenario but for the plausible extremes.</blockquote>
 
 <hr>
 
 <h2>📏 The Taxonomy of Dispersion Measures</h2>
 
-<p>Before diving into each measure, it helps to see the big picture. Dispersion measures fall into two broad families (Wackerly et al., 2014):</p>
+<p>Before examining each measure in detail, it helps to see the landscape. Dispersion measures fall into two broad families, each serving distinct purposes (Wackerly et al., 2014):</p>
 
 <table>
   <thead>
     <tr><th>Type</th><th>Measures</th><th>Uses Original Units?</th><th>Comparable Across Different Datasets?</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Absolute Measures</strong></td><td>Range, IQR, Mean Deviation, Variance, Standard Deviation</td><td>✅ (except Variance, which squares units)</td><td>❌ Only if same units and similar means</td></tr>
-    <tr><td><strong>Relative Measures</strong></td><td>Coefficient of Variation (CV)</td><td>❌ Dimensionless (usually %)</td><td>✅ Can compare across different units and scales</td></tr>
+    <tr><td><strong>Absolute Measures</strong></td><td>Range, IQR, Mean Absolute Deviation, Variance, Standard Deviation</td><td>✅ (except Variance, which squares units)</td><td>❌ Only if same units and similar means</td></tr>
+    <tr><td><strong>Relative Measures</strong></td><td>Coefficient of Variation (CV)</td><td>❌ Dimensionless (usually expressed as %)</td><td>✅ Can compare across different units, scales, and magnitudes</td></tr>
   </tbody>
 </table>
 
@@ -54,8 +56,8 @@
 
 <p style="text-align:center;"><strong>R = X<sub>max</sub> − X<sub>min</sub></strong></p>
 
-<p><strong>Worked example:</strong> Five wheat plots yield 28, 31, 35, 29, and 32 q/ha.</p>
-<p style="text-align:center;"><strong>R = 35 − 28 = 7 q/ha</strong></p>
+<p><strong>Worked example:</strong> Daily maximum temperatures (°C) recorded during one week in São Paulo, Brazil: 28, 31, 35, 29, 32, 27, 33.</p>
+<p style="text-align:center;"><strong>R = 35 − 27 = 8°C</strong></p>
 
 <h3>Properties of the Range</h3>
 
@@ -64,15 +66,15 @@
     <tr><th>Property</th><th>Assessment</th></tr>
   </thead>
   <tbody>
-    <tr><td>✅ Simplicity</td><td>Trivial to calculate — requires only the extreme values</td></tr>
+    <tr><td>✅ Simplicity</td><td>Trivial to calculate — requires only the two extreme values</td></tr>
     <tr><td>✅ Intuitive</td><td>Everyone understands "the data spans from X to Y"</td></tr>
-    <tr><td>❌ Outlier sensitivity</td><td>A single extreme value can inflate the range enormously</td></tr>
-    <tr><td>❌ Ignores interior data</td><td>Only uses 2 of n observations — says nothing about how the rest are distributed</td></tr>
-    <tr><td>❌ Grows with sample size</td><td>Larger samples are more likely to capture extreme values, making range non-comparable across different-sized samples</td></tr>
+    <tr><td>❌ Outlier sensitivity</td><td>A single extreme value can inflate the range enormously — one recording error of 99°C would give R = 72°C instead of 8°C</td></tr>
+    <tr><td>❌ Ignores interior data</td><td>Only uses 2 of n observations — says nothing about how the remaining n − 2 values are distributed</td></tr>
+    <tr><td>❌ Grows with sample size</td><td>Larger samples are more likely to capture extreme values, making range non-comparable across different-sized samples. This property was formally demonstrated by Cox (1948)</td></tr>
   </tbody>
 </table>
 
-<blockquote>⚠️ <strong>Why the range is dangerous alone:</strong> Consider two datasets: A = {49, 50, 50, 50, 51} and B = {10, 50, 50, 50, 90}. Both have a range of 2 vs. 80, but dataset A is tightly packed while B has extreme outliers. The range catches this difference, which is good — but now consider C = {10, 50, 50, 50, 50} and D = {10, 10, 10, 10, 50}. Both have range = 40, yet their internal distributions are completely different. The range is blind to these differences (Devore & Berk, 2012).</blockquote>
+<blockquote>⚠️ <strong>Why the range is dangerous alone:</strong> Consider two datasets: A = {49, 50, 50, 50, 51} and B = {10, 50, 50, 50, 90}. Dataset A has R = 2 (tightly packed) while B has R = 80 (extreme outliers) — the range catches this difference, which is useful. But now consider C = {10, 50, 50, 50, 50} and D = {10, 10, 10, 10, 50}. Both have R = 40, yet their internal distributions are completely different — C has one low outlier while D has one high outlier. The range is blind to these differences. For this reason, the range should <strong>never</strong> be used as the sole measure of dispersion in any serious analysis (Devore &amp; Berk, 2012).</blockquote>
 
 <hr>
 
@@ -86,9 +88,20 @@
 
 <p>The IQR is the natural partner of the <strong>median</strong> — just as standard deviation pairs with the mean. Because it discards the bottom 25% and top 25% of values, it is <strong>resistant to outliers</strong>, making it the preferred spread measure for skewed distributions or data with extreme values (Moore et al., 2021).</p>
 
-<p><strong>Worked example:</strong> For the sorted data {12, 15, 18, 22, 25, 30, 35, 42, 50}, Q₁ = 16.5, Q₃ = 38.5, so IQR = 38.5 − 16.5 = 22.</p>
+<h3>Worked Example</h3>
 
-<blockquote>📦 <strong>Box Plot Connection:</strong> The IQR is exactly what the "box" in a box-and-whisker plot represents. The box captures the central 50% of observations, and its width (the IQR) gives you an immediate visual feel for the data's spread. Outliers are flagged as points beyond 1.5 × IQR from the box edges — a rule proposed by John Tukey (1977), one of the most influential statisticians of the 20th century.</blockquote>
+<p><strong>Monthly rainfall (mm) in 9 cities worldwide:</strong> sorted data {12, 15, 18, 22, 25, 30, 35, 42, 50}.</p>
+<p>Q₁ = median of lower half {12, 15, 18, 22} = (15 + 18)/2 = 16.5</p>
+<p>Q₃ = median of upper half {30, 35, 42, 50} = (35 + 42)/2 = 38.5</p>
+<p style="text-align:center;"><strong>IQR = 38.5 − 16.5 = 22 mm</strong></p>
+
+<p>This tells us the central half of cities receive rainfall spanning a 22 mm range — regardless of whether the driest city gets 0 mm or the wettest gets 200 mm. The IQR is immune to those extremes.</p>
+
+<h3>The IQR and Outlier Detection</h3>
+
+<p>The IQR is the foundation of the most widely used outlier detection rule, proposed by John Tukey (1977) — one of the most influential statisticians of the 20th century. Any observation falling below Q₁ − 1.5 × IQR or above Q₃ + 1.5 × IQR is flagged as a <strong>potential outlier</strong>. Observations beyond Q₁ − 3 × IQR or Q₃ + 3 × IQR are <strong>extreme outliers</strong>. This is precisely how box-and-whisker plots determine which points to display as individual dots beyond the whiskers.</p>
+
+<blockquote>📦 <strong>Box Plot Connection:</strong> The IQR is exactly what the "box" in a box-and-whisker plot represents. The box captures the central 50% of observations, and its width (the IQR) gives you an immediate visual feel for the data's spread. Tukey developed the box plot and the 1.5 × IQR rule simultaneously as part of his Exploratory Data Analysis (EDA) revolution — a philosophical shift that emphasized <em>looking at data</em> before modelling it, letting the data speak before imposing assumptions (Tukey, 1977).</blockquote>
 
 <hr>
 
@@ -100,11 +113,19 @@
 
 <p style="text-align:center;"><strong>MAD = (1/n) × Σ|xᵢ − x̄|</strong></p>
 
-<p><strong>Worked example:</strong> Data: {2, 4, 6, 8, 10}. Mean = 6. Deviations from mean: |2−6| + |4−6| + |6−6| + |8−6| + |10−6| = 4 + 2 + 0 + 2 + 4 = 12. MAD = 12/5 = <strong>2.4</strong>.</p>
+<h3>Worked Example</h3>
 
-<p>The MAD is arguably more intuitive than variance or standard deviation because it doesn't square anything — it simply averages the raw distances. Yet it fell out of statistical favor for a reason: <strong>absolute values are mathematically intractable</strong>. You cannot differentiate them smoothly, and they do not decompose algebraically the way squared deviations do. This is why Karl Pearson, Ronald Fisher, and the architects of modern statistics championed variance and standard deviation instead (Gorard, 2005).</p>
+<p><strong>Data:</strong> Test scores of 5 students: {2, 4, 6, 8, 10}.</p>
+<p>Mean = 6. Deviations from mean: |2−6| + |4−6| + |6−6| + |8−6| + |10−6| = 4 + 2 + 0 + 2 + 4 = 12.</p>
+<p style="text-align:center;"><strong>MAD = 12/5 = 2.4</strong></p>
 
-<blockquote>🔬 <strong>A Renaissance:</strong> Despite its fall from favor, the MAD has experienced a renaissance in robust statistics. Peter Huber and others showed that the median absolute deviation (a variant using the median instead of the mean) is extraordinarily resistant to outliers and contaminated data (Huber & Ronchetti, 2009). The median-based MAD is now a standard tool in many fields.</blockquote>
+<p>This says: on average, each score deviates 2.4 units from the mean of 6. No squaring, no square roots — just raw, interpretable distance.</p>
+
+<h3>Why Did the MAD Lose to the Standard Deviation?</h3>
+
+<p>The MAD is arguably more intuitive than variance or standard deviation — it does not square anything, it simply averages the raw distances. Yet it fell out of statistical favour in the early 20th century for profound mathematical reasons: <strong>absolute values are mathematically intractable</strong>. The function |x| has a sharp corner (a "kink") at zero, meaning it is not differentiable there. You cannot perform calculus-based optimization on it smoothly, and it does not decompose algebraically the way squared deviations do. This is why Karl Pearson, Ronald Fisher, and the architects of modern parametric statistics championed variance and standard deviation instead — they needed measures that worked seamlessly with calculus, matrix algebra, and probability theory (Gorard, 2005).</p>
+
+<blockquote>🔬 <strong>A Renaissance:</strong> Despite its early abandonment, the MAD has experienced a remarkable renaissance. Peter Huber's foundational work on robust statistics showed that the <em>median</em> absolute deviation (a variant using the median instead of the mean as the central point) is extraordinarily resistant to outliers — it can tolerate up to 50% contaminated data points without breaking down. This "breakdown point" of 50% is the theoretical maximum, making the median-based MAD one of the most robust statistical estimators known. It is now a standard tool in fields from signal processing to astrophysics (Huber &amp; Ronchetti, 2009).</blockquote>
 
 <hr>
 
@@ -112,71 +133,71 @@
 
 <h3>Why Squaring? The Mathematical Motivation</h3>
 
-<p>If we simply averaged the deviations from the mean without absolute values, positive and negative deviations would cancel out, giving us zero every time — a mathematically elegant but useless result (recall: Σ(xᵢ − x̄) = 0 is a fundamental property of the mean). We need a way to make all deviations positive. Two options exist: take absolute values (giving us the MAD) or <strong>square the deviations</strong> (giving us the variance). The statistical world chose squaring, and for profound reasons (Wackerly et al., 2014):</p>
+<p>If we simply averaged the deviations from the mean without absolute values, positive and negative deviations would cancel out, giving us zero every time — a mathematically elegant but useless result (recall: Σ(xᵢ − x̄) = 0 is a fundamental algebraic property of the arithmetic mean). We need a way to make all deviations positive. Two options exist: take absolute values (giving us the MAD) or <strong>square the deviations</strong> (giving us the variance). The statistical world chose squaring, and for five profound reasons (Wackerly et al., 2014; Devore &amp; Berk, 2012):</p>
 
 <table>
   <thead>
     <tr><th>Reason</th><th>Explanation</th></tr>
   </thead>
   <tbody>
-    <tr><td>📐 <strong>Differentiability</strong></td><td>x² is smooth and differentiable everywhere, while |x| has a kink at zero — making calculus-based optimization (least squares) possible</td></tr>
-    <tr><td>🧮 <strong>Algebraic decomposition</strong></td><td>Variance decomposes beautifully: total variance = between-group variance + within-group variance. This is the foundation of ANOVA</td></tr>
-    <tr><td>🔗 <strong>Additivity</strong></td><td>For independent variables, Var(X + Y) = Var(X) + Var(Y). No such property exists for absolute deviations</td></tr>
-    <tr><td>⚡ <strong>Emphasis on extremes</strong></td><td>Squaring penalizes large deviations disproportionately — a point 3 units away contributes 9, not 3, to the variance. This sensitivity is a feature, not a bug, for detecting heterogeneity</td></tr>
-    <tr><td>🔔 <strong>Normal distribution link</strong></td><td>The normal (Gaussian) distribution is entirely defined by two parameters: mean and variance. Variance is the natural measure for parametric models</td></tr>
+    <tr><td>📐 <strong>Differentiability</strong></td><td>x² is smooth and differentiable everywhere, while |x| has a kink at zero — making calculus-based optimization (least-squares method) possible. This is why Gauss and Legendre chose squared deviations in the early 1800s</td></tr>
+    <tr><td>🧮 <strong>Algebraic decomposition</strong></td><td>Variance decomposes beautifully: Total SS = Between-group SS + Within-group SS. This decomposition is the mathematical foundation of ANOVA, invented by R. A. Fisher in the 1920s</td></tr>
+    <tr><td>🔗 <strong>Additivity</strong></td><td>For independent random variables, Var(X + Y) = Var(X) + Var(Y). No analogous property exists for absolute deviations. This additivity is essential for building complex models from simple components</td></tr>
+    <tr><td>⚡ <strong>Emphasis on extremes</strong></td><td>Squaring penalises large deviations disproportionately — a point 3 units away contributes 9, not 3, to the variance. This sensitivity is a feature, not a bug, for detecting heterogeneity and outliers</td></tr>
+    <tr><td>🔔 <strong>Normal distribution link</strong></td><td>The normal (Gaussian) distribution is entirely defined by two parameters: the mean (μ) and the variance (σ²). Variance is the natural measure for all parametric models built on normality</td></tr>
   </tbody>
 </table>
 
 <h3>Population Variance vs. Sample Variance</h3>
 
-<p>There are two versions of the variance formula, and the distinction is critical (Triola, 2018; Moore et al., 2021):</p>
+<p>There are two versions of the variance formula, and the distinction between them is one of the most critical in all of statistics (Triola, 2018; Moore et al., 2021):</p>
 
 <table>
   <thead>
     <tr><th>Context</th><th>Formula</th><th>Symbol</th><th>Denominator</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Population variance</strong></td><td>σ² = Σ(xᵢ − μ)² / N</td><td>σ² (sigma squared)</td><td>N (population size)</td></tr>
+    <tr><td><strong>Population variance</strong></td><td>σ² = Σ(xᵢ − μ)² / N</td><td>σ² (sigma squared)</td><td>N (total population size)</td></tr>
     <tr><td><strong>Sample variance</strong></td><td>s² = Σ(xᵢ − x̄)² / (n − 1)</td><td>s²</td><td>n − 1 (Bessel's correction)</td></tr>
   </tbody>
 </table>
 
 <h3>🔑 Bessel's Correction: Why n − 1?</h3>
 
-<p>This is one of the most frequently asked questions in introductory statistics, and understanding it deeply separates surface-level learners from those who truly grasp inference. When we compute the sample variance, we divide by <strong>n − 1</strong> instead of n. This adjustment is called <strong>Bessel's correction</strong>, named after Friedrich Bessel who applied similar bias-correction techniques in his 1818 analysis of astronomical observations (Reichel, 2025).</p>
+<p>This is one of the most frequently asked questions in introductory statistics, and understanding it deeply separates surface-level learners from those who truly grasp statistical inference. When we compute the sample variance, we divide by <strong>n − 1</strong> instead of n. This adjustment is called <strong>Bessel's correction</strong>, named after the German astronomer Friedrich Bessel who applied similar bias-correction techniques in his 1818 analysis of astronomical observations at the Königsberg Observatory (Reichel, 2025).</p>
 
-<p><strong>The intuition:</strong> The sample mean x̄ is always positioned at the very center of the sample data (by definition, it minimizes the sum of squared deviations). But the population mean μ could be anywhere. Because x̄ is <em>guaranteed</em> to be closer to the sample points than μ typically is, dividing by n <strong>systematically underestimates</strong> the true population variance. The correction factor of n − 1 compensates for this downward bias.</p>
+<p><strong>The intuition:</strong> The sample mean x̄ is always positioned at the very centre of the sample data (by definition, it minimises the sum of squared deviations from itself). But the true population mean μ could be anywhere — it is not constrained to sit at the sample's centre. Because x̄ is <em>guaranteed</em> to be closer to the sample points than μ typically is, using the sample mean instead of the population mean in the variance formula creates a <strong>systematic downward bias</strong>. Dividing by n − 1 instead of n inflates the estimate just enough to compensate, producing an <strong>unbiased estimator</strong> of the population variance.</p>
 
-<p><strong>The degrees of freedom interpretation:</strong> In a sample of n observations, once you know the sample mean, only n − 1 values are "free" to vary independently. The last value is mathematically determined by the other n − 1 values and the mean (since they must sum to n × x̄). Thus, there are only <strong>n − 1 degrees of freedom</strong> available for estimating variance (Wackerly et al., 2014).</p>
+<p><strong>The degrees of freedom interpretation:</strong> In a sample of n observations, once you know the sample mean x̄, only n − 1 values are "free" to vary independently. The last value is mathematically determined by the other n − 1 values and the mean (since they must sum to n × x̄). Thus, there are only <strong>n − 1 degrees of freedom</strong> available for estimating variance. This concept, formalised by R. A. Fisher in the 1920s, is the foundation of all inferential statistics (Wackerly et al., 2014).</p>
 
-<blockquote>🎓 <strong>Consider the extreme case:</strong> If n = 1, dividing by n gives variance = 0 for any population. That is clearly wrong — a single observation tells us nothing about the spread. Dividing by n − 1 = 0 is undefined, correctly signaling that variance cannot be estimated from a single observation. The correction becomes less important as n grows large (for n = 1000, dividing by 999 vs. 1000 hardly matters), but for small biological samples (n = 5, 10, 20), the correction is essential (Freedman et al., 2007).</blockquote>
+<blockquote>🎓 <strong>Consider the extreme case:</strong> If n = 1 (a single observation), dividing by n gives variance = 0 for any population — clearly wrong, since a single observation tells us nothing about spread. Dividing by n − 1 = 0 is undefined, correctly signalling that variance <em>cannot</em> be estimated from a single observation. As n grows large, the correction matters less (for n = 1,000, dividing by 999 vs. 1,000 makes negligible difference), but for small samples typical in biology, psychology, and pilot studies (n = 5, 10, 20), Bessel's correction is essential (Freedman et al., 2007).</blockquote>
 
 <h3>Step-by-Step Worked Example</h3>
 
-<p>Data: Five soil pH measurements from a field in Sétif: {6.2, 6.8, 7.1, 6.5, 7.4}.</p>
+<p><strong>Data:</strong> Mercury concentration (μg/L) in five water samples from the Danube River: {0.42, 0.58, 0.71, 0.35, 0.94}.</p>
 
 <table>
   <thead>
     <tr><th>Step</th><th>Operation</th><th>Result</th></tr>
   </thead>
   <tbody>
-    <tr><td>1</td><td>Calculate the mean: x̄ = (6.2 + 6.8 + 7.1 + 6.5 + 7.4) / 5</td><td>x̄ = 34.0 / 5 = <strong>6.80</strong></td></tr>
-    <tr><td>2</td><td>Compute deviations: (xᵢ − x̄)</td><td>−0.6, 0.0, 0.3, −0.3, 0.6</td></tr>
-    <tr><td>3</td><td>Square each deviation: (xᵢ − x̄)²</td><td>0.36, 0.00, 0.09, 0.09, 0.36</td></tr>
-    <tr><td>4</td><td>Sum of squares: Σ(xᵢ − x̄)²</td><td><strong>0.90</strong></td></tr>
-    <tr><td>5</td><td>Divide by (n − 1) = 4</td><td>s² = 0.90 / 4 = <strong>0.225</strong></td></tr>
+    <tr><td>1</td><td>Calculate the mean: x̄ = (0.42 + 0.58 + 0.71 + 0.35 + 0.94) / 5</td><td>x̄ = 3.00 / 5 = <strong>0.600</strong></td></tr>
+    <tr><td>2</td><td>Compute deviations: (xᵢ − x̄)</td><td>−0.18, −0.02, +0.11, −0.25, +0.34</td></tr>
+    <tr><td>3</td><td>Square each deviation: (xᵢ − x̄)²</td><td>0.0324, 0.0004, 0.0121, 0.0625, 0.1156</td></tr>
+    <tr><td>4</td><td>Sum of squares: Σ(xᵢ − x̄)²</td><td><strong>0.2230</strong></td></tr>
+    <tr><td>5</td><td>Divide by (n − 1) = 4</td><td>s² = 0.2230 / 4 = <strong>0.05575</strong></td></tr>
   </tbody>
 </table>
 
-<p>The sample variance is <strong>s² = 0.225</strong>. But notice the problem: variance is in <strong>squared units</strong> (pH²), which is not directly interpretable. This is exactly why we need the standard deviation.</p>
+<p>The sample variance is <strong>s² = 0.056 (μg/L)²</strong>. But notice the problem: variance is in <strong>squared units</strong> — "micrograms per litre squared" has no physical meaning. This is exactly why we need the standard deviation.</p>
 
 <h3>Variance for Grouped Data</h3>
 
-<p>When data comes from a frequency table, the formula adapts to use midpoints and frequencies:</p>
+<p>When data comes from a frequency table rather than raw observations, the formula adapts to use class midpoints and frequencies:</p>
 
 <p style="text-align:center;"><strong>s² = [Σfᵢ(mᵢ − x̄)²] / (n − 1)</strong></p>
 
-<p>where mᵢ is the midpoint of each class, fᵢ is the frequency, and x̄ = Σfᵢmᵢ / n.</p>
+<p>where mᵢ is the midpoint of each class interval, fᵢ is the class frequency, x̄ = Σfᵢmᵢ / n, and n = Σfᵢ is the total number of observations.</p>
 
 <hr>
 
@@ -184,23 +205,23 @@
 
 <h3>Definition</h3>
 
-<p>The <strong>standard deviation</strong> is simply the <strong>square root of the variance</strong>. This one transformation solves the squared-units problem and gives us a measure of spread expressed in the <em>same units as the original data</em> — making it directly interpretable (Moore et al., 2021):</p>
+<p>The <strong>standard deviation</strong> is simply the <strong>square root of the variance</strong>. This single transformation solves the squared-units problem and gives us a measure of spread expressed in the <em>same units as the original data</em> — making it directly interpretable and the most widely reported measure of dispersion in science, medicine, engineering, and social science (Moore et al., 2021):</p>
 
 <table>
   <thead>
     <tr><th>Context</th><th>Formula</th><th>Symbol</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Population</strong></td><td>σ = √[Σ(xᵢ − μ)² / N]</td><td>σ (sigma)</td></tr>
+    <tr><td><strong>Population</strong></td><td>σ = √[Σ(xᵢ − μ)² / N]</td><td>σ (lowercase Greek sigma)</td></tr>
     <tr><td><strong>Sample</strong></td><td>s = √[Σ(xᵢ − x̄)² / (n − 1)]</td><td>s</td></tr>
   </tbody>
 </table>
 
-<p>From our worked example: <strong>s = √0.225 ≈ 0.474 pH units</strong>. This tells us that soil pH measurements in our Sétif field typically deviate about 0.47 units from the mean of 6.80.</p>
+<p>From our Danube River example: <strong>s = √0.05575 ≈ 0.236 μg/L</strong>. This tells us that mercury concentrations in the sampled stretch of the Danube typically deviate about 0.24 μg/L from the mean of 0.60 μg/L — a directly meaningful statement in the units of the original measurement.</p>
 
 <h3>The Empirical Rule (68–95–99.7 Rule)</h3>
 
-<p>For data that is approximately <strong>normally distributed</strong> (bell-shaped), the standard deviation has a remarkable interpretation known as the <strong>empirical rule</strong> (Triola, 2018):</p>
+<p>For data that is approximately <strong>normally distributed</strong> (bell-shaped), the standard deviation has a remarkably precise interpretation known as the <strong>empirical rule</strong>, sometimes called the <strong>three-sigma rule</strong>. This relationship was first described by Abraham de Moivre in 1733 and later formalised by Carl Friedrich Gauss (Stigler, 1986; Triola, 2018):</p>
 
 <table>
   <thead>
@@ -209,30 +230,30 @@
   <tbody>
     <tr><td><strong>x̄ ± 1s</strong></td><td>~68% of data</td><td>About two-thirds of observations fall within one standard deviation of the mean</td></tr>
     <tr><td><strong>x̄ ± 2s</strong></td><td>~95% of data</td><td>Nearly all "normal" observations fall within two standard deviations</td></tr>
-    <tr><td><strong>x̄ ± 3s</strong></td><td>~99.7% of data</td><td>Virtually all observations fall within three standard deviations — anything beyond is extremely rare</td></tr>
+    <tr><td><strong>x̄ ± 3s</strong></td><td>~99.7% of data</td><td>Virtually all observations fall within three standard deviations — anything beyond is extremely rare (about 3 in 1,000)</td></tr>
   </tbody>
 </table>
 
-<blockquote>📊 <strong>Practical Power:</strong> If wheat yields in a region are normally distributed with x̄ = 30 q/ha and s = 5 q/ha, the empirical rule tells us that ~68% of fields yield between 25 and 35 q/ha, ~95% yield between 20 and 40, and virtually none yield below 15 or above 45. This allows agronomists to predict, plan, and identify anomalies with confidence.</blockquote>
+<blockquote>📊 <strong>Practical Power:</strong> Human birth weight in well-nourished populations is approximately normally distributed with μ ≈ 3,400 g and σ ≈ 500 g (WHO, 2006). The empirical rule tells us: ~68% of newborns weigh between 2,900 and 3,900 g, ~95% weigh between 2,400 and 4,400 g, and virtually none weigh below 1,900 g or above 4,900 g in a healthy population. Neonatologists use precisely these σ-based thresholds to identify low-birth-weight and macrosomic infants requiring special care.</blockquote>
 
 <h3>Chebyshev's Theorem — For Any Distribution</h3>
 
-<p>What if the data is <em>not</em> normally distributed? Pafnuty Chebyshev proved a universal bound that applies to <strong>any distribution</strong>, regardless of shape (Wackerly et al., 2014):</p>
+<p>What if the data is <em>not</em> normally distributed? The Russian mathematician Pafnuty Chebyshev proved in 1867 a universal bound that applies to <strong>any distribution whatsoever</strong>, regardless of shape — symmetric, skewed, bimodal, or otherwise (Wackerly et al., 2014):</p>
 
 <p style="text-align:center;"><strong>At least (1 − 1/k²) × 100% of data lies within k standard deviations of the mean</strong></p>
 
 <table>
   <thead>
-    <tr><th>k</th><th>Minimum % within x̄ ± ks</th></tr>
+    <tr><th>k</th><th>Minimum % within x̄ ± ks</th><th>Comparison with Empirical Rule (normal data)</th></tr>
   </thead>
   <tbody>
-    <tr><td>2</td><td>At least 75%</td></tr>
-    <tr><td>3</td><td>At least 88.9%</td></tr>
-    <tr><td>4</td><td>At least 93.75%</td></tr>
+    <tr><td>2</td><td>At least 75%</td><td>Empirical rule gives ~95% — Chebyshev is conservative</td></tr>
+    <tr><td>3</td><td>At least 88.9%</td><td>Empirical rule gives ~99.7% — again conservative</td></tr>
+    <tr><td>4</td><td>At least 93.75%</td><td>Beyond the usual empirical rule range</td></tr>
   </tbody>
 </table>
 
-<p>Chebyshev's theorem is weaker than the empirical rule (it guarantees less), but it has the enormous advantage of <strong>making no assumptions</strong> about the shape of the distribution.</p>
+<p>Chebyshev's theorem is weaker than the empirical rule (it guarantees less), but it has the enormous advantage of <strong>making absolutely no assumptions</strong> about the shape of the distribution. This makes it invaluable for real-world data that is rarely perfectly normal — income distributions, rainfall data, species abundances, and most biological measurements are skewed or heavy-tailed.</p>
 
 <h3>Key Properties of the Standard Deviation</h3>
 
@@ -241,11 +262,11 @@
     <tr><th>#</th><th>Property</th><th>Mathematical Statement</th><th>Why It Matters</th></tr>
   </thead>
   <tbody>
-    <tr><td>1</td><td>✅ <strong>Non-negative</strong></td><td>s ≥ 0, and s = 0 only when all values are identical</td><td>Zero spread means zero variability — a constant</td></tr>
-    <tr><td>2</td><td>📐 <strong>Same units as data</strong></td><td>If data is in kg, s is in kg</td><td>Directly interpretable, unlike variance</td></tr>
-    <tr><td>3</td><td>🔗 <strong>Linear transformation</strong></td><td>If y = a + bx, then s<sub>y</sub> = |b| × s<sub>x</sub></td><td>Adding a constant doesn't change spread; multiplying scales it proportionally</td></tr>
-    <tr><td>4</td><td>⚡ <strong>Sensitive to outliers</strong></td><td>Squaring amplifies extreme deviations</td><td>A feature for detection, a weakness for robustness</td></tr>
-    <tr><td>5</td><td>📈 <strong>Foundation of inference</strong></td><td>SE = s/√n ; CI = x̄ ± z × SE</td><td>Standard error, confidence intervals, and hypothesis tests all depend on s</td></tr>
+    <tr><td>1</td><td>✅ <strong>Non-negative</strong></td><td>s ≥ 0, and s = 0 only when all values are identical</td><td>Zero spread means zero variability — a constant, not a variable</td></tr>
+    <tr><td>2</td><td>📐 <strong>Same units as data</strong></td><td>If data is in kg, s is in kg; if in °C, s is in °C</td><td>Directly interpretable, unlike variance which is in squared units</td></tr>
+    <tr><td>3</td><td>🔗 <strong>Linear transformation</strong></td><td>If y = a + bx, then s<sub>y</sub> = |b| × s<sub>x</sub></td><td>Adding a constant (a) does not change spread; multiplying by a constant (b) scales spread proportionally. Converting temperatures from °C to °F multiplies s by 1.8 but does not add 32 to it</td></tr>
+    <tr><td>4</td><td>⚡ <strong>Sensitive to outliers</strong></td><td>Squaring amplifies extreme deviations disproportionately</td><td>A feature for detection (outliers inflate s visibly), a weakness for robustness (a single extreme value can distort s dramatically)</td></tr>
+    <tr><td>5</td><td>📈 <strong>Foundation of inference</strong></td><td>SE = s/√n ; CI = x̄ ± z × SE ; t = (x̄ − μ₀) / SE</td><td>Standard error, confidence intervals, t-tests, and virtually all parametric inference depend on s. Without the standard deviation, modern inferential statistics would not exist</td></tr>
   </tbody>
 </table>
 
@@ -255,27 +276,27 @@
 
 <h3>The Problem CV Solves</h3>
 
-<p>Imagine you measure the height of sunflower plants (mean = 180 cm, s = 12 cm) and the length of their seeds (mean = 1.2 cm, s = 0.3 cm). Which variable is "more variable"? You <strong>cannot</strong> answer this by comparing standard deviations directly — they use different units and different scales. This is where the <strong>coefficient of variation</strong> comes in (Pearson, 1896).</p>
+<p>Imagine a wildlife biologist studying African elephants (mean body mass = 5,000 kg, SD = 800 kg) and Etruscan shrews (mean body mass = 1.8 g, SD = 0.3 g). Which species shows more variability in body mass? Comparing standard deviations directly is meaningless — 800 kg vs. 0.3 g — because the measurements exist on entirely different scales. This is the problem the <strong>coefficient of variation</strong> solves.</p>
 
-<h3>Definition</h3>
+<h3>Definition and Origin</h3>
 
-<p>The <strong>coefficient of variation</strong>, introduced by Karl Pearson in 1896, expresses the standard deviation as a percentage of the mean. It is a <strong>dimensionless, unitless</strong> measure that allows comparison of variability across completely different datasets:</p>
+<p>The <strong>coefficient of variation</strong>, introduced by Karl Pearson in 1896 in his landmark paper on regression and heredity, expresses the standard deviation as a percentage of the mean. It is a <strong>dimensionless, unitless</strong> measure that allows comparison of variability across completely different datasets, different units, and different magnitudes (Pearson, 1896):</p>
 
 <p style="text-align:center;"><strong>CV = (s / x̄) × 100%</strong></p>
 
-<p><strong>Back to our example:</strong></p>
+<p><strong>Back to our wildlife example:</strong></p>
 
 <table>
   <thead>
-    <tr><th>Variable</th><th>Mean</th><th>SD</th><th>CV</th><th>Interpretation</th></tr>
+    <tr><th>Species</th><th>Mean</th><th>SD</th><th>CV</th><th>Interpretation</th></tr>
   </thead>
   <tbody>
-    <tr><td>Plant height</td><td>180 cm</td><td>12 cm</td><td>(12/180) × 100 = <strong>6.67%</strong></td><td>Low relative variability</td></tr>
-    <tr><td>Seed length</td><td>1.2 cm</td><td>0.3 cm</td><td>(0.3/1.2) × 100 = <strong>25.0%</strong></td><td>High relative variability</td></tr>
+    <tr><td>African elephant</td><td>5,000 kg</td><td>800 kg</td><td>(800/5000) × 100 = <strong>16.0%</strong></td><td>Moderate relative variability</td></tr>
+    <tr><td>Etruscan shrew</td><td>1.8 g</td><td>0.3 g</td><td>(0.3/1.8) × 100 = <strong>16.7%</strong></td><td>Moderate relative variability</td></tr>
   </tbody>
 </table>
 
-<p>Despite having a much <em>smaller</em> standard deviation in absolute terms, seed length is far <strong>more variable</strong> relative to its mean. The CV reveals what raw standard deviation hides.</p>
+<p>A striking result: despite an 800 kg standard deviation for elephants versus 0.3 g for shrews — a factor of nearly 3 billion in absolute terms — both species show <em>almost identical</em> relative variability in body mass (~16%). The CV reveals a biological regularity that raw standard deviation completely obscures.</p>
 
 <h3>Interpreting the CV</h3>
 
@@ -284,29 +305,29 @@
     <tr><th>CV Range</th><th>Interpretation</th><th>Typical Context</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>CV < 10%</strong></td><td>Low variability — highly consistent</td><td>Laboratory assays, precision instruments</td></tr>
-    <tr><td><strong>10% ≤ CV ≤ 20%</strong></td><td>Moderate variability — acceptable</td><td>Agricultural field trials, biological measurements</td></tr>
-    <tr><td><strong>20% < CV ≤ 30%</strong></td><td>High variability — requires attention</td><td>Social science surveys, ecological data</td></tr>
-    <tr><td><strong>CV > 30%</strong></td><td>Very high variability — heterogeneous data</td><td>Income distributions, highly variable biological traits</td></tr>
+    <tr><td><strong>CV &lt; 10%</strong></td><td>Low variability — highly consistent data</td><td>Precision laboratory assays, industrial quality control, well-controlled experiments</td></tr>
+    <tr><td><strong>10% ≤ CV ≤ 20%</strong></td><td>Moderate variability — generally acceptable</td><td>Agricultural field trials, biological measurements, clinical data</td></tr>
+    <tr><td><strong>20% &lt; CV ≤ 30%</strong></td><td>High variability — requires attention</td><td>Social science surveys, ecological field data, early-stage experiments</td></tr>
+    <tr><td><strong>CV &gt; 30%</strong></td><td>Very high variability — heterogeneous data</td><td>Income distributions, species abundances, highly variable biological traits</td></tr>
   </tbody>
 </table>
 
 <h3>When NOT to Use the CV</h3>
 
-<p>The CV has important limitations (Wackerly et al., 2014):</p>
+<p>The CV has important limitations that must be respected (Wackerly et al., 2014; Abdi, 2010):</p>
 
 <table>
   <thead>
     <tr><th>Limitation</th><th>Explanation</th></tr>
   </thead>
   <tbody>
-    <tr><td>⚠️ <strong>Mean near zero</strong></td><td>If x̄ ≈ 0, the CV explodes toward infinity, becoming meaningless</td></tr>
-    <tr><td>⚠️ <strong>Interval scales only</strong></td><td>CV is only valid for <strong>ratio-scale data</strong> (where zero means "absence"). Temperature in °C has no true zero — the same data in Celsius and Fahrenheit gives different CVs</td></tr>
-    <tr><td>⚠️ <strong>Negative values</strong></td><td>If data contains negative values or the mean is negative, the CV is not meaningful</td></tr>
+    <tr><td>⚠️ <strong>Mean near zero</strong></td><td>If x̄ ≈ 0, the CV explodes toward infinity, becoming meaningless. Wind speed at a sheltered site with mean 0.5 m/s and SD 0.4 m/s gives CV = 80% — not because the wind is erratic but because the denominator is tiny</td></tr>
+    <tr><td>⚠️ <strong>Ratio scales only</strong></td><td>CV is only valid for <strong>ratio-scale data</strong> (where zero means "absence of the quantity"). Temperature in °C has no true zero — the same dataset in Celsius and Fahrenheit gives different CVs, proving the measure is meaningless for interval scales</td></tr>
+    <tr><td>⚠️ <strong>Negative values</strong></td><td>If data contains negative values or the mean is negative, the CV is not defined. Net profit/loss data, altitude relative to sea level, and similar datasets require alternative approaches</td></tr>
   </tbody>
 </table>
 
-<blockquote>🌾 <strong>Agricultural Application:</strong> In field experiments, the CV is the standard quality indicator for experimental precision. Gomez & Gomez (1984) suggest that a CV below 12% indicates good experimental control for most crop traits, while CVs above 20% suggest excessive uncontrolled variation that may require redesigning the experiment or adding replication. ANOVA tables in agricultural research routinely report the CV alongside F-statistics.</blockquote>
+<blockquote>🌾 <strong>Agricultural Standard:</strong> In field experiments worldwide, the CV is the standard quality indicator for experimental precision. Gomez &amp; Gomez (1984), in their classic reference <em>Statistical Procedures for Agricultural Research</em>, suggested that a CV below 12% indicates good experimental control for most crop traits, while CVs above 20% suggest excessive uncontrolled variation that may require redesigning the experiment, adding replication, or adjusting the blocking structure. ANOVA tables in agricultural research journals routinely report the CV alongside F-statistics and P-values as a measure of data quality.</blockquote>
 
 <hr>
 
@@ -317,12 +338,12 @@
     <tr><th>Measure</th><th>Formula</th><th>Units</th><th>Uses All Data?</th><th>Outlier Resistant?</th><th>Best Paired With</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Range</strong></td><td>X<sub>max</sub> − X<sub>min</sub></td><td>Same as data</td><td>❌ Only extremes</td><td>❌ Extremely sensitive</td><td>Quick overview</td></tr>
-    <tr><td><strong>IQR</strong></td><td>Q₃ − Q₁</td><td>Same as data</td><td>❌ Only middle 50%</td><td>✅ Very robust</td><td>Median, box plots</td></tr>
-    <tr><td><strong>MAD</strong></td><td>Σ|xᵢ − x̄| / n</td><td>Same as data</td><td>✅</td><td>Moderate</td><td>Robust analysis</td></tr>
-    <tr><td><strong>Variance</strong></td><td>Σ(xᵢ − x̄)² / (n−1)</td><td>Squared units</td><td>✅</td><td>❌ Sensitive</td><td>ANOVA, theoretical work</td></tr>
-    <tr><td><strong>Std. Deviation</strong></td><td>√Variance</td><td>Same as data</td><td>✅</td><td>❌ Sensitive</td><td>Mean, normal distribution</td></tr>
-    <tr><td><strong>CV</strong></td><td>(s / x̄) × 100%</td><td>Dimensionless %</td><td>✅</td><td>❌ Sensitive</td><td>Cross-group comparison</td></tr>
+    <tr><td><strong>Range</strong></td><td>X<sub>max</sub> − X<sub>min</sub></td><td>Same as data</td><td>❌ Only extremes</td><td>❌ Extremely sensitive</td><td>Quick overview, preliminary inspection</td></tr>
+    <tr><td><strong>IQR</strong></td><td>Q₃ − Q₁</td><td>Same as data</td><td>❌ Only middle 50%</td><td>✅ Very robust</td><td>Median, box plots, skewed data</td></tr>
+    <tr><td><strong>MAD</strong></td><td>Σ|xᵢ − x̄| / n</td><td>Same as data</td><td>✅</td><td>Moderate (mean-based) to Very robust (median-based)</td><td>Robust analysis, contaminated data</td></tr>
+    <tr><td><strong>Variance</strong></td><td>Σ(xᵢ − x̄)² / (n−1)</td><td>Squared units</td><td>✅</td><td>❌ Sensitive</td><td>ANOVA, regression, theoretical derivations</td></tr>
+    <tr><td><strong>Std. Deviation</strong></td><td>√Variance</td><td>Same as data</td><td>✅</td><td>❌ Sensitive</td><td>Mean, normal distribution, confidence intervals</td></tr>
+    <tr><td><strong>CV</strong></td><td>(s / x̄) × 100%</td><td>Dimensionless %</td><td>✅</td><td>❌ Sensitive</td><td>Cross-group/cross-variable comparison</td></tr>
   </tbody>
 </table>
 
@@ -330,37 +351,39 @@
 
 <h2>🧮 Shortcut Formula for Variance</h2>
 
-<p>For hand calculation, the <strong>computational formula</strong> avoids computing deviations one by one and reduces rounding errors (Triola, 2018):</p>
+<p>For hand calculation, the <strong>computational formula</strong> (also called the "raw-score formula") avoids computing individual deviations and reduces cumulative rounding errors. It is algebraically equivalent to the definitional formula but computationally more efficient (Triola, 2018):</p>
 
 <p style="text-align:center;"><strong>s² = [n(Σxᵢ²) − (Σxᵢ)²] / [n(n − 1)]</strong></p>
 
-<p><strong>Verification with our pH data:</strong></p>
+<p><strong>Verification with our Danube mercury data:</strong></p>
 
 <table>
   <thead>
     <tr><th>xᵢ</th><th>xᵢ²</th></tr>
   </thead>
   <tbody>
-    <tr><td>6.2</td><td>38.44</td></tr>
-    <tr><td>6.8</td><td>46.24</td></tr>
-    <tr><td>7.1</td><td>50.41</td></tr>
-    <tr><td>6.5</td><td>42.25</td></tr>
-    <tr><td>7.4</td><td>54.76</td></tr>
-    <tr><td><strong>Σxᵢ = 34.0</strong></td><td><strong>Σxᵢ² = 232.10</strong></td></tr>
+    <tr><td>0.42</td><td>0.1764</td></tr>
+    <tr><td>0.58</td><td>0.3364</td></tr>
+    <tr><td>0.71</td><td>0.5041</td></tr>
+    <tr><td>0.35</td><td>0.1225</td></tr>
+    <tr><td>0.94</td><td>0.8836</td></tr>
+    <tr><td><strong>Σxᵢ = 3.00</strong></td><td><strong>Σxᵢ² = 2.0230</strong></td></tr>
   </tbody>
 </table>
 
-<p style="text-align:center;">s² = [5(232.10) − (34.0)²] / [5(4)] = [1160.50 − 1156.00] / 20 = 4.50 / 20 = <strong>0.225</strong> ✓</p>
+<p style="text-align:center;">s² = [5(2.0230) − (3.00)²] / [5(4)] = [10.1150 − 9.0000] / 20 = 1.1150 / 20 = <strong>0.05575</strong> ✓</p>
+
+<p>The result matches our step-by-step calculation exactly, confirming the algebraic equivalence of the two formulas.</p>
 
 <hr>
 
-<h2>🔬 Complete Worked Example: Comparing Two Fertilizer Treatments</h2>
+<h2>🔬 Complete Worked Example: Comparing Two Irrigation Methods</h2>
 
-<p>An agricultural researcher in Batna, Algeria, tests two nitrogen fertilizers on barley. Ten plots each receive treatment A or B, and yields (in q/ha) are recorded:</p>
+<p>A research team at the International Centre for Agricultural Research in the Dry Areas (ICARDA) tests two irrigation methods on barley in a semi-arid trial. Ten plots each receive drip irrigation (Method A) or furrow irrigation (Method B), and yields (in q/ha) are recorded:</p>
 
 <table>
   <thead>
-    <tr><th>Treatment A</th><th>Treatment B</th></tr>
+    <tr><th>Method A (Drip)</th><th>Method B (Furrow)</th></tr>
   </thead>
   <tbody>
     <tr><td>28, 30, 32, 29, 31, 33, 30, 31, 29, 27</td><td>20, 35, 25, 40, 22, 38, 28, 42, 18, 32</td></tr>
@@ -369,7 +392,7 @@
 
 <table>
   <thead>
-    <tr><th>Statistic</th><th>Treatment A</th><th>Treatment B</th></tr>
+    <tr><th>Statistic</th><th>Method A (Drip)</th><th>Method B (Furrow)</th></tr>
   </thead>
   <tbody>
     <tr><td><strong>Mean (x̄)</strong></td><td>30.0 q/ha</td><td>30.0 q/ha</td></tr>
@@ -380,23 +403,23 @@
   </tbody>
 </table>
 
-<p><strong>Interpretation:</strong> Both fertilizers produce the same average yield — but the story beneath the mean is dramatically different. Treatment A delivers consistent, predictable results (CV ≈ 6%, excellent experimental control). Treatment B is a gamble: some plots yield spectacularly while others fail badly (CV ≈ 28%, very high variability). For a risk-averse farmer, Treatment A is the clear winner despite the identical mean. This is the power of dispersion analysis — the mean alone would have declared these treatments equivalent.</p>
+<p><strong>Interpretation:</strong> Both irrigation methods produce the same average yield — but the story beneath the mean is dramatically different. Method A (drip) delivers consistent, predictable results with a CV of approximately 6%, indicating excellent uniformity. Method B (furrow) is a gamble: some plots yield spectacularly (42 q/ha) while others fail badly (18 q/ha), with a CV approaching 28% — very high variability. For a farmer managing water-scarce land, Method A is the clear winner despite the identical mean. This is the power of dispersion analysis — the mean alone would have declared these irrigation methods equivalent, yet one is a reliable tool and the other is a roll of the dice.</p>
 
 <hr>
 
 <h2>📐 Dispersion and the Shape of Distributions</h2>
 
-<p>Dispersion measures interact intimately with the shape of a distribution. Understanding this relationship deepens your statistical intuition (Weisberg, 1992):</p>
+<p>Dispersion measures interact intimately with the shape of a distribution. Choosing the right dispersion measure depends on matching it to the distribution's characteristics — a pairing as important as choosing the right central tendency measure (Weisberg, 1992; Moore et al., 2021):</p>
 
 <table>
   <thead>
     <tr><th>Distribution Shape</th><th>Best Central Tendency</th><th>Best Dispersion</th><th>Why</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Symmetric (normal)</strong></td><td>Mean</td><td>Standard Deviation</td><td>Mean and SD fully characterize the normal distribution</td></tr>
-    <tr><td><strong>Skewed</strong></td><td>Median</td><td>IQR</td><td>Both are resistant to the pull of the long tail</td></tr>
-    <tr><td><strong>Outlier-contaminated</strong></td><td>Trimmed Mean</td><td>Median Absolute Deviation</td><td>Robust measures resist the influence of extreme values</td></tr>
-    <tr><td><strong>Comparing different scales</strong></td><td>Mean</td><td>Coefficient of Variation</td><td>CV normalizes spread relative to the center</td></tr>
+    <tr><td><strong>Symmetric (normal)</strong></td><td>Mean</td><td>Standard Deviation</td><td>Mean and SD together fully characterise the normal distribution — they are sufficient statistics</td></tr>
+    <tr><td><strong>Skewed</strong></td><td>Median</td><td>IQR</td><td>Both are resistant to the pull of the long tail. Reporting mean ± SD for income data, for example, can produce negative lower bounds — a logical impossibility</td></tr>
+    <tr><td><strong>Outlier-contaminated</strong></td><td>Trimmed Mean or Median</td><td>Median Absolute Deviation</td><td>Robust measures resist the influence of extreme values — the median-based MAD has a 50% breakdown point</td></tr>
+    <tr><td><strong>Comparing different scales</strong></td><td>Mean</td><td>Coefficient of Variation</td><td>CV normalises spread relative to the centre, enabling comparison across variables measured in different units</td></tr>
   </tbody>
 </table>
 
@@ -409,12 +432,13 @@
     <tr><th>Field</th><th>Dispersion in Action</th></tr>
   </thead>
   <tbody>
-    <tr><td>🌾 <strong>Agriculture</strong></td><td>CV of crop yields assesses cultivar stability; small s² in fertilizer trials indicates reliable recommendations (Gomez & Gomez, 1984)</td></tr>
-    <tr><td>🔬 <strong>Laboratory Science</strong></td><td>Repeatability measured by CV of replicate measurements; CV < 10% is typically required for analytical validation</td></tr>
-    <tr><td>💊 <strong>Medicine</strong></td><td>Blood pressure variability (SD) is an independent predictor of cardiovascular risk — not just the mean level (Rothwell et al., 2010)</td></tr>
-    <tr><td>💰 <strong>Finance</strong></td><td>Portfolio risk = standard deviation of returns; the Sharpe ratio = (return − risk-free rate) / σ — making σ the denominator of risk-adjusted performance</td></tr>
-    <tr><td>🏭 <strong>Manufacturing</strong></td><td>Six Sigma methodology aims for process variation so small that 99.99966% of products fall within specification limits (±6σ from the mean)</td></tr>
-    <tr><td>🌿 <strong>Ecology</strong></td><td>Species diversity indices incorporate variance in abundance to distinguish communities with even vs. uneven distributions</td></tr>
+    <tr><td>🌾 <strong>Agriculture</strong></td><td>CV of crop yields assesses cultivar stability across environments; small s² in fertiliser trials indicates reliable treatment recommendations. Gomez &amp; Gomez (1984) established the CV as the standard quality criterion for field experiments worldwide</td></tr>
+    <tr><td>🔬 <strong>Laboratory Science</strong></td><td>Repeatability is measured by the CV of replicate measurements. Analytical method validation typically requires CV &lt; 10% for precision, following ICH Q2(R1) guidelines used globally in pharmaceutical laboratories</td></tr>
+    <tr><td>💊 <strong>Medicine</strong></td><td>Blood pressure variability (SD of visit-to-visit readings) is now recognised as an <em>independent</em> predictor of cardiovascular risk — not just the mean level. Rothwell et al. (2010) showed in <em>The Lancet</em> that patients with high systolic BP variability faced significantly increased stroke risk, even when mean BP was controlled</td></tr>
+    <tr><td>💰 <strong>Finance</strong></td><td>Portfolio risk = standard deviation of returns. The Sharpe ratio = (return − risk-free rate) / σ, making σ the denominator of risk-adjusted performance. Markowitz's (1952) Modern Portfolio Theory is fundamentally a theory about minimising variance</td></tr>
+    <tr><td>🏭 <strong>Manufacturing</strong></td><td>Six Sigma methodology, developed at Motorola in 1986, aims for process variation so small that 99.99966% of products fall within specification limits (±6σ from the target mean), allowing only 3.4 defects per million opportunities (Harry &amp; Schroeder, 2000)</td></tr>
+    <tr><td>🌿 <strong>Ecology</strong></td><td>Species diversity indices (Simpson's, Shannon-Wiener) incorporate variance in abundance across species to distinguish communities with even distributions from those dominated by a single species — the variance in abundance is ecologically more informative than the mean</td></tr>
+    <tr><td>🌡️ <strong>Climate Science</strong></td><td>Global temperature projections are meaningless without uncertainty bounds. The IPCC reports warming scenarios as ranges (e.g., 1.5–4.5°C for climate sensitivity), and policymakers plan for the tails of the distribution, not the centre</td></tr>
   </tbody>
 </table>
 
@@ -427,11 +451,12 @@
     <tr><th>Pitfall</th><th>The Mistake</th><th>The Correction</th></tr>
   </thead>
   <tbody>
-    <tr><td>❌ <strong>Reporting mean without spread</strong></td><td>"The average yield was 30 q/ha" — with no SD or CI</td><td>Always pair the mean with a measure of spread (SD or SE) and state n</td></tr>
-    <tr><td>❌ <strong>Comparing SDs across different scales</strong></td><td>Concluding height (SD = 12 cm) is less variable than weight (SD = 8 kg)</td><td>Use CV for cross-variable comparisons</td></tr>
-    <tr><td>❌ <strong>Using SD for skewed data</strong></td><td>Reporting mean ± SD for income data (heavily right-skewed)</td><td>Use median and IQR for skewed distributions</td></tr>
-    <tr><td>❌ <strong>Confusing σ and s</strong></td><td>Using population formulas (÷ n) on sample data</td><td>Always use n − 1 for samples; reserve n for known populations</td></tr>
-    <tr><td>❌ <strong>Interpreting variance directly</strong></td><td>"The variance is 25 cm²" — what does "squared centimeters" mean?</td><td>Report standard deviation (5 cm) for interpretability; use variance for calculations</td></tr>
+    <tr><td>❌ <strong>Reporting mean without spread</strong></td><td>"The average score was 72" — with no SD, SE, or CI reported</td><td>Always pair the mean with a measure of spread (SD for description, SE for inference) and state the sample size n. The American Psychological Association (APA) Publication Manual explicitly requires this</td></tr>
+    <tr><td>❌ <strong>Comparing SDs across different scales</strong></td><td>Concluding height (SD = 12 cm) is "less variable" than weight (SD = 8 kg)</td><td>Use the CV for cross-variable comparisons — it normalises by the mean, making comparisons meaningful regardless of units</td></tr>
+    <tr><td>❌ <strong>Using SD for skewed data</strong></td><td>Reporting mean ± SD for household income (heavily right-skewed), giving a lower bound of −$5,000</td><td>Use median and IQR for skewed distributions — they are resistant to the pull of the long tail and never produce impossible values</td></tr>
+    <tr><td>❌ <strong>Confusing σ and s</strong></td><td>Using the population formula (÷ n) on sample data, systematically underestimating population variance</td><td>Always use n − 1 for samples (Bessel's correction); reserve n for known, complete populations. Most real-world data is a sample</td></tr>
+    <tr><td>❌ <strong>Interpreting variance directly</strong></td><td>"The variance is 25 cm²" — what does "squared centimetres" mean physically?</td><td>Report standard deviation (5 cm) for interpretability and communication; use variance for computational and theoretical work (ANOVA, regression)</td></tr>
+    <tr><td>❌ <strong>Ignoring dispersion in decision-making</strong></td><td>Choosing Treatment B over Treatment A because its mean is 1 unit higher, ignoring that its SD is 10× larger</td><td>Always consider the <em>risk-reward trade-off</em>: a slightly lower mean with much lower variability is often preferable, especially in risk-averse contexts like medicine, agriculture, and engineering</td></tr>
   </tbody>
 </table>
 
@@ -444,11 +469,11 @@
     <tr><th>Question</th><th>If YES →</th><th>If NO →</th></tr>
   </thead>
   <tbody>
-    <tr><td>Do you just need a quick sense of total spread?</td><td>Use <strong>Range</strong></td><td>↓</td></tr>
-    <tr><td>Is the data skewed or has outliers?</td><td>Use <strong>IQR</strong> (with Median)</td><td>↓</td></tr>
-    <tr><td>Is the data approximately normal?</td><td>Use <strong>Standard Deviation</strong> (with Mean)</td><td>↓</td></tr>
+    <tr><td>Do you just need a quick sense of total spread?</td><td>Use <strong>Range</strong> — but never as the sole measure</td><td>↓</td></tr>
+    <tr><td>Is the data skewed or does it contain outliers?</td><td>Use <strong>IQR</strong> (paired with the Median)</td><td>↓</td></tr>
+    <tr><td>Is the data approximately normal (bell-shaped)?</td><td>Use <strong>Standard Deviation</strong> (paired with the Mean)</td><td>↓</td></tr>
     <tr><td>Are you comparing groups with different units or very different means?</td><td>Use <strong>Coefficient of Variation</strong></td><td>↓</td></tr>
-    <tr><td>Are you performing ANOVA, regression, or theoretical derivations?</td><td>Use <strong>Variance</strong></td><td>Use SD or IQR as appropriate</td></tr>
+    <tr><td>Are you performing ANOVA, regression, or theoretical derivations?</td><td>Use <strong>Variance</strong> — the computational engine of inference</td><td>Use SD or IQR as appropriate for the distribution</td></tr>
   </tbody>
 </table>
 
@@ -456,30 +481,44 @@
 
 <h2>📚 References</h2>
 
-<p>Agresti, A., & Finlay, B. (2018). <em>Statistical methods for the social sciences</em> (5th ed.). Pearson.</p>
+<p>Abdi, H. (2010). Coefficient of variation. In N. Salkind (Ed.), <em>Encyclopedia of research design</em> (pp. 169–171). Sage.</p>
 
-<p>Devore, J. L., & Berk, K. N. (2012). <em>Modern mathematical statistics with applications</em> (2nd ed.). Springer.</p>
+<p>Agresti, A., &amp; Finlay, B. (2018). <em>Statistical methods for the social sciences</em> (5th ed.). Pearson.</p>
 
-<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton & Company.</p>
+<p>Cox, D. R. (1948). A note on the asymptotic distribution of range. <em>Biometrika</em>, <em>35</em>(3–4), 310–315.</p>
 
-<p>Gomez, K. A., & Gomez, A. A. (1984). <em>Statistical procedures for agricultural research</em> (2nd ed.). John Wiley & Sons.</p>
+<p>Deltacommissie. (2008). <em>Working together with water: A living land builds for its future</em>. Deltacommissie.</p>
 
-<p>Gorard, S. (2005). Revisiting a 90-year-old debate: The advantages of the mean deviation. <em>British Journal of Educational Studies</em>, 53(4), 417–430. https://doi.org/10.1111/j.1467-8527.2005.00304.x</p>
+<p>Devore, J. L., &amp; Berk, K. N. (2012). <em>Modern mathematical statistics with applications</em> (2nd ed.). Springer.</p>
 
-<p>Huber, P. J., & Ronchetti, E. M. (2009). <em>Robust statistics</em> (2nd ed.). Wiley.</p>
+<p>Freedman, D., Pisani, R., &amp; Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton &amp; Company.</p>
 
-<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+<p>Gerritsen, H. (2005). What happened in 1953? The Big Flood in the Netherlands in retrospect. <em>Philosophical Transactions of the Royal Society A</em>, <em>363</em>(1831), 1271–1291. https://doi.org/10.1098/rsta.2005.1568</p>
 
-<p>Pearson, K. (1896). Mathematical contributions to the theory of evolution. III. Regression, heredity, and panmixia. <em>Philosophical Transactions of the Royal Society of London, Series A</em>, 187, 253–318.</p>
+<p>Gomez, K. A., &amp; Gomez, A. A. (1984). <em>Statistical procedures for agricultural research</em> (2nd ed.). John Wiley &amp; Sons.</p>
+
+<p>Gorard, S. (2005). Revisiting a 90-year-old debate: The advantages of the mean deviation. <em>British Journal of Educational Studies</em>, <em>53</em>(4), 417–430. https://doi.org/10.1111/j.1467-8527.2005.00304.x</p>
+
+<p>Harry, M. J., &amp; Schroeder, R. (2000). <em>Six Sigma: The breakthrough management strategy revolutionizing the world's top corporations</em>. Currency/Doubleday.</p>
+
+<p>Huber, P. J., &amp; Ronchetti, E. M. (2009). <em>Robust statistics</em> (2nd ed.). Wiley.</p>
+
+<p>Markowitz, H. (1952). Portfolio selection. <em>The Journal of Finance</em>, <em>7</em>(1), 77–91. https://doi.org/10.2307/2975974</p>
+
+<p>Moore, D. S., McCabe, G. P., &amp; Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
+
+<p>Pearson, K. (1896). Mathematical contributions to the theory of evolution. III. Regression, heredity, and panmixia. <em>Philosophical Transactions of the Royal Society of London, Series A</em>, <em>187</em>, 253–318.</p>
 
 <p>Reichel, F. (2025). On Bessel's correction: Unbiased sample variance, the bariance, and a novel runtime-optimized estimator. <em>arXiv preprint</em> arXiv:2503.22333.</p>
 
-<p>Rothwell, P. M., Howard, S. C., Dolan, E., O'Brien, E., Dobson, J. E., Dahlöf, B., Sever, P. S., & Poulter, N. R. (2010). Prognostic significance of visit-to-visit variability, maximum systolic blood pressure, and episodic hypertension. <em>The Lancet</em>, 375(9718), 895–905. https://doi.org/10.1016/S0140-6736(10)60308-X</p>
+<p>Rothwell, P. M., Howard, S. C., Dolan, E., O'Brien, E., Dobson, J. E., Dahlöf, B., Sever, P. S., &amp; Poulter, N. R. (2010). Prognostic significance of visit-to-visit variability, maximum systolic blood pressure, and episodic hypertension. <em>The Lancet</em>, <em>375</em>(9718), 895–905. https://doi.org/10.1016/S0140-6736(10)60308-X</p>
+
+<p>Stigler, S. M. (1986). <em>The history of statistics: The measurement of uncertainty before 1900</em>. Harvard University Press.</p>
 
 <p>Triola, M. F. (2018). <em>Elementary statistics</em> (13th ed.). Pearson.</p>
 
 <p>Tukey, J. W. (1977). <em>Exploratory data analysis</em>. Addison-Wesley.</p>
 
-<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>
+<p>Wackerly, D. D., Mendenhall, W., &amp; Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>
 
 <p>Weisberg, H. F. (1992). <em>Central tendency and variability</em>. Sage Publications.</p>

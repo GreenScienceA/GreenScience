@@ -1,0 +1,364 @@
+<h2>📈 Croissance des Populations : Les mathématiques de l'expansion de la vie</h2>
+
+<p>En 1859, un seul colon anglais nommé Thomas Austin relâcha 24 lapins sauvages sur son domaine dans le sud de l'Australie, déclarant qu'il regrettait de ne plus pouvoir les chasser comme chez lui. En une décennie, deux millions de lapins étaient abattus chaque année — et la population continuait de croître. En 1920, la population de lapins avait explosé pour atteindre environ <strong>dix milliards</strong>, dévastant les prairies australiennes, dépouillant la végétation plus vite qu'elle ne pouvait se régénérer, poussant les marsupiaux indigènes vers l'extinction, et déclenchant des dommages économiques qui persistent encore aujourd'hui (Fenner &amp; Fantini, 1999). Vingt-quatre lapins devinrent dix milliards en soixante ans. Non pas grâce à un avantage biologique particulier, mais par l'arithmétique implacable de la reproduction : chaque génération plus nombreuse que la précédente, chaque génération produisant encore plus de descendants que celle d'avant.</p>
+
+<p>Comment ? La réponse réside dans l'une des idées les plus puissantes et les plus dangereuses de l'écologie : la <strong>croissance exponentielle</strong>. Et la question de ce qui finit par arrêter la croissance exponentielle — ce qui courbe la courbe — est le problème central de l'écologie des populations. Chaque épidémie, chaque famine, chaque crise de conservation et chaque débat sur la durabilité humaine est, en son cœur mathématique, une question de croissance des populations.</p>
+
+<blockquote>💡 <strong>Le Principe de Croissance :</strong> Toute population possède la capacité inhérente de croître exponentiellement. Le fait qu'aucune population ne le fasse réellement de manière indéfinie nous révèle quelque chose de profond : l'environnement impose des limites. Comprendre l'interaction entre le potentiel de croissance d'une population et ses contraintes environnementales est le fondement de toute l'écologie des populations (Gotelli, 2008).</blockquote>
+
+<hr>
+
+<h2>📐 Fondements : L'équation de croissance</h2>
+
+<p>La croissance des populations est fondamentalement un problème de comptabilité. À tout moment, quatre processus — et seulement quatre — modifient la taille d'une population :</p>
+
+<table>
+  <thead>
+    <tr><th>Processus</th><th>Symbole</th><th>Effet sur N</th><th>Signification biologique</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Naissances</strong></td><td>B</td><td>Augmente N</td><td>Nouveaux individus produits par la reproduction</td></tr>
+    <tr><td><strong>Décès</strong></td><td>D</td><td>Diminue N</td><td>Individus perdus par mortalité (prédation, maladie, sénescence)</td></tr>
+    <tr><td><strong>Immigration</strong></td><td>I</td><td>Augmente N</td><td>Individus arrivant d'autres populations</td></tr>
+    <tr><td><strong>Émigration</strong></td><td>E</td><td>Diminue N</td><td>Individus partant vers d'autres populations</td></tr>
+  </tbody>
+</table>
+
+<p>L'<strong>équation fondamentale du bilan démographique</strong> :</p>
+<p style="text-align:center; font-size:1.15em;"><strong>N<sub>t+1</sub> = N<sub>t</sub> + B − D + I − E</strong></p>
+
+<p>Pour une <strong>population fermée</strong> (sans migration), cela se simplifie en :</p>
+<p style="text-align:center; font-size:1.15em;"><strong>N<sub>t+1</sub> = N<sub>t</sub> + B − D</strong></p>
+
+<p>Si les naissances dépassent les décès, la population croît. Si les décès dépassent les naissances, elle décline. Si les deux sont égaux, la population est <strong>stationnaire</strong>. Cela peut sembler d'une évidence triviale, mais ses implications sont profondes. Tout dans la théorie de la croissance des populations — de Malthus aux modèles stochastiques modernes — est une élaboration de cette équation d'une simplicité trompeuse. La discipline entière de la démographie, toute la logique de la biologie de la conservation, toutes les mathématiques de l'épidémiologie — tout dérive des quatre termes B, D, I et E.</p>
+
+<hr>
+
+<h2>🚀 Modèle I : Croissance exponentielle (géométrique) — La courbe en J</h2>
+
+<h3>L'origine historique : Malthus (1798)</h3>
+
+<p>En 1798, le révérend <strong>Thomas Robert Malthus</strong> publia <em>An Essay on the Principle of Population</em>, l'un des livres les plus influents de l'histoire des sciences. Malthus observa que les populations humaines tendent à croître <em>géométriquement</em> (1, 2, 4, 8, 16, 32...) tandis que la production alimentaire n'augmente qu'<em>arithmétiquement</em> (1, 2, 3, 4, 5, 6...). La conséquence inévitable, argumenta Malthus, était que la croissance démographique dépasserait toujours les ressources, menant à la famine, la maladie et la guerre — les « freins positifs » à la population (Malthus, 1798).</p>
+
+<p>L'essai de Malthus résonna bien au-delà de l'économie. <strong>Charles Darwin</strong> lut Malthus en 1838 et en fut profondément influencé. La lutte pour l'existence que Malthus décrivait parmi les humains, Darwin le reconnut, s'appliquait à tous les êtres vivants — et elle devint le mécanisme de la <strong>sélection naturelle</strong>. Alfred Russel Wallace parvint indépendamment à la même conclusion après avoir lu le même livre. L'écologie des populations donna ainsi littéralement naissance à la théorie de l'évolution. Comme Darwin lui-même l'écrivit dans son autobiographie : « En octobre 1838... je lus par hasard pour m'amuser Malthus sur la Population... et il me frappa aussitôt que dans ces circonstances les variations favorables tendraient à être préservées, et les défavorables à être détruites. »</p>
+
+<h3>Le modèle continu</h3>
+
+<p>Lorsque les générations se chevauchent — comme c'est le cas chez la plupart des mammifères, oiseaux, reptiles et humains — la croissance de la population est modélisée comme un <strong>processus continu</strong>. Le taux de changement de la population à tout instant est :</p>
+
+<p style="text-align:center; font-size:1.15em;"><strong>dN/dt = rN</strong></p>
+
+<p>Où :</p>
+<p><strong>N</strong> = taille de la population au temps t</p>
+<p><strong>r</strong> = <em>taux intrinsèque d'accroissement naturel</em> (taux de natalité per capita moins taux de mortalité per capita : r = b − d)</p>
+<p><strong>dN/dt</strong> = taux instantané de changement de la population</p>
+
+<p>La solution, obtenue par intégration de l'équation différentielle, est l'<strong>équation de croissance exponentielle</strong> :</p>
+<p style="text-align:center; font-size:1.15em;"><strong>N<sub>t</sub> = N<sub>0</sub> · e<sup>rt</sup></strong></p>
+
+<p>Cette équation dit : si r &gt; 0, la population croît sans limite, produisant la caractéristique <strong>courbe en J</strong>. Plus r est grand, plus la courbe est abrupte. L'idée cruciale est que la croissance est <em>multiplicative</em>, et non additive : chaque individu ajouté à la population contribue à produire encore plus d'individus. La croissance s'alimente elle-même. Une population de 1 000 individus avec r = 0,1 ajoute 100 individus par unité de temps ; mais une fois ces 100 ajoutés, la population de 1 100 ajoute 110 par unité de temps ; et ainsi les additions s'accélèrent.</p>
+
+<h3>Le modèle discret</h3>
+
+<p>Lorsque les générations <em>ne se chevauchent pas</em> — comme chez de nombreux insectes, les plantes annuelles, les saumons qui se reproduisent une seule fois avant de mourir — on utilise le <strong>modèle de croissance géométrique</strong> :</p>
+
+<p style="text-align:center; font-size:1.15em;"><strong>N<sub>t+1</sub> = λN<sub>t</sub></strong> &nbsp; ou de manière équivalente &nbsp; <strong>N<sub>t</sub> = N<sub>0</sub> · λ<sup>t</sup></strong></p>
+
+<p>Où <strong>λ</strong> (lambda) est le <strong>taux fini d'accroissement</strong>, le facteur par lequel la population se multiplie à chaque génération : λ = e<sup>r</sup>. Si λ &gt; 1, la population croît. Si λ &lt; 1, elle décline. Si λ = 1, elle est stable. La relation entre les paramètres continu (r) et discret (λ) est : r = ln(λ). Une population avec λ = 2 double chaque génération ; λ = 0,5 diminue de moitié chaque génération.</p>
+
+<h3>Le paramètre r : Le paramètre malthusien</h3>
+
+<p>Le taux intrinsèque d'accroissement, r, varie énormément d'un organisme à l'autre. Il encapsule l'histoire de vie de l'espèce — la vitesse à laquelle elle se reproduit, le nombre de descendants qu'elle produit, et la rapidité avec laquelle ceux-ci commencent eux-mêmes à se reproduire. Le <strong>taux intrinsèque maximal</strong> (r<sub>max</sub>) est le taux atteint dans des conditions idéales — ressources illimitées, absence de prédation, absence de maladie :</p>
+
+<table>
+  <thead>
+    <tr><th>Organisme</th><th>r<sub>max</sub> (par an)</th><th>Temps de doublement</th><th>Implication écologique</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><em>Escherichia coli</em> (bactérie)</td><td>~8 800</td><td>~20 minutes</td><td>Une seule cellule pourrait théoriquement couvrir la surface terrestre en 2 jours</td></tr>
+    <tr><td>Mouche domestique (<em>Musca domestica</em>)</td><td>~10</td><td>~25 jours</td><td>Un couple → des milliards en une saison sans mortalité</td></tr>
+    <tr><td>Rat brun (<em>Rattus norvegicus</em>)</td><td>~5,4</td><td>~47 jours</td><td>Potentiel reproductif élevé ; ravageur commensal majeur à l'échelle mondiale</td></tr>
+    <tr><td>Cerf de Virginie (<em>Odocoileus virginianus</em>)</td><td>~0,5</td><td>~1,4 ans</td><td>Modéré ; populations explosent quand les prédateurs sont éliminés (est des USA)</td></tr>
+    <tr><td>Humain (<em>Homo sapiens</em>)</td><td>~0,04</td><td>~17 ans</td><td>Lent intrinsèquement, mais une croissance soutenue a transformé la planète entière</td></tr>
+    <tr><td>Éléphant d'Afrique (<em>Loxodonta africana</em>)</td><td>~0,02</td><td>~35 ans</td><td>Mammifère terrestre à reproduction la plus lente ; extrêmement vulnérable à la surexploitation</td></tr>
+    <tr><td>Condor de Californie (<em>Gymnogyps californianus</em>)</td><td>~0,01</td><td>~70 ans</td><td>Stratège K ; la quasi-extinction a exigé un élevage conservatoire intensif</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Temps de doublement</strong> = ln(2)/r ≈ 0,693/r. C'est le temps nécessaire pour qu'une population en croissance exponentielle double de taille. Remarquez l'étendue stupéfiante : de 20 minutes pour les bactéries à 70 ans pour les condors — une différence de plus de 18 millions de fois — reflétant la vaste diversité des stratégies d'histoire de vie à travers l'arbre du vivant.</p>
+
+<h3>Quand la croissance exponentielle se produit-elle réellement ?</h3>
+
+<p>La croissance exponentielle n'est pas une simple abstraction théorique. Elle se produit dans la nature sous des conditions spécifiques et identifiables :</p>
+
+<p><strong>Colonisation d'un nouvel habitat :</strong> Lorsqu'une espèce arrive dans un environnement aux ressources abondantes et avec peu de compétiteurs — les lapins en Australie (1859), les étourneaux européens en Amérique du Nord (60 oiseaux relâchés à New York en 1890 devinrent plus de 200 millions en 1990), les faisans à collier introduits sur Protection Island, Washington (8 oiseaux → 1 898 en six ans ; Einarsen, 1945).</p>
+
+<p><strong>Début d'épidémie :</strong> Durant la phase initiale d'une épidémie, les hôtes susceptibles sont abondants et la population de pathogènes croît exponentiellement. Le COVID-19 à Wuhan en janvier 2020, avec un temps de doublement d'environ 2,5 jours, a démontré la croissance exponentielle avec une clarté terrifiante.</p>
+
+<p><strong>Cultures de laboratoire :</strong> Des bactéries inoculées dans un bouillon nutritif frais, des levures dans du moût de raisin, ou des <em>Paramecium</em> dans des flacons de culture — des exemples pédagogiques classiques où la croissance exponentielle est directement observable (Gause, 1934).</p>
+
+<p><strong>Récupération post-catastrophe :</strong> Les populations se rétablissant après un goulet d'étranglement — les éléphants de mer du Nord, remontant d'environ 20 individus dans les années 1890 à plus de 175 000 aujourd'hui, ont connu une croissance exponentielle durant leur phase de récupération.</p>
+
+<p>Cependant, la croissance exponentielle est toujours <strong>temporaire</strong>. Aucun environnement ne dispose de ressources infinies. Quelque chose finit toujours par courber la courbe. La question est <em>quoi</em> la courbe et <em>quand</em>.</p>
+
+<hr>
+
+<h2>🔁 Modèle II : Croissance logistique — La courbe en S</h2>
+
+<h3>L'origine historique : Verhulst (1838)</h3>
+
+<p>En 1838, le mathématicien belge <strong>Pierre-François Verhulst</strong> lut Malthus et réalisa que la croissance exponentielle était irréaliste pour toute population réelle sur de longues périodes. Il modifia le modèle exponentiel en ajoutant un <strong>terme frein</strong> qui ralentit progressivement la croissance à mesure que la population approche une limite environnementale. Verhulst appela son modèle l'<em>équation logistique</em> (du français <em>logistique</em>) et l'utilisa pour modéliser les données démographiques belges, françaises et russes avec une précision remarquable (Verhulst, 1838).</p>
+
+<p>L'équation fut ensuite largement oubliée pendant près d'un siècle. Elle fut indépendamment redécouverte par <strong>Raymond Pearl</strong> et <strong>Lowell Reed</strong> à l'Université Johns Hopkins en 1920, qui l'appliquèrent aux données du recensement américain. Pearl devint un évangéliste enthousiaste de la logistique, exagérant parfois son universalité, mais l'équation gagna sa place permanente en écologie par son élégante simplicité et son pouvoir prédictif surprenant (Pearl &amp; Reed, 1920).</p>
+
+<h3>L'équation logistique</h3>
+
+<p style="text-align:center; font-size:1.15em;"><strong>dN/dt = rN · (K − N) / K</strong></p>
+<p style="text-align:center;">ou de manière équivalente : <strong>dN/dt = rN (1 − N/K)</strong></p>
+
+<p>Le nouveau terme <strong>(1 − N/K)</strong> est le facteur frein. Il représente la <em>fraction de capacité de charge inutilisée</em> — la proportion de la capacité totale de l'environnement qui n'est pas encore occupée.</p>
+
+<p><strong>K</strong> = <strong>capacité de charge</strong> — la taille maximale de population que l'environnement peut maintenir indéfiniment compte tenu des ressources disponibles (nourriture, eau, espace, sites de nidification). La lettre K vient de l'allemand <em>Kapazitätsgrenze</em> (limite de capacité), introduit par les écologistes allemands au début du vingtième siècle.</p>
+
+<h3>Fonctionnement de la logistique : étape par étape</h3>
+
+<table>
+  <thead>
+    <tr><th>Taille de la population (N)</th><th>Valeur de (1 − N/K)</th><th>Taux de croissance dN/dt</th><th>Ce qui se passe</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>N ≪ K</strong> (très petite)</td><td>≈ 1 (presque toute la capacité inutilisée)</td><td>≈ rN (exponentielle)</td><td>Croissance quasi exponentielle — ressources abondantes, pas de compétition</td></tr>
+    <tr><td><strong>N = K/4</strong></td><td>= 0,75</td><td>= 0,75rN (accélération)</td><td>Croissance encore en accélération ; courbe s'incurvant vers le haut</td></tr>
+    <tr><td><strong>N = K/2</strong></td><td>= 0,5</td><td>= rN/2 (<strong>croissance absolue maximale</strong>)</td><td><strong>Point d'inflexion</strong> — la population croît le plus vite en termes absolus</td></tr>
+    <tr><td><strong>N = 3K/4</strong></td><td>= 0,25</td><td>= 0,25rN (décélération)</td><td>Croissance visiblement ralentie ; compétition s'intensifiant</td></tr>
+    <tr><td><strong>N approche K</strong></td><td>→ 0 (capacité presque atteinte)</td><td>→ 0 (croissance quasi nulle)</td><td>Ressources rares, compétition intense, naissances ≈ décès</td></tr>
+    <tr><td><strong>N = K</strong></td><td>= 0</td><td>= 0</td><td><strong>Équilibre</strong> — population stable à la capacité de charge</td></tr>
+    <tr><td><strong>N &gt; K</strong> (dépassement)</td><td>&lt; 0 (négatif)</td><td>&lt; 0 (population en déclin)</td><td>Population dépasse la capacité → décès &gt; naissances → déclin vers K</td></tr>
+  </tbody>
+</table>
+
+<p>La logistique produit la caractéristique <strong>courbe en S (sigmoïde)</strong> : une croissance initialement exponentielle qui décélère à mesure que la population approche K, se stabilisant finalement à la capacité de charge. La courbe en S est l'une des formes les plus reconnaissables de toute la science — elle apparaît en écologie des populations, en épidémiologie, dans l'adoption technologique, la croissance tumorale et la cinétique des réactions chimiques.</p>
+
+<h3>Le point d'inflexion : taux de croissance maximal</h3>
+
+<p>Une propriété mathématique d'une importance cruciale : le <strong>taux de croissance absolu (dN/dt)</strong> de la population est maximisé lorsque <strong>N = K/2</strong>. C'est le point d'inflexion de la courbe en S — le point où la courbe passe d'une croissance accélérée à une croissance décélérée. En dessous de K/2, la population accélère (d²N/dt² &gt; 0) ; au-dessus de K/2, elle décélère (d²N/dt² &lt; 0).</p>
+
+<p>Ce résultat a une importance pratique énorme. Le concept de <strong>Rendement Maximum Soutenable (MSY — Maximum Sustainable Yield)</strong> en gestion des pêcheries est directement fondé sur la récolte de la production excédentaire à K/2, où la population produit le plus grand excès pouvant être prélevé durablement. Cette seule idée mathématique a guidé la politique mondiale des pêcheries pendant des décennies — bien que son application pratique, comme nous le verrons, soit semée de difficultés (Begon et al., 2006).</p>
+
+<h3>Validation en laboratoire : les expériences classiques de Gause</h3>
+
+<p>Dans les années 1930, l'écologiste russe <strong>Georgy Gause</strong> réalisa des expériences fondatrices qui donnèrent vie à l'équation logistique. Il cultiva <em>Paramecium caudatum</em> et <em>Paramecium aurelia</em> dans des tubes à essai avec un apport contrôlé de bactéries comme nourriture. Cultivée seule, chaque espèce suivit une courbe en S logistique quasi parfaite, croissant exponentiellement au début puis se stabilisant à une capacité de charge déterminée par l'apport alimentaire. Ces expériences, publiées dans son ouvrage fondateur <em>The Struggle for Existence</em> (1934), demeurent parmi les démonstrations les plus citées de toute l'écologie — une preuve élégante que la simple équation dN/dt = rN(1 − N/K) capture quelque chose de réel sur le comportement des populations sous limitation de ressources.</p>
+
+<hr>
+
+<h2>⚖️ Capacité de charge (K) : Le plafond environnemental</h2>
+
+<p>La capacité de charge est l'un des concepts les plus importants mais les plus mal compris de l'écologie. K <strong>n'est pas un nombre fixe gravé sur un habitat</strong> — c'est une propriété dynamique de l'interaction entre une population et son environnement, se déplaçant continuellement avec les conditions.</p>
+
+<h3>Qu'est-ce qui détermine K ?</h3>
+
+<table>
+  <thead>
+    <tr><th>Ressource / Facteur</th><th>Comment il limite K</th><th>Exemple mondial</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Approvisionnement alimentaire</strong></td><td>L'apport calorique et nutritionnel limite la reproduction et la survie</td><td>La production de graines détermine la capacité de charge des pinsons hivernaux à travers le Canada boréal</td></tr>
+    <tr><td><strong>Disponibilité en eau</strong></td><td>Limite la fonction métabolique et l'habitabilité</td><td>Les oasis sahariennes déterminent K des gazelles dans les régions hyper-arides d'Afrique du Nord</td></tr>
+    <tr><td><strong>Sites de nidification / territoire</strong></td><td>Les exigences spatiales limitent les couples reproducteurs</td><td>Les falaises limitent la densité du faucon pèlerin sur chaque continent</td></tr>
+    <tr><td><strong>Maladies / parasites</strong></td><td>La transmission densité-dépendante augmente la mortalité quand N est élevé</td><td>La myxomatose a initialement réduit K des lapins australiens de &gt;90 % (Fenner &amp; Fantini, 1999)</td></tr>
+    <tr><td><strong>Pression de prédation</strong></td><td>Les prédateurs imposent un plafond de mortalité densité-dépendant</td><td>La réintroduction du loup en 1995 a modifié K des wapitis à Yellowstone, USA (Ripple &amp; Beschta, 2012)</td></tr>
+    <tr><td><strong>Accumulation de déchets</strong></td><td>Les sous-produits métaboliques deviennent toxiques à haute densité</td><td>L'alcool produit par la levure limite sa propre population dans la fermentation du vin (~14 % ABV)</td></tr>
+    <tr><td><strong>Compétition intraspécifique</strong></td><td>L'entassement réduit la fitness individuelle et la reproduction</td><td>Les ténébrions de la farine (<em>Tribolium</em>) cannibalisent œufs et nymphes à haute densité (Park, 1948)</td></tr>
+  </tbody>
+</table>
+
+<h3>K est dynamique, non statique</h3>
+
+<p>La capacité de charge change au fil du temps, et comprendre ce dynamisme est essentiel pour comprendre les populations réelles :</p>
+
+<p><strong>Fluctuations saisonnières :</strong> L'hiver réduit K pour les espèces tempérées à travers la Scandinavie, le Canada et la Patagonie — les oiseaux migrateurs suivent ces variations saisonnières de K à travers des hémisphères entiers.</p>
+
+<p><strong>Changement environnemental à long terme :</strong> La désertification réduit K pour la faune à travers la ceinture du Sahel du Sénégal au Soudan. Les épisodes de blanchissement corallien réduisent K pour les communautés de poissons récifaux à travers l'Indo-Pacifique. Le dégel du pergélisol modifie K pour les espèces arctiques de la Sibérie au nord du Canada.</p>
+
+<p><strong>Modification humaine :</strong> L'agriculture augmente K pour les espèces commensales (rats, moineaux, pigeons) tout en réduisant K pour les espèces indigènes spécialistes. L'urbanisation des zones humides côtières des Pays-Bas au Bangladesh remodèle K pour les oiseaux aquatiques migrateurs. La déforestation en Amazonie et à Bornéo réduit K pour des milliers d'espèces forestières simultanément.</p>
+
+<p><strong>Changement climatique :</strong> Le déplacement des régimes de température et de précipitations modifie K pour pratiquement toutes les espèces. Les ours polaires font face à un K en déclin à mesure que la banquise arctique recule ; les espèces de montagne font face à des zones d'habitat qui rétrécissent à mesure que les isothermes se déplacent vers le haut.</p>
+
+<p>Cela signifie que la trajectoire d'une population n'est pas une courbe en S lisse vers une asymptote fixe, mais un chemin fluctuant poursuivant une <em>cible mouvante</em> (Begon et al., 2006).</p>
+
+<hr>
+
+<h2>🔬 Au-delà des modèles simples : les complications dans les populations réelles</h2>
+
+<h3>Retards temporels et dépassement de la capacité de charge</h3>
+
+<p>Les populations réelles ne répondent pas instantanément aux limitations de ressources. Il existe souvent un <strong>retard temporel (τ)</strong> entre le changement environnemental et la réponse de la population — la population continue de croître même après avoir dépassé K, parce que les organismes conçus durant les périodes d'abondance naissent encore et grandissent. Cela produit un <strong>dépassement (overshoot)</strong> : la population dépasse K, les ressources sont épuisées en dessous de leur capacité de régénération, et la population s'effondre alors en dessous de K. Selon l'ampleur du retard temporel par rapport à r :</p>
+
+<table>
+  <thead>
+    <tr><th>Condition</th><th>Comportement de la population</th><th>Résultat écologique</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>rτ &lt; 0,368</strong> (e<sup>−1</sup>)</td><td>Approche douce vers K (pas d'oscillation)</td><td>La population se stabilise doucement à la capacité de charge</td></tr>
+    <tr><td><strong>0,368 &lt; rτ &lt; 1,57</strong> (π/2)</td><td>Oscillations amorties</td><td>Dépassements et sous-dépassements mais convergence éventuelle vers K</td></tr>
+    <tr><td><strong>rτ &gt; 1,57</strong></td><td>Cycles limites stables ou fluctuations chaotiques</td><td>La population ne se stabilise jamais — cycles perpétuels d'expansion et d'effondrement</td></tr>
+  </tbody>
+</table>
+
+<p>L'exemple classique : les <strong>cerfs du Kaibab</strong> sur le plateau du Kaibab, Arizona, USA. Après l'élimination systématique des prédateurs (loups, pumas, coyotes) au début des années 1900, la population de cerfs mulets passa d'environ 4 000 à environ 100 000 estimés en 1924. Les cerfs dépassèrent massivement leur capacité de charge, dépouillant la végétation jusqu'au sol nu, et s'effondrèrent de manière catastrophique — deux hivers rigoureux successifs tuèrent environ 60 % du troupeau. La population se stabilisa ensuite bien en dessous du K original parce que l'habitat avait été sévèrement dégradé (Caughley, 1970). Le cas du Kaibab devint l'un des exemples les plus enseignés en écologie, démontrant que supprimer un facteur de régulation naturel (la prédation) ne fait pas simplement augmenter K — cela peut déclencher des dynamiques d'expansion-effondrement qui endommagent la base même des ressources.</p>
+
+<p>Un parallèle plus récent : les <strong>rennes de l'île St. Matthew</strong> dans la mer de Béring, Alaska. En 1944, la garde côtière américaine introduisit 29 rennes sur une île dotée de lichens abondants et sans prédateurs. En 1963, la population avait explosé à 6 000 individus. En 1966, elle s'était effondrée à 42 animaux affamés. Dans les années 1980, la population était éteinte. Les rennes avaient consommé les lichens à croissance lente plus rapidement qu'ils ne pouvaient se régénérer — un dépassement-effondrement exemplaire provoqué par le décalage entre le temps de doublement de la population et le temps de récupération de la ressource (Klein, 1968).</p>
+
+<h3>L'effet Allee : quand la petitesse est dangereuse</h3>
+
+<p>Le modèle logistique suppose que le taux de croissance per capita est le plus élevé lorsque N est le plus petit (maximum de ressources par individu). Mais l'écologiste américain <strong>Warder Clyde Allee</strong> (1931) démontra, par des décennies d'expériences, que pour de nombreuses espèces, une très faible densité de population <em>réduit</em> en fait le taux de croissance per capita — l'opposé de ce que la dépendance à la densité prédit. Ce phénomène, maintenant appelé l'<strong>effet Allee</strong>, se produit parce que :</p>
+
+<p><strong>Difficulté à trouver un partenaire :</strong> À faible densité, les individus ne peuvent localiser de partenaires. Cela est aigu chez les reproducteurs marins à émission (oursins, ormeaux) et les espèces terrestres à large répartition.</p>
+<p><strong>Effondrement de la défense coopérative :</strong> Les suricates du Kalahari, les bœufs musqués de l'Arctique et les poissons en bancs dépendent tous de la taille du groupe pour la défense contre les prédateurs. En dessous d'une taille de groupe critique, la mortalité monte en flèche.</p>
+<p><strong>Détérioration génétique :</strong> Les petites populations perdent leur diversité génétique par dérive et souffrent de dépression de consanguinité — survie, fertilité et résistance aux maladies réduites. Le guépard (<em>Acinonyx jubatus</em>), avec son goulet d'étranglement génétique extrême il y a environ 10 000 ans, est si génétiquement uniforme que les greffes de peau entre individus non apparentés ne sont pas rejetées (Frankham et al., 2010).</p>
+<p><strong>Perte de facilitation sociale :</strong> Les lycaons (<em>Lycaon pictus</em>) chassent de manière coopérative ; les meutes de moins de 5 adultes ont un succès de chasse et une survie des chiots dramatiquement plus faibles.</p>
+
+<p>L'<strong>effet Allee fort</strong> crée un seuil de population critique (le seuil d'Allee) — en dessous de ce seuil, la population entre dans un déclin auto-renforçant vers l'extinction même si l'habitat est en parfait état. Cela a d'énormes implications pour la conservation : une population réduite en dessous de son seuil d'Allee par la surexploitation, la destruction de l'habitat ou des événements stochastiques <em>ne peut pas se rétablir</em>, même si toutes les menaces sont éliminées.</p>
+
+<p>L'extinction de la <strong>tourte voyageuse</strong> (<em>Ectopistes migratorius</em>) en est l'exemple le plus dramatique. Autrefois l'oiseau le plus abondant d'Amérique du Nord — des vols de milliards assombrissaient le ciel pendant des heures — l'espèce fut poussée en dessous de son seuil d'Allee par la chasse commerciale et la destruction de l'habitat. Les tourtes voyageuses étaient des nicheurs coloniaux obligatoires qui nécessitaient des agrégations massives pour le « swamping » des prédateurs et la stimulation reproductive. Une fois la taille des vols tombée en dessous d'un niveau critique, la reproduction s'effondra entièrement. Le dernier individu, une femelle nommée Martha, mourut au zoo de Cincinnati le 1er septembre 1914 (Hung et al., 2014).</p>
+
+<h3>Effets stochastiques : quand le hasard règne</h3>
+
+<p>Tous les modèles discutés ci-dessus sont <strong>déterministes</strong> — étant donné les mêmes conditions initiales et paramètres, ils produisent toujours le même résultat. Les populations réelles, cependant, subissent deux types fondamentaux de hasard :</p>
+
+<p><strong>Stochasticité démographique :</strong> Variation aléatoire des naissances et décès individuels. Dans une population de 10 individus, une série de décès fortuits (disons 6 sur 10 meurent la même année) peut signifier l'extinction ; dans une population de 10 000, la même fluctuation proportionnelle est statistiquement négligeable. La stochasticité démographique compte le plus dans les <em>petites</em> populations — précisément celles dont la biologie de la conservation se soucie le plus.</p>
+
+<p><strong>Stochasticité environnementale :</strong> Variation aléatoire des conditions environnementales — sécheresse, incendie, ouragan, épidémie, éruption volcanique. Contrairement à la stochasticité démographique, celle-ci affecte les populations de <em>toutes</em> tailles. Les feux de brousse australiens de 2019–2020 ont tué environ trois milliards d'animaux de tous les taxons (van Eeden et al., 2020) — même des populations grandes et stables ont subi des pertes catastrophiques lors d'un seul événement environnemental stochastique.</p>
+
+<p><strong>Catastrophes :</strong> Des événements extrêmes rares — tsunamis, éruptions volcaniques massives, pandémies nouvelles — qui peuvent dévaster même d'énormes populations d'une manière que ni les modèles déterministes ni les modèles stochastiques standard ne peuvent prédire.</p>
+
+<p>Pour les populations petites et isolées (comme les espèces menacées sur des fragments d'habitat), les effets stochastiques peuvent provoquer l'extinction même quand les modèles déterministes prédisent la stabilité. Cette idée est le fondement de l'<strong>Analyse de Viabilité des Populations (PVA — Population Viability Analysis)</strong>, l'outil computationnel que les biologistes de la conservation utilisent pour estimer les probabilités d'extinction sous différents scénarios de gestion (Shaffer, 1981 ; Boyce, 1992).</p>
+
+<hr>
+
+<h2>📊 Comparaison des deux modèles de croissance</h2>
+
+<table>
+  <thead>
+    <tr><th>Caractéristique</th><th>Exponentiel (Malthus)</th><th>Logistique (Verhulst)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Équation</strong></td><td>dN/dt = rN</td><td>dN/dt = rN(1 − N/K)</td></tr>
+    <tr><td><strong>Forme de la courbe</strong></td><td>En J</td><td>En S (sigmoïde)</td></tr>
+    <tr><td><strong>Densité-dépendance</strong></td><td>Aucune — le taux per capita r est constant quel que soit N</td><td>Oui — le taux per capita décline linéairement quand N → K</td></tr>
+    <tr><td><strong>Équilibre</strong></td><td>Aucun — croissance illimitée</td><td>N = K (équilibre stable)</td></tr>
+    <tr><td><strong>Hypothèses</strong></td><td>Ressources illimitées ; r constant ; aucune interaction interspécifique</td><td>K fini ; déclin linéaire du taux per capita ; réponse instantanée à la densité</td></tr>
+    <tr><td><strong>S'applique le mieux à</strong></td><td>Colonisation initiale ; pullulations ; épidémies ; récupération post-goulet</td><td>Populations établies approchant les limites de ressources</td></tr>
+    <tr><td><strong>Origine historique</strong></td><td>Malthus (1798)</td><td>Verhulst (1838) ; Pearl &amp; Reed (1920)</td></tr>
+    <tr><td><strong>Faiblesse principale</strong></td><td>Ignore entièrement les limites environnementales</td><td>Suppose une réponse douce et immédiate ; K fixe ; courbe en S symétrique</td></tr>
+    <tr><td><strong>Relation mathématique</strong></td><td>Cas particulier de la logistique quand K → ∞</td><td>Généralisation de l'exponentiel avec un frein densité-dépendant</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🌍 Croissance de la population humaine : l'étude de cas ultime</h2>
+
+<p>La croissance de la population humaine est le phénomène écologique le plus lourd de conséquences sur Terre. Pendant la majeure partie des 300 000 ans d'histoire d'<em>Homo sapiens</em>, la population crût d'une lenteur imperceptible — limitée par la capacité de charge des chasseurs-cueilleurs. Il fallut toute l'histoire humaine jusqu'à environ 1804 pour atteindre le premier milliard. Puis les révolutions agricole et industrielle brisèrent les anciennes contraintes, et la croissance devint explosive :</p>
+
+<table>
+  <thead>
+    <tr><th>Seuil de population</th><th>Année atteinte</th><th>Temps pour ajouter 1 milliard</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>1 milliard</strong></td><td>~1804</td><td>Toute l'histoire humaine (~300 000 ans)</td></tr>
+    <tr><td><strong>2 milliards</strong></td><td>~1927</td><td>123 ans</td></tr>
+    <tr><td><strong>3 milliards</strong></td><td>~1960</td><td>33 ans</td></tr>
+    <tr><td><strong>4 milliards</strong></td><td>~1974</td><td>14 ans</td></tr>
+    <tr><td><strong>5 milliards</strong></td><td>~1987</td><td>13 ans</td></tr>
+    <tr><td><strong>6 milliards</strong></td><td>~1999</td><td>12 ans</td></tr>
+    <tr><td><strong>7 milliards</strong></td><td>~2011</td><td>12 ans</td></tr>
+    <tr><td><strong>8 milliards</strong></td><td>~2022</td><td>11 ans</td></tr>
+  </tbody>
+</table>
+
+<p>La courbe de croissance humaine de 1800 à 2000 ressemblait étroitement à une croissance exponentielle — une courbe en J quasi parfaite. Depuis la fin des années 1960, cependant, le taux de croissance mondial décline (d'un pic de ~2,1 % par an en 1968 à ~0,9 % aujourd'hui), suggérant une transition de la croissance exponentielle vers une croissance de type logistique.</p>
+
+<h3>La transition démographique</h3>
+
+<p>Le <strong>modèle de transition démographique</strong>, d'abord décrit par Warren Thompson (1929) puis formalisé par Frank Notestein (1945), explique comment les populations humaines traversent quatre stades : (1) l'équilibre préindustriel avec des taux de natalité et de mortalité élevés, (2) la transition précoce avec des taux de mortalité en déclin mais des taux de natalité persistants élevés (explosion démographique), (3) la transition tardive avec des taux de natalité en déclin (croissance décélérant), et (4) l'équilibre post-industriel avec des taux de natalité et de mortalité bas.</p>
+
+<p>Différentes nations illustrent différents stades : le <strong>Niger</strong> et le <strong>Tchad</strong>, avec des indices de fécondité supérieurs à 6 enfants par femme, restent dans la phase explosive précoce. L'<strong>Inde</strong> et le <strong>Brésil</strong> sont en transition tardive, avec des taux de natalité en chute rapide. Le <strong>Japon</strong>, la <strong>Corée du Sud</strong> et une grande partie de l'<strong>Europe</strong> ont achevé la transition et font maintenant face au <em>déclin</em> démographique — leur λ est tombé en dessous de 1. L'indice de fécondité de la Corée du Sud est tombé à 0,72 en 2023, le plus bas jamais enregistré pour aucun pays — bien en dessous du taux de remplacement de 2,1.</p>
+
+<p>La question de l'écologiste demeure : <em>Quel est K pour les humains ?</em> Les estimations varient largement, de 4 milliards à 16 milliards, selon les hypothèses sur la technologie, le régime alimentaire, les systèmes énergétiques, les modes de consommation et la durabilité environnementale. Cet écart énorme illustre un point fondamental : pour les humains, K n'est pas un nombre fixe mais dépend du <em>mode de vie, de l'allocation des ressources et de la gestion environnementale</em> (Cohen, 1995). Une planète de 10 milliards de végétariens a un K très différent d'une planète de 10 milliards de personnes consommant les ressources au rythme de l'Américain moyen.</p>
+
+<hr>
+
+<h2>🌱 Croissance des populations appliquée : gestion et conservation</h2>
+
+<h3>Pêcheries et Rendement Maximum Soutenable</h3>
+
+<p>Le modèle logistique prédit un taux de croissance maximal de la population à N = K/2. C'est la base théorique du <strong>Rendement Maximum Soutenable (MSY — Maximum Sustainable Yield)</strong> : si l'on récolte la production excédentaire à K/2, la population remplace exactement ce qui est prélevé, et la récolte peut continuer indéfiniment. Le MSY est la pierre angulaire de la gestion mondiale des pêcheries depuis le milieu du vingtième siècle.</p>
+
+<p>En pratique, cependant, le MSY est extrêmement difficile à mettre en œuvre correctement. Estimer K et r avec précision pour les populations de poissons sauvages est un défi, et les hypothèses du modèle logistique (K constant, densité-dépendance linéaire, absence de structure d'âge) sont souvent violées. L'effondrement catastrophique de la pêcherie de <strong>morue de l'Atlantique</strong> au large de Terre-Neuve, Canada, en 1992 — où des décennies de récolte aux niveaux présumés du MSY ont conduit à un effondrement soudain des stocks et à un moratoire toujours en vigueur trois décennies plus tard — a démontré les dangers de la dépendance excessive aux modèles simples pour des systèmes biologiques complexes (Hilborn &amp; Walters, 1992). La pêcherie d'<strong>anchois du Pérou</strong>, autrefois la plus grande du monde, s'est effondrée de manière similaire en 1972 lorsque le changement environnemental lié à El Niño a réduit K tandis que la récolte continuait aux taux précédents.</p>
+
+<h3>Conservation et le seuil d'Allee</h3>
+
+<p>Pour les espèces menacées, l'effet Allee crée un <strong>vortex d'extinction</strong> : à mesure que la population diminue, le taux de croissance per capita décroît (moins de partenaires, moins de défense coopérative, plus de consanguinité), causant un déclin supplémentaire de la population, qui réduit davantage le taux de croissance — une boucle de rétroaction positive accélérant vers l'extinction. Les stratégies de conservation doivent donc maintenir les populations <em>bien au-dessus</em> du seuil d'Allee, pas simplement empêcher le déclin jusqu'à zéro (Courchamp et al., 1999).</p>
+
+<p>Ce principe a guidé le sauvetage du <strong>condor de Californie</strong> : lorsque la population atteignit 22 individus en 1982, les biologistes prirent la décision controversée de capturer chaque oiseau sauvage restant pour l'élevage conservatoire — reconnaissant qu'une population de 22 était déjà fonctionnellement en dessous de tout seuil d'Allee raisonnable et déclinerait vers l'extinction sans intervention. Le programme réussit ; la population dépasse maintenant 500 individus.</p>
+
+<h3>Lutte contre les ravageurs et les espèces envahissantes</h3>
+
+<p>Comprendre r<sub>max</sub> et K permet de prédire la dynamique des populations de ravageurs et d'orienter les stratégies de contrôle. Les espèces à r élevé (insectes, rongeurs) peuvent se rétablir rapidement après les efforts de contrôle à moins que le contrôle ne soit maintenu — réduire une population de blattes de 90 % est sans effet si les survivants, avec leur r<sub>max</sub> élevé, peuvent reconstruire la population en quelques semaines. À l'inverse, réduire K (en éliminant les sources de nourriture, en scellant les sites de nidification, en supprimant l'accès à l'eau) est souvent plus efficace à long terme que réduire N directement, parce que cela abaisse le plafond que la population peut atteindre même après récupération.</p>
+
+<p>La <strong>Lutte Intégrée contre les Ravageurs (IPM — Integrated Pest Management)</strong>, maintenant le paradigme dominant en lutte antiparasitaire agricole dans le monde, est fondamentalement une application de la théorie de la croissance des populations : combinant de multiples approches pour réduire simultanément r (lutte biologique, lâchers de mâles stériles) et K (modification de l'habitat, rotation des cultures) (Begon et al., 2006).</p>
+
+<hr>
+
+<h2>⚠️ Idées fausses courantes</h2>
+
+<p><strong>1. « La croissance exponentielle est anormale. »</strong> Toute population est capable de croissance exponentielle — c'est le mode de croissance <em>par défaut</em> quand les ressources sont illimitées. Ce qui est anormal, ce sont les ressources illimitées. La croissance exponentielle est l'équivalent écologique de la première loi de Newton : elle décrit l'état d'un système en l'absence de forces extérieures. De même qu'un objet dans un espace sans frottement se déplace en ligne droite indéfiniment, une population avec des ressources illimitées croît exponentiellement indéfiniment. La réalité fournit le frottement (Gotelli, 2008).</p>
+
+<p><strong>2. « La capacité de charge est un nombre fixe. »</strong> K varie avec les saisons, le climat, la disponibilité des ressources, les compétiteurs, les prédateurs, les maladies et l'activité humaine. C'est une propriété dynamique de l'interaction population-environnement, non un attribut fixe de l'habitat. Le K d'une forêt pour les cerfs change avec chaque incendie, chaque sécheresse, chaque coupe forestière et chaque réintroduction de loups.</p>
+
+<p><strong>3. « Les populations atteignent toujours K en douceur. »</strong> Les retards temporels causent dépassement et oscillation. Certaines populations ne se stabilisent jamais mais fluctuent en permanence — les lemmings, les campagnols, les lièvres d'Amérique et les tordeuses du mélèze cyclent avec une régularité frappante pour des raisons qui génèrent encore un débat scientifique (Turchin, 2003).</p>
+
+<p><strong>4. « Le modèle logistique est toujours meilleur que l'exponentiel. »</strong> Le modèle logistique fait des hypothèses fortes — densité-dépendance linéaire, K constant, réponse instantanée à l'entassement, courbe en S symétrique — qui sont fréquemment violées dans la nature. Pour de nombreux organismes, la thêta-logistique (dN/dt = rN[1 − (N/K)<sup>θ</sup>]) ou les modèles matriciels à structure de stades fournissent de bien meilleurs ajustements. La logistique est un point de départ conceptuel utile, non une loi universelle.</p>
+
+<p><strong>5. « Les petites populations sont en sécurité si l'habitat est bon. »</strong> L'effet Allee signifie que des populations très petites peuvent décliner vers l'extinction même dans un habitat parfait, parce que les mécanismes reproductifs et sociaux échouent à faible densité. La qualité de l'habitat est nécessaire mais non suffisante pour la persistance.</p>
+
+<p><strong>6. « Les humains sont exemptés des limites écologiques de croissance. »</strong> La technologie peut élever K — l'agriculture, la médecine, l'assainissement et les systèmes énergétiques l'ont fait de manière spectaculaire au cours des deux derniers siècles. Mais la technologie ne peut pas éliminer K. Chaque ressource a des limites physiques. L'eau douce, les terres arables, le phosphore pour les engrais, les terres rares — tous sont finis. La question n'est pas de savoir si les humains font face à des limites de capacité de charge, mais où ces limites se situent et si nous les approcherons par une gestion durable ou par un dépassement suivi d'un effondrement.</p>
+
+<hr>
+
+<h2>🧩 Synthèse : Les deux grandes courbes</h2>
+
+<p>L'écologie des populations repose sur deux modèles mathématiques qui capturent la tension fondamentale de la vie : la <strong>courbe en J</strong> (croissance exponentielle) et la <strong>courbe en S</strong> (croissance logistique). La courbe en J représente la pulsion inhérente de la vie à se multiplier — l'impératif biologique inscrit dans chaque génome, de la bactérie à la baleine bleue. La courbe en S représente la réponse inévitable de l'environnement : les ressources sont finies, l'espace est limité, et toute population finit par rencontrer le plafond de sa capacité de charge.</p>
+
+<p>Le monde réel, bien sûr, est plus complexe que l'une ou l'autre courbe. Les retards temporels causent dépassement et effondrement. Les effets Allee créent des seuils d'extinction qui condamnent les populations en dessous d'une taille critique. Les événements stochastiques — incendies, inondations, épidémies — ajoutent une imprévisibilité qu'aucun modèle déterministe ne peut capturer. La prédation, la compétition, le parasitisme et le mutualisme modifient K continuellement. La structure d'âge, les sex-ratios et l'hétérogénéité spatiale ajoutent des dimensions que les modèles simples ignorent.</p>
+
+<p>Mais la logique sous-jacente persiste, et elle est aussi pertinente pour un débat politique sur les quotas de pêche en Norvège que pour une crise de conservation à Madagascar, aussi applicable à la gestion des invasions de criquets en Afrique de l'Est qu'à la prédiction de la propagation pandémique à travers les continents. Les populations qui croissent sans limite détruisent leur base de ressources et s'effondrent. Les populations qui se stabilisent à ou près de la capacité de charge persistent. Les mathématiques de la croissance des populations sont ultimement les mathématiques de la durabilité — et elles s'appliquent aussi puissamment à huit milliards d'humains sur une planète finie qu'à vingt-quatre lapins sur un domaine australien, ou à des bactéries se divisant dans une boîte de Pétri. Les lapins de Thomas Austin ont appris à l'Australie une leçon que chaque espèce, y compris la nôtre, doit finalement apprendre : la croissance exponentielle est une promesse que l'environnement ne peut pas tenir.</p>
+
+<hr>
+
+<h2>📚 Références</h2>
+
+<p>Allee, W. C. (1931). <em>Animal aggregations: A study in general sociology</em>. University of Chicago Press.</p>
+<p>Begon, M., Townsend, C. R., &amp; Harper, J. L. (2006). <em>Ecology: From individuals to ecosystems</em> (4th ed.). Blackwell Publishing.</p>
+<p>Boyce, M. S. (1992). Population viability analysis. <em>Annual Review of Ecology and Systematics</em>, <em>23</em>(1), 481–497.</p>
+<p>Caughley, G. (1970). Eruption of ungulate populations, with emphasis on Himalayan thar in New Zealand. <em>Ecology</em>, <em>51</em>(1), 53–72.</p>
+<p>Cohen, J. E. (1995). <em>How many people can the Earth support?</em> W. W. Norton.</p>
+<p>Courchamp, F., Clutton-Brock, T., &amp; Grenfell, B. (1999). Inverse density dependence and the Allee effect. <em>Trends in Ecology &amp; Evolution</em>, <em>14</em>(10), 405–410.</p>
+<p>Fenner, F., &amp; Fantini, B. (1999). <em>Biological control of vertebrate pests: The history of myxomatosis — an experiment in evolution</em>. CABI Publishing.</p>
+<p>Frankham, R., Ballou, J. D., &amp; Briscoe, D. A. (2010). <em>Introduction to conservation genetics</em> (2nd ed.). Cambridge University Press.</p>
+<p>Gause, G. F. (1934). <em>The struggle for existence</em>. Williams &amp; Wilkins.</p>
+<p>Gotelli, N. J. (2008). <em>A primer of ecology</em> (4th ed.). Sinauer Associates.</p>
+<p>Hilborn, R., &amp; Walters, C. J. (1992). <em>Quantitative fisheries stock assessment: Choice, dynamics and uncertainty</em>. Chapman &amp; Hall.</p>
+<p>Hung, C.-M., Shaner, P.-J. L., Zink, R. M., Liu, W.-C., Chu, T.-C., Huang, W.-S., &amp; Li, S.-H. (2014). Drastic population fluctuations explain the rapid extinction of the passenger pigeon. <em>Proceedings of the National Academy of Sciences</em>, <em>111</em>(29), 10636–10641.</p>
+<p>Klein, D. R. (1968). The introduction, increase, and crash of reindeer on St. Matthew Island. <em>Journal of Wildlife Management</em>, <em>32</em>(2), 350–367.</p>
+<p>Lotka, A. J. (1925). <em>Elements of physical biology</em>. Williams &amp; Wilkins.</p>
+<p>Malthus, T. R. (1798). <em>An essay on the principle of population</em>. J. Johnson.</p>
+<p>Park, T. (1948). Experimental studies of interspecies competition. I. <em>Ecological Monographs</em>, <em>18</em>(2), 265–308.</p>
+<p>Pearl, R., &amp; Reed, L. J. (1920). On the rate of growth of the population of the United States since 1790 and its mathematical representation. <em>Proceedings of the National Academy of Sciences</em>, <em>6</em>(6), 275–288.</p>
+<p>Ripple, W. J., &amp; Beschta, R. L. (2012). Trophic cascades in Yellowstone: The first 15 years after wolf reintroduction. <em>Biological Conservation</em>, <em>145</em>(1), 205–213.</p>
+<p>Shaffer, M. L. (1981). Minimum population sizes for species conservation. <em>BioScience</em>, <em>31</em>(2), 131–134.</p>
+<p>Turchin, P. (2003). <em>Complex population dynamics: A theoretical/empirical synthesis</em>. Princeton University Press.</p>
+<p>van Eeden, L. M., et al. (2020). Impacts of the unprecedented 2019–2020 bushfires on Australian animals. Report for WWF-Australia.</p>
+<p>Verhulst, P.-F. (1838). Notice sur la loi que la population suit dans son accroissement. <em>Correspondance Mathématique et Physique</em>, <em>10</em>, 113–121.</p>
+<p>Volterra, V. (1926). Variazioni e fluttuazioni del numero d'individui in specie animali conviventi. <em>Memorie della R. Accademia Nazionale dei Lincei</em>, <em>2</em>, 31–113.</p>

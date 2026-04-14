@@ -1,185 +1,372 @@
-<h2>🔬 Soil: A Hidden Universe in Three Phases</h2>
+<h2>⚖️ Mass-Volume Relations: The Quantitative Architecture of Soil</h2>
 
-<p>Pick up a handful of soil. It looks simple, right? <strong>Wrong.</strong> What you're holding is one of the most complex physical systems on Earth — a dynamic, living matrix where solid particles, water, and air wage a constant tug-of-war that determines whether crops thrive or starve.</p>
+<p>In 1927, a Swedish agronomist named Albert Atterberg — the same scientist who gave us the Atterberg limits for clay consistency — posed a deceptively simple question: <em>how do you describe a soil completely using only mass and volume?</em> His insight, refined over the following decades by the Danish physicist Edgar Buckingham and the Israeli soil physicist Daniel Hillel, was that every physical property of soil — its strength, its drainage, its thermal behaviour, its capacity to sustain roots — ultimately reduces to <strong>how mass and volume are distributed among three phases: solid, liquid, and gas</strong>. This is the mass-volume framework, and it is to soil physics what the periodic table is to chemistry: the organizing structure upon which everything else is built (Hillel, 2004).</p>
 
-<p>Welcome to the fascinating world of <strong>soil physics</strong> — the science of measuring and predicting how matter and energy (especially water, air, and heat) move through the soil profile. Let's crack it open.</p>
+<p>To understand why this matters, consider a practical problem. An irrigation engineer in the Mitidja Plain south of Algiers must decide how much water to apply to a wheat field. Too little, and the crop suffers drought stress. Too much, and the waterlogged soil deprives roots of oxygen, promoting anaerobiosis and root rot. The answer depends entirely on knowing the current mass-volume state of the soil: how much of the soil volume is solid mineral, how much is pore space, how much of that pore space is already filled with water, and how much remains filled with air. Every irrigation schedule, every drainage design, every foundation calculation in geotechnical engineering, and every contamination transport model in environmental science begins here — with the mass-volume relations of soil (Jury &amp; Horton, 2004).</p>
 
-<h3>🧊 The Three-Phase System</h3>
+<blockquote>💡 <strong>The Core Principle:</strong> Soil is a <strong>three-phase porous medium</strong> — a mixture of solid particles (minerals + organic matter), liquid (water + dissolved solutes), and gas (soil air). The mass-volume relations are the mathematical framework that quantifies the proportions, densities, and water status of these three phases. Master these relations, and you possess the quantitative foundation upon which all of soil physics, soil mechanics, hydrology, and agricultural engineering are constructed (Hillel, 2004; Brady &amp; Weil, 2017).</blockquote>
 
-<p>Every soil sample, no matter where on Earth, is a <strong>three-phase system</strong> built from four components:</p>
+<hr>
 
-<table>
-  <thead>
-    <tr><th>Phase</th><th>Components</th><th>Typical Volume</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>🪨 <strong>Solid</strong></td><td>Mineral particles + organic matter</td><td>45–65%</td></tr>
-    <tr><td>💧 <strong>Liquid</strong></td><td>Water + dissolved substances</td><td rowspan="2">35–55% (shared)</td></tr>
-    <tr><td>💨 <strong>Gas</strong></td><td>Air (≈80% N₂, O₂, CO₂)</td></tr>
-  </tbody>
-</table>
+<h2>🧊 Part I — The Three-Phase System: Conceptual Foundation</h2>
 
-<p>Think of it like a <strong>sponge</strong>: the sponge material is the solid phase, and the holes (pores) are filled with either water or air depending on how wet it is. The solid matrix forms a chemically reactive porous network connecting soil horizons to the atmosphere.</p>
-
-<h3>🧱 What Makes Up Each Phase?</h3>
+<p>Every sample of soil, whether collected from the Saharan reg, the Tell Atlas forest floor, or a rice paddy in Bangladesh, is a <strong>three-phase system</strong> composed of four components distributed across three physical states:</p>
 
 <table>
   <thead>
-    <tr><th></th><th>Solid – Minerals</th><th>Solid – Organic</th><th>Liquid</th><th>Gas</th></tr>
+    <tr><th>Phase</th><th>Components</th><th>Typical Volume Fraction</th><th>State</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Origin</strong></td><td>Rock weathering</td><td>Decomposition of organisms</td><td>Rain, groundwater, runoff</td><td>Atmosphere, respiration, decomposition</td></tr>
-    <tr><td><strong>Categories</strong></td><td>Skeleton (>2mm), Fine earth (<2mm), Quartz, Silicates, Carbonates</td><td>Living organisms, Dead matter, Humic substances</td><td>Water, Dissolved sugars, acids, cations, anions</td><td>N₂, O₂, CO₂, CH₄, NH₃</td></tr>
+    <tr><td>🪨 <strong>Solid</strong></td><td>Mineral particles (quartz, feldspars, clay minerals, carbonates, iron oxides) + organic matter (humus, roots, organisms)</td><td>45–65% of total volume</td><td>Rigid framework — provides structure and chemical reactivity</td></tr>
+    <tr><td>💧 <strong>Liquid</strong></td><td>Water + dissolved substances (ions, organic acids, nutrients)</td><td rowspan="2">35–55% of total volume (shared between liquid and gas — their ratio changes dynamically)</td><td>Mobile phase — transport medium for nutrients and contaminants</td></tr>
+    <tr><td>💨 <strong>Gas</strong></td><td>Soil air (≈78% N₂, 20.5% O₂, 0.5–5% CO₂, trace CH₄, N₂O, NH₃)</td><td>Compressible phase — supplies O₂ for root respiration and soil organisms</td></tr>
   </tbody>
 </table>
 
-<h2>⚖️ Mass-Volume Relations: The DNA of Soil Physics</h2>
+<p>The mental model is a <strong>sponge</strong>: the sponge material is the solid phase (fixed skeleton), and the holes (pores) are filled with either water or air depending on the moisture state. When you squeeze the sponge (compaction), total pore volume decreases, bulk density increases, and both water capacity and aeration suffer. When you release it (tillage, frost action, biological activity), pore volume recovers. This dynamic interplay between the three phases governs every physical process in the soil — from infiltration to heat conduction to gas exchange (Hillel, 2004).</p>
 
-<p>Here's the key insight: <strong>everything about soil behavior</strong> — how it drains, how strong it is, how well roots penetrate — comes down to how mass and volume are distributed among the three phases.</p>
+<h3>The Block Diagram: Visualising Mass-Volume Relations</h3>
 
-<h3>📐 The Fundamental Equations</h3>
+<p>The standard pedagogical tool in soil physics is the <strong>block diagram</strong> (also called the phase diagram), first formalized by Karl Terzaghi in his 1925 foundation text <em>Erdbaumechanik</em>. The diagram represents a unit soil sample as a rectangle divided into three horizontal compartments — solids at the bottom, water in the middle, air at the top — with <strong>volumes on the left axis</strong> and <strong>masses on the right axis</strong>. This simple device makes the relationships between all mass-volume parameters immediately visible (Terzaghi et al., 1996).</p>
 
 <table>
   <thead>
-    <tr><th>Relationship</th><th>Equation</th><th>Note</th></tr>
+    <tr><th>Volume Side</th><th>Phase</th><th>Mass Side</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Total Volume</strong></td><td>V<sub>t</sub> = V<sub>s</sub> + V<sub>l</sub> + V<sub>a</sub></td><td>Solids + water + air</td></tr>
-    <tr><td><strong>Total Mass</strong></td><td>M<sub>t</sub> = M<sub>s</sub> + M<sub>l</sub></td><td>Air mass ≈ 0</td></tr>
-    <tr><td><strong>Pore Volume</strong></td><td>V<sub>p</sub> = V<sub>l</sub> + V<sub>a</sub></td><td>Water + air space</td></tr>
+    <tr><td>V<sub>a</sub></td><td>💨 Air</td><td>M<sub>a</sub> ≈ 0</td></tr>
+    <tr><td>V<sub>l</sub> (= V<sub>w</sub>)</td><td>💧 Water</td><td>M<sub>l</sub> (= M<sub>w</sub>)</td></tr>
+    <tr><td>V<sub>s</sub></td><td>🪨 Solids</td><td>M<sub>s</sub></td></tr>
   </tbody>
 </table>
 
-<blockquote>💡 <strong>Why ignore air mass?</strong> Air is roughly 1000× lighter than water and solid particles — its mass is negligible in soil calculations.</blockquote>
-
-<p>Researchers organized soil measurements into <strong>three fundamental categories</strong>: Density, Porosity, and Water Content. Let's explore each one.</p>
-
-<h2>🏗️ I. Soil Density: How Packed Is Your Soil?</h2>
-
-<p>Density answers one question: <strong>"How much stuff is crammed into a given space?"</strong>. It's the ultimate compaction indicator. Four types:</p>
-
-<h3>1️⃣ Bulk Density (ρ<sub>b</sub>) — The Compaction Detective</h3>
-
-<p>The <strong>most important density</strong> in practical soil science. Dry soil mass divided by total volume (solids + pores):</p>
-
-<p style="text-align:center; font-size:1.1em; padding:12px; background:rgba(39,174,96,0.06); border-radius:8px;">
-  <strong>ρ<sub>b</sub> = M<sub>s</sub> / V<sub>t</sub></strong>
-</p>
-
-<p><strong>Compact soil</strong> → high ρ<sub>b</sub> (1.6–1.8 g/cm³) — construction sites. <strong>Loose, porous soil</strong> → low ρ<sub>b</sub> (0.7–1.2 g/cm³) — forest topsoil.</p>
-
-<p>There's also <strong>Wet Bulk Density (ρ<sub>t</sub>)</strong> which includes water mass: <strong>ρ<sub>t</sub> = (M<sub>s</sub> + M<sub>w</sub>) / V<sub>t</sub></strong></p>
-
-<h3>2️⃣ Particle Density (ρ<sub>s</sub>) — The Mineral Fingerprint</h3>
-
-<p>Density of <strong>solid particles only</strong>, ignoring pore space:</p>
-
-<p style="text-align:center; font-size:1.1em; padding:12px; background:rgba(39,174,96,0.06); border-radius:8px;">
-  <strong>ρ<sub>s</sub> = M<sub>s</sub> / V<sub>s</sub></strong>
-</p>
-
-<p>Most mineral soils: <strong>≈ 2.65 g/cm³</strong> (quartz density). Heavy metals push it up, organic matter pulls it down:</p>
+<p>From this diagram, three <strong>fundamental identities</strong> emerge:</p>
 
 <table>
   <thead>
-    <tr><th>Material</th><th>ρ<sub>s</sub> (g/cm³)</th><th>Effect</th></tr>
+    <tr><th>Relationship</th><th>Equation</th><th>Explanation</th></tr>
   </thead>
   <tbody>
-    <tr><td>Hematite</td><td>5.26</td><td>↑ Heavy</td></tr>
-    <tr><td>Quartz</td><td>2.65</td><td>— Standard</td></tr>
-    <tr><td>Kaolinite</td><td>2.61–2.68</td><td>≈ Standard</td></tr>
-    <tr><td>Organic matter</td><td>1.0–1.4</td><td>↓ Very light</td></tr>
+    <tr><td><strong>Total volume</strong></td><td>V<sub>t</sub> = V<sub>s</sub> + V<sub>l</sub> + V<sub>a</sub></td><td>Total = solids + water + air</td></tr>
+    <tr><td><strong>Total mass</strong></td><td>M<sub>t</sub> = M<sub>s</sub> + M<sub>l</sub></td><td>Air mass ≈ 0 (density of air ≈ 1.2 kg/m³ vs. water ≈ 1,000 kg/m³ — negligible)</td></tr>
+    <tr><td><strong>Pore volume</strong></td><td>V<sub>p</sub> = V<sub>l</sub> + V<sub>a</sub> = V<sub>t</sub> − V<sub>s</sub></td><td>All non-solid space — filled by water and/or air</td></tr>
   </tbody>
 </table>
 
-<blockquote>🔑 <strong>Key difference:</strong> Bulk density changes with management (tilling, compaction). Particle density is fixed by mineral composition — you can't change it by farming.</blockquote>
+<p>Every mass-volume parameter in soil science is derived from combinations of these six quantities: V<sub>t</sub>, V<sub>s</sub>, V<sub>l</sub>, V<sub>a</sub>, M<sub>s</sub>, M<sub>l</sub>. The entire edifice of soil physical characterization rests on measuring these six values accurately and computing their ratios (Jury &amp; Horton, 2004).</p>
 
-<h3>3️⃣ Specific Gravity (G<sub>s</sub>) — Dimensionless Ratio</h3>
+<hr>
 
-<p style="text-align:center; font-size:1.1em; padding:12px; background:rgba(39,174,96,0.06); border-radius:8px;">
-  <strong>G<sub>s</sub> = ρ<sub>s</sub> / ρ<sub>w</sub></strong> &nbsp;(water density at 4°C = 1.0 g/cm³)
+<h2>🏗️ Part II — Soil Density: How Tightly Packed Is the Matrix?</h2>
+
+<p>Density — mass per unit volume — is the most fundamental physical measurement of any material. In soil science, we define <strong>four distinct density parameters</strong>, each answering a different question about the soil's physical state.</p>
+
+<h3>1. Bulk Density (ρ<sub>b</sub>) — The Compaction Indicator</h3>
+
+<p>Bulk density is arguably the <strong>single most important physical property</strong> in applied soil science. It is the mass of oven-dry soil (dried at 105°C for 24 hours to remove all gravitational and capillary water) divided by the total volume of the undisturbed sample (solids + pores):</p>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(39,174,96,0.07); border-radius:8px;">
+  <strong>ρ<sub>b</sub> = M<sub>s</sub> / V<sub>t</sub></strong> &nbsp;&nbsp;(units: g/cm³, kg/m³, or Mg/m³)
 </p>
 
-<p>For most soils: G<sub>s</sub> ≈ 2.65 — same number as particle density but unitless.</p>
+<p>Bulk density integrates three soil attributes into one number: <strong>particle size distribution</strong> (texture), <strong>structural arrangement</strong> (aggregation), and <strong>degree of compaction</strong>. It is the bridge between mass-based and volume-based measurements — without ρ<sub>b</sub>, you cannot convert gravimetric water content to volumetric water content, and you cannot calculate total water storage in a soil profile (Brady &amp; Weil, 2017).</p>
 
-<h3>4️⃣ Specific Volume (V<sub>b</sub>) — The Inverse</h3>
+<table>
+  <thead>
+    <tr><th>Soil Condition</th><th>ρ<sub>b</sub> (g/cm³)</th><th>Interpretation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Organic/peat soils</td><td>0.1–0.6</td><td>Extremely low — very high porosity, dominated by organic matter (ρ<sub>s</sub> ≈ 1.2–1.4 g/cm³)</td></tr>
+    <tr><td>Well-structured forest topsoil</td><td>0.7–1.0</td><td>Excellent — high biological activity, abundant macropores, root-friendly</td></tr>
+    <tr><td>Cultivated loam (good tilth)</td><td>1.1–1.3</td><td>Normal agricultural range — adequate porosity for crops</td></tr>
+    <tr><td>Sandy soils</td><td>1.4–1.6</td><td>Higher due to single-grain structure — large pores but fewer total pores</td></tr>
+    <tr><td>Compacted subsoil / plough pan</td><td>1.5–1.8</td><td>Root-limiting — tillage pans restrict root penetration and water movement</td></tr>
+    <tr><td>Glacial till / hardpan</td><td>1.8–2.2</td><td>Root-impenetrable — effectively a barrier layer</td></tr>
+  </tbody>
+</table>
 
-<p><strong>V<sub>b</sub> = 1/ρ<sub>b</sub></strong> (cm³/g). How much space one gram of dry soil occupies. Range: 0.5–1.0.</p>
+<blockquote>⚠️ <strong>Root-limiting threshold:</strong> For most agricultural crops, root growth is severely restricted when ρ<sub>b</sub> exceeds <strong>1.5–1.6 g/cm³</strong> in clay soils and <strong>1.7–1.8 g/cm³</strong> in sandy soils. This threshold determines whether compacted fields require deep ripping or subsoiling — a critical management decision in Algerian cereal-growing regions like the Sétif and Constantine high plateaus where tractor traffic on wet soils causes persistent compaction (Hamza &amp; Anderson, 2005).</blockquote>
 
-<h2>🕳️ II. Porosity: The Breathing Room</h2>
+<p><strong>Measurement methods:</strong> The <strong>core method</strong> (driving a steel cylinder of known volume into the soil, excavating it, and oven-drying) is the standard field technique. Alternatives include the <strong>clod method</strong> (coating a natural soil clod with paraffin wax, measuring displacement volume), the <strong>sand cone method</strong> (excavating a hole and filling it with calibrated sand to measure volume), and the <strong>gamma-ray attenuation method</strong> (non-destructive, used in nuclear moisture-density gauges) (Jury &amp; Horton, 2004).</p>
 
-<p>If density tells you how packed soil is, <strong>porosity tells you how much empty space exists</strong> for water and air. Without pores, roots can't breathe, water can't flow, microbes can't survive.</p>
+<h3>2. Wet Bulk Density (ρ<sub>t</sub>) — The Field-State Density</h3>
 
-<h3>1️⃣ Total Porosity (P)</h3>
+<p>The total mass (solids + water) divided by total volume — representing the soil as it exists in the field at its current moisture state:</p>
 
-<p style="text-align:center; font-size:1.1em; padding:12px; background:rgba(99,102,241,0.06); border-radius:8px;">
-  <strong>P = V<sub>p</sub> / V<sub>t</sub> = (V<sub>a</sub> + V<sub>l</sub>) / (V<sub>s</sub> + V<sub>a</sub> + V<sub>l</sub>)</strong>
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(39,174,96,0.07); border-radius:8px;">
+  <strong>ρ<sub>t</sub> = (M<sub>s</sub> + M<sub>w</sub>) / V<sub>t</sub> = ρ<sub>b</sub>(1 + w)</strong>
 </p>
 
-<p>Range: <strong>0.3–0.7</strong>. Sandy soils ≈ 0.35–0.45. Clay soils ≈ 0.50–0.65. Depends on compaction, particle size, shape, cementation, and aggregation.</p>
+<p>Wet bulk density is essential for <strong>earthwork calculations</strong> in civil engineering — when a contractor excavates soil for a dam embankment, the mass of material moved depends on ρ<sub>t</sub>, not ρ<sub>b</sub>. Range: typically 1.0–2.2 g/cm³ depending on soil type and moisture state.</p>
 
-<h3>2️⃣ Void Ratio (e) — The Engineer's Favorite</h3>
+<h3>3. Particle Density (ρ<sub>s</sub>) — The Mineral Fingerprint</h3>
 
-<p style="text-align:center; font-size:1.1em; padding:12px; background:rgba(99,102,241,0.06); border-radius:8px;">
-  <strong>e = V<sub>p</sub> / V<sub>s</sub></strong> &nbsp;(Range: 0.4–2.2)
+<p>The density of the solid particles themselves, with all pore space excluded — measured by dividing the mass of oven-dry solids by the volume occupied by the solid phase only:</p>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(39,174,96,0.07); border-radius:8px;">
+  <strong>ρ<sub>s</sub> = M<sub>s</sub> / V<sub>s</sub></strong> &nbsp;&nbsp;(units: g/cm³)
 </p>
 
-<p>Compares pores to solids (not total volume). Essential for geotechnical settlement calculations.</p>
+<p>Particle density is <strong>determined by mineral composition</strong>, not by soil structure or management. For most mineral soils, ρ<sub>s</sub> falls within the narrow range of <strong>2.60–2.75 g/cm³</strong> because quartz (2.65 g/cm³) and feldspars (2.55–2.76 g/cm³) dominate the mineral fraction of most soils worldwide. The conventional default value <strong>ρ<sub>s</sub> = 2.65 g/cm³</strong> is used when direct measurement is unavailable (Hillel, 2004).</p>
 
-<h3>3️⃣ Air Ratio (α)</h3>
-<p><strong>α = V<sub>a</sub> / V<sub>s</sub></strong> — Air volume relative to solids. Key for root aeration assessment.</p>
+<table>
+  <thead>
+    <tr><th>Mineral / Material</th><th>ρ<sub>s</sub> (g/cm³)</th><th>Effect on Soil ρ<sub>s</sub></th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Magnetite (Fe₃O₄)</td><td>5.18</td><td>↑ Increases ρ<sub>s</sub> substantially — found in volcanic and lateritic soils</td></tr>
+    <tr><td>Hematite (Fe₂O₃)</td><td>5.26</td><td>↑ Red tropical soils — Algerian Terra Rossa of the Tell Atlas</td></tr>
+    <tr><td>Quartz (SiO₂)</td><td>2.65</td><td>— Standard reference mineral</td></tr>
+    <tr><td>Orthoclase feldspar</td><td>2.56</td><td>≈ Slightly below quartz</td></tr>
+    <tr><td>Kaolinite</td><td>2.61–2.68</td><td>≈ Close to quartz</td></tr>
+    <tr><td>Montmorillonite (smectite)</td><td>2.35–2.70</td><td>≈ Variable — depends on interlayer cation</td></tr>
+    <tr><td>Calcite (CaCO₃)</td><td>2.71</td><td>≈ Slightly above quartz — common in Algerian calcareous soils</td></tr>
+    <tr><td>Gypsum (CaSO₄·2H₂O)</td><td>2.32</td><td>↓ Reduces ρ<sub>s</sub> — gypsiferous soils of southern Algeria</td></tr>
+    <tr><td>Organic matter (humus)</td><td>1.0–1.4</td><td>↓↓ Strongly reduces ρ<sub>s</sub> — peaty/organic horizons</td></tr>
+  </tbody>
+</table>
 
-<h3>4️⃣ Air-Filled Porosity (F<sub>a</sub>) — The Survival Threshold</h3>
+<p><strong>Measurement:</strong> The <strong>pycnometer method</strong> (also called volumetric flask method) is the standard laboratory technique. A known mass of oven-dry soil is placed in a calibrated flask, water is added to fill remaining volume, and V<sub>s</sub> is determined by displacement. Gas pycnometers using helium (which penetrates even the finest pores) provide the most accurate results (Flint &amp; Flint, 2002).</p>
 
-<p style="text-align:center; font-size:1.1em; padding:12px; background:rgba(239,68,68,0.06); border-radius:8px;">
+<blockquote>🔑 <strong>Critical distinction:</strong> Bulk density (ρ<sub>b</sub>) changes with tillage, compaction, biological activity, wetting-drying cycles, and freeze-thaw cycles — it is a <em>management-sensitive</em> property. Particle density (ρ<sub>s</sub>) is essentially <em>fixed</em> by mineral composition — no amount of farming changes it. This distinction is fundamental: ρ<sub>b</sub> is the property you manage; ρ<sub>s</sub> is the property you inherit.</blockquote>
+
+<h3>4. Specific Gravity (G<sub>s</sub>) — The Dimensionless Ratio</h3>
+
+<p>The ratio of particle density to the density of water at 4°C (ρ<sub>w</sub> = 1.000 g/cm³ = 1,000 kg/m³):</p>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(39,174,96,0.07); border-radius:8px;">
+  <strong>G<sub>s</sub> = ρ<sub>s</sub> / ρ<sub>w</sub></strong> &nbsp;&nbsp;(dimensionless; for most soils G<sub>s</sub> ≈ 2.65)
+</p>
+
+<p>Since ρ<sub>w</sub> = 1.000 g/cm³ in CGS units, G<sub>s</sub> is numerically identical to ρ<sub>s</sub> expressed in g/cm³ — but without units. Specific gravity is used extensively in <strong>geotechnical engineering</strong> for calculating phase relations in earthwork specifications (ASTM D854) and in hydrometer analysis for particle size determination (Terzaghi et al., 1996).</p>
+
+<h3>5. Specific Volume (V<sub>b</sub>) — The Reciprocal</h3>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(39,174,96,0.07); border-radius:8px;">
+  <strong>V<sub>b</sub> = 1 / ρ<sub>b</sub> = V<sub>t</sub> / M<sub>s</sub></strong> &nbsp;&nbsp;(units: cm³/g)
+</p>
+
+<p>The volume occupied by one gram of oven-dry soil, including its associated pore space. Useful for converting between mass-based and volume-based calculations. Range: 0.45–1.4 cm³/g. For a typical agricultural soil with ρ<sub>b</sub> = 1.3 g/cm³, V<sub>b</sub> = 0.77 cm³/g.</p>
+
+<hr>
+
+<h2>🕳️ Part III — Porosity: The Architecture of Empty Space</h2>
+
+<p>If density describes how much solid material is packed into a volume, <strong>porosity describes how much empty space remains</strong>. That empty space — the pore network — is where all the action happens: water flows through it, air circulates in it, roots grow into it, microorganisms colonize it. Without adequate porosity, soil becomes impenetrable stone. The great soil physicist L.A. Richards, who developed the pressure plate apparatus in 1941, wrote: « The pore space is the living space of the soil — its lungs, its blood vessels, and its highways » (Richards, 1954).</p>
+
+<h3>1. Total Porosity (P or n) — The Grand Total</h3>
+
+<p>The fraction of total soil volume occupied by pores (voids) — both water-filled and air-filled:</p>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(99,102,241,0.07); border-radius:8px;">
+  <strong>P = V<sub>p</sub> / V<sub>t</sub> = (V<sub>a</sub> + V<sub>l</sub>) / V<sub>t</sub> = 1 − (ρ<sub>b</sub> / ρ<sub>s</sub>)</strong>
+</p>
+
+<p>The formula <strong>P = 1 − (ρ<sub>b</sub> / ρ<sub>s</sub>)</strong> is one of the most powerful equations in soil physics because it derives porosity from two easily measured densities. Using the standard assumption ρ<sub>s</sub> = 2.65 g/cm³, a soil with ρ<sub>b</sub> = 1.3 g/cm³ has P = 1 − (1.3/2.65) = 0.509 — about 51% pore space (Hillel, 2004).</p>
+
+<table>
+  <thead>
+    <tr><th>Soil Type</th><th>P (approximate)</th><th>Explanation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Coarse sand</td><td>0.35–0.40</td><td>Single-grain structure — large pores but low total porosity; rapid drainage</td></tr>
+    <tr><td>Sandy loam</td><td>0.40–0.47</td><td>Mixed structure — intermediate</td></tr>
+    <tr><td>Silt loam</td><td>0.45–0.55</td><td>Well-aggregated — good balance of macropores and micropores</td></tr>
+    <tr><td>Clay (compacted)</td><td>0.40–0.45</td><td>Dispersion and compaction reduce porosity despite small particles</td></tr>
+    <tr><td>Clay (well-structured)</td><td>0.50–0.65</td><td>Strong aggregation creates inter-aggregate macropores → high total porosity</td></tr>
+    <tr><td>Peat / organic soil</td><td>0.75–0.95</td><td>Extremely high — organic fibres create enormous pore volume</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🧠 <strong>The porosity paradox:</strong> Clay soils have <em>higher</em> total porosity than sandy soils — yet they drain <em>more slowly</em>. Why? Because clay pores are predominantly <strong>micropores</strong> (< 0.05 mm) that hold water by capillary forces, while sandy pores are predominantly <strong>macropores</strong> (> 0.05 mm) that drain freely under gravity. Total porosity tells you how much space exists; <em>pore size distribution</em> tells you how that space behaves (Brady &amp; Weil, 2017).</blockquote>
+
+<h3>2. Void Ratio (e) — The Geotechnical Standard</h3>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(99,102,241,0.07); border-radius:8px;">
+  <strong>e = V<sub>p</sub> / V<sub>s</sub> = P / (1 − P) = (ρ<sub>s</sub> / ρ<sub>b</sub>) − 1</strong>
+</p>
+
+<p>Void ratio compares pore volume to <em>solid volume</em> rather than total volume. It is the preferred porosity measure in <strong>geotechnical engineering</strong> because V<sub>s</sub> remains constant during consolidation (only V<sub>p</sub> changes), making void ratio a more natural variable for tracking settlement and compression. Range: 0.3 (very dense sand) to 2.5+ (soft organic clay). A void ratio of 1.0 means pore volume equals solid volume — exactly 50% porosity (Terzaghi et al., 1996).</p>
+
+<p>The <strong>conversion between P and e</strong> is: <strong>P = e / (1 + e)</strong> and <strong>e = P / (1 − P)</strong>.</p>
+
+<h3>3. Air-Filled Porosity (F<sub>a</sub> or n<sub>a</sub>) — The Aeration Measure</h3>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(239,68,68,0.07); border-radius:8px;">
   <strong>F<sub>a</sub> = V<sub>a</sub> / V<sub>t</sub> = P − θ</strong>
 </p>
 
-<blockquote>⚠️ <strong>Critical threshold:</strong> Below <strong>F<sub>a</sub> = 0.10 (10%)</strong>, plant roots suffocate (anaerobiosis). This is exactly why waterlogged soils kill crops!</blockquote>
+<p>Air-filled porosity is the fraction of total volume occupied by air — it represents the breathing capacity of the soil. This parameter carries a <strong>critical biological threshold</strong>:</p>
 
-<h2>💧 III. Soil Water Content: How Wet Is Your Soil?</h2>
+<blockquote>⚠️ <strong>The 10% rule:</strong> When F<sub>a</sub> drops below <strong>0.10 (10%)</strong>, oxygen diffusion becomes insufficient for root respiration and aerobic microbial activity. Roots enter <strong>anaerobiosis</strong> — switching from aerobic to anaerobic metabolism, which produces toxic ethanol and acetaldehyde, eventually killing the root tips. This threshold explains why waterlogged soils kill most crop plants within 24–72 hours, why rice (<em>Oryza sativa</em>) requires specialized aerenchyma tissue to survive in flooded paddies, and why drainage engineering exists as an entire discipline (Hillel, 2004; Jury &amp; Horton, 2004).</blockquote>
 
-<p>Water content is the bridge between density and porosity — it tells you <strong>how the pore space is being used</strong>.</p>
+<h3>4. Air Ratio (a<sub>r</sub>)</h3>
 
-<h3>1️⃣ Gravimetric Water Content (w)</h3>
-<p style="text-align:center; font-size:1.1em; padding:12px; background:rgba(59,130,246,0.06); border-radius:8px;">
-  <strong>w = (M<sub>l</sub> / M<sub>s</sub>) × 100</strong>
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(99,102,241,0.07); border-radius:8px;">
+  <strong>a<sub>r</sub> = V<sub>a</sub> / V<sub>s</sub></strong>
 </p>
-<p>Weigh → oven-dry at 105°C → weigh again. Range: 0–30%.</p>
 
-<h3>2️⃣ Volumetric Water Content (θ) — The Farmer's Metric</h3>
-<p style="text-align:center; font-size:1.1em; padding:12px; background:rgba(59,130,246,0.06); border-radius:8px;">
-  <strong>θ = V<sub>l</sub> / V<sub>t</sub></strong> &nbsp;(Range: 0–0.7 m³/m³)
+<p>Air volume relative to solid volume — analogous to void ratio but for the air phase only. Used in expansive clay soil mechanics where volume changes must be tracked relative to a constant solid phase reference (Fredlund &amp; Rahardjo, 1993).</p>
+
+<hr>
+
+<h2>💧 Part IV — Soil Water Content: Quantifying the Liquid Phase</h2>
+
+<p>Water content is the dynamic variable of the mass-volume framework — unlike density and porosity, which change slowly over seasons, water content can change dramatically in hours (a rainstorm) or minutes (irrigation). Four standard expressions quantify it, each suited to different applications.</p>
+
+<h3>1. Gravimetric Water Content (w) — The Laboratory Standard</h3>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(59,130,246,0.07); border-radius:8px;">
+  <strong>w = M<sub>w</sub> / M<sub>s</sub></strong> &nbsp;&nbsp;(dimensionless ratio, often expressed as % by multiplying × 100)
 </p>
-<p>Directly measured by soil moisture sensors (TDR probes). Most used in irrigation planning.</p>
 
-<h3>3️⃣ Degree of Saturation (S)</h3>
-<p style="text-align:center; font-size:1.1em; padding:12px; background:rgba(59,130,246,0.06); border-radius:8px;">
-  <strong>S = V<sub>l</sub> / V<sub>p</sub></strong> &nbsp;(0 to 100%)
+<p>The ratio of water mass to oven-dry soil mass. Determined by the <strong>thermogravimetric method</strong>: weigh a wet sample (M<sub>wet</sub>), oven-dry at 105°C for 24 hours, weigh again (M<sub>s</sub>), calculate M<sub>w</sub> = M<sub>wet</sub> − M<sub>s</sub>. This is the most fundamental and historically the first standardized water content measurement — simple, inexpensive, and universally accepted as the reference against which all other methods are calibrated (Gardner, 1986).</p>
+
+<p>Range: 0 (oven-dry) to 0.05–0.10 (dry sandy soil) to 0.20–0.35 (moist loam) to 0.50–1.50 (saturated organic soil). Gravimetric water content <em>can exceed 1.0</em> (>100%) in highly organic soils like peat, because the water mass exceeds the solid mass — a fact that often surprises students.</p>
+
+<h3>2. Volumetric Water Content (θ) — The Practical Standard</h3>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(59,130,246,0.07); border-radius:8px;">
+  <strong>θ = V<sub>w</sub> / V<sub>t</sub></strong> &nbsp;&nbsp;(units: m³/m³ or cm³/cm³, dimensionless)
 </p>
-<p>S = 0 → bone dry. S = 1 → fully saturated = no air = roots suffocate.</p>
 
-<h3>4️⃣ Liquid Ratio (θ<sub>p</sub>)</h3>
-<p><strong>θ<sub>p</sub> = V<sub>l</sub> / V<sub>s</sub></strong> — Especially useful for expansive clay soils that shrink-swell dramatically.</p>
+<p>The volume of water per unit total volume of soil. Volumetric water content is the <strong>most widely used</strong> expression in modern soil physics, hydrology, and irrigation science because: (1) it directly indicates the depth of water stored per unit depth of soil (e.g., θ = 0.30 means 30 cm of water per 100 cm of soil depth), (2) it is directly measured by electromagnetic sensors — <strong>Time Domain Reflectometry (TDR)</strong>, <strong>Frequency Domain Reflectometry (FDR)</strong>, and <strong>capacitance probes</strong> — that measure soil dielectric permittivity (which depends primarily on water content because water has a dielectric constant of ~80 vs. ~3–5 for mineral solids and ~1 for air), and (3) it has a natural upper bound equal to porosity P (Topp et al., 1980).</p>
 
-<h2>📊 Quick Reference: Typical Ranges</h2>
+<p>Range: 0 (oven-dry) to P (fully saturated). At <strong>field capacity</strong> (the water content 24–48 hours after thorough wetting, when free drainage has ceased): θ ≈ 0.15–0.35 depending on texture. At <strong>permanent wilting point</strong> (the water content at which plants can no longer extract water — conventionally defined at −1.5 MPa matric potential): θ ≈ 0.05–0.25 (Brady &amp; Weil, 2017).</p>
+
+<h3>3. The Critical Conversion: w ↔ θ</h3>
+
+<p>Gravimetric and volumetric water contents are related through <strong>bulk density</strong>:</p>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(234,179,8,0.08); border-radius:8px;">
+  <strong>θ = w × (ρ<sub>b</sub> / ρ<sub>w</sub>)</strong> &nbsp;&nbsp;or equivalently&nbsp;&nbsp; <strong>w = θ × (ρ<sub>w</sub> / ρ<sub>b</sub>)</strong>
+</p>
+
+<p>This conversion is used daily in soil science laboratories worldwide. Since ρ<sub>w</sub> ≈ 1.0 g/cm³, the simplified form is <strong>θ ≈ w × ρ<sub>b</sub></strong>. For example: a soil with w = 0.20 (20% gravimetric) and ρ<sub>b</sub> = 1.35 g/cm³ has θ = 0.20 × 1.35 = 0.27 (27% volumetric). Without bulk density, the conversion is impossible — which is why ρ<sub>b</sub> is measured alongside every water content determination in a properly conducted soil survey (Hillel, 2004).</p>
+
+<h3>4. Degree of Saturation (S) — The Pore-Filling Ratio</h3>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(59,130,246,0.07); border-radius:8px;">
+  <strong>S = V<sub>w</sub> / V<sub>p</sub> = θ / P</strong> &nbsp;&nbsp;(range: 0 to 1, or 0% to 100%)
+</p>
+
+<p>The fraction of pore space occupied by water. S = 0 means bone dry (all pores filled with air). S = 1 means fully saturated (all pores filled with water — no air — below the water table). In the unsaturated zone (vadose zone), S typically ranges from 0.3 to 0.9. Degree of saturation connects the water content directly to the aeration status: <strong>F<sub>a</sub> = P(1 − S)</strong> — so when S > 0.90, the air-filled porosity drops below the critical 10% threshold (Jury &amp; Horton, 2004).</p>
+
+<h3>5. Liquid Ratio (ϑ) — The Shrink-Swell Variable</h3>
+
+<p style="text-align:center; font-size:1.15em; padding:14px; background:rgba(59,130,246,0.07); border-radius:8px;">
+  <strong>ϑ = V<sub>w</sub> / V<sub>s</sub></strong>
+</p>
+
+<p>Water volume relative to solid volume. This parameter is essential for characterizing <strong>expansive (vertisol) soils</strong> — the high-smectite clay soils found across the Chelif Valley, the Hodna basin, and parts of the Constantine plains in Algeria — where total volume changes with water content. Because V<sub>s</sub> is constant, ϑ tracks water changes without the confounding effect of volume change that complicates θ in shrink-swell soils (Fredlund &amp; Rahardjo, 1993).</p>
+
+<hr>
+
+<h2>🔄 Part V — Master Conversion Table: Linking All Parameters</h2>
+
+<p>The power of the mass-volume framework lies in the fact that <strong>all parameters are mathematically interconnected</strong>. Knowing any two or three allows computation of the rest. The following table summarizes the key conversion formulas — the daily toolkit of every soil physicist and geotechnical engineer:</p>
 
 <table>
   <thead>
-    <tr><th>Property</th><th>Symbol</th><th>Range</th><th>Units</th></tr>
+    <tr><th>To Find</th><th>From</th><th>Formula</th></tr>
   </thead>
   <tbody>
-    <tr><td>Particle density</td><td>ρ<sub>s</sub></td><td>2.6–2.8</td><td>g/cm³</td></tr>
-    <tr><td>Bulk density</td><td>ρ<sub>b</sub></td><td>0.7–1.8</td><td>g/cm³</td></tr>
-    <tr><td>Total porosity</td><td>P</td><td>0.3–0.7</td><td>m³/m³</td></tr>
-    <tr><td>Air-filled porosity</td><td>F<sub>a</sub></td><td>0–P</td><td>m³/m³</td></tr>
-    <tr><td>Void ratio</td><td>e</td><td>0.4–2.2</td><td>—</td></tr>
-    <tr><td>Gravimetric water</td><td>w</td><td>0–0.3</td><td>kg/kg</td></tr>
-    <tr><td>Volumetric water</td><td>θ</td><td>0–0.7</td><td>m³/m³</td></tr>
-    <tr><td>Saturation</td><td>S</td><td>0–1</td><td>—</td></tr>
-    <tr><td>Specific volume</td><td>V<sub>b</sub></td><td>0.5–1</td><td>cm³/g</td></tr>
-    <tr><td>Wet bulk density</td><td>ρ<sub>t</sub></td><td>1–2</td><td>g/cm³</td></tr>
+    <tr><td>Total porosity P</td><td>ρ<sub>b</sub>, ρ<sub>s</sub></td><td>P = 1 − (ρ<sub>b</sub> / ρ<sub>s</sub>)</td></tr>
+    <tr><td>Total porosity P</td><td>e</td><td>P = e / (1 + e)</td></tr>
+    <tr><td>Void ratio e</td><td>P</td><td>e = P / (1 − P)</td></tr>
+    <tr><td>Void ratio e</td><td>ρ<sub>b</sub>, ρ<sub>s</sub></td><td>e = (ρ<sub>s</sub> / ρ<sub>b</sub>) − 1</td></tr>
+    <tr><td>Volumetric θ</td><td>w, ρ<sub>b</sub></td><td>θ = w × (ρ<sub>b</sub> / ρ<sub>w</sub>)</td></tr>
+    <tr><td>Gravimetric w</td><td>θ, ρ<sub>b</sub></td><td>w = θ × (ρ<sub>w</sub> / ρ<sub>b</sub>)</td></tr>
+    <tr><td>Saturation S</td><td>θ, P</td><td>S = θ / P</td></tr>
+    <tr><td>Saturation S</td><td>w, e, G<sub>s</sub></td><td>S = w × G<sub>s</sub> / e</td></tr>
+    <tr><td>Air-filled porosity F<sub>a</sub></td><td>P, θ</td><td>F<sub>a</sub> = P − θ</td></tr>
+    <tr><td>Wet bulk density ρ<sub>t</sub></td><td>ρ<sub>b</sub>, w</td><td>ρ<sub>t</sub> = ρ<sub>b</sub>(1 + w)</td></tr>
+    <tr><td>Bulk density ρ<sub>b</sub></td><td>G<sub>s</sub>, e, S</td><td>ρ<sub>b</sub> = G<sub>s</sub> × ρ<sub>w</sub> × (1 + w) / (1 + e) where w = S × e / G<sub>s</sub></td></tr>
   </tbody>
 </table>
 
-<blockquote>🎯 <strong>Bottom line:</strong> These aren't just abstract numbers. Every irrigation schedule, every drainage plan, every erosion control strategy depends on getting these mass-volume relationships right. Master these, and you've mastered the physical foundation of soil science.</blockquote>
+<hr>
+
+<h2>📝 Part VI — Worked Example: Integrating All Concepts</h2>
+
+<p>A soil sample is collected from an irrigated wheat field near <strong>Sétif, Algeria</strong> using a core sampler (cylinder volume = 100 cm³). The following measurements are obtained:</p>
+
+<table>
+  <thead>
+    <tr><th>Measurement</th><th>Value</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mass of wet soil + cylinder</td><td>325.0 g</td></tr>
+    <tr><td>Mass of empty cylinder</td><td>150.0 g</td></tr>
+    <tr><td>Mass of oven-dry soil + cylinder (after 24h at 105°C)</td><td>290.0 g</td></tr>
+    <tr><td>Cylinder volume (V<sub>t</sub>)</td><td>100 cm³</td></tr>
+    <tr><td>Assumed particle density (ρ<sub>s</sub>)</td><td>2.65 g/cm³</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Step 1 — Basic masses:</strong><br>
+Mass of wet soil: M<sub>wet</sub> = 325.0 − 150.0 = <strong>175.0 g</strong><br>
+Mass of oven-dry soil: M<sub>s</sub> = 290.0 − 150.0 = <strong>140.0 g</strong><br>
+Mass of water: M<sub>w</sub> = 175.0 − 140.0 = <strong>35.0 g</strong></p>
+
+<p><strong>Step 2 — Bulk density:</strong><br>
+ρ<sub>b</sub> = M<sub>s</sub> / V<sub>t</sub> = 140.0 / 100 = <strong>1.40 g/cm³</strong></p>
+
+<p><strong>Step 3 — Gravimetric water content:</strong><br>
+w = M<sub>w</sub> / M<sub>s</sub> = 35.0 / 140.0 = <strong>0.25 (25%)</strong></p>
+
+<p><strong>Step 4 — Volumetric water content:</strong><br>
+θ = w × ρ<sub>b</sub> / ρ<sub>w</sub> = 0.25 × 1.40 / 1.0 = <strong>0.35 (35%)</strong></p>
+
+<p><strong>Step 5 — Total porosity:</strong><br>
+P = 1 − (ρ<sub>b</sub> / ρ<sub>s</sub>) = 1 − (1.40 / 2.65) = 1 − 0.528 = <strong>0.472 (47.2%)</strong></p>
+
+<p><strong>Step 6 — Void ratio:</strong><br>
+e = P / (1 − P) = 0.472 / 0.528 = <strong>0.894</strong></p>
+
+<p><strong>Step 7 — Degree of saturation:</strong><br>
+S = θ / P = 0.35 / 0.472 = <strong>0.742 (74.2%)</strong></p>
+
+<p><strong>Step 8 — Air-filled porosity:</strong><br>
+F<sub>a</sub> = P − θ = 0.472 − 0.35 = <strong>0.122 (12.2%)</strong></p>
+
+<p><strong>Step 9 — Interpretation:</strong> The air-filled porosity (12.2%) is just above the critical 10% threshold — the soil is adequately but marginally aerated. The degree of saturation (74.2%) indicates the soil is approaching field capacity. Further irrigation without drainage would push F<sub>a</sub> below 10%, risking anaerobiosis. The bulk density (1.40 g/cm³) is within the normal range for cultivated loam but suggests some compaction — values below 1.30 would indicate better structure. This is exactly the kind of analysis an agronomist on the Sétif high plateaus would conduct to make irrigation decisions.</p>
+
+<hr>
+
+<h2>⚠️ Common Misconceptions</h2>
+
+<p><strong>1. « Sandy soils have higher porosity than clay soils. »</strong> False. The opposite is usually true: well-structured clay soils have total porosities of 0.50–0.65, while sandy soils have 0.35–0.45. The confusion arises because sandy soils <em>drain faster</em>, creating the impression of more pore space — but what they have is more <em>macropores</em> and fewer total pores.</p>
+
+<p><strong>2. « Bulk density is a fixed property of a soil type. »</strong> False. Bulk density varies enormously with management: the same soil can have ρ<sub>b</sub> = 1.1 g/cm³ after deep tillage and ρ<sub>b</sub> = 1.6 g/cm³ after heavy vehicle traffic. Particle density is relatively fixed; bulk density is not (Hamza &amp; Anderson, 2005).</p>
+
+<p><strong>3. « Gravimetric water content cannot exceed 100%. »</strong> False. In organic soils (peat, histosols), where M<sub>w</sub> > M<sub>s</sub>, gravimetric water content routinely exceeds 100% and can reach 500–1,500% in Sphagnum peat bogs.</p>
+
+<p><strong>4. « Volumetric and gravimetric water contents are interchangeable. »</strong> False. They differ by the factor ρ<sub>b</sub>/ρ<sub>w</sub>. A soil with w = 0.20 could have θ = 0.24 (if ρ<sub>b</sub> = 1.2) or θ = 0.34 (if ρ<sub>b</sub> = 1.7). Failing to specify which expression is being used has caused serious errors in irrigation scheduling and hydrological modelling.</p>
+
+<p><strong>5. « Porosity alone determines soil drainage. »</strong> False. Pore <em>size distribution</em> matters far more than total porosity. A clay soil with P = 0.55 drains poorly because its pores are predominantly micropores held by capillary forces. A sandy soil with P = 0.40 drains rapidly because its macropores empty under gravity.</p>
+
+<p><strong>6. « Air mass contributes to total soil mass. »</strong> Negligible. Air density is approximately 1.2 kg/m³ — roughly 1,000 times lighter than water and 2,200 times lighter than mineral solids. In a 100 cm³ soil sample with 20% air-filled porosity, air mass ≈ 0.024 g, versus water mass ≈ 30 g and solid mass ≈ 130 g.</p>
+
+<hr>
+
+<h2>🧩 Summary: The Quantitative Foundation</h2>
+
+<p>The mass-volume relations of soil are not abstract mathematical constructions — they are the quantitative language through which soil scientists, agronomists, hydrologists, and civil engineers communicate about the physical state of the most complex material at the Earth's surface. From Karl Terzaghi's phase diagrams in the 1920s to Daniel Hillel's comprehensive soil physics in the 2000s, this framework has proven remarkably durable because it captures the essential truth about soil: it is a <strong>three-phase system whose behaviour is governed by the proportions and interactions of its solid, liquid, and gaseous components</strong>.</p>
+
+<p>Every irrigation schedule in the Mitidja Plain, every drainage design in the Chelif Valley, every foundation calculation for infrastructure in the Saharan cities, every contamination risk assessment for industrial sites — all begin with measuring ρ<sub>b</sub>, ρ<sub>s</sub>, w, θ, P, and S. Master these six parameters and their interconversions, and you have mastered the quantitative foundation upon which the entire edifice of soil physics is constructed.</p>
+
+<hr>
+
+<h2>📚 References</h2>
+
+<p>Brady, N. C., &amp; Weil, R. R. (2017). <em>The nature and properties of soils</em> (15th ed.). Pearson.</p>
+<p>Flint, A. L., &amp; Flint, L. E. (2002). Particle density. In J. H. Dane &amp; G. C. Topp (Eds.), <em>Methods of soil analysis: Part 4 — Physical methods</em> (pp. 229–240). Soil Science Society of America.</p>
+<p>Fredlund, D. G., &amp; Rahardjo, H. (1993). <em>Soil mechanics for unsaturated soils</em>. John Wiley &amp; Sons.</p>
+<p>Gardner, W. H. (1986). Water content. In A. Klute (Ed.), <em>Methods of soil analysis: Part 1 — Physical and mineralogical methods</em> (2nd ed., pp. 493–544). American Society of Agronomy.</p>
+<p>Hamza, M. A., &amp; Anderson, W. K. (2005). Soil compaction in cropping systems: A review of the nature, causes and possible solutions. <em>Soil &amp; Tillage Research</em>, <em>82</em>(2), 121–145. https://doi.org/10.1016/j.still.2004.08.009</p>
+<p>Hillel, D. (2004). <em>Introduction to environmental soil physics</em>. Academic Press.</p>
+<p>Jury, W. A., &amp; Horton, R. (2004). <em>Soil physics</em> (6th ed.). John Wiley &amp; Sons.</p>
+<p>Richards, L. A. (1954). <em>Diagnosis and improvement of saline and alkali soils</em>. USDA Agriculture Handbook No. 60.</p>
+<p>Terzaghi, K., Peck, R. B., &amp; Mesri, G. (1996). <em>Soil mechanics in engineering practice</em> (3rd ed.). John Wiley &amp; Sons.</p>
+<p>Topp, G. C., Davis, J. L., &amp; Annan, A. P. (1980). Electromagnetic determination of soil water content: Measurements in coaxial transmission lines. <em>Water Resources Research</em>, <em>16</em>(3), 574–582. https://doi.org/10.1029/WR016i003p00574</p>

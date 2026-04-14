@@ -1,343 +1,469 @@
-<h2>⚖️ Test d'Hypothèses : Le Moteur de la Découverte Scientifique</h2>
+<h2>⚖️ Test d'hypothèses : Le moteur de la découverte scientifique</h2>
 
-<p>Imaginez que vous êtes un agronome en Algérie testant un nouvel engrais sur des champs de blé. Vous l'appliquez à 30 parcelles sélectionnées au hasard et comparez leurs rendements à 30 parcelles témoins. Les parcelles traitées affichent en moyenne 4,2 tonnes/ha contre 3,8 tonnes/ha pour les témoins. Cette différence de 0,4 tonne est-elle <em>réelle</em> — un véritable effet de l'engrais — ou aurait-elle pu survenir par pur hasard, simplement par la variation naturelle entre les champs ? C'est la question fondamentale pour laquelle le <strong>test d'hypothèses</strong> a été inventé.</p>
+<p>Par un après-midi d'été dans les années 1920, lors d'une garden-party universitaire à Cambridge, en Angleterre, une femme nommée Muriel Bristol fit une affirmation apparemment anodine : elle pouvait distinguer, par le goût seul, si le lait avait été versé dans sa tasse avant ou après le thé. Les scientifiques autour d'elle se moquèrent. Mais un homme — un statisticien de petite taille portant des lunettes épaisses nommé <strong>Ronald A. Fisher</strong> — vit quelque chose de profond dans ce moment. Plutôt que de discuter, il proposa une expérience : huit tasses de thé, quatre préparées de chaque manière, présentées dans un ordre aléatoire. Bristol devait goûter chacune et les classifier. Fisher posa alors la question qui allait remodeler toute la science : <em>Comment savoir si ses réponses correctes reflètent une capacité réelle, ou une simple chance au devinement ?</em> De cette dispute ludique autour du thé et du lait naquit le cadre formel du <strong>test d'hypothèses</strong> — la méthode d'inférence scientifique la plus influente jamais conçue (Salsburg, 2001).</p>
 
-<p>Le test d'hypothèses est le cadre statistique formel pour prendre des décisions sous incertitude. Il transforme des questions scientifiques vagues (« Ce traitement fonctionne-t-il ? ») en problèmes mathématiques précis avec des taux d'erreur quantifiables. Développé au début du XXᵉ siècle par trois géants intellectuels — <strong>Ronald A. Fisher</strong>, <strong>Jerzy Neyman</strong> et <strong>Egon Pearson</strong> — il reste l'outil inférentiel le plus utilisé en science, médecine, ingénierie et recherche sociale (Lehmann &amp; Romano, 2005).</p>
+<p>Le test d'hypothèses est la machinerie statistique rigoureuse par laquelle les scientifiques, médecins, ingénieurs, économistes et décideurs politiques séparent les effets réels du bruit du hasard. Chaque fois qu'une entreprise pharmaceutique cherche l'approbation d'un médicament, chaque fois qu'un agronome évalue une nouvelle variété de culture, chaque fois qu'un psychologue prétend qu'une nouvelle thérapie fonctionne, chaque fois qu'une agence gouvernementale évalue une politique environnementale — le test d'hypothèses se tient à la porte, exigeant des preuves. C'est, comme l'ont décrit Lehmann et Romano (2005), la logique formelle de la prise de décision scientifique sous incertitude.</p>
 
-<blockquote>💡 <strong>Pourquoi le Test d'Hypothèses est Important :</strong> Sans cadre formel, les humains sont notoirement mauvais pour juger si des patterns sont réels ou coïncidents. Le test d'hypothèses fournit une méthode disciplinée et reproductible pour séparer les effets véritables du bruit aléatoire — nous protégeant de nos propres biais cognitifs et permettant à la science d'accumuler des connaissances fiables.</blockquote>
-
-<hr>
-
-<h2>📜 Un Bref Historique : Trois Philosophies, Une Procédure</h2>
-
-<p>Ce que la plupart des manuels enseignent comme une procédure unifiée est en réalité une fusion malaisée de deux approches distinctes — et historiquement rivales (Lehmann, 1993). Comprendre cette histoire intellectuelle vous aide à utiliser le test d'hypothèses plus judicieusement.</p>
-
-<h3>🎣 Le Test de Signification de Fisher (1925)</h3>
-
-<p>Ronald A. Fisher, travaillant à la Station Expérimentale de Rothamsted sur des expériences agricoles, a développé le <strong>test de signification</strong> comme méthode de quantification de l'évidence contre une hypothèse. Son innovation clé fut la <strong>valeur p</strong> — une mesure continue de la surprise que les données causeraient si l'hypothèse nulle était vraie (Fisher, 1925). Fisher considérait la valeur p comme un outil de <em>raisonnement inductif</em> : une petite valeur p constitue une preuve contre H₀, avec des valeurs plus petites indiquant une preuve plus forte. Il considérait 0,05 comme un simple point de référence pratique, et non un seuil mécanique de décision.</p>
-
-<h3>⚙️ La Théorie de Décision de Neyman-Pearson (1928–1933)</h3>
-
-<p>Jerzy Neyman et Egon Pearson ont adopté une approche fondamentalement différente. Ils ont formulé le test comme un <strong>problème de décision</strong> entre deux hypothèses avec un contrôle explicite des taux d'erreur à long terme. Leurs innovations incluaient : l'<em>hypothèse alternative</em> formelle (H₁), les <em>erreurs de Type I et Type II</em>, le concept de <em>puissance statistique</em>, et le <strong>lemme de Neyman-Pearson</strong> — qui identifie le test le plus puissant pour les hypothèses simples (Neyman &amp; Pearson, 1933).</p>
-
-<h3>🔀 L'Hybride Moderne : le NHST</h3>
-
-<p>Ce que les chercheurs pratiquent aujourd'hui est le <strong>Test de Signification de l'Hypothèse Nulle (NHST)</strong> — un amalgame qui mélange les valeurs p de Fisher avec le cadre décisionnel de Neyman-Pearson (Gigerenzer, 2004). Vous formulez H₀ et H₁, calculez une valeur p, la comparez à un α prédéfini, et parfois interprétez l'amplitude de la valeur p comme force de preuve.</p>
-
-<table>
-  <thead>
-    <tr><th>Caractéristique</th><th>Fisher (1925)</th><th>Neyman-Pearson (1933)</th><th>NHST (Hybride Moderne)</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>Hypothèses</strong></td><td>H₀ seule</td><td>H₀ et H₁ explicitement</td><td>H₀ et H₁</td></tr>
-    <tr><td><strong>Métrique clé</strong></td><td>Valeur p (continue)</td><td>α et β (pré-fixés)</td><td>Valeur p comparée à α</td></tr>
-    <tr><td><strong>Objectif</strong></td><td>Mesurer l'évidence contre H₀</td><td>Minimiser les erreurs de décision à long terme</td><td>Mélange des deux</td></tr>
-    <tr><td><strong>Décision</strong></td><td>Pas de décision binaire ; preuve graduée</td><td>Rejeter ou ne pas rejeter</td><td>Rejeter si p &lt; α</td></tr>
-    <tr><td><strong>Puissance</strong></td><td>Non considérée formellement</td><td>Concept central (1 − β)</td><td>Souvent négligée en pratique</td></tr>
-    <tr><td><strong>Philosophie</strong></td><td>Inférence inductive</td><td>Comportement inductif (contrôle à long terme)</td><td>Mélange incohérent</td></tr>
-  </tbody>
-</table>
+<blockquote>💡 <strong>Pourquoi cela vous concerne :</strong> Sans cadre formel, l'intuition humaine est dangereusement peu fiable pour distinguer les vrais patterns des coïncidences. Nous voyons des visages dans les nuages, des séries gagnantes dans des lancers de pièce aléatoires, et des guérisons miraculeuses dans des rémissions spontanées. Le test d'hypothèses est notre défense disciplinée contre ces illusions cognitives — une méthode structurée pour poser, avec une précision mathématique : <em>Ce résultat aurait-il pu se produire par le seul hasard ?</em></blockquote>
 
 <hr>
 
-<h2>🔬 L'Anatomie d'un Test d'Hypothèses</h2>
+<h2>📜 Les origines intellectuelles : Trois esprits, deux philosophies, une révolution</h2>
 
-<p>Malgré les différences philosophiques, le test d'hypothèses moderne suit une procédure structurée en 7 étapes. Parcourons chaque étape avec notre exemple d'engrais pour blé.</p>
+<p>Ce que la plupart des manuels présentent comme une procédure unique et unifiée est, en réalité, un mariage instable entre deux philosophies fondamentalement différentes forgées par trois esprits brillants sur trois décennies. Comprendre cette histoire intellectuelle n'est pas un simple détail académique — c'est essentiel pour utiliser le test d'hypothèses avec sagesse, car les confusions qui affligent la pratique moderne découlent directement de l'amalgame entre ces deux traditions (Lehmann, 1993 ; Gigerenzer, 2004).</p>
 
-<h3>Étape 1 : Formuler la Question de Recherche</h3>
+<h3>🎣 Ronald A. Fisher et la naissance du test de significativité (années 1920–1930)</h3>
 
-<p>Traduisez votre question scientifique en une forme statistique testable. Notre question : « Le nouvel engrais augmente-t-il le rendement du blé ? » Cela doit être formulé en termes de paramètres de population, non de statistiques d'échantillon.</p>
+<p>Ronald Aylmer Fisher (1890–1962) fut, selon tout critère, l'un des scientifiques les plus influents du vingtième siècle. Travaillant à la Station expérimentale de Rothamsted dans le Hertfordshire, en Angleterre — un humble centre de recherche agricole — il inventa à lui seul la majeure partie de la statistique moderne, incluant l'analyse de la variance, l'estimation du maximum de vraisemblance, le plan d'expériences et le concept de suffisance. Son ouvrage magistral de 1925, <em>Statistical Methods for Research Workers</em>, devint la bible de la science empirique pendant un demi-siècle (Fisher, 1925).</p>
 
-<h3>Étape 2 : Formuler les Hypothèses</h3>
+<p>L'approche de Fisher en matière de test était enracinée dans le <strong>raisonnement inductif</strong>. Son innovation clé fut la <strong>valeur p (p-value)</strong> : une mesure continue quantifiant à quel point les données observées seraient surprenantes si l'hypothèse nulle était vraie. Pour Fisher, la valeur p n'était pas un interrupteur binaire mais une mesure graduée de la preuve. Une très petite valeur p jetait le doute sur l'hypothèse nulle ; une grande valeur ne fournissait pas une telle preuve. Il écrivit de manière célèbre qu'une valeur p autour de 0.05 signifiait que le résultat « méritait un second regard » — non qu'il devait être mécaniquement déclaré « significatif » et publié sans plus de réflexion. Fisher concevait l'hypothèse nulle (H₀) comme un homme de paille à potentiellement renverser, mais il ne formula jamais d'hypothèse alternative explicite. Son univers était celui de la preuve et du jugement, non des décisions automatisées.</p>
 
-<p>Chaque test implique une paire d'hypothèses mutuellement exclusives et exhaustives concernant un paramètre de population θ :</p>
+<h3>⚙️ Jerzy Neyman et Egon Pearson : La révolution de la théorie de la décision (1928–1938)</h3>
 
-<table>
-  <thead>
-    <tr><th>Hypothèse</th><th>Symbole</th><th>Signification</th><th>Exemple Engrais</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>🔴 <strong>Hypothèse Nulle</strong></td><td>H₀</td><td>L'énoncé « pas d'effet » ou « pas de différence » ; le statu quo</td><td>H₀ : μ₁ − μ₂ = 0 (l'engrais n'a aucun effet)</td></tr>
-    <tr><td>🟢 <strong>Hypothèse Alternative</strong></td><td>H₁ ou Hₐ</td><td>L'affirmation que le chercheur souhaite soutenir ; contredit H₀</td><td>H₁ : μ₁ − μ₂ &gt; 0 (l'engrais augmente le rendement)</td></tr>
-  </tbody>
-</table>
+<p>Tandis que Fisher travaillait dans les champs de Rothamsted, deux mathématiciens plus jeunes à l'University College de Londres construisaient un cadre radicalement différent. <strong>Jerzy Neyman</strong> (1894–1981), un mathématicien polonais ayant survécu à la Révolution russe et à la Première Guerre mondiale, et <strong>Egon Sharpe Pearson</strong> (1895–1980), le fils timide du grand statisticien Karl Pearson, publièrent une série d'articles entre 1928 et 1938 qui reformulèrent le test comme un <strong>problème de décision</strong> entre deux hypothèses concurrentes (Neyman &amp; Pearson, 1933).</p>
 
-<blockquote>🧠 <strong>Insight Clé :</strong> On ne « prouve » jamais H₁ directement. On évalue plutôt si les données fournissent suffisamment de preuves pour <em>rejeter</em> H₀. C'est la logique de la <strong>preuve par contradiction</strong> — on suppose que H₀ est vraie, on montre que les données sont hautement invraisemblables sous cette hypothèse, puis on conclut que H₀ est probablement fausse.</blockquote>
+<p>Leurs innovations furent extraordinaires par leur précision. Ils introduisirent l'<em>hypothèse alternative</em> formelle (H₁), définirent deux types d'erreurs (Type I et Type II), établirent le concept de <em>puissance statistique</em>, et démontrèrent le célèbre <strong>lemme de Neyman-Pearson</strong> — qui identifie le test le plus puissant pour toute paire d'hypothèses simples. Dans leur cadre, le chercheur fixe les taux d'erreur maximaux acceptables <em>avant</em> la collecte des données, puis prend une décision binaire d'acceptation ou de rejet. L'objectif n'était pas de mesurer la preuve dans une expérience isolée mais de contrôler la fréquence des erreurs à long terme à travers une série infinie de décisions — ce que Neyman appela le <strong>comportement inductif</strong> plutôt que l'inférence inductive.</p>
 
-<h3>Tests Unilatéraux vs. Bilatéraux</h3>
+<h3>⚔️ La querelle amère</h3>
+
+<p>Fisher et le camp Neyman-Pearson s'affrontèrent amèrement pendant des décennies. Fisher rejeta leur approche en la décrivant comme réduisant le raisonnement scientifique à « une règle de comportement pour automates » et ridiculisa le concept d'acceptation de H₀ comme logiquement absurde. Neyman répliqua que le test de significativité de Fisher était vague et incomplet, dépourvu de tout mécanisme formel de contrôle des erreurs. Leur dispute fut scientifique, philosophique et profondément personnelle — Fisher avait été le mentor du jeune Egon Pearson et se sentit trahi (Lehmann, 1993). L'hostilité persista jusqu'à la mort de Fisher en 1962, et les échos de cette guerre intellectuelle résonnent encore aujourd'hui dans chaque salle de cours de statistique.</p>
+
+<h3>🔀 L'hybride moderne : Le test de significativité de l'hypothèse nulle (NHST)</h3>
+
+<p>Ironiquement, ce que les chercheurs pratiquent effectivement aujourd'hui est le <strong>test de significativité de l'hypothèse nulle (NHST)</strong> — un amalgame que ni Fisher ni Neyman-Pearson n'auraient pleinement approuvé. Le NHST mélange des éléments des deux cadres : on formule H₀ et H₁ (Neyman-Pearson), on calcule une valeur p (Fisher), on la compare à un seuil α préfixé (Neyman-Pearson), et on interprète parfois la magnitude de la valeur p comme force de preuve (Fisher). Cet hybride émergea non d'une délibération théorique mais des besoins pragmatiques des auteurs de manuels dans les années 1940 et 1950 qui simplifièrent les deux traditions en une recette toute faite (Gigerenzer, 2004). Le résultat est extrêmement utile en pratique, mais il crée de la confusion quand les utilisateurs ne reconnaissent pas où une philosophie finit et où l'autre commence.</p>
 
 <table>
   <thead>
-    <tr><th>Type</th><th>Forme de H₁</th><th>Quand l'Utiliser</th><th>Exemple</th></tr>
+    <tr><th>Caractéristique</th><th>Fisher (1925)</th><th>Neyman-Pearson (1933)</th><th>NHST (Hybride moderne)</th></tr>
   </thead>
   <tbody>
-    <tr><td>➡️ <strong>Unilatéral droit</strong></td><td>H₁ : θ &gt; θ₀</td><td>Vous prédisez une direction spécifique</td><td>L'engrais <em>augmente</em> le rendement</td></tr>
-    <tr><td>⬅️ <strong>Unilatéral gauche</strong></td><td>H₁ : θ &lt; θ₀</td><td>Vous prédisez une diminution</td><td>Le médicament <em>réduit</em> la tension</td></tr>
-    <tr><td>↔️ <strong>Bilatéral</strong></td><td>H₁ : θ ≠ θ₀</td><td>Vous prédisez une différence, pas sa direction</td><td>La méthode pédagogique <em>diffère</em> de l'ancienne</td></tr>
+    <tr><td><strong>Hypothèses</strong></td><td>H₀ seule (hypothèse nulle comme homme de paille)</td><td>H₀ et H₁ explicitement spécifiées</td><td>H₀ et H₁ formulées</td></tr>
+    <tr><td><strong>Métrique clé</strong></td><td>Valeur p (mesure continue de preuve)</td><td>α et β (taux d'erreur préfixés)</td><td>Valeur p comparée à un α fixe</td></tr>
+    <tr><td><strong>Objectif</strong></td><td>Quantifier la preuve contre H₀</td><td>Minimiser les erreurs de décision à long terme</td><td>Mélange les deux objectifs</td></tr>
+    <tr><td><strong>Décision</strong></td><td>Pas de décision binaire ; la preuve est graduée</td><td>Rejeter ou ne pas rejeter ; binaire</td><td>Rejeter si p &lt; α</td></tr>
+    <tr><td><strong>Puissance (1 − β)</strong></td><td>Non formellement considérée</td><td>Concept central ; doit être planifiée</td><td>Souvent négligée en pratique</td></tr>
+    <tr><td><strong>Philosophie</strong></td><td>Inférence inductive (apprendre des données)</td><td>Comportement inductif (contrôle à long terme)</td><td>Mélange philosophique incohérent</td></tr>
+    <tr><td><strong>Réplication</strong></td><td>Chaque expérience jugée sur sa propre preuve</td><td>Justifié par l'application répétée</td><td>Les études isolées traitées comme définitives</td></tr>
   </tbody>
 </table>
-
-<p>Les tests bilatéraux sont plus conservateurs (plus difficiles de rejeter H₀) car ils divisent α entre les deux queues. N'utilisez les tests unilatéraux que lorsque vous avez une justification théorique <em>a priori</em> solide pour la direction — jamais parce que vous avez regardé les données en premier (Lombardi &amp; Hurlbert, 2009).</p>
-
-<h3>Étape 3 : Choisir le Seuil de Signification (α)</h3>
-
-<p>Le seuil de signification α est la <strong>probabilité maximale d'une erreur de Type I</strong> que vous êtes prêt à tolérer. Il doit être fixé <em>avant</em> la collecte des données.</p>
-
-<table>
-  <thead>
-    <tr><th>Niveau α</th><th>Interprétation</th><th>Usage Typique</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>0,10</strong></td><td>10 % de risque de fausse alarme ; plus libéral</td><td>Recherche exploratoire, études pilotes</td></tr>
-    <tr><td><strong>0,05</strong></td><td>5 % de risque de fausse alarme ; convention par défaut</td><td>La plupart des disciplines scientifiques</td></tr>
-    <tr><td><strong>0,01</strong></td><td>1 % de risque de fausse alarme ; plus strict</td><td>Essais médicaux, décisions à haut enjeu</td></tr>
-    <tr><td><strong>0,001</strong></td><td>0,1 % de risque ; très strict</td><td>Génomique, physique des particules</td></tr>
-  </tbody>
-</table>
-
-<blockquote>⚠️ <strong>La Convention de 0,05 :</strong> L'utilisation quasi-universelle de α = 0,05 remonte à la recommandation de Fisher en 1925. Bien que pratique, elle est fondamentalement arbitraire. Benjamin et al. (2018) ont proposé de redéfinir la signification statistique à p &lt; 0,005 pour les nouvelles découvertes, arguant que le seuil de 0,05 produit trop de faux positifs.</blockquote>
-
-<h3>Étape 4 : Sélectionner la Statistique de Test</h3>
-
-<p>La statistique de test transforme vos données en un nombre unique mesurant la déviation du résultat par rapport à ce que H₀ prédit :</p>
-
-<table>
-  <thead>
-    <tr><th>Situation</th><th>Statistique de Test</th><th>Distribution Sous H₀</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Moyenne, σ connu, grand n</td><td>z = (x̄ − μ₀) / (σ/√n)</td><td>Normale standard N(0,1)</td></tr>
-    <tr><td>Moyenne, σ inconnu</td><td>t = (x̄ − μ₀) / (s/√n)</td><td>Student t avec ddl = n−1</td></tr>
-    <tr><td>Deux moyennes indépendantes</td><td>t = (x̄₁ − x̄₂) / SE</td><td>Student t avec ddl combinés</td></tr>
-    <tr><td>Proportion</td><td>z = (p̂ − p₀) / √[p₀(1−p₀)/n]</td><td>Normale standard (grand n)</td></tr>
-    <tr><td>Variance</td><td>χ² = (n−1)s² / σ₀²</td><td>Khi-deux avec ddl = n−1</td></tr>
-    <tr><td>Données catégorielles</td><td>χ² = Σ (O−E)² / E</td><td>Khi-deux</td></tr>
-    <tr><td>Moyennes de plusieurs groupes</td><td>F = CM<sub>inter</sub> / CM<sub>intra</sub></td><td>Distribution F</td></tr>
-  </tbody>
-</table>
-
-<h3>Étape 5 : Déterminer la Région Critique ou Calculer la Valeur p</h3>
-
-<p><strong>Approche A — Méthode de la Valeur Critique :</strong> Trouvez la valeur frontière qui sépare la région de rejet de la région de non-rejet. Si votre statistique de test tombe dans la région de rejet, rejetez H₀.</p>
-
-<p><strong>Approche B — Méthode de la Valeur p :</strong> Calculez la probabilité d'obtenir une statistique de test aussi extrême que celle observée, en supposant H₀ vraie. Si p ≤ α, rejetez H₀. L'approche par la valeur p est plus informative car elle montre la force exacte de la preuve (Wasserstein &amp; Lazar, 2016).</p>
-
-<h3>Étape 6 : Collecter les Données et Calculer</h3>
-
-<p>Supposons que nos données donnent t<sub>obs</sub> = 2,31 avec p = 0,012. Puisque p = 0,012 &lt; α = 0,05, nous rejetons H₀.</p>
-
-<h3>Étape 7 : Formuler la Conclusion</h3>
-
-<p>Traduisez toujours dans le contexte réel : « Il existe une preuve statistiquement significative au seuil de 5 % que le nouvel engrais augmente le rendement du blé (t(58) = 2,31, p = 0,012, d = 0,60). » Rapportez la statistique de test, les degrés de liberté, la valeur p <em>et</em> une taille d'effet (Wilkinson &amp; Task Force, 1999).</p>
 
 <hr>
 
-<h2>🚨 Erreurs de Type I et de Type II : Les Deux Façons de Se Tromper</h2>
+<h2>🔬 La logique du test d'hypothèses : La preuve par l'absurde</h2>
 
-<table>
-  <thead>
-    <tr><th></th><th>H₀ est Réellement VRAIE</th><th>H₀ est Réellement FAUSSE</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>Rejeter H₀</strong></td><td>🔴 <strong>Erreur de Type I</strong> (Faux Positif) — Probabilité = α</td><td>✅ <strong>Décision Correcte</strong> (Vrai Positif) — Probabilité = 1 − β = Puissance</td></tr>
-    <tr><td><strong>Ne pas rejeter H₀</strong></td><td>✅ <strong>Décision Correcte</strong> (Vrai Négatif) — Probabilité = 1 − α</td><td>🟡 <strong>Erreur de Type II</strong> (Faux Négatif) — Probabilité = β</td></tr>
-  </tbody>
-</table>
+<p>En son cœur philosophique, le test d'hypothèses emprunte une stratégie logique ancienne — le <strong>raisonnement par l'absurde</strong> (reductio ad absurdum). Le raisonnement procède en trois étapes : (1) supposer que l'hypothèse nulle est vraie ; (2) calculer les données qu'on s'attendrait à observer sous cette supposition ; (3) si les données réelles sont hautement improbables sous cette supposition, conclure que la supposition elle-même est probablement fausse. C'est exactement la logique qu'Euclide utilisa pour prouver l'infinité des nombres premiers il y a plus de deux mille ans, appliquée maintenant à la science empirique.</p>
 
-<h3>🔴 Erreur de Type I (α) — La Fausse Alarme</h3>
+<p>Le philosophe Karl Popper (1959) formalisa ce raisonnement dans sa théorie de la <strong>falsifiabilité</strong> : la science progresse non en prouvant que les théories sont vraies, mais en tentant de les <em>falsifier</em>. Une théorie qui survit à de rigoureuses tentatives de falsification gagne une acceptation provisoire — non parce qu'elle est prouvée, mais parce qu'elle a résisté aux défis les plus forts. Le test d'hypothèses opérationnalise cette vision poppérienne : nous ne prouvons pas qu'un médicament fonctionne ; nous démontrons que les données sont incompatibles avec l'hypothèse que le médicament ne fait rien.</p>
 
-<p>Vous concluez que l'engrais fonctionne alors qu'en réalité il n'a aucun effet. En recherche médicale, cela pourrait signifier approuver un médicament inefficace ; en justice pénale, c'est condamner un innocent.</p>
-
-<h3>🟡 Erreur de Type II (β) — La Découverte Manquée</h3>
-
-<p>Vous échouez à détecter que l'engrais fonctionne réellement. En médecine, cela signifie ne pas identifier un traitement efficace.</p>
-
-<blockquote>🏛️ <strong>L'Analogie du Tribunal :</strong> En droit pénal, l'hypothèse nulle est « l'accusé est innocent ». Une erreur de Type I est <em>condamner un innocent</em> (faux positif) — le système judiciaire est conçu pour rendre cela rare (« au-delà de tout doute raisonnable »). Une erreur de Type II est <em>acquitter un coupable</em> (faux négatif) — regrettable, mais considéré comme moins catastrophique.</blockquote>
-
-<h3>Le Compromis α–β</h3>
-
-<p>Pour un échantillon de taille fixe, diminuer α augmente inévitablement β. La seule façon de réduire les <em>deux</em> erreurs simultanément est d'<strong>augmenter la taille de l'échantillon</strong> — plus de données donnent plus de précision (Cohen, 1988).</p>
+<blockquote>🧠 <strong>L'asymétrie cruciale :</strong> Le test d'hypothèses est fondamentalement asymétrique. Nous pouvons rassembler des preuves <em>contre</em> H₀, mais nous ne pouvons jamais prouver que H₀ est vraie. Ne pas rejeter H₀ ne signifie pas que H₀ est correcte — cela signifie que nous avons manqué de preuves suffisantes pour la réfuter. Cette asymétrie, empruntée directement à la philosophie de Popper, est la raison pour laquelle nous disons « on ne rejette pas H₀ » plutôt que « on accepte H₀ ». Comme l'épidémiologiste Douglas Altman l'a mémorablement déclaré : « L'absence de preuve n'est pas une preuve d'absence » (Altman &amp; Bland, 1995).</blockquote>
 
 <hr>
 
-<h2>💪 Puissance Statistique : La Capacité de Détecter le Réel</h2>
+<h2>🏗️ L'anatomie complète d'un test d'hypothèses : Dix étapes</h2>
 
-<p>La <strong>puissance statistique</strong> est la probabilité qu'un test rejette correctement H₀ quand H₁ est vraie. Elle vaut 1 − β.</p>
+<p>Malgré les différences philosophiques entre Fisher et Neyman-Pearson, le test d'hypothèses moderne suit une procédure structurée qui intègre les apports des deux traditions. Ci-dessous, nous parcourons chaque étape à l'aide d'un exemple clinique mondial : un essai contrôlé randomisé testant si un nouveau médicament antihypertenseur réduit la pression artérielle systolique plus efficacement que le traitement standard actuel.</p>
+
+<h3>Étape 1 : Définir précisément la question de recherche</h3>
+
+<p>Commencez par transformer une curiosité scientifique vague en une question spécifique et testable portant sur un paramètre de population. Vague : « Le nouveau médicament fonctionne-t-il ? » Précise : « Le nouveau médicament antihypertenseur produit-il une réduction moyenne plus importante de la pression artérielle systolique après 12 semaines comparé au traitement standard, chez les adultes de 40 à 70 ans atteints d'hypertension de stade 1 ? » La précision à ce stade prévient l'ambiguïté ultérieure. La question doit être formulée en termes de <em>paramètres de population</em> (moyennes, proportions, variances), non de statistiques d'échantillon.</p>
+
+<h3>Étape 2 : Formuler l'hypothèse nulle et l'hypothèse alternative</h3>
+
+<p>Chaque test implique une paire d'hypothèses mutuellement exclusives et exhaustives portant sur un paramètre de population θ :</p>
 
 <table>
   <thead>
-    <tr><th>Facteur</th><th>Effet sur la Puissance</th><th>Pourquoi</th></tr>
+    <tr><th>Hypothèse</th><th>Symbole</th><th>Signification</th><th>Exemple clinique</th></tr>
   </thead>
   <tbody>
-    <tr><td>📈 <strong>Taille d'effet plus grande</strong></td><td>↑ Augmente</td><td>Les effets plus importants sont plus faciles à détecter</td></tr>
-    <tr><td>📊 <strong>Taille d'échantillon plus grande (n)</strong></td><td>↑ Augmente</td><td>Plus de données réduit la variabilité d'échantillonnage</td></tr>
-    <tr><td>🎯 <strong>α plus élevé</strong></td><td>↑ Augmente</td><td>Seuil plus bas pour le rejet (mais augmente l'erreur de Type I)</td></tr>
-    <tr><td>📉 <strong>Variabilité plus faible (σ)</strong></td><td>↑ Augmente</td><td>Moins de bruit rend le signal plus clair</td></tr>
-    <tr><td>➡️ <strong>Unilatéral vs. bilatéral</strong></td><td>↑ Unilatéral a plus de puissance</td><td>Concentre α dans une direction</td></tr>
+    <tr><td>🔴 <strong>Hypothèse nulle</strong></td><td>H₀</td><td>L'énoncé « pas d'effet » ou « pas de différence » ; le statu quo à contester</td><td>H₀ : μ<sub>nouveau</sub> − μ<sub>standard</sub> = 0 (pas de différence dans la réduction de PA)</td></tr>
+    <tr><td>🟢 <strong>Hypothèse alternative</strong></td><td>H₁ ou Hₐ</td><td>L'affirmation de recherche ; ce pour quoi nous cherchons des preuves</td><td>H₁ : μ<sub>nouveau</sub> − μ<sub>standard</sub> &gt; 0 (le nouveau médicament produit une réduction plus grande)</td></tr>
   </tbody>
 </table>
 
-<blockquote>🎯 <strong>La Convention de 80 % :</strong> Cohen (1988) a recommandé que les études soient conçues pour atteindre au moins 80 % de puissance (β ≤ 0,20). Pourtant, des enquêtes empiriques montrent que la puissance médiane dans la recherche publiée est bien inférieure — environ 50 % ou moins dans de nombreux domaines (Button et al., 2013). Cette « défaillance de puissance » est un contributeur majeur à la crise de réplication.</blockquote>
+<p>L'hypothèse nulle contient toujours l'égalité (=, ≤ ou ≥) et représente le défaut conservateur. La charge de la preuve repose entièrement sur son rejet — tout comme dans un procès pénal, l'accusation doit prouver la culpabilité au-delà du doute raisonnable tandis que la défense n'a qu'à maintenir le doute.</p>
+
+<h3>Directionnalité : Tests unilatéraux vs bilatéraux</h3>
+
+<table>
+  <thead>
+    <tr><th>Type</th><th>Forme de H₁</th><th>Quand l'utiliser</th><th>Exemple</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>➡️ <strong>Unilatéral droit</strong></td><td>H₁ : θ &gt; θ₀</td><td>Base théorique ou empirique <em>a priori</em> solide pour prédire une direction spécifique</td><td>Le nouveau médicament produit une réduction de PA <em>plus grande</em></td></tr>
+    <tr><td>⬅️ <strong>Unilatéral gauche</strong></td><td>H₁ : θ &lt; θ₀</td><td>La théorie prédit une diminution spécifique</td><td>L'intervention <em>réduit</em> les niveaux de cortisol</td></tr>
+    <tr><td>↔️ <strong>Bilatéral</strong></td><td>H₁ : θ ≠ θ₀</td><td>Pas de prédiction directionnelle forte ; l'effet pourrait aller dans les deux sens</td><td>Le nouveau curriculum <em>diffère</em> du traditionnel en scores d'examen</td></tr>
+  </tbody>
+</table>
+
+<p>Les tests bilatéraux sont plus conservateurs car ils répartissent α sur les deux queues, exigeant des preuves plus fortes pour rejeter H₀. Les tests unilatéraux concentrent tout α dans une direction, offrant plus de puissance pour cette alternative spécifique mais aucune capacité à détecter des effets dans la direction inattendue. N'utilisez les tests unilatéraux que lorsque vous avez une justification <em>a priori</em> solide — jamais parce que vous avez regardé les données et vu dans quelle direction l'effet tombait (Lombardi &amp; Hurlbert, 2009). La décision doit être documentée avant la collecte des données, idéalement dans un protocole de pré-enregistrement.</p>
+
+<h3>Étape 3 : Choisir le seuil de significativité (α)</h3>
+
+<p>Le seuil de significativité α est la <strong>probabilité maximale d'une erreur de Type I</strong> (faux positif — rejeter H₀ quand elle est vraie) que vous êtes disposé à tolérer. Ce seuil doit être fixé <em>avant</em> la collecte des données, non ajusté après avoir vu les résultats.</p>
+
+<table>
+  <thead>
+    <tr><th>Niveau α</th><th>Risque d'erreur de Type I</th><th>Domaine d'application typique</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>0.10</strong></td><td>Taux de fausse alarme de 10 % ; libéral</td><td>Recherche exploratoire, études pilotes, screening écologique</td></tr>
+    <tr><td><strong>0.05</strong></td><td>Taux de fausse alarme de 5 % ; conventionnel</td><td>La plupart des disciplines scientifiques (psychologie, biologie, agriculture)</td></tr>
+    <tr><td><strong>0.01</strong></td><td>Taux de fausse alarme de 1 % ; strict</td><td>Essais cliniques, contrôle qualité, décisions réglementaires</td></tr>
+    <tr><td><strong>0.001</strong></td><td>Taux de fausse alarme de 0.1 % ; très strict</td><td>Génomique (souvent 5 × 10⁻⁸), physique des particules (5σ ≈ 3 × 10⁻⁷)</td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚠️ <strong>L'histoire troublée de α = 0.05 :</strong> L'adoption quasi universelle de 0.05 remonte à une seule phrase du livre de Fisher de 1925 où il le qualifia de niveau « pratique ». Cette convention arbitraire s'est pétrifiée en un seuil rigide qui déforme la pratique scientifique. En 2017, un article historique signé par 72 statisticiens éminents proposa de redéfinir le seuil de découverte à α = 0.005, arguant que le standard 0.05 produit beaucoup trop de faux positifs (Benjamin et al., 2018). Le débat reste irrésolu, mais la leçon fondamentale est claire : le « bon » α dépend du contexte — les conséquences des faux positifs versus faux négatifs, la probabilité a priori de l'effet, la taille de l'échantillon et les standards de votre discipline.</blockquote>
+
+<h3>Étape 4 : Conduire une analyse de puissance et déterminer la taille de l'échantillon</h3>
+
+<p>Avant de collecter un seul point de données, un chercheur responsable effectue une <strong>analyse de puissance</strong> pour déterminer la taille minimale d'échantillon nécessaire pour détecter un effet significatif. Cette étape — chronologiquement la plus importante de toute la procédure — est aussi la plus fréquemment omise, avec des conséquences dévastatrices pour la fiabilité de la recherche publiée (Cohen, 1992). Nous discutons la puissance en détail dans une section dédiée ci-dessous.</p>
+
+<h3>Étape 5 : Sélectionner la statistique de test appropriée</h3>
+
+<p>La statistique de test transforme vos données brutes en un seul nombre mesurant à quel point le résultat observé de l'échantillon s'écarte de ce que H₀ prédit, mis à l'échelle par la variabilité attendue. Son choix dépend du type de données, du nombre de groupes, de la taille de l'échantillon et des hypothèses distributionnelles :</p>
+
+<table>
+  <thead>
+    <tr><th>Situation</th><th>Statistique de test</th><th>Distribution sous H₀</th><th>Hypothèse clé</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Une moyenne, σ connu, grand n</td><td>z = (x̄ − μ₀) / (σ/√n)</td><td>Normale standard N(0,1)</td><td>Échantillonnage aléatoire ; n ≥ 30 ou population normale</td></tr>
+    <tr><td>Une moyenne, σ inconnu</td><td>t = (x̄ − μ₀) / (s/√n)</td><td>Student t, df = n − 1</td><td>Population normale ou grand n ; échantillonnage aléatoire</td></tr>
+    <tr><td>Deux moyennes indépendantes</td><td>t = (x̄₁ − x̄₂) / SE<sub>groupé</sub></td><td>Student t, df = n₁ + n₂ − 2</td><td>Populations normales ; variances égales (ou utiliser Welch)</td></tr>
+    <tr><td>Moyennes appariées</td><td>t = d̄ / (s<sub>d</sub>/√n)</td><td>Student t, df = n − 1</td><td>Distribution normale des différences</td></tr>
+    <tr><td>Une proportion</td><td>z = (p̂ − p₀) / √[p₀(1−p₀)/n]</td><td>Normale standard (grand n)</td><td>np₀ ≥ 10 et n(1−p₀) ≥ 10</td></tr>
+    <tr><td>Deux proportions</td><td>z = (p̂₁ − p̂₂) / SE<sub>groupé</sub></td><td>Normale standard (grand n)</td><td>Grands échantillons dans les deux groupes</td></tr>
+    <tr><td>Variance</td><td>χ² = (n−1)s² / σ₀²</td><td>Khi-deux, df = n − 1</td><td>Population normale (sensible à la non-normalité)</td></tr>
+    <tr><td>Fréquences catégorielles</td><td>χ² = Σ (O − E)² / E</td><td>Khi-deux</td><td>Effectifs attendus ≥ 5 dans chaque cellule</td></tr>
+    <tr><td>Moyennes de groupes multiples</td><td>F = MC<sub>inter</sub> / MC<sub>intra</sub></td><td>Distribution F</td><td>Populations normales ; variances égales ; indépendance</td></tr>
+    <tr><td>Corrélation</td><td>t = r√(n−2) / √(1−r²)</td><td>Student t, df = n − 2</td><td>Normalité bivariée ; relation linéaire</td></tr>
+  </tbody>
+</table>
+
+<p>Pour notre essai clinique comparant deux groupes indépendants avec des variances de population inconnues, nous sélectionnons un <strong>test t pour deux échantillons</strong> (ou test t de Welch si les variances sont inégales).</p>
+
+<h3>Étape 6 : Vérifier les hypothèses</h3>
+
+<p>Chaque test paramétrique repose sur des hypothèses — normalité, indépendance, égalité des variances — et les violer peut produire des résultats trompeurs. Avant de calculer quoi que ce soit, évaluez vos hypothèses à l'aide d'outils diagnostiques : le test de Shapiro-Wilk ou les graphiques Q-Q pour la normalité, le test de Levene pour l'homogénéité des variances, et un plan d'étude soigné pour garantir l'indépendance. Lorsque les hypothèses sont violées, envisagez soit des transformations de données (logarithmique, racine carrée, Box-Cox) soit des alternatives non paramétriques (Mann-Whitney U, Wilcoxon pour rangs signés, Kruskal-Wallis) qui font moins d'hypothèses distributionnelles (Conover, 1999).</p>
+
+<h3>Étape 7 : Collecter les données et calculer la statistique de test</h3>
+
+<p>L'essai terminé, supposons que nous observions : 60 patients sous le nouveau médicament montrent une réduction moyenne de la pression artérielle systolique de 14.8 mmHg (s₁ = 6.2), tandis que 60 patients sous le traitement standard montrent une réduction moyenne de 11.3 mmHg (s₂ = 5.9). L'erreur standard groupée est SE = √(6.2²/60 + 5.9²/60) = √(0.641 + 0.580) = √1.221 ≈ 1.105. La statistique de test est t = (14.8 − 11.3) / 1.105 = 3.5 / 1.105 ≈ 3.17.</p>
+
+<h3>Étape 8 : Déterminer la valeur p</h3>
+
+<p>En utilisant la distribution t avec approximativement 117 degrés de liberté (approximation de Welch), notre valeur p unilatérale est approximativement 0.001. Cela signifie : si le nouveau médicament n'avait véritablement aucun avantage sur le traitement standard, il n'y aurait qu'une probabilité de 0.1 % d'observer une différence de 3.5 mmHg ou plus grande par la seule variation aléatoire d'échantillonnage.</p>
+
+<h3>Étape 9 : Prendre la décision statistique</h3>
+
+<p>Puisque p = 0.001 &lt; α = 0.05, nous <strong>rejetons H₀</strong>. Il existe une preuve statistiquement significative que le nouveau médicament produit une réduction plus importante de la pression artérielle systolique par rapport au traitement standard.</p>
+
+<h3>Étape 10 : Rapporter et interpréter complètement</h3>
+
+<p>Un rapport statistique complet inclut la statistique de test, les degrés de liberté, la valeur p exacte, la taille d'effet et l'intervalle de confiance — pas seulement le verdict binaire « significatif/non significatif ». Conformément aux normes de reporting de l'American Psychological Association (Wilkinson &amp; Task Force, 1999) et aux lignes directrices CONSORT pour les essais cliniques (Schulz et al., 2010) :</p>
+
+<p><em>« Les patients recevant le nouveau médicament antihypertenseur ont montré une réduction significativement plus importante de la pression artérielle systolique (M = 14.8 mmHg, ET = 6.2) comparés à ceux recevant le traitement standard (M = 11.3 mmHg, ET = 5.9), t(117) = 3.17, p = .001, unilatéral. La différence moyenne de 3.5 mmHg [IC à 95 % : 1.3, 5.7] correspond à une taille d'effet moyenne (d de Cohen = 0.58), suggérant une amélioration cliniquement significative. »</em></p>
 
 <hr>
 
-<h2>📏 La Valeur p : Ce Qu'elle Est et Ce Qu'elle N'est PAS</h2>
+<h2>🚨 Erreurs de Type I et de Type II : Les deux façons de se tromper</h2>
 
-<p>La <strong>valeur p</strong> est peut-être la statistique la plus utilisée, la plus mal comprise et la plus controversée de toute la science. En 2016, l'American Statistical Association (ASA) a pris la mesure sans précédent de publier une déclaration formelle sur son utilisation correcte (Wasserstein &amp; Lazar, 2016).</p>
+<p>Chaque test d'hypothèses est une décision prise sous incertitude, et chaque décision comporte un risque d'erreur. Le génie du cadre de Neyman-Pearson fut de reconnaître qu'il existe exactement deux façons de se tromper, et que le contrôle de l'une implique toujours un compromis avec l'autre. Comprendre ces erreurs — leur nature, leurs conséquences et la tension entre elles — est essentiel pour concevoir des études rigoureuses et interpréter les résultats avec sagesse plutôt qu'avec une obéissance mécanique.</p>
 
-<h3>✅ Ce Que la Valeur p EST</h3>
+<table>
+  <thead>
+    <tr><th></th><th>H₀ est effectivement VRAIE (pas d'effet réel)</th><th>H₀ est effectivement FAUSSE (un effet réel existe)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Rejeter H₀</strong></td><td>🔴 <strong>Erreur de Type I</strong> (Faux positif) — Probabilité = α</td><td>✅ <strong>Décision correcte</strong> (Vrai positif) — Probabilité = 1 − β = Puissance</td></tr>
+    <tr><td><strong>Ne pas rejeter H₀</strong></td><td>✅ <strong>Décision correcte</strong> (Vrai négatif) — Probabilité = 1 − α</td><td>🟡 <strong>Erreur de Type II</strong> (Faux négatif) — Probabilité = β</td></tr>
+  </tbody>
+</table>
 
-<p>La valeur p est la probabilité, <strong>en supposant H₀ vraie</strong>, d'obtenir une statistique de test aussi extrême ou plus extrême que celle observée :</p>
+<h3>🔴 Erreur de Type I (α) — La fausse alarme</h3>
+
+<p>Une erreur de Type I se produit quand vous rejetez H₀ alors qu'elle est en réalité vraie — vous déclarez qu'un effet existe alors qu'il n'existe pas. C'est l'équivalent statistique d'une alarme incendie qui se déclenche sans feu, ou d'un système radar qui détecte un avion ennemi qui n'est pas là.</p>
+
+<p><strong>Les conséquences dans le monde réel sont sévères.</strong> En médecine, une erreur de Type I pourrait signifier l'approbation d'un médicament en réalité inefficace, exposant des millions de patients à des effets secondaires sans bénéfice thérapeutique — comme cela s'est produit avec plusieurs thérapies de remplacement hormonal au début des années 2000. En justice pénale, cela signifie condamner un innocent. En fabrication, cela signifie arrêter une ligne de production parfaitement fonctionnelle. En génomique, même un taux de faux positifs de 5 % devient catastrophique lorsqu'on teste 20 000 gènes simultanément — on s'attendrait à 1 000 « découvertes » fallacieuses par le seul hasard.</p>
+
+<h3>🟡 Erreur de Type II (β) — La découverte manquée</h3>
+
+<p>Une erreur de Type II se produit quand vous ne rejetez pas H₀ alors qu'elle est en réalité fausse — un effet réel existe, mais vous le manquez. C'est le détecteur de fumée qui ne se déclenche pas lors d'un vrai incendie.</p>
+
+<p><strong>Le coût caché des erreurs de Type II est énorme.</strong> En médecine, cela signifie ne pas identifier un traitement efficace — les patients continuent de souffrir d'une maladie qui aurait pu être traitée. En sciences de l'environnement, cela signifie ne pas détecter la toxicité d'un polluant jusqu'à ce que les dommages soient irréversibles. Le coût économique des découvertes manquées est incalculable car, par leur nature même, elles sont invisibles — elles peuplent ce que Rosenthal (1979) appela le <strong>tiroir de classement</strong> : le cimetière des études sous-puissantes dont les effets réels n'ont pas été détectés.</p>
+
+<blockquote>🏛️ <strong>L'analogie du tribunal :</strong> Le système juridique fournit un parallèle puissant. L'hypothèse nulle est « l'accusé est innocent ». Une <strong>erreur de Type I</strong> est de condamner un innocent — la plus grave erreur judiciaire. Une <strong>erreur de Type II</strong> est d'acquitter un coupable — regrettable, mais considéré comme moins catastrophique. Le standard de preuve « au-delà du doute raisonnable » reflète l'asymétrie délibérée de la société : on fixe α très bas (rendant la condamnation erronée rare), en acceptant que certains coupables soient acquittés. La science adopte la même philosophie par convention — fixer α à 0.05 protège contre les fausses découvertes, mais au prix de manquer des effets réels quand les études sont sous-puissantes.</blockquote>
+
+<h3>Le compromis inévitable α–β</h3>
+
+<p>Pour toute taille d'échantillon fixée, réduire α (durcir le standard de rejet) augmente inévitablement β (rendant plus facile de manquer des effets réels), et vice versa. Ce compromis n'est pas un défaut de la méthode — c'est une nécessité mathématique reflétant la difficulté fondamentale de distinguer le signal du bruit avec des données limitées. <strong>Le seul moyen de réduire les deux erreurs simultanément</strong> est d'augmenter la taille de l'échantillon, ce qui fournit davantage d'information et rétrécit les distributions d'échantillonnage, facilitant la distinction entre vérité et bruit (Cohen, 1988).</p>
+
+<p>En pratique, les conséquences de chaque type d'erreur devraient guider le choix de α. Si un faux positif serait catastrophique (approuver un médicament dangereux, condamner un innocent), utilisez un α très petit. Si un faux négatif serait catastrophique (manquer un contaminant environnemental mortel, ne pas détecter un traitement efficace pour une maladie fatale), privilégiez la puissance et acceptez un α plus grand. Il n'existe pas d'équilibre universellement « correct » — c'est un jugement qui dépend entièrement du contexte.</p>
+
+<hr>
+
+<h2>💪 La puissance statistique : Le pilier négligé de la bonne science</h2>
+
+<p>La <strong>puissance statistique</strong> est la probabilité qu'un test rejette correctement une H₀ fausse — c'est-à-dire la probabilité de détecter un effet réel quand il existe véritablement. Mathématiquement, puissance = 1 − β. Si β = 0.20 (une chance de 20 % de manquer un effet réel), alors la puissance = 0.80 (une chance de 80 % de le détecter). La puissance est sans doute le concept le plus important et le plus négligé dans l'ensemble du cadre du test d'hypothèses.</p>
+
+<h3>Les quatre leviers de la puissance</h3>
+
+<p>La puissance est déterminée par quatre facteurs interconnectés. Connaître trois d'entre eux détermine le quatrième, ce qui constitue la base mathématique de l'analyse de puissance :</p>
+
+<table>
+  <thead>
+    <tr><th>Facteur</th><th>Symbole</th><th>Effet sur la puissance</th><th>Explication</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📈 <strong>Taille d'effet</strong></td><td>d, r, f, etc.</td><td>↑ Effet plus grand → Puissance plus élevée</td><td>Les effets plus grands produisent des statistiques de test plus élevées, les rendant plus faciles à détecter contre le bruit de fond</td></tr>
+    <tr><td>📊 <strong>Taille d'échantillon</strong></td><td>n</td><td>↑ n plus grand → Puissance plus élevée</td><td>Plus d'observations réduisent l'erreur standard, diminuant le chevauchement entre les distributions nulle et alternative</td></tr>
+    <tr><td>🎯 <strong>Seuil de significativité</strong></td><td>α</td><td>↑ α plus grand → Puissance plus élevée</td><td>Un seuil plus indulgent rend le rejet plus facile, mais augmente le taux d'erreur de Type I</td></tr>
+    <tr><td>📉 <strong>Variabilité de la population</strong></td><td>σ</td><td>↓ σ plus bas → Puissance plus élevée</td><td>Moins de bruit dans les données rend le signal plus clair ; contrôlé par des mesures précises et des échantillons homogènes</td></tr>
+  </tbody>
+</table>
+
+<h3>Les conventions de Cohen et le standard de 80 %</h3>
+
+<p>Jacob Cohen (1923–1998), psychologue à l'Université de New York, consacra une grande partie de sa carrière à promouvoir l'analyse de puissance. Son magnum opus de 1988, <em>Statistical Power Analysis for the Behavioral Sciences</em>, établit des tailles d'effet de référence et la recommandation désormais standard que les études devraient atteindre au moins une <strong>puissance de 80 %</strong> (β ≤ 0.20). Cela signifie que si un effet réel existe, une étude correctement puissante a au moins 80 % de chances de le détecter. De nombreuses agences de financement et revues exigent maintenant cela comme minimum (Cohen, 1988).</p>
+
+<table>
+  <thead>
+    <tr><th>Mesure de taille d'effet</th><th>Petit</th><th>Moyen</th><th>Grand</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>d de Cohen</strong> (différence de moyennes)</td><td>0.20</td><td>0.50</td><td>0.80</td></tr>
+    <tr><td><strong>r de Pearson</strong> (corrélation)</td><td>0.10</td><td>0.30</td><td>0.50</td></tr>
+    <tr><td><strong>f de Cohen</strong> (ANOVA)</td><td>0.10</td><td>0.25</td><td>0.40</td></tr>
+    <tr><td><strong>η²</strong> (variance expliquée)</td><td>0.01</td><td>0.06</td><td>0.14</td></tr>
+    <tr><td><strong>Rapport des cotes</strong></td><td>1.5</td><td>2.5</td><td>4.3</td></tr>
+  </tbody>
+</table>
+
+<h3>La crise de la puissance dans la recherche publiée</h3>
+
+<p>Malgré des décennies de plaidoyer de Cohen, la puissance statistique de la recherche publiée reste alarmante. Une méta-analyse historique de Button et al. (2013) examina 730 études en neuroscience et trouva que la <strong>puissance statistique médiane n'était que de 21 %</strong> — signifiant que près de 80 % des effets réels passaient inaperçus. Des enquêtes similaires en écologie (Jennions &amp; Møller, 2003), psychologie (Sedlmeier &amp; Gigerenzer, 1989) et économie ont révélé des chiffres comparables. Cette « défaillance de puissance » a trois conséquences dévastatrices : (1) la plupart des effets réels sont entièrement manqués ; (2) les résultats significatifs qui <em>émergent</em> sont probablement gonflés en magnitude (la « malédiction du gagnant ») ; et (3) la littérature publiée devient dominée par les faux positifs et les effets exagérés, alimentant la <strong>crise de la réplication</strong> qui a ébranlé de multiples disciplines scientifiques depuis 2010.</p>
+
+<blockquote>🎯 <strong>L'analyse de puissance a priori est non négociable :</strong> L'analyse de puissance doit être effectuée <em>avant</em> la collecte des données, non après. L'analyse de puissance post hoc (calculer la puissance après avoir obtenu un résultat non significatif) est statistiquement dénuée de sens — elle ne fait que reformuler la valeur p en d'autres termes et ne vous dit rien d'utile (Hoenig &amp; Heisey, 2001). Le moment de se préoccuper de la puissance est <em>avant</em> d'investir du temps, de l'argent et des participants dans une étude potentiellement vouée à des résultats non concluants. Des outils comme G*Power (Faul et al., 2007), le package pwr de R et les méthodes basées sur la simulation rendent l'analyse de puissance prospective accessible à tout chercheur.</blockquote>
+
+<hr>
+
+<h2>📏 La valeur p : La statistique la plus utilisée et la plus mal comprise en science</h2>
+
+<p>Aucun concept statistique n'a généré plus de controverse, plus de confusion et plus de débats passionnés que la valeur p. En 2016, l'<strong>American Statistical Association (ASA)</strong> prit la mesure sans précédent de publier une déclaration formelle de consensus sur les valeurs p — la première fois en 177 ans d'histoire que l'organisation s'adressait publiquement à une pratique statistique spécifique. La déclaration, rédigée par Wasserstein et Lazar (2016), fut motivée par ce que l'ASA qualifia de « monde submergé de valeurs p mal comprises » et les dommages que cette incompréhension inflige à la science et aux politiques publiques.</p>
+
+<h3>✅ Ce qu'EST la valeur p : La définition formelle</h3>
+
+<p>La valeur p est la probabilité, <strong>calculée sous l'hypothèse que H₀ est vraie</strong>, d'obtenir une statistique de test aussi extrême ou plus extrême que la valeur effectivement observée. Formellement :</p>
 
 <p style="text-align: center; font-size: 1.1em;"><strong>p = P(T ≥ t<sub>obs</sub> | H₀ est vraie)</strong></p>
 
-<h3>❌ Ce Que la Valeur p N'est PAS</h3>
+<p>Une petite valeur p signifie que les données observées seraient improbables si H₀ était vraie, ce qui constitue une preuve contre H₀. Pour notre essai clinique, p = 0.001 signifie : « Si le nouveau médicament n'avait véritablement aucun avantage sur le traitement standard, il n'y aurait qu'une probabilité de 0.1 % d'observer une différence de 3.5 mmHg ou plus grande par la seule variation aléatoire d'échantillonnage. » Les données sont donc hautement incompatibles avec l'hypothèse nulle.</p>
+
+<h3>❌ Les six grandes idées fausses</h3>
+
+<p>Des décennies d'enquêtes ont documenté des taux alarmants de mauvaise interprétation de la valeur p parmi les chercheurs, étudiants et même les enseignants de statistique. Oakes (1986) trouva que 97 % des psychologues académiques approuvaient au moins une interprétation erronée. Haller et Krauss (2002) répliquèrent cette conclusion avec des professeurs de statistique en Allemagne. La persistance de ces erreurs est l'une des caractéristiques les plus troublantes de la pratique scientifique moderne.</p>
 
 <table>
   <thead>
-    <tr><th>Idée Fausse Courante</th><th>Réalité</th></tr>
+    <tr><th>Idée fausse</th><th>Pourquoi c'est faux</th></tr>
   </thead>
   <tbody>
-    <tr><td>« p = 0,03 signifie 3 % de chance que H₀ soit vraie »</td><td>❌ La valeur p est P(données | H₀), <strong>PAS</strong> P(H₀ | données).</td></tr>
-    <tr><td>« p = 0,03 signifie 97 % de chance que l'effet soit réel »</td><td>❌ Même erreur inversée. On ne peut pas dériver P(H₁ | données) de la valeur p seule.</td></tr>
-    <tr><td>« Un p plus petit signifie un effet plus grand »</td><td>❌ La valeur p mélange taille d'effet et taille d'échantillon.</td></tr>
-    <tr><td>« p &gt; 0,05 signifie qu'il n'y a pas d'effet »</td><td>❌ <strong>L'absence de preuve n'est pas la preuve de l'absence</strong> (Altman &amp; Bland, 1995).</td></tr>
-    <tr><td>« p = 0,049 est fondamentalement différent de p = 0,051 »</td><td>❌ La différence entre « significatif » et « non significatif » n'est pas elle-même significative (Gelman &amp; Stern, 2006).</td></tr>
+    <tr><td>« p = 0.03 signifie qu'il y a 3 % de probabilité que H₀ soit vraie »</td><td>La valeur p est P(données | H₀), <strong>pas</strong> P(H₀ | données). Ce sont des quantités entièrement différentes. La conversion entre elles requiert le théorème de Bayes et une probabilité a priori pour H₀, que la valeur p ne fournit pas.</td></tr>
+    <tr><td>« p = 0.03 signifie qu'il y a 97 % de probabilité que l'effet soit réel »</td><td>C'est la même erreur de probabilité inverse. Vous ne pouvez pas calculer P(H₁ | données) à partir de la valeur p sans méthodes bayésiennes. Sellke, Bayarri et Berger (2001) ont montré qu'une valeur p de 0.05 peut correspondre à une probabilité postérieure de H₀ étant vraie allant jusqu'à 30–50 %, selon les hypothèses a priori.</td></tr>
+    <tr><td>« Une valeur p plus petite signifie un effet plus grand »</td><td>La valeur p confond taille d'effet et taille d'échantillon. Un effet minuscule et trivial (d = 0.01) peut produire p &lt; 0.001 avec un échantillon assez grand, tandis qu'un effet important (d = 0.8) peut donner p = 0.30 avec un petit échantillon. La valeur p ne révèle ni la magnitude ni l'importance pratique d'un effet.</td></tr>
+    <tr><td>« p &gt; 0.05 signifie qu'il n'y a pas d'effet »</td><td>Un résultat non significatif peut refléter une puissance statistique insuffisante plutôt qu'un vrai effet nul. Avec de petits échantillons, même de grands effets réels produisent fréquemment p &gt; 0.05. Comme Altman et Bland (1995) l'ont souligné : <strong>« L'absence de preuve n'est pas une preuve d'absence. »</strong></td></tr>
+    <tr><td>« p = 0.049 est fondamentalement différent de p = 0.051 »</td><td>La différence entre ces deux valeurs p est triviale et ne porte aucune distinction significative en termes de preuve. Pourtant l'une est publiée comme « résultat significatif » et l'autre comme résultat nul. Comme Gelman et Stern (2006) l'ont démontré : « La différence entre significatif et non significatif n'est pas elle-même statistiquement significative. »</td></tr>
+    <tr><td>« Une étude de réplication produira une valeur p similaire »</td><td>Les valeurs p sont hautement variables d'une réplication à l'autre, même quand l'hypothèse alternative est vraie. Une étude donnant p = 0.04 dans une réplication pourrait facilement donner p = 0.35 dans la suivante. Cumming (2008) a démontré cette « danse des valeurs p » par simulation, montrant que les valeurs p d'études identiques rebondissent de manière imprévisible.</td></tr>
   </tbody>
 </table>
 
-<blockquote>📢 <strong>Les Six Principes de l'ASA (Wasserstein &amp; Lazar, 2016) :</strong><br>
-1. Les valeurs p peuvent indiquer une incompatibilité entre les données et un modèle spécifié.<br>
-2. Les valeurs p ne mesurent pas la probabilité que l'hypothèse soit vraie.<br>
-3. Les conclusions scientifiques ne doivent pas reposer uniquement sur un seuil de valeur p.<br>
-4. Une inférence correcte exige un rapport complet et transparent.<br>
-5. La valeur p ne mesure pas la taille d'un effet ni l'importance d'un résultat.<br>
-6. En soi, une valeur p ne fournit pas une bonne mesure de preuve.</blockquote>
+<h3>📢 Les six principes de l'ASA sur les valeurs p (Wasserstein &amp; Lazar, 2016)</h3>
+
+<p>La déclaration historique de l'American Statistical Association de 2016 a établi six principes fondamentaux que tout chercheur devrait intérioriser :</p>
+
+<p><strong>Principe 1 :</strong> Les valeurs p peuvent indiquer l'incompatibilité des données avec un modèle statistique spécifié.</p>
+<p><strong>Principe 2 :</strong> Les valeurs p ne mesurent pas la probabilité que l'hypothèse étudiée soit vraie, ni la probabilité que les données aient été produites par le seul hasard.</p>
+<p><strong>Principe 3 :</strong> Les conclusions scientifiques et les décisions commerciales ou politiques ne devraient pas être fondées uniquement sur le fait qu'une valeur p dépasse un seuil spécifique.</p>
+<p><strong>Principe 4 :</strong> Une inférence correcte requiert un rapport complet et transparent — le rapport sélectif des valeurs p les rend inutiles.</p>
+<p><strong>Principe 5 :</strong> Une valeur p, ou la significativité statistique, ne mesure pas la taille d'un effet ni l'importance d'un résultat.</p>
+<p><strong>Principe 6 :</strong> À elle seule, une valeur p ne fournit pas une bonne mesure de la preuve concernant un modèle ou une hypothèse.</p>
 
 <hr>
 
-<h2>📐 Taille d'Effet : La Magnitude Qui Compte</h2>
+<h2>📐 La taille d'effet : La grandeur qui compte vraiment</h2>
 
-<p>Si la valeur p répond à « Y a-t-il un effet ? », la <strong>taille d'effet</strong> répond à la question bien plus importante : « <strong>Quelle est l'ampleur de l'effet ?</strong> »</p>
+<p>Si la valeur p répond à « Y a-t-il une preuve d'un effet ? », la <strong>taille d'effet</strong> répond à la question bien plus conséquente : « <strong>Quelle est la grandeur de l'effet ? </strong>» Cette distinction est critique car la significativité statistique et l'importance pratique sont des choses entièrement différentes. Une entreprise pharmaceutique testant un remède contre les maux de tête sur 100 000 patients pourrait trouver une amélioration statistiquement significative de 0.3 minute dans la durée du mal de tête (p &lt; 0.001) — un effet réel mais totalement insignifiant. Inversement, une étude pilote d'un traitement anticancéreux sur 20 patients pourrait montrer une amélioration de 40 % de la survie mais ne pas atteindre la significativité (p = 0.08) simplement en raison du petit échantillon — une découverte manquée aux implications vitales.</p>
+
+<h3>La famille des mesures de taille d'effet</h3>
 
 <table>
   <thead>
-    <tr><th>Mesure</th><th>Formule</th><th>Usage</th><th>Repères de Cohen</th></tr>
+    <tr><th>Mesure</th><th>Formule</th><th>Cas d'utilisation</th><th>Repères de Cohen</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>d de Cohen</strong></td><td>d = (x̄₁ − x̄₂) / s<sub>combiné</sub></td><td>Différence entre deux moyennes</td><td>Petit : 0,2 | Moyen : 0,5 | Grand : 0,8</td></tr>
-    <tr><td><strong>r de Pearson</strong></td><td>Coefficient de corrélation</td><td>Force d'association</td><td>Petit : 0,1 | Moyen : 0,3 | Grand : 0,5</td></tr>
-    <tr><td><strong>η² (Êta carré)</strong></td><td>SC<sub>effet</sub> / SC<sub>total</sub></td><td>Proportion de variance expliquée (ANOVA)</td><td>Petit : 0,01 | Moyen : 0,06 | Grand : 0,14</td></tr>
-    <tr><td><strong>f² de Cohen</strong></td><td>R² / (1 − R²)</td><td>Taille d'effet en régression</td><td>Petit : 0,02 | Moyen : 0,15 | Grand : 0,35</td></tr>
-    <tr><td><strong>Odds Ratio (OR)</strong></td><td>ad / bc</td><td>Issues catégorielles</td><td>Petit : 1,5 | Moyen : 2,5 | Grand : 4,3</td></tr>
+    <tr><td><strong>d de Cohen</strong></td><td>d = (x̄₁ − x̄₂) / s<sub>groupé</sub></td><td>Différence standardisée entre les moyennes de deux groupes</td><td>Petit : 0.2 | Moyen : 0.5 | Grand : 0.8</td></tr>
+    <tr><td><strong>g de Hedges</strong></td><td>d corrigé du biais</td><td>Préféré pour les petits échantillons (n &lt; 20) ; utilisé en méta-analyse</td><td>Approximativement comme d</td></tr>
+    <tr><td><strong>Δ de Glass</strong></td><td>Δ = (x̄₁ − x̄₂) / s<sub>contrôle</sub></td><td>Quand les variances des groupes sont inégales ; utilise l'ET du groupe contrôle uniquement</td><td>Approximativement comme d</td></tr>
+    <tr><td><strong>r de Pearson</strong></td><td>Coefficient de corrélation</td><td>Force de l'association linéaire entre deux variables</td><td>Petit : 0.1 | Moyen : 0.3 | Grand : 0.5</td></tr>
+    <tr><td><strong>η² (Êta carré)</strong></td><td>SC<sub>effet</sub> / SC<sub>total</sub></td><td>Proportion de la variance totale expliquée par le facteur (ANOVA)</td><td>Petit : 0.01 | Moyen : 0.06 | Grand : 0.14</td></tr>
+    <tr><td><strong>ω² (Oméga carré)</strong></td><td>η² corrigé du biais</td><td>Estimation moins biaisée de la taille d'effet de la population pour l'ANOVA</td><td>Approximativement comme η²</td></tr>
+    <tr><td><strong>f² de Cohen</strong></td><td>R² / (1 − R²)</td><td>Taille d'effet pour les modèles de régression</td><td>Petit : 0.02 | Moyen : 0.15 | Grand : 0.35</td></tr>
+    <tr><td><strong>Rapport des cotes (OR)</strong></td><td>ad / bc</td><td>Association dans les tableaux 2×2 ; régression logistique</td><td>Petit : 1.5 | Moyen : 2.5 | Grand : 4.3</td></tr>
+    <tr><td><strong>Risque relatif (RR)</strong></td><td>p₁ / p₂</td><td>Risque relatif dans les études de cohorte et essais cliniques</td><td>Dépend du contexte</td></tr>
+    <tr><td><strong>Nombre de sujets à traiter (NNT)</strong></td><td>1 / |p₁ − p₂|</td><td>Interprétabilité clinique : nombre de patients à traiter pour un bénéfice additionnel</td><td>Dépend du contexte</td></tr>
   </tbody>
 </table>
 
-<blockquote>💬 <strong>La Sagesse de Jacob Cohen :</strong> « Le produit principal d'une enquête de recherche est une ou plusieurs mesures de taille d'effet, pas des valeurs p. » (Cohen, 1990). Rapportez toujours les tailles d'effet en plus des valeurs p.</blockquote>
+<p>Cohen (1988) lui-même mit en garde que ses repères étaient des « lignes directrices générales, pas des standards rigides » — l'importance pratique de toute taille d'effet donnée dépend entièrement du contexte. Dans notre essai clinique, d = 0.58 représente un effet moyen, suggérant que l'amélioration de la pression artérielle est non seulement détectable mais cliniquement pertinente. À titre de comparaison, la taille d'effet de l'aspirine dans la prévention des crises cardiaques n'est que d ≈ 0.07 — un effet minuscule selon les standards de Cohen mais qui sauve des milliers de vies annuellement en raison de l'énorme population à risque (Rosenthal, 1994).</p>
+
+<blockquote>💬 <strong>La sagesse durable de Cohen :</strong> « Le produit principal d'une recherche est une ou plusieurs mesures de taille d'effet, pas des valeurs p » (Cohen, 1990). Ce message, répété par Cohen pendant trois décennies, fut lent à pénétrer la pratique scientifique mais est désormais une politique standard : le Manuel de publication de l'APA, les lignes directrices CONSORT pour les essais cliniques et un nombre croissant de revues exigent des tailles d'effet aux côtés des tests de significativité.</blockquote>
 
 <hr>
 
-<h2>🔄 Le Flux de Travail Complet du Test d'Hypothèses</h2>
+<h2>🔗 Les intervalles de confiance : Le compagnon informatif</h2>
 
-<table>
-  <thead>
-    <tr><th>Étape</th><th>Action</th><th>Question Clé</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>1️⃣</td><td>Définir la question de recherche</td><td>Quel effet ou relation est-ce que je teste ?</td></tr>
-    <tr><td>2️⃣</td><td>Formuler H₀ et H₁</td><td>Quelle est l'hypothèse nulle vs. alternative ?</td></tr>
-    <tr><td>3️⃣</td><td>Fixer α (ex. 0,05)</td><td>Quel risque d'erreur de Type I est-ce que j'accepte ?</td></tr>
-    <tr><td>4️⃣</td><td>Analyse de puissance a priori</td><td>De combien de sujets/observations ai-je besoin ?</td></tr>
-    <tr><td>5️⃣</td><td>Collecter les données</td><td>Mon plan d'échantillonnage est-il valide et non biaisé ?</td></tr>
-    <tr><td>6️⃣</td><td>Vérifier les hypothèses</td><td>Normalité ? Variances égales ? Indépendance ?</td></tr>
-    <tr><td>7️⃣</td><td>Calculer la statistique de test et la valeur p</td><td>Les données sont-elles extrêmes sous H₀ ?</td></tr>
-    <tr><td>8️⃣</td><td>Prendre la décision</td><td>Est-ce que p ≤ α ? Rejeter ou ne pas rejeter H₀</td></tr>
-    <tr><td>9️⃣</td><td>Rapporter la taille d'effet et l'IC</td><td>Quelle est l'ampleur et la précision de l'effet ?</td></tr>
-    <tr><td>🔟</td><td>Interpréter en contexte</td><td>Que signifie cela pour mon domaine ?</td></tr>
-  </tbody>
-</table>
+<p>Un <strong>intervalle de confiance (IC)</strong> fournit une plage de valeurs plausibles pour le paramètre de population, offrant une information plus riche qu'un simple verdict binaire de rejet/non-rejet. Un IC à 95 % signifie : si nous répétions l'étude un nombre infini de fois, 95 % des intervalles calculés contiendraient la vraie valeur du paramètre. L'IC communique simultanément la taille d'effet estimée, sa précision et le résultat du test de significativité — c'est trois informations en un seul ensemble élégant.</p>
+
+<p>Dans notre essai clinique, l'IC à 95 % pour la différence des moyennes de réduction de pression artérielle était [1.3, 5.7] mmHg. Cela nous dit trois choses : (1) la meilleure estimation est 3.5 mmHg ; (2) nous sommes confiants à 95 % que la vraie différence se situe entre 1.3 et 5.7 mmHg ; et (3) comme l'intervalle n'inclut pas zéro, le résultat est significatif à α = 0.05. Remarquez combien c'est plus informatif que de simplement déclarer « p = 0.001 » — l'IC révèle à la fois la magnitude de l'effet et l'incertitude qui l'entoure.</p>
+
+<p>Cumming (2014) a plaidé avec force pour un paradigme de « nouvelles statistiques » mettant l'accent sur les tailles d'effet et les intervalles de confiance plutôt que sur le test de significativité dichotomique. Bien que ce changement n'ait pas entièrement remplacé le NHST, il a considérablement enrichi les pratiques de reporting, et de nombreuses revues exigent désormais à la fois les valeurs p et les IC comme outils complémentaires.</p>
 
 <hr>
 
-<h2>⚠️ Pièges Courants et Bonnes Pratiques</h2>
+<h2>🌍 Exemples complets travaillés du monde entier</h2>
 
-<h3>Pièges à Éviter</h3>
+<h3>Exemple 1 : Éducation — Les classes plus petites améliorent-elles la réussite ? (Tennessee, États-Unis)</h3>
 
-<table>
-  <thead>
-    <tr><th>Piège</th><th>Description</th><th>Conséquence</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>🎣 <strong>p-Hacking</strong></td><td>Exécuter de multiples tests, sélectionner les résultats favorables, supprimer des points de données gênants jusqu'à obtenir p &lt; 0,05</td><td>Taux de faux positifs gonflé ; résultats non réplicables</td></tr>
-    <tr><td>🗂️ <strong>HARKing</strong></td><td>Formuler des hypothèses après avoir connu les résultats — présenter des résultats exploratoires comme confirmatoires</td><td>Biais de confirmation déguisé en science rigoureuse</td></tr>
-    <tr><td>📂 <strong>Biais de Publication</strong></td><td>Les revues publient préférentiellement les résultats significatifs (le « problème du tiroir »)</td><td>La littérature publiée surestime les tailles d'effet</td></tr>
-    <tr><td>📊 <strong>Ignorer la Taille d'Effet</strong></td><td>Rapporter seulement « significatif » ou « non significatif » sans quantifier l'ampleur</td><td>Effets triviaux surévalués ; effets importants non significatifs écartés</td></tr>
-    <tr><td>🔋 <strong>Faible Puissance</strong></td><td>Études sous-puissancées (petits échantillons pour l'effet attendu)</td><td>Taux élevé d'erreur de Type II</td></tr>
-    <tr><td>🔁 <strong>Comparaisons Multiples</strong></td><td>Effectuer de nombreux tests sans corriger α</td><td>Le taux d'erreur familial explose</td></tr>
-  </tbody>
-</table>
-
-<h3>Bonnes Pratiques</h3>
-
-<table>
-  <thead>
-    <tr><th>Pratique</th><th>Pourquoi C'est Important</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>📝 <strong>Pré-enregistrer hypothèses et plan d'analyse</strong></td><td>Empêche le p-hacking et le HARKing</td></tr>
-    <tr><td>📏 <strong>Toujours rapporter tailles d'effet et intervalles de confiance</strong></td><td>Fournit la signification pratique au-delà du binaire de la valeur p</td></tr>
-    <tr><td>🔋 <strong>Analyse de puissance a priori</strong></td><td>Assure une taille d'échantillon adéquate</td></tr>
-    <tr><td>🔢 <strong>Corriger pour les comparaisons multiples</strong></td><td>Contrôle l'erreur familiale (Bonferroni, Holm, Benjamini-Hochberg)</td></tr>
-    <tr><td>📊 <strong>Rapporter les valeurs p exactes</strong></td><td>Dites « p = 0,032 » et non simplement « p &lt; 0,05 »</td></tr>
-    <tr><td>🔄 <strong>Répliquer les résultats</strong></td><td>Une seule étude n'est jamais définitive</td></tr>
-    <tr><td>📈 <strong>Considérer les alternatives bayésiennes</strong></td><td>Les méthodes bayésiennes peuvent quantifier la preuve <em>pour</em> H₀</td></tr>
-  </tbody>
-</table>
-
-<hr>
-
-<h2>🌍 Application Concrète : Un Exemple Complet</h2>
-
-<p><strong>Question de Recherche :</strong> Un nouveau système d'irrigation goutte-à-goutte réduit-il la consommation d'eau dans la culture de tomates par rapport à l'irrigation traditionnelle par submersion ?</p>
-
-<p><strong>Données :</strong> 25 parcelles avec irrigation goutte-à-goutte (consommation moyenne = 4 200 m³/ha, s = 380) vs. 25 parcelles avec submersion (moyenne = 5 100 m³/ha, s = 420).</p>
+<p>L'expérience STAR du Tennessee (Student/Teacher Achievement Ratio), l'une des plus grandes expériences randomisées de l'histoire de l'éducation, assigna 11 600 élèves dans 79 écoles à des classes petites (13–17 élèves) ou des classes régulières (22–25 élèves) de la maternelle à la troisième année.</p>
 
 <table>
   <thead>
     <tr><th>Étape</th><th>Application</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>H₀</strong></td><td>μ<sub>goutte</sub> − μ<sub>submersion</sub> = 0</td></tr>
-    <tr><td><strong>H₁</strong></td><td>μ<sub>goutte</sub> − μ<sub>submersion</sub> &lt; 0 (unilatéral gauche)</td></tr>
-    <tr><td><strong>α</strong></td><td>0,05</td></tr>
-    <tr><td><strong>Test</strong></td><td>Test t pour deux échantillons indépendants</td></tr>
-    <tr><td><strong>SE</strong></td><td>√(380²/25 + 420²/25) ≈ 113,3</td></tr>
-    <tr><td><strong>t<sub>obs</sub></strong></td><td>(4200 − 5100) / 113,3 ≈ −7,94</td></tr>
-    <tr><td><strong>Valeur p</strong></td><td>p ≈ 0,0000000001 (extrêmement faible)</td></tr>
-    <tr><td><strong>Taille d'effet</strong></td><td>d ≈ 2,25 (très grand)</td></tr>
-    <tr><td><strong>Décision</strong></td><td>Rejeter H₀ — preuve écrasante que l'irrigation goutte-à-goutte réduit la consommation d'eau</td></tr>
-    <tr><td><strong>Interprétation</strong></td><td>L'irrigation goutte-à-goutte a réduit la consommation d'eau d'environ 900 m³/ha (réduction de 17,6 %), avec une taille d'effet très grande (d = 2,25). Cela représente une économie d'eau significative pour l'agriculture algérienne.</td></tr>
+    <tr><td><strong>Question de recherche</strong></td><td>Les élèves en classes plus petites obtiennent-ils des scores de lecture standardisés plus élevés après un an ?</td></tr>
+    <tr><td><strong>H₀</strong></td><td>μ<sub>petit</sub> − μ<sub>régulier</sub> = 0 (pas de différence de réussite)</td></tr>
+    <tr><td><strong>H₁</strong></td><td>μ<sub>petit</sub> − μ<sub>régulier</sub> &gt; 0 (les classes petites améliorent les scores) — unilatéral droit</td></tr>
+    <tr><td><strong>α</strong></td><td>0.05</td></tr>
+    <tr><td><strong>Test</strong></td><td>Test t pour deux échantillons (groupes indépendants, grand n)</td></tr>
+    <tr><td><strong>Données</strong></td><td>Classe petite : n = 1 900, x̄ = 534.2, s = 29.5 ; Classe régulière : n = 2 100, x̄ = 524.6, s = 30.1</td></tr>
+    <tr><td><strong>SE</strong></td><td>√(29.5²/1900 + 30.1²/2100) = √(0.458 + 0.431) = √0.889 ≈ 0.943</td></tr>
+    <tr><td><strong>t<sub>obs</sub></strong></td><td>(534.2 − 524.6) / 0.943 = 9.6 / 0.943 ≈ 10.18</td></tr>
+    <tr><td><strong>Valeur p</strong></td><td>p &lt; 0.0001 (extrêmement petite)</td></tr>
+    <tr><td><strong>Taille d'effet</strong></td><td>d = 9.6 / 29.8 ≈ 0.32 (petit à moyen)</td></tr>
+    <tr><td><strong>IC à 95 %</strong></td><td>[7.75, 11.45] points</td></tr>
+    <tr><td><strong>Conclusion</strong></td><td>Les élèves en classes plus petites ont obtenu des scores de lecture significativement plus élevés (t(3998) = 10.18, p &lt; .0001, d = 0.32, IC à 95 % [7.8, 11.4]). La taille d'effet de d = 0.32, bien que modeste selon les repères de Cohen, se traduit par un avantage éducatif significatif — approximativement équivalent à plusieurs mois supplémentaires d'apprentissage.</td></tr>
+  </tbody>
+</table>
+
+<h3>Exemple 2 : Sciences environnementales — Contamination au plomb de l'eau potable (Flint, Michigan)</h3>
+
+<p>En 2015, des chercheurs soupçonnèrent que le changement de source d'eau à Flint, Michigan, avait élevé les niveaux de plomb dans l'eau potable résidentielle. Le seuil d'action de l'EPA est de 15 parties par milliard (ppb).</p>
+
+<table>
+  <thead>
+    <tr><th>Étape</th><th>Application</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Question de recherche</strong></td><td>La concentration moyenne en plomb dans l'eau résidentielle de Flint dépasse-t-elle le seuil d'action de l'EPA de 15 ppb ?</td></tr>
+    <tr><td><strong>H₀</strong></td><td>μ ≤ 15 ppb (l'eau respecte le standard de sécurité)</td></tr>
+    <tr><td><strong>H₁</strong></td><td>μ &gt; 15 ppb (l'eau dépasse le standard de sécurité) — unilatéral droit</td></tr>
+    <tr><td><strong>α</strong></td><td>0.01 (strict en raison des implications de santé publique)</td></tr>
+    <tr><td><strong>Test</strong></td><td>Test t pour un échantillon (σ inconnu)</td></tr>
+    <tr><td><strong>Données</strong></td><td>n = 252 foyers échantillonnés ; x̄ = 23.4 ppb ; s = 18.6 ppb</td></tr>
+    <tr><td><strong>t<sub>obs</sub></strong></td><td>(23.4 − 15) / (18.6/√252) = 8.4 / 1.172 ≈ 7.17</td></tr>
+    <tr><td><strong>Valeur p</strong></td><td>p &lt; 0.0001</td></tr>
+    <tr><td><strong>Taille d'effet</strong></td><td>d = 8.4 / 18.6 ≈ 0.45 (effet moyen)</td></tr>
+    <tr><td><strong>Conclusion</strong></td><td>La concentration moyenne en plomb a significativement dépassé le seuil de l'EPA (t(251) = 7.17, p &lt; .0001, d = 0.45, IC à 95 % [21.1, 25.7] ppb). Cette constatation a fourni la preuve statistique pour la déclaration d'urgence de santé publique et a déclenché l'une des interventions environnementales les plus conséquentes de l'histoire américaine récente.</td></tr>
+  </tbody>
+</table>
+
+<h3>Exemple 3 : Agriculture — Comparaison des méthodes d'irrigation (Application mondiale)</h3>
+
+<p>Un consortium international de recherche agricole teste si l'irrigation goutte-à-goutte réduit la consommation d'eau dans la culture de la tomate comparée à l'irrigation traditionnelle par submersion, à travers des stations de terrain en Espagne, en Inde et au Brésil.</p>
+
+<table>
+  <thead>
+    <tr><th>Étape</th><th>Application</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>H₀</strong></td><td>μ<sub>goutte</sub> − μ<sub>submersion</sub> = 0 (pas de différence de consommation d'eau)</td></tr>
+    <tr><td><strong>H₁</strong></td><td>μ<sub>goutte</sub> − μ<sub>submersion</sub> &lt; 0 (le goutte-à-goutte consomme moins) — unilatéral gauche</td></tr>
+    <tr><td><strong>α</strong></td><td>0.05</td></tr>
+    <tr><td><strong>Données</strong></td><td>Goutte-à-goutte : n = 45, x̄ = 4 200 m³/ha, s = 380 ; Submersion : n = 45, x̄ = 5 100 m³/ha, s = 420</td></tr>
+    <tr><td><strong>SE</strong></td><td>√(380²/45 + 420²/45) = √(3209 + 3920) = √7129 ≈ 84.4</td></tr>
+    <tr><td><strong>t<sub>obs</sub></strong></td><td>(4200 − 5100) / 84.4 = −900 / 84.4 ≈ −10.66</td></tr>
+    <tr><td><strong>Valeur p</strong></td><td>p &lt; 0.0001</td></tr>
+    <tr><td><strong>Taille d'effet</strong></td><td>d = 900 / 400.6 ≈ 2.25 (très grand)</td></tr>
+    <tr><td><strong>Conclusion</strong></td><td>L'irrigation goutte-à-goutte a réduit la consommation d'eau d'environ 900 m³/ha (réduction de 17.6 % ; t(86) = −10.66, p &lt; .0001, d = 2.25, IC à 95 % [−1 068, −732] m³/ha). La très grande taille d'effet démontre à la fois une significativité statistique et pratique, avec des implications pour les régions agricoles en stress hydrique dans le monde entier.</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>🧭 Au-delà du NHST : Le Paysage Moderne</h2>
+<h2>⚠️ Les écueils : Comment le test d'hypothèses peut mal tourner</h2>
+
+<p>Le test d'hypothèses est un outil puissant, mais comme tout outil puissant, il peut causer des dommages sérieux quand il est mal utilisé. La dernière décennie a été témoin d'une crise de confiance sans précédent dans la recherche publiée — la <strong>crise de la réplication</strong> — alimentée en grande partie par un mauvais usage systématique et une incompréhension du test d'hypothèses. L'historique Open Science Collaboration (2015) tenta de répliquer 100 études psychologiques publiées dans des revues de premier plan : seules 36 % se répliquèrent avec succès. Des échecs de réplication similaires ont été documentés en biologie du cancer (Begley &amp; Ellis, 2012), en économie (Camerer et al., 2016) et dans d'autres domaines. Comprendre les écueils spécifiques qui produisent ces échecs est essentiel pour tout scientifique.</p>
+
+<h3>Les péchés capitaux du test d'hypothèses</h3>
 
 <table>
   <thead>
-    <tr><th>Approche</th><th>Idée Clé</th><th>Avantage par Rapport au NHST</th></tr>
+    <tr><th>Écueil</th><th>Description</th><th>Conséquence</th></tr>
   </thead>
   <tbody>
-    <tr><td>🔵 <strong>Intervalles de Confiance</strong></td><td>Estimer la plage de valeurs plausibles du paramètre</td><td>Montre précision et direction, pas seulement la signification</td></tr>
-    <tr><td>🟣 <strong>Test Bayésien d'Hypothèses</strong></td><td>Les facteurs de Bayes quantifient la preuve pour H₀ <em>et</em> H₁</td><td>Peut soutenir H₀ ; intègre les connaissances préalables</td></tr>
-    <tr><td>🟢 <strong>Test d'Équivalence</strong></td><td>La procédure TOST teste si les effets sont négligeables</td><td>Peut conclure affirmativement « pas d'effet significatif »</td></tr>
-    <tr><td>🟡 <strong>Méta-Analyse</strong></td><td>Combine les résultats de plusieurs études</td><td>Estimations plus précises ; réduit le biais de publication</td></tr>
-    <tr><td>🔴 <strong>Pré-Enregistrement</strong></td><td>Enregistrer hypothèses et méthodes avant la collecte</td><td>Élimine le p-hacking et le HARKing</td></tr>
+    <tr><td>🎣 <strong>p-Hacking</strong></td><td>Essayer de multiples analyses, définitions de variables, sous-groupes ou spécifications de modèles jusqu'à obtenir p &lt; 0.05 — puis ne rapporter que l'analyse « réussie ». Simmons, Nelson et Simonsohn (2011) ont démontré que les « degrés de liberté du chercheur » courants peuvent gonfler le taux de faux positifs à plus de 60 %.</td><td>Le taux de faux positifs publié dépasse largement le α nominal ; des résultats non réplicables inondent la littérature</td></tr>
+    <tr><td>🗂️ <strong>HARKing</strong></td><td>Formuler les hypothèses après avoir connu les résultats — présenter des résultats exploratoires issus des données comme s'ils étaient des hypothèses confirmatoires planifiées (Kerr, 1998)</td><td>Le biais de confirmation se déguise en science rigoureuse ; confiance exagérée dans des résultats fallacieux</td></tr>
+    <tr><td>📂 <strong>Biais de publication</strong></td><td>Les revues publient préférentiellement les résultats significatifs (le « problème du tiroir de classement » décrit par Rosenthal, 1979) ; les résultats non significatifs restent cachés</td><td>La littérature publiée surestime systématiquement les tailles d'effet et les taux de significativité</td></tr>
+    <tr><td>📊 <strong>Ignorer la taille d'effet</strong></td><td>Ne rapporter que « significatif » ou « non significatif » sans quantifier la magnitude de l'effet</td><td>Les effets triviaux sont surévalués ; les effets importants non significatifs sont écartés</td></tr>
+    <tr><td>🔋 <strong>Sous-puissance chronique</strong></td><td>Mener des études avec des tailles d'échantillon bien trop petites pour la taille d'effet attendue</td><td>β élevé ; les quelques résultats significatifs qui émergent sont probablement gonflés (malédiction du gagnant)</td></tr>
+    <tr><td>🔁 <strong>Comparaisons multiples</strong></td><td>Effectuer de nombreux tests sans ajuster α. Avec 20 tests indépendants à α = 0.05, la probabilité d'au moins un faux positif est 1 − (0.95)²⁰ = 64 %</td><td>Le taux d'erreur par famille explose ; les découvertes fallacieuses se multiplient</td></tr>
+    <tr><td>🔄 <strong>Arrêt optionnel</strong></td><td>Vérifier répétitivement les résultats pendant la collecte et s'arrêter quand p &lt; 0.05</td><td>Gonfle massivement l'erreur de Type I ; une étude qui aurait fini non significative est interrompue prématurément sur une fluctuation aléatoire</td></tr>
+    <tr><td>📉 <strong>Dichotomanie</strong></td><td>Traiter p = 0.049 et p = 0.051 comme des catégories qualitativement différentes plutôt que des points sur une échelle continue</td><td>Crée une fausse dichotomie qui obscurcit l'incertitude inhérente à toute preuve statistique</td></tr>
   </tbody>
 </table>
 
-<blockquote>🔮 <strong>L'Avenir de l'Inférence :</strong> La tendance en statistique moderne n'est pas d'abandonner le test d'hypothèses mais de l'<em>enrichir</em> — en combinant valeurs p, tailles d'effet, intervalles de confiance et mesures bayésiennes pour construire un tableau plus complet de la preuve.</blockquote>
+<h3>Meilleures pratiques pour un test d'hypothèses rigoureux</h3>
+
+<table>
+  <thead>
+    <tr><th>Pratique</th><th>Pourquoi c'est important</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>📝 <strong>Pré-enregistrer les hypothèses et plans d'analyse</strong></td><td>Empêche le p-hacking et le HARKing en rendant transparente la distinction entre analyse confirmatoire et exploratoire. Des plateformes comme OSF (osf.io) et ClinicalTrials.gov facilitent cela.</td></tr>
+    <tr><td>📏 <strong>Toujours rapporter les tailles d'effet et les intervalles de confiance</strong></td><td>Fournit la significativité pratique et la précision au-delà du verdict binaire de la valeur p</td></tr>
+    <tr><td>🔋 <strong>Conduire une analyse de puissance a priori</strong></td><td>Assure que la taille d'échantillon est adéquate pour détecter des effets significatifs avec au moins 80 % de probabilité</td></tr>
+    <tr><td>🔢 <strong>Corriger pour les comparaisons multiples</strong></td><td>Contrôle l'erreur par famille lors du test de multiples hypothèses (procédures de Bonferroni, Holm, Benjamini-Hochberg FDR)</td></tr>
+    <tr><td>📊 <strong>Rapporter les valeurs p exactes</strong></td><td>Écrire « p = 0.032 » et non simplement « p &lt; 0.05 » — donne aux lecteurs la preuve complète à évaluer</td></tr>
+    <tr><td>🔄 <strong>Poursuivre la réplication</strong></td><td>Les études isolées ne sont jamais définitives ; la réplication est l'étalon-or de la preuve scientifique</td></tr>
+    <tr><td>📈 <strong>Considérer les alternatives bayésiennes</strong></td><td>Les méthodes bayésiennes peuvent quantifier la preuve <em>en faveur de</em> H₀ (pas seulement contre elle) et incorporer des connaissances a priori</td></tr>
+    <tr><td>🔍 <strong>Distinguer exploratoire et confirmatoire</strong></td><td>Les analyses exploratoires génèrent des hypothèses ; les analyses confirmatoires les testent. Confondre les deux est l'une des sources les plus courantes de fausses découvertes.</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>🧭 Au-delà du NHST : La boîte à outils en expansion de l'inférence moderne</h2>
+
+<p>Les deux dernières décennies ont vu des appels croissants à compléter — sinon nécessairement remplacer — le NHST traditionnel par des outils inférentiels supplémentaires. Ce mouvement, que Cumming (2014) a appelé « les nouvelles statistiques », cherche à fournir une image plus riche et plus nuancée de la preuve que ce qu'une seule méthode peut offrir à elle seule.</p>
+
+<table>
+  <thead>
+    <tr><th>Approche</th><th>Idée centrale</th><th>Avantage par rapport au NHST seul</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔵 <strong>Intervalles de confiance</strong></td><td>Estimer la plage de valeurs plausibles du paramètre avec un niveau de confiance spécifié</td><td>Montre la magnitude, la direction et la précision de l'effet simultanément</td></tr>
+    <tr><td>🟣 <strong>Test d'hypothèses bayésien</strong></td><td>Les facteurs de Bayes quantifient la preuve relative pour H₀ versus H₁ en utilisant des distributions a priori et des rapports de vraisemblance (Wagenmakers, 2007)</td><td>Peut fournir une preuve <em>en faveur de</em> H₀, pas seulement contre elle ; incorpore des connaissances a priori ; évite de nombreux paradoxes du NHST</td></tr>
+    <tr><td>🟢 <strong>Test d'équivalence (TOST)</strong></td><td>La procédure des deux tests unilatéraux teste explicitement si les effets tombent dans une plage négligeable prédéfinie (Lakens, 2017)</td><td>Peut affirmer positivement « pas d'effet significatif » plutôt que simplement déclarer « preuve insuffisante pour rejeter H₀ »</td></tr>
+    <tr><td>🟡 <strong>Méta-analyse</strong></td><td>Combine systématiquement les résultats de multiples études en utilisant des moyennes pondérées des tailles d'effet</td><td>Estimations d'effet plus précises ; réduit l'influence de toute étude isolée ; quantifie l'hétérogénéité inter-études ; traite partiellement le biais de publication</td></tr>
+    <tr><td>🔴 <strong>Pré-enregistrement et Rapports enregistrés</strong></td><td>Les revues s'engagent à publier les études sur la base de la qualité du design de recherche, <em>avant</em> que les résultats ne soient connus</td><td>Élimine le biais de publication et le p-hacking à la source ; sépare la recherche confirmatoire de l'exploratoire</td></tr>
+    <tr><td>🟠 <strong>Méthodes de vraisemblance</strong></td><td>Les rapports de vraisemblance comparent le support pour différentes valeurs de paramètres directement à partir des données</td><td>Évite les seuils arbitraires ; se concentre sur la preuve relative ; ne requiert pas de spécification d'un a priori</td></tr>
+  </tbody>
+</table>
+
+<blockquote>🔮 <strong>L'avenir de l'inférence scientifique :</strong> La tendance en statistique moderne n'est pas d'abandonner le test d'hypothèses mais de l'<em>enrichir</em> — en combinant les valeurs p avec les tailles d'effet, les intervalles de confiance, les mesures bayésiennes de preuve et la réplication pour construire une image multicouche de ce que les données révèlent. Comme la Task Force de l'ASA (Wasserstein et al., 2019) l'a conclu dans sa déclaration de suivi intitulée « Vers un monde au-delà de p &lt; 0.05 » : les tests de significativité, correctement appliqués, restent des outils importants, mais ils doivent être intégrés avec des méthodes complémentaires, un reporting transparent et une reconnaissance honnête de l'incertitude. L'avenir appartient aux chercheurs qui maîtrisent non pas une seule méthode mais l'ensemble de la boîte à outils inférentielle.</blockquote>
 
 <hr>
 
@@ -345,15 +471,27 @@
 
 <p>Altman, D. G., &amp; Bland, J. M. (1995). Absence of evidence is not evidence of absence. <em>BMJ</em>, 311(7003), 485. https://doi.org/10.1136/bmj.311.7003.485</p>
 
+<p>Begley, C. G., &amp; Ellis, L. M. (2012). Drug development: Raise standards for preclinical cancer research. <em>Nature</em>, 483(7391), 531–533. https://doi.org/10.1038/483531a</p>
+
 <p>Benjamin, D. J., Berger, J. O., Johannesson, M., Nosek, B. A., Wagenmakers, E.-J., Berk, R., ... &amp; Johnson, V. E. (2018). Redefine statistical significance. <em>Nature Human Behaviour</em>, 2(1), 6–10. https://doi.org/10.1038/s41562-017-0189-z</p>
 
 <p>Button, K. S., Ioannidis, J. P. A., Mokrysz, C., Nosek, B. A., Flint, J., Robinson, E. S. J., &amp; Munafò, M. R. (2013). Power failure: Why small sample size undermines the reliability of neuroscience. <em>Nature Reviews Neuroscience</em>, 14(5), 365–376. https://doi.org/10.1038/nrn3475</p>
+
+<p>Camerer, C. F., Dreber, A., Forsell, E., Ho, T.-H., Huber, J., Johannesson, M., ... &amp; Wu, H. (2016). Evaluating replicability of laboratory experiments in economics. <em>Science</em>, 351(6280), 1433–1436. https://doi.org/10.1126/science.aaf0918</p>
 
 <p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
 
 <p>Cohen, J. (1990). Things I have learned (so far). <em>American Psychologist</em>, 45(12), 1304–1312. https://doi.org/10.1037/0003-066X.45.12.1304</p>
 
+<p>Cohen, J. (1992). A power primer. <em>Psychological Bulletin</em>, 112(1), 155–159. https://doi.org/10.1037/0033-2909.112.1.155</p>
+
+<p>Conover, W. J. (1999). <em>Practical nonparametric statistics</em> (3rd ed.). John Wiley &amp; Sons.</p>
+
+<p>Cumming, G. (2008). Replication and p intervals: p values predict the future only vaguely, but confidence intervals do much better. <em>Perspectives on Psychological Science</em>, 3(4), 286–300. https://doi.org/10.1111/j.1745-6924.2008.00079.x</p>
+
 <p>Cumming, G. (2014). The new statistics: Why and how. <em>Psychological Science</em>, 25(1), 7–29. https://doi.org/10.1177/0956797613504966</p>
+
+<p>Faul, F., Erdfelder, E., Lang, A.-G., &amp; Buchner, A. (2007). G*Power 3: A flexible statistical power analysis program for the social, behavioral, and biomedical sciences. <em>Behavior Research Methods</em>, 39(2), 175–191. https://doi.org/10.3758/BF03193146</p>
 
 <p>Fisher, R. A. (1925). <em>Statistical methods for research workers</em>. Oliver and Boyd.</p>
 
@@ -361,16 +499,46 @@
 
 <p>Gigerenzer, G. (2004). Mindless statistics. <em>The Journal of Socio-Economics</em>, 33(5), 587–606. https://doi.org/10.1016/j.socec.2004.09.033</p>
 
+<p>Haller, H., &amp; Krauss, S. (2002). Misinterpretations of significance: A problem students share with their teachers? <em>Methods of Psychological Research</em>, 7(1), 1–20.</p>
+
+<p>Hoenig, J. M., &amp; Heisey, D. M. (2001). The abuse of power: The pervasive fallacy of power calculations for data analysis. <em>The American Statistician</em>, 55(1), 19–24. https://doi.org/10.1198/000313001300339897</p>
+
+<p>Jennions, M. D., &amp; Møller, A. P. (2003). A survey of the statistical power of research in behavioral ecology and animal behavior. <em>Behavioral Ecology</em>, 14(3), 438–445. https://doi.org/10.1093/beheco/14.3.438</p>
+
+<p>Kerr, N. L. (1998). HARKing: Hypothesizing after the results are known. <em>Personality and Social Psychology Review</em>, 2(3), 196–217. https://doi.org/10.1207/s15327957pspr0203_4</p>
+
+<p>Lakens, D. (2017). Equivalence tests: A practical primer for t tests, correlations, and meta-analyses. <em>Social Psychological and Personality Science</em>, 8(4), 355–362. https://doi.org/10.1177/1948550617697177</p>
+
 <p>Lehmann, E. L. (1993). The Fisher, Neyman-Pearson theories of testing hypotheses: One theory or two? <em>Journal of the American Statistical Association</em>, 88(424), 1242–1249. https://doi.org/10.1080/01621459.1993.10476404</p>
 
 <p>Lehmann, E. L., &amp; Romano, J. P. (2005). <em>Testing statistical hypotheses</em> (3rd ed.). Springer.</p>
 
-<p>Lombardi, C. M., &amp; Hurlbert, S. H. (2009). Misprescription and misuse of one‐tailed tests. <em>Austral Ecology</em>, 34(4), 447–468. https://doi.org/10.1111/j.1442-9993.2009.01946.x</p>
-
-<p>Moore, D. S., McCabe, G. P., &amp; Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W.H. Freeman.</p>
+<p>Lombardi, C. M., &amp; Hurlbert, S. H. (2009). Misprescription and misuse of one-tailed tests. <em>Austral Ecology</em>, 34(4), 447–468. https://doi.org/10.1111/j.1442-9993.2009.01946.x</p>
 
 <p>Neyman, J., &amp; Pearson, E. S. (1933). On the problem of the most efficient tests of statistical hypotheses. <em>Philosophical Transactions of the Royal Society A</em>, 231(694–706), 289–337. https://doi.org/10.1098/rsta.1933.0009</p>
 
+<p>Oakes, M. (1986). <em>Statistical inference: A commentary for the social and behavioural sciences</em>. John Wiley &amp; Sons.</p>
+
+<p>Open Science Collaboration. (2015). Estimating the reproducibility of psychological science. <em>Science</em>, 349(6251), aac4716. https://doi.org/10.1126/science.aac4716</p>
+
+<p>Popper, K. (1959). <em>The logic of scientific discovery</em>. Hutchinson &amp; Co.</p>
+
+<p>Rosenthal, R. (1979). The file drawer problem and tolerance for null results. <em>Psychological Bulletin</em>, 86(3), 638–641. https://doi.org/10.1037/0033-2909.86.3.638</p>
+
+<p>Rosenthal, R. (1994). Parametric measures of effect size. In H. Cooper &amp; L. V. Hedges (Eds.), <em>The handbook of research synthesis</em> (pp. 231–244). Russell Sage Foundation.</p>
+
+<p>Salsburg, D. (2001). <em>The lady tasting tea: How statistics revolutionized science in the twentieth century</em>. W. H. Freeman.</p>
+
+<p>Schulz, K. F., Altman, D. G., &amp; Moher, D. (2010). CONSORT 2010 statement: Updated guidelines for reporting parallel group randomised trials. <em>BMJ</em>, 340, c332. https://doi.org/10.1136/bmj.c332</p>
+
+<p>Sellke, T., Bayarri, M. J., &amp; Berger, J. O. (2001). Calibration of p values for testing precise null hypotheses. <em>The American Statistician</em>, 55(1), 62–71. https://doi.org/10.1198/000313001300339950</p>
+
+<p>Simmons, J. P., Nelson, L. D., &amp; Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. <em>Psychological Science</em>, 22(11), 1359–1366. https://doi.org/10.1177/0956797611417632</p>
+
+<p>Wagenmakers, E.-J. (2007). A practical solution to the pervasive problems of p values. <em>Psychonomic Bulletin &amp; Review</em>, 14(5), 779–804. https://doi.org/10.3758/BF03194105</p>
+
 <p>Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA's statement on p-values: Context, process, and purpose. <em>The American Statistician</em>, 70(2), 129–133. https://doi.org/10.1080/00031305.2016.1154108</p>
+
+<p>Wasserstein, R. L., Schirm, A. L., &amp; Lazar, N. A. (2019). Moving to a world beyond "p &lt; 0.05." <em>The American Statistician</em>, 73(sup1), 1–19. https://doi.org/10.1080/00031305.2019.1583913</p>
 
 <p>Wilkinson, L., &amp; the Task Force on Statistical Inference. (1999). Statistical methods in psychology journals: Guidelines and explanations. <em>American Psychologist</em>, 54(8), 594–604. https://doi.org/10.1037/0003-066X.54.8.594</p>

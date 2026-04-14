@@ -1,302 +1,324 @@
-<h2>📊 Les Tableaux de Fréquences : Transformer le Chaos en Clarté</h2>
+<h2>📊 Tableaux de fréquences : Transformer le chaos en clarté</h2>
 
-<p>Imaginez que vous venez de collecter les notes d'examen de 200 étudiants, les mesures de pluviométrie quotidienne d'une année entière, ou les hauteurs de 500 plants de blé répartis sur des parcelles expérimentales dans la région de Sétif en Algérie. Vous regardez les données brutes — un mur vertigineux de chiffres — et une seule pensée vous traverse l'esprit : <strong>que signifie tout cela ?</strong></p>
+<p>Durant l'été 1854, le choléra tuait des centaines de Londoniens. La théorie médicale dominante — le <em>miasme</em>, la croyance que la maladie se propageait par l'air vicié — n'offrait aucune indication sur comment l'arrêter. Alors un médecin nommé <strong>John Snow</strong> fit quelque chose de révolutionnaire : il compta. Il enregistra chaque décès de choléra dans le quartier de Soho et tabula leur distribution par adresse, créant ce qui était essentiellement un <strong>tableau de fréquences des décès par localisation</strong>. Le résultat fut saisissant — une concentration écrasante de cas autour d'une seule pompe à eau dans Broad Street. La tabulation de Snow conduisit au retrait de la poignée de la pompe, l'épidémie s'atténua, et la théorie des germes reçut l'une de ses premières confirmations empiriques. Un simple comptage, organisé en tableau, changea le cours de la médecine (Johnson, 2006 ; Freedman et al., 2007).</p>
 
-<p>C'est le défi fondamental de la statistique : les données brutes, dans leur forme non organisée, ne vous disent presque rien. C'est du bruit sans signal, une forêt sans carte. Le tableau de distribution des fréquences est le premier outil le plus puissant du statisticien pour transformer ce chaos en signification. Il est le pont entre le monde brut et désordonné de la collecte de données et le monde structuré et perspicace de l'analyse des données (Moore et al., 2021 ; Gravetter & Wallnau, 2017).</p>
+<p>Cette histoire illustre une vérité que les statisticiens comprennent depuis des siècles : <strong>les données brutes, sous leur forme non organisée, ne vous disent presque rien</strong>. C'est du bruit sans signal, une forêt sans carte. Que vous fixiez 200 notes d'examen, une année de mesures pluviométriques quotidiennes, 500 hauteurs de plantes provenant de parcelles expérimentales, ou les lectures de pression artérielle de 1 000 patients dans un essai clinique — le défi est identique. Le <strong>tableau de distribution des fréquences</strong> est le premier outil le plus puissant du statisticien pour transformer ce chaos en signification. C'est le pont entre le monde brut et désordonné de la collecte des données et le monde structuré et éclairant de l'analyse des données (Moore et al., 2021 ; Gravetter &amp; Wallnau, 2017).</p>
 
-<blockquote>💡 <strong>L'idée fondamentale :</strong> Un tableau de fréquences ne modifie pas les données — il les réorganise. En comptant combien de fois chaque valeur ou chaque intervalle de valeurs apparaît, nous révélons la <em>forme</em>, le <em>centre</em> et la <em>dispersion</em> des données. Comme l'a écrit le légendaire statisticien John Tukey dans son ouvrage pionnier sur l'analyse exploratoire des données : la première étape est toujours de <strong>regarder les données</strong> (Tukey, 1977). Le tableau de fréquences est la manière dont nous prenons ce premier regard crucial.</blockquote>
+<p>Florence Nightingale comprit ce pont peut-être mieux que quiconque à son époque. Pendant la guerre de Crimée (1853–1856), elle tabula les causes de décès parmi les soldats britanniques en distributions de fréquences, révélant que les <strong>décès par maladies évitables dépassaient les morts au combat dans un rapport de dix contre un</strong>. Ses tableaux et les diagrammes en aire polaire novateurs qu'elle en tira persuadèrent le ministère de la Guerre britannique de réformer l'hygiène militaire — sauvant des milliers de vies. Nightingale ne découvrit pas de nouvelles maladies et n'inventa pas de nouveaux médicaments ; elle organisa les données existantes en tableaux de fréquences et laissa les patterns parler (Cohen, 1984 ; Braveman, 1998).</p>
+
+<blockquote>💡 <strong>L'intuition fondamentale :</strong> Un tableau de fréquences ne change pas les données — il les <em>réorganise</em>. En comptant la fréquence d'apparition de chaque valeur ou plage de valeurs, nous révélons la <em>forme</em>, le <em>centre</em> et la <em>dispersion</em> des données. Comme l'écrivit le légendaire statisticien John Tukey dans son ouvrage pionnier sur l'analyse exploratoire des données : la première étape est toujours de <strong>regarder les données</strong> (Tukey, 1977). Le tableau de fréquences est la manière dont nous prenons ce premier regard crucial. Sans lui, même le modèle statistique le plus sophistiqué est construit sur du sable.</blockquote>
 
 <hr>
 
-<h2>📋 Qu'est-ce qu'un Tableau de Fréquences ?</h2>
+<h2>📋 Partie I — Qu'est-ce qu'un tableau de fréquences ?</h2>
 
-<p>Un <strong>tableau de distribution des fréquences</strong> (ou simplement <em>tableau de fréquences</em>) est une tabulation organisée qui montre combien de fois chaque valeur — ou chaque intervalle de valeurs — apparaît dans un jeu de données. Il prend les observations brutes et dispersées et les compresse en un résumé compact qui révèle des tendances invisibles dans les données originales (Wackerly et al., 2014).</p>
+<p>Un <strong>tableau de distribution des fréquences</strong> (ou simplement <em>tableau de fréquences</em>) est une tabulation organisée qui montre combien de fois chaque valeur — ou chaque plage de valeurs — apparaît dans un jeu de données. Il prend les observations brutes et éparses et les compresse en un résumé compact qui révèle des patterns invisibles dans les données originales. À son cœur, un tableau de fréquences répond à la question la plus simple et la plus importante de toute la statistique descriptive : <strong>combien de fois chaque résultat se produit-il ?</strong> (Wackerly et al., 2014).</p>
 
-<p>À la base, un tableau de fréquences répond à la question la plus simple et la plus importante de toute la statistique descriptive : <strong>combien de fois chaque résultat se produit-il ?</strong></p>
+<p>Le concept est ancien. Les plus anciennes tabulations de fréquences connues apparaissent dans les <strong>registres astronomiques babyloniens</strong> (vers 400 av. J.-C.), où les scribes comptaient la fréquence des positions planétaires à travers les secteurs célestes. Au dix-septième siècle, <strong>John Graunt</strong> publia ses <em>Natural and Political Observations upon the Bills of Mortality</em> (1662), tabulant les fréquences de décès par cause à Londres — œuvre largement considérée comme la naissance à la fois de la démographie et de la statistique descriptive (Stigler, 1986). Au dix-neuvième siècle, les tableaux de fréquences étaient devenus le langage universel de la science quantitative, des études de <em>l'homme moyen</em> de Quetelet aux enquêtes anthropométriques de Galton à l'Exposition internationale de santé de Londres en 1884, où il tabula les tailles, poids et temps de réaction de plus de 9 000 visiteurs (Stigler, 1986 ; Freedman et al., 2007).</p>
+
+<p>Tout tableau de fréquences est construit à partir des mêmes composantes fondamentales :</p>
 
 <table>
   <thead>
     <tr><th>Composante</th><th>Symbole</th><th>Définition</th><th>Exemple</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Classe / Catégorie</strong></td><td>xᵢ ou [Lᵢ, Lᵢ₊₁[</td><td>Une valeur distincte ou un intervalle regroupant les observations</td><td>[150, 160[ cm</td></tr>
-    <tr><td><strong>Fréquence absolue</strong></td><td>nᵢ (ou fᵢ)</td><td>Le nombre d'observations tombant dans chaque classe</td><td>23 étudiants</td></tr>
+    <tr><td><strong>Classe / Catégorie</strong></td><td>xᵢ ou [Lᵢ, Lᵢ₊₁[</td><td>Une valeur distincte ou un intervalle regroupant des observations</td><td>[150, 160[ cm</td></tr>
+    <tr><td><strong>Fréquence absolue</strong></td><td>nᵢ</td><td>Le nombre d'observations tombant dans chaque classe</td><td>23 étudiants</td></tr>
     <tr><td><strong>Fréquence relative</strong></td><td>fᵢ = nᵢ / N</td><td>La proportion des observations totales dans chaque classe</td><td>23/100 = 0,23</td></tr>
-    <tr><td><strong>Fréquence en pourcentage</strong></td><td>fᵢ × 100</td><td>La fréquence relative exprimée en pourcentage</td><td>23%</td></tr>
-    <tr><td><strong>Fréquence cumulée</strong></td><td>Nᵢ (ou Fᵢ)</td><td>Total cumulé des fréquences jusqu'à la classe i incluse</td><td>45 étudiants</td></tr>
-    <tr><td><strong>Fréquence relative cumulée</strong></td><td>Fᵢ = Nᵢ / N</td><td>Proportion des observations à la classe i ou en dessous</td><td>45/100 = 0,45</td></tr>
+    <tr><td><strong>Fréquence en pourcentage</strong></td><td>fᵢ × 100</td><td>La fréquence relative exprimée en pourcentage</td><td>23 %</td></tr>
+    <tr><td><strong>Fréquence cumulée</strong></td><td>Nᵢ</td><td>Total cumulé des fréquences jusqu'à la classe i incluse</td><td>45 étudiants</td></tr>
+    <tr><td><strong>Fréq. relative cumulée</strong></td><td>Fᵢ = Nᵢ / N</td><td>Proportion d'observations à ou en dessous de la classe i</td><td>45/100 = 0,45</td></tr>
   </tbody>
 </table>
 
-<blockquote>🔑 <strong>Identité clé :</strong> La somme de toutes les fréquences absolues doit être égale au nombre total d'observations : <strong>Σnᵢ = N</strong>. La somme de toutes les fréquences relatives doit être égale à 1 : <strong>Σfᵢ = 1</strong>. Si ce n'est pas le cas, vous avez commis une erreur quelque part. C'est votre contrôle de qualité intégré.</blockquote>
+<blockquote>🔑 <strong>Identité clé :</strong> La somme de toutes les fréquences absolues doit égaler le nombre total d'observations : <strong>Σnᵢ = N</strong>. La somme de toutes les fréquences relatives doit égaler 1 : <strong>Σfᵢ = 1</strong>. Si ce n'est pas le cas, vous avez commis une erreur quelque part. C'est votre contrôle qualité intégré — une fonctionnalité d'auto-vérification enchâssée dans la structure mathématique du tableau.</blockquote>
 
 <hr>
 
-<h2>📌 Deux Types de Tableaux de Fréquences</h2>
+<h2>📌 Partie II — Deux types de tableaux de fréquences</h2>
 
-<p>Le type de tableau de fréquences que vous construisez dépend de la nature de votre variable et de l'étendue des valeurs de vos données. Il existe deux formes fondamentales, chacune adaptée à des situations différentes (Freedman et al., 2007).</p>
+<p>Le type de tableau de fréquences que vous construisez dépend de la nature de votre variable et de l'étendue des valeurs dans vos données. Il existe deux formes fondamentales, chacune adaptée à des situations différentes (Freedman et al., 2007 ; Agresti &amp; Franklin, 2018).</p>
 
-<h3>1️⃣ Tableaux de Fréquences Non Groupés (Simples)</h3>
+<h3>1️⃣ Tableaux de fréquences non groupés (simples)</h3>
 
-<p>Un <strong>tableau de fréquences non groupé</strong> liste chaque valeur distincte individuellement et compte combien de fois chacune apparaît. Cette approche fonctionne mieux lorsque la variable a un <em>petit nombre de valeurs distinctes</em> — typiquement moins de 15 à 20 valeurs uniques. Elle est idéale pour les variables discrètes à étendue limitée et pour toutes les variables qualitatives (catégorielles).</p>
+<p>Un <strong>tableau de fréquences non groupé</strong> liste chaque valeur distincte individuellement et compte combien de fois chacune apparaît. Cette approche fonctionne le mieux quand la variable a un <em>petit nombre de valeurs distinctes</em> — typiquement moins de 15–20 valeurs uniques. Elle est idéale pour les variables discrètes avec une étendue limitée et pour toutes les variables qualitatives (catégorielles).</p>
 
-<p><strong>Exemple — Nombre d'enfants par famille (enquête sur 30 familles) :</strong></p>
+<p><strong>Exemple — Taille des ménages dans une enquête démographique (n = 30 ménages à São Paulo, Brésil) :</strong></p>
 
 <p>Données brutes : 2, 3, 1, 4, 2, 2, 3, 1, 0, 2, 3, 5, 1, 2, 3, 2, 4, 1, 2, 3, 0, 1, 2, 3, 4, 2, 1, 3, 2, 1</p>
 
 <table>
   <thead>
-    <tr><th>Enfants (xᵢ)</th><th>Dépouillement</th><th>Fréquence (nᵢ)</th><th>Fréq. relative (fᵢ)</th><th>Pourcentage (%)</th><th>Fréq. cumulée (Nᵢ)</th><th>Fréq. rel. cum. (Fᵢ)</th></tr>
+    <tr><th>Enfants (xᵢ)</th><th>Décompte</th><th>Fréquence (nᵢ)</th><th>Fréq. rel. (fᵢ)</th><th>Pourcentage (%)</th><th>Fréq. cum. (Nᵢ)</th><th>Fréq. rel. cum. (Fᵢ)</th></tr>
   </thead>
   <tbody>
-    <tr><td>0</td><td>||</td><td>2</td><td>0,067</td><td>6,7%</td><td>2</td><td>0,067</td></tr>
-    <tr><td>1</td><td>|||| ||</td><td>7</td><td>0,233</td><td>23,3%</td><td>9</td><td>0,300</td></tr>
-    <tr><td>2</td><td>|||| |||| |</td><td>10</td><td>0,333</td><td>33,3%</td><td>19</td><td>0,633</td></tr>
-    <tr><td>3</td><td>|||| ||</td><td>7</td><td>0,233</td><td>23,3%</td><td>26</td><td>0,867</td></tr>
-    <tr><td>4</td><td>|||</td><td>3</td><td>0,100</td><td>10,0%</td><td>29</td><td>0,967</td></tr>
-    <tr><td>5</td><td>|</td><td>1</td><td>0,033</td><td>3,3%</td><td>30</td><td>1,000</td></tr>
-    <tr><td colspan="2"><strong>Total</strong></td><td><strong>30</strong></td><td><strong>1,000</strong></td><td><strong>100%</strong></td><td>—</td><td>—</td></tr>
+    <tr><td>0</td><td>||</td><td>2</td><td>0,067</td><td>6,7 %</td><td>2</td><td>0,067</td></tr>
+    <tr><td>1</td><td>|||| ||</td><td>7</td><td>0,233</td><td>23,3 %</td><td>9</td><td>0,300</td></tr>
+    <tr><td>2</td><td>|||| |||| |</td><td>10</td><td>0,333</td><td>33,3 %</td><td>19</td><td>0,633</td></tr>
+    <tr><td>3</td><td>|||| ||</td><td>7</td><td>0,233</td><td>23,3 %</td><td>26</td><td>0,867</td></tr>
+    <tr><td>4</td><td>|||</td><td>3</td><td>0,100</td><td>10,0 %</td><td>29</td><td>0,967</td></tr>
+    <tr><td>5</td><td>|</td><td>1</td><td>0,033</td><td>3,3 %</td><td>30</td><td>1,000</td></tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td><strong>30</strong></td><td><strong>1,000</strong></td><td><strong>100 %</strong></td><td>—</td><td>—</td></tr>
   </tbody>
 </table>
 
-<blockquote>🔍 <strong>Ce que le tableau révèle instantanément :</strong> La taille de famille la plus courante est 2 enfants (mode = 2, fréquence = 10). Un tiers des familles ont exactement 2 enfants. Près de 87% des familles ont 3 enfants ou moins. Une seule famille a 5 enfants — une valeur aberrante claire. Aucun de ces schémas n'est visible dans la chaîne de données brutes ci-dessus.</blockquote>
+<blockquote>🔍 <strong>Ce que le tableau révèle instantanément :</strong> La taille de ménage la plus courante est 2 enfants (mode = 2, fréquence = 10). Un tiers des familles ont exactement 2 enfants. Près de 87 % des familles ont 3 enfants ou moins. Une seule famille a 5 enfants — une valeur aberrante potentielle méritant investigation. Aucun de ces patterns n'est visible dans la chaîne de données brutes ci-dessus. Le tableau a transformé 30 nombres opaques en un portrait démographique clair.</blockquote>
 
-<h3>2️⃣ Tableaux de Fréquences Groupés (Intervalles de Classe)</h3>
+<h3>2️⃣ Tableaux de fréquences groupés (classes d'intervalles)</h3>
 
-<p>Lorsqu'une variable prend de nombreuses valeurs distinctes — comme c'est typiquement le cas des variables continues — lister chaque valeur individuellement produirait un tableau avec des dizaines ou des centaines de lignes, ce qui irait à l'encontre de l'objectif même de la synthèse. Dans ce cas, nous regroupons les valeurs dans des <strong>intervalles de classe</strong> (aussi appelés <em>classes</em> ou <em>bins</em>) et comptons combien d'observations tombent dans chaque intervalle (Triola, 2018).</p>
+<p>Quand une variable prend de nombreuses valeurs distinctes — comme c'est typiquement le cas des variables continues — lister chaque valeur individuellement produirait un tableau de dizaines ou centaines de lignes, annulant tout l'objectif de la synthèse. Dans ces cas, nous regroupons les valeurs en <strong>classes d'intervalles</strong> (aussi appelées <em>intervalles</em> ou <em>classes</em>) et comptons combien d'observations tombent dans chaque intervalle. Ce compromis entre détail et clarté est au cœur des tableaux de fréquences groupés (Triola, 2018).</p>
 
-<p>C'est là que les tableaux de fréquences deviennent à la fois un art et une science. Le choix du nombre de classes et de leur largeur affecte profondément les tendances que vous voyez — ou manquez — dans les données.</p>
+<p>Le choix du nombre de classes et de leur largeur n'est pas anodin — il affecte profondément les patterns que vous voyez, ou manquez, dans les données. Comme David Freedman l'a averti : « La manière dont vous regroupez les données détermine l'histoire que les données semblent raconter » (Freedman et al., 2007). C'est là que les tableaux de fréquences deviennent à la fois un <strong>art</strong> et une <strong>science</strong>.</p>
 
 <hr>
 
-<h2>🧮 Comment Construire un Tableau de Fréquences Groupé : Étape par Étape</h2>
+<h2>🧮 Partie III — Comment construire un tableau de fréquences groupé : Étape par étape</h2>
 
-<p>La construction d'un tableau de fréquences groupé suit un processus systématique. Chaque étape implique une décision, et chaque décision façonne le résultat final. Parcourons ce processus avec un exemple concret (Wackerly et al., 2014 ; Moore et al., 2021).</p>
+<p>La construction d'un tableau de fréquences groupé suit un processus systématique. Chaque étape implique une décision, et chaque décision façonne le résultat final. Parcourons cela avec un exemple concret (Wackerly et al., 2014 ; Moore et al., 2021).</p>
 
-<p><strong>Scénario :</strong> Un pédologue mesure le pH de 40 échantillons de sol collectés dans les champs agricoles de la région de Sétif en Algérie. Les mesures brutes sont :</p>
+<p><strong>Scénario :</strong> Un pédologue mesure le pH de 40 échantillons de sol prélevés dans des champs agricoles à travers la Beauce en France centrale — l'une des zones agricoles les plus productives d'Europe. Les mesures brutes sont :</p>
 
 <p>6,2 — 7,1 — 5,8 — 6,9 — 7,5 — 6,4 — 5,5 — 7,8 — 6,1 — 6,7 — 7,3 — 5,9 — 6,5 — 7,0 — 6,8 — 5,6 — 7,2 — 6,3 — 7,6 — 6,0 — 5,7 — 7,4 — 6,6 — 7,1 — 5,4 — 6,8 — 7,7 — 6,2 — 6,9 — 5,8 — 7,3 — 6,5 — 6,1 — 7,0 — 5,9 — 6,4 — 7,5 — 6,7 — 5,6 — 7,2</p>
 
-<h3>Étape 1 : Calculer l'Étendue</h3>
+<h3>Étape 1 : Trouver l'étendue</h3>
 
-<p>L'<strong>étendue</strong> est la différence entre la valeur maximale et la valeur minimale du jeu de données :</p>
+<p>L'<strong>étendue</strong> est la différence entre les valeurs maximale et minimale du jeu de données — la mesure la plus simple de la dispersion totale :</p>
 
 <p><strong>Étendue = X_max − X_min = 7,8 − 5,4 = 2,4</strong></p>
 
-<h3>Étape 2 : Déterminer le Nombre de Classes (k)</h3>
+<h3>Étape 2 : Déterminer le nombre de classes (k)</h3>
 
-<p>C'est la décision la plus critique. Trop peu de classes simplifient excessivement les données, masquant les vrais schémas. Trop de classes sous-simplifient, montrant du bruit plutôt que du signal. Plusieurs règles empiriques existent :</p>
+<p>C'est la décision la plus critique dans la construction de tout tableau de fréquences groupé. Trop peu de classes simplifient excessivement les données, cachant les vrais patterns sous des moyennes grossières. Trop de classes sous-simplifient, montrant du bruit aléatoire comme s'il s'agissait de variation significative. Plusieurs règles empiriques ont été développées au cours de près d'un siècle de pratique statistique :</p>
 
 <table>
   <thead>
-    <tr><th>Méthode</th><th>Formule</th><th>Convient pour</th><th>Résultat (n = 40)</th></tr>
+    <tr><th>Méthode</th><th>Formule</th><th>Idéale pour</th><th>Résultat (n = 40)</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Règle de Sturges</strong> (1926)</td><td>k = 1 + 3,322 × log₁₀(n)</td><td>Petits à moyens échantillons ; données approx. normales</td><td>k = 1 + 3,322 × log₁₀(40) = 1 + 3,322 × 1,602 ≈ <strong>6,3 → 7</strong></td></tr>
-    <tr><td><strong>Règle de la racine carrée</strong></td><td>k = √n</td><td>Estimation rapide</td><td>k = √40 ≈ <strong>6,3 → 7</strong></td></tr>
+    <tr><td><strong>Règle de Sturges</strong> (1926)</td><td>k = 1 + 3,322 × log₁₀(n)</td><td>Échantillons petits à modérés ; données approximativement normales</td><td>k = 1 + 3,322 × 1,602 ≈ <strong>6,3 → 7</strong></td></tr>
+    <tr><td><strong>Règle de la racine carrée</strong></td><td>k = √n</td><td>Estimation rapide ; largement utilisée dans les cours d'introduction</td><td>k = √40 ≈ <strong>6,3 → 7</strong></td></tr>
     <tr><td><strong>Règle de Rice</strong></td><td>k = 2 × n^(1/3)</td><td>Échantillons modérés à grands</td><td>k = 2 × 40^(1/3) ≈ <strong>6,8 → 7</strong></td></tr>
-    <tr><td><strong>Règle de Freedman-Diaconis</strong></td><td>h = 2 × EIQ × n^(−1/3)</td><td>Robuste aux valeurs aberrantes et à l'asymétrie</td><td>Dépend du calcul de l'EIQ</td></tr>
+    <tr><td><strong>Règle de Freedman-Diaconis</strong></td><td>h = 2 × IQR × n^(−1/3)</td><td>Robuste aux valeurs aberrantes et à l'asymétrie ; préférée pour les grands jeux de données</td><td>Dépend du calcul de l'IQR</td></tr>
   </tbody>
 </table>
 
-<blockquote>📚 <strong>Note historique :</strong> Herbert A. Sturges a publié sa célèbre règle dans un bref article en 1926 dans le <em>Journal of the American Statistical Association</em>. Sa formule dérive de l'approximation d'une distribution normale par une distribution binomiale — une connexion mathématique élégante. Malgré sa simplicité, elle reste l'une des lignes directrices les plus utilisées près d'un siècle plus tard (Sturges, 1926). Cependant, Scott (1979) a montré que la règle de Sturges tend à produire des histogrammes trop lissés pour les grands échantillons, menant au développement d'alternatives comme la règle de Freedman-Diaconis (Freedman & Diaconis, 1981).</blockquote>
+<blockquote>📚 <strong>Note historique :</strong> Herbert A. Sturges publia sa célèbre règle dans un bref article d'une page dans le <em>Journal of the American Statistical Association</em> en 1926. Sa formule dérive d'une idée d'une élégance remarquable : approximer une distribution normale à l'aide d'une distribution binomiale, puis déterminer combien de classes la binomiale requiert. Malgré sa simplicité, la règle de Sturges reste l'une des directives les plus utilisées près d'un siècle plus tard (Sturges, 1926). Cependant, David Scott (1979) démontra dans <em>Biometrika</em> que la règle de Sturges tend à produire des histogrammes excessivement lissés pour les grands échantillons (n > 200), sous-estimant systématiquement le nombre optimal de classes. Cela conduisit au développement de la propre règle de largeur optimale de Scott et de l'influente règle de Freedman-Diaconis (1981), qui utilise l'écart interquartile (IQR) au lieu de l'écart-type, la rendant robuste aux valeurs aberrantes — un avantage critique pour les données du monde réel qui se comportent rarement de manière parfaitement normale.</blockquote>
 
-<p>Pour nos données de pH du sol, les trois règles courantes convergent vers environ <strong>k = 7 classes</strong>.</p>
+<p>Pour nos données de pH du sol, les trois règles courantes convergent vers approximativement <strong>k = 7 classes</strong> — une convergence rassurante suggérant que c'est un choix raisonnable.</p>
 
-<h3>Étape 3 : Calculer l'Amplitude de Classe (h)</h3>
+<h3>Étape 3 : Calculer l'amplitude de classe (h)</h3>
 
-<p>L'amplitude de classe est déterminée en divisant l'étendue par le nombre de classes et en arrondissant à un nombre pratique :</p>
+<p>L'amplitude de classe est déterminée en divisant l'étendue par le nombre de classes et en arrondissant au nombre pratique supérieur :</p>
 
-<p><strong>h = Étendue / k = 2,4 / 7 ≈ 0,34 → arrondir à 0,4</strong></p>
+<p><strong>h = Étendue / k = 2,4 / 7 ≈ 0,34 → arrondi à 0,4</strong></p>
 
-<p>Nous choisissons h = 0,4 car c'est un nombre « propre » qui rend les intervalles faciles à lire et interpréter.</p>
+<p>Nous choisissons h = 0,4 parce que c'est un nombre « propre » qui rend les intervalles faciles à lire et interpréter. C'est un choix de jugement — l'amplitude de classe doit être un nombre qui a un sens pratique pour la variable mesurée. Pour le pH, des incréments de 0,4 sont scientifiquement significatifs ; pour des notes d'examen, on préférerait des amplitudes de 5 ou 10 points.</p>
 
-<h3>Étape 4 : Définir les Limites de Classe</h3>
+<h3>Étape 4 : Fixer les limites de classes</h3>
 
-<p>En partant d'une valeur égale ou juste inférieure au minimum (5,4), nous créons des intervalles de largeur 0,4. Nous utilisons la convention <strong>[limite inf, limite sup[</strong> signifiant que la limite inférieure est incluse mais la limite supérieure est exclue :</p>
+<p>En partant d'une valeur égale ou juste inférieure au minimum (5,4), nous créons des intervalles de largeur 0,4. Nous utilisons la convention <strong>[borne inférieure, borne supérieure[</strong> signifiant que la borne inférieure est <em>incluse</em> mais la borne supérieure est <em>exclue</em> (garantissant qu'aucune observation ne tombe dans deux classes simultanément). C'est la convention mathématique standard pour les intervalles semi-ouverts, utilisée universellement dans la pratique statistique française et internationale.</p>
 
-<h3>Étape 5 : Compter, Calculer et Assembler</h3>
+<h3>Étape 5 : Compter, calculer et assembler</h3>
 
 <table>
   <thead>
-    <tr><th>Intervalle [Lᵢ, Lᵢ₊₁[</th><th>Centre (cᵢ)</th><th>Fréq. (nᵢ)</th><th>Fréq. rel. (fᵢ)</th><th>Pourcentage</th><th>Fréq. cum. (Nᵢ)</th><th>Fréq. rel. cum. (Fᵢ)</th></tr>
+    <tr><th>Classe [Lᵢ, Lᵢ₊₁[</th><th>Centre (cᵢ)</th><th>Fréq. (nᵢ)</th><th>Fréq. rel. (fᵢ)</th><th>Pourcentage</th><th>Fréq. cum. (Nᵢ)</th><th>Fréq. rel. cum. (Fᵢ)</th></tr>
   </thead>
   <tbody>
-    <tr><td>[5,4 ; 5,8[</td><td>5,6</td><td>4</td><td>0,100</td><td>10,0%</td><td>4</td><td>0,100</td></tr>
-    <tr><td>[5,8 ; 6,2[</td><td>6,0</td><td>6</td><td>0,150</td><td>15,0%</td><td>10</td><td>0,250</td></tr>
-    <tr><td>[6,2 ; 6,6[</td><td>6,4</td><td>6</td><td>0,150</td><td>15,0%</td><td>16</td><td>0,400</td></tr>
-    <tr><td>[6,6 ; 7,0[</td><td>6,8</td><td>7</td><td>0,175</td><td>17,5%</td><td>23</td><td>0,575</td></tr>
-    <tr><td>[7,0 ; 7,4[</td><td>7,2</td><td>8</td><td>0,200</td><td>20,0%</td><td>31</td><td>0,775</td></tr>
-    <tr><td>[7,4 ; 7,8[</td><td>7,6</td><td>5</td><td>0,125</td><td>12,5%</td><td>36</td><td>0,900</td></tr>
-    <tr><td>[7,8 ; 8,2[</td><td>8,0</td><td>4</td><td>0,100</td><td>10,0%</td><td>40</td><td>1,000</td></tr>
-    <tr><td colspan="2"><strong>Total</strong></td><td><strong>40</strong></td><td><strong>1,000</strong></td><td><strong>100%</strong></td><td>—</td><td>—</td></tr>
+    <tr><td>[5,4 ; 5,8[</td><td>5,6</td><td>4</td><td>0,100</td><td>10,0 %</td><td>4</td><td>0,100</td></tr>
+    <tr><td>[5,8 ; 6,2[</td><td>6,0</td><td>6</td><td>0,150</td><td>15,0 %</td><td>10</td><td>0,250</td></tr>
+    <tr><td>[6,2 ; 6,6[</td><td>6,4</td><td>6</td><td>0,150</td><td>15,0 %</td><td>16</td><td>0,400</td></tr>
+    <tr><td>[6,6 ; 7,0[</td><td>6,8</td><td>7</td><td>0,175</td><td>17,5 %</td><td>23</td><td>0,575</td></tr>
+    <tr><td>[7,0 ; 7,4[</td><td>7,2</td><td>8</td><td>0,200</td><td>20,0 %</td><td>31</td><td>0,775</td></tr>
+    <tr><td>[7,4 ; 7,8[</td><td>7,6</td><td>5</td><td>0,125</td><td>12,5 %</td><td>36</td><td>0,900</td></tr>
+    <tr><td>[7,8 ; 8,2[</td><td>8,0</td><td>4</td><td>0,100</td><td>10,0 %</td><td>40</td><td>1,000</td></tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td><strong>40</strong></td><td><strong>1,000</strong></td><td><strong>100 %</strong></td><td>—</td><td>—</td></tr>
   </tbody>
 </table>
 
-<blockquote>🧪 <strong>Que révèle le tableau ?</strong> Les valeurs de pH du sol se concentrent principalement dans la plage légèrement acide à neutre (6,6–7,4), avec la classe modale étant [7,0 ; 7,4[. Environ 58% des échantillons ont un pH inférieur à 7,0. La distribution est approximativement symétrique, avec une légère asymétrie positive. Cela indique au pédologue que la plupart des champs de la région sont quasi neutres — une excellente information pour le choix des cultures et la planification de la fertilisation.</blockquote>
+<blockquote>🧪 <strong>Que révèle le tableau ?</strong> Les valeurs de pH du sol se concentrent le plus fortement dans la plage légèrement acide à neutre (6,6–7,4), la classe modale étant [7,0 ; 7,4[. Environ 58 % des échantillons ont un pH inférieur à 7,0 (fréquence cumulée à la fin de la classe [6,6 ; 7,0[ = 23/40). La distribution est approximativement symétrique, avec une légère asymétrie positive. Cela indique au pédologue que la plupart des champs de la région sont proches de la neutralité — une information excellente pour le choix des cultures et la planification de la fertilisation. Un chercheur dans le cerrado brésilien, le plateau du Deccan en Inde ou le bassin Murray-Darling en Australie suivrait la procédure exactement identique avec ses propres échantillons de sol.</blockquote>
 
 <hr>
 
-<h2>🔬 Anatomie de Chaque Type de Fréquence : Pourquoi Ils Sont Tous Importants</h2>
+<h2>🔬 Partie IV — Anatomie de chaque type de fréquence : Pourquoi chacun compte</h2>
 
-<p>Un tableau de fréquences complet contient plusieurs types de fréquences, chacun servant un objectif analytique distinct. Comprendre ce que chacun vous dit est crucial pour extraire le maximum d'information de vos données (Agresti & Franklin, 2018).</p>
+<p>Un tableau de fréquences complet contient plusieurs types de fréquences, chacun servant un objectif analytique distinct. Comprendre ce que chacun vous dit est crucial pour extraire le maximum d'information de vos données (Agresti &amp; Franklin, 2018).</p>
 
-<h3>📊 Fréquence Absolue (nᵢ) — Le Comptage Brut</h3>
+<h3>📊 Fréquence absolue (nᵢ) — Le décompte brut</h3>
 
-<p>La fréquence absolue est simplement le nombre d'observations qui tombent dans chaque classe. C'est la mesure la plus basique et intuitive — le comptage direct de « combien ». Les fréquences absolues sont essentielles pour comprendre la magnitude réelle de chaque groupe, mais elles peuvent être trompeuses lors de la comparaison de jeux de données de tailles différentes.</p>
+<p>La fréquence absolue est simplement le nombre d'observations qui tombent dans chaque classe. C'est la mesure la plus basique et intuitive — le comptage direct du « combien. » Les fréquences absolues sont essentielles pour comprendre la magnitude réelle de chaque groupe, mais elles peuvent être trompeuses lors de la comparaison de jeux de données de tailles différentes. Une classe avec nᵢ = 50 dans un jeu de données de N = 100 est très différente de nᵢ = 50 dans un jeu de données de N = 10 000. La première représente 50 % des observations ; la seconde seulement 0,5 %. C'est pourquoi la fréquence absolue seule n'est jamais suffisante pour l'analyse comparative.</p>
 
-<h3>📏 Fréquence Relative (fᵢ) — La Proportion</h3>
+<h3>📏 Fréquence relative (fᵢ) — La proportion</h3>
 
-<p>La fréquence relative transforme le comptage brut en proportion du total : <strong>fᵢ = nᵢ / N</strong>. Cette standardisation permet de comparer des distributions à travers des jeux de données de tailles différentes — un avantage crucial en recherche scientifique.</p>
+<p>La fréquence relative transforme le décompte brut en proportion du total : <strong>fᵢ = nᵢ / N</strong>. Cette standardisation rend possible la comparaison des distributions entre jeux de données de tailles différentes — un avantage crucial en recherche scientifique. Si 20 % des échantillons de sol en Beauce sont acides et 35 % dans la plaine de Kanto au Japon sont acides, nous pouvons faire des comparaisons significatives indépendamment du fait que 40 ou 400 échantillons aient été collectés dans chaque région. La fréquence relative est le langage universel de comparaison entre différentes tailles d'échantillons et différentes études.</p>
 
-<blockquote>📈 <strong>Lien avec la probabilité :</strong> Les fréquences relatives sont les estimations empiriques (observées) de la probabilité. Si vous sélectionniez aléatoirement un échantillon de sol, la fréquence relative de chaque classe approxime la probabilité d'obtenir une valeur de pH dans cette plage. À mesure que la taille de l'échantillon augmente, les fréquences relatives convergent vers les vraies probabilités — c'est l'essence de la <strong>Loi des Grands Nombres</strong> (Wackerly et al., 2014).</blockquote>
+<blockquote>📈 <strong>Lien avec la probabilité :</strong> Les fréquences relatives sont les estimations empiriques (observées) de la probabilité. Si vous sélectionniez aléatoirement un échantillon de sol dans notre jeu de données, la fréquence relative de chaque classe approxime la probabilité d'obtenir une valeur de pH dans cette plage. À mesure que la taille de l'échantillon augmente, les fréquences relatives convergent vers les vraies probabilités de la population — c'est l'essence de la <strong>Loi des grands nombres</strong>, l'un des théorèmes fondateurs de la théorie des probabilités, formalisé par Jacob Bernoulli dans son <em>Ars Conjectandi</em> posthume (1713) et rigoureusement démontré par Émile Borel (1909) et Andreï Kolmogorov (1933). En termes modernes : pour tout événement A, quand n → ∞, la fréquence relative fᵢ → P(A) presque sûrement (Wackerly et al., 2014).</blockquote>
 
-<h3>📈 Fréquence Cumulée (Nᵢ) — Le Total Cumulé</h3>
+<h3>📈 Fréquence cumulée (Nᵢ) — Le total cumulé</h3>
 
-<p>La fréquence cumulée est la somme de toutes les fréquences de la première classe jusqu'à la classe i incluse : <strong>Nᵢ = n₁ + n₂ + ... + nᵢ</strong>. Elle indique combien d'observations sont <em>à ou en dessous</em> d'une valeur donnée.</p>
+<p>La fréquence cumulée est la somme de toutes les fréquences depuis la première classe jusqu'à la classe i incluse : <strong>Nᵢ = n₁ + n₂ + ... + nᵢ</strong>. Elle vous indique combien d'observations se situent <em>à ou en dessous</em> d'une valeur donnée. C'est extrêmement utile pour répondre à des questions comme « Combien d'étudiants ont obtenu 70 ou moins ? » ou « Quel pourcentage de patients ont un cholestérol en dessous du seuil clinique de 200 mg/dL ? »</p>
 
-<p>Il existe deux types de fréquence cumulée :</p>
+<p>Il existe deux types de fréquence cumulée, chacun répondant à une question différente :</p>
 
 <table>
   <thead>
-    <tr><th>Type</th><th>Direction</th><th>Formule</th><th>Question à laquelle elle répond</th></tr>
+    <tr><th>Type</th><th>Direction</th><th>Formule</th><th>Question à laquelle il répond</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Croissante (≤)</strong></td><td>De bas en haut</td><td>Nᵢ = Σ nⱼ pour j = 1 à i</td><td>« Combien d'observations sont à cette valeur ou en dessous ? »</td></tr>
-    <tr><td><strong>Décroissante (≥)</strong></td><td>De haut en bas</td><td>N'ᵢ = Σ nⱼ pour j = i à k</td><td>« Combien d'observations sont à cette valeur ou au-dessus ? »</td></tr>
+    <tr><td><strong>Ascendante (≤)</strong></td><td>Du bas vers le haut</td><td>Nᵢ = Σ nⱼ pour j = 1 à i</td><td>« Combien d'observations sont à ou en dessous de cette valeur ? »</td></tr>
+    <tr><td><strong>Descendante (≥)</strong></td><td>Du haut vers le bas</td><td>N'ᵢ = Σ nⱼ pour j = i à k</td><td>« Combien d'observations sont à ou au-dessus de cette valeur ? »</td></tr>
   </tbody>
 </table>
 
-<h3>📊 Fréquence Relative Cumulée (Fᵢ) — Percentiles et Au-delà</h3>
+<p>Notez que pour toute classe i : <strong>Nᵢ (ascendante) + N'ᵢ (descendante) − nᵢ = N</strong>. Cette identité fournit un autre contrôle de vérification intégré.</p>
 
-<p>La fréquence relative cumulée, <strong>Fᵢ = Nᵢ / N</strong>, donne directement le rang percentile. Si Fᵢ = 0,75 pour une classe donnée, alors 75% des données sont à ou en dessous de cette limite de classe. C'est le fondement mathématique pour calculer les <strong>quartiles</strong>, les <strong>percentiles</strong> et la <strong>médiane</strong> à partir de données groupées.</p>
+<h3>📊 Fréquence relative cumulée (Fᵢ) — Percentiles et au-delà</h3>
 
-<hr>
-
-<h2>📐 Le Centre de Classe (Point Milieu) : Un Outil Discret mais Essentiel</h2>
-
-<p>Le <strong>centre de classe</strong> (ou <em>point milieu</em>, <em>marque de classe</em>) est la valeur située exactement au milieu de chaque intervalle de classe :</p>
-
-<p><strong>cᵢ = (Limite inférieure + Limite supérieure) / 2</strong></p>
-
-<p>Bien qu'il puisse sembler un détail technique mineur, le centre de classe joue un rôle vital. Lorsque nous calculons la <strong>moyenne</strong>, la <strong>variance</strong> et l'<strong>écart-type</strong> à partir de données groupées, nous supposons que chaque observation d'une classe prend la valeur du centre de classe. Cela introduit une petite erreur d'approximation — appelée <em>erreur de groupement</em> — mais permet le calcul lorsque seul le tableau groupé (et non les données brutes) est disponible (Spiegel et al., 2013).</p>
+<p>La fréquence relative cumulée, <strong>Fᵢ = Nᵢ / N</strong>, donne directement le rang percentile. Si Fᵢ = 0,75 pour une classe donnée, alors 75 % des données se situent à ou en dessous de la limite de cette classe. C'est le fondement mathématique pour le calcul des <strong>quartiles</strong>, des <strong>percentiles</strong> et de la <strong>médiane</strong> à partir de données groupées. En épidémiologie, la fréquence relative cumulée est utilisée pour construire les <strong>courbes de survie</strong> ; en économie, elle forme la base des <strong>courbes de Lorenz</strong> pour mesurer l'inégalité des revenus ; en hydrologie, elle est utilisée pour estimer les <strong>périodes de retour</strong> des crues. La même structure mathématique sert des disciplines radicalement différentes — un témoignage de l'universalité des distributions de fréquences.</p>
 
 <hr>
 
-<h2>⚖️ Règles et Principes pour des Classes Bien Construites</h2>
+<h2>📐 Partie V — Le centre de classe (point milieu) : Un outil caché mais essentiel</h2>
 
-<p>Un tableau de fréquences mal conçu peut déformer les données aussi gravement que l'absence de tableau. Les principes suivants, établis par des générations de statisticiens, garantissent que votre tableau groupé représente fidèlement les données sous-jacentes (Moore et al., 2021 ; Freedman et al., 2007) :</p>
+<p>Le <strong>centre de classe</strong> (ou <em>point milieu</em>, <em>valeur centrale</em>) est la valeur située exactement au milieu de chaque intervalle de classe :</p>
+
+<p><strong>cᵢ = (Borne inférieure + Borne supérieure) / 2</strong></p>
+
+<p>Bien qu'il puisse sembler être un détail technique mineur, le centre de classe joue un rôle vital dans tous les calculs ultérieurs. Quand nous calculons la <strong>moyenne</strong>, la <strong>variance</strong> et l'<strong>écart-type</strong> à partir de données groupées, nous supposons que chaque observation dans une classe prend la valeur du centre de classe. Cela introduit une petite erreur d'approximation — appelée <em>erreur de groupement</em> ou <em>correction de Sheppard</em> — mais cela permet le calcul quand seul le tableau groupé (et non les données brutes) est disponible. William F. Sheppard quantifia cette erreur en 1898, montrant que la variance calculée à partir de données groupées surestime systématiquement la vraie variance d'environ h²/12, où h est l'amplitude de classe (Spiegel et al., 2013).</p>
+
+<p>Historiquement, cette approximation était indispensable — quand Karl Pearson, Ronald Fisher et leurs contemporains travaillaient avec des jeux de données de milliers d'observations au début du vingtième siècle, tous les calculs étaient effectués à la main à l'aide de tableaux de fréquences groupés. Même aujourd'hui, quand les données ne sont publiées que sous forme groupée (comme dans de nombreux rapports statistiques gouvernementaux, résumés sanitaires de l'OMS et publications de recensement), le centre de classe reste le seul outil pour estimer les statistiques descriptives.</p>
+
+<hr>
+
+<h2>⚖️ Partie VI — Règles et principes pour des classes bien construites</h2>
+
+<p>Un tableau de fréquences mal conçu peut déformer les données aussi gravement qu'une absence de tableau. Les principes suivants, établis par des générations de statisticiens, garantissent que votre tableau groupé représente fidèlement les données sous-jacentes (Moore et al., 2021 ; Freedman et al., 2007) :</p>
 
 <table>
   <thead>
     <tr><th>Principe</th><th>Description</th><th>Pourquoi c'est important</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Exhaustivité</strong></td><td>Chaque observation doit tomber dans exactement une classe</td><td>Aucune donnée ne doit rester non classifiée</td></tr>
-    <tr><td><strong>Exclusivité mutuelle</strong></td><td>Les classes ne doivent pas se chevaucher</td><td>Empêche le double comptage ; utiliser la convention [inf, sup[</td></tr>
-    <tr><td><strong>Largeur égale</strong></td><td>Toutes les classes doivent avoir la même largeur (si possible)</td><td>Des largeurs inégales déforment les comparaisons visuelles</td></tr>
-    <tr><td><strong>5 à 20 classes</strong></td><td>Utiliser entre 5 et 20 classes pour la plupart des jeux de données</td><td>Moins = simplification excessive ; plus = manque de synthèse</td></tr>
-    <tr><td><strong>Limites nettes</strong></td><td>Choisir des limites faciles à lire (multiples de 5, 10, etc.)</td><td>Améliore l'interprétabilité et réduit les erreurs</td></tr>
-    <tr><td><strong>Pas de classes vides</strong></td><td>Éviter les classes avec une fréquence nulle (si possible)</td><td>Les classes vides suggèrent une structure d'intervalles inappropriée</td></tr>
+    <tr><td><strong>Exhaustivité</strong></td><td>Chaque observation doit tomber dans exactement une classe</td><td>Aucune donnée ne doit rester non classée — les classes doivent couvrir toute l'étendue</td></tr>
+    <tr><td><strong>Exclusivité mutuelle</strong></td><td>Les classes ne doivent pas se chevaucher</td><td>Empêche le double-comptage ; la convention [inférieure, supérieure[ le garantit</td></tr>
+    <tr><td><strong>Amplitude égale</strong></td><td>Toutes les classes devraient avoir la même amplitude (si possible)</td><td>Des amplitudes inégales déforment les comparaisons visuelles dans les histogrammes et nécessitent des corrections de densité</td></tr>
+    <tr><td><strong>5–20 classes</strong></td><td>Utiliser entre 5 et 20 classes pour la plupart des jeux de données</td><td>Moins = simplification excessive ; plus = sous-synthèse (le bruit passe pour du signal)</td></tr>
+    <tr><td><strong>Limites propres</strong></td><td>Choisir des limites faciles à lire (multiples de 5, 10, etc.)</td><td>Améliore l'interprétabilité, réduit les erreurs humaines, facilite la communication</td></tr>
+    <tr><td><strong>Pas de classes vides</strong></td><td>Éviter les classes avec une fréquence nulle (si possible)</td><td>Des classes vides suggèrent que la structure d'intervalles est inappropriée pour les données</td></tr>
   </tbody>
 </table>
 
-<blockquote>⚠️ <strong>Le problème de Boucle d'Or :</strong> Trop peu de classes (disons 3 classes pour 500 observations) compresse des schémas distincts en moyennes floues — vous pourriez fusionner des sols acides et neutres en une seule catégorie, perdant la distinction cruciale. Trop de classes (disons 50 classes pour 50 observations) montre chaque fluctuation mineure comme si c'était un vrai schéma alors que ce n'est que du bruit aléatoire. L'objectif est de trouver le nombre qui est « juste bien » (Tukey, 1977 ; Scott, 1979).</blockquote>
+<blockquote>⚠️ <strong>Le problème de Boucles d'or :</strong> Trop peu de classes (disons, 3 classes pour 500 observations) comprime des patterns distincts en moyennes floues — vous pourriez fusionner des lectures de pression artérielle normales et hypertensives dans une seule catégorie, perdant la distinction clinique cruciale. Trop de classes (disons, 50 classes pour 50 observations) montre chaque fluctuation mineure comme si c'était un vrai pattern alors que c'est juste du bruit aléatoire. L'objectif est de trouver le nombre « juste » — assez de résolution pour voir les vrais patterns, assez de lissage pour supprimer le bruit. Cette tension entre <em>résolution</em> et <em>stabilité</em> est l'un des thèmes centraux de toute analyse de données, des simples tableaux de fréquences à l'apprentissage automatique (Tukey, 1977 ; Scott, 1979).</blockquote>
+
+<h3>Cas spécial : Classes ouvertes</h3>
+
+<p>Parfois la première ou la dernière classe doit être laissée ouverte — écrite « < 10 » ou « ≥ 100 » — pour accommoder les valeurs extrêmes sans créer de nombreuses classes presque vides. Cela se produit fréquemment dans les distributions de revenus (la tranche supérieure « 200 000 $ et plus »), les distributions d'âge (« 85 ans et plus »), et les données cliniques (« en dessous de la limite de détection »). Les classes ouvertes ont une limitation significative : elles n'ont <strong>pas de point milieu défini</strong>, ce qui empêche le calcul exact de la moyenne et de la variance à partir du tableau groupé. Les chercheurs doivent soit estimer le point milieu en utilisant des connaissances du domaine, soit exclure ces classes des calculs nécessitant des points milieux (Triola, 2018).</p>
+
+<h3>Cas spécial : Amplitudes de classes inégales</h3>
+
+<p>Quand les données sont fortement asymétriques — comme dans les distributions de revenus, les populations urbaines ou les magnitudes sismiques — des classes d'amplitude égale peuvent produire des tableaux où la plupart des observations se concentrent dans une ou deux classes tandis que les autres sont presque vides. Dans de tels cas, utiliser des <strong>amplitudes de classes inégales</strong> (plus étroites là où les données sont denses, plus larges là où elles sont éparses) peut produire un tableau plus informatif. Cependant, les amplitudes inégales introduisent une complication critique : <strong>les histogrammes construits à partir de tels tableaux doivent utiliser la densité de fréquence (dᵢ = nᵢ / hᵢ) plutôt que la fréquence brute pour l'axe des ordonnées</strong>, sinon les classes plus larges apparaissent disproportionnellement importantes. C'est l'une des erreurs les plus courantes dans les histogrammes publiés (Freedman et al., 2007).</p>
 
 <hr>
 
-<h2>🔄 Des Données au Tableau au Graphique : Le Pipeline Analytique</h2>
+<h2>🔄 Partie VII — Des données au tableau au graphique : Le pipeline analytique</h2>
 
-<p>Le tableau de fréquences n'est pas une fin en soi — il est le fondement sur lequel toutes les représentations graphiques sont construites. Chaque type de fréquence a son graphique correspondant (Triola, 2018) :</p>
+<p>Le tableau de fréquences n'est pas une fin en soi — c'est le fondement sur lequel toutes les représentations graphiques sont construites. Chaque type de fréquence a son graphique correspondant, et comprendre cette correspondance est essentiel pour une communication efficace des données (Triola, 2018 ; Moore et al., 2021) :</p>
 
 <table>
   <thead>
     <tr><th>Type de fréquence</th><th>Graphique</th><th>Ce qu'il montre</th></tr>
   </thead>
   <tbody>
-    <tr><td>Absolue / Relative (non groupée, qualitative)</td><td><strong>Diagramme en barres</strong></td><td>Barres séparées par des espaces ; l'ordre peut être modifié</td></tr>
-    <tr><td>Absolue / Relative (groupée, quantitative)</td><td><strong>Histogramme</strong></td><td>Barres jointes (sans espaces) ; l'axe X est une échelle continue</td></tr>
-    <tr><td>Relative / Pourcentage</td><td><strong>Diagramme circulaire</strong></td><td>Composition proportionnelle de l'ensemble</td></tr>
-    <tr><td>Absolue (points milieu reliés)</td><td><strong>Polygone de fréquences</strong></td><td>Forme de la distribution ; permet la comparaison</td></tr>
-    <tr><td>Fréquence cumulée</td><td><strong>Ogive (courbe cumulative)</strong></td><td>Lecture des percentiles, médiane, quartiles graphiquement</td></tr>
+    <tr><td>Absolue / Relative (non groupé, qualitatif)</td><td><strong>Diagramme en barres</strong></td><td>Barres séparées par des espaces ; l'ordre peut être réarrangé pour les données nominales</td></tr>
+    <tr><td>Absolue / Relative (groupé, quantitatif)</td><td><strong>Histogramme</strong></td><td>Barres adjacentes (pas d'espaces) ; l'axe x est une échelle continue ; aire ∝ fréquence</td></tr>
+    <tr><td>Relative / Pourcentage</td><td><strong>Diagramme circulaire</strong></td><td>Composition proportionnelle du tout (à utiliser avec parcimonie — limité pour >6 catégories)</td></tr>
+    <tr><td>Absolue (points milieux connectés)</td><td><strong>Polygone de fréquences</strong></td><td>Forme de la distribution ; permet la comparaison superposée de plusieurs distributions</td></tr>
+    <tr><td>Fréquence cumulée</td><td><strong>Ogive (courbe cumulative)</strong></td><td>Lecture graphique des percentiles, médiane, quartiles à partir de la courbe</td></tr>
   </tbody>
 </table>
 
-<blockquote>🎯 <strong>Aperçu pratique :</strong> L'histogramme naît directement du tableau de fréquences groupé — chaque barre représente une classe et sa hauteur égale la fréquence. L'ogive naît de la colonne de fréquence cumulée. Comprendre cette connexion entre tableaux et graphiques est essentiel : <strong>le tableau est la donnée, le graphique est l'histoire</strong>.</blockquote>
+<blockquote>🎯 <strong>Insight pratique :</strong> L'histogramme naît directement du tableau de fréquences groupé — chaque barre représente une classe, et la hauteur de la barre égale la fréquence (ou la fréquence relative, ou la densité). L'ogive naît de la colonne de fréquence cumulée — chaque point représente la borne supérieure d'une classe tracée contre le total cumulé. Comprendre cette connexion entre tableaux et graphiques est essentiel : <strong>le tableau est la donnée, le graphique est l'histoire</strong>. William Playfair, qui inventa le diagramme en barres (1786) et le diagramme circulaire (1801), comprit que les représentations graphiques rendent les patterns statistiques accessibles aux audiences qui ne liraient jamais un tableau — un principe qui reste central dans la visualisation moderne des données (Tufte, 2001).</blockquote>
 
 <hr>
 
-<h2>🌍 Applications Réelles : Les Tableaux de Fréquences Sont Partout</h2>
+<h2>🌍 Partie VIII — Applications concrètes : Les tableaux de fréquences à travers les disciplines</h2>
+
+<p>Les tableaux de fréquences ne se limitent pas aux manuels de statistique. Ils sont l'épine dorsale analytique de pratiquement chaque discipline quantitative sur Terre (Agresti &amp; Franklin, 2018 ; Moore et al., 2021) :</p>
 
 <table>
   <thead>
     <tr><th>Domaine</th><th>Exemple d'application</th><th>Ce que le tableau révèle</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>🌾 Agriculture</strong></td><td>Rendement en grains (t/ha) de 200 parcelles expérimentales</td><td>Quelles plages de rendement sont les plus courantes</td></tr>
-    <tr><td><strong>🏥 Médecine</strong></td><td>Mesures de tension artérielle de 500 patients</td><td>Distribution du risque d'hypertension</td></tr>
-    <tr><td><strong>🌿 Écologie</strong></td><td>Comptages d'espèces à travers 100 quadrats</td><td>Schémas de biodiversité ; espèces rares vs. communes</td></tr>
-    <tr><td><strong>💰 Économie</strong></td><td>Distribution des revenus mensuels de 10 000 ménages</td><td>Inégalité des revenus ; pourcentage sous le seuil de pauvreté</td></tr>
-    <tr><td><strong>🏭 Contrôle qualité</strong></td><td>Poids des produits sur une chaîne d'assemblage</td><td>Si les produits répondent aux spécifications ; taux de défauts</td></tr>
-    <tr><td><strong>🧬 Génétique</strong></td><td>Niveaux d'expression génique à travers des échantillons de tissus</td><td>Quels gènes sont sur/sous-exprimés</td></tr>
+    <tr><td><strong>🏥 Médecine / Épidémiologie</strong></td><td>Lectures de pression artérielle de 5 000 patients dans un essai clinique (Tokyo, São Paulo, Londres)</td><td>Distribution du risque d'hypertension ; pourcentage au-dessus des seuils OMS (140/90 mmHg) ; comparaison entre sites d'étude</td></tr>
+    <tr><td><strong>🌾 Agriculture</strong></td><td>Rendement en grains (t/ha) de 200 parcelles expérimentales au Pendjab, Inde</td><td>Quelles plages de rendement sont les plus courantes ; identification des variétés performantes ; évaluation de la variabilité</td></tr>
+    <tr><td><strong>🌿 Écologie</strong></td><td>Comptages d'espèces dans 100 quadrats d'échantillonnage dans le bassin de l'Amazone</td><td>Patterns de biodiversité ; distribution des espèces rares vs. communes ; priorités de conservation</td></tr>
+    <tr><td><strong>💰 Économie</strong></td><td>Distribution du revenu mensuel de 10 000 ménages dans les pays de l'OCDE</td><td>Inégalité des revenus ; pourcentage en dessous des seuils nationaux de pauvreté ; estimation du coefficient de Gini</td></tr>
+    <tr><td><strong>🏭 Contrôle qualité</strong></td><td>Poids des produits d'une chaîne de montage Toyota à Nagoya</td><td>Si les produits respectent les spécifications ; taux de défauts ; capabilité de processus Six Sigma</td></tr>
+    <tr><td><strong>🧬 Génomique</strong></td><td>Niveaux d'expression génique dans 500 échantillons de tissus (TCGA Cancer Genome Atlas)</td><td>Quels gènes sont sur/sous-exprimés ; identification des seuils d'expression pour le diagnostic</td></tr>
+    <tr><td><strong>🌊 Hydrologie</strong></td><td>Débit de pointe annuel du Nil à Assouan (130 ans de relevés)</td><td>Analyse fréquentielle des crues ; estimation des périodes de retour pour la conception des infrastructures</td></tr>
+    <tr><td><strong>📊 Recensement / Démographie</strong></td><td>Distribution par âge d'une population nationale (Perspectives démographiques mondiales de l'ONU)</td><td>Forme de la pyramide des âges ; ratios de dépendance ; tendances de vieillissement pour la planification politique</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>🧪 Exemple Complet : Des Données Brutes à l'Analyse Complète</h2>
+<h2>🧪 Partie IX — Exemple complet travaillé : Des données brutes à l'analyse complète</h2>
 
-<p>Un phytopathologiste mesure le diamètre des lésions (en mm) de 50 feuilles de blé infectées dans une expérience étudiant la septoriose (<em>Septoria tritici</em>). Les données brutes sont :</p>
+<p>Un chercheur médical dans un hôpital universitaire de Nairobi, Kenya, mesure la concentration d'hémoglobine (g/dL) de 50 patients adultes masculins dans le cadre d'un programme de dépistage de l'anémie. Les données brutes sont :</p>
 
-<p>12, 18, 23, 15, 31, 27, 19, 22, 14, 26, 33, 17, 21, 28, 16, 24, 30, 20, 13, 25, 35, 19, 22, 29, 17, 11, 23, 26, 32, 18, 21, 27, 15, 24, 34, 20, 14, 28, 16, 22, 30, 19, 25, 13, 23, 31, 17, 21, 26, 29</p>
+<p>12,1 — 14,8 — 16,3 — 13,5 — 18,1 — 15,7 — 14,2 — 16,0 — 13,0 — 15,6 — 17,3 — 12,7 — 15,1 — 16,8 — 13,6 — 14,4 — 17,0 — 14,9 — 11,3 — 15,5 — 18,5 — 14,2 — 16,0 — 17,9 — 13,7 — 10,8 — 15,3 — 15,6 — 18,2 — 14,0 — 15,1 — 16,7 — 13,5 — 14,4 — 18,4 — 14,8 — 12,0 — 16,8 — 13,6 — 16,0 — 17,5 — 14,2 — 15,5 — 11,3 — 15,3 — 17,1 — 13,7 — 15,1 — 15,6 — 16,9</p>
 
-<p><strong>Étape 1 : Étendue</strong> = 35 − 11 = 24 mm</p>
+<p><strong>Étape 1 : Étendue</strong> = 18,5 − 10,8 = 7,7 g/dL</p>
 
-<p><strong>Étape 2 : Nombre de classes</strong> (règle de Sturges) = 1 + 3,322 × log₁₀(50) ≈ 6,6 → <strong>k = 7</strong></p>
+<p><strong>Étape 2 : Nombre de classes</strong> (règle de Sturges) = 1 + 3,322 × log₁₀(50) = 1 + 3,322 × 1,699 ≈ 6,6 → <strong>k = 7</strong></p>
 
-<p><strong>Étape 3 : Amplitude de classe</strong> = 24 / 7 ≈ 3,43 → arrondir à <strong>h = 4 mm</strong></p>
+<p><strong>Étape 3 : Amplitude de classe</strong> = 7,7 / 7 ≈ 1,1 → arrondi à <strong>h = 1,2 g/dL</strong></p>
 
-<p><strong>Étape 4 : Point de départ</strong> = 10 (un nombre net juste sous le minimum de 11)</p>
+<p><strong>Étape 4 : Point de départ</strong> = 10,6 (juste en dessous du minimum de 10,8)</p>
 
 <table>
   <thead>
-    <tr><th>Classe [mm]</th><th>Centre</th><th>nᵢ</th><th>fᵢ</th><th>%</th><th>Nᵢ ↑</th><th>Fᵢ ↑</th></tr>
+    <tr><th>Classe [g/dL]</th><th>Centre</th><th>nᵢ</th><th>fᵢ</th><th>%</th><th>Nᵢ ↑</th><th>Fᵢ ↑</th></tr>
   </thead>
   <tbody>
-    <tr><td>[10, 14[</td><td>12</td><td>4</td><td>0,080</td><td>8,0%</td><td>4</td><td>0,080</td></tr>
-    <tr><td>[14, 18[</td><td>16</td><td>9</td><td>0,180</td><td>18,0%</td><td>13</td><td>0,260</td></tr>
-    <tr><td>[18, 22[</td><td>20</td><td>10</td><td>0,200</td><td>20,0%</td><td>23</td><td>0,460</td></tr>
-    <tr><td>[22, 26[</td><td>24</td><td>10</td><td>0,200</td><td>20,0%</td><td>33</td><td>0,660</td></tr>
-    <tr><td>[26, 30[</td><td>28</td><td>9</td><td>0,180</td><td>18,0%</td><td>42</td><td>0,840</td></tr>
-    <tr><td>[30, 34[</td><td>32</td><td>5</td><td>0,100</td><td>10,0%</td><td>47</td><td>0,940</td></tr>
-    <tr><td>[34, 38[</td><td>36</td><td>3</td><td>0,060</td><td>6,0%</td><td>50</td><td>1,000</td></tr>
-    <tr><td colspan="2"><strong>Total</strong></td><td><strong>50</strong></td><td><strong>1,000</strong></td><td><strong>100%</strong></td><td>—</td><td>—</td></tr>
+    <tr><td>[10,6 ; 11,8[</td><td>11,2</td><td>3</td><td>0,060</td><td>6,0 %</td><td>3</td><td>0,060</td></tr>
+    <tr><td>[11,8 ; 13,0[</td><td>12,4</td><td>3</td><td>0,060</td><td>6,0 %</td><td>6</td><td>0,120</td></tr>
+    <tr><td>[13,0 ; 14,2[</td><td>13,6</td><td>8</td><td>0,160</td><td>16,0 %</td><td>14</td><td>0,280</td></tr>
+    <tr><td>[14,2 ; 15,4[</td><td>14,8</td><td>10</td><td>0,200</td><td>20,0 %</td><td>24</td><td>0,480</td></tr>
+    <tr><td>[15,4 ; 16,6[</td><td>16,0</td><td>10</td><td>0,200</td><td>20,0 %</td><td>34</td><td>0,680</td></tr>
+    <tr><td>[16,6 ; 17,8[</td><td>17,2</td><td>9</td><td>0,180</td><td>18,0 %</td><td>43</td><td>0,860</td></tr>
+    <tr><td>[17,8 ; 19,0[</td><td>18,4</td><td>7</td><td>0,140</td><td>14,0 %</td><td>50</td><td>1,000</td></tr>
+    <tr><td colspan="2"><strong>Total</strong></td><td><strong>50</strong></td><td><strong>1,000</strong></td><td><strong>100 %</strong></td><td>—</td><td>—</td></tr>
   </tbody>
 </table>
 
-<blockquote>🔬 <strong>Interprétation :</strong> La distribution des diamètres de lésions est approximativement symétrique, centrée autour de 18–26 mm (les deux classes modales, chacune avec 10 observations). Environ 46% des lésions mesurent moins de 22 mm. Seulement 16% des lésions dépassent 30 mm — ces feuilles gravement infectées nécessitent une attention particulière. La forme approximativement normale suggère que le pathogène affecte les feuilles de manière uniforme, la variation biologique naturelle causant la dispersion.</blockquote>
+<blockquote>🔬 <strong>Interprétation clinique :</strong> L'OMS définit l'anémie chez l'homme adulte comme un taux d'hémoglobine inférieur à 13,0 g/dL. D'après la colonne de fréquence cumulée, nous lisons que 6 patients (12 %) ont une hémoglobine inférieure à 13,0 — ce sont les cas d'anémie nécessitant un suivi clinique. Les classes modales sont [14,2 ; 15,4[ et [15,4 ; 16,6[, chacune avec 10 observations, indiquant que la majorité des patients se situent dans la plage normale (13,0–17,5 g/dL). La distribution est légèrement asymétrique négativement, avec une queue s'étendant vers les valeurs basses. Ce tableau de fréquences a transformé 50 nombres bruts en un résumé de dépistage cliniquement exploitable — identifiant les patients à risque, confirmant que la majorité sont en bonne santé, et révélant la distribution globale de l'hémoglobine pour cette population.</blockquote>
 
 <hr>
 
-<h2>⚠️ Erreurs Courantes et Comment les Éviter</h2>
+<h2>⚠️ Partie X — Erreurs courantes et comment les éviter</h2>
 
 <table>
   <thead>
     <tr><th>❌ Erreur</th><th>Pourquoi c'est faux</th><th>✅ Approche correcte</th></tr>
   </thead>
   <tbody>
-    <tr><td>Classes qui se chevauchent : [10–20], [20–30]</td><td>Une observation de 20 tombe dans deux classes</td><td>Utiliser des bornes sup. exclues : [10, 20[, [20, 30[</td></tr>
-    <tr><td>Largeurs de classes inégales sans justification</td><td>Exagère visuellement les classes étroites dans les histogrammes</td><td>Utiliser des largeurs égales ; si inégales, utiliser la densité de fréquence</td></tr>
-    <tr><td>Trop peu de classes (k = 2 ou 3)</td><td>Compresse toute la variation en masses indistinctes</td><td>Utiliser la règle de Sturges ou similaire comme guide</td></tr>
-    <tr><td>Oublier de vérifier Σnᵢ = N</td><td>Indique une erreur de comptage</td><td>Toujours vérifier que les fréquences totalisent N</td></tr>
-    <tr><td>Utiliser des tableaux groupés pour des données catégorielles</td><td>Les données nominales/ordinales ne doivent pas être groupées en intervalles numériques</td><td>Utiliser des tableaux non groupés pour les variables catégorielles</td></tr>
-    <tr><td>Rapporter les fréquences sans fréquences relatives</td><td>Rend la comparaison entre échantillons de tailles différentes impossible</td><td>Toujours inclure nᵢ et fᵢ (ou %) dans votre tableau</td></tr>
+    <tr><td>Classes chevauchantes : [10–20], [20–30]</td><td>Une observation de 20 tombe dans deux classes — double-comptage</td><td>Utiliser des bornes supérieures exclues : [10, 20[, [20, 30[</td></tr>
+    <tr><td>Amplitudes inégales sans correction de densité</td><td>Exagère visuellement les classes étroites dans les histogrammes</td><td>Utiliser des amplitudes égales ; si des amplitudes inégales sont nécessaires, tracer la densité de fréquence (nᵢ/hᵢ)</td></tr>
+    <tr><td>Trop peu de classes (k = 2 ou 3)</td><td>Comprime toute la variation en amas insignifiants, masquant les vrais patterns</td><td>Utiliser la règle de Sturges, Scott ou Freedman-Diaconis comme guide de départ</td></tr>
+    <tr><td>Trop de classes (k > 25 pour petit n)</td><td>Crée de nombreuses classes vides ou presque vides ; le bruit apparaît comme du signal</td><td>Viser 5–20 classes sans intervalles vides</td></tr>
+    <tr><td>Oublier de vérifier Σnᵢ = N</td><td>Indique une erreur de comptage — certaines observations ont été omises ou comptées deux fois</td><td>Toujours vérifier que les fréquences totalisent N avant de poursuivre</td></tr>
+    <tr><td>Utiliser des tables groupées pour des données catégorielles</td><td>Les données nominales/ordinales ne doivent pas être groupées en intervalles numériques</td><td>Utiliser des tables non groupées pour les variables catégorielles ; préserver les catégories naturelles</td></tr>
+    <tr><td>Rapporter les fréquences sans fréquences relatives</td><td>Rend la comparaison entre différentes tailles d'échantillon impossible</td><td>Toujours inclure à la fois nᵢ et fᵢ (ou %) dans votre tableau</td></tr>
+    <tr><td>Commencer exactement à la valeur minimale</td><td>L'observation minimale peut se situer de manière ambiguë sur une limite de classe</td><td>Commencer légèrement en dessous du minimum pour s'assurer que toutes les valeurs sont clairement capturées</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>🧠 Résumé des Formules Clés</h2>
+<h2>🧠 Partie XI — Résumé des formules clés</h2>
 
 <table>
   <thead>
@@ -304,50 +326,46 @@
   </thead>
   <tbody>
     <tr><td>Étendue</td><td>R = X_max − X_min</td><td>Dispersion totale des données</td></tr>
-    <tr><td>Règle de Sturges</td><td>k = 1 + 3,322 × log₁₀(n)</td><td>Nombre de classes</td></tr>
+    <tr><td>Règle de Sturges</td><td>k = 1 + 3,322 × log₁₀(n)</td><td>Nombre de classes (n petit à modéré)</td></tr>
+    <tr><td>Règle de Scott</td><td>h = 3,49 × s × n^(−1/3)</td><td>Amplitude de classe optimale (données normales, grand n)</td></tr>
+    <tr><td>Règle de Freedman-Diaconis</td><td>h = 2 × IQR × n^(−1/3)</td><td>Amplitude de classe optimale (robuste aux valeurs aberrantes)</td></tr>
     <tr><td>Amplitude de classe</td><td>h = R / k (arrondi au supérieur)</td><td>Largeur de chaque intervalle</td></tr>
     <tr><td>Centre de classe</td><td>cᵢ = (Lᵢ + Lᵢ₊₁) / 2</td><td>Valeur représentative de chaque classe</td></tr>
     <tr><td>Fréquence relative</td><td>fᵢ = nᵢ / N</td><td>Proportion dans chaque classe</td></tr>
     <tr><td>Fréquence cumulée</td><td>Nᵢ = Σ nⱼ (j = 1 à i)</td><td>Total cumulé jusqu'à la classe i</td></tr>
-    <tr><td>Fréquence relative cumulée</td><td>Fᵢ = Nᵢ / N</td><td>Rang percentile</td></tr>
-    <tr><td>Densité de fréquence</td><td>dᵢ = nᵢ / hᵢ</td><td>Nécessaire quand les largeurs de classes sont inégales</td></tr>
+    <tr><td>Fréq. relative cumulée</td><td>Fᵢ = Nᵢ / N</td><td>Rang percentile</td></tr>
+    <tr><td>Densité de fréquence</td><td>dᵢ = nᵢ / hᵢ</td><td>Pour les histogrammes à amplitudes inégales</td></tr>
+    <tr><td>Correction de Sheppard</td><td>σ²_corrigée = σ²_groupée − h²/12</td><td>Ajuste la variance groupée pour l'erreur de groupement</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>💡 Réflexion Finale : Le Tableau de Fréquences comme Mode de Vision</h2>
+<h2>💡 Réflexion finale : Le tableau de fréquences comme manière de voir</h2>
 
-<p>Le tableau de fréquences est souvent considéré comme un outil « basique » — quelque chose à apprendre la première semaine puis à dépasser. C'est une erreur. Chaque technique statistique avancée — du test du khi-deux à l'analyse de régression — repose ultimement sur le fondement de la compréhension de la distribution des valeurs à travers les catégories et les intervalles. Florence Nightingale, l'une des grandes statisticiennes appliquées de l'histoire, a utilisé les distributions de fréquences pour démontrer que plus de soldats mouraient de maladies évitables que de blessures de guerre, révolutionnant la médecine militaire et la santé publique (Braveman, 1998 ; Cohen, 1984).</p>
+<p>Le tableau de fréquences est souvent rejeté comme un outil « basique » — quelque chose à apprendre la première semaine d'un cours de statistique puis à dépasser. C'est une erreur profonde. Chaque technique statistique avancée — du test du khi-deux (qui compare les fréquences observées aux fréquences attendues) à l'analyse de régression (qui modélise comment les distributions de fréquences se déplacent avec les variables prédictives) — repose ultimement sur la fondation de la compréhension de la manière dont les valeurs se distribuent à travers les catégories et les intervalles.</p>
 
-<p>Le tableau de fréquences n'est pas seulement un outil d'organisation des données. C'est une <strong>manière de voir</strong> — une méthode disciplinée pour découvrir ce que les données essaient de vous dire. Maîtrisez cet outil, et vous aurez maîtrisé le fondement sur lequel toute la statistique est construite.</p>
+<p>John Snow tabula les décès de choléra par adresse et trouva la pompe de Broad Street. Florence Nightingale tabula les décès des soldats par cause et réforma la médecine militaire. John Graunt tabula les décès londoniens par cause et inventa la démographie. Au vingtième siècle, le tableau de fréquences devint le fondement du contrôle qualité (Walter Shewhart aux Bell Labs), des essais cliniques (l'étude historique d'Austin Bradford Hill en 1950 reliant le tabagisme au cancer du poumon, qui reposait sur la comparaison des distributions de fréquences des habitudes tabagiques entre patients cancéreux et témoins), et de la génomique (tout le domaine de l'analyse de l'expression génique commence par le comptage de la fréquence d'apparition de chaque gène dans les échantillons de tissus) (Stigler, 1986 ; Moore et al., 2021).</p>
+
+<p>Le tableau de fréquences n'est pas un simple outil d'organisation des données. C'est une <strong>manière de voir</strong> — une méthode disciplinée pour découvrir ce que les données essaient de vous dire. Maîtrisez cet outil, et vous aurez maîtrisé le fondement sur lequel toute la statistique est construite.</p>
 
 <hr>
 
 <h2>📚 Références</h2>
 
-<p>Agresti, A., & Franklin, C. (2018). <em>Statistics: The art and science of learning from data</em> (4th ed.). Pearson.</p>
-
+<p>Agresti, A., &amp; Franklin, C. (2018). <em>Statistics: The art and science of learning from data</em> (4th ed.). Pearson.</p>
 <p>Braveman, P. (1998). Florence Nightingale and evidence-based medicine. <em>American Journal of Public Health</em>, <em>88</em>(6), 968. https://doi.org/10.2105/AJPH.88.6.968</p>
-
 <p>Cohen, I. B. (1984). Florence Nightingale. <em>Scientific American</em>, <em>250</em>(3), 128–137.</p>
-
-<p>Freedman, D., Pisani, R., & Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton.</p>
-
-<p>Freedman, D., & Diaconis, P. (1981). On the histogram as a density estimator: L₂ theory. <em>Zeitschrift für Wahrscheinlichkeitstheorie und verwandte Gebiete</em>, <em>57</em>(4), 453–476. https://doi.org/10.1007/BF01025868</p>
-
-<p>Gravetter, F. J., & Wallnau, L. B. (2017). <em>Statistics for the behavioral sciences</em> (10th ed.). Cengage Learning.</p>
-
-<p>Moore, D. S., McCabe, G. P., & Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
-
+<p>Freedman, D., &amp; Diaconis, P. (1981). On the histogram as a density estimator: L₂ theory. <em>Zeitschrift für Wahrscheinlichkeitstheorie und verwandte Gebiete</em>, <em>57</em>(4), 453–476. https://doi.org/10.1007/BF01025868</p>
+<p>Freedman, D., Pisani, R., &amp; Purves, R. (2007). <em>Statistics</em> (4th ed.). W. W. Norton.</p>
+<p>Gravetter, F. J., &amp; Wallnau, L. B. (2017). <em>Statistics for the behavioral sciences</em> (10th ed.). Cengage Learning.</p>
+<p>Johnson, S. (2006). <em>The ghost map: The story of London's most terrifying epidemic — and how it changed science, cities, and the modern world</em>. Riverhead Books.</p>
+<p>Moore, D. S., McCabe, G. P., &amp; Craig, B. A. (2021). <em>Introduction to the practice of statistics</em> (10th ed.). W. H. Freeman.</p>
 <p>Scott, D. W. (1979). On optimal and data-based histograms. <em>Biometrika</em>, <em>66</em>(3), 605–610. https://doi.org/10.1093/biomet/66.3.605</p>
-
-<p>Spiegel, M. R., Schiller, J. J., & Srinivasan, R. A. (2013). <em>Schaum's outline of probability and statistics</em> (4th ed.). McGraw-Hill.</p>
-
+<p>Spiegel, M. R., Schiller, J. J., &amp; Srinivasan, R. A. (2013). <em>Schaum's outline of probability and statistics</em> (4th ed.). McGraw-Hill.</p>
+<p>Stigler, S. M. (1986). <em>The history of statistics: The measurement of uncertainty before 1900</em>. Harvard University Press.</p>
 <p>Sturges, H. A. (1926). The choice of a class interval. <em>Journal of the American Statistical Association</em>, <em>21</em>(153), 65–66. https://doi.org/10.1080/01621459.1926.10502161</p>
-
 <p>Triola, M. F. (2018). <em>Elementary statistics</em> (13th ed.). Pearson.</p>
-
+<p>Tufte, E. R. (2001). <em>The visual display of quantitative information</em> (2nd ed.). Graphics Press.</p>
 <p>Tukey, J. W. (1977). <em>Exploratory data analysis</em>. Addison-Wesley.</p>
-
-<p>Wackerly, D. D., Mendenhall, W., & Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>
+<p>Wackerly, D. D., Mendenhall, W., &amp; Scheaffer, R. L. (2014). <em>Mathematical statistics with applications</em> (7th ed.). Cengage Learning.</p>

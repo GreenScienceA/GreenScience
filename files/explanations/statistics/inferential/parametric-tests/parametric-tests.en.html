@@ -1,104 +1,134 @@
 <h2>📊 Parametric Tests: The Workhorse of Statistical Inference</h2>
 
-<p>Imagine it is 1904 in Dublin, Ireland. A young Oxford-educated chemist named <strong>William Sealy Gosset</strong> stares at a table of numbers — the soft resin content measured from a handful of hop samples destined for the Guinness brewery. He needs to know: does this batch of hops meet quality standards? The problem? He has only 5 measurements, and the statistical methods of his era — built for astronomy and census data with hundreds of observations — are hopelessly unreliable for such tiny samples. Gosset's struggle with this practical question would lead him to invent the most widely used statistical test in all of science: the <strong>Student's t-test</strong>.</p>
+<p>Imagine it is 1904 in Dublin, Ireland. A young Oxford-educated chemist named <strong>William Sealy Gosset</strong> stares at a table of numbers — the soft resin content measured from a handful of hop samples destined for the Guinness brewery. He needs to know: does this batch of hops meet quality standards? The problem? He has only 5 measurements, and the statistical methods of his era — built for astronomy and census data with hundreds or thousands of observations — are hopelessly unreliable for such tiny samples. At the time, the dominant paradigm assumed that the Central Limit Theorem could be invoked universally, but Gosset recognized intuitively what he would soon prove mathematically: <em>with small samples, the uncertainty in estimating the standard deviation itself must be accounted for</em>. His struggle with this practical question would lead him to invent the most widely used statistical test in all of science: the <strong>Student's t-test</strong>, a tool that would transform how every scientific discipline — from medicine to agriculture, from psychology to engineering — draws conclusions from limited data (Student, 1908).</p>
 
-<p>Parametric tests are the backbone of inferential statistics. They earn the name "parametric" because they make <em>assumptions about the parameters</em> of the population distribution from which data are drawn — typically that the data follow a normal distribution with unknown mean μ and variance σ² (Lehmann &amp; Romano, 2005). When these assumptions are reasonably met, parametric tests are the most <strong>powerful</strong> tools available — meaning they have the highest probability of detecting a true effect when one exists (Sheskin, 2011).</p>
+<p>Parametric tests are the backbone of inferential statistics. They earn the name "parametric" because they make <em>assumptions about the parameters</em> of the population distribution from which data are drawn — typically that the data follow a normal distribution with unknown mean μ and variance σ² (Lehmann &amp; Romano, 2005). When these assumptions are reasonably met, parametric tests are the most <strong>powerful</strong> tools available — meaning they have the highest probability of detecting a true effect when one exists. In the language of statistical decision theory, they minimize the probability of a Type II error (failing to reject a false null hypothesis) for a given level of Type I error (Sheskin, 2011). This power advantage is not trivial: in clinical trials, it can mean the difference between detecting a life-saving treatment effect and missing it entirely; in agricultural research, it can mean the difference between identifying a superior cultivar and discarding it as statistically indistinguishable from alternatives.</p>
 
-<blockquote>💡 <strong>The Big Idea:</strong> Parametric tests use sample statistics (means, variances) to make inferences about population parameters under explicit distributional assumptions. They trade assumptions for power — by assuming something about the shape of the data's distribution, they extract more information from each observation than assumption-free (nonparametric) alternatives.</blockquote>
+<blockquote>💡 <strong>The Big Idea:</strong> Parametric tests use sample statistics (means, variances) to make inferences about population parameters under explicit distributional assumptions. They trade assumptions for power — by assuming something about the shape of the data's distribution, they extract more information from each observation than assumption-free (nonparametric) alternatives. This trade-off is the central philosophical tension in parametric inference: <em>the more you assume, the more you can learn — but wrong assumptions can lead you astray</em>.</blockquote>
 
 <hr>
 
 <h2>🍺 A Brief History: From Beer to Biostatistics</h2>
 
+<h3>The Intellectual Landscape Before Gosset</h3>
+
+<p>To appreciate Gosset's contribution, one must understand the statistical world he inherited. By the late 19th century, the theory of errors — developed by <strong>Carl Friedrich Gauss</strong> (1809) and <strong>Pierre-Simon Laplace</strong> (1812) for astronomical observations — had established the normal distribution as the foundation of statistical reasoning. <strong>Adolphe Quetelet</strong> (1835) had extended these ideas to human populations, and <strong>Francis Galton</strong> (1886) had introduced regression and correlation. But the entire edifice rested on an implicit assumption: that sample sizes were large enough for the Central Limit Theorem to render exact distributional knowledge unnecessary. This was perfectly reasonable for astronomers analyzing hundreds of star positions or for census bureaus tabulating millions of records — but utterly inadequate for the emerging experimental sciences, where a chemist might have 4 measurements, a biologist 8 field plots, or a physician 12 patients.</p>
+
+<p>The gap between large-sample theory and small-sample reality was not merely academic. <strong>Karl Pearson</strong>, the towering figure of early 20th-century statistics and founder of <em>Biometrika</em>, had developed the chi-squared test (1900) and built an elaborate system of frequency curves — but his methods all assumed large samples. When Gosset arrived at Pearson's Biometric Laboratory in 1906, he brought a problem that the entire statistical establishment had either ignored or dismissed: <em>what happens when n is small?</em></p>
+
 <h3>Gosset and the Birth of the t-Test (1908)</h3>
 
-<p>William Sealy Gosset (1876–1937) was hired by the Guinness brewery in 1899, one of the first Oxford graduates recruited as Guinness moved from traditional craft brewing to scientific quality control. Gosset's job required him to determine whether batches of barley, hops, and malt met specifications — but his experiments yielded only 3 to 5 measurements per batch. The existing statistical theory, built on the Central Limit Theorem, required large samples to be trustworthy (Student, 1908).</p>
+<p>William Sealy Gosset (1876–1937) was hired by the Guinness brewery in Dublin in 1899, one of the first Oxford graduates recruited as part of Guinness's visionary program to transform traditional craft brewing into a science-based industrial operation. His daily responsibilities required him to determine whether batches of barley, hops, and malt met quality specifications — but his experiments typically yielded only 3 to 5 measurements per batch, sometimes as few as 4 observations. The existing statistical theory, which relied on the normal approximation guaranteed by the Central Limit Theorem, simply could not be trusted for such small samples (Student, 1908).</p>
 
-<p>In 1906, Guinness granted Gosset a sabbatical at Karl Pearson's Biometric Laboratory at University College London, where he worked on the small-sample problem. His breakthrough insight was that when you estimate both the mean <em>and</em> the standard deviation from a small sample, the resulting ratio does not follow the normal distribution — it follows a new, heavier-tailed distribution that depends on the sample size (Student, 1908). Because Guinness forbade employees from publishing under their real names (to protect trade secrets), Gosset published his landmark paper under the pseudonym <strong>"Student"</strong> in <em>Biometrika</em>. The distribution he discovered is still called the "Student's t-distribution."</p>
+<p>In 1906, Guinness granted Gosset a study leave at Karl Pearson's Biometric Laboratory at University College London. There, working with tireless empirical thoroughness, he attacked the small-sample problem head-on. He drew thousands of random samples of size 4 from a dataset of 3,000 criminals' finger measurements, computing the ratio of the sample mean to the sample standard deviation for each draw. His breakthrough insight was profound yet simple: when you estimate both the mean <em>and</em> the standard deviation from a small sample, the resulting ratio does not follow the normal distribution — it follows a new, heavier-tailed distribution whose shape depends on the sample size (Student, 1908). The smaller the sample, the heavier the tails — reflecting the additional uncertainty from estimating σ with very few observations.</p>
 
-<p>The mathematical community initially ignored Gosset's paper. It was not until <strong>Ronald A. Fisher</strong> provided a rigorous proof of the t-distribution in 1925 and popularized the t-test in his enormously influential <em>Statistical Methods for Research Workers</em> that the method became the standard tool for comparing means (Fisher, 1925). Fisher also introduced the concept of <strong>degrees of freedom</strong> — the key parameter that shapes the t-distribution.</p>
+<p>Because Guinness strictly forbade employees from publishing under their real names — a policy designed to prevent competitors from knowing that Guinness was applying scientific methods — Gosset published his landmark paper under the pseudonym <strong>"Student"</strong> in <em>Biometrika</em> in 1908. The paper, modestly titled "The Probable Error of a Mean," is now recognized as one of the most important publications in the history of statistics. The distribution he discovered is still universally called the <strong>"Student's t-distribution."</strong></p>
 
-<blockquote>🧠 <strong>Fisher on Gosset:</strong> After Gosset's death in 1937, Fisher wrote that Gosset had introduced "a fundamentally new approach to the classical problem of the theory of errors, the consequences of which are still only gradually coming to be appreciated." That appreciation continues more than a century later — the t-test remains the single most frequently used statistical method across all scientific disciplines.</blockquote>
+<h3>Fisher's Formalization and the Triumph of Small-Sample Theory (1925)</h3>
+
+<p>The mathematical community initially received Gosset's paper with polite indifference. Pearson himself did not fully grasp its implications. It was not until <strong>Ronald Aylmer Fisher</strong> (1890–1962) — arguably the greatest statistician of the 20th century — provided a rigorous mathematical proof of the exact distribution of the t-statistic in 1925 that the method achieved broad acceptance. Fisher's enormously influential book <em>Statistical Methods for Research Workers</em> (1925) placed the t-test at the center of experimental science and introduced the concept of <strong>degrees of freedom</strong> — the key parameter that shapes the t-distribution and that Gosset had identified empirically but never fully formalized. Fisher also established the convention of using α = 0.05 as a significance threshold, which — for better or worse — became the universal standard of scientific evidence for the next century (Fisher, 1925).</p>
+
+<p>Fisher's relationship with Gosset was one of the more remarkable intellectual friendships in the history of science. Despite Fisher's notoriously combative personality — he carried on bitter public feuds with Pearson, Neyman, and others — he always treated Gosset with warmth and respect. Their extensive correspondence reveals Gosset as a quiet but penetrating thinker who often corrected Fisher's errors with characteristic gentleness.</p>
+
+<h3>Welch's Generalization (1947): Solving the Behrens-Fisher Problem</h3>
+
+<p>Student's original t-test assumed equal population variances in the two groups being compared — an assumption often violated in practice. The problem of comparing means when variances differ, known as the <strong>Behrens-Fisher problem</strong>, had resisted solution for decades. In 1947, <strong>Bernard Lewis Welch</strong> (1911–1989) at the University of Oxford proposed an elegant approximate solution: use the separate variance estimates (rather than pooling them) and approximate the degrees of freedom using what is now called the <strong>Welch-Satterthwaite equation</strong>. This generalization — Welch's t-test — has become the modern default recommendation, as demonstrated conclusively by Delacre, Lakens, and Leys (2017).</p>
+
+<blockquote>🧠 <strong>Fisher on Gosset:</strong> After Gosset's death in 1937, Fisher wrote that Gosset had introduced "a fundamentally new approach to the classical problem of the theory of errors, the consequences of which are still only gradually coming to be appreciated." That appreciation continues more than a century later — the t-test remains the single most frequently used statistical method across all scientific disciplines, appearing in an estimated 58% of empirical articles in major psychology journals (Wetzels et al., 2011) and with comparable dominance in medical, agricultural, and engineering research.</blockquote>
 
 <hr>
 
 <h2>🔧 Prerequisites: The Four Assumptions of Parametric Tests</h2>
 
-<p>Every parametric test rests on a set of assumptions. When these assumptions hold, the test delivers optimal performance — correct Type I error rates and maximum statistical power. When they are violated, results may be misleading. Understanding assumptions is therefore <em>essential</em> for responsible use of parametric methods.</p>
+<p>Every parametric test rests on a set of assumptions. When these assumptions hold, the test delivers optimal performance — correct Type I error rates and maximum statistical power. When they are violated, results may be misleading: significance tests may reject H₀ too often (liberal test) or too rarely (conservative test), and confidence intervals may not achieve their stated coverage probability. Understanding assumptions is therefore <em>essential</em> for responsible use of parametric methods.</p>
 
 <table>
   <thead>
     <tr><th>#</th><th>Assumption</th><th>What It Means</th><th>How to Check</th><th>Consequence of Violation</th></tr>
   </thead>
   <tbody>
-    <tr><td>1</td><td>🔢 <strong>Scale of Measurement</strong></td><td>Data must be interval or ratio scale (not ordinal or nominal)</td><td>Examine the nature of the variable</td><td>Means and variances become meaningless</td></tr>
-    <tr><td>2</td><td>🎲 <strong>Independence</strong></td><td>Observations are independent of each other (no clustering, no repeated measures unless accounted for)</td><td>Study design review; Durbin-Watson test for autocorrelation</td><td><strong>Severe</strong> — inflated Type I error; no simple fix</td></tr>
-    <tr><td>3</td><td>📐 <strong>Normality</strong></td><td>The sampling distribution of the mean is approximately normal (population is normal, or n is large enough for CLT)</td><td>Shapiro-Wilk test, Q-Q plot, histogram, skewness/kurtosis</td><td><strong>Mild</strong> for moderate n (≥ 25–30); t-test is robust (Glass et al., 1972)</td></tr>
-    <tr><td>4</td><td>⚖️ <strong>Homogeneity of Variance</strong></td><td>Groups being compared have equal population variances (homoscedasticity)</td><td>Levene's test, Brown-Forsythe test, F-max ratio</td><td><strong>Moderate to severe</strong> when sample sizes are unequal; use Welch's correction</td></tr>
+    <tr><td>1</td><td>🔢 <strong>Scale of Measurement</strong></td><td>Data must be interval or ratio scale (not ordinal or nominal). Arithmetic operations on the data (means, differences) must be meaningful.</td><td>Examine the nature of the variable; verify that equal intervals on the measurement scale represent equal differences in the quantity measured</td><td>Means and variances become mathematically meaningless; results have no valid interpretation</td></tr>
+    <tr><td>2</td><td>🎲 <strong>Independence</strong></td><td>Observations are statistically independent of each other. The value of one observation provides no information about the value of any other observation. No clustering, nesting, or repeated measures unless explicitly modeled.</td><td>Study design review (most critical); Durbin-Watson test for serial autocorrelation; intraclass correlation (ICC) for clustered data</td><td><strong>Severe and uncorrectable</strong> — inflated Type I error rates, often dramatically (e.g., nominal α = 0.05 may correspond to actual α = 0.15–0.30); no simple post-hoc fix exists (Scariano &amp; Davenport, 1987)</td></tr>
+    <tr><td>3</td><td>📐 <strong>Normality</strong></td><td>The population from which the sample is drawn is normally distributed (or the sample is large enough for the Central Limit Theorem to ensure approximate normality of the sampling distribution of the mean).</td><td>Shapiro-Wilk test (most powerful for n &lt; 2000), Q-Q plot, histogram inspection, skewness/kurtosis indices</td><td><strong>Mild to moderate</strong> for moderate n (≥ 25–30 per group); t-test is robust to non-normality under symmetry (Glass et al., 1972; Boneau, 1960). Severe for small n with heavy skewness.</td></tr>
+    <tr><td>4</td><td>⚖️ <strong>Homogeneity of Variance</strong></td><td>Groups being compared have equal (or approximately equal) population variances — also called homoscedasticity.</td><td>Levene's test (1960), Brown-Forsythe test (uses medians; more robust), Bartlett's test (sensitive to non-normality), F-max ratio (&lt; 3–4 acceptable)</td><td><strong>Moderate to severe</strong> when combined with unequal sample sizes; with equal n, the effect is minimal. When variance heterogeneity exists, use Welch's correction (Delacre et al., 2017).</td></tr>
   </tbody>
 </table>
 
-<blockquote>⚠️ <strong>Robustness — Good News:</strong> Decades of simulation research have shown that the t-test and F-test are remarkably <strong>robust</strong> to violations of normality, especially with moderate sample sizes (n ≥ 25–30 per group) and equal group sizes (Glass, Peckham, &amp; Sanders, 1972; Boneau, 1960). The Central Limit Theorem guarantees that sample means approach normality regardless of the population shape. However, the tests are <strong>not</strong> robust to violations of the independence assumption or to heterogeneity of variance when combined with unequal sample sizes.</blockquote>
+<blockquote>⚠️ <strong>The Robustness Hierarchy — What Matters Most:</strong> Not all assumptions are equally important. Decades of Monte Carlo simulation research have established a clear hierarchy of vulnerability (Glass et al., 1972; Lix, Keselman, &amp; Keselman, 1996):
+<br><br><strong>1. Independence (most critical):</strong> Violation produces the most severe consequences and has no simple remedy. Even mild violations (ICC = 0.05 in clustered data) can double the actual Type I error rate (Scariano &amp; Davenport, 1987).
+<br><strong>2. Homogeneity of variance (critical when n₁ ≠ n₂):</strong> When the larger sample comes from the population with the larger variance, the test becomes liberal (rejects too often). When the larger sample comes from the smaller-variance population, the test becomes conservative. Welch's correction effectively solves this problem.
+<br><strong>3. Normality (least critical for the t-test):</strong> The Central Limit Theorem provides powerful protection. For n ≥ 25–30 per group with approximately symmetric distributions, the t-test controls Type I error well even under substantial departures from normality. However, power can be reduced with heavy-tailed distributions (Wilcox, 2017).</blockquote>
 
 <hr>
 
 <h2>📏 The z-Test: When σ Is Known</h2>
 
-<p>The z-test is the simplest parametric test and the theoretical starting point for understanding all others. It applies when you want to test whether a sample mean differs from a known population mean, <em>and you know the population standard deviation σ</em>.</p>
+<p>The z-test is the simplest parametric test and the theoretical starting point for understanding all others. It applies when you want to test whether a sample mean differs from a known population mean, <em>and you know the population standard deviation σ</em>. While this situation is rare in original research, it arises in quality control settings where long-established process parameters are known, in standardized testing where published norms exist, and — most importantly — as the large-sample limiting case of the t-test.</p>
 
 <h3>Hypotheses and Test Statistic</h3>
 
 <p style="text-align:center; font-size:1.1em;"><strong>z = (x̄ − μ₀) / (σ / √n)</strong></p>
 
-<p>Under H₀, this statistic follows the standard normal distribution N(0, 1).</p>
+<p>Under H₀, this statistic follows the standard normal distribution N(0, 1) exactly — not approximately, but <em>exactly</em>, regardless of sample size, provided the population is normal. For non-normal populations, the CLT guarantees that z is approximately standard normal for large n.</p>
 
 <table>
   <thead>
-    <tr><th>Component</th><th>Meaning</th></tr>
+    <tr><th>Component</th><th>Meaning</th><th>Interpretation</th></tr>
   </thead>
   <tbody>
-    <tr><td>x̄</td><td>Sample mean</td></tr>
-    <tr><td>μ₀</td><td>Hypothesized population mean (under H₀)</td></tr>
-    <tr><td>σ</td><td>Known population standard deviation</td></tr>
-    <tr><td>n</td><td>Sample size</td></tr>
+    <tr><td>x̄</td><td>Sample mean</td><td>Our best estimate of the population mean μ</td></tr>
+    <tr><td>μ₀</td><td>Hypothesized population mean (under H₀)</td><td>The value we are testing against</td></tr>
+    <tr><td>σ</td><td>Known population standard deviation</td><td>A fixed, known constant — not estimated from data</td></tr>
+    <tr><td>n</td><td>Sample size</td><td>Number of independent observations</td></tr>
+    <tr><td>σ / √n</td><td>Standard error of the mean (SEM)</td><td>The standard deviation of the sampling distribution of x̄</td></tr>
   </tbody>
 </table>
 
-<p><strong>When to use:</strong> The z-test is primarily used in two situations: (1) when the population σ is truly known (rare in practice — perhaps from long-established manufacturing processes or standardized tests with published norms), and (2) for large-sample tests of proportions (where the standard error can be computed from the hypothesized proportion).</p>
+<p><strong>When to use:</strong> The z-test is primarily used in three situations: (1) when the population σ is truly known from extensive prior data — as in standardized tests (e.g., IQ: μ = 100, σ = 15) or long-established industrial processes; (2) for large-sample tests of proportions, where the standard error is computed from the hypothesized proportion rather than estimated from the data; and (3) as a pedagogical bridge between probability theory and inferential statistics.</p>
 
-<h3>Worked Example: Standardized Test Scores</h3>
+<h3>Worked Example: Cognitive Enhancement Drug Trial</h3>
 
-<p>A national exam has a known mean μ₀ = 500 and σ = 100. A random sample of n = 64 students from a new teaching program scores x̄ = 520. Is this significantly different at α = 0.05?</p>
+<p>A pharmaceutical company tests a new cognitive enhancement drug using a well-established IQ test with known population parameters μ₀ = 100 and σ = 15. A random sample of n = 64 participants who received the drug scores x̄ = 104.5. Does the drug significantly improve cognitive performance at α = 0.05?</p>
 
-<p>z = (520 − 500) / (100/√64) = 20 / 12.5 = <strong>1.60</strong>. The critical value for a two-tailed test at α = 0.05 is z* = ±1.96. Since |1.60| &lt; 1.96, we <strong>fail to reject H₀</strong>. The sample mean is not significantly different from 500 at the 5% level.</p>
+<p><strong>Step 1 — Hypotheses:</strong> H₀: μ = 100 (no drug effect); H₁: μ &gt; 100 (drug improves performance — one-tailed, justified by the directional prediction).</p>
+
+<p><strong>Step 2 — Test statistic:</strong> z = (104.5 − 100) / (15/√64) = 4.5 / 1.875 = <strong>2.40</strong>.</p>
+
+<p><strong>Step 3 — Decision:</strong> For a one-tailed test at α = 0.05, z* = 1.645. Since 2.40 &gt; 1.645, we <strong>reject H₀</strong>. The p-value = P(Z &gt; 2.40) = 0.0082.</p>
+
+<p><strong>Step 4 — Effect size:</strong> d = (104.5 − 100) / 15 = <strong>0.30</strong> — a small-to-medium effect by Cohen's (1988) benchmarks. This 4.5-point increase, while statistically significant, should be evaluated for clinical meaningfulness.</p>
+
+<p><strong>Step 5 — 95% Confidence Interval for μ:</strong> x̄ ± z<sub>α/2</sub>(σ/√n) = 104.5 ± 1.96(1.875) = 104.5 ± 3.675 = <strong>[100.83, 108.18]</strong>. The CI excludes 100, consistent with rejecting H₀.</p>
 
 <hr>
 
 <h2>📐 Student's t-Test: The Workhorse of Science</h2>
 
-<p>In practice, we almost never know σ. When we replace it with the sample standard deviation s, the standardized statistic no longer follows the normal distribution — it follows the <strong>Student's t-distribution</strong> with (n − 1) degrees of freedom. This distribution has heavier tails than the normal, reflecting the additional uncertainty from estimating σ. As n increases, the t-distribution converges to the normal — for n ≥ 30, the two are virtually indistinguishable (Student, 1908; Fisher, 1925).</p>
+<p>In practice, we almost never know σ. When we replace the known population standard deviation with the sample standard deviation s, the standardized statistic no longer follows the normal distribution — it follows the <strong>Student's t-distribution</strong> with (n − 1) degrees of freedom. This distribution has heavier tails than the normal, reflecting the additional uncertainty introduced by estimating σ from the data. The smaller the sample, the heavier the tails — with n = 2, the t-distribution is actually a Cauchy distribution with no finite mean or variance. As n increases, the t-distribution converges to the standard normal — for n ≥ 30, the two are virtually indistinguishable, and for n ≥ 120, they are practically identical to three decimal places (Student, 1908; Fisher, 1925).</p>
+
+<p>The concept of <strong>degrees of freedom</strong> (df) is central to understanding the t-distribution. Informally, df represents the number of independent pieces of information available for estimating a parameter. When computing a sample standard deviation from n observations, we first calculate the sample mean, which "uses up" one piece of information — leaving n − 1 independent deviations from the mean. This is why df = n − 1 for a one-sample t-test, and df = n₁ + n₂ − 2 for an independent two-sample test (one degree lost in each group for estimating each group mean).</p>
 
 <p>There are three major variants of the t-test, each designed for a different research scenario:</p>
 
 <h3>1. One-Sample t-Test</h3>
 
-<p><strong>Purpose:</strong> Test whether the population mean μ equals a specified value μ₀.</p>
+<p><strong>Purpose:</strong> Test whether the population mean μ equals a specified value μ₀, when σ is unknown.</p>
 
 <p style="text-align:center; font-size:1.1em;"><strong>t = (x̄ − μ₀) / (s / √n)</strong> &nbsp; with df = n − 1</p>
 
-<p><strong>Example:</strong> A soil scientist collects n = 20 soil samples from a field in Sétif. The mean pH is x̄ = 7.8 with s = 0.6. Does the field differ from neutral pH (μ₀ = 7.0)?</p>
+<p><strong>Example — Water Quality Monitoring in São Paulo:</strong> An environmental engineer collects n = 25 water samples from tributaries of the Tietê River and measures dissolved oxygen (mg/L). The mean is x̄ = 6.2 with s = 1.4. Brazilian environmental standards (CONAMA Resolution 357) require a minimum of 5.0 mg/L for Class 2 waterways. Does this stretch of river meet the standard (i.e., is the true mean significantly above 5.0)?</p>
 
-<p>t = (7.8 − 7.0) / (0.6/√20) = 0.8 / 0.134 = <strong>5.96</strong>. With df = 19, the critical value at α = 0.05 (two-tailed) is t* ≈ 2.093. Since 5.96 &gt;&gt; 2.093, we <strong>reject H₀</strong>. The soil is significantly more alkaline than neutral. Effect size: Cohen's d = 0.8 / 0.6 = <strong>1.33</strong> (very large).</p>
+<p>H₀: μ = 5.0; H₁: μ &gt; 5.0 (one-tailed). t = (6.2 − 5.0) / (1.4/√25) = 1.2 / 0.28 = <strong>4.29</strong>. With df = 24 and α = 0.05 (one-tailed), t* = 1.711. Since 4.29 &gt;&gt; 1.711, we <strong>reject H₀</strong> (p &lt; 0.001). The dissolved oxygen is significantly above the regulatory minimum. Cohen's d = 1.2 / 1.4 = <strong>0.86</strong> (large effect), indicating a substantial margin above the standard.</p>
 
 <h3>2. Independent Two-Sample t-Test</h3>
 
-<p><strong>Purpose:</strong> Test whether two <em>independent</em> groups have different population means.</p>
+<p><strong>Purpose:</strong> Test whether two <em>independent</em> groups have different population means. This is the most commonly used form of the t-test in research practice.</p>
 
-<p><strong>Equal variances assumed (Student's original):</strong></p>
+<p><strong>Equal variances assumed (Student's original formulation):</strong></p>
 
 <p style="text-align:center; font-size:1.1em;"><strong>t = (x̄₁ − x̄₂) / (s<sub>p</sub> · √(1/n₁ + 1/n₂))</strong></p>
 
-<p>where s<sub>p</sub> = √[((n₁−1)s₁² + (n₂−1)s₂²) / (n₁ + n₂ − 2)] is the <strong>pooled standard deviation</strong>.</p>
+<p>where s<sub>p</sub> = √[((n₁−1)s₁² + (n₂−1)s₂²) / (n₁ + n₂ − 2)] is the <strong>pooled standard deviation</strong> — a weighted average of the two sample standard deviations, with weights proportional to their degrees of freedom.</p>
 
 <p><strong>Unequal variances (Welch's t-test):</strong></p>
 
@@ -108,40 +138,57 @@
 
 <p style="text-align:center;"><strong>df = (s₁²/n₁ + s₂²/n₂)² / [(s₁²/n₁)²/(n₁−1) + (s₂²/n₂)²/(n₂−1)]</strong></p>
 
-<blockquote>🎯 <strong>Modern Best Practice:</strong> Delacre, Lakens, and Leys (2017) demonstrated convincingly that Welch's t-test should be used <em>by default</em> instead of Student's t-test. Welch's version controls Type I error rates well even when variances are unequal, and it loses very little power compared to Student's test when variances are actually equal. The traditional strategy of first testing for equality of variances (e.g., Levene's test) and then choosing which t-test to use has been shown to perform poorly and is no longer recommended.</blockquote>
+<p>This formula typically yields a non-integer df, which is used directly with the t-distribution (modern software handles this seamlessly). When variances are actually equal, Welch's df is close to (n₁ + n₂ − 2), and the two tests give nearly identical results — so Welch's version loses almost nothing when the classical assumption holds.</p>
 
-<p><strong>Example:</strong> An agronomist compares wheat yield (t/ha) between two irrigation methods. Group 1 (drip): n₁ = 15, x̄₁ = 4.5, s₁ = 0.7. Group 2 (flood): n₂ = 18, x̄₂ = 3.9, s₂ = 0.9.</p>
+<blockquote>🎯 <strong>Modern Best Practice — The Welch Default:</strong> In a landmark simulation study, Delacre, Lakens, and Leys (2017) demonstrated convincingly that Welch's t-test should be used <em>by default</em> instead of Student's t-test for all independent two-sample comparisons. Their key findings: (1) Welch's test controls Type I error rates well regardless of whether variances are equal or unequal; (2) it loses very little power (typically &lt; 1%) compared to Student's test when variances are actually equal; (3) the traditional "preliminary test" strategy — first testing equality of variances with Levene's test, then choosing which t-test to use — actually performs <em>worse</em> than simply using Welch's test always, because the preliminary test introduces a conditional procedure that inflates the overall Type I error rate. Major statistical software (R, JASP, jamovi) have adopted Welch's t-test as the default.</blockquote>
 
-<p>Using Welch's t-test: t = (4.5 − 3.9) / √(0.49/15 + 0.81/18) = 0.6 / √(0.0327 + 0.045) = 0.6 / 0.278 = <strong>2.16</strong>. Welch df ≈ 31.4. At α = 0.05: t* ≈ 2.040. Since 2.16 &gt; 2.040, we <strong>reject H₀</strong>. Drip irrigation produces significantly higher yields. Cohen's d = 0.6 / √((0.49+0.81)/2) = 0.6 / 0.806 = <strong>0.74</strong> (medium-to-large effect).</p>
+<p><strong>Example — Antibiotic Efficacy Trial in Nairobi:</strong> A clinical researcher at Kenyatta National Hospital compares recovery time (days) for bacterial pneumonia patients treated with two different antibiotic protocols. Protocol A (azithromycin): n₁ = 28, x̄₁ = 7.3 days, s₁ = 2.1. Protocol B (amoxicillin-clavulanate): n₂ = 32, x̄₂ = 8.9 days, s₂ = 3.4.</p>
+
+<p>Using Welch's t-test: t = (7.3 − 8.9) / √(2.1²/28 + 3.4²/32) = −1.6 / √(0.1575 + 0.3613) = −1.6 / √0.5188 = −1.6 / 0.720 = <strong>−2.22</strong>.</p>
+
+<p>Welch df = (0.1575 + 0.3613)² / [(0.1575)²/27 + (0.3613)²/31] = (0.5188)² / [0.000919 + 0.004212] = 0.2692 / 0.005131 ≈ <strong>52.5</strong>.</p>
+
+<p>At α = 0.05 (two-tailed), t* ≈ 2.006 for df ≈ 52. Since |−2.22| &gt; 2.006, we <strong>reject H₀</strong> (p ≈ 0.031). Cohen's d = 1.6 / √((2.1² + 3.4²)/2) = 1.6 / √(7.99/2) = 1.6 / 1.999 ≈ <strong>0.57</strong> (medium effect). Protocol A achieves significantly faster recovery, with a clinically meaningful advantage of approximately 1.6 days.</p>
 
 <h3>3. Paired-Samples t-Test (Dependent t-Test)</h3>
 
-<p><strong>Purpose:</strong> Compare two related measurements on the <em>same</em> subjects (before/after, matched pairs, repeated measures).</p>
+<p><strong>Purpose:</strong> Compare two related measurements on the <em>same</em> subjects (before/after designs, matched pairs, crossover studies, or repeated measures on the same units).</p>
 
 <p>The key insight is to compute the <strong>difference score</strong> d<sub>i</sub> = x<sub>1i</sub> − x<sub>2i</sub> for each pair, then apply a one-sample t-test to the differences:</p>
 
 <p style="text-align:center; font-size:1.1em;"><strong>t = d̄ / (s<sub>d</sub> / √n)</strong> &nbsp; with df = n − 1</p>
 
-<p>where d̄ is the mean of differences and s<sub>d</sub> is the standard deviation of differences.</p>
+<p>where d̄ is the mean of differences, s<sub>d</sub> is the standard deviation of differences, and n is the number of pairs (not the total number of observations).</p>
 
-<p><strong>Why it's more powerful:</strong> By analyzing differences, the paired test <em>eliminates between-subject variability</em>. Each subject serves as their own control, so the error term is typically much smaller than in an independent test — resulting in a more powerful analysis (Cohen, 1988).</p>
+<p><strong>Why it's more powerful:</strong> By analyzing within-subject differences, the paired test <em>eliminates between-subject variability</em> — which is often the largest source of variation in biological and behavioral data. Each subject serves as their own control, so the error term reflects only within-subject inconsistency, which is typically much smaller than between-subject variability. The result is dramatically increased statistical power. Cohen (1988) noted that paired designs can effectively double or triple the sample size equivalent compared to independent designs when the correlation between paired measurements is high (ρ &gt; 0.5).</p>
 
-<p><strong>Example:</strong> A researcher measures blood pressure in n = 12 patients before and after a new treatment.</p>
+<p><strong>Example — Cognitive Training Program in Tokyo:</strong> A neuroscience researcher at the University of Tokyo measures working memory capacity (digit span) in n = 15 healthy adults before and after an 8-week cognitive training program.</p>
 
 <table>
   <thead>
-    <tr><th>Patient</th><th>Before</th><th>After</th><th>Difference (d)</th></tr>
+    <tr><th>Participant</th><th>Before</th><th>After</th><th>Difference (d)</th></tr>
   </thead>
   <tbody>
-    <tr><td>1</td><td>142</td><td>130</td><td>12</td></tr>
-    <tr><td>2</td><td>155</td><td>148</td><td>7</td></tr>
-    <tr><td>3</td><td>160</td><td>145</td><td>15</td></tr>
-    <tr><td>...</td><td>...</td><td>...</td><td>...</td></tr>
-    <tr><td colspan="3"><strong>Summary:</strong> d̄ = 9.5, s<sub>d</sub> = 4.2</td><td></td></tr>
+    <tr><td>1</td><td>6</td><td>7</td><td>1</td></tr>
+    <tr><td>2</td><td>5</td><td>7</td><td>2</td></tr>
+    <tr><td>3</td><td>7</td><td>8</td><td>1</td></tr>
+    <tr><td>4</td><td>6</td><td>6</td><td>0</td></tr>
+    <tr><td>5</td><td>8</td><td>9</td><td>1</td></tr>
+    <tr><td>6</td><td>5</td><td>6</td><td>1</td></tr>
+    <tr><td>7</td><td>7</td><td>9</td><td>2</td></tr>
+    <tr><td>8</td><td>6</td><td>7</td><td>1</td></tr>
+    <tr><td>9</td><td>4</td><td>5</td><td>1</td></tr>
+    <tr><td>10</td><td>7</td><td>8</td><td>1</td></tr>
+    <tr><td>11</td><td>5</td><td>7</td><td>2</td></tr>
+    <tr><td>12</td><td>6</td><td>7</td><td>1</td></tr>
+    <tr><td>13</td><td>8</td><td>8</td><td>0</td></tr>
+    <tr><td>14</td><td>5</td><td>6</td><td>1</td></tr>
+    <tr><td>15</td><td>6</td><td>8</td><td>2</td></tr>
+    <tr><td colspan="3"><strong>Summary:</strong> d̄ = 1.133, s<sub>d</sub> = 0.640</td><td></td></tr>
   </tbody>
 </table>
 
-<p>t = 9.5 / (4.2/√12) = 9.5 / 1.212 = <strong>7.84</strong>. With df = 11, t* = 2.201 (α = 0.05). Highly significant — the treatment substantially reduces blood pressure.</p>
+<p>t = 1.133 / (0.640/√15) = 1.133 / 0.1653 = <strong>6.86</strong>. With df = 14, t* = 2.145 (α = 0.05, two-tailed). Since 6.86 &gt;&gt; 2.145, the result is <strong>highly significant</strong> (p &lt; 0.001). Cohen's d<sub>z</sub> = d̄/s<sub>d</sub> = 1.133/0.640 = <strong>1.77</strong> — an exceptionally large effect. The cognitive training program produces a reliable and substantial improvement in working memory capacity.</p>
 
 <hr>
 
@@ -149,14 +196,16 @@
 
 <table>
   <thead>
-    <tr><th>Scenario</th><th>Test</th><th>H₀</th><th>Formula Core</th><th>df</th></tr>
+    <tr><th>Research Scenario</th><th>Appropriate Test</th><th>Null Hypothesis</th><th>Formula Core</th><th>Degrees of Freedom</th></tr>
   </thead>
   <tbody>
-    <tr><td>One sample vs. known value</td><td>One-sample t</td><td>μ = μ₀</td><td>(x̄ − μ₀) / (s/√n)</td><td>n − 1</td></tr>
-    <tr><td>Two independent groups, equal var.</td><td>Student's t</td><td>μ₁ = μ₂</td><td>(x̄₁ − x̄₂) / (s<sub>p</sub>√(1/n₁+1/n₂))</td><td>n₁ + n₂ − 2</td></tr>
-    <tr><td>Two independent groups, unequal var.</td><td>Welch's t ✅</td><td>μ₁ = μ₂</td><td>(x̄₁ − x̄₂) / √(s₁²/n₁+s₂²/n₂)</td><td>Welch-Satterthwaite</td></tr>
-    <tr><td>Same subjects, two conditions</td><td>Paired t</td><td>μ<sub>d</sub> = 0</td><td>d̄ / (s<sub>d</sub>/√n)</td><td>n − 1</td></tr>
-    <tr><td>Large sample, σ known</td><td>z-test</td><td>μ = μ₀</td><td>(x̄ − μ₀) / (σ/√n)</td><td>∞ (normal)</td></tr>
+    <tr><td>One sample vs. known value, σ unknown</td><td>One-sample t-test</td><td>μ = μ₀</td><td>(x̄ − μ₀) / (s/√n)</td><td>n − 1</td></tr>
+    <tr><td>Two independent groups, σ₁ = σ₂ assumed</td><td>Student's independent t-test</td><td>μ₁ = μ₂</td><td>(x̄₁ − x̄₂) / (s<sub>p</sub>√(1/n₁+1/n₂))</td><td>n₁ + n₂ − 2</td></tr>
+    <tr><td>Two independent groups, σ₁ ≠ σ₂ possible</td><td>Welch's t-test ✅ (recommended default)</td><td>μ₁ = μ₂</td><td>(x̄₁ − x̄₂) / √(s₁²/n₁+s₂²/n₂)</td><td>Welch-Satterthwaite approximation</td></tr>
+    <tr><td>Same subjects measured twice</td><td>Paired-samples t-test</td><td>μ<sub>d</sub> = 0</td><td>d̄ / (s<sub>d</sub>/√n)</td><td>n<sub>pairs</sub> − 1</td></tr>
+    <tr><td>One sample vs. known value, σ known</td><td>z-test</td><td>μ = μ₀</td><td>(x̄ − μ₀) / (σ/√n)</td><td>∞ (standard normal)</td></tr>
+    <tr><td>One proportion vs. known value</td><td>z-test for proportions</td><td>p = p₀</td><td>(p̂ − p₀) / √(p₀(1−p₀)/n)</td><td>∞ (standard normal)</td></tr>
+    <tr><td>Two independent proportions</td><td>Two-sample z-test for proportions</td><td>p₁ = p₂</td><td>(p̂₁ − p̂₂) / √(p̄(1−p̄)(1/n₁+1/n₂))</td><td>∞ (standard normal)</td></tr>
   </tbody>
 </table>
 
@@ -164,50 +213,110 @@
 
 <h2>📏 Effect Size: Beyond Statistical Significance</h2>
 
-<p>A statistically significant t-test tells you the effect is likely real — but not whether it's <em>large enough to matter</em>. This is why modern reporting guidelines require <strong>effect size measures</strong> alongside p-values (APA, 2010; Cumming, 2014).</p>
+<p>A statistically significant t-test tells you the effect is likely <em>real</em> — but not whether it is <em>large enough to matter</em> in practice. A study with n = 10,000 can detect a trivially small effect as "statistically significant," while a study with n = 10 might miss a genuinely important effect. This crucial distinction between <strong>statistical significance</strong> and <strong>practical importance</strong> is why modern reporting guidelines universally require <strong>effect size measures</strong> alongside p-values (APA, 2020; Cumming, 2014). As Cohen (1988) memorably argued: "The primary product of a research inquiry is one or more measures of effect size, not p-values."</p>
 
 <h3>Cohen's d — The Gold Standard for Mean Differences</h3>
 
+<p>For the independent two-sample case:</p>
+
 <p style="text-align:center; font-size:1.1em;"><strong>d = (x̄₁ − x̄₂) / s<sub>pooled</sub></strong></p>
 
-<table>
-  <thead>
-    <tr><th>Cohen's d</th><th>Interpretation</th><th>Real-World Analogy</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>0.2</td><td>Small effect</td><td>Height difference between 15- and 16-year-old girls</td></tr>
-    <tr><td>0.5</td><td>Medium effect</td><td>Height difference between 14- and 18-year-old girls</td></tr>
-    <tr><td>0.8</td><td>Large effect</td><td>Height difference between 13- and 18-year-old girls</td></tr>
-  </tbody>
-</table>
+<p>For the paired case (Cohen's d<sub>z</sub>):</p>
 
-<p>Cohen (1988) proposed these benchmarks as rough guidelines, but emphasized that "the terms 'small,' 'medium,' and 'large' are relative… to each other and to the context of a particular research domain." In clinical research, even a "small" effect can be meaningful if the outcome is important (e.g., survival). In educational research, a "medium" effect might represent substantial improvement.</p>
-
-<h3>Other Effect Size Measures</h3>
+<p style="text-align:center; font-size:1.1em;"><strong>d<sub>z</sub> = d̄ / s<sub>d</sub></strong></p>
 
 <table>
   <thead>
-    <tr><th>Measure</th><th>Formula / Use</th><th>Range</th></tr>
+    <tr><th>Cohen's d</th><th>Interpretation</th><th>Overlap Between Distributions</th><th>Real-World Analogy</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Hedges' g</strong></td><td>Like d but with bias correction for small samples</td><td>Same as d</td></tr>
-    <tr><td><strong>Glass's Δ</strong></td><td>Uses control group SD only: (x̄₁ − x̄₂) / s<sub>control</sub></td><td>Same as d</td></tr>
-    <tr><td><strong>r (point-biserial)</strong></td><td>r = √(t² / (t² + df))</td><td>0 to 1</td></tr>
-    <tr><td><strong>η² (eta-squared)</strong></td><td>η² = t² / (t² + df); proportion of variance explained</td><td>0 to 1</td></tr>
+    <tr><td>0.2</td><td>Small effect</td><td>85% overlap</td><td>Height difference between 15- and 16-year-old girls; barely noticeable without measurement</td></tr>
+    <tr><td>0.5</td><td>Medium effect</td><td>67% overlap</td><td>Height difference between 14- and 18-year-old girls; visible to the careful observer</td></tr>
+    <tr><td>0.8</td><td>Large effect</td><td>53% overlap</td><td>Height difference between 13- and 18-year-old girls; obvious to casual observation</td></tr>
+    <tr><td>1.2</td><td>Very large effect</td><td>40% overlap</td><td>Height difference between average men and women; immediately apparent</td></tr>
+    <tr><td>2.0</td><td>Huge effect</td><td>19% overlap</td><td>Height difference between 8-year-old children and adults; unmistakable</td></tr>
   </tbody>
 </table>
 
-<blockquote>📐 <strong>The "New Statistics" Rule:</strong> Always report: (1) the test statistic and degrees of freedom, (2) the exact p-value, (3) an appropriate effect size with its confidence interval, and (4) descriptive statistics (means, SDs, sample sizes). Example: "Drip irrigation yielded significantly higher wheat production than flood irrigation, t(31.4) = 2.16, p = .038, d = 0.74, 95% CI [0.04, 1.44]." This single sentence tells the complete statistical story (Cumming, 2014).</blockquote>
+<p>Cohen (1988) proposed the 0.2 / 0.5 / 0.8 benchmarks as rough guidelines, but emphasized repeatedly that "the terms 'small,' 'medium,' and 'large' are relative… to each other and to the context of a particular research domain." In clinical oncology, even d = 0.1 can represent a meaningful extension of life; in educational psychology, d = 0.4 represents a substantial improvement (roughly equivalent to a student moving from the 50th to the 66th percentile); in agricultural science, the economic implications of a given effect size depend entirely on the crop value and scale of cultivation.</p>
+
+<h3>The Complete Effect Size Toolkit</h3>
+
+<table>
+  <thead>
+    <tr><th>Measure</th><th>Formula / Description</th><th>When to Use</th><th>Interpretation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Cohen's d</strong></td><td>(x̄₁ − x̄₂) / s<sub>pooled</sub></td><td>Independent groups, equal n, equal variances</td><td>Standardized mean difference in SD units</td></tr>
+    <tr><td><strong>Hedges' g</strong></td><td>d × (1 − 3/(4(n₁+n₂)−9))</td><td>Small samples (n &lt; 20); corrects upward bias in d</td><td>Unbiased version of Cohen's d</td></tr>
+    <tr><td><strong>Glass's Δ</strong></td><td>(x̄₁ − x̄₂) / s<sub>control</sub></td><td>When treatment might affect variability (uses control group SD only)</td><td>Standardized against untreated variability</td></tr>
+    <tr><td><strong>r (point-biserial)</strong></td><td>r = √(t² / (t² + df))</td><td>When correlation metric is preferred; meta-analysis</td><td>Small = 0.1, Medium = 0.3, Large = 0.5</td></tr>
+    <tr><td><strong>η² (eta-squared)</strong></td><td>η² = t² / (t² + df)</td><td>Proportion of total variance explained by the group factor</td><td>Small = 0.01, Medium = 0.06, Large = 0.14</td></tr>
+    <tr><td><strong>Common Language ES</strong></td><td>Probability that a random score from Group 1 exceeds a random score from Group 2</td><td>Intuitive communication to non-statisticians</td><td>50% = no effect; 71% corresponds to d = 0.8</td></tr>
+  </tbody>
+</table>
+
+<blockquote>📐 <strong>The "New Statistics" — A Paradigm Shift:</strong> Cumming (2014) argued powerfully for what he called "the new statistics" — an approach that emphasizes estimation (effect sizes and confidence intervals) over binary hypothesis testing (p &lt; 0.05 vs. p &gt; 0.05). The APA Publication Manual (7th ed., 2020) now requires: (1) the test statistic and degrees of freedom, (2) the exact p-value (e.g., p = .038, not p &lt; .05), (3) an appropriate effect size measure with its confidence interval, and (4) descriptive statistics (means, SDs, sample sizes) for all groups. A well-reported result looks like this: "Protocol A achieved significantly faster recovery than Protocol B (M = 7.3 vs. 8.9 days), t(52.5) = −2.22, p = .031, d = 0.57, 95% CI [0.05, 1.09]." This single sentence tells the complete statistical story.</blockquote>
+
+<hr>
+
+<h2>⚡ Statistical Power and Sample Size Planning</h2>
+
+<p>Statistical power — the probability of correctly rejecting H₀ when it is false — is one of the most neglected yet most important concepts in research design. An underpowered study is not merely inconclusive; it is <em>wasteful</em> at best and <em>misleading</em> at worst. If a study has only 30% power, there is a 70% probability of missing a real effect (Type II error), and the effects that <em>are</em> detected will tend to be inflated in magnitude — the so-called "winner's curse" or "Type M error" (Gelman &amp; Carlin, 2014).</p>
+
+<h3>The Four Pillars of Power</h3>
+
+<p>Power depends on exactly four quantities, related by a fundamental equation (Cohen, 1988):</p>
+
+<table>
+  <thead>
+    <tr><th>Factor</th><th>Symbol</th><th>Relationship to Power</th><th>Researcher's Control</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Effect size</td><td>d (or δ)</td><td>Larger effect → higher power</td><td>Cannot control (determined by nature); can choose research contexts where effects are expected to be large</td></tr>
+    <tr><td>Sample size</td><td>n</td><td>Larger n → higher power</td><td><strong>Primary lever</strong> — researcher's main tool for controlling power</td></tr>
+    <tr><td>Significance level</td><td>α</td><td>Larger α → higher power (but more Type I errors)</td><td>Typically fixed at 0.05 by convention; sometimes 0.01 or 0.10 for specific applications</td></tr>
+    <tr><td>Population variance</td><td>σ²</td><td>Smaller σ² → higher power</td><td>Can reduce through better measurement, controlling extraneous variables, or using paired designs</td></tr>
+  </tbody>
+</table>
+
+<h3>Sample Size Formulas for Common Designs</h3>
+
+<p><strong>One-sample t-test:</strong></p>
+<p style="text-align:center;"><strong>n = (z<sub>α/2</sub> + z<sub>β</sub>)² / d²</strong></p>
+
+<p><strong>Independent two-sample t-test (equal groups):</strong></p>
+<p style="text-align:center;"><strong>n per group = 2(z<sub>α/2</sub> + z<sub>β</sub>)² / d²</strong></p>
+
+<p>For the most common scenario (α = 0.05 two-tailed, power = 0.80), the required sample sizes per group are:</p>
+
+<table>
+  <thead>
+    <tr><th>Expected Effect Size (d)</th><th>n per Group (80% power)</th><th>n per Group (90% power)</th><th>n per Group (95% power)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0.2 (small)</td><td>394</td><td>527</td><td>651</td></tr>
+    <tr><td>0.5 (medium)</td><td>64</td><td>86</td><td>105</td></tr>
+    <tr><td>0.8 (large)</td><td>26</td><td>34</td><td>42</td></tr>
+    <tr><td>1.0 (very large)</td><td>17</td><td>23</td><td>28</td></tr>
+  </tbody>
+</table>
+
+<blockquote>⚠️ <strong>The Replication Crisis Connection:</strong> A devastating analysis by Button et al. (2013) in <em>Nature Reviews Neuroscience</em> found that the median statistical power of neuroscience studies was only <strong>21%</strong> — meaning that most studies had less than a 1-in-4 chance of detecting the effects they were designed to find. This chronic underpowering has been identified as a primary driver of the scientific replication crisis: underpowered studies that happen to achieve significance report inflated effect sizes, which then fail to replicate. The solution is straightforward: conduct <strong>a priori power analyses</strong> before data collection using tools like G*Power (Faul et al., 2007), the R package 'pwr', or dedicated online calculators. This is not merely good practice — many funding agencies and ethics boards now <em>require</em> formal power justification.</blockquote>
 
 <hr>
 
 <h2>⚖️ z-Test for Proportions</h2>
 
-<p>When comparing proportions (e.g., success rates, prevalence), we use a z-test based on the normal approximation to the binomial distribution.</p>
+<p>When the research question involves <em>proportions</em> rather than means — success rates, prevalence, response rates, pass/fail rates — we use a z-test based on the normal approximation to the binomial distribution. This approximation is adequate when both np₀ ≥ 10 and n(1−p₀) ≥ 10 (or both np̂ ≥ 10 and n(1−p̂) ≥ 10 for two-sample tests). When these conditions are not met, exact binomial tests or Fisher's exact test should be used instead.</p>
 
 <h3>One-Sample z-Test for a Proportion</h3>
 
 <p style="text-align:center; font-size:1.1em;"><strong>z = (p̂ − p₀) / √(p₀(1−p₀)/n)</strong></p>
+
+<p><strong>Example:</strong> A seed company claims a 90% germination rate. An agricultural researcher plants n = 200 seeds and observes 168 germinations (p̂ = 0.84). Is this significantly below the claimed rate?</p>
+
+<p>H₀: p = 0.90; H₁: p &lt; 0.90 (one-tailed). z = (0.84 − 0.90) / √(0.90 × 0.10 / 200) = −0.06 / √(0.00045) = −0.06 / 0.02121 = <strong>−2.83</strong>. Since |−2.83| &gt; 1.645, we <strong>reject H₀</strong> (p = 0.002). The germination rate is significantly below the claimed 90%.</p>
 
 <h3>Two-Sample z-Test for Comparing Proportions</h3>
 
@@ -215,25 +324,30 @@
 
 <p>where p̄ = (x₁ + x₂)/(n₁ + n₂) is the pooled proportion under H₀.</p>
 
-<p><strong>Example:</strong> A public health study compares vaccination rates in two regions. Region A: 420/500 = 84% vaccinated. Region B: 360/500 = 72%.</p>
+<p><strong>Example — Vaccine Efficacy in Sub-Saharan Africa:</strong> A Phase III clinical trial conducted across Ghana, Kenya, and Senegal compares a new malaria vaccine to a placebo. Vaccine group: 48/600 developed symptomatic malaria (p̂₁ = 0.080). Placebo group: 112/600 developed symptomatic malaria (p̂₂ = 0.187).</p>
 
-<p>p̄ = (420+360)/(500+500) = 0.78. z = (0.84 − 0.72) / √(0.78 × 0.22 × (1/500 + 1/500)) = 0.12 / √(0.000686) = 0.12 / 0.0262 = <strong>4.58</strong>. Since |4.58| &gt;&gt; 1.96, the difference is highly significant — Region A has a substantially higher vaccination rate.</p>
+<p>p̄ = (48 + 112)/(600 + 600) = 160/1200 = 0.1333. z = (0.080 − 0.187) / √(0.1333 × 0.8667 × (1/600 + 1/600)) = −0.107 / √(0.1155 × 0.00333) = −0.107 / √(0.000385) = −0.107 / 0.01962 = <strong>−5.45</strong>.</p>
+
+<p>This is overwhelmingly significant (p &lt; 0.0001). The vaccine reduces malaria incidence by (0.187 − 0.080)/0.187 × 100 = <strong>57.2%</strong> — a clinically transformative effect. The 95% CI for the difference in proportions: −0.107 ± 1.96 × √(0.080 × 0.920/600 + 0.187 × 0.813/600) = −0.107 ± 0.038 = [−0.145, −0.069], confirming the practical significance.</p>
 
 <hr>
 
 <h2>🔍 Checking Assumptions: A Practical Guide</h2>
 
+<p>Assumption checking is not an optional formality — it is an integral part of the analytical process. However, it requires judgment: formal statistical tests of assumptions have their own problems (notably, they are underpowered when n is small — precisely when violations matter most — and overpowered when n is large, detecting trivial departures that have no practical consequence). The best approach combines visual inspection with formal tests and knowledge of the robustness properties of the analysis (Schucany &amp; Ng, 2006).</p>
+
 <h3>Testing Normality</h3>
 
 <table>
   <thead>
-    <tr><th>Method</th><th>How It Works</th><th>Best For</th></tr>
+    <tr><th>Method</th><th>How It Works</th><th>Best For</th><th>Limitations</th></tr>
   </thead>
   <tbody>
-    <tr><td>📊 <strong>Shapiro-Wilk test</strong></td><td>Most powerful omnibus normality test</td><td>Small to moderate samples (n &lt; 2000)</td></tr>
-    <tr><td>📈 <strong>Q-Q plot</strong></td><td>Visual: points should follow diagonal line</td><td>Any sample size; shows nature of deviation</td></tr>
-    <tr><td>📐 <strong>Skewness &amp; Kurtosis</strong></td><td>Values near 0 suggest normality; |skew| &lt; 2 and |kurtosis| &lt; 7 acceptable</td><td>Quick numerical check</td></tr>
-    <tr><td>📊 <strong>Histogram</strong></td><td>Visual inspection of distribution shape</td><td>Moderate to large samples</td></tr>
+    <tr><td>📊 <strong>Shapiro-Wilk test</strong></td><td>Computes a test statistic W based on the correlation between the ordered data and expected normal order statistics; most powerful omnibus normality test (Razali &amp; Wah, 2011)</td><td>Small to moderate samples (n &lt; 2000); recommended as the default formal test</td><td>Overpowered for large n (rejects normality for trivially small departures); upper limit n ≈ 5000</td></tr>
+    <tr><td>📈 <strong>Q-Q (Quantile-Quantile) plot</strong></td><td>Plots sample quantiles against theoretical normal quantiles; deviations from the diagonal line reveal the nature and severity of non-normality</td><td>Any sample size; shows <em>how</em> the distribution deviates (skewness, kurtosis, outliers)</td><td>Requires visual judgment — subjective to some extent</td></tr>
+    <tr><td>📐 <strong>Skewness &amp; Kurtosis indices</strong></td><td>Skewness measures asymmetry (0 = symmetric); kurtosis measures tail heaviness (0 = normal). Rules of thumb: |skewness| &lt; 2 and |kurtosis| &lt; 7 are acceptable (Curran, West, &amp; Finch, 1996)</td><td>Quick numerical screen; useful as a supplement to visual methods</td><td>Not a formal test; may miss multimodality</td></tr>
+    <tr><td>📊 <strong>Histogram with normal overlay</strong></td><td>Visual comparison of the empirical frequency distribution with a fitted normal curve</td><td>Moderate to large samples (n &gt; 30); detects multimodality and gross asymmetry</td><td>Appearance depends on bin width; poor for small samples</td></tr>
+    <tr><td>📊 <strong>Kolmogorov-Smirnov test</strong></td><td>Compares the empirical CDF with the theoretical normal CDF; measures maximum absolute deviation</td><td>Large samples; tests any specified distribution, not just normality</td><td>Less powerful than Shapiro-Wilk for detecting normality violations specifically</td></tr>
   </tbody>
 </table>
 
@@ -241,110 +355,208 @@
 
 <table>
   <thead>
-    <tr><th>Test</th><th>How It Works</th><th>Robustness to Non-Normality</th></tr>
+    <tr><th>Test</th><th>How It Works</th><th>Robustness to Non-Normality</th><th>Recommendation</th></tr>
   </thead>
   <tbody>
-    <tr><td>⚖️ <strong>Levene's test</strong></td><td>ANOVA on absolute deviations from group means</td><td>Moderate</td></tr>
-    <tr><td>⚖️ <strong>Brown-Forsythe test</strong></td><td>Like Levene's but uses group medians</td><td>Good — recommended for skewed data</td></tr>
-    <tr><td>⚖️ <strong>Bartlett's test</strong></td><td>Likelihood ratio test</td><td>Poor — very sensitive to non-normality</td></tr>
-    <tr><td>📏 <strong>F-max ratio</strong></td><td>Largest variance / Smallest variance; concern if &gt; 3–4</td><td>Quick rule of thumb</td></tr>
+    <tr><td>⚖️ <strong>Levene's test (1960)</strong></td><td>Performs ANOVA on the absolute deviations from group means</td><td>Moderate — better than Bartlett's but still sensitive to heavy tails</td><td>Widely available; acceptable default</td></tr>
+    <tr><td>⚖️ <strong>Brown-Forsythe test</strong></td><td>Like Levene's but uses deviations from group <em>medians</em> instead of means</td><td>Good — recommended for skewed data or data with outliers</td><td>Preferred over Levene's in general practice</td></tr>
+    <tr><td>⚖️ <strong>Bartlett's test</strong></td><td>Based on the likelihood ratio under normality; equivalent to the chi-squared test for equality of variances</td><td>Poor — extremely sensitive to non-normality; often rejects equality of variances due to non-normality rather than actual variance differences</td><td>Avoid unless normality is confirmed</td></tr>
+    <tr><td>📏 <strong>F-max ratio (Hartley's test)</strong></td><td>Ratio of the largest to smallest group variance; concern if F-max &gt; 3–4</td><td>A quick heuristic, not a formal test</td><td>Useful for quick screening in ANOVA designs</td></tr>
   </tbody>
 </table>
 
-<blockquote>🎯 <strong>Practical Decision Framework:</strong>
-<br>1. Check independence (by design, not by testing).
-<br>2. Check normality visually (Q-Q plot) and formally (Shapiro-Wilk).
-<br>3. If normality fails badly and n is small → consider nonparametric alternatives or bootstrap.
-<br>4. For two-group comparisons → use Welch's t-test by default (Delacre et al., 2017).
-<br>5. Always report effect sizes and confidence intervals alongside p-values.</blockquote>
+<blockquote>🎯 <strong>Practical Decision Framework for Assumption Checking:</strong>
+<br>1. <strong>Independence:</strong> Verify by examining the study design, not by statistical testing. Ask: could one observation influence another? If subjects are clustered (students within classrooms, patients within hospitals), use multilevel models instead.
+<br>2. <strong>Normality:</strong> Inspect the Q-Q plot first (visual), then run Shapiro-Wilk (formal). If normality is rejected but the Q-Q plot shows only mild deviations and n ≥ 25–30, proceed with the t-test (it's robust). If normality fails badly with small n → consider nonparametric alternatives or the bootstrap.
+<br>3. <strong>Homogeneity:</strong> For two-group comparisons, simply use Welch's t-test by default — it handles both equal and unequal variances well (Delacre et al., 2017). For ANOVA, use the Brown-Forsythe test and consider Welch's ANOVA if heterogeneity is detected.
+<br>4. <strong>Always report</strong> the assumption-checking procedures and their results in your methods section.</blockquote>
 
 <hr>
 
 <h2>🔄 When Assumptions Fail: Alternatives and Remedies</h2>
 
+<p>No real-world dataset perfectly satisfies all parametric assumptions. The question is not <em>whether</em> assumptions are violated, but <em>how severely</em> and <em>what to do about it</em>. The following table provides a decision-support framework based on decades of methodological research:</p>
+
 <table>
   <thead>
-    <tr><th>Problem</th><th>Remedy</th><th>Alternative Test</th></tr>
+    <tr><th>Problem</th><th>Severity Assessment</th><th>First Remedy</th><th>Alternative Test</th><th>Key Reference</th></tr>
   </thead>
   <tbody>
-    <tr><td>Non-normality (mild)</td><td>t-test is robust; proceed with caution for n ≥ 25–30</td><td>—</td></tr>
-    <tr><td>Non-normality (severe, small n)</td><td>Data transformation (log, sqrt, rank) or bootstrap</td><td>Mann-Whitney U (independent) / Wilcoxon signed-rank (paired)</td></tr>
-    <tr><td>Unequal variances</td><td>Use Welch's t-test (default recommendation)</td><td>—</td></tr>
-    <tr><td>Outliers</td><td>Trimmed means (Yuen's test), winsorization, robust methods</td><td>Wilcox's robust methods (Wilcox, 2017)</td></tr>
-    <tr><td>Non-independence</td><td>Redesign; use mixed models or repeated-measures approaches</td><td>No simple nonparametric fix</td></tr>
-    <tr><td>Ordinal data</td><td>Use nonparametric tests designed for ranks</td><td>Mann-Whitney / Wilcoxon</td></tr>
+    <tr><td>Non-normality (mild: slight skew, |skewness| &lt; 1)</td><td>Low — t-test is robust for n ≥ 25–30</td><td>Proceed with the t-test; note the mild departure</td><td>Not needed</td><td>Glass et al., 1972</td></tr>
+    <tr><td>Non-normality (moderate: clear skew or kurtosis)</td><td>Moderate — especially problematic for small n</td><td>Data transformation (log, square root, reciprocal) or bootstrap confidence intervals</td><td>Mann-Whitney U / Wilcoxon signed-rank</td><td>Wilcox, 2017</td></tr>
+    <tr><td>Non-normality (severe: bimodal, extreme skew, or heavy outliers)</td><td>High — parametric tests may give misleading results</td><td>Trimmed means with Yuen's test; bootstrap; permutation tests</td><td>Mann-Whitney / Wilcoxon / Permutation test</td><td>Wilcox, 2017</td></tr>
+    <tr><td>Unequal variances (any degree)</td><td>Moderate to severe when combined with unequal n</td><td>Use Welch's t-test (should be the default regardless)</td><td>—</td><td>Delacre et al., 2017</td></tr>
+    <tr><td>Outliers (few extreme values)</td><td>Can severely inflate variance and distort means</td><td>Trimmed means and winsorized variances (Yuen's test); robust M-estimators</td><td>Rank-based tests are naturally resistant to outliers</td><td>Wilcox, 2017</td></tr>
+    <tr><td>Non-independence (clustering, repeated measures)</td><td><strong>Severe — no simple fix</strong></td><td>Use appropriate methods: mixed-effects models (for clustered data), repeated-measures ANOVA, or multilevel modeling</td><td>No simple nonparametric alternative addresses non-independence</td><td>Scariano &amp; Davenport, 1987</td></tr>
+    <tr><td>Ordinal data (Likert scales, rankings)</td><td>Moderate — parametric tests assume meaningful intervals</td><td>Use nonparametric tests specifically designed for ranked/ordinal data</td><td>Mann-Whitney / Wilcoxon / Brunner-Munzel</td><td>Lehmann, 2006</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>🌍 Comprehensive Worked Example: Agricultural Field Trial</h2>
+<h2>🌍 Comprehensive Worked Example: Agricultural Field Trial in Punjab, India</h2>
 
-<p>A researcher in the Algerian Hauts Plateaux compares the effect of two fertilizer treatments on durum wheat yield (quintals/hectare). Treatment A (organic compost): n₁ = 20 plots; Treatment B (chemical NPK): n₂ = 20 plots.</p>
+<p>A plant scientist at the Punjab Agricultural University in Ludhiana conducts a randomized field trial comparing the effect of two rice cultivar varieties on grain yield (tonnes per hectare) under the same irrigation and fertilization regime. Cultivar A (PR-126, a short-duration variety): n₁ = 22 plots; Cultivar B (Pusa Basmati-1121, an aromatic variety): n₂ = 18 plots.</p>
 
 <table>
   <thead>
-    <tr><th>Statistic</th><th>Treatment A (Organic)</th><th>Treatment B (NPK)</th></tr>
+    <tr><th>Statistic</th><th>Cultivar A (PR-126)</th><th>Cultivar B (PB-1121)</th></tr>
   </thead>
   <tbody>
-    <tr><td>Mean (x̄)</td><td>28.5 q/ha</td><td>32.1 q/ha</td></tr>
-    <tr><td>Std Dev (s)</td><td>4.2</td><td>5.1</td></tr>
-    <tr><td>n</td><td>20</td><td>20</td></tr>
+    <tr><td>Mean (x̄)</td><td>7.84 t/ha</td><td>6.21 t/ha</td></tr>
+    <tr><td>Std Dev (s)</td><td>1.12</td><td>1.58</td></tr>
+    <tr><td>n</td><td>22</td><td>18</td></tr>
+    <tr><td>Shapiro-Wilk p</td><td>0.34</td><td>0.18</td></tr>
   </tbody>
 </table>
 
-<p><strong>Step 1 — State hypotheses:</strong> H₀: μ_A = μ_B (no difference); H₁: μ_A ≠ μ_B (two-tailed)</p>
+<p><strong>Step 1 — State hypotheses:</strong> H₀: μ<sub>A</sub> = μ<sub>B</sub> (no difference in yield between cultivars); H₁: μ<sub>A</sub> ≠ μ<sub>B</sub> (two-tailed, since we have no prior directional prediction about which cultivar yields more).</p>
 
-<p><strong>Step 2 — Check assumptions:</strong> Shapiro-Wilk: both groups p &gt; 0.10 (normality OK). Q-Q plots: approximately linear. Levene's test: F = 1.02, p = 0.32 (homogeneity OK, but we'll use Welch's anyway).</p>
+<p><strong>Step 2 — Check assumptions:</strong></p>
+<p><em>Independence:</em> Plots were randomly assigned and spatially separated → independence satisfied by design.</p>
+<p><em>Normality:</em> Shapiro-Wilk test: Cultivar A (W = 0.96, p = 0.34) and Cultivar B (W = 0.94, p = 0.18) — both non-significant, indicating no evidence against normality. Q-Q plots were approximately linear for both groups.</p>
+<p><em>Homogeneity of variance:</em> The standard deviations differ (1.12 vs. 1.58), and sample sizes are unequal (22 vs. 18). Brown-Forsythe test: F = 2.14, p = 0.152 — non-significant, but the combination of unequal variances and unequal n makes Welch's t-test the prudent default choice.</p>
 
-<p><strong>Step 3 — Compute Welch's t:</strong><br>
-t = (28.5 − 32.1) / √(4.2²/20 + 5.1²/20) = −3.6 / √(0.882 + 1.3005) = −3.6 / √2.1825 = −3.6 / 1.477 = <strong>−2.44</strong></p>
+<p><strong>Step 3 — Compute Welch's t-test:</strong></p>
+<p>t = (7.84 − 6.21) / √(1.12²/22 + 1.58²/18) = 1.63 / √(0.0570 + 0.1387) = 1.63 / √0.1957 = 1.63 / 0.4424 = <strong>3.68</strong></p>
 
-<p>Welch df = (0.882 + 1.3005)² / [(0.882)²/19 + (1.3005)²/19] = 4.763 / (0.0410 + 0.0890) = 4.763 / 0.130 ≈ <strong>36.6</strong></p>
+<p><strong>Step 4 — Welch degrees of freedom:</strong></p>
+<p>df = (0.0570 + 0.1387)² / [(0.0570)²/21 + (0.1387)²/17] = (0.1957)² / [0.0001548 + 0.001132] = 0.03830 / 0.001287 ≈ <strong>29.8</strong></p>
 
-<p><strong>Step 4 — Decision:</strong> For df ≈ 37, t* (two-tailed, α = 0.05) ≈ 2.026. |−2.44| &gt; 2.026 → <strong>Reject H₀</strong>.</p>
+<p><strong>Step 5 — Decision:</strong> For df ≈ 30, the critical value (two-tailed, α = 0.05) is t* ≈ 2.042. Since |3.68| &gt; 2.042 → <strong>Reject H₀</strong> (p = 0.001).</p>
 
-<p><strong>Step 5 — Effect size:</strong> Cohen's d = 3.6 / √((4.2² + 5.1²)/2) = 3.6 / 4.672 = <strong>0.77</strong> (medium-to-large).</p>
+<p><strong>Step 6 — Effect size:</strong> Cohen's d = 1.63 / √((1.12² × 21 + 1.58² × 17)/(21 + 17)) = 1.63 / √((26.3424 + 42.4308)/38) = 1.63 / √(1.8098) = 1.63 / 1.345 = <strong>1.21</strong> (very large effect).</p>
 
-<p><strong>Step 6 — Report:</strong> "NPK fertilizer produced significantly higher durum wheat yields than organic compost (M = 32.1 vs. 28.5 q/ha), t(36.6) = −2.44, p = .020, d = 0.77, 95% CI for the mean difference [−6.58, −0.62]."</p>
+<p><strong>Step 7 — Confidence interval for the mean difference:</strong> 95% CI = (x̄₁ − x̄₂) ± t<sub>α/2,df</sub> × SE = 1.63 ± 2.042 × 0.4424 = 1.63 ± 0.904 = <strong>[0.73, 2.53]</strong> t/ha.</p>
+
+<p><strong>Step 8 — Complete APA-style report:</strong> "Cultivar PR-126 produced significantly higher grain yields than Pusa Basmati-1121 (M = 7.84 vs. 6.21 t/ha), t(29.8) = 3.68, p = .001, d = 1.21, 95% CI for the mean difference [0.73, 2.53]. The effect is very large (d &gt; 1.0), suggesting a substantial agronomic advantage for PR-126 under the tested conditions, although the premium market value of Basmati varieties must be considered in any economic analysis."</p>
 
 <hr>
 
-<h2>🆚 Parametric vs. Nonparametric: When to Choose Which?</h2>
+<h2>🔬 Second Worked Example: Paired Design — Physiotherapy Trial in Melbourne</h2>
+
+<p>A sports medicine researcher at the University of Melbourne evaluates a new physiotherapy protocol for patients with chronic lower back pain. The study uses a crossover design: n = 16 patients receive both the standard protocol and the new protocol (separated by a 4-week washout period), and pain is measured on a validated 100-point Visual Analog Scale (VAS) after each treatment.</p>
+
+<table>
+  <thead>
+    <tr><th>Patient</th><th>Standard Protocol (VAS)</th><th>New Protocol (VAS)</th><th>Difference (d<sub>i</sub>)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>62</td><td>48</td><td>14</td></tr>
+    <tr><td>2</td><td>71</td><td>65</td><td>6</td></tr>
+    <tr><td>3</td><td>55</td><td>42</td><td>13</td></tr>
+    <tr><td>4</td><td>48</td><td>44</td><td>4</td></tr>
+    <tr><td>5</td><td>66</td><td>52</td><td>14</td></tr>
+    <tr><td>6</td><td>73</td><td>61</td><td>12</td></tr>
+    <tr><td>7</td><td>59</td><td>55</td><td>4</td></tr>
+    <tr><td>8</td><td>64</td><td>50</td><td>14</td></tr>
+    <tr><td>9</td><td>70</td><td>58</td><td>12</td></tr>
+    <tr><td>10</td><td>52</td><td>41</td><td>11</td></tr>
+    <tr><td>11</td><td>68</td><td>60</td><td>8</td></tr>
+    <tr><td>12</td><td>57</td><td>50</td><td>7</td></tr>
+    <tr><td>13</td><td>61</td><td>49</td><td>12</td></tr>
+    <tr><td>14</td><td>75</td><td>68</td><td>7</td></tr>
+    <tr><td>15</td><td>58</td><td>47</td><td>11</td></tr>
+    <tr><td>16</td><td>63</td><td>53</td><td>10</td></tr>
+    <tr><td colspan="3"><strong>Summary:</strong> d̄ = 9.94, s<sub>d</sub> = 3.47</td><td></td></tr>
+  </tbody>
+</table>
+
+<p><strong>Step 1 — Hypotheses:</strong> H₀: μ<sub>d</sub> = 0 (no difference between protocols); H₁: μ<sub>d</sub> ≠ 0.</p>
+
+<p><strong>Step 2 — Normality of differences:</strong> Shapiro-Wilk on the differences: W = 0.94, p = 0.31 (normality not rejected). Q-Q plot approximately linear.</p>
+
+<p><strong>Step 3 — Test statistic:</strong> t = 9.94 / (3.47/√16) = 9.94 / 0.8675 = <strong>11.46</strong>. With df = 15.</p>
+
+<p><strong>Step 4 — Decision:</strong> t* (two-tailed, α = 0.05, df = 15) = 2.131. Since 11.46 &gt;&gt; 2.131, the result is overwhelmingly significant (p &lt; 0.0001).</p>
+
+<p><strong>Step 5 — Effect size:</strong> Cohen's d<sub>z</sub> = 9.94/3.47 = <strong>2.86</strong> — an extremely large effect. In clinical terms, patients reported approximately 10 fewer VAS points (on a 100-point scale) with the new protocol, which exceeds the widely accepted Minimal Clinically Important Difference (MCID) of 9–13 points for chronic back pain (Ostelo et al., 2008).</p>
+
+<p><strong>Step 6 — 95% CI for μ<sub>d</sub>:</strong> 9.94 ± 2.131 × 0.8675 = 9.94 ± 1.85 = <strong>[8.09, 11.79]</strong> VAS points.</p>
+
+<p><strong>Step 7 — Report:</strong> "The new physiotherapy protocol resulted in significantly lower pain scores than the standard protocol (M<sub>new</sub> = 52.1 vs. M<sub>standard</sub> = 62.0, d̄ = 9.94), t(15) = 11.46, p &lt; .001, d<sub>z</sub> = 2.86, 95% CI for mean difference [8.09, 11.79]. The improvement exceeds the established MCID of 9–13 points, confirming both statistical and clinical significance."</p>
+
+<hr>
+
+<h2>🆚 Parametric vs. Nonparametric: A Principled Comparison</h2>
 
 <table>
   <thead>
     <tr><th>Criterion</th><th>Parametric Tests</th><th>Nonparametric Tests</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Assumptions</strong></td><td>Requires normality and (usually) equal variances</td><td>Distribution-free (no shape assumptions)</td></tr>
-    <tr><td><strong>Data level</strong></td><td>Interval / ratio</td><td>Ordinal or above</td></tr>
-    <tr><td><strong>Power (when assumptions met)</strong></td><td>Higher — extracts more info per observation</td><td>Lower — wastes some information by ranking</td></tr>
-    <tr><td><strong>Power (when assumptions violated)</strong></td><td>Can be lower than nonparametric</td><td>Can be higher for heavy-tailed or skewed data</td></tr>
-    <tr><td><strong>Sample size</strong></td><td>Works well for moderate to large n</td><td>Better for very small n with non-normal data</td></tr>
-    <tr><td><strong>Asymptotic Relative Efficiency</strong></td><td>Benchmark (100%)</td><td>≥ 95.5% for many alternatives (e.g., Wilcoxon)</td></tr>
-    <tr><td><strong>Corresponding tests</strong></td><td>One-sample t, Independent t, Paired t, ANOVA</td><td>Sign test, Mann-Whitney, Wilcoxon, Kruskal-Wallis</td></tr>
+    <tr><td><strong>Distributional assumptions</strong></td><td>Requires normality (or large n for CLT) and usually equal variances</td><td>Distribution-free — no assumptions about population shape</td></tr>
+    <tr><td><strong>Measurement level required</strong></td><td>Interval or ratio scale</td><td>Ordinal or above</td></tr>
+    <tr><td><strong>Power (when assumptions met)</strong></td><td>Maximum — extracts the most information per observation</td><td>Slightly lower — discards some information by converting data to ranks</td></tr>
+    <tr><td><strong>Power (when assumptions violated)</strong></td><td>Can be substantially lower than nonparametric alternatives</td><td>Can be higher for heavy-tailed, skewed, or contaminated data</td></tr>
+    <tr><td><strong>Sample size requirements</strong></td><td>Works well for moderate to large n; requires n ≥ 25–30 for robustness to non-normality</td><td>Valid for any sample size; especially valuable for very small n with non-normal data</td></tr>
+    <tr><td><strong>Outlier sensitivity</strong></td><td>Highly sensitive — a single extreme value can dramatically shift the mean and inflate the variance</td><td>Robust — ranks are naturally resistant to outliers</td></tr>
+    <tr><td><strong>Asymptotic Relative Efficiency (ARE)</strong></td><td>Benchmark (100%)</td><td>≥ 86.4% for any continuous distribution; ≈ 95.5% for normal data (Lehmann, 2006)</td></tr>
+    <tr><td><strong>Confidence intervals &amp; effect sizes</strong></td><td>Natural, widely understood, and easy to compute</td><td>Available but less intuitive (Hodges-Lehmann estimator; rank-biserial r)</td></tr>
+    <tr><td><strong>Corresponding test pairs</strong></td><td>One-sample t → Paired t → Independent t → One-way ANOVA</td><td>Sign test → Wilcoxon signed-rank → Mann-Whitney U → Kruskal-Wallis</td></tr>
   </tbody>
 </table>
 
-<blockquote>📊 <strong>The Asymptotic Relative Efficiency (ARE):</strong> The Wilcoxon rank-sum test has an ARE of at least 0.864 relative to the t-test for <em>any</em> continuous distribution, and exactly 3/π ≈ 0.955 for normal data (Lehmann, 2006). This means that even under normality — the best-case scenario for the t-test — the Wilcoxon test needs only about 5% more observations to achieve the same power. For heavy-tailed distributions, the Wilcoxon can be <em>substantially more powerful</em> than the t-test.</blockquote>
+<blockquote>📊 <strong>The Asymptotic Relative Efficiency (ARE) — A Key Concept:</strong> The Wilcoxon rank-sum test has an ARE of at least 0.864 relative to the t-test for <em>any</em> continuous distribution, and exactly 3/π ≈ 0.955 for normal data (Lehmann, 2006). This means that even under normality — the best-case scenario for the t-test — the Wilcoxon needs only about 5% more observations to achieve the same power. For heavy-tailed distributions (e.g., the double-exponential or Cauchy), the Wilcoxon can be <em>infinitely more powerful</em> than the t-test. This remarkable property makes the Wilcoxon test a surprisingly competitive alternative even when normality holds, and a clearly superior choice when it does not.</blockquote>
 
 <hr>
 
-<h2>✅ Best Practices and Reporting Guidelines</h2>
+<h2>⚠️ Common Mistakes and Misconceptions</h2>
 
 <table>
   <thead>
-    <tr><th>Practice</th><th>Recommendation</th></tr>
+    <tr><th>#</th><th>Misconception</th><th>Reality</th></tr>
   </thead>
   <tbody>
-    <tr><td>🔧 <strong>Default to Welch's t-test</strong></td><td>Use Welch's version for independent samples; it's robust regardless of variance equality (Delacre et al., 2017)</td></tr>
-    <tr><td>📐 <strong>Always check assumptions</strong></td><td>Use Q-Q plots and Shapiro-Wilk; report results</td></tr>
-    <tr><td>📏 <strong>Report effect sizes</strong></td><td>Cohen's d or Hedges' g with 95% CI (APA, 2010)</td></tr>
-    <tr><td>🔢 <strong>Report exact p-values</strong></td><td>Write p = .038, not p &lt; .05; report to 3 decimal places</td></tr>
-    <tr><td>📊 <strong>Include descriptives</strong></td><td>Means, SDs, sample sizes for all groups</td></tr>
-    <tr><td>🔗 <strong>Include confidence intervals</strong></td><td>95% CI for the mean difference completes the picture</td></tr>
-    <tr><td>⚠️ <strong>State one-tailed vs. two-tailed</strong></td><td>Justify one-tailed tests <em>a priori</em>; default to two-tailed</td></tr>
+    <tr><td>1</td><td><strong>"Always test normality first, then decide which test to use"</strong></td><td>This conditional procedure inflates Type I error. For two-group comparisons, use Welch's t-test by default regardless of normality test results (Delacre et al., 2017). For clearly non-normal small samples, decide <em>a priori</em> based on research knowledge.</td></tr>
+    <tr><td>2</td><td><strong>"p &lt; 0.05 means the result is important"</strong></td><td>Statistical significance ≠ practical importance. With large enough n, even trivially small effects become significant. Always interpret effect sizes alongside p-values (Cohen, 1988).</td></tr>
+    <tr><td>3</td><td><strong>"p &gt; 0.05 means there is no effect"</strong></td><td>Absence of evidence ≠ evidence of absence. A non-significant result could reflect a true null, or simply insufficient power. Report confidence intervals to show what effect sizes remain plausible (Cumming, 2014).</td></tr>
+    <tr><td>4</td><td><strong>"Normality must be tested on the raw data"</strong></td><td>The t-test actually requires normality of the <em>sampling distribution of the mean</em> (or of the differences for paired tests), not of the individual observations. The CLT ensures this for moderate n regardless of population shape.</td></tr>
+    <tr><td>5</td><td><strong>"Two significant t-tests prove a significant difference between the two comparisons"</strong></td><td>Comparing two separate p-values is invalid. If Group A differs significantly from control but Group B does not, this does NOT mean A and B differ from each other. You must directly compare A vs. B (Gelman &amp; Stern, 2006: "the difference between 'significant' and 'not significant' is not itself statistically significant").</td></tr>
+    <tr><td>6</td><td><strong>"Running multiple t-tests is fine when comparing many groups"</strong></td><td>Multiple t-tests inflate the family-wise Type I error rate exponentially. With k groups, there are k(k−1)/2 pairwise comparisons, and the probability of at least one false positive is 1 − (1−α)<sup>m</sup>. For 5 groups (10 comparisons), this reaches 40%. Use ANOVA with post-hoc corrections instead (Bonferroni, Tukey, etc.).</td></tr>
+    <tr><td>7</td><td><strong>"Paired and independent t-tests are interchangeable"</strong></td><td>Using an independent t-test on paired data wastes the within-subject correlation, dramatically reducing power. Conversely, using a paired t-test on independent data is invalid and typically impossible (since there is no natural pairing).</td></tr>
+    <tr><td>8</td><td><strong>"Effect sizes are only needed for significant results"</strong></td><td>Effect sizes should be reported for <em>all</em> analyses, significant or not. For non-significant results, the effect size and its CI show what the data can and cannot rule out — essential for interpreting null findings and for future meta-analyses (APA, 2020).</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>💻 Software Implementation</h2>
+
+<p>Every major statistical software package implements the parametric tests discussed in this chapter. Here are the most common implementations for reference:</p>
+
+<table>
+  <thead>
+    <tr><th>Software</th><th>One-sample t</th><th>Independent t (Welch)</th><th>Paired t</th><th>z-test for proportions</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>R</strong></td><td><code>t.test(x, mu = μ₀)</code></td><td><code>t.test(x, y)</code> (Welch is default)</td><td><code>t.test(x, y, paired = TRUE)</code></td><td><code>prop.test(x, n, p = p₀)</code></td></tr>
+    <tr><td><strong>Python (SciPy)</strong></td><td><code>ttest_1samp(x, μ₀)</code></td><td><code>ttest_ind(x, y, equal_var=False)</code></td><td><code>ttest_rel(x, y)</code></td><td><code>proportions_ztest()</code> (statsmodels)</td></tr>
+    <tr><td><strong>SPSS</strong></td><td>Analyze → Compare Means → One-Sample T Test</td><td>Analyze → Compare Means → Independent-Samples T Test</td><td>Analyze → Compare Means → Paired-Samples T Test</td><td>Analyze → Nonparametric → Binomial (or manual z)</td></tr>
+    <tr><td><strong>JASP / jamovi</strong></td><td>T-Tests → One Sample T-Test</td><td>T-Tests → Independent Samples T-Test (Welch default)</td><td>T-Tests → Paired Samples T-Test</td><td>Frequencies → Binomial Test</td></tr>
+    <tr><td><strong>Excel</strong></td><td><code>=T.TEST(range, μ₀, tails, type)</code></td><td><code>=T.TEST(range1, range2, tails, 3)</code> (type 3 = Welch)</td><td><code>=T.TEST(range1, range2, tails, 1)</code></td><td>Manual formula or Analysis ToolPak</td></tr>
+  </tbody>
+</table>
+
+<blockquote>💻 <strong>Important Note on R:</strong> Since R version 2.0 (2004), the default behavior of <code>t.test(x, y)</code> is to perform Welch's t-test (var.equal = FALSE). This reflects the statistical community's consensus that Welch's version should be the standard. To explicitly request Student's pooled-variance test, use <code>t.test(x, y, var.equal = TRUE)</code>. For power analysis, use the 'pwr' package: <code>pwr.t.test(d = 0.5, power = 0.80, sig.level = 0.05, type = "two.sample")</code> returns the required sample size per group.</blockquote>
+
+<hr>
+
+<h2>✅ Best Practices and Reporting Guidelines (APA 7th Edition)</h2>
+
+<table>
+  <thead>
+    <tr><th>Practice</th><th>Recommendation</th><th>Rationale</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔧 <strong>Default to Welch's t-test</strong></td><td>Use Welch's version for all independent-samples comparisons; Student's pooled test only when there is strong theoretical justification for equal variances</td><td>Welch's controls Type I error regardless of variance equality and loses negligible power when variances are equal (Delacre et al., 2017)</td></tr>
+    <tr><td>📐 <strong>Always check and report assumptions</strong></td><td>Use Q-Q plots, Shapiro-Wilk, and Levene's/Brown-Forsythe; report results in the methods section</td><td>Transparency and reproducibility; allows readers to evaluate the appropriateness of the analysis</td></tr>
+    <tr><td>📏 <strong>Report effect sizes with CIs</strong></td><td>Cohen's d (or Hedges' g for small n) with 95% confidence interval</td><td>Effect sizes quantify practical importance; CIs convey estimation precision (APA, 2020)</td></tr>
+    <tr><td>🔢 <strong>Report exact p-values</strong></td><td>Write p = .038, not p &lt; .05; report to 3 decimal places; use p &lt; .001 for very small values</td><td>Exact p-values allow readers to apply their own significance thresholds and enable meta-analysis</td></tr>
+    <tr><td>📊 <strong>Include full descriptive statistics</strong></td><td>Means, standard deviations, and sample sizes for all groups</td><td>Essential for replication, meta-analysis, and reader interpretation</td></tr>
+    <tr><td>🔗 <strong>Include confidence intervals</strong></td><td>95% CI for the mean difference — this is the most informative single number in the analysis</td><td>CIs combine estimation and hypothesis testing in a single measure; they show both the direction and plausible magnitude of the effect</td></tr>
+    <tr><td>⚠️ <strong>Justify one-tailed tests a priori</strong></td><td>Default to two-tailed; one-tailed tests require strong prior justification stated <em>before</em> data collection</td><td>One-tailed tests are more powerful but only in one direction; post-hoc one-tailed testing is a form of p-hacking</td></tr>
+    <tr><td>⚡ <strong>Conduct a priori power analysis</strong></td><td>Determine required sample size before data collection using G*Power, R 'pwr', or equivalent tools</td><td>Ensures the study has a reasonable chance of detecting the expected effect; prevents wasted resources on underpowered studies (Button et al., 2013)</td></tr>
   </tbody>
 </table>
 
@@ -352,25 +564,39 @@ t = (28.5 − 32.1) / √(4.2²/20 + 5.1²/20) = −3.6 / √(0.882 + 1.3005) = 
 
 <h2>🧩 Summary: The Power and Responsibility of Parametric Tests</h2>
 
-<p>Parametric tests — the z-test, Student's t-test, and Welch's t-test — are the foundational tools of statistical comparison. Born from Gosset's practical need to evaluate beer ingredients with small samples, they have grown into the most widely applied methods across medicine, psychology, agriculture, engineering, and virtually every empirical science. Their power comes from leveraging distributional assumptions to extract maximum information from data — but with that power comes the responsibility to verify those assumptions and to report results completely, with effect sizes and confidence intervals alongside significance tests.</p>
+<p>Parametric tests — the z-test, Student's t-test, Welch's t-test, and the z-test for proportions — are the foundational tools of statistical comparison. Born from William Sealy Gosset's practical need to evaluate beer ingredients with samples of 4 or 5 observations at the Guinness brewery in Dublin, formalized by Ronald Fisher's mathematical genius at the Rothamsted Experimental Station, and refined by Bernard Welch's solution to the Behrens-Fisher problem at Oxford, they have grown into the most widely applied methods across medicine, psychology, agriculture, engineering, ecology, and virtually every empirical science on every continent. Their power comes from leveraging distributional assumptions to extract maximum information from data — but with that power comes the responsibility to verify those assumptions and to report results completely, with effect sizes and confidence intervals alongside significance tests.</p>
 
-<p>The arc from Gosset's Dublin brewery to modern meta-analyses spanning millions of observations is a testament to the enduring brilliance of a simple idea: that even a few carefully collected measurements can tell us something meaningful about the world, as long as we account honestly for the uncertainty inherent in small samples.</p>
+<p>The modern statistician's toolkit recognizes that the era of blind adherence to "p &lt; 0.05" is ending. The 2019 call by 800+ scientists in <em>Nature</em> to retire statistical significance (Amrhein, Greenland, &amp; McShane, 2019), the ASA's 2016 statement on p-values (Wasserstein &amp; Lazar, 2016), and the replication crisis across multiple disciplines have converged on a clear message: report the complete statistical story — test statistics, exact p-values, effect sizes, confidence intervals, power analyses — and let readers draw their own informed conclusions. Parametric tests remain the most powerful tools for this task when their assumptions are met; nonparametric alternatives stand ready when they are not; and modern robust methods (bootstrap, permutation tests, trimmed means) occupy an increasingly important middle ground.</p>
+
+<p>The arc from Gosset's Dublin brewery to modern multi-site clinical trials spanning thousands of patients across dozens of countries is a testament to the enduring brilliance of a simple idea: that even a few carefully collected measurements can tell us something meaningful about the world — as long as we account honestly for the uncertainty inherent in small samples, report our findings transparently, and resist the temptation to mistake statistical significance for scientific truth.</p>
 
 <hr>
 
 <h2>📚 References</h2>
 
-<p>American Psychological Association. (2010). <em>Publication manual of the American Psychological Association</em> (6th ed.). Author.</p>
+<p>American Psychological Association. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.). Author. https://doi.org/10.1037/0000165-000</p>
+
+<p>Amrhein, V., Greenland, S., &amp; McShane, B. (2019). Scientists rise up against statistical significance. <em>Nature</em>, <em>567</em>(7748), 305–307. https://doi.org/10.1038/d41586-019-00857-9</p>
 
 <p>Boneau, C. A. (1960). The effects of violations of assumptions underlying the t test. <em>Psychological Bulletin</em>, <em>57</em>(1), 49–64. https://doi.org/10.1037/h0041412</p>
+
+<p>Button, K. S., Ioannidis, J. P. A., Mokrysz, C., Nosek, B. A., Flint, J., Robinson, E. S. J., &amp; Munafò, M. R. (2013). Power failure: Why small sample size undermines the reliability of neuroscience. <em>Nature Reviews Neuroscience</em>, <em>14</em>(5), 365–376. https://doi.org/10.1038/nrn3475</p>
 
 <p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
 
 <p>Cumming, G. (2014). The new statistics: Why and how. <em>Psychological Science</em>, <em>25</em>(1), 7–29. https://doi.org/10.1177/0956797613504966</p>
 
+<p>Curran, P. J., West, S. G., &amp; Finch, J. F. (1996). The robustness of test statistics to nonnormality and specification error in confirmatory factor analysis. <em>Psychological Methods</em>, <em>1</em>(1), 16–29. https://doi.org/10.1037/1082-989X.1.1.16</p>
+
 <p>Delacre, M., Lakens, D., &amp; Leys, C. (2017). Why psychologists should by default use Welch's t-test instead of Student's t-test. <em>International Review of Social Psychology</em>, <em>30</em>(1), 92–101. https://doi.org/10.5334/irsp.82</p>
 
+<p>Faul, F., Erdfelder, E., Lang, A.-G., &amp; Buchner, A. (2007). G*Power 3: A flexible statistical power analysis program for the social, behavioral, and biomedical sciences. <em>Behavior Research Methods</em>, <em>39</em>(2), 175–191. https://doi.org/10.3758/BF03193146</p>
+
 <p>Fisher, R. A. (1925). <em>Statistical methods for research workers</em>. Oliver and Boyd.</p>
+
+<p>Gelman, A., &amp; Carlin, J. (2014). Beyond power calculations: Assessing Type S (sign) and Type M (magnitude) errors. <em>Perspectives on Psychological Science</em>, <em>9</em>(6), 641–651. https://doi.org/10.1177/1745691614551642</p>
+
+<p>Gelman, A., &amp; Stern, H. (2006). The difference between "significant" and "not significant" is not itself statistically significant. <em>The American Statistician</em>, <em>60</em>(4), 328–331. https://doi.org/10.1198/000313006X152649</p>
 
 <p>Glass, G. V., Peckham, P. D., &amp; Sanders, J. R. (1972). Consequences of failure to meet assumptions underlying the fixed effects analyses of variance and covariance. <em>Review of Educational Research</em>, <em>42</em>(3), 237–288. https://doi.org/10.3102/00346543042003237</p>
 
@@ -380,10 +606,24 @@ t = (28.5 − 32.1) / √(4.2²/20 + 5.1²/20) = −3.6 / √(0.882 + 1.3005) = 
 
 <p>Levene, H. (1960). Robust tests for equality of variances. In I. Olkin (Ed.), <em>Contributions to probability and statistics</em> (pp. 278–292). Stanford University Press.</p>
 
+<p>Lix, L. M., Keselman, J. C., &amp; Keselman, H. J. (1996). Consequences of assumption violations revisited: A quantitative review of alternatives to the one-way analysis of variance F test. <em>Review of Educational Research</em>, <em>66</em>(4), 579–619. https://doi.org/10.3102/00346543066004579</p>
+
+<p>Ostelo, R. W. J. G., Deyo, R. A., Stratford, P., Waddell, G., Croft, P., Von Korff, M., ... &amp; de Vet, H. C. (2008). Interpreting change scores for pain and functional status in low back pain: Towards international consensus regarding minimal important change. <em>Spine</em>, <em>33</em>(1), 90–94. https://doi.org/10.1097/BRS.0b013e31815e3a10</p>
+
+<p>Razali, N. M., &amp; Wah, Y. B. (2011). Power comparisons of Shapiro-Wilk, Kolmogorov-Smirnov, Lilliefors and Anderson-Darling tests. <em>Journal of Statistical Modeling and Analytics</em>, <em>2</em>(1), 21–33.</p>
+
+<p>Scariano, S. M., &amp; Davenport, J. M. (1987). The effects of violations of independence assumptions in the one-way ANOVA. <em>The American Statistician</em>, <em>41</em>(2), 123–129. https://doi.org/10.2307/2684224</p>
+
+<p>Schucany, W. R., &amp; Ng, H. K. T. (2006). Preliminary goodness-of-fit tests for normality do not validate the one-sample Student t. <em>Communications in Statistics—Theory and Methods</em>, <em>35</em>(12), 2275–2286. https://doi.org/10.1080/03610920600853308</p>
+
 <p>Sheskin, D. J. (2011). <em>Handbook of parametric and nonparametric statistical procedures</em> (5th ed.). Chapman &amp; Hall/CRC.</p>
 
 <p>Student. (1908). The probable error of a mean. <em>Biometrika</em>, <em>6</em>(1), 1–25. https://doi.org/10.1093/biomet/6.1.1</p>
 
+<p>Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA statement on p-values: Context, process, and purpose. <em>The American Statistician</em>, <em>70</em>(2), 129–133. https://doi.org/10.1080/00031305.2016.1154108</p>
+
 <p>Welch, B. L. (1947). The generalization of "Student's" problem when several different population variances are involved. <em>Biometrika</em>, <em>34</em>(1–2), 28–35. https://doi.org/10.1093/biomet/34.1-2.28</p>
+
+<p>Wetzels, R., Matzke, D., Lee, M. D., Rouder, J. N., Iverson, G. J., &amp; Wagenmakers, E.-J. (2011). Statistical evidence in experimental psychology: An empirical comparison using 855 t tests. <em>Perspectives on Psychological Science</em>, <em>6</em>(3), 291–298. https://doi.org/10.1177/1745691611406923</p>
 
 <p>Wilcox, R. R. (2017). <em>Introduction to robust estimation and hypothesis testing</em> (4th ed.). Academic Press.</p>

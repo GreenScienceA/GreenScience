@@ -1,257 +1,632 @@
-<h2>📋 Tests Non Paramétriques : Quand vos données refusent de suivre les règles</h2>
+<h2>📋 Tests non paramétriques : La libération de la statistique du joug de la courbe normale</h2>
 
-<p>Imaginez que vous êtes un chercheur agricole à Batna, en Algérie, enquêtant auprès de 15 petits agriculteurs sur leur satisfaction vis-à-vis d'un nouveau système d'irrigation goutte à goutte. Chaque agriculteur note sa satisfaction sur une échelle de 1 (très insatisfait) à 5 (très satisfait). Vous voulez savoir : la satisfaction diffère-t-elle entre les agriculteurs ayant reçu une formation et ceux qui n'en ont pas reçu ? Vous attrapez instinctivement un test t — puis vous hésitez. Vos données sont des rangs ordinaux, pas des mesures continues. Avec seulement 7 agriculteurs dans un groupe et 8 dans l'autre, vous ne pouvez pas présumer de la normalité. Les variances semblent très différentes. Toutes les hypothèses paramétriques sont violées. Que faites-vous ?</p>
+<p>En 1956, à l'apogée de l'ère paramétrique — alors que la distribution normale régnait en souveraine incontestée de l'inférence statistique — deux mathématiciens de l'Université de Californie à Berkeley publièrent un article qui allait altérer de manière permanente le paysage de la statistique appliquée. <strong>Joseph Hodges Jr.</strong> et <strong>Erich Lehmann</strong> démontrèrent un théorème si surprenant que les statisticiens établis refusèrent d'abord d'y croire : le test de somme des rangs de Wilcoxon — une méthode simple qui écarte toute information sur les magnitudes réelles des observations pour ne travailler qu'avec leurs rangs ordinaux — <em>ne perd jamais plus de 4,5 % d'efficacité par rapport au test t de Student optimal, même lorsque les hypothèses du test t sont parfaitement satisfaites</em>. Et lorsque ces hypothèses sont violées — lorsque les données sont asymétriques, contaminées par des valeurs aberrantes ou issues de distributions à queues lourdes — le test de rangs peut être non seulement compétitif mais <em>infiniment plus puissant</em> que son rival paramétrique (Hodges &amp; Lehmann, 1956). Ce résultat, que le statisticien <strong>Bradley</strong> (1968) qualifia de « théorème le plus remarquable de la statistique non paramétrique », fit voler en éclats la croyance dominante selon laquelle les méthodes libres de distribution n'étaient que de faibles substituts de l'analyse paramétrique « propre ». Il révéla que l'hypothèse de normalité — loin d'être une source de puissance statistique — constituait souvent une vulnérabilité, et que les méthodes qui <em>refusent</em> de formuler des hypothèses distributionnelles peuvent être plus robustes, plus fiables et fréquemment plus puissantes que celles qui en formulent.</p>
 
-<p>Vous utilisez un <strong>test non paramétrique</strong> — une classe de méthodes statistiques qui font des hypothèses minimales sur la distribution de la population sous-jacente. Ces tests n'exigent pas que vos données soient normalement distribuées, ne demandent pas l'égalité des variances et peuvent traiter des données ordinales, classées ou fortement asymétriques avec rigueur et élégance. Ce ne sont ni un compromis ni un « Plan B » ; c'est une philosophie statistique distincte et puissante avec des fondements mathématiques profonds, une efficacité prouvée et une histoire riche remontant aux années 1900.</p>
+<p>Les tests non paramétriques (également appelés <em>tests libres de distribution</em>) sont des méthodes statistiques qui ne formulent aucune hypothèse sur la forme de la distribution de la population dont les données sont tirées. Là où les tests paramétriques comme le test t et l'ANOVA supposent que les populations suivent une distribution normale avec des variances égales, les tests non paramétriques remplacent les valeurs brutes par leurs <em>rangs</em> — transformant la question de « quelle est la différence entre les moyennes ? » en « quelle est la différence entre les positions ordinales ? ». Cette substitution, d'apparence simple, accomplit quelque chose de profond : elle rend les tests valides pour <em>toute</em> distribution continue, applicables aux données ordinales que les méthodes paramétriques ne peuvent pas traiter, et immunisés contre les distorsions causées par les valeurs aberrantes et l'asymétrie qui affectent les données du monde réel (Lehmann &amp; Romano, 2005).</p>
 
-<blockquote>💡 <strong>L'idée clé :</strong> Les tests paramétriques sont comme des costumes sur mesure — ils s'ajustent parfaitement quand le corps (les données) correspond au patron (les hypothèses). Les tests non paramétriques sont comme des vêtements élastiques — ils s'adaptent à presque toute morphologie. Vous sacrifiez un peu de précision quand le costume aurait parfaitement convenu, mais vous gagnez la capacité de travailler de manière fiable avec des données de presque n'importe quelle forme distributionnelle.</blockquote>
+<blockquote>💡 <strong>L'idée fondamentale :</strong> Les tests paramétriques échangent des hypothèses contre de la puissance — en supposant la normalité, ils extraient le maximum d'information des données <em>lorsque cette hypothèse est vérifiée</em>. Les tests non paramétriques font le marché inverse : en remplaçant les valeurs brutes par des rangs, ils sacrifient une infime quantité d'information (au plus ~4,5 % dans les conditions idéales) en échange d'une <em>validité universelle</em>. Dans un monde où la normalité parfaite est une fiction mathématique plutôt qu'une réalité empirique, ce compromis est massivement favorable. Comme le grand statisticien John Tukey l'a observé : « Le meilleur avantage des tests non paramétriques est que vous n'avez pas à vous soucier de savoir si vos hypothèses sont satisfaites. Le pire inconvénient des tests paramétriques est que vous devez vous en soucier. »</blockquote>
 
 <hr>
 
 <h2>📜 Origines historiques : Du χ² de Pearson à la révolution des rangs</h2>
 
-<p>L'histoire des statistiques non paramétriques est celle d'esprits brillants qui ont remis en question le monopole de la distribution normale sur l'inférence statistique.</p>
+<h3>Le paysage intellectuel de la statistique au début du XXe siècle</h3>
 
-<p>Le plus ancien test non paramétrique précède le terme lui-même. En 1900, <strong>Karl Pearson</strong> publia un article fondateur dans le <em>Philosophical Magazine</em> introduisant le <strong>test du chi-deux (χ²) d'adéquation</strong> — une méthode qui évalue si des fréquences observées correspondent aux fréquences attendues sans supposer de distribution continue particulière (Pearson, 1900). Le statisticien Bradley Efron a qualifié cet article de « début prometteur pour un siècle merveilleux dans le domaine des statistiques » (Rao, 2002).</p>
+<p>Pour apprécier la révolution que représentent les méthodes non paramétriques, il faut comprendre le monde statistique qu'elles ont bousculé. En 1900, la <strong>distribution normale</strong> — découverte indépendamment par <strong>Abraham de Moivre</strong> (1733), <strong>Pierre-Simon Laplace</strong> (1774) et <strong>Carl Friedrich Gauss</strong> (1809) — avait acquis un statut quasi théologique dans la théorie statistique. Gauss avait montré que la distribution normale émerge naturellement dans la théorie des erreurs ; Laplace avait démontré le Théorème Central Limite établissant que les moyennes d'échantillons convergent vers la normalité indépendamment de la distribution parente ; et <strong>Adolphe Quetelet</strong> (1835) avait étendu la « courbe en cloche » aux populations humaines, proposant le célèbre concept de <em>l'homme moyen</em>. Lorsque <strong>Francis Galton</strong> (1889) publia <em>Natural Inheritance</em>, la distribution normale était si profondément enracinée dans la pensée statistique qu'il la décrivit en termes quasi mystiques, écrivant que la loi de fréquence des erreurs « aurait été personnifiée par les Grecs et déifiée, s'ils l'avaient connue ».</p>
 
-<p>En 1904, le psychologue britannique <strong>Charles Spearman</strong> proposa le <strong>coefficient de corrélation des rangs</strong> (ρ, ou « rho de Spearman »), qui mesure l'association entre deux variables en utilisant leurs rangs plutôt que leurs valeurs brutes (Spearman, 1904). C'était une percée conceptuelle : en convertissant les observations en rangs, Spearman libéra l'analyse de corrélation des hypothèses de linéarité et de normalité.</p>
+<p>Ce « culte de la distribution normale », comme l'historien <strong>Stephen Stigler</strong> (1986) le caractériserait plus tard, créa un profond angle mort intellectuel. Tout l'appareil de l'inférence classique — le <strong>test t de Student</strong> (1908), l'<strong>analyse de la variance de Fisher</strong> (1925), la corrélation de Pearson — reposait sur l'hypothèse que les données provenaient de populations normales. Lorsque cette hypothèse était satisfaite, ces méthodes étaient prouvablement optimales. Mais que se passait-il lorsqu'elle ne l'était pas ? La question était rarement posée, car le Théorème Central Limite était considéré comme un filet de sécurité universel. Pourtant, comme <strong>Geary</strong> (1947) le démontrerait finalement dans sa critique dévastatrice, le TCL garantit la normalité des <em>moyennes d'échantillons</em>, pas des observations individuelles — et de nombreuses procédures paramétriques courantes sont sensibles non seulement à la distribution des moyennes mais à la distribution des données brutes elles-mêmes.</p>
 
-<p>La révolution non paramétrique moderne s'enflamma véritablement en 1945, quand <strong>Frank Wilcoxon</strong>, chimiste physicien à l'American Cyanamid Company, publia un article remarquablement concis de quatre pages dans le <em>Biometrics Bulletin</em>. Dans ces quatre pages, il proposa à la fois le <strong>test des rangs signés</strong> (pour échantillons appariés) et le <strong>test de la somme des rangs</strong> (pour échantillons indépendants) — deux tests qui deviendraient les pierres angulaires des statistiques non paramétriques (Wilcoxon, 1945). La motivation de Wilcoxon était pratique : il était fatigué de calculer d'interminables tests t pour ses mesures de laboratoire et voulait des alternatives plus simples basées sur les rangs (Noether, 1992).</p>
+<h3>La première vague : Karl Pearson et le test du χ² (1900)</h3>
 
-<p>En 1947, <strong>Henry Mann</strong> et son étudiant <strong>Donald Ransom Whitney</strong> étendirent le test de la somme des rangs de Wilcoxon aux échantillons de tailles inégales et fournirent une analyse théorique complète, créant ce qu'on appelle maintenant le <strong>test U de Mann-Whitney</strong> (Mann &amp; Whitney, 1947). Puis en 1952, <strong>William Kruskal</strong> et <strong>W. Allen Wallis</strong> généralisèrent le test de rangs à deux échantillons aux groupes multiples, produisant le <strong>test H de Kruskal-Wallis</strong> — l'alternative non paramétrique à l'ANOVA à un facteur (Kruskal &amp; Wallis, 1952). Parallèlement, l'économiste lauréat du prix Nobel <strong>Milton Friedman</strong> avait déjà proposé un test basé sur les rangs pour les plans à mesures répétées en 1937, maintenant appelé le <strong>test de Friedman</strong> (Friedman, 1937).</p>
+<p>Le premier test statistique véritablement libre de distribution arriva à l'aube même du XXe siècle, bien que son inventeur ne l'ait pas conçu en ces termes. En 1900, <strong>Karl Pearson</strong> (1857–1936) — le fondateur imposant de la statistique mathématique, éditeur de <em>Biometrika</em> et titulaire de la chaire Galton à l'University College London — publia son article fondateur « On the Criterion That a Given System of Deviations from the Probable... » dans le <em>Philosophical Magazine</em>, introduisant le <strong>test d'ajustement du chi-deux (χ²)</strong> (Pearson, 1900). Ce fut le premier test statistique capable d'évaluer si les fréquences observées dans des catégories correspondaient aux attentes théoriques <em>sans supposer une forme distributionnelle spécifique pour les données sous-jacentes</em>. La motivation de Pearson était entièrement pratique : il voulait tester si des dés étaient équilibrés, si les rapports mendéliens se vérifiaient dans les croisements génétiques, et si les taux de mortalité observés correspondaient aux prédictions actuarielles. Son test n'exigeait que l'indépendance des observations et des effectifs attendus suffisamment grands — des conditions bien plus faibles que la normalité.</p>
 
-<blockquote>🧠 <strong>La surprise de l'efficacité :</strong> De nombreux chercheurs supposent que les tests non paramétriques sont intrinsèquement plus faibles que les tests paramétriques. Mais Hodges et Lehmann (1956) ont prouvé un résultat surprenant : l'efficacité relative asymptotique (ERA) du test de Wilcoxon par rapport au test t <em>ne descend jamais en dessous de 0,864</em>, même quand les données sont parfaitement normales — ce qui signifie que le test de Wilcoxon nécessite au maximum 16 % d'observations supplémentaires pour atteindre la même puissance. Pour les distributions non normales, le test de Wilcoxon peut être <em>infiniment</em> plus efficace que le test t.</blockquote>
+<p>Les trois variantes du test χ² — l'<strong>ajustement</strong> (comparaison des fréquences observées à une distribution théorique), le <strong>test d'indépendance</strong> (évaluation de l'association entre deux variables catégorielles dans un tableau de contingence) et le <strong>test d'homogénéité</strong> (comparaison des distributions d'une variable à travers les populations) — devinrent parmi les procédures statistiques les plus utilisées dans toute la science. <strong>Cochran</strong> (1952), dans sa revue faisant autorité, établit les conditions pratiques de validité encore enseignées aujourd'hui : tous les effectifs attendus devraient idéalement dépasser 5, avec au plus 20 % des cellules en dessous de ce seuil.</p>
+
+<h3>La corrélation de rang de Spearman : La graine d'une idée (1904)</h3>
+
+<p>Quatre ans après le χ² de Pearson, le psychologue britannique <strong>Charles Edward Spearman</strong> (1863–1945) planta la graine dont la révolution entière basée sur les rangs allait finalement germer. Dans son article de 1904 « The Proof and Measurement of Association between Two Things » dans l'<em>American Journal of Psychology</em>, Spearman proposa une méthode pour mesurer la corrélation entre deux variables sans exiger la normalité : remplacer les valeurs brutes par leurs <em>rangs</em>, puis calculer la corrélation produit-moment de Pearson sur ces rangs (Spearman, 1904). La motivation de Spearman était profondément pratique — il étudiait la corrélation entre les scores d'enfants à différents tests d'intelligence, et ces scores étaient souvent des évaluations ordinales attribuées par les enseignants plutôt que des mesures d'intervalle précises. Le coefficient de corrélation de Pearson exigeait à la fois la normalité et une mesure au niveau intervalle ; la corrélation de rang de Spearman n'exigeait ni l'une ni l'autre.</p>
+
+<p>La percée conceptuelle intégrée dans la méthode de Spearman — le fait que la <em>transformation en rangs</em> puisse libérer une procédure statistique de ses hypothèses distributionnelles — était bien plus importante que toute mesure de corrélation individuelle. Il faudrait quatre décennies pour que cette graine germe en une théorie complète, mais lorsque ce fut le cas, elle transforma la statistique.</p>
+
+<h3>La révolution des rangs : Frank Wilcoxon (1945)</h3>
+
+<p>La véritable révolution de la statistique non paramétrique débuta non pas dans un département universitaire mais dans un <strong>laboratoire de chimie industrielle</strong>. <strong>Frank Wilcoxon</strong> (1892–1965) était chimiste physicien à l'American Cyanamid Company à Stamford, Connecticut. Né dans le comté de Cork en Irlande, élevé aux États-Unis et formé à Rutgers (chimie) puis Cornell (chimie physique), Wilcoxon passa sa carrière à concevoir et analyser des expériences sur les insecticides, les fongicides et les régulateurs de croissance végétale. Son travail quotidien l'obligeait à comparer l'efficacité de formulations chimiques — et il était perpétuellement frustré par les calculs laborieux requis par les tests t, la normalité douteuse de ses petits échantillons de laboratoire et l'influence déformante des valeurs extrêmes occasionnelles causées par la contamination expérimentale ou les dysfonctionnements d'équipement (Noether, 1992).</p>
+
+<p>En 1945, Wilcoxon publia un article de trois pages dans <em>Biometrics Bulletin</em> — l'un des articles les plus courts et les plus conséquents de l'histoire de la statistique — intitulé « Individual Comparisons by Ranking Methods » (Wilcoxon, 1945). Dans cet article d'apparence modeste, il proposa deux tests : le <strong>test de la somme des rangs</strong> pour comparer deux échantillons indépendants et le <strong>test des rangs signés</strong> pour les échantillons appariés. Les deux méthodes remplaçaient les données brutes par des rangs et calculaient les statistiques de test à partir de ces seuls rangs. La motivation de Wilcoxon était entièrement pratique — il voulait des tests computationnellement simples, libres d'hypothèses distributionnelles et résistants aux valeurs aberrantes qui affligeaient ses données de laboratoire. Comme <strong>Noether</strong> (1992) l'écrivit dans son hommage rétrospectif, Wilcoxon « n'aurait jamais pu imaginer que ces deux techniques deviendraient les pierres angulaires d'une branche entièrement nouvelle de la statistique ».</p>
+
+<h3>L'expansion de la révolution (1947–1956)</h3>
+
+<p>L'article de Wilcoxon de 1945 déclencha une réaction en chaîne de développements théoriques qui allait occuper les meilleurs statisticiens mathématiciens pendant les deux décennies suivantes :</p>
+
+<p><strong>Mann et Whitney (1947)</strong> développèrent indépendamment une formulation mathématiquement équivalente du test de la somme des rangs qui s'étendait naturellement aux tailles d'échantillons inégales et fournissait une interprétation probabiliste élégante : la statistique <em>U</em> égale le nombre de fois qu'une observation du Groupe 1 précède une observation du Groupe 2 dans le classement combiné. Leur article, publié dans les <em>Annals of Mathematical Statistics</em>, établit les fondements théoriques formels que l'article pratique de Wilcoxon n'avait pas fournis (Mann &amp; Whitney, 1947).</p>
+
+<p><strong>Milton Friedman (1937)</strong> — le même économiste qui remporterait plus tard le prix Nobel d'économie en 1976 pour ses travaux sur la théorie monétaire — avait en fait <em>précédé</em> Wilcoxon en développant une alternative basée sur les rangs à l'ANOVA à deux facteurs pour les dispositifs à mesures répétées. Son test, conçu pour analyser les classements de préférence des consommateurs, parut dans le <em>Journal of the American Statistical Association</em> (Friedman, 1937).</p>
+
+<p><strong>William Kruskal et W. Allen Wallis (1952)</strong> de l'Université de Chicago généralisèrent le test de rangs à deux échantillons à <em>k</em> groupes indépendants, créant l'analogue non paramétrique de l'ANOVA à un facteur. Leur test H, publié dans <em>JASA</em>, compléta la boîte à outils de base en fournissant une méthode libre de distribution pour les comparaisons multi-groupes (Kruskal &amp; Wallis, 1952).</p>
+
+<p>La pierre de voûte théorique arriva avec l'article de <strong>Hodges et Lehmann</strong> de 1956 sur l'<strong>efficacité relative asymptotique (ERA)</strong>, qui prouva que les tests de rangs paient un prix étonnamment faible — au plus 4,5 % sous normalité — pour leur liberté vis-à-vis des hypothèses distributionnelles, tout en gagnant des avantages potentiellement infinis lorsque ces hypothèses échouent (Hodges &amp; Lehmann, 1956). Ce seul théorème transforma les méthodes non paramétriques de « solutions de second choix » en procédures légitimement prioritaires.</p>
+
+<blockquote>🧠 <strong>Le don d'un chimiste à la statistique :</strong> Frank Wilcoxon n'était pas statisticien de formation — c'était un chimiste physicien qui avait besoin d'outils pratiques pour analyser des données d'insecticides. Son article de 1945 ne faisait que trois pages, ne contenait aucune preuve formelle, et était motivé uniquement par le désir de simplicité computationnelle. Pourtant, il catalysa un domaine entier. Comme Noether (1992) le rappela : « Rarement un article aussi court a eu un impact aussi profond sur la théorie et la pratique statistiques. » Wilcoxon n'occupa jamais de poste universitaire, ne reçut aucun prix statistique majeur de son vivant et publia la plupart de ses travaux dans des revues de chimie appliquée — pourtant il est désormais reconnu comme l'une des figures les plus influentes de la statistique du XXe siècle.</blockquote>
 
 <hr>
 
-<h2>🔬 Le principe fondamental : Les rangs plutôt que les valeurs brutes</h2>
+<h2>🔬 Le principe fondamental : Pourquoi les rangs fonctionnent</h2>
 
-<p>L'intuition fondamentale derrière la plupart des tests non paramétriques est d'une simplicité trompeuse : <strong>remplacer chaque observation par son rang</strong> dans l'échantillon combiné, puis effectuer les calculs sur ces rangs plutôt que sur les données originales.</p>
+<h3>La transformation en rangs : Des magnitudes aux positions ordinales</h3>
+
+<p>L'intuition fondamentale de la statistique non paramétrique est d'une simplicité désarmante mais d'une profondeur mathématique remarquable : <strong>remplacer chaque valeur de donnée par son rang dans l'échantillon ordonné</strong>. Considérons le jeu de données : {2,1 ; 5,7 ; 3,4 ; 89,2 ; 4,0}. La valeur 89,2 est une valeur aberrante extrême — peut-être une mesure contaminée, une erreur de transcription ou une observation extrême authentique — qui déformerait gravement toute analyse paramétrique fondée sur les moyennes et les variances. En rangs, cependant, le jeu de données devient : {1, 4, 2, 5, 3}. La valeur aberrante reste la plus grande observation (rang 5), mais sa magnitude extrême a été neutralisée. Que la plus grande valeur soit 5,8 ou 89,2 ou 10 000, elle reçoit le rang 5 dans tous les cas. C'est l'essence de la <strong>robustesse</strong> — le test répond à l'<em>ordonnancement</em> des observations, non à leurs <em>magnitudes</em>.</p>
+
+<h3>Trois propriétés qui rendent les rangs puissants</h3>
+
+<p><strong>Propriété 1 : Liberté distributionnelle.</strong> Sous l'hypothèse nulle d'absence de différence entre groupes, les rangs constituent une permutation aléatoire des entiers de 1 à <em>N</em> — et ceci est vrai quelle que soit la distribution dont proviennent les données : normale, exponentielle, de Cauchy, uniforme ou toute autre distribution continue. La distribution sous H₀ de toute statistique de test basée sur les rangs dépend <em>uniquement des tailles d'échantillons</em>, jamais de la forme de la distribution parente. Cela signifie que le taux d'erreur de type I (la probabilité d'un faux positif) est exactement contrôlé au niveau nominal pour toute distribution continue possible — une garantie qu'aucun test paramétrique ne peut offrir (Lehmann &amp; Romano, 2005). Formellement, si l'hypothèse nulle est que deux groupes proviennent de la même distribution continue <em>F</em>, alors la probabilité de tout arrangement particulier des rangs est 1/<em>N</em>! pour tout <em>F</em> — les rangs sont <strong>ancillaires</strong> par rapport à la distribution, c'est pourquoi les tests de rangs atteignent exactement le niveau α sans connaître <em>F</em>.</p>
+
+<p><strong>Propriété 2 : Robustesse aux valeurs aberrantes.</strong> Puisque les rangs compriment les valeurs extrêmes en positions ordinales, une valeur aberrante 10 fois plus grande que l'observation suivante a exactement la même influence qu'une valeur 1,01 fois plus grande — toutes deux reçoivent le même rang. Cela rend les tests de rangs idéaux pour les données « contaminées », qui sont bien plus courantes en pratique que ne le suggèrent les présentations des manuels. Dans une étude Monte Carlo marquante, <strong>Blair et Higgins</strong> (1980) montrèrent que même 5 à 10 % de contamination d'une distribution par ailleurs normale peut faire perdre au test t entre 50 et 75 % de sa puissance, tandis que le test de Wilcoxon ne subit pratiquement aucune perte.</p>
+
+<p><strong>Propriété 3 : Applicabilité aux données ordinales.</strong> De nombreuses variables en sciences de la santé, sciences sociales et recherche environnementale sont intrinsèquement ordinales : échelles de douleur (aucune/légère/modérée/sévère), réponses de type Likert (fortement en désaccord à fortement en accord), évaluations de la qualité des sols, indices de condition écologique et scores de gravité de maladie. Les tests basés sur les rangs fonctionnent nativement avec ces données car ils n'exigent que la possibilité d'ordonner significativement les observations — et non que les intervalles entre catégories soient égaux. Appliquer des tests paramétriques à des données ordinales requiert l'hypothèse non vérifiable et souvent invraisemblable que la différence entre « léger » et « modéré » égale la différence entre « modéré » et « sévère » (Conover, 1999).</p>
+
+<h3>Traitement des ex æquo</h3>
+
+<p>Lorsque deux ou plusieurs observations partagent la même valeur, on leur attribue la <strong>moyenne</strong> (rang moyen) des rangs qu'elles auraient occupés. Par exemple, si les 3e et 4e plus petites valeurs sont égales, toutes deux reçoivent le rang (3 + 4)/2 = 3,5. Les ex æquo réduisent la variation entre les rangs et diminuent par conséquent le pouvoir discriminant des tests de rangs. Lorsque les ex æquo sont nombreux, une <strong>correction de continuité</strong> doit être appliquée à la statistique de test. Pour les tests de Mann-Whitney et de Kruskal-Wallis, la formule de variance corrigée divise par un facteur tenant compte du nombre et de la taille des groupes d'ex æquo (Conover, 1999). En pratique, les ex æquo ne sont rarement problématiques que si les données contiennent un très petit nombre de valeurs distinctes — ce qui est un signal que l'échelle de mesure peut être trop grossière pour l'analyse.</p>
+
+<hr>
+
+<h2>🗺️ La carte complète : Correspondance paramétrique → non paramétrique</h2>
+
+<p>Chaque test paramétrique majeur possède un homologue non paramétrique. Comprendre cette correspondance est essentiel pour choisir le test approprié dans toute situation donnée :</p>
 
 <table>
   <thead>
-    <tr><th>Propriété</th><th>Valeurs brutes</th><th>Rangs</th></tr>
+    <tr><th>Plan de recherche</th><th>Test paramétrique</th><th>Alternative non paramétrique</th><th>Type de données requis</th></tr>
   </thead>
   <tbody>
-    <tr><td>Sensibilité aux valeurs extrêmes</td><td>Les valeurs extrêmes dominent les calculs</td><td>La plus grande valeur obtient le rang <em>n</em>, quelle que soit son amplitude</td></tr>
-    <tr><td>Hypothèse de distribution</td><td>Exige une distribution spécifique (normalement gaussienne)</td><td>Sans distribution sous H₀</td></tr>
-    <tr><td>Échelle de mesure</td><td>Exige une échelle d'intervalle/ratio</td><td>Fonctionne avec des données ordinales</td></tr>
-    <tr><td>Robustesse</td><td>Vulnérable à la non-normalité, l'hétéroscédasticité</td><td>Très robuste aux violations distributionnelles</td></tr>
+    <tr><td>Un échantillon — localisation</td><td>Test t pour un échantillon</td><td>Test des rangs signés de Wilcoxon</td><td>Continu ou Ordinal</td></tr>
+    <tr><td>Deux échantillons indépendants</td><td>Test t pour échantillons indépendants</td><td><strong>Test U de Mann-Whitney</strong></td><td>Continu ou Ordinal</td></tr>
+    <tr><td>Deux échantillons appariés/liés</td><td>Test t pour échantillons appariés</td><td><strong>Test des rangs signés de Wilcoxon</strong></td><td>Continu ou Ordinal</td></tr>
+    <tr><td><em>k</em> échantillons indépendants</td><td>ANOVA à un facteur</td><td><strong>Test H de Kruskal-Wallis</strong></td><td>Continu ou Ordinal</td></tr>
+    <tr><td><em>k</em> échantillons liés/répétés</td><td>ANOVA à mesures répétées</td><td><strong>Test de Friedman</strong></td><td>Continu ou Ordinal</td></tr>
+    <tr><td>Association bivariée</td><td><em>r</em> de Pearson</td><td><strong>ρ<sub>s</sub> de Spearman</strong> / τ de Kendall</td><td>Continu ou Ordinal</td></tr>
+    <tr><td>Fréquences catégorielles</td><td>(Pas d'analogue paramétrique)</td><td><strong>Test χ² de Pearson</strong></td><td>Nominal (Catégoriel)</td></tr>
   </tbody>
 </table>
 
 <hr>
 
-<h2>📊 La famille des tests non paramétriques : Guide complet</h2>
+<h2>📊 Test 1 : Le test U de Mann-Whitney (deux échantillons indépendants)</h2>
+
+<h3>Présentation et quand l'utiliser</h3>
+
+<p>Le <strong>test U de Mann-Whitney</strong> — également connu sous le nom de test de la somme des rangs de Wilcoxon, test de Mann-Whitney-Wilcoxon, ou simplement test U — est l'alternative non paramétrique au test t pour échantillons indépendants. Il compare deux groupes indépendants pour déterminer si l'un tend à produire systématiquement des valeurs plus grandes que l'autre. Formellement, il teste si la probabilité qu'une observation tirée au hasard du Groupe 1 dépasse une observation tirée au hasard du Groupe 2 diffère de 0,50 (Mann &amp; Whitney, 1947). Ce test s'utilise lorsque : la variable dépendante est au moins ordinale, les deux échantillons sont indépendants, et les hypothèses du test t (normalité, égalité des variances) sont douteuses ou clairement violées.</p>
+
+<h3>La procédure étape par étape</h3>
+
+<p>1. Combiner toutes les <em>N</em> = n₁ + n₂ observations des deux groupes en un seul jeu de données. 2. Classer toutes les observations de la plus petite (rang 1) à la plus grande (rang <em>N</em>). Attribuer aux valeurs ex æquo la moyenne des rangs qu'elles auraient occupés. 3. Calculer R₁ = somme des rangs attribués aux observations du Groupe 1. 4. Calculer la statistique U :</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>U₁ = n₁ · n₂ + n₁(n₁ + 1)/2 − R₁</strong></p>
+
+<p>5. De même, U₂ = n₁ · n₂ − U₁. La statistique de test est U = min(U₁, U₂). 6. Comparer U à la valeur critique de la table de Mann-Whitney (pour les petits échantillons) ou calculer l'approximation normale Z pour les grands échantillons (n₁, n₂ ≥ 20).</p>
+
+<h3>L'interprétation probabiliste</h3>
+
+<p>La statistique U possède une signification probabiliste élégante : U₁ compte le nombre de fois qu'une observation du Groupe 1 <em>précède</em> (est inférieure à) une observation du Groupe 2 lorsque toutes les n₁ × n₂ paires possibles sont comparées. Sous H₀, l'espérance est E(U) = n₁n₂/2, car chaque paire a autant de chances d'aller dans un sens que dans l'autre (Mann &amp; Whitney, 1947). La variance sous H₀ est σ²<sub>U</sub> = n₁n₂(n₁ + n₂ + 1)/12.</p>
+
+<h3>Approximation normale pour grands échantillons</h3>
+
+<p>Lorsque les deux tailles d'échantillons dépassent environ 20, la distribution de U est bien approximée par la distribution normale :</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>Z = (U − μ<sub>U</sub>) / σ<sub>U</sub></strong></p>
+
+<p>où μ<sub>U</sub> = n₁n₂/2 et σ<sub>U</sub> = √[n₁n₂(n₁ + n₂ + 1)/12]. En présence d'ex æquo, la formule de variance nécessite un facteur de correction (Conover, 1999).</p>
+
+<h3>🏥 Exemple détaillé : Comparaison du soulagement de la douleur entre deux analgésiques</h3>
+
+<p>Un pharmacologue clinicien dans un hôpital de São Paulo, au Brésil, conduit un essai randomisé comparant deux médicaments analgésiques pour le soulagement de la douleur post-chirurgicale. Les patients évaluent leur douleur sur une échelle visuelle analogique (EVA) de 0 à 10 à 4 heures post-opératoires. Parce que les scores EVA sont bornés et souvent asymétriques, le test U de Mann-Whitney est approprié. Médicament A (n₁ = 7) : scores de douleur = {6, 4, 7, 3, 5, 8, 6}. Médicament B (n₂ = 7) : scores de douleur = {3, 2, 4, 1, 3, 5, 2}.</p>
 
 <table>
   <thead>
-    <tr><th>Question de recherche</th><th>Test paramétrique</th><th>Alternative non paramétrique</th><th>Données requises</th></tr>
+    <tr><th>Valeur</th><th>1</th><th>2</th><th>2</th><th>3</th><th>3</th><th>3</th><th>4</th><th>4</th><th>5</th><th>5</th><th>6</th><th>6</th><th>7</th><th>8</th></tr>
   </thead>
   <tbody>
-    <tr><td>Un échantillon vs. médiane hypothétique</td><td>Test t pour un échantillon</td><td>🔹 <strong>Test des rangs signés de Wilcoxon</strong></td><td>Ordinal+, distribution symétrique des différences</td></tr>
-    <tr><td>Deux groupes indépendants</td><td>Test t indépendant</td><td>🔹 <strong>Test U de Mann-Whitney</strong></td><td>Ordinal+, observations indépendantes</td></tr>
-    <tr><td>Deux groupes appariés</td><td>Test t apparié</td><td>🔹 <strong>Test des rangs signés de Wilcoxon</strong></td><td>Ordinal+, observations appariées</td></tr>
-    <tr><td>Trois groupes indépendants ou plus</td><td>ANOVA à un facteur</td><td>🔹 <strong>Test H de Kruskal-Wallis</strong></td><td>Ordinal+, observations indépendantes</td></tr>
-    <tr><td>Trois mesures répétées ou plus</td><td>ANOVA à mesures répétées</td><td>🔹 <strong>Test de Friedman</strong></td><td>Ordinal+, plan en blocs/répété</td></tr>
-    <tr><td>Association entre deux variables</td><td>Corrélation de Pearson (r)</td><td>🔹 <strong>Corrélation de Spearman (ρ)</strong></td><td>Ordinal+, relation monotone</td></tr>
-    <tr><td>Distributions de fréquences catégorielles</td><td>—</td><td>🔹 <strong>Test du chi-deux (χ²)</strong></td><td>Nominal/catégoriel, effectifs attendus ≥ 5</td></tr>
-    <tr><td>Tableau 2×2, petits échantillons</td><td>—</td><td>🔹 <strong>Test exact de Fisher</strong></td><td>Nominal/catégoriel, toute taille d'échantillon</td></tr>
+    <tr><td><strong>Rang</strong></td><td>1</td><td>2,5</td><td>2,5</td><td>5</td><td>5</td><td>5</td><td>7,5</td><td>7,5</td><td>9,5</td><td>9,5</td><td>11,5</td><td>11,5</td><td>13</td><td>14</td></tr>
+    <tr><td><strong>Groupe</strong></td><td>B</td><td>B</td><td>B</td><td>A</td><td>B</td><td>B</td><td>A</td><td>B</td><td>A</td><td>B</td><td>A</td><td>A</td><td>A</td><td>A</td></tr>
   </tbody>
 </table>
 
-<hr>
+<p><strong>Étape 1 :</strong> R<sub>A</sub> = 5 + 7,5 + 9,5 + 11,5 + 11,5 + 13 + 14 = 72. R<sub>B</sub> = 1 + 2,5 + 2,5 + 5 + 5 + 7,5 + 9,5 = 33.</p>
 
-<h2>🔹 Test 1 : Le test U de Mann-Whitney (Deux échantillons indépendants)</h2>
+<p><strong>Étape 2 :</strong> U<sub>A</sub> = 7 × 7 + 7(8)/2 − 72 = 49 + 28 − 72 = <strong>5</strong>. U<sub>B</sub> = 49 − 5 = <strong>44</strong>.</p>
 
-<h3>Quand l'utiliser</h3>
-<p>Utilisez le test U de Mann-Whitney pour comparer deux groupes indépendants lorsque vous ne pouvez pas supposer la normalité — par exemple, comparer la teneur en matière organique du sol entre exploitations conventionnelles et biologiques lorsque les données sont asymétriques.</p>
+<p><strong>Étape 3 :</strong> U = min(5, 44) = <strong>5</strong>. D'après la table des valeurs critiques de Mann-Whitney (n₁ = n₂ = 7, α = 0,05, bilatéral), U<sub>critique</sub> = 8. Puisque 5 &lt; 8, nous <strong>rejetons H₀</strong> (p = 0,007). Le médicament B produit des scores de douleur post-chirurgicale significativement plus bas que le médicament A.</p>
 
-<h3>La procédure</h3>
-<p>Supposons que nous mesurions la concentration en cadmium (mg/kg) dans le sol de deux régions :</p>
-<p><strong>Région A (n₁ = 5) :</strong> 0,8 ; 1,2 ; 2,5 ; 3,1 ; 4,7<br>
-<strong>Région B (n₂ = 5) :</strong> 1,9 ; 3,8 ; 5,2 ; 6,1 ; 8,3</p>
-
-<p><strong>Étape 1 :</strong> Combiner toutes les observations et attribuer les rangs de 1 à N = 10.<br>
-<strong>Étape 2 :</strong> Calculer les sommes de rangs : R₁ = 19, R₂ = 36.<br>
-<strong>Étape 3 :</strong> Calculer U₁ = n₁n₂ + n₁(n₁+1)/2 − R₁ = 25 + 15 − 19 = <strong>21</strong> ; U₂ = 25 − 21 = <strong>4</strong>.<br>
-<strong>Étape 4 :</strong> U = min(U₁, U₂) = 4. Comparer à la valeur critique.</p>
-
-<h3>La formule (générale)</h3>
-<p style="text-align:center; font-size:1.1em;"><strong>U = n₁n₂ + n₁(n₁+1)/2 − R₁</strong></p>
-
-<p>Pour les grands échantillons (n₁ et n₂ > 20), U suit approximativement une loi normale avec μ<sub>U</sub> = n₁n₂/2 et σ<sub>U</sub> = √(n₁n₂(n₁+n₂+1)/12) (Mann &amp; Whitney, 1947).</p>
+<p><strong>Taille de l'effet :</strong> r = Z/√N. En utilisant l'approximation normale : Z = (5 − 24,5)/√(49 × 15/12) = −19,5/7,83 = −2,49. Ainsi r = 2,49/√14 = <strong>0,67</strong>, un effet de grande taille (Cohen, 1988).</p>
 
 <hr>
 
-<h2>🔹 Test 2 : Le test des rangs signés de Wilcoxon (Échantillons appariés)</h2>
+<h2>✍️ Test 2 : Le test des rangs signés de Wilcoxon (échantillons appariés)</h2>
 
-<h3>Quand l'utiliser</h3>
-<p>Utilisez-le pour comparer deux mesures apparentées — avant/après traitement, paires appariées — quand vous ne pouvez pas supposer que les différences sont normalement distribuées.</p>
+<h3>Présentation et quand l'utiliser</h3>
 
-<h3>La procédure</h3>
-<p>Nous mesurons le pH du sol sur 8 sites avant et après application d'un amendement calcaire :</p>
+<p>Le <strong>test des rangs signés de Wilcoxon</strong> est l'alternative non paramétrique au test t pour échantillons appariés. Il teste si la différence médiane entre les observations appariées est nulle. Ce test s'utilise lorsque : l'on dispose de paires appariées ou de mesures répétées, les différences entre les paires sont au moins ordinales, et l'hypothèse de normalité des différences requise par le test t apparié est douteuse. Contrairement au plus simple <strong>test du signe</strong> (qui ne considère que la direction des différences), le test des rangs signés utilise aussi les <em>magnitudes</em> des différences, ce qui le rend considérablement plus puissant (Wilcoxon, 1945).</p>
 
-<p><strong>Étape 1 :</strong> Calculer les différences d, éliminer les zéros.<br>
-<strong>Étape 2 :</strong> Classer les |d| par ordre croissant et attribuer les rangs.<br>
-<strong>Étape 3 :</strong> Attacher le signe de la différence originale à chaque rang.<br>
-<strong>Étape 4 :</strong> Calculer W⁺ (somme des rangs positifs) et W⁻ (somme des rangs négatifs). T = min(W⁺, W⁻).</p>
+<h3>Hypothèse clé : Symétrie des différences</h3>
 
-<p>Le test suppose que la distribution des différences est <em>symétrique</em> autour de la médiane. Il ne requiert <em>pas</em> la normalité, mais l'hypothèse de symétrie est importante (Wilcoxon, 1945).</p>
+<p>Le test des rangs signés de Wilcoxon suppose que la distribution des différences D<sub>i</sub> = X<sub>i</sub> − Y<sub>i</sub> est <strong>symétrique</strong> autour de la médiane. C'est une hypothèse substantiellement plus faible que la normalité exigée par le test t apparié, mais c'est néanmoins une hypothèse qui doit être vérifiée. Si les différences sont clairement asymétriques (par exemple, toutes les différences positives sont petites mais les différences négatives sont grandes), le test du signe — qui ne suppose rien sur la forme de la distribution des différences — constitue une alternative plus sûre, au prix d'une puissance réduite.</p>
+
+<h3>La procédure étape par étape</h3>
+
+<p>1. Calculer la différence D<sub>i</sub> = X<sub>i</sub> − Y<sub>i</sub> pour chaque paire. 2. Éliminer toutes les paires où D<sub>i</sub> = 0 (ex æquo exacts) et réduire la taille effective de l'échantillon <em>n</em> en conséquence. 3. Classer les <em>valeurs absolues</em> |D<sub>i</sub>| de 1 (la plus petite) à <em>n</em> (la plus grande). Attribuer aux différences absolues ex æquo la moyenne de leurs rangs. 4. Attacher à chaque rang le <em>signe</em> de son D<sub>i</sub> correspondant (positif ou négatif). 5. Calculer W⁺ = somme des rangs signés positifs et W⁻ = somme des rangs signés négatifs. Noter que W⁺ + W⁻ = n(n + 1)/2 toujours. 6. La statistique de test est W = min(W⁺, W⁻). Sous H₀, E(W⁺) = E(W⁻) = n(n + 1)/4.</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>W = min(W⁺, W⁻)</strong></p>
+
+<h3>Approximation pour grands échantillons</h3>
+
+<p>Pour n ≥ 25, la distribution de W⁺ est approximativement normale avec une moyenne μ = n(n + 1)/4 et un écart type σ = √[n(n + 1)(2n + 1)/24]. La statistique Z est : Z = (W⁺ − μ)/σ.</p>
+
+<h3>🌊 Exemple détaillé : Qualité de l'eau avant et après un programme de conservation</h3>
+
+<p>Un scientifique environnemental dans le delta du Mékong, au Vietnam, mesure l'oxygène dissous (OD, mg/L) à 10 stations de suivi fluvial avant et après la mise en œuvre d'un programme de restauration de bandes riveraines. Les données sont asymétriques en raison de deux stations proches de zones industrielles présentant des lectures anormalement basses :</p>
+
+<table>
+  <thead>
+    <tr><th>Station</th><th>Avant</th><th>Après</th><th>D<sub>i</sub></th><th>|D<sub>i</sub>|</th><th>Rang de |D<sub>i</sub>|</th><th>Rang signé</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>5,2</td><td>6,1</td><td>+0,9</td><td>0,9</td><td>3</td><td>+3</td></tr>
+    <tr><td>2</td><td>4,8</td><td>5,5</td><td>+0,7</td><td>0,7</td><td>2</td><td>+2</td></tr>
+    <tr><td>3</td><td>6,4</td><td>6,0</td><td>−0,4</td><td>0,4</td><td>1</td><td>−1</td></tr>
+    <tr><td>4</td><td>3,9</td><td>5,3</td><td>+1,4</td><td>1,4</td><td>5,5</td><td>+5,5</td></tr>
+    <tr><td>5</td><td>5,0</td><td>6,2</td><td>+1,2</td><td>1,2</td><td>4</td><td>+4</td></tr>
+    <tr><td>6</td><td>4,1</td><td>5,5</td><td>+1,4</td><td>1,4</td><td>5,5</td><td>+5,5</td></tr>
+    <tr><td>7</td><td>5,8</td><td>7,6</td><td>+1,8</td><td>1,8</td><td>8</td><td>+8</td></tr>
+    <tr><td>8</td><td>3,5</td><td>5,1</td><td>+1,6</td><td>1,6</td><td>7</td><td>+7</td></tr>
+    <tr><td>9</td><td>6,0</td><td>8,2</td><td>+2,2</td><td>2,2</td><td>9</td><td>+9</td></tr>
+    <tr><td>10</td><td>4,5</td><td>7,3</td><td>+2,8</td><td>2,8</td><td>10</td><td>+10</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Calcul :</strong> W⁺ = 3 + 2 + 5,5 + 4 + 5,5 + 8 + 7 + 9 + 10 = <strong>54</strong>. W⁻ = 1. W = min(54, 1) = <strong>1</strong>.</p>
+
+<p><strong>Décision :</strong> D'après la table des valeurs critiques du test des rangs signés de Wilcoxon (n = 10, α = 0,05, bilatéral), W<sub>critique</sub> = 8. Puisque W = 1 &lt; 8, nous <strong>rejetons H₀</strong> (p = 0,004). Les niveaux d'oxygène dissous ont augmenté significativement après le programme de restauration des bandes riveraines, avec une amélioration constatée dans 9 des 10 stations.</p>
+
+<p><strong>Taille de l'effet :</strong> En utilisant l'approximation Z : Z = (54 − 27,5)/√(10 × 11 × 21/24) = 26,5/9,81 = 2,70. Ainsi r = 2,70/√20 = <strong>0,60</strong>, un effet de grande taille.</p>
 
 <hr>
 
-<h2>🔹 Test 3 : Le test H de Kruskal-Wallis (Trois groupes indépendants ou plus)</h2>
+<h2>📈 Test 3 : Le test H de Kruskal-Wallis (<em>k</em> groupes indépendants)</h2>
+
+<h3>Présentation et quand l'utiliser</h3>
+
+<p>Le <strong>test H de Kruskal-Wallis</strong> est l'alternative non paramétrique à l'ANOVA à un facteur. Il teste si <em>k</em> ≥ 3 groupes indépendants proviennent de la même distribution — ou, de manière équivalente, si au moins un groupe tend à produire systématiquement des valeurs plus grandes que les autres. Comme le test de Mann-Whitney (dont il est une généralisation directe), il travaille avec les rangs plutôt qu'avec les valeurs brutes et ne formule aucune hypothèse sur la normalité ou l'égalité des variances (Kruskal &amp; Wallis, 1952). Ce test s'utilise lorsque : l'on dispose de trois groupes indépendants ou plus, la variable dépendante est au moins ordinale, et les hypothèses de l'ANOVA à un facteur sont douteuses.</p>
 
 <h3>La formule</h3>
-<p style="text-align:center; font-size:1.1em;"><strong>H = [12 / N(N+1)] × Σ (Rᵢ²/nᵢ) − 3(N+1)</strong></p>
 
-<p>où N est la taille totale de l'échantillon, nᵢ la taille du groupe i, et Rᵢ la somme des rangs du groupe i (Kruskal &amp; Wallis, 1952).</p>
+<p>Classer toutes les <em>N</em> = Σn<sub>j</sub> observations de tous les groupes ensemble de 1 à <em>N</em>. Soit R<sub>j</sub> = somme des rangs dans le groupe <em>j</em>. Alors :</p>
 
-<p>Sous H₀, H suit approximativement une distribution χ²(k−1). Comme l'ANOVA, c'est un test <em>omnibus</em> : il indique qu'au moins un groupe diffère, mais pas lequel. Des comparaisons post-hoc (par exemple, test de Dunn avec correction de Bonferroni) sont nécessaires (Conover, 1999).</p>
+<p style="text-align:center; font-size:1.1em;"><strong>H = [12 / N(N + 1)] × Σ (R<sub>j</sub>² / n<sub>j</sub>) − 3(N + 1)</strong></p>
+
+<p>Sous H₀ (tous les groupes tirés de la même distribution), <em>H</em> suit approximativement la distribution du chi-deux avec <em>k</em> − 1 degrés de liberté lorsque chaque groupe compte au moins 5 observations. Pour des échantillons plus petits, les distributions de permutation exactes doivent être utilisées.</p>
+
+<h3>Correction pour les ex æquo</h3>
+
+<p>En présence de rangs ex æquo, la statistique H doit être divisée par le facteur de correction C = 1 − Σ(t<sub>i</sub>³ − t<sub>i</sub>) / (N³ − N), où t<sub>i</sub> est le nombre d'observations dans le <em>i</em>-ème groupe de valeurs ex æquo. En pratique, cette correction est négligeable sauf si les ex æquo sont très nombreux (Conover, 1999).</p>
+
+<h3>Test post-hoc : Test de Dunn</h3>
+
+<p>Lorsque le test de Kruskal-Wallis donne un résultat significatif, il nous dit seulement qu'<em>au moins une paire</em> de groupes diffère — mais pas lesquelles. Le <strong>test de Dunn</strong> (1964) identifie les différences par paires spécifiques en comparant les rangs moyens de toutes les paires possibles tout en contrôlant le taux d'erreur par famille. La statistique de test pour la comparaison des groupes <em>i</em> et <em>j</em> est :</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>Z<sub>ij</sub> = (R̄<sub>i</sub> − R̄<sub>j</sub>) / √{[N(N + 1)/12] × (1/n<sub>i</sub> + 1/n<sub>j</sub>)}</strong></p>
+
+<p>Les valeurs p résultantes sont ajustées à l'aide de la <strong>correction de Bonferroni</strong> (multiplier par le nombre de comparaisons) ou de la procédure moins conservatrice de <strong>Benjamini-Hochberg</strong> contrôlant le taux de fausses découvertes (Dunn, 1964).</p>
+
+<h3>📚 Exemple détaillé : Comparaison de trois méthodes d'enseignement sur la performance étudiante</h3>
+
+<p>Un psychologue de l'éducation à l'Université du Cap, en Afrique du Sud, compare trois méthodes pédagogiques — cours magistral traditionnel (n = 8), apprentissage par problèmes (n = 8) et classe inversée (n = 8) — sur la performance aux examens des étudiants. Les scores d'examen sont fortement asymétriques à droite (la plupart des étudiants obtiennent entre 60 et 80, mais quelques individus très performants créent une longue queue). Le test de Shapiro-Wilk rejette la normalité pour deux des trois groupes. Le chercheur applique le test de Kruskal-Wallis.</p>
+
+<p><strong>Données (scores d'examen) :</strong> Cours magistral : {58, 62, 55, 70, 64, 59, 61, 66}. Apprentissage par problèmes : {72, 68, 75, 80, 71, 69, 77, 73}. Classe inversée : {65, 78, 82, 70, 85, 74, 88, 79}.</p>
+
+<p><strong>Étape 1 :</strong> Classer les 24 observations ensemble. Le score le plus bas (55, Cours magistral) reçoit le rang 1 ; le plus élevé (88, Classe inversée) reçoit le rang 24.</p>
+
+<p><strong>Étape 2 :</strong> R<sub>Magistral</sub> = 1 + 3 + 5 + 6 + 7 + 8 + 11 + 14 = 55. R<sub>APP</sub> = 9 + 10 + 13 + 15 + 16 + 18 + 19 + 22 = 122. R<sub>Inversée</sub> = 2 + 4 + 12 + 17 + 20 + 21 + 23 + 24 = 123.</p>
+
+<p><strong>Étape 3 :</strong> H = [12/(24 × 25)] × [(55²/8) + (122²/8) + (123²/8)] − 3(25) = 0,02 × [378,1 + 1860,5 + 1890,1] − 75 = 0,02 × 4128,7 − 75 = 82,57 − 75 = <strong>7,57</strong>.</p>
+
+<p><strong>Étape 4 :</strong> Avec df = 3 − 1 = 2 et χ²<sub>0,05 ; 2</sub> = 5,991, puisque H = 7,57 > 5,991, nous <strong>rejetons H₀</strong> (p = 0,023). Au moins une méthode d'enseignement produit des performances d'examen significativement différentes.</p>
+
+<p><strong>Post-hoc (test de Dunn) :</strong> Les comparaisons par paires révèlent que Magistral vs APP (p = 0,012) et Magistral vs Inversée (p = 0,009) sont significatifs après correction de Bonferroni, tandis que APP vs Inversée ne l'est pas (p = 0,94). Les deux méthodes d'apprentissage actif surpassent le cours magistral traditionnel.</p>
+
+<p><strong>Taille de l'effet :</strong> η²<sub>H</sub> = (H − k + 1)/(N − k) = (7,57 − 2)/(24 − 3) = 5,57/21 = <strong>0,27</strong>, un effet de grande taille (Cohen, 1988).</p>
 
 <hr>
 
-<h2>🔹 Test 4 : Le test de Friedman (Mesures répétées, trois conditions ou plus)</h2>
+<h2>🔄 Test 4 : Le test de Friedman (<em>k</em> échantillons liés)</h2>
 
-<p>Le test de Friedman classe les observations <em>au sein de chaque bloc</em> (sujet), puis teste si les sommes de rangs entre traitements diffèrent plus que ce que le hasard prédirait (Friedman, 1937).</p>
+<h3>Présentation et quand l'utiliser</h3>
 
-<p style="text-align:center; font-size:1.1em;"><strong>χ²<sub>F</sub> = [12 / bk(k+1)] × Σ Rⱼ² − 3b(k+1)</strong></p>
+<p>Le <strong>test de Friedman</strong> est l'alternative non paramétrique à l'ANOVA à mesures répétées. Il teste si <em>k</em> ≥ 3 conditions liées (traitements mesurés sur les mêmes sujets, ou traitements dans un plan en blocs complets randomisés) produisent des réponses systématiquement différentes. Le test classe les observations <em>à l'intérieur de chaque bloc</em> (sujet) séparément, puis analyse si la somme des rangs de chaque traitement s'écarte de la valeur attendue sous l'hypothèse nulle d'absence d'effet traitement (Friedman, 1937).</p>
 
-<p>où b = nombre de blocs, k = nombre de traitements, Rⱼ = somme des rangs pour le traitement j.</p>
+<p>Note historique charmante : <strong>Milton Friedman</strong> développa ce test en 1937 dans le cadre de sa thèse de doctorat à l'Université Columbia, des années avant de devenir l'économiste le plus célèbre du monde. Le test de Friedman et la « doctrine Friedman » du capitalisme actionnarial sont les produits d'un même esprit — un fait qui ne manque jamais de surprendre statisticiens et économistes.</p>
+
+<h3>La procédure</h3>
+
+<p>Pour <em>b</em> blocs (sujets) et <em>k</em> traitements : 1. À l'intérieur de chaque bloc, classer les <em>k</em> observations de 1 à <em>k</em>. 2. Pour chaque traitement <em>j</em>, calculer R<sub>j</sub> = somme de ses rangs à travers tous les blocs. 3. Calculer la statistique de test :</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>χ²<sub>r</sub> = [12 / bk(k + 1)] × Σ R<sub>j</sub>² − 3b(k + 1)</strong></p>
+
+<p>Sous H₀, χ²<sub>r</sub> suit approximativement la distribution du chi-deux avec <em>k</em> − 1 degrés de liberté. Pour les petits échantillons (b &lt; 10 ou k ≤ 4), les tables exactes doivent être consultées (Conover, 1999).</p>
+
+<h3>Post-hoc : Test de Nemenyi et méthode de Conover</h3>
+
+<p>Lorsque le test de Friedman est significatif, le <strong>test de Nemenyi</strong> (1963) compare toutes les paires de traitements. Deux traitements diffèrent significativement si leur différence de rang moyen dépasse la différence critique :</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>DC = q<sub>α</sub> × √[k(k + 1) / (6b)]</strong></p>
+
+<p>où q<sub>α</sub> est la valeur critique de la distribution de l'étendue studentisée pour <em>k</em> traitements au seuil de signification α. Une procédure post-hoc alternative — le <strong>test de Conover</strong> (1999) — utilise la distribution t et est généralement plus puissante que la méthode de Nemenyi.</p>
+
+<h3>🍷 Exemple détaillé : Évaluations de la qualité du vin par des juges experts</h3>
+
+<p>Un chercheur en viticulture à Bordeaux, en France, demande à 6 sommeliers experts d'évaluer 4 vins (A, B, C, D) de la même appellation mais de millésimes différents sur une échelle de 100 points. Chaque sommelier évalue les 4 vins, ce qui constitue un plan classique à mesures répétées avec les sujets (juges) comme blocs :</p>
+
+<table>
+  <thead>
+    <tr><th>Juge</th><th>Vin A</th><th>Vin B</th><th>Vin C</th><th>Vin D</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>82</td><td>90</td><td>78</td><td>85</td></tr>
+    <tr><td>2</td><td>76</td><td>88</td><td>80</td><td>84</td></tr>
+    <tr><td>3</td><td>80</td><td>92</td><td>75</td><td>87</td></tr>
+    <tr><td>4</td><td>85</td><td>86</td><td>82</td><td>90</td></tr>
+    <tr><td>5</td><td>79</td><td>91</td><td>77</td><td>83</td></tr>
+    <tr><td>6</td><td>83</td><td>89</td><td>81</td><td>86</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Étape 1 :</strong> Classement à l'intérieur de chaque juge (ligne). Juge 1 : C=1, A=2, D=3, B=4. Juge 2 : A=1, C=2, D=3, B=4. Juge 3 : C=1, A=2, D=3, B=4. Juge 4 : C=1, A=2, B=3, D=4. Juge 5 : C=1, A=2, D=3, B=4. Juge 6 : C=1, A=2, D=3, B=4.</p>
+
+<p><strong>Étape 2 :</strong> R<sub>A</sub> = 2+1+2+2+2+2 = 11. R<sub>B</sub> = 4+4+4+3+4+4 = 23. R<sub>C</sub> = 1+2+1+1+1+1 = 7. R<sub>D</sub> = 3+3+3+4+3+3 = 19.</p>
+
+<p><strong>Étape 3 :</strong> χ²<sub>r</sub> = [12/(6 × 4 × 5)] × (11² + 23² + 7² + 19²) − 3 × 6 × 5 = [12/120] × (121 + 529 + 49 + 361) − 90 = 0,1 × 1060 − 90 = 106 − 90 = <strong>16,0</strong>.</p>
+
+<p><strong>Étape 4 :</strong> Avec df = 4 − 1 = 3 et χ²<sub>0,001 ; 3</sub> = 16,266, le résultat est hautement significatif (p ≈ 0,001). Les évaluations des vins diffèrent significativement entre les quatre millésimes. Le test post-hoc de Nemenyi révèle que le Vin B est évalué significativement plus haut que les Vins A et C, et que le Vin D est évalué significativement plus haut que le Vin C.</p>
 
 <hr>
 
-<h2>🔹 Test 5 : Le test du Chi-deux (χ²) de Pearson (Données catégorielles)</h2>
+<h2>🎯 Test 5 : Le test du chi-deux de Pearson (données catégorielles)</h2>
 
-<h3>Trois visages du χ²</h3>
-<p><strong>① Adéquation (Goodness of Fit) :</strong> Une distribution observée correspond-elle à une distribution théorique ?<br>
-<strong>② Test d'indépendance :</strong> Deux variables catégorielles sont-elles associées dans un tableau de contingence ?<br>
-<strong>③ Test d'homogénéité :</strong> Deux groupes ou plus ont-ils la même distribution d'une variable catégorielle ?</p>
+<h3>Trois variantes d'un cadre unifié</h3>
 
-<h3>La formule</h3>
-<p style="text-align:center; font-size:1.15em;"><strong>χ² = Σ (Oᵢ − Eᵢ)² / Eᵢ</strong></p>
+<p>Le test χ² de Pearson (Pearson, 1900) est le cheval de bataille de l'analyse des données catégorielles. Contrairement aux autres tests non paramétriques présentés dans ce chapitre — qui remplacent les données continues/ordinales par des rangs — le test χ² travaille nativement avec des données <em>catégorielles (nominales)</em> : des dénombrements d'observations tombant dans des catégories discrètes. Il se décline en trois formes :</p>
 
-<p>où Oᵢ = fréquence observée et Eᵢ = fréquence attendue sous H₀ (Pearson, 1900).</p>
+<p><strong>Variante 1 : Test d'ajustement.</strong> Teste si les fréquences observées dans une seule variable catégorielle correspondent à une distribution hypothétique. Exemple : un croisement génétique produit-il le rapport mendélien 9:3:3:1 ?</p>
+
+<p><strong>Variante 2 : Test d'indépendance.</strong> Teste si deux variables catégorielles sont associées dans un tableau de contingence. Exemple : existe-t-il une association entre le statut tabagique et le diagnostic de cancer du poumon ?</p>
+
+<p><strong>Variante 3 : Test d'homogénéité.</strong> Teste si la distribution d'une variable catégorielle est la même dans deux populations ou plus. Exemple : la distribution des groupes sanguins est-elle la même dans trois groupes ethniques ?</p>
+
+<h3>La formule (les trois variantes)</h3>
+
+<p style="text-align:center; font-size:1.15em;"><strong>χ² = Σ [(O<sub>i</sub> − E<sub>i</sub>)² / E<sub>i</sub>]</strong></p>
+
+<p>où O<sub>i</sub> = fréquence observée et E<sub>i</sub> = fréquence attendue sous l'hypothèse nulle. Pour le test d'indépendance dans un tableau de contingence r × c, la fréquence attendue pour la cellule (<em>i</em>, <em>j</em>) est : E<sub>ij</sub> = (Total ligne<sub>i</sub> × Total colonne<sub>j</sub>) / Total général. Les degrés de liberté sont : Ajustement : df = k − 1 − nombre de paramètres estimés ; Indépendance/Homogénéité : df = (r − 1)(c − 1).</p>
 
 <h3>Conditions de validité</h3>
-<p>Le test du χ² exige que les fréquences attendues soient suffisamment grandes — la règle classique est Eᵢ ≥ 5 pour toutes les cellules (Cochran, 1954). Pour les tableaux 2×2 avec de petits effectifs attendus, utilisez le <strong>test exact de Fisher</strong>.</p>
 
-<hr>
+<p>L'approximation χ² exige : (1) tous les effectifs attendus E<sub>i</sub> ≥ 5 (Cochran, 1952), ou au plus 20 % des cellules en dessous de 5 avec aucune en dessous de 1 ; (2) les observations sont indépendantes (pas de mesures répétées, pas de regroupement). Pour les tableaux 2 × 2 avec de petits effectifs attendus, le <strong>test exact de Fisher</strong> est l'alternative appropriée — il calcule les probabilités exactes en énumérant tous les tableaux 2 × 2 possibles avec les mêmes totaux marginaux. Pour les violations modérées, la <strong>correction de continuité de Yates</strong> fournit une solution intermédiaire : χ²<sub>Yates</sub> = Σ [(|O<sub>i</sub> − E<sub>i</sub>| − 0,5)² / E<sub>i</sub>] (Conover, 1999).</p>
 
-<h2>🔹 Test 6 : La corrélation de rang de Spearman (ρ)</h2>
+<h3>🌍 Exemple détaillé : Hésitation vaccinale dans trois pays</h3>
 
-<p style="text-align:center; font-size:1.15em;"><strong>ρ = 1 − [6Σdᵢ²] / [n(n²−1)]</strong></p>
-
-<p>où dᵢ = différence entre les rangs des observations correspondantes (Spearman, 1904). ρ varie de −1 (relation monotone négative parfaite) à +1 (relation monotone positive parfaite). Contrairement à la corrélation de Pearson, ρ de Spearman détecte toute relation monotone, pas seulement linéaire (Lehmann &amp; D'Abrera, 1998).</p>
-
-<hr>
-
-<h2>⚖️ Efficacité relative asymptotique : Combien de puissance perd-on ?</h2>
+<p>Un consortium de recherche en santé publique interroge 600 adultes dans trois pays — Allemagne (n = 200), Nigeria (n = 200) et Japon (n = 200) — pour savoir s'ils accepteraient un nouveau vaccin. La question de recherche est de savoir si l'acceptation vaccinale est indépendante du pays de résidence (un test d'indépendance/homogénéité) :</p>
 
 <table>
   <thead>
-    <tr><th>Test non paramétrique</th><th>Comparé à</th><th>ERA (données normales)</th><th>ERA (logistique)</th><th>ERA (double exponentielle)</th></tr>
+    <tr><th></th><th>Accepte</th><th>Incertain</th><th>Refuse</th><th>Total ligne</th></tr>
   </thead>
   <tbody>
-    <tr><td>Mann-Whitney / Wilcoxon</td><td>Test t</td><td>3/π ≈ <strong>0,955</strong></td><td>π²/9 ≈ <strong>1,098</strong></td><td><strong>1,500</strong></td></tr>
-    <tr><td>Test du signe</td><td>Test t</td><td>2/π ≈ <strong>0,637</strong></td><td>π²/12 ≈ <strong>0,822</strong></td><td><strong>2,000</strong></td></tr>
-    <tr><td>Kruskal-Wallis</td><td>Test F (ANOVA)</td><td>3/π ≈ <strong>0,955</strong></td><td>π²/9 ≈ <strong>1,098</strong></td><td><strong>1,500</strong></td></tr>
+    <tr><td><strong>Allemagne</strong></td><td>130</td><td>42</td><td>28</td><td>200</td></tr>
+    <tr><td><strong>Nigeria</strong></td><td>108</td><td>52</td><td>40</td><td>200</td></tr>
+    <tr><td><strong>Japon</strong></td><td>92</td><td>68</td><td>40</td><td>200</td></tr>
+    <tr><td><strong>Total colonne</strong></td><td>330</td><td>162</td><td>108</td><td>600</td></tr>
   </tbody>
 </table>
 
-<p><em>Source : Hodges &amp; Lehmann (1956).</em></p>
+<p><strong>Fréquences attendues :</strong> E<sub>Allemagne, Accepte</sub> = (200 × 330)/600 = 110. E<sub>Allemagne, Incertain</sub> = (200 × 162)/600 = 54. E<sub>Allemagne, Refuse</sub> = (200 × 108)/600 = 36. (Par symétrie des totaux de lignes égaux, tous les pays partagent les mêmes valeurs attendues : 110, 54, 36.)</p>
 
-<p><strong>① Le pire des cas n'est pas grave :</strong> Même quand les données sont parfaitement normales, le test de Wilcoxon conserve 95,5 % de l'efficacité du test t.<br>
-<strong>② Pour les données non normales, les tests non paramétriques peuvent être <em>plus</em> puissants :</strong> Pour les distributions à queues lourdes, l'avantage peut être considérable.<br>
-<strong>③ La garantie minimale d'ERA est de 0,864 :</strong> Dans le pire des cas absolu, il faut au maximum 16 % de données supplémentaires.</p>
+<p><strong>Calcul :</strong></p>
 
-<hr>
+<p>χ² = (130−110)²/110 + (42−54)²/54 + (28−36)²/36 + (108−110)²/110 + (52−54)²/54 + (40−36)²/36 + (92−110)²/110 + (68−54)²/54 + (40−36)²/36</p>
 
-<h2>🎯 Quand choisir les tests non paramétriques : Cadre de décision</h2>
+<p>= 3,636 + 2,667 + 1,778 + 0,036 + 0,074 + 0,444 + 2,945 + 3,630 + 0,444 = <strong>15,65</strong></p>
 
-<p><strong>✅ Utilisez les tests non paramétriques quand :</strong></p>
-<p>① Vos données sont <strong>ordinales</strong> (rangs, échelles de Likert)<br>
-② L'échantillon est <strong>petit</strong> (n < 20–30) et la normalité ne peut être vérifiée<br>
-③ Les tests de normalité (Shapiro-Wilk) <strong>rejettent la normalité</strong><br>
-④ Les données contiennent des <strong>valeurs aberrantes extrêmes</strong><br>
-⑤ Les données sont <strong>fortement asymétriques</strong><br>
-⑥ Les <strong>variances sont très inégales</strong> entre les groupes<br>
-⑦ Vous travaillez avec des <strong>données catégorielles</strong> (→ test χ²)</p>
+<p>Avec df = (3 − 1)(3 − 1) = 4 et χ²<sub>0,01 ; 4</sub> = 13,277, nous rejetons fortement H₀ (p = 0,004). Les schémas d'acceptation vaccinale diffèrent significativement entre les trois pays, l'Allemagne affichant le taux d'acceptation le plus élevé et le Japon le plus bas.</p>
 
-<blockquote>🔎 <strong>Idée fausse courante :</strong> « Les tests non paramétriques n'ont pas d'hypothèses. » C'est faux. Ces tests supposent toujours l'indépendance des observations, et plusieurs exigent que la distribution des différences soit symétrique (Wilcoxon) ou que les groupes aient des distributions de forme similaire (Mann-Whitney). Ils font simplement des hypothèses <em>moins nombreuses et plus faibles</em>.</blockquote>
+<h3>Taille de l'effet : V de Cramér</h3>
+
+<p style="text-align:center; font-size:1.1em;"><strong>V = √(χ² / [N × min(r − 1, c − 1)])</strong></p>
+
+<p>V = √(15,65 / [600 × min(2, 2)]) = √(15,65/1200) = √0,01304 = <strong>0,114</strong>, indiquant une association faible à modérée (Cohen, 1988). Les seuils de Cohen (1988) pour le V de Cramér dépendent du plus petit entre (r − 1) et (c − 1) : pour min = 2, petit = 0,07, moyen = 0,21, grand = 0,35.</p>
 
 <hr>
 
-<h2>⚙️ Tailles d'effet pour les tests non paramétriques</h2>
+<h2>🔗 Test 6 : La corrélation de rang de Spearman (ρ<sub>s</sub>)</h2>
+
+<h3>Présentation et quand l'utiliser</h3>
+
+<p>Le coefficient de corrélation de rang de Spearman (ρ<sub>s</sub>) mesure l'intensité et la direction d'une relation <strong>monotone</strong> (constamment croissante ou décroissante) entre deux variables. C'est l'alternative non paramétrique à la corrélation produit-moment de Pearson (<em>r</em>) et il est approprié lorsque : la relation entre les variables est monotone mais pas nécessairement linéaire, les données sont ordinales, les distributions sont non normales, ou des valeurs aberrantes sont présentes (Spearman, 1904). Contrairement au <em>r</em> de Pearson, qui mesure l'association <em>linéaire</em>, le ρ<sub>s</sub> de Spearman détecte toute tendance monotone cohérente — y compris les relations logarithmiques, exponentielles et en loi de puissance.</p>
+
+<h3>La formule</h3>
+
+<p>Classer les deux variables séparément de 1 à <em>n</em>. En l'absence d'ex æquo, le ρ<sub>s</sub> de Spearman se réduit à une élégante formule raccourcie :</p>
+
+<p style="text-align:center; font-size:1.15em;"><strong>ρ<sub>s</sub> = 1 − [6 Σ d<sub>i</sub>² / n(n² − 1)]</strong></p>
+
+<p>où d<sub>i</sub> = rang(X<sub>i</sub>) − rang(Y<sub>i</sub>) est la différence entre les deux rangs pour la <em>i</em>-ème observation, et <em>n</em> est le nombre de paires. En présence d'ex æquo, ρ<sub>s</sub> doit être calculé comme la corrélation de Pearson appliquée aux rangs — la formule raccourcie n'est qu'une approximation en présence d'ex æquo.</p>
+
+<h3>Interprétation et test de signification</h3>
+
+<p>ρ<sub>s</sub> varie de −1 (association monotone négative parfaite : quand une variable augmente, l'autre diminue toujours) à +1 (association monotone positive parfaite), avec 0 indiquant l'absence de relation monotone. Pour n ≥ 10, la signification peut être testée à l'aide de l'approximation t :</p>
+
+<p style="text-align:center; font-size:1.1em;"><strong>t = ρ<sub>s</sub> × √[(n − 2) / (1 − ρ<sub>s</sub>²)]</strong></p>
+
+<p>avec df = n − 2. Pour les échantillons plus petits, les valeurs critiques exactes de ρ<sub>s</sub> doivent être consultées dans les tables (Conover, 1999).</p>
+
+<h3>Spearman vs Pearson : Quand la différence compte-t-elle ?</h3>
+
+<p>Si la relation entre deux variables est parfaitement linéaire et que les deux variables sont normalement distribuées, le <em>r</em> de Pearson et le ρ<sub>s</sub> de Spearman donneront des valeurs quasi identiques — la transformation en rangs ne coûte presque rien. Mais lorsque la relation est monotone mais non linéaire (par exemple, une courbe de croissance exponentielle, une courbe de saturation ou une décroissance logarithmique), le ρ<sub>s</sub> de Spearman peut être substantiellement plus grand que le <em>r</em> de Pearson, car ρ<sub>s</sub> mesure la cohérence de la <em>direction</em> plutôt que le degré de linéarité. Inversement, pour les relations en U ou en U inversé (qui ne sont pas monotones), les deux coefficients peuvent être proches de zéro même lorsque les variables sont fortement liées — dans de tels cas, aucune des deux mesures n'est appropriée, et la régression polynomiale ou non linéaire devrait être envisagée.</p>
+
+<h3>Le tau de Kendall (τ) : Une alternative importante</h3>
+
+<p>Une mesure de corrélation de rangs étroitement apparentée est le <strong>tau de Kendall</strong> (τ), introduit par <strong>Maurice Kendall</strong> en 1938. Alors que le ρ<sub>s</sub> de Spearman est simplement la corrélation de Pearson appliquée aux rangs, le τ de Kendall compte la proportion de paires <strong>concordantes</strong> versus <strong>discordantes</strong> parmi toutes les n(n − 1)/2 paires possibles d'observations. Deux paires (X<sub>i</sub>, Y<sub>i</sub>) et (X<sub>j</sub>, Y<sub>j</sub>) sont concordantes si X<sub>i</sub> &gt; X<sub>j</sub> et Y<sub>i</sub> &gt; Y<sub>j</sub> (ou les deux inversés), et discordantes si l'ordonnancement est opposé. Le τ de Kendall = (concordantes − discordantes) / total des paires. Le τ de Kendall donne typiquement des valeurs plus proches de zéro que le ρ<sub>s</sub> de Spearman pour les mêmes données, possède de meilleures propriétés statistiques pour les petits échantillons et ses intervalles de confiance sont plus fiables. Cependant, pour les grands échantillons, les deux mesures conduisent à des conclusions équivalentes (Kendall, 1938).</p>
+
+<h3>🐠 Exemple détaillé : Santé des récifs coralliens et diversité des espèces de poissons</h3>
+
+<p>Un biologiste marin étudiant les récifs coralliens au large d'Okinawa, au Japon, mesure la couverture corallienne (%) et la richesse spécifique en poissons (nombre d'espèces distinctes) sur 8 transects récifaux. La relation est supposée monotone mais pas nécessairement linéaire :</p>
 
 <table>
   <thead>
-    <tr><th>Test</th><th>Mesure de taille d'effet</th><th>Interprétation</th></tr>
+    <tr><th>Transect</th><th>Couverture corallienne (%)</th><th>Nombre d'espèces de poissons</th><th>Rang X</th><th>Rang Y</th><th>d<sub>i</sub></th><th>d<sub>i</sub>²</th></tr>
   </thead>
   <tbody>
-    <tr><td>Mann-Whitney U</td><td><strong>r = Z/√N</strong></td><td>Petit : 0,1 ; Moyen : 0,3 ; Grand : 0,5</td></tr>
-    <tr><td>Kruskal-Wallis</td><td><strong>η²<sub>H</sub> = (H − k + 1)/(N − k)</strong></td><td>Analogue à η² de l'ANOVA</td></tr>
-    <tr><td>Chi-deux (χ²)</td><td><strong>V de Cramér = √(χ²/(N×min(r−1, c−1)))</strong></td><td>0 à 1 ; petit : 0,1 ; moyen : 0,3 ; grand : 0,5</td></tr>
-    <tr><td>Spearman ρ</td><td><strong>ρ lui-même</strong></td><td>−1 à +1 ; petit : 0,1 ; moyen : 0,3 ; grand : 0,5</td></tr>
+    <tr><td>1</td><td>15</td><td>12</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+    <tr><td>2</td><td>28</td><td>18</td><td>2</td><td>2</td><td>0</td><td>0</td></tr>
+    <tr><td>3</td><td>35</td><td>25</td><td>3</td><td>4</td><td>−1</td><td>1</td></tr>
+    <tr><td>4</td><td>42</td><td>22</td><td>4</td><td>3</td><td>1</td><td>1</td></tr>
+    <tr><td>5</td><td>50</td><td>30</td><td>5</td><td>5</td><td>0</td><td>0</td></tr>
+    <tr><td>6</td><td>58</td><td>35</td><td>6</td><td>6</td><td>0</td><td>0</td></tr>
+    <tr><td>7</td><td>65</td><td>42</td><td>7</td><td>7</td><td>0</td><td>0</td></tr>
+    <tr><td>8</td><td>78</td><td>48</td><td>8</td><td>8</td><td>0</td><td>0</td></tr>
   </tbody>
 </table>
 
-<hr>
+<p><strong>Calcul :</strong> Σd<sub>i</sub>² = 0 + 0 + 1 + 1 + 0 + 0 + 0 + 0 = 2. ρ<sub>s</sub> = 1 − 6(2)/[8(64 − 1)] = 1 − 12/504 = 1 − 0,024 = <strong>0,976</strong>.</p>
 
-<h2>✅ Bonnes pratiques et directives APA de présentation</h2>
-
-<p><strong>1.</strong> Rapportez la statistique exacte, les tailles d'échantillon et la valeur p (APA, 2020).<br>
-<strong>2.</strong> Rapportez les <strong>médianes</strong> plutôt que les moyennes comme mesure de tendance centrale.<br>
-<strong>3.</strong> Incluez toujours une <strong>taille d'effet</strong> (r, η²<sub>H</sub>, V de Cramér ou ρ).<br>
-<strong>4.</strong> <strong>Justifiez votre choix</strong> du test non paramétrique.<br>
-<strong>5.</strong> Utilisez des <strong>tests exacts</strong> pour les petits échantillons (n < 20).<br>
-<strong>6.</strong> Appliquez les <strong>corrections pour ex aequo</strong>.<br>
-<strong>7.</strong> Pour les comparaisons post-hoc, utilisez le test de Dunn avec correction de Bonferroni.<br>
-<strong>8.</strong> Pour les tests χ², rapportez les <strong>fréquences attendues</strong> (Cochran, 1954).</p>
+<p><strong>Signification :</strong> t = 0,976 × √[6/(1 − 0,952)] = 0,976 × √(6/0,048) = 0,976 × 11,18 = 10,91. Avec df = 6, ce résultat est hautement significatif (p &lt; 0,001). Il existe une association monotone positive très forte entre la couverture corallienne et la diversité des espèces de poissons — à mesure que la santé des coraux s'améliore, la biodiversité ichtyologique augmente substantiellement.</p>
 
 <hr>
 
-<h2>🧩 Sujets avancés et perspectives modernes</h2>
+<h2>⚡ La surprise de la puissance : Efficacité relative asymptotique</h2>
 
-<h3>L'alternative du bootstrap</h3>
-<p>Le calcul moderne a permis les <strong>méthodes bootstrap</strong> (Efron, 1979) — des approches par rééchantillonnage pouvant remplacer ou compléter les tests paramétriques et non paramétriques classiques. Les tests classiques basés sur les rangs restent préférés pour les plans standards grâce à leurs propriétés exactes sans distribution (Lehmann &amp; D'Abrera, 1998).</p>
+<p>L'objection la plus courante aux tests non paramétriques — répétée dans d'innombrables manuels et amphithéâtres — est : « Ils ont moins de puissance statistique. » La vérité, révélée par les travaux fondateurs de Hodges et Lehmann (1956), est bien plus nuancée et massivement favorable aux méthodes non paramétriques.</p>
 
-<h3>Limites</h3>
-<p>Les tests non paramétriques ont des limites réelles. Il n'existe pas d'équivalent basé sur les rangs pour une ANOVA factorielle avec interaction, un modèle mixte ou une ANCOVA. Pour ces plans, les chercheurs peuvent utiliser des méthodes paramétriques robustes, des modèles linéaires généralisés ou des approches bootstrap (Hollander et al., 2014).</p>
+<h3>Qu'est-ce que l'efficacité relative asymptotique (ERA) ?</h3>
+
+<p>L'<strong>efficacité relative asymptotique</strong> mesure combien d'observations supplémentaires un test non paramétrique nécessite pour atteindre la même puissance que son homologue paramétrique, lorsque la taille de l'échantillon tend vers l'infini. Une ERA de 0,955 signifie que le test non paramétrique a besoin de 1/0,955 ≈ 1,047 fois plus d'observations — essentiellement la même taille d'échantillon. Une ERA de 1,5 signifie que le test non paramétrique n'a besoin que de 1/1,5 ≈ 0,667 fois plus d'observations — il est 50 % <em>plus efficace</em> (Lehmann &amp; Romano, 2005).</p>
+
+<h3>Le théorème de Hodges-Lehmann : Un plancher, pas un plafond</h3>
+
+<p>Hodges et Lehmann (1956) démontrèrent le théorème qui définit le domaine entier :</p>
+
+<blockquote>🎯 <strong>La garantie de Hodges-Lehmann :</strong> L'efficacité relative asymptotique du test de la somme des rangs de Wilcoxon par rapport au test t de Student optimal n'est <em>jamais inférieure à 0,864</em> — pour toute distribution continue quelle qu'elle soit. Cela signifie que le test de Wilcoxon n'a jamais besoin de plus de 1/0,864 ≈ 1,157 fois plus d'observations pour égaler la puissance du test t. Dans le pire des cas, il vous faut environ 16 % de données supplémentaires. Dans le meilleur des cas, l'avantage est <em>infini</em>.</blockquote>
+
+<p>L'ERA varie de manière spectaculaire selon la vraie forme de la distribution des données :</p>
+
+<table>
+  <thead>
+    <tr><th>Distribution réelle des données</th><th>ERA (Wilcoxon vs test t)</th><th>Interprétation pratique</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Normale (Gaussienne)</td><td>3/π ≈ 0,955</td><td>Wilcoxon ne perd que 4,5 % d'efficacité — négligeable</td></tr>
+    <tr><td>Uniforme</td><td>1,0</td><td>Les deux tests sont également efficaces</td></tr>
+    <tr><td>Logistique</td><td>π²/9 ≈ 1,097</td><td>Wilcoxon est 10 % <em>plus</em> efficace</td></tr>
+    <tr><td>Double exponentielle (Laplace)</td><td>3/2 = 1,500</td><td>Wilcoxon est 50 % <em>plus</em> efficace</td></tr>
+    <tr><td>Cauchy (queues lourdes)</td><td>∞</td><td>Le test t est totalement inutile ; Wilcoxon fonctionne parfaitement</td></tr>
+    <tr><td>Normale contaminée (5–10 %)</td><td>Jusqu'à 4,0+</td><td>Wilcoxon peut être 300 %+ plus efficace</td></tr>
+    <tr><td>Exponentielle</td><td>3,0</td><td>Wilcoxon est 200 % plus efficace</td></tr>
+  </tbody>
+</table>
+
+<h3>Ce que cela signifie en pratique</h3>
+
+<p>Les implications du théorème de Hodges-Lehmann sont profondes. Puisque les données du monde réel ne sont presque jamais parfaitement normales — elles sont asymétriques, à queues lourdes, contaminées par des valeurs aberrantes ou discrétisées par les limitations de mesure — les tests non paramétriques seront fréquemment <em>plus puissants</em> que les tests paramétriques en pratique, pas moins. <strong>Blair et Higgins</strong> (1980) le démontrèrent empiriquement dans une étude Monte Carlo marquante : sous diverses distributions non normales couramment rencontrées dans la recherche comportementale et biologique, le test de Wilcoxon était systématiquement plus puissant que le test t, parfois par des facteurs de 3 à 4. Ils conclurent que « la croyance répandue en la puissance supérieure du test t n'est pas étayée par les données ».</p>
+
+<blockquote>⚠️ <strong>L'implication pratique :</strong> Le conseil traditionnel de « toujours préférer les tests paramétriques lorsque les hypothèses sont satisfaites » devrait être reconsidéré. Sous normalité parfaite, le coût d'utilisation de Wilcoxon au lieu du test t n'est que de 4,5 % d'efficacité — équivalent à nécessiter 105 observations au lieu de 100. Sous même une légère non-normalité, le bénéfice peut être énorme. Comme Conover (1999) l'argua : « En cas de doute, le test non paramétrique est le choix le plus sûr. »</blockquote>
+
+<hr>
+
+<h2>🧭 Cadre décisionnel : Quand choisir les tests non paramétriques</h2>
+
+<p>Le choix entre méthodes paramétriques et non paramétriques n'est pas simplement une affaire de vérification de la normalité — il implique une réflexion plus profonde sur le type de données, la taille de l'échantillon, les objectifs de recherche et les conséquences de la violation des hypothèses. Les tests non paramétriques s'utilisent lorsque l'une des conditions suivantes est remplie :</p>
+
+<table>
+  <thead>
+    <tr><th>Condition</th><th>Pourquoi non paramétrique ?</th><th>Exemple concret</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Données ordinales</strong></td><td>Les rangs sont l'échelle naturelle ; les moyennes n'ont pas de sens</td><td>Réponses de type Likert, échelles de gravité de la douleur, stadification du cancer</td></tr>
+    <tr><td><strong>Distributions asymétriques</strong></td><td>Hypothèse de normalité violée ; moyennes déformées</td><td>Données de revenus, durée de séjour hospitalier, concentrations de polluants environnementaux</td></tr>
+    <tr><td><strong>Valeurs aberrantes présentes</strong></td><td>Les rangs neutralisent les valeurs extrêmes</td><td>Valeurs cliniques de laboratoire avec erreurs d'instrument, prix immobiliers avec parcelles extrêmes</td></tr>
+    <tr><td><strong>Petits échantillons (n &lt; 15)</strong></td><td>Impossible de vérifier fiablement la normalité ; distributions exactes de rangs disponibles</td><td>Études pilotes, essais sur maladies rares, relevés d'espèces menacées</td></tr>
+    <tr><td><strong>Variances hétérogènes</strong></td><td>Les tests de rangs sont moins sensibles à l'inégalité des dispersions entre groupes</td><td>Comparaison de résultats de traitements dans des populations à variabilité différente</td></tr>
+    <tr><td><strong>Données catégorielles</strong></td><td>Seuls le χ² et les tests apparentés s'appliquent aux catégories nominales</td><td>Présence/absence de maladie, préférences de vote, fréquences génotypiques</td></tr>
+    <tr><td><strong>Robustesse souhaitée</strong></td><td>Protection contre des formes distributionnelles inconnues</td><td>Données de terrain environnementales, données d'enquête de populations diverses</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Quand préférer les tests paramétriques :</strong> Lorsque toutes les hypothèses paramétriques sont vérifiées et remplies avec confiance, les données sont mesurées sur une échelle d'intervalle ou de rapport, les tailles d'échantillons sont grandes (n ≥ 30 par groupe, où le TCL assure une protection), la question de recherche porte spécifiquement sur les moyennes (et non les médianes ou les rangs), et l'on a besoin de plans complexes (ANOVA factorielle, ANCOVA, modèles mixtes) pour lesquels les équivalents non paramétriques sont limités ou indisponibles.</p>
+
+<hr>
+
+<h2>📐 Tailles d'effet pour les tests non paramétriques</h2>
+
+<p>La signification statistique nous dit si un effet <em>existe</em> ; la taille de l'effet nous dit quelle est sa <em>magnitude</em>. Le rapport des tailles d'effet est obligatoire dans la recherche moderne (APA, 2020) et est particulièrement important pour les tests non paramétriques, dont les statistiques de test ne sont pas directement comparables entre les études. Chaque test non paramétrique possède des mesures de taille d'effet appropriées :</p>
+
+<table>
+  <thead>
+    <tr><th>Test</th><th>Mesure de taille d'effet</th><th>Formule</th><th>Petit / Moyen / Grand</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mann-Whitney U</td><td><em>r</em> (corrélation bisériale de rang)</td><td>r = Z / √N</td><td>0,10 / 0,30 / 0,50</td></tr>
+    <tr><td>Wilcoxon rangs signés</td><td><em>r</em></td><td>r = Z / √N</td><td>0,10 / 0,30 / 0,50</td></tr>
+    <tr><td>Kruskal-Wallis</td><td>η²<sub>H</sub> (epsilon-carré)</td><td>η²<sub>H</sub> = (H − k + 1) / (N − k)</td><td>0,01 / 0,06 / 0,14</td></tr>
+    <tr><td>Friedman</td><td><em>W</em> de Kendall</td><td>W = χ²<sub>r</sub> / [b(k − 1)]</td><td>0,10 / 0,30 / 0,50</td></tr>
+    <tr><td>Chi-deux</td><td>V de Cramér</td><td>V = √(χ² / [N × min(r−1, c−1)])</td><td>Dépend du df*</td></tr>
+    <tr><td>Corrélation de Spearman</td><td>ρ<sub>s</sub> (le coefficient lui-même)</td><td>—</td><td>0,10 / 0,30 / 0,50</td></tr>
+  </tbody>
+</table>
+
+<p>*Les seuils du V de Cramér dépendent de la plus petite dimension du tableau de contingence : pour min(r−1, c−1) = 1, petit/moyen/grand = 0,10/0,30/0,50 ; pour min = 2, petit/moyen/grand = 0,07/0,21/0,35 ; pour min = 3, petit/moyen/grand = 0,06/0,17/0,29 (Cohen, 1988). Tous les seuils sont des guides approximatifs, et non des seuils rigides — la signification pratique d'un effet dépend du contexte de la recherche.</p>
+
+<hr>
+
+<h2>✅ Directives de rapport APA</h2>
+
+<p>Le rapport professionnel des tests non paramétriques doit inclure : la statistique de test, les tailles d'échantillons, la valeur p exacte (ou p &lt; .001 si très petite), la taille de l'effet avec intervalle de confiance lorsque disponible, et une déclaration claire de la direction de l'effet (APA, 2020). Exemples suivant les normes actuelles de l'APA 7e édition :</p>
+
+<p><strong>Mann-Whitney U :</strong> « Les scores de douleur post-chirurgicale étaient significativement plus bas avec le Médicament B qu'avec le Médicament A, <em>U</em> = 5, <em>n</em><sub>A</sub> = <em>n</em><sub>B</sub> = 7, <em>p</em> = .007, <em>r</em> = .67. »</p>
+
+<p><strong>Wilcoxon rangs signés :</strong> « Les niveaux d'oxygène dissous ont augmenté significativement après le programme de restauration riveraine, <em>W</em> = 1, <em>n</em> = 10, <em>p</em> = .004, <em>r</em> = .60. »</p>
+
+<p><strong>Kruskal-Wallis :</strong> « La performance aux examens différait significativement selon les méthodes d'enseignement, <em>H</em>(2) = 7,57, <em>p</em> = .023, η²<sub>H</sub> = .27. »</p>
+
+<p><strong>Friedman :</strong> « Les évaluations de qualité du vin variaient significativement selon les millésimes, χ²<sub>r</sub>(3) = 16,0, <em>p</em> = .001, <em>W</em> = .89. »</p>
+
+<p><strong>Chi-deux (Indépendance) :</strong> « L'acceptation vaccinale était significativement associée au pays de résidence, χ²(4, <em>N</em> = 600) = 15,65, <em>p</em> = .004, <em>V</em> = .11. »</p>
+
+<p><strong>Spearman :</strong> « La couverture corallienne était fortement positivement associée à la richesse spécifique en poissons, ρ<sub>s</sub>(6) = .98, <em>p</em> &lt; .001. »</p>
+
+<hr>
+
+<h2>🚫 Idées fausses courantes sur les tests non paramétriques</h2>
+
+<p>Les méthodes non paramétriques sont entourées d'un réseau d'idées fausses persistantes, dont beaucoup sont perpétuées par des manuels d'introduction qui relèguent ces tests à un bref chapitre subsidiaire. Corriger ces idées fausses est essentiel pour une pratique statistique éclairée :</p>
+
+<p><strong>Idée fausse 1 : « Les tests non paramétriques sont moins puissants. »</strong> Cela n'est vrai <em>que</em> sous normalité parfaite, où la perte de puissance est un trivial 4,5 %. Sous tout écart à la normalité — ce qui décrit virtuellement toutes les données du monde réel — les tests non paramétriques peuvent être égaux ou substantiellement <em>plus puissants</em>. Le théorème de Hodges-Lehmann garantit une ERA minimale de 0,864, sans borne supérieure (Hodges &amp; Lehmann, 1956).</p>
+
+<p><strong>Idée fausse 2 : « Les tests non paramétriques ne sont que pour les petits échantillons. »</strong> En fait, les tests non paramétriques fonctionnent parfaitement bien avec de grands échantillons — et leurs approximations normales sont excellentes pour n &gt; 20. La confusion provient du fait que les manuels introduisent souvent les méthodes non paramétriques comme des alternatives lorsque les échantillons sont « trop petits pour vérifier la normalité ». Mais de grands échantillons tirés de distributions non normales bénéficient toujours de l'analyse basée sur les rangs.</p>
+
+<p><strong>Idée fausse 3 : « Les tests non paramétriques ne peuvent pas comparer les moyennes. »</strong> Correct, mais potentiellement trompeur. Les tests non paramétriques comparent les médianes (Wilcoxon rangs signés) ou les distributions (Mann-Whitney, Kruskal-Wallis). Pour les distributions symétriques, moyennes et médianes coïncident, donc la distinction est sans objet. Pour les distributions asymétriques, la médiane est généralement une mesure de tendance centrale plus significative que la moyenne — le « revenu médian » est plus informatif que le « revenu moyen » en présence de milliardaires.</p>
+
+<p><strong>Idée fausse 4 : « Si les données paraissent approximativement normales, il faut toujours utiliser les tests paramétriques. »</strong> Cela ignore l'enseignement du théorème de Hodges-Lehmann : le coût d'utilisation d'un test non paramétrique lorsque les données <em>sont</em> normales est minime (4,5 %), tandis que le coût d'utilisation d'un test paramétrique lorsque les données <em>ne sont pas</em> normales peut être énorme (taux d'erreur de type I gonflé, puissance effondrée). L'analyse risque-bénéfice favorise fortement les méthodes non paramétriques comme choix par défaut pour les échantillons de taille petite à modérée (Conover, 1999).</p>
+
+<p><strong>Idée fausse 5 : « Les tests non paramétriques ne font aucune hypothèse. »</strong> Ils font <em>moins</em> d'hypothèses, mais pas zéro. Le test U de Mann-Whitney suppose que les deux distributions ont la même forme (ne différant qu'en localisation) ; le test des rangs signés de Wilcoxon suppose la symétrie des différences ; tous les tests de rangs supposent l'indépendance des observations (sauf lorsque le test est explicitement conçu pour les données dépendantes, comme le test de Friedman) ; et le test χ² exige des effectifs attendus adéquats. Affirmer que les tests non paramétriques sont « sans hypothèse » est une simplification excessive (Lehmann &amp; Romano, 2005).</p>
+
+<p><strong>Idée fausse 6 : « Les tests non paramétriques ne sont que pour les données ordinales. »</strong> Les tests non paramétriques fonctionnent à la fois avec les données ordinales <em>et</em> continues. Ils sont la <em>seule</em> option valide pour les données ordinales, mais ils constituent aussi un choix légitime et souvent supérieur pour les données continues qui violent les hypothèses paramétriques.</p>
+
+<hr>
+
+<h2>⚠️ Limitations réelles des tests non paramétriques</h2>
+
+<p>Malgré leur polyvalence, les tests non paramétriques présentent de véritables limitations que les chercheurs doivent comprendre :</p>
+
+<p><strong>1. Perte d'information due à la transformation en rangs.</strong> En convertissant les données en rangs, nous perdons l'information sur les distances réelles entre les observations. La différence entre les valeurs 10 et 11 est traitée de manière identique à la différence entre 10 et 1 000. Lorsque les données sont véritablement normalement distribuées et mesurées sur une échelle d'intervalle précise, cette perte d'information — bien que limitée à ~4,5 % en termes de puissance — est réelle et inutile.</p>
+
+<p><strong>2. Estimation moins précise.</strong> Les tests non paramétriques testent typiquement des hypothèses sur les médianes ou les décalages de distribution plutôt que sur les moyennes. Si la question de recherche porte spécifiquement sur la moyenne de la population (par exemple, « quel est l'effet moyen du traitement ? »), les méthodes paramétriques fournissent des estimations ponctuelles et des intervalles de confiance plus directement interprétables.</p>
+
+<p><strong>3. Disponibilité limitée pour les plans complexes.</strong> Alors que les méthodes paramétriques s'étendent aisément à l'ANOVA factorielle, l'ANCOVA, les modèles multiniveaux, les modèles d'équations structurelles et d'autres plans sophistiqués, les équivalents non paramétriques pour les plans multi-facteurs sont limités, nécessitent des logiciels spécialisés ou impliquent des schémas de permutation complexes. La <strong>transformation de rang alignée</strong> (Wobbrock et al., 2011) et les méthodes non paramétriques basées sur les rangs pour les plans factoriels (Brunner et al., 2002) comblent cette lacune mais ne sont pas encore largement adoptées.</p>
+
+<p><strong>4. Sensibilité aux ex æquo.</strong> Lorsque de nombreuses observations partagent la même valeur (par exemple, données de Likert avec un petit nombre de catégories de réponse), l'attribution de rangs ex æquo introduit des approximations qui peuvent affecter la précision du test, particulièrement pour les petits échantillons. Des ex æquo nombreux réduisent la variabilité entre les rangs et diminuent donc le pouvoir discriminant des tests basés sur les rangs.</p>
+
+<p><strong>5. Puissance inférieure sous normalité exacte.</strong> Sous normalité parfaite avec variances égales — le meilleur scénario pour les tests paramétriques — les tests non paramétriques sont légèrement moins puissants. Pour la comparaison Wilcoxon vs test t, cette différence n'est que de 4,5 %, mais pour d'autres paires de tests (par exemple, Friedman vs ANOVA à mesures répétées), l'écart peut être plus large.</p>
+
+<hr>
+
+<h2>⚙️ Extensions modernes et alternatives</h2>
+
+<h3>Méthodes bootstrap</h3>
+
+<p>Le <strong>bootstrap</strong>, introduit par <strong>Bradley Efron</strong> (1979) à l'Université Stanford, fournit une alternative puissante et sans hypothèse aux tests paramétriques et aux tests basés sur les rangs. En rééchantillonnant avec remise à partir des données observées des milliers ou des millions de fois, les méthodes bootstrap construisent des distributions d'échantillonnage empiriques pour <em>toute</em> statistique — moyennes, médianes, rapports, corrélations, coefficients de régression — sans hypothèses distributionnelles. Les intervalles de confiance bootstrap sont particulièrement précieux lorsque les tests non paramétriques de rangs fournissent des résultats de tests d'hypothèses mais pas d'estimations d'intervalle correspondantes. La méthode est devenue une pratique standard dans la statistique appliquée moderne (Efron &amp; Tibshirani, 1993).</p>
+
+<h3>Tests de permutation (randomisation)</h3>
+
+<p>Les tests de permutation constituent la classe la plus générale des méthodes non paramétriques. Ils calculent la distribution exacte sous H₀ en énumérant tous les réarrangements possibles des étiquettes de données. La valeur p est la proportion de permutations produisant une statistique de test aussi extrême que celle observée. Conceptualisés par <strong>R. A. Fisher</strong> (1935) et développés rigoureusement par <strong>Pitman</strong> (1937), les tests de permutation étaient historiquement impraticables car l'énumération de toutes les permutations exigeait des calculs énormes. Avec la puissance de calcul moderne, les tests de permutation peuvent traiter des plans complexes — multi-facteurs, multivariés et à mesures répétées — qui n'ont pas d'alternative standard basée sur les rangs. Ils sont l'étalon-or théorique contre lequel toutes les autres méthodes non paramétriques sont évaluées (Good, 2005).</p>
+
+<h3>Méthodes robustes</h3>
+
+<p>Les <strong>moyennes tronquées</strong>, les <strong>M-estimateurs</strong> (Huber, 1964) et les <strong>moyennes tronquées bootstrappées</strong> fournissent un terrain intermédiaire entre les approches paramétriques et non paramétriques. Ces méthodes utilisent les valeurs réelles des données (pas seulement les rangs) mais pondèrent à la baisse ou éliminent les observations extrêmes, atteignant à la fois une haute efficacité sous normalité et une forte robustesse contre les violations. Le programme de recherche extensif de <strong>Rand Wilcox</strong> a montré que les méthodes robustes surpassent souvent à la fois les tests paramétriques et les tests de rangs à travers un large éventail de distributions réalistes, et son manuel complet demeure la référence définitive (Wilcox, 2022).</p>
+
+<h3>Méthodes exactes et Monte Carlo</h3>
+
+<p>Pour les très petits échantillons (n &lt; 10) où même les approximations non paramétriques par le χ² peuvent être inexactes, les <strong>distributions de permutation exactes</strong> peuvent être calculées en énumérant toutes les attributions de rangs possibles. Les logiciels statistiques (R, SPSS, SAS, Stata) incluent désormais des routines pour les tests non paramétriques exacts. Lorsque le nombre de permutations est trop grand pour une énumération complète, la <strong>simulation de Monte Carlo</strong> (échantillonnage aléatoire à partir de la distribution de permutation) fournit des approximations de précision arbitraire (Good, 2005).</p>
+
+<hr>
+
+<h2>🧩 Résumé : La boîte à outils non paramétrique en un coup d'œil</h2>
+
+<table>
+  <thead>
+    <tr><th>Test</th><th>Plan</th><th>Teste</th><th>H₀</th><th>Distribution sous H₀</th><th>Post-hoc</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Mann-Whitney U</strong></td><td>2 groupes indépendants</td><td>Décalage de localisation</td><td>Distributions identiques</td><td>Exact / Approx. normale</td><td>—</td></tr>
+    <tr><td><strong>Wilcoxon rangs signés</strong></td><td>Apparié / 1 échantillon</td><td>Localisation symétrique</td><td>Différence médiane = 0</td><td>Exact / Approx. normale</td><td>—</td></tr>
+    <tr><td><strong>Kruskal-Wallis H</strong></td><td><em>k</em> groupes indépendants</td><td>Décalage de localisation</td><td>Toutes distributions identiques</td><td>χ²(k − 1)</td><td>Test de Dunn</td></tr>
+    <tr><td><strong>Friedman</strong></td><td><em>k</em> groupes liés</td><td>Effet traitement</td><td>Pas d'effet traitement</td><td>χ²(k − 1)</td><td>Nemenyi / Conover</td></tr>
+    <tr><td><strong>χ² de Pearson</strong></td><td>Données catégorielles</td><td>Ajustement / Indépendance / Homogénéité</td><td>O = E</td><td>χ²(df)</td><td>Résidus ajustés</td></tr>
+    <tr><td><strong>ρ<sub>s</sub> de Spearman</strong></td><td>Ordinal bivarié</td><td>Association monotone</td><td>ρ<sub>s</sub> = 0</td><td>t(n − 2)</td><td>—</td></tr>
+  </tbody>
+</table>
 
 <hr>
 
 <h2>📚 Références</h2>
 
-<p>American Psychological Association. (2020). <em>Publication manual of the American Psychological Association</em> (7e éd.). American Psychological Association.</p>
+<p>American Psychological Association. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.). APA.</p>
 
-<p>Cochran, W. G. (1954). Some methods for strengthening the common χ² tests. <em>Biometrics</em>, <em>10</em>(4), 417–451.</p>
+<p>Blair, R. C., &amp; Higgins, J. J. (1980). A comparison of the power of Wilcoxon's rank-sum statistic to that of Student's t statistic under various nonnormal distributions. <em>Journal of Educational Statistics, 5</em>(4), 309–335. https://doi.org/10.2307/1164905</p>
 
-<p>Conover, W. J. (1999). <em>Practical nonparametric statistics</em> (3e éd.). John Wiley &amp; Sons.</p>
+<p>Bradley, J. V. (1968). <em>Distribution-free statistical tests</em>. Prentice-Hall.</p>
 
-<p>Efron, B. (1979). Bootstrap methods: Another look at the jackknife. <em>The Annals of Statistics</em>, <em>7</em>(1), 1–26.</p>
+<p>Brunner, E., Domhof, S., &amp; Langer, F. (2002). <em>Nonparametric analysis of longitudinal data in factorial experiments</em>. Wiley.</p>
 
-<p>Friedman, M. (1937). The use of ranks to avoid the assumption of normality implicit in the analysis of variance. <em>Journal of the American Statistical Association</em>, <em>32</em>(200), 675–701.</p>
+<p>Cochran, W. G. (1952). The χ² test of goodness of fit. <em>The Annals of Mathematical Statistics, 23</em>(3), 315–345. https://doi.org/10.1214/aoms/1177729380</p>
 
-<p>Hodges, J. L., Jr., &amp; Lehmann, E. L. (1956). The efficiency of some nonparametric competitors of the <em>t</em>-test. <em>Annals of Mathematical Statistics</em>, <em>27</em>(2), 324–335.</p>
+<p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum Associates.</p>
 
-<p>Hollander, M., Wolfe, D. A., &amp; Chicken, E. (2014). <em>Nonparametric statistical methods</em> (3e éd.). John Wiley &amp; Sons.</p>
+<p>Conover, W. J. (1999). <em>Practical nonparametric statistics</em> (3rd ed.). Wiley.</p>
 
-<p>Kruskal, W. H., &amp; Wallis, W. A. (1952). Use of ranks in one-criterion variance analysis. <em>Journal of the American Statistical Association</em>, <em>47</em>(260), 583–621.</p>
+<p>Dunn, O. J. (1964). Multiple comparisons using rank sums. <em>Technometrics, 6</em>(3), 241–252. https://doi.org/10.1080/00401706.1964.10490181</p>
 
-<p>Lehmann, E. L., &amp; D'Abrera, H. J. M. (1998). <em>Nonparametrics: Statistical methods based on ranks</em> (éd. rév.). Prentice-Hall.</p>
+<p>Efron, B. (1979). Bootstrap methods: Another look at the jackknife. <em>The Annals of Statistics, 7</em>(1), 1–26. https://doi.org/10.1214/aos/1176344552</p>
 
-<p>Mann, H. B., &amp; Whitney, D. R. (1947). On a test of whether one of two random variables is stochastically larger than the other. <em>Annals of Mathematical Statistics</em>, <em>18</em>(1), 50–60.</p>
+<p>Efron, B., &amp; Tibshirani, R. J. (1993). <em>An introduction to the bootstrap</em>. Chapman &amp; Hall/CRC.</p>
 
-<p>Noether, G. E. (1992). Introduction to Wilcoxon (1945) Individual comparisons by ranking methods. In S. Kotz &amp; N. L. Johnson (Eds.), <em>Breakthroughs in statistics</em> (pp. 196–202). Springer.</p>
+<p>Fisher, R. A. (1935). <em>The design of experiments</em>. Oliver &amp; Boyd.</p>
 
-<p>Oja, H. (2010). <em>Multivariate nonparametric methods with R</em>. Springer.</p>
+<p>Friedman, M. (1937). The use of ranks to avoid the assumption of normality implicit in the analysis of variance. <em>Journal of the American Statistical Association, 32</em>(200), 675–701. https://doi.org/10.1080/01621459.1937.10503522</p>
 
-<p>Pearson, K. (1900). On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling. <em>Philosophical Magazine, Series 5</em>, <em>50</em>(302), 157–175.</p>
+<p>Geary, R. C. (1947). Testing for normality. <em>Biometrika, 34</em>(3/4), 209–242. https://doi.org/10.2307/2332434</p>
 
-<p>Rao, C. R. (2002). Karl Pearson chi-square test: The dawn of statistical inference. In C. Huber-Carol et al. (Eds.), <em>Goodness-of-fit tests and model validity</em> (pp. 9–24). Birkhäuser.</p>
+<p>Good, P. I. (2005). <em>Permutation, parametric, and bootstrap tests of hypotheses</em> (3rd ed.). Springer.</p>
 
-<p>Spearman, C. (1904). The proof and measurement of association between two things. <em>The American Journal of Psychology</em>, <em>15</em>(1), 72–101.</p>
+<p>Hodges, J. L., Jr., &amp; Lehmann, E. L. (1956). The efficiency of some nonparametric competitors of the <em>t</em>-test. <em>The Annals of Mathematical Statistics, 27</em>(2), 324–335. https://doi.org/10.1214/aoms/1177728261</p>
 
-<p>Wilcoxon, F. (1945). Individual comparisons by ranking methods. <em>Biometrics Bulletin</em>, <em>1</em>(6), 80–83.</p>
+<p>Kendall, M. G. (1938). A new measure of rank correlation. <em>Biometrika, 30</em>(1/2), 81–93. https://doi.org/10.2307/2332226</p>
+
+<p>Kruskal, W. H., &amp; Wallis, W. A. (1952). Use of ranks in one-criterion variance analysis. <em>Journal of the American Statistical Association, 47</em>(260), 583–621. https://doi.org/10.1080/01621459.1952.10483441</p>
+
+<p>Lehmann, E. L., &amp; Romano, J. P. (2005). <em>Testing statistical hypotheses</em> (3rd ed.). Springer.</p>
+
+<p>Mann, H. B., &amp; Whitney, D. R. (1947). On a test of whether one of two random variables is stochastically larger than the other. <em>The Annals of Mathematical Statistics, 18</em>(1), 50–60. https://doi.org/10.1214/aoms/1177730491</p>
+
+<p>Noether, G. E. (1992). Introduction to Wilcoxon (1945) Individual comparisons by ranking methods. In S. Kotz &amp; N. L. Johnson (Eds.), <em>Breakthroughs in statistics</em> (Vol. II, pp. 196–202). Springer.</p>
+
+<p>Pearson, K. (1900). On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling. <em>Philosophical Magazine, Series 5, 50</em>(302), 157–175.</p>
+
+<p>Siegel, S., &amp; Castellan, N. J., Jr. (1988). <em>Nonparametric statistics for the behavioral sciences</em> (2nd ed.). McGraw-Hill.</p>
+
+<p>Spearman, C. (1904). The proof and measurement of association between two things. <em>The American Journal of Psychology, 15</em>(1), 72–101. https://doi.org/10.2307/1412159</p>
+
+<p>Stigler, S. M. (1986). <em>The history of statistics: The measurement of uncertainty before 1900</em>. Harvard University Press.</p>
+
+<p>Wilcox, R. R. (2022). <em>Introduction to robust estimation and hypothesis testing</em> (5th ed.). Academic Press.</p>
+
+<p>Wilcoxon, F. (1945). Individual comparisons by ranking methods. <em>Biometrics Bulletin, 1</em>(6), 80–83. https://doi.org/10.2307/3001968</p>
+
+<p>Wobbrock, J. O., Findlater, L., Gergle, D., &amp; Higgins, J. J. (2011). The aligned rank transform for nonparametric factorial analyses using only ANOVA procedures. <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</em>, 143–146. https://doi.org/10.1145/1978942.1978963</p>
